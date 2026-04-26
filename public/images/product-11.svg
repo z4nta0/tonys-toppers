@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 220" width="150" height="220">
+  <defs>
+    <linearGradient id="bg11" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fefcf6"/>
+      <stop offset="100%" stop-color="#f5efe0"/>
+    </linearGradient>
+  </defs>
+  <rect width="150" height="220" fill="url(#bg11)"/>
+  <path d="M 75 58.2 C 46.4 41.3, 46.4 21.8, 64.6 21.8 C 71.1 21.8, 75 29.6, 75 34.8 C 75 29.6, 78.9 21.8, 85.4 21.8 C 103.6 21.8, 103.6 41.3, 75 58.2 Z" fill="#0f766e" stroke="#1a1a1a" stroke-width="1.5"/>
+  
+    <rect x="58" y="76" width="34" height="14" rx="2" fill="#374151" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M62 90 L 88 90 L 86 175 Q 75 185 64 175 Z" fill="#d4a574" stroke="#1a1a1a" stroke-width="1.5"/>
+    <ellipse cx="75" cy="90" rx="13" ry="3" fill="#1f2937" opacity="0.3"/>
+    <line x1="68" y1="105" x2="68" y2="165" stroke="#a87a4d" stroke-width="1" opacity="0.5"/>
+    <line x1="75" y1="100" x2="75" y2="170" stroke="#a87a4d" stroke-width="1" opacity="0.5"/>
+    <line x1="82" y1="105" x2="82" y2="165" stroke="#a87a4d" stroke-width="1" opacity="0.5"/>
+    
+</svg>

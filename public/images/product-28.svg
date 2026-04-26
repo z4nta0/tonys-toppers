@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 200" width="150" height="200">
+  <defs>
+    <linearGradient id="bg28" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fefcf6"/>
+      <stop offset="100%" stop-color="#f5efe0"/>
+    </linearGradient>
+  </defs>
+  <rect width="150" height="200" fill="url(#bg28)"/>
+  <circle cx="75" cy="14" r="6" fill="none" stroke="#9ca3af" stroke-width="2"/>
+  <line x1="75" y1="10" x2="75" y2="55" stroke="#1a1a1a" stroke-width="1.5"/>
+  <circle cx="75" cy="35" r="6" fill="#c4b5fd" stroke="#1a1a1a" stroke-width="1.2"/><ellipse cx="73.2" cy="33.2" rx="1.8" ry="1.2" fill="white" opacity="0.55"/><circle cx="75" cy="50" r="6" fill="#7c3aed" stroke="#1a1a1a" stroke-width="1.2"/><ellipse cx="73.2" cy="48.2" rx="1.8" ry="1.2" fill="white" opacity="0.55"/>
+  
+        <circle cx="75" cy="115" r="45" fill="#7c3aed" stroke="#1a1a1a" stroke-width="1.8"/>
+        <circle cx="75" cy="115" r="38" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="4 3"/>
+        <path d="M 75 130.4 C 50.8 116.1, 50.8 99.6, 66.2 99.6 C 71.7 99.6, 75 106.2, 75 110.6 C 75 106.2, 78.3 99.6, 83.8 99.6 C 99.2 99.6, 99.2 116.1, 75 130.4 Z" fill="#c4b5fd" stroke="#1a1a1a" stroke-width="1.5"/>
+        
+</svg>
