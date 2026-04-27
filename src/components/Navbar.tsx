@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
       <Link to="/" className="nav-brand" onClick={close}>
-        <img src="/images/logo.jpg" alt="Tony's Toppers logo" />
+        <img src="/images/logo-notext.svg" alt="Tony's Toppers logo" />
         <span>Tony's Toppers</span>
       </Link>
 

@@ -9,7 +9,7 @@ export default function Hero() {
         <div className="hero-text">
           <span className="hero-eyebrow">Handcrafted in Bolivar, Missouri</span>
           <h1>
-            Beaded pens &amp; wine stoppers, <span className="accent">made with love.</span>
+            Crafted by hand &amp; <span className="accent">made with love.</span>
           </h1>
           <p className="lede">
             Tony Mawhiney designs and beads every piece by hand — color-coordinated, carefully
@@ -26,7 +26,7 @@ export default function Hero() {
         </div>
         <div className="hero-visual">
           <div className="hero-logo">
-            <img src="/images/logo.jpg" alt="Tony's Toppers logo" />
+            <img src="/images/logo.svg" alt="Tony's Toppers logo" />
           </div>
           <div className="hero-sticker">
             Made
