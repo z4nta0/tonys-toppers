@@ -8,7 +8,7 @@ export default function About() {
               <img src="/images/tony-portrait.jpg" alt="Portrait of Tony Mawhiney" />
             </div>
             <div className="bio-cartoon">
-              <img src="/images/tony-cartoon.jpg" alt="Cartoon illustration of Tony" />
+              <img src="/images/logo.svg" alt="Tony's Toppers logo" />
             </div>
           </div>
 
@@ -18,7 +18,7 @@ export default function About() {
               Tony Mawhiney — <em>artist, crafter, kind soul.</em>
             </h2>
             <p>
-              Tony is a 42-year-old young man living in Bolivar, Missouri. He's quiet at first, but
+              Tony is a 42-year-old young man with down syndrome living in Bolivar, Missouri. He's quiet at first, but
               once you know him you won't find a kinder, more polite person — and you wouldn't have
               to look hard to know it.
             </p>

@@ -26,7 +26,7 @@ export default function Hero() {
         </div>
         <div className="hero-visual">
           <div className="hero-logo">
-            <img src="/images/logo.svg" alt="Tony's Toppers logo" />
+            <img src="/images/tony-cartoon.jpg" alt="Cartoon illustration of Tony" />
           </div>
           <div className="hero-sticker">
             Made

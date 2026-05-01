@@ -354,10 +354,11 @@ footer {
 }
 .hero-logo {
   position: absolute;
-  inset: 0;
-  /* background: white; */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   border-radius: 50%;
-  width: 270px;
   width: 270px;
   display: grid;
   place-items: center;
@@ -366,8 +367,9 @@ footer {
 .hero-logo img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: 50%;
-  object-fit: contain;
   animation: spin-slow-reverse 40s linear infinite;
   filter: drop-shadow(20px 40px 15px rgba(30, 58, 138, 0.4)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.04));
 }
@@ -602,7 +604,7 @@ footer {
   height: 140px;
   border-radius: 50%;
   border: 4px solid var(--ink);
-  background: var(--yellow);
+  background: #FFFFFF;
   overflow: hidden;
   transform: rotate(8deg);
   box-shadow: 6px 6px 0 var(--ink);
@@ -612,6 +614,7 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* background-color: white; */
 }
 
 .bio-content h2 {
