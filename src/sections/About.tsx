@@ -1,4 +1,6 @@
 export default function About() {
+    const date = new Date();
+    const age = date.getFullYear() - 1982; // Tony was born in 1982, so this calculates his current age. It's a bit hacky but it means we won't have to update this every year.
   return (
     <section id="about" className="section about-section">
       <div className="container">
@@ -18,7 +20,7 @@ export default function About() {
               Tony Mawhiney — <em>artist, crafter, kind soul.</em>
             </h2>
             <p>
-              Tony is a 42-year-old young man with down syndrome living in Bolivar, Missouri. He's quiet at first, but
+              Tony is a {age}-year-old young man with down syndrome living in Bolivar, Missouri. He's quiet at first, but
               once you know him you won't find a kinder, more polite person — and you wouldn't have
               to look hard to know it.
             </p>
@@ -43,7 +45,7 @@ export default function About() {
 
             <div className="bio-stats">
               <div className="bio-stat">
-                <span className="num">42</span>
+                <span className="num">{age}</span>
                 <div className="label">Years young</div>
               </div>
               <div className="bio-stat">
