@@ -70,9 +70,9 @@ export default function Products() {
           ))}
         </div>
 
-        <p className="placeholder-note">
+        {/* <p className="placeholder-note">
           ↑ Placeholder images. Tony will swap in photos of his real, finished pieces.
-        </p>
+        </p> */}
       </div>
     </section>
   );
