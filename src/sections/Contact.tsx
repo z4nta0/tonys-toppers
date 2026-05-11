@@ -68,6 +68,13 @@ export default function Contact() {
                 <div className="value">(417) 733-0681</div>
               </div>
             </a>
+            <a href="https://www.facebook.com/profile.php?id=61560009400871" className="contact-direct" target="_blank" rel="noopener noreferrer">
+              <div className="icon">📲</div>
+              <div>
+                <div className="label">Facebook Page</div>
+                <div className="value">Tony's Toppers</div>
+              </div>
+            </a>
             <div className="contact-direct">
               <div className="icon">📍</div>
               <div>
