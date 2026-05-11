@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 
-type InterestOption = 'A beaded pen' | 'A wine stopper' | 'A custom piece' | 'Just saying hi';
+type InterestOption = 'A pen topper' | 'A wine stopper' | 'A keychain' | 'A dog necklace' | 'A car freshie' | 'A name badge reel' | 'A phone grip' | 'A custom piece' | 'Just saying hi';
 
 interface FormState {
   name: string;
@@ -12,13 +12,18 @@ interface FormState {
 const INITIAL: FormState = {
   name: '',
   email: '',
-  interest: 'A beaded pen',
+  interest: 'A pen topper',
   message: '',
 };
 
 const INTEREST_OPTIONS: InterestOption[] = [
-  'A beaded pen',
+  'A pen topper',
   'A wine stopper',
+  'A keychain',
+  'A dog necklace',
+  'A car freshie',
+  'A name badge reel',
+  'A phone grip',
   'A custom piece',
   'Just saying hi',
 ];
@@ -63,6 +68,13 @@ export default function Contact() {
                 <div className="value">(417) 733-0681</div>
               </div>
             </a>
+            <a href="https://www.facebook.com/profile.php?id=61560009400871" className="contact-direct" target="_blank" rel="noopener noreferrer">
+              <div className="icon">📲</div>
+              <div>
+                <div className="label">Facebook Page</div>
+                <div className="value">Tony's Toppers</div>
+              </div>
+            </a>
             <div className="contact-direct">
               <div className="icon">📍</div>
               <div>
@@ -74,7 +86,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <form name='contactForm' className="contact-form" onSubmit={handleSubmit} noValidate data-netlify="true">
             {submitted && (
               <div className="form-success" role="status">
                 ✓ Thanks! Your message is ready — Tony will be in touch soon.
