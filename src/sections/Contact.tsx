@@ -86,7 +86,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <form name='contactForm' className="contact-form" onSubmit={handleSubmit} noValidate data-netlify="true">
             {submitted && (
               <div className="form-success" role="status">
                 ✓ Thanks! Your message is ready — Tony will be in touch soon.
