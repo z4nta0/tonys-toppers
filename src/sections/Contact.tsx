@@ -1,5 +1,5 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react';
-
+import { useState, type ChangeEvent } from 'react';
+//type FormEvent,
 type InterestOption = 'A pen topper' | 'A wine stopper' | 'A keychain' | 'A dog necklace' | 'A car freshie' | 'A name badge reel' | 'A phone grip' | 'A custom piece' | 'Just saying hi';
 
 interface FormState {
@@ -37,15 +37,17 @@ export default function Contact() {
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    setSubmitted(true);
+    setSubmitted(false);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // No backend wired up yet — this is a UI-only success state.
-    setSubmitted(true);
-    setForm(INITIAL);
-    window.setTimeout(() => setSubmitted(false), 6000);
-  };
+//   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+//     e.preventDefault();
+//     // No backend wired up yet — this is a UI-only success state.
+//     setSubmitted(true);
+//     setForm(INITIAL);
+//     window.setTimeout(() => setSubmitted(false), 6000);
+//   };
 
   return (
     <section id="contact" className="section contact-section">
