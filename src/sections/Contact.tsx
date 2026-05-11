@@ -142,67 +142,7 @@ export default function Contact() {
                 required
               />
             </div>
-            <button type="submit" className="form-submit">
-              Send Message →
-            </button>
-          </form>
-          <form hidden name='contactForm' className="contact-form" onSubmit={handleSubmit} noValidate data-netlify="true">
-            {submitted && (
-              <div className="form-success" role="status">
-                ✓ Thanks! Your message is ready — Tony will be in touch soon.
-              </div>
-            )}
-            <input type="hidden" name="contact-form" value="tonys-toppers-contact-form" />
-            <div className="form-row">
-              <div className="form-field">
-                <label htmlFor="name">Your Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-field">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-field">
-              <label htmlFor="interest">I'm interested in</label>
-              <select
-                id="interest"
-                name="interest"
-                value={form.interest}
-                onChange={handleChange}
-              >
-                {INTEREST_OPTIONS.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-field">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                placeholder="Tell Tony what you have in mind..."
-                required
-              />
-            </div>
+            <input type="hidden" name="form-name" value="contactForm" />
             <button type="submit" className="form-submit">
               Send Message →
             </button>
