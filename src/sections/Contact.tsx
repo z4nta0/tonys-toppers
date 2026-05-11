@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from 'react';
+import { useState, type FormEvent, type ChangeEvent } from 'react';
 //type FormEvent,
 type InterestOption = 'A pen topper' | 'A wine stopper' | 'A keychain' | 'A dog necklace' | 'A car freshie' | 'A name badge reel' | 'A phone grip' | 'A custom piece' | 'Just saying hi';
 
@@ -41,13 +41,21 @@ export default function Contact() {
     setSubmitted(false);
   };
 
-//   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-//     // No backend wired up yet — this is a UI-only success state.
-//     setSubmitted(true);
-//     setForm(INITIAL);
-//     window.setTimeout(() => setSubmitted(false), 6000);
-//   };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // No backend wired up yet — this is a UI-only success state.
+    const myForm = e.target as HTMLFormElement;
+    const formData = new FormData(myForm) as unknown as Record<string, string>;
+
+    fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+    }).catch(error => alert(error));
+    setSubmitted(true);
+    setForm(INITIAL);
+    window.setTimeout(() => setSubmitted(false), 6000);
+  };
 
   return (
     <section id="contact" className="section contact-section">
@@ -87,8 +95,8 @@ export default function Contact() {
               </div>
             </div>
           </div>
-{/* onSubmit={handleSubmit} */}
-          <form name='contactForm' className="contact-form"  noValidate data-netlify="true" method="POST">
+{/* method="POST" */}
+          <form name='contactForm' className="contact-form"  noValidate data-netlify="true" onSubmit={handleSubmit}>
             {submitted && (
               <div className="form-success" role="status">
                 ✓ Thanks! Your message is ready — Tony will be in touch soon.
