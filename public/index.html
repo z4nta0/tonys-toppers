@@ -1,54 +1,65 @@
-<form hidden name='contactForm' className="contact-form" onSubmit={handleSubmit} noValidate data-netlify="true">
-            <div className="form-row">
-              <div className="form-field">
-                <label htmlFor="name">Your Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-field">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/images/logo-notext.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tony's Toppers — Handcrafted Beaded Pens & Wine Stoppers</title>
+  </head>
+  <body>
+    <form hidden name='contactForm' className="contact-form" onSubmit={handleSubmit} noValidate data-netlify="true">
+        <div className="form-row">
             <div className="form-field">
-              <label htmlFor="interest">I'm interested in</label>
-              <select id="interest" name="interest">
-                <option value="A pen topper">A pen topper</option>
-                <option value="A wine stopper">A wine stopper</option>
-                <option value="A keychain">A keychain</option>
-                <option value="A dog necklace">A dog necklace</option>
-                <option value="A car freshie">A car freshie</option>
-                <option value="A name badge reel">A name badge reel</option>
-                <option value="A phone grip">A phone grip</option>
-                <option value="A custom piece">A custom piece</option>
-                <option value="Just saying hi">Just saying hi</option>
-            </select>
-            </div>
-            <div className="form-field">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={form.message}
+            <label htmlFor="name">Your Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value={form.name}
                 onChange={handleChange}
-                placeholder="Tell Tony what you have in mind..."
                 required
-              ></textarea>
+            />
             </div>
-            <button type="submit" className="form-submit">
-              Send Message →
-            </button>
-          </form>
+            <div className="form-field">
+            <label htmlFor="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+            />
+            </div>
+        </div>
+        <div className="form-field">
+            <label htmlFor="interest">I'm interested in</label>
+            <select id="interest" name="interest">
+            <option value="A pen topper">A pen topper</option>
+            <option value="A wine stopper">A wine stopper</option>
+            <option value="A keychain">A keychain</option>
+            <option value="A dog necklace">A dog necklace</option>
+            <option value="A car freshie">A car freshie</option>
+            <option value="A name badge reel">A name badge reel</option>
+            <option value="A phone grip">A phone grip</option>
+            <option value="A custom piece">A custom piece</option>
+            <option value="Just saying hi">Just saying hi</option>
+        </select>
+        </div>
+        <div className="form-field">
+            <label htmlFor="message">Message</label>
+            <textarea
+            id="message"
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            placeholder="Tell Tony what you have in mind..."
+            required
+            ></textarea>
+        </div>
+        <button type="submit" className="form-submit">
+            Send Message →
+        </button>
+    </form>
+  </body>
+</html>
