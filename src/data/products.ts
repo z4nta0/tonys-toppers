@@ -5,7 +5,8 @@ export type ProductType =
   | 'dog-necklace'
   | 'car-freshie'
   | 'name-badge-reel'
-  | 'phone-grip';
+  | 'phone-grip'
+  | 'straw-charm';
 
 export interface Product {
   id: string;
@@ -23,6 +24,7 @@ export const CATEGORIES: { value: ProductType; label: string; short: string }[] 
   { value: 'car-freshie', label: 'Car Freshies', short: 'Freshie' },
   { value: 'name-badge-reel', label: 'Name Badge Reels', short: 'Badge' },
   { value: 'phone-grip', label: 'Phone Grips', short: 'Phone' },
+  { value: 'straw-charm', label: 'Straw Charms', short: 'Straw' },
 ];
 
 const NAMES: Record<ProductType, string[]> = {
@@ -33,6 +35,7 @@ const NAMES: Record<ProductType, string[]> = {
   'car-freshie': ['car-freshie-1', 'car-freshie-2', 'car-freshie-3', 'car-freshie-4', 'car-freshie-5',],
   'name-badge-reel': ['name-badge-reel-1',],
   'phone-grip': ['phone-grip-1', 'phone-grip-2', 'phone-grip-3', 'phone-grip-4', 'phone-grip-5', 'phone-grip-6', 'phone-grip-7', 'phone-grip-8', 'phone-grip-9',],
+  'straw-charm': ['straw-charm-1',],
 };
 
 //const pad = (n: number) => String(n).padStart(2, '0');
@@ -48,6 +51,7 @@ export const PRODUCTS: Product[] = CATEGORIES.flatMap((cat, catIdx) => {
     'car-freshie': 'Car Freshie',
     'name-badge-reel': 'Name Badge Reel',
     'phone-grip': 'Phone Grip',
+    'straw-charm': 'Straw Charm',
   };
   return NAMES[cat.value].map((name, i) => {
     const id = `${catIdx} + ${i}`;
