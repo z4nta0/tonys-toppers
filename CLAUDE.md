@@ -31,6 +31,12 @@ form a shop could build on.
 ## Content
 Decided 2026-10-10. Claude drafts the product photos' alt text and an About
 paragraph covering all 8 categories, and the user confirms them for accuracy.
+- **Duplicate photos, awaiting the user**: eight photos are byte-for-byte
+  copies of others, so the same picture shows under two or three cards.
+  Pen toppers 1, 4, 10, 11, 14, and 15 repeat as wine stoppers 8, 2, 3, 4,
+  6, and 7; pen topper 13 repeats as straw charm 1; and pen topper 12
+  repeats as both wine stopper 5 and dog necklace 13. Some may show both
+  kinds of piece on purpose; the user is confirming which are mislabeled.
 
 ## Images
 Decided 2026-10-10, under the user-level "## Images" rule. The original
@@ -53,12 +59,16 @@ rather than a web app with tabs.
 src/
   main.tsx               entry point
   app.tsx                React Router setup, the bar, and the footer
+  assets/                fonts/ (the self-hosted fonts) and products/ (the
+                         64 product photos)
   pages/
-    home/                the home page, its four sections, and catalog.ts
+    home/                the home page, its four sections, catalog.ts, and
+                         the images only it shows (Tony's photos, the logo)
     not-found/           the 404 page
-  ui/                    components used by 2 or more pages (nav, footer,
-                         hash-link)
-  styles/                global CSS only (styles.css)
+  ui/                    components used by 2 or more pages (nav, footer),
+                         section-link.ts, and the bar's logo mark
+  styles/                global CSS only (fonts.css, styles.css)
+  utils/                 app-agnostic helpers (motion.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
@@ -67,13 +77,24 @@ Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
 - **A page's main file is named after its folder, with no prefix**
   (`pages/home/home.tsx`), the same as the sibling projects.
 - **The product data is `pages/home/catalog.ts`**, not `products.ts`,
-  so it doesn't share a name with the products section beside it.
-- **The bar, footer, and section links live in `ui/`** as `nav.tsx`,
-  `footer.tsx`, and `hash-link.tsx`, since the 404 page uses the bar and
-  footer too, and the hero uses the section links.
-- **Still to come**: `assets/` and `utils/` once something needs them, and
-  the 64 product photos, which stay in `public/images/` until step 11's
-  optimization script writes their resized copies into `src/`.
+  so it doesn't share a name with the products section beside it. It
+  imports every photo through `import.meta.glob` and looks each card's up
+  by file name.
+- **The product photos live in `src/assets/products/`** (decided 2026-10-10
+  by the user), though only the home page shows them, in one flat folder,
+  since a folder per category would pass the two-level depth limit. Step
+  11's optimization script writes their resized copies there, with the
+  originals in `design/photos/`.
+- **The bar, footer, and section links live in `ui/`**, since the 404 page
+  uses the bar and footer too. Section links go through
+  `ui/section-link.ts`, as in seal-and-shield, which scrolls in place on the
+  home page and navigates home with the section's id as the hash from any
+  other page; the home page jumps to that section on arrival and clears the
+  hash. Unlike seal-and-shield's, its `modCliFun` leaves a Ctrl, Cmd,
+  Shift, Alt, or middle click to the browser, so a section can still open in
+  a new tab, as the old `HashLink` allowed.
+- **The bar's logo mark is copied into `ui/`** while `public/images/` keeps
+  its own copy as the favicon, until step 11's favicon set replaces it.
 
 ## Unused files
 Decided 2026-10-10. An unused image is listed for the user to confirm before
@@ -133,10 +154,14 @@ passes on `close-out`.
    - **Needs review by hand**: axe can't judge the contrast of text over the
      hero's gradient and the photos, and flags the hidden form's repeated
      ids (step 7).
-5. **Directory structure**, matching reese-roofing and seal-and-shield
-   (`pages/home/`, `pages/not-found/`, `ui/`, `styles/`, `assets/`,
-   `utils/`), with `ui/section-link.ts` replacing `HashLink` and the product
-   photos imported rather than served from `public/`.
+5. **Directory structure**, matching reese-roofing and seal-and-shield (see
+   "## Directory structure"). Done 2026-10-10 in six commits: the Netlify
+   fallback moved to `public/_redirects`; the source files moved with only
+   their import paths changed; Tony's photos and the logos imported rather
+   than served from `public/`; the product photos moved to `src/assets/`;
+   the fonts self-hosted (moved up from step 9, as in seal-and-shield, since
+   the Google Fonts tags fit none of the HTML rules' head sections); and
+   `ui/section-link.ts` replacing `HashLink` and its 50ms scroll timeout.
 6. **Formatting, naming, and comment pass**, one file per commit, with the
    copy fixes (no em dashes, "Down syndrome" capitalized).
 7. **Contact form fixes**: the success message waits for Netlify's answer,
@@ -144,13 +169,18 @@ passes on `close-out`.
    `index.html` becomes valid HTML.
 8. **Hooks and CSS modules**, including the product filter buttons moving
    from a partial tablist to `aria-pressed` toggles.
-9. **Design tokens** in five commits: role colors and self-hosted fonts, the
-   type and spacing scale, durations and easing, elevation shadows, and
-   class and keyframe names.
+9. **Design tokens** in five commits: role colors and font tokens, the type
+   and spacing scale, durations and easing, elevation shadows, and class and
+   keyframe names. The reduced-motion pass also turns off `html`'s smooth
+   scrolling, which still glides a section link's `'auto'` scroll today.
 10. **Horizontal layout comparison** (see above), then a WAVE and
     accessibility review.
 11. **New features**: the 404 page, security headers, image optimization,
-    SEO, social previews and the favicon set, and interaction feedback.
+    SEO, social previews and the favicon set, and interaction feedback. Once
+    the photos carry their width and height, recheck WebKit's phone menu
+    links: WebKit has no scroll anchoring, so a link far down the page lands
+    a few hundred pixels short while the photos above it load and grow
+    their cards, the same as before the section links arrived.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
