@@ -3,7 +3,7 @@ import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router'; // What: Use Navigate. Why: The hash should leave the address once the page has scrolled to it. How: This returns the router's navigate function.
 import { HerSecCom } from './hero.tsx';
 import { ProSecCom } from './products.tsx';
-import About from './about.tsx';
+import { AboSecCom } from './about.tsx';
 import Contact from './contact.tsx';
 import { FaiSecCom } from './fairs.tsx'; // What: Fairs Section Component. Why: The craft fair gallery sits between the products and Tony's story. How: This is rendered after the products section.
 
@@ -32,7 +32,7 @@ export default function Home() {
       <HerSecCom />
       <ProSecCom />
       <FaiSecCom />
-      <About />
+      <AboSecCom />
       <Contact />
     </>
   );
