@@ -69,6 +69,10 @@ passes on `close-out`.
      blur. It also writes colors as hex, which moves the nav's translucent
      background by one color level, and `background : none` as a position of
      `0px 0px`, which draws nothing different.
+   - **React 19**: done 2026-10-10, with identical screenshots and behavior
+     (filters, menu, section links, form typing, the 404 page's button) and
+     no console errors. The production bundle grows from 58 to 81 KB
+     gzipped, React 19's own size and in line with seal-and-shield.
    - **Known axe violations**, already on the live site and fixed in their own
      steps: the footer's phone link told apart by color alone (step 6), the
      hidden Netlify form repeating the contact form's ids (step 7), and the
