@@ -1,0 +1,199 @@
+
+
+
+/**
+ * fairs.module.css = Fairs Section Module
+ *
+ * @summary
+ * Styles for FaiSecCom: the craft fair gallery's section, with its heading
+ * and note above a responsive grid of booth shots, each in a rounded 4:5
+ * frame. The shared section, container, heading, and note classes the
+ * section used to borrow from the global stylesheet are copied here.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region section */
+
+.section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+
+
+	padding  : 110px 40px;
+	position : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+
+
+		padding : 80px 20px;
+
+
+	}
+
+
+}
+
+
+/* #region container */
+
+.container { /* What: Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : 1200px;
+
+
+}
+
+
+/* #region section-head */
+
+.section-head { /* What: Section Head Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, copied from the shared section head. */
+
+
+	align-items     : end;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : 40px;
+	justify-content : space-between;
+	margin-bottom   : 60px;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section Head Div. Why: The heading and note don't fit side by side on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.section-head { /* What: Stacked Section Head Div. Why: The note reads best below the heading. How: This stacks them on the left with a smaller gap. */
+
+
+		align-items    : flex-start;
+		flex-direction : column;
+		gap            : 16px;
+
+
+	}
+
+
+}
+
+.section-label { /* What: Section Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+
+
+	align-items    : center;
+	color          : var(--navy);
+	display        : flex;
+	font-size      : 0.8rem;
+	font-weight    : 600;
+	gap            : 12px;
+	letter-spacing : 0.22em;
+	margin-bottom  : 12px;
+	text-transform : uppercase;
+
+
+}
+.section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var(--yellow);
+	content    : '';
+	height     : 2px;
+	width      : 32px;
+
+
+}
+
+
+/* #region section-title */
+
+.section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, copied from the shared section title. */
+
+
+	font-family    : var(--serif);
+	font-size      : clamp(2rem, 4.5vw, 3.4rem);
+	font-weight    : 800;
+	letter-spacing : -0.02em;
+	line-height    : 1.05;
+
+
+}
+
+.section-title-accent { /* What: Section Title Accent Emphasis. Why: The heading's second half carries its warmth. How: This sets it in navy italics. */
+
+
+	color      : var(--navy);
+	font-style : italic;
+
+
+}
+
+/* #endregion section-title */
+
+
+.section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped at 420px, copied from the shared section note. */
+
+
+	color     : var(--ink-soft);
+	font-size : 1.05rem;
+	max-width : 420px;
+
+
+}
+
+/* #endregion section-head */
+
+
+
+/* #region fairs-grid */
+
+.fairs-grid { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least 150px wide, or the full width when that's narrower. */
+
+
+	display               : grid;
+	gap                   : 20px;
+	grid-template-columns : repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+
+
+}
+
+
+/* #region fair-photo */
+
+.fair-photo { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners. */
+
+
+	aspect-ratio  : 4 / 5;
+	background    : white;
+	border        : 1px solid var(--line);
+	border-radius : 18px;
+	overflow      : hidden;
+
+
+}
+
+.fair-photo-image { /* What: Fair Photo Image. Why: The booth shot should fill its frame. How: This covers the frame with the photo, cropping its edges, as a block so no gap shows beneath it. */
+
+
+	display    : block;
+	height     : 100%;
+	object-fit : cover;
+	width      : 100%;
+
+
+}
+
+/* #endregion fair-photo */
+
+/* #endregion fairs-grid */
+
+/* #endregion container */
+
+/* #endregion section */
+
+
