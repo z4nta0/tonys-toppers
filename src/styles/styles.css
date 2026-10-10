@@ -869,7 +869,8 @@ footer {
 }
 footer a {
   color: var(--yellow);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 /* ---------- RESPONSIVE ---------- */

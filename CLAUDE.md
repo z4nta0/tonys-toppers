@@ -140,10 +140,10 @@ passes on `close-out`.
      compiles), so the source checking cleanly and a byte-for-byte identical
      build stood in for the browser checks.
    - **Known axe violations**, already on the live site and fixed in their own
-     steps: the footer's phone link told apart by color alone (step 6) and the
-     404 page with no `h1` (step 11). The hidden Netlify form repeating the
-     contact form's ids was fixed early, in step 6, before `index.html`'s
-     formatting.
+     steps: the 404 page with no `h1` (step 11). The footer's phone link, told
+     apart by color alone, gained an underline in step 6, and the hidden
+     Netlify form repeating the contact form's ids was rebuilt in step 6,
+     before `index.html`'s formatting.
 3. **ESLint**, set up from ease-my-life's `eslint.config.ts`. Done
    2026-10-10 with seal-and-shield's copy unchanged and the sibling
    projects' versions; the source lints with no findings.
