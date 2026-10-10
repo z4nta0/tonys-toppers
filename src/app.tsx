@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router';
 import { NavBarCom } from './ui/nav.tsx';
 import { SitFooCom } from './ui/footer.tsx';
-import Home from './pages/home/home.tsx';
+import { HomPagCom } from './pages/home/home.tsx';
 import NotFound from './pages/not-found/not-found.tsx';
 
 /**
@@ -15,7 +15,7 @@ export default function App() {
       <NavBarCom />
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomPagCom />} />
           {/* Add more routes here as the site grows, e.g.:
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
