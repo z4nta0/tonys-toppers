@@ -25,9 +25,9 @@
 .nav { /* What: Navigation Bar. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it. */
 
 
-	-webkit-backdrop-filter : blur( 12px );                                                                                              /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
+	-webkit-backdrop-filter : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                               /* Vertical Rhythm Base Minus 1 = 11px */ /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
 	align-items             : center;
-	backdrop-filter         : blur( 12px );
+	backdrop-filter         : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                               /* Vertical Rhythm Base Minus 1 = 11px */
 	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );                                                           /* Background Page Color = #fdf9ee @ 0.85 opacity */
 	border-bottom           : var( --bor-wid-bas ) solid transparent;                                                                    /* Border Width Base ~= 1.160px */
 	display                 : flex;

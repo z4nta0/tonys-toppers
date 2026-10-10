@@ -143,17 +143,17 @@
 .btn-primary { /* What: Primary Button Anchor. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
 
 
-	background : var( --acc-mai-col );           /* Accent Main Color = #1e3a8a */
-	box-shadow : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
-	color      : var( --tex-acc-col );           /* Text Accent Color = #fdf9ee */
+	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	color      : var( --tex-acc-col );                                                                           /* Text Accent Color = #fdf9ee */
 
 
 }
 .btn-primary:hover { /* What: Hovered Primary Button Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
-	box-shadow : 6px 6px 0 var( --sha-mai-col );                                                    /* Shadow Main Color = #1a1a2e */
-	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
 
 
 }

@@ -304,9 +304,9 @@
 .product-card:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This casts a soft navy shadow and turns its border navy, while its lift waits on the entrance animation's held transform. */
 
 
-	border-color : var( --acc-mai-col );                                                                  /* Accent Main Color = #1e3a8a */
-	box-shadow   : 0 20px 40px -20px oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-004-rec ) ); /* Accent Main Color = #1e3a8a, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
-	transform    : translateY( calc( var( --spa-ver-m03 ) * -1 ) );                                       /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
+	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	transform    : translateY( calc( var( --spa-ver-m03 ) * -1 ) ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
 }
