@@ -38,6 +38,10 @@ const NAMES: Record<ProductType, string[]> = {
   'straw-charm': ['straw-charm-1',],
 };
 
+const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.jpg', { eager : true, import : 'default' } ); // What: Product URL Object. Why: The product photos live in src/assets/products, where Vite fingerprints each one and fails the build when a listed photo is missing from its import. How: This imports every photo in the folder at build time and maps each one's source path to its built URL.
+
+
+
 //const pad = (n: number) => String(n).padStart(2, '0');
 
 // Generated SVGs run product-01 through product-28, in the same order as CATEGORIES,
@@ -57,7 +61,7 @@ export const PRODUCTS: Product[] = CATEGORIES.flatMap((cat, catIdx) => {
     const id = `${catIdx} + ${i}`;
     return {
       id: id,
-      img: `images/${cat.value}/${name}.jpg`,
+      img: PRO_URL_OBJ[ `../../assets/products/${ name }.jpg` ], // What: Image. Why: Each card shows its own photo. How: This looks up the photo's built URL by its file name.
       name: `${labelMap[cat.value]} ${i + 1}`,
       type: cat.value,
       typeLabel: labelMap[cat.value],
