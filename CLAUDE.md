@@ -184,11 +184,17 @@ passes on `close-out`.
    sticker is hidden as decoration, and `catalog.ts` reads each category's
    photos from the folder. The README's em dashes go with its rewrite at
    close-out.
-7. **Contact form fixes**: the success message waits for Netlify's answer,
-   and the browser's required-field checks come back on. The hidden form in
-   `index.html` became a bare, valid copy of the real form's four fields in
-   step 6, as in seal-and-shield. After the next deploy, the user sends a
-   test submission to confirm Netlify still records every field.
+7. **Contact form fixes**: done 2026-10-10. The browser's required-field
+   checks are back on, so an empty or malformed form isn't sent. Sending
+   now waits for Netlify's answer: only an OK shows the thank-you note,
+   while a rejection or a network failure keeps the visitor's details and
+   shows an announced error note offering a retry or Tony's number, and the
+   button is disabled and reads Sending... while a request is out. The
+   error note's reds are literal until step 9 gives them their status
+   roles. The hidden form in `index.html` became a bare, valid copy of the
+   real form's four fields in step 6, as in seal-and-shield. After the next
+   deploy, the user sends a test submission to confirm Netlify still
+   records every field.
 8. **Hooks and CSS modules**, including the product filter buttons moving
    from a partial tablist to `aria-pressed` toggles.
 9. **Design tokens** in five commits: role colors and font tokens, the type
