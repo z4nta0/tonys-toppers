@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router';
 import { NavBarCom } from './ui/nav.tsx';
 import { SitFooCom } from './ui/footer.tsx';
 import { HomPagCom } from './pages/home/home.tsx';
-import NotFound from './pages/not-found/not-found.tsx';
+import { NotFouCom } from './pages/not-found/not-found.tsx';
 
 /**
  * Router is in place even though the site is currently a single page,
@@ -20,7 +20,7 @@ export default function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
           */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFouCom />} />
         </Routes>
       </main>
       <SitFooCom />
