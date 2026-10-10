@@ -76,6 +76,9 @@ passes on `close-out`.
    - **React Router 8**: done 2026-10-10, with every import moved to
      `react-router`, identical checks (a direct visit to `/#about` included),
      and `npm audit` clear of the old router's three moderate advisories.
+   - **TypeScript 6.0**: done 2026-10-10. It only type checks (Vite
+     compiles), so the source checking cleanly and a byte-for-byte identical
+     build stood in for the browser checks.
    - **Known axe violations**, already on the live site and fixed in their own
      steps: the footer's phone link told apart by color alone (step 6), the
      hidden Netlify form repeating the contact form's ids (step 7), and the
