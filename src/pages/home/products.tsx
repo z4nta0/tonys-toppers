@@ -47,9 +47,8 @@ type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's fi
  * @summary
  * Renders the collection. Choosing a filter button re-renders the grid with
  * that filter's cards, which fade in one after another, each 30ms behind the
- * one before. The buttons still use tab roles, which step 8 of the cleanup
- * plan replaces with toggle buttons, since nothing here behaves as a tab
- * panel.
+ * one before. The filter buttons are a labelled group of toggle buttons, the
+ * chosen one pressed, so screen readers announce which filter is on.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -123,20 +122,19 @@ function ProSecCom () : React.JSX.Element {
 					className='filter-tabs'
 
 					aria-label='Filter products by category'
-					role='tablist'
-				>{ /* What: Filter Tabs Div Element. Why: Visitors can narrow the grid to one kind of piece. How: This holds the All button and one button per category. */ }
+					role='group'
+				>{ /* What: Filter Tabs Div Element. Why: Visitors can narrow the grid to one kind of piece. How: This groups the All button and one button per category under one label. */ }
 
 
 					<button
-						className={ ` filter-tab   ${ filKeyStr === 'all' ? 'active' : '' } ` }
+						className='filter-tab'
 
 						type='button'
 
-						aria-selected={ filKeyStr === 'all' }
-						role='tab'
+						aria-pressed={ filKeyStr === 'all' }
 
 						onClick={ () => setFilKeyStr( 'all' ) }
-					>{ /* What: All Filter Button Element. Why: Visitors can go back to every piece. How: This chooses the all filter. */ }
+					>{ /* What: All Filter Button Element. Why: Visitors can go back to every piece. How: This chooses the all filter, and shows as pressed while it's chosen. */ }
 						All
 					</button>
 
@@ -146,15 +144,14 @@ function ProSecCom () : React.JSX.Element {
 						<button
 							key={ catRcdObj.sluStr }
 
-							className={ ` filter-tab   ${ filKeyStr === catRcdObj.sluStr ? 'active' : '' } ` }
+							className='filter-tab'
 
 							type='button'
 
-							aria-selected={ filKeyStr === catRcdObj.sluStr }
-							role='tab'
+							aria-pressed={ filKeyStr === catRcdObj.sluStr }
 
 							onClick={ () => setFilKeyStr( catRcdObj.sluStr ) }
-						>{ /* What: Category Filter Button Element. Why: Visitors can narrow the grid to this category. How: This chooses the category's slug as the filter. */ }
+						>{ /* What: Category Filter Button Element. Why: Visitors can narrow the grid to this category. How: This chooses the category's slug as the filter, and shows as pressed while it's chosen. */ }
 							{ catRcdObj.labStr }
 						</button>
 

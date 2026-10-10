@@ -474,7 +474,7 @@ footer {
     flex-basis: 33.3%;
   }
 } 
-.filter-tab.active {
+.filter-tab[aria-pressed='true'] {
   background: var(--navy);
   color: var(--cream);
 }
