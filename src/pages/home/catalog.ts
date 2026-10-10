@@ -9,10 +9,11 @@ export type ProductType =
   | 'straw-charm';
 
 export interface Product {
+  booth: boolean; // What: Booth. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the All list. How: This is true for a booth shot and false for a piece or set.
   id: string;
   img: string;
   name: string;
-  type: ProductType;
+  types: ProductType[]; // What: Types. Why: One photo can show more than one kind of piece. How: This lists every category the photo is tagged with, the first one setting its card's look.
   typeLabel: string;
 }
 
@@ -28,43 +29,86 @@ export const CATEGORIES: { value: ProductType; label: string; short: string }[] 
 ];
 
 const NAMES: Record<ProductType, string[]> = {
-  'pen-topper': ['pen-topper-1', 'pen-topper-2', 'pen-topper-3', 'pen-topper-4', 'pen-topper-5', 'pen-topper-6', 'pen-topper-7', 'pen-topper-8', 'pen-topper-9', 'pen-topper-10', 'pen-topper-11', 'pen-topper-12', 'pen-topper-13', 'pen-topper-14', 'pen-topper-15', 'pen-topper-16', 'pen-topper-17', 'pen-topper-18', 'pen-topper-19',],
-  'wine-stopper': ['wine-stopper-1', 'wine-stopper-2', 'wine-stopper-3', 'wine-stopper-4', 'wine-stopper-5', 'wine-stopper-6', 'wine-stopper-7', 'wine-stopper-8'],
+  'pen-topper': ['pen-topper-1', 'pen-topper-2', 'pen-topper-3', 'pen-topper-4', 'pen-topper-5', 'pen-topper-6', 'pen-topper-7', 'pen-topper-8', 'pen-topper-9', 'pen-topper-10', 'pen-topper-11',],
+  'wine-stopper': ['wine-stopper-1',],
   'keychain': ['keychain-1',],
-  'dog-necklace': ['dog-necklace-1', 'dog-necklace-2', 'dog-necklace-3', 'dog-necklace-4', 'dog-necklace-5', 'dog-necklace-6', 'dog-necklace-7', 'dog-necklace-8', 'dog-necklace-9', 'dog-necklace-10', 'dog-necklace-11', 'dog-necklace-12', 'dog-necklace-13', 'dog-necklace-14', 'dog-necklace-15', 'dog-necklace-16', 'dog-necklace-17', 'dog-necklace-18', 'dog-necklace-19', 'dog-necklace-20',],
+  'dog-necklace': ['dog-necklace-1', 'dog-necklace-2', 'dog-necklace-3', 'dog-necklace-4', 'dog-necklace-5', 'dog-necklace-6', 'dog-necklace-7', 'dog-necklace-8', 'dog-necklace-9', 'dog-necklace-10', 'dog-necklace-11', 'dog-necklace-12', 'dog-necklace-13', 'dog-necklace-14', 'dog-necklace-15', 'dog-necklace-16', 'dog-necklace-17', 'dog-necklace-18', 'dog-necklace-19',],
   'car-freshie': ['car-freshie-1', 'car-freshie-2', 'car-freshie-3', 'car-freshie-4', 'car-freshie-5',],
   'name-badge-reel': ['name-badge-reel-1',],
   'phone-grip': ['phone-grip-1', 'phone-grip-2', 'phone-grip-3', 'phone-grip-4', 'phone-grip-5', 'phone-grip-6', 'phone-grip-7', 'phone-grip-8', 'phone-grip-9',],
-  'straw-charm': ['straw-charm-1',],
+  'straw-charm': [],
 };
+
+
+
+const LABELS: Record<ProductType, string> = {
+  'pen-topper': 'Pen Topper',
+  'wine-stopper': 'Wine Stopper',
+  'keychain': 'Keychain',
+  'dog-necklace': 'Dog Necklace',
+  'car-freshie': 'Car Freshie',
+  'name-badge-reel': 'Name Badge Reel',
+  'phone-grip': 'Phone Grip',
+  'straw-charm': 'Straw Charm',
+};
+
+
+
+const SETS: { file: string; types: ProductType[] }[] = [ // What: Sets. Why: A few photos show pen toppers and wine stoppers displayed together, so each is one card under both filters rather than a copy under each. How: Each row names the photo and the categories it shows.
+  { file: 'pen-wine-set-1', types: ['pen-topper', 'wine-stopper'] },
+  { file: 'pen-wine-set-2', types: ['pen-topper', 'wine-stopper'] },
+  { file: 'pen-wine-set-3', types: ['pen-topper', 'wine-stopper'] },
+];
+
+
+
+const BOOTH: { file: string; types: ProductType[] }[] = [ // What: Booth. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo and the categories it shows.
+  { file: 'booth-1', types: ['pen-topper', 'wine-stopper'] },
+  { file: 'booth-2', types: ['pen-topper', 'wine-stopper', 'dog-necklace'] },
+  { file: 'booth-3', types: ['pen-topper', 'straw-charm'] },
+  { file: 'booth-4', types: ['pen-topper', 'wine-stopper'] },
+];
+
+
 
 const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.jpg', { eager : true, import : 'default' } ); // What: Product URL Object. Why: The product photos live in src/assets/products, where Vite fingerprints each one and fails the build when a listed photo is missing from its import. How: This imports every photo in the folder at build time and maps each one's source path to its built URL.
 
 
 
-//const pad = (n: number) => String(n).padStart(2, '0');
+const urlFor = (file: string) => PRO_URL_OBJ[ `../../assets/products/${ file }.jpg` ]; // What: URL For. Why: Every card looks its photo up the same way. How: This returns the photo's built URL by its file name.
 
-// Generated SVGs run product-01 through product-28, in the same order as CATEGORIES,
-// 4 per category. Build the typed product list from that.
-export const PRODUCTS: Product[] = CATEGORIES.flatMap((cat, catIdx) => {
-  const labelMap: Record<ProductType, string> = {
-    'pen-topper': 'Pen Topper',
-    'wine-stopper': 'Wine Stopper',
-    'keychain': 'Keychain',
-    'dog-necklace': 'Dog Necklace',
-    'car-freshie': 'Car Freshie',
-    'name-badge-reel': 'Name Badge Reel',
-    'phone-grip': 'Phone Grip',
-    'straw-charm': 'Straw Charm',
-  };
-  return NAMES[cat.value].map((name, i) => {
-    const id = `${catIdx} + ${i}`;
-    return {
-      id: id,
-      img: PRO_URL_OBJ[ `../../assets/products/${ name }.jpg` ], // What: Image. Why: Each card shows its own photo. How: This looks up the photo's built URL by its file name.
-      name: `${labelMap[cat.value]} ${i + 1}`,
-      type: cat.value,
-      typeLabel: labelMap[cat.value],
-    };
-  });
-});
+
+
+// Every individual piece in category order, with the pen and wine stopper sets
+// right after the wine stoppers, then the booth shots, which only the filters
+// and the gallery show.
+export const PRODUCTS: Product[] = [
+  ...CATEGORIES.flatMap((cat) => [
+    ...NAMES[cat.value].map((file, i) => ({
+      booth: false,
+      id: file,
+      img: urlFor(file),
+      name: `${LABELS[cat.value]} ${i + 1}`,
+      types: [cat.value],
+      typeLabel: LABELS[cat.value],
+    })),
+    ...(cat.value === 'wine-stopper'
+      ? SETS.map((set, i) => ({
+          booth: false,
+          id: set.file,
+          img: urlFor(set.file),
+          name: `Pen Topper & Wine Stopper Set ${i + 1}`,
+          types: set.types,
+          typeLabel: 'Pen Topper & Wine Stopper',
+        }))
+      : []),
+  ]),
+  ...BOOTH.map((shot, i) => ({
+    booth: true,
+    id: shot.file,
+    img: urlFor(shot.file),
+    name: `Craft Fair Table ${i + 1}`,
+    types: shot.types,
+    typeLabel: 'Craft Fair Table',
+  })),
+];

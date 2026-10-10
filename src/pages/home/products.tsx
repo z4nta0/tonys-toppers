@@ -7,7 +7,7 @@ export default function Products() {
   const [filter, setFilter] = useState<Filter>('all');
 
   const visible = useMemo(
-    () => (filter === 'all' ? PRODUCTS : PRODUCTS.filter((p) => p.type === filter)),
+    () => (filter === 'all' ? PRODUCTS.filter((p) => !p.booth) : PRODUCTS.filter((p) => p.types.includes(filter))), // What: Visible Products. Why: All lists every piece and set once, while a category also shows the booth shots tagged with it. How: This leaves the booth shots out of All, and otherwise keeps every photo tagged with the chosen category.
     [filter]
   );
 
@@ -55,10 +55,10 @@ export default function Products() {
           {visible.map((p, idx) => (
             <article
               key={p.id}
-              className={`product-card product-card--${p.type}`}
+              className={`product-card product-card--${p.types[0]}`}
               style={{ animationDelay: `${idx * 30}ms` }}
             >
-              <div className={`product-tag tag--${p.type}`}>{p.typeLabel}</div>
+              <div className={`product-tag tag--${p.types[0]}`}>{p.typeLabel}</div>
               <div className="product-img">
                 <img src={p.img} alt={p.name} loading="lazy" />
               </div>
