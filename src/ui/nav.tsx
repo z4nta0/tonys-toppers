@@ -227,7 +227,11 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<nav className={ ` nav   ${ isaScrBoo ? 'scrolled' : '' } ` }>{ /* What: Container Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the section links, and the phone menu toggle, raised into a pill once the page scrolls. */ }
+		<nav
+			className='nav'
+
+			data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar raises into a pill once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
+		>{ /* What: Container Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the section links, and the phone menu toggle, carrying data-page-scroll-active once the page scrolls. */ }
 
 
 			<Link
@@ -252,7 +256,11 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-			<ul className={ ` nav-links   ${ menOpeBoo ? 'open' : '' } ` }>{ /* What: Navigation Links List Element. Why: The section links sit in a row on wide screens and in a dropdown menu on a phone. How: This holds one item per section, shown as the menu when it's open. */ }
+			<ul
+				className='nav-links'
+
+				data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Flag. Why: On a phone the links drop down as a menu only while it's open. How: This marks the list while menOpeBoo is true, and drops the attribute otherwise.
+			>{ /* What: Navigation Links List Element. Why: The section links sit in a row on wide screens and in a dropdown menu on a phone. How: This holds one item per section, carrying data-mobile-menu-open while the menu is open. */ }
 
 
 				{ NAV_SEC_ARR.map( ( secRcdObj ) => ( // What: Section Link Map. Why: Each section gets a link. How: This renders one list item per section row.
@@ -262,7 +270,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 						<a
-							className={ isaHomBoo && actSecStr === secRcdObj.ideStr ? 'active' : '' }
+							data-section-link-active={ ( isaHomBoo && actSecStr === secRcdObj.ideStr ) || undefined } // What: Section Link Active Flag. Why: The link for the section being read is marked on the home page. How: This marks the link when its section is the active one there, and drops the attribute otherwise.
 
 							href={ `/#${ secRcdObj.ideStr }` }
 

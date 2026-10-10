@@ -73,17 +73,17 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
-		await curPagObj.addStyleTag( { content : '#home > div:nth-child(-n+2) { animation : none; }' } ); // What: Blob Animation Stop Call. Why: The hero's two blurred blobs float forever, and WebKit redraws their blur differently each time a capture pauses and resumes them, so the page never held still. How: This switches off the animation on the hero section's first two divs, its blobs, found by position until they get their own hook, leaving them where they rest, which is what reduced motion support will do on its own once the site has it.
+		await curPagObj.addStyleTag( { content : '[data-element-name-hook~="herBloDiv"] { animation : none; }' } ); // What: Blob Animation Stop Call. Why: The hero's two blurred blobs float forever, and WebKit redraws their blur differently each time a capture pauses and resumes them, so the page never held still. How: This switches off the animation on both blobs, found by their shared herBloDiv hook, leaving them where they rest, which is what reduced motion support will do on its own once the site has it.
 
 
 		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the product photos masked, and compares it with the state's baseline pixel for pixel, color for color.
 
 
-			animations        : 'disabled',                                         // What: Animations. Why: A looping animation would never hold still for the capture. How: This stops every animation at its start.
-			fullPage          : true,                                               // What: Full Page. Why: The whole state has to match, not just the first screen. How: This captures the page's full height.
-			mask              : [ curPagObj.locator( 'article img, figure img' ) ], // What: Mask. Why: WebKit draws the full-size product photos differently on each full-page capture, so the page never held still. How: This covers every photo inside a product card or a craft fair gallery figure with a solid box, found by tag until the photos get their own hook.
-			maxDiffPixelRatio : MAX_DIF_NUM,                                        // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.
-			threshold         : PIX_THR_NUM                                         // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.
+			animations        : 'disabled',                                                                                              // What: Animations. Why: A looping animation would never hold still for the capture. How: This stops every animation at its start.
+			fullPage          : true,                                                                                                    // What: Full Page. Why: The whole state has to match, not just the first screen. How: This captures the page's full height.
+			mask              : [ curPagObj.locator( '[data-element-name-hook~="proPhoIma"], [data-element-name-hook~="faiPhoIma"]' ) ], // What: Mask. Why: WebKit draws the full-size product photos differently on each full-page capture, so the page never held still. How: This covers every product card photo and gallery photo with a solid box, found by their hooks.
+			maxDiffPixelRatio : MAX_DIF_NUM,                                                                                             // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.
+			threshold         : PIX_THR_NUM                                                                                              // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.
 
 
 		} );

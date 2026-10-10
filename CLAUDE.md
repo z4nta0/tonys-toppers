@@ -230,24 +230,24 @@ logo ring, and wobbling sticker) when waiting for the page to settle.
   (order, traps, focus on screen, uncovered, and visible), reflow at 320px,
   and motion under reduced motion. axe's "needs review" results are printed
   and attached to the report rather than failing the run.
-- `npm run test:rendering`: compares a full-page screenshot of every state
-  with its baseline in `tests/rendering/baselines/`, with zero tolerance and
-  a per-pixel color threshold of 0. The page's clock is fixed to one date
-  rather than masking text, since the footer's year and Tony's age in the
-  About section both come from it. WebKit drew the page differently from one
+- `npm run test:rendering`: compares a full-page screenshot of every state with
+  its baseline in `tests/rendering/baselines/`, with zero tolerance and a
+  per-pixel color threshold of 0. The page's clock is fixed to one date rather
+  than masking text, since the footer's year and Tony's age in the About
+  section both come from it. WebKit drew the page differently from one
   full-page capture to the next in two places, so the page never held still
   long enough to compare: the 64 full-size product photos, which are masked
   (their boxes still show), and the hero's blurred blobs, whose floating
   animation is switched off before the capture, the same as reduced motion
   support will do once the site has it (step 9), when that line can go. The
   photo mask is retried without once step 11 shrinks the photos. Both find
-  their elements by tag and position until step 8 gives them hooks. After an
-  intended visual change, refresh with `npm run test:rendering --
-  --update-snapshots` and commit the baselines with it. Baselines are
-  captured on Linux. Chromium once failed the open menu state on its text's
-  antialiasing alone, across the whole page, while all three engines ran at
-  once, and passed every rerun after; a lone failure like that gets a rerun,
-  not new baselines.
+  their elements by hook: `proPhoIma` and `faiPhoIma` for the photos, and
+  `herBloDiv`, shared by both blobs. After an intended visual change, refresh
+  with `npm run test:rendering -- --update-snapshots` and commit the baselines
+  with it. Baselines are captured on Linux. Chromium once failed the open menu
+  state on its text's antialiasing alone, across the whole page, while all
+  three engines ran at once, and passed every rerun after; a lone failure like
+  that gets a rerun, not new baselines.
 - `npm run test:responsive`: measures the home page, the 404 page, and the
   open menu at 14 widths from 320 to 1,920px (the 900px and 1,000px
   breakpoints and the pixel past each included), failing on sideways

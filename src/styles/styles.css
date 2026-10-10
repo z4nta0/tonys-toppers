@@ -80,7 +80,7 @@ footer {
   transition: border-color 0.3s, padding 0.3s;
   max-width: 100vw;
 }
-.nav.scrolled {
+.nav[data-page-scroll-active] {
   border-bottom-color: var(--line);
   padding: 12px 40px;
 }
@@ -119,7 +119,7 @@ footer {
   background: var(--navy);
   color: var(--cream);
 }
-.nav-links a.active {
+.nav-links a[data-section-link-active] {
   background: var(--ink);
   color: var(--cream);
 }
@@ -899,7 +899,7 @@ footer a {
   .nav {
     padding: 14px 20px;
   }
-  .nav.scrolled {
+  .nav[data-page-scroll-active] {
     padding: 10px 20px;
   }
   .nav-links {
@@ -916,7 +916,7 @@ footer a {
     transition: transform 0.3s;
     pointer-events: none;
   }
-  .nav-links.open {
+  .nav-links[data-mobile-menu-open] {
     transform: translateY(0);
     pointer-events: all;
   }

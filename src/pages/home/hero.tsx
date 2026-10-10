@@ -121,9 +121,17 @@ function HerSecCom () : React.JSX.Element {
 		>{ /* What: Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
 
 
-			<div className='blob blob-1' />{ /* What: First Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
+			<div
+				className='blob blob-1'
 
-			<div className='blob blob-2' />{ /* What: Second Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
+				data-element-name-hook='herBloDiv'
+			/>{ /* What: First Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly; the rendering suite stills both blobs through their shared herBloDiv hook. */ }
+
+			<div
+				className='blob blob-2'
+
+				data-element-name-hook='herBloDiv'
+			/>{ /* What: Second Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first; the rendering suite stills both blobs through their shared herBloDiv hook. */ }
 
 
 
