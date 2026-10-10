@@ -9,6 +9,7 @@ import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Func
 const SECTIONS = [
   { id: 'home', label: 'Home' },
   { id: 'products', label: 'Products' },
+  { id: 'fairs', label: 'Craft Fairs' },
   { id: 'about', label: 'About Tony' },
   { id: 'contact', label: 'Contact' },
 ] as const;

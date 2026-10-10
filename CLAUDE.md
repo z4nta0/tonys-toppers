@@ -44,8 +44,8 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
   out: step 11's image script crops off the phone's interface, keeping the
   original in `design/photos/`. The gallery's 4:5 crop already hides most
   of it; the product cards still show it until then.
-- **The gallery has no bar link yet**: the bar keeps its four links until
-  the user decides whether "At the craft fairs" should join them.
+- **The bar links to the gallery** as "Craft Fairs" (decided 2026-10-10),
+  between Products and About Tony, in page order.
 
 ## Images
 Decided 2026-10-10, under the user-level "## Images" rule. The original
