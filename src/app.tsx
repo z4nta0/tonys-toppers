@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router';
-import Navbar from './ui/nav.tsx';
+import { NavBarCom } from './ui/nav.tsx';
 import { SitFooCom } from './ui/footer.tsx';
 import Home from './pages/home/home.tsx';
 import NotFound from './pages/not-found/not-found.tsx';
@@ -12,7 +12,7 @@ import NotFound from './pages/not-found/not-found.tsx';
 export default function App() {
   return (
     <>
-      <Navbar />
+      <NavBarCom />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
