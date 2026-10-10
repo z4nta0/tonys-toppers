@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'; // What: Use Navigate. Why: The hash
 import { HerSecCom } from './hero.tsx';
 import { ProSecCom } from './products.tsx';
 import { AboSecCom } from './about.tsx';
-import Contact from './contact.tsx';
+import { ConSecCom } from './contact.tsx';
 import { FaiSecCom } from './fairs.tsx'; // What: Fairs Section Component. Why: The craft fair gallery sits between the products and Tony's story. How: This is rendered after the products section.
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
       <ProSecCom />
       <FaiSecCom />
       <AboSecCom />
-      <Contact />
+      <ConSecCom />
     </>
   );
 }
