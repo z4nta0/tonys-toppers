@@ -195,8 +195,40 @@ passes on `close-out`.
    real form's four fields in step 6, as in seal-and-shield. After the next
    deploy, the user sends a test submission to confirm Netlify still
    records every field.
-8. **Hooks and CSS modules**, including the product filter buttons moving
-   from a partial tablist to `aria-pressed` toggles.
+8. **Hooks and CSS modules**: done 2026-10-10.
+   - **State and hooks**: the bar's scrolled, open-menu, and active-link
+     classes became `data-page-scroll-active`, `data-mobile-menu-open`, and
+     `data-section-link-active`, and the photos carry the `proPhoIma` and
+     `faiPhoIma` hooks the rendering suite masks them by.
+   - **Accessibility fixes**: the product filters became a labelled group of
+     `aria-pressed` toggles in place of a partial tablist, and the closed
+     phone menu is `visibility: hidden` once its slide-out ends, so its links
+     leave the Tab order and screen readers.
+   - **Modules**: every component has its own `.module.css` (`ui/nav`,
+     `ui/footer`, and the hero, products, fairs, about, contact, and 404
+     pages), classes kept verbatim and read through `cssModObj`. The shared
+     section, container, heading, label, note, and button classes are copied
+     into each module that uses them, inline styles and outside overrides
+     merged in, and every element once reached through a tag selector has a
+     class of its own. Rule-less classes (`hero-text`, `bio-content`,
+     `bio-stat`, `contact-info`, the per-section classes) and the unused
+     category modifiers, stopper tag, and placeholder note are gone.
+     `fadeUp` stays global behind `global()`, the hero's other keyframes
+     moved into its module, and every animation and transition has a
+     reduced-motion variant. `styles.css` holds only the tokens, base
+     element styles, the mount element, and `fadeUp`.
+   - **Verified** by comparing every element's computed style against the
+     previous commit at rest, scrolled, with each control hovered and
+     focused, and with the phone menu open, on both pages at both widths in
+     all three engines (the form's notes too, against faked answers). The
+     reduced-motion baselines were refreshed twice, for the hero and the
+     cards, whose entrance animations no longer run there. With the motion
+     variants in, the reduced-motion checks and the keyboard walks pass, and
+     only the 404 page's missing `h1` still fails (step 11).
+   - **Found for later**: a product card's hover lift never shows, since its
+     entrance animation's `both` fill holds `transform` (step 11's
+     interaction feedback), and the form fields swap the browser's focus
+     outline for a border color alone (step 9's focus rings).
 9. **Design tokens** in five commits: role colors and font tokens, the type
    and spacing scale, durations and easing, elevation shadows, and class and
    keyframe names. The reduced-motion pass also turns off `html`'s smooth
