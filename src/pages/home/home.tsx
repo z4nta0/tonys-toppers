@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router'; // What: Use Navigate. Why: The hash should leave the address once the page has scrolled to it. How: This returns the router's navigate function.
-import Hero from './hero.tsx';
+import { HerSecCom } from './hero.tsx';
 import Products from './products.tsx';
 import About from './about.tsx';
 import Contact from './contact.tsx';
@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
+      <HerSecCom />
       <Products />
       <Fairs />
       <About />
