@@ -27,10 +27,10 @@
 .hero { /* What: Hero Section. Why: The page opens on a warm, screen-filling welcome. How: This fills the screen below the bar, centers its content, clips the glows at its edges, and washes the cream background with a yellow glow at the top left and a blue one at the bottom right. */
 
 
-	background  : radial-gradient(ellipse at 20% 10%, rgba(251, 191, 36, 0.18), transparent 50%),
-		radial-gradient(ellipse at 85% 80%, rgba(30, 58, 138, 0.12), transparent 55%), var(--cream);
+	background  : radial-gradient( ellipse at 20% 10%, oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-006-rec ) ), transparent 50% ),
+		radial-gradient( ellipse at 85% 80%, oklch( from var( --acc-mai-col ) l c h / 0.12 ), transparent 55% ), var( --bac-pag-col ); /* Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185, Accent Main Color = #1e3a8a @ 0.12 opacity, Background Page Color = #fdf9ee */
 	display     : grid;
-	min-height  : calc(100vh - 80px);
+	min-height  : calc( 100vh - 80px );
 	overflow    : hidden;
 	padding     : 110px 40px 80px;
 	place-items : center;
@@ -57,7 +57,7 @@
 
 	animation      : float 14s ease-in-out infinite;
 	border-radius  : 50%;
-	filter         : blur(40px);
+	filter         : blur( 40px );
 	opacity        : 0.5;
 	pointer-events : none;
 	position       : absolute;
@@ -67,7 +67,7 @@
 .blob-1 { /* What: First Blob Div. Why: A yellow glow warms the top left corner. How: This sizes the circle at 320px and sets it partly off the corner. */
 
 
-	background : var(--yellow);
+	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	height     : 320px;
 	left       : -80px;
 	top        : -80px;
@@ -79,7 +79,7 @@
 
 
 	animation-delay : -7s;
-	background      : var(--navy-soft);
+	background      : oklch( from var( --acc-mai-col ) calc( l + 0.132 ) calc( c + 0.037 ) calc( h + 2.02 ) ); /* Accent Main Color = #1e3a8a, lightened to ~= #3b5bc9 */
 	bottom          : -100px;
 	height          : 280px;
 	right           : -60px;
@@ -107,7 +107,7 @@
 	100% {
 
 
-		transform : translate(0, 0) scale(1);
+		transform : translate( 0, 0 ) scale( 1 );
 
 
 	}
@@ -115,7 +115,7 @@
 	50% {
 
 
-		transform : translate(30px, -20px) scale(1.08);
+		transform : translate( 30px, -20px ) scale( 1.08 );
 
 
 	}
@@ -160,11 +160,11 @@
 
 
 	align-items    : center;
-	animation      : global( fadeUp ) 0.8s 0.1s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	background     : rgba(255, 255, 255, 0.7);
-	border         : 1px solid var(--line);
+	animation      : global( fadeUp ) 0.8s 0.1s both;                                     /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	background     : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+	border         : 1px solid var( --bor-mai-col );                                      /* Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius  : 999px;
-	color          : var(--navy);
+	color          : var( --acc-mai-col );                                                /* Accent Main Color = #1e3a8a */
 	display        : inline-flex;
 	font-size      : 0.85rem;
 	font-weight    : 600;
@@ -179,9 +179,9 @@
 .hero-eyebrow::before { /* What: Hero Eyebrow Dot. Why: A small yellow dot leads the eye into the line. How: This draws an 8px yellow circle with a soft yellow halo. */
 
 
-	background    : var(--yellow);
+	background    : var( --acc-sec-col );                                                          /* Accent Secondary Color = #fbbf24 */
 	border-radius : 50%;
-	box-shadow    : 0 0 0 4px rgba(251, 191, 36, 0.3);
+	box-shadow    : 0 0 0 4px oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-004-rec ) ); /* Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
 	content       : '';
 	height        : 8px;
 	width         : 8px;
@@ -209,9 +209,9 @@
 
 
 	animation      : global( fadeUp ) 0.9s 0.2s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	color          : var(--ink);
-	font-family    : var(--serif);
-	font-size      : clamp(2.8rem, 7vw, 5.5rem);
+	color          : var( --tex-mai-col );            /* Text Main Color = #1a1a2e */
+	font-family    : var( --fon-fam-sec );            /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( 2.8rem, 7vw, 5.5rem );
 	font-weight    : 800;
 	letter-spacing : -0.035em;
 	line-height    : 0.98;
@@ -236,7 +236,7 @@
 .accent { /* What: Accent Span. Why: The headline's second half carries its warmth. How: This sets it in navy italics, as an inline block so its highlight bar can sit beneath it. */
 
 
-	color      : var(--navy);
+	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display    : inline-block;
 	font-style : italic;
 	position   : relative;
@@ -246,7 +246,7 @@
 .accent::after { /* What: Accent Highlight Bar. Why: A yellow bar under the words reads like a hand-drawn highlight. How: This draws a slightly skewed yellow band across the bottom of the words, behind them. */
 
 
-	background    : var(--yellow);
+	background    : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	border-radius : 2px;
 	bottom        : 4px;
 	content       : '';
@@ -254,7 +254,7 @@
 	left          : -4px;
 	position      : absolute;
 	right         : -4px;
-	transform     : skew(-3deg);
+	transform     : skew( -3deg );
 	z-index       : -1;
 
 
@@ -267,7 +267,7 @@
 
 
 	animation     : global( fadeUp ) 1s 0.35s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	color         : var(--ink-soft);
+	color         : var( --tex-sec-col );           /* Text Secondary Color = #4a4a5e */
 	font-size     : 1.18rem;
 	margin-bottom : 36px;
 	max-width     : 520px;
@@ -323,7 +323,7 @@
 	border-radius   : 999px;
 	cursor          : pointer;
 	display         : inline-flex;
-	font-family     : var(--sans);
+	font-family     : var( --fon-fam-mai ); /* Font Family Main = 'Outfit', system-ui, sans-serif */
 	font-size       : 1rem;
 	font-weight     : 600;
 	gap             : 10px;
@@ -336,17 +336,17 @@
 .btn-primary { /* What: Primary Button Anchor. Why: The collection is the page's main goal, so its button leads. How: This fills it navy with cream text and a hard ink shadow. */
 
 
-	background : var(--navy);
-	box-shadow : 4px 4px 0 var(--ink);
-	color      : var(--cream);
+	background : var( --acc-mai-col );           /* Accent Main Color = #1e3a8a */
+	box-shadow : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	color      : var( --tex-acc-col );           /* Text Accent Color = #fdf9ee */
 
 
 }
 .btn-primary:hover { /* What: Hovered Primary Button Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
-	box-shadow : 6px 6px 0 var(--ink);
-	transform  : translate(-2px, -2px);
+	box-shadow : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	transform  : translate( -2px, -2px );
 
 
 }
@@ -354,16 +354,16 @@
 
 
 	background   : transparent;
-	border-color : var(--ink);
-	color        : var(--ink);
+	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
+	color        : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
 
 
 }
 .btn-ghost:hover { /* What: Hovered Ghost Button Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text cream. */
 
 
-	background : var(--ink);
-	color      : var(--cream);
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1a2e */
+	color      : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
 
 
 }
@@ -479,7 +479,7 @@
 	to {
 
 
-		transform : rotate(360deg);
+		transform : rotate( 360deg );
 
 
 	}
@@ -493,7 +493,7 @@
 	animation     : spin-slow-reverse 40s linear infinite;
 	aspect-ratio  : 1 / 1;
 	border-radius : 50%;
-	filter        : drop-shadow(20px 40px 15px rgba(30, 58, 138, 0.4)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.04));
+	filter        : drop-shadow( 20px 40px 15px oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ) drop-shadow( 0 0 1px oklch( from var( --sha-mai-col ) l c h / 0.04 ) ); /* Accent Main Color = #1e3a8a, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430, Shadow Main Color = #1a1a2e @ 0.04 opacity */
 	height        : 100%;
 	object-fit    : cover;
 	width         : 100%;
@@ -519,7 +519,7 @@
 	to {
 
 
-		transform : rotate(-360deg);
+		transform : rotate( -360deg );
 
 
 	}
@@ -534,13 +534,13 @@
 
 
 	animation     : wobble 6s ease-in-out infinite;
-	background    : var(--yellow);
-	border        : 2px solid var(--ink);
+	background    : var( --acc-sec-col );           /* Accent Secondary Color = #fbbf24 */
+	border        : 2px solid var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
 	border-radius : 50%;
-	box-shadow    : 4px 4px 0 var(--ink);
-	color         : var(--ink);
+	box-shadow    : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
 	display       : grid;
-	font-family   : var(--serif);
+	font-family   : var( --fon-fam-sec );           /* Font Family Secondary = 'Fraunces', Georgia, serif */
 	font-size     : 0.95rem;
 	font-style    : italic;
 	font-weight   : 600;
@@ -551,7 +551,7 @@
 	right         : -10px;
 	text-align    : center;
 	top           : -10px;
-	transform     : rotate(-12deg);
+	transform     : rotate( -12deg );
 	width         : 110px;
 	z-index       : 3;
 
@@ -592,7 +592,7 @@
 	100% {
 
 
-		transform : rotate(-12deg);
+		transform : rotate( -12deg );
 
 
 	}
@@ -600,7 +600,7 @@
 	50% {
 
 
-		transform : rotate(-6deg) scale(1.04);
+		transform : rotate( -6deg ) scale( 1.04 );
 
 
 	}

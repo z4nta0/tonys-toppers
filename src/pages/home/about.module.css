@@ -120,11 +120,11 @@
 
 
 	aspect-ratio  : 4 / 5;
-	border        : 4px solid var(--ink);
+	border        : 4px solid var( --bor-str-col );   /* Border Strong Color = #1a1a2e */
 	border-radius : 24px;
-	box-shadow    : 14px 14px 0 var(--yellow);
+	box-shadow    : 14px 14px 0 var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	overflow      : hidden;
-	transform     : rotate(-2deg);
+	transform     : rotate( -2deg );
 	transition    : transform 0.4s;
 	width         : 100%;
 
@@ -133,7 +133,7 @@
 .bio-photo:hover { /* What: Hovered Biography Photo Div. Why: The frame should respond to the pointer. How: This straightens it. */
 
 
-	transform : rotate(0deg);
+	transform : rotate( 0deg );
 
 
 }
@@ -170,16 +170,16 @@
 .bio-cartoon { /* What: Biography Cartoon Div. Why: A round logo badge marks the portrait as Tony's Toppers. How: This draws a 140px white circle with a thick ink border and a hard ink shadow, tilted the other way, overlapping the portrait's bottom right corner. */
 
 
-	background    : #FFFFFF;
-	border        : 4px solid var(--ink);
+	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
+	border        : 4px solid var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
 	border-radius : 50%;
 	bottom        : -60px;
-	box-shadow    : 6px 6px 0 var(--ink);
+	box-shadow    : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
 	height        : 140px;
 	overflow      : hidden;
 	position      : absolute;
 	right         : -40px;
-	transform     : rotate(8deg);
+	transform     : rotate( 8deg );
 	width         : 140px;
 	z-index       : 3;
 
@@ -222,7 +222,7 @@
 
 
 	align-items    : center;
-	color          : var(--navy);
+	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display        : flex;
 	font-size      : 0.8rem;
 	font-weight    : 600;
@@ -236,7 +236,7 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var(--yellow);
+	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : 2px;
 	width      : 32px;
@@ -251,8 +251,8 @@
 .bio-title { /* What: Biography Title Heading. Why: The heading names Tony and sums him up. How: This sets it in the heavy serif, growing with the screen between 32px and 48px, tightly leaded, with room below. */
 
 
-	font-family    : var(--serif);
-	font-size      : clamp(2rem, 4vw, 3rem);
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( 2rem, 4vw, 3rem );
 	font-weight    : 800;
 	letter-spacing : -0.02em;
 	line-height    : 1.05;
@@ -264,7 +264,7 @@
 .bio-title-accent { /* What: Biography Title Accent Emphasis. Why: The description of Tony carries the heading's warmth. How: This sets it in navy italics. */
 
 
-	color      : var(--navy);
+	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	font-style : italic;
 
 
@@ -276,7 +276,7 @@
 .bio-paragraph { /* What: Biography Paragraph. Why: The story should read comfortably. How: This sets it a little large in the soft ink color, generously leaded, with room between paragraphs. */
 
 
-	color         : var(--ink-soft);
+	color         : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
 	font-size     : 1.05rem;
 	line-height   : 1.75;
 	margin-bottom : 18px;
@@ -286,9 +286,9 @@
 .bio-paragraph:first-of-type::first-letter { /* What: Biography Paragraph Drop Cap. Why: A drop cap opens the story like a book. How: This floats the first paragraph's first letter large in the heavy navy serif, spanning about two lines. */
 
 
-	color       : var(--navy);
+	color       : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	float       : left;
-	font-family : var(--serif);
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
 	font-size   : 4.2rem;
 	font-weight : 800;
 	line-height : 0.9;
@@ -317,10 +317,10 @@
 .bio-stats { /* What: Biography Stats Div. Why: Three short facts round off the story. How: This sets them in three even, centered columns below a hairline. */
 
 
-	border-top            : 1px solid var(--line);
+	border-top            : 1px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
 	display               : grid;
 	gap                   : 16px;
-	grid-template-columns : repeat(3, 1fr);
+	grid-template-columns : repeat( 3, 1fr );
 	justify-items         : center;
 	margin-top            : 36px;
 	padding-top           : 32px;
@@ -331,9 +331,9 @@
 .num { /* What: Number Span. Why: Each stat's figure leads. How: This sets it large in the heavy navy serif, on a line of its own. */
 
 
-	color          : var(--navy);
+	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display        : block;
-	font-family    : var(--serif);
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
 	font-size      : 2.4rem;
 	font-weight    : 800;
 	letter-spacing : -0.02em;
@@ -345,7 +345,7 @@
 .label { /* What: Label Div. Why: Each figure needs a quiet caption. How: This sets it small, spaced, and uppercase in soft ink just below the figure. */
 
 
-	color          : var(--ink-soft);
+	color          : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
 	font-size      : 0.78rem;
 	letter-spacing : 0.14em;
 	margin-top     : 6px;

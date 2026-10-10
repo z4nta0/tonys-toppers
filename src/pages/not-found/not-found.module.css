@@ -61,7 +61,7 @@
 
 
 	align-items     : center;
-	color           : var(--navy);
+	color           : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display         : flex;
 	font-size       : 0.8rem;
 	font-weight     : 600;
@@ -76,7 +76,7 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var(--yellow);
+	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : 2px;
 	width      : 32px;
@@ -91,8 +91,8 @@
 .section-title { /* What: Section Title Heading. Why: The heading says the page wasn't found. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, with room below, copied from the shared section title. */
 
 
-	font-family    : var(--serif);
-	font-size      : clamp(2rem, 4.5vw, 3.4rem);
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( 2rem, 4.5vw, 3.4rem );
 	font-weight    : 800;
 	letter-spacing : -0.02em;
 	line-height    : 1.05;
@@ -104,7 +104,7 @@
 .section-title-accent { /* What: Section Title Accent Emphasis. Why: The last word carries the heading's emphasis. How: This sets it in navy italics. */
 
 
-	color      : var(--navy);
+	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	font-style : italic;
 
 
@@ -116,7 +116,7 @@
 .not-found-note { /* What: Not Found Note Paragraph. Why: The note points the visitor back to Tony's work without competing with the heading. How: This sets it in the soft ink color with room below. */
 
 
-	color         : var(--ink-soft);
+	color         : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
 	margin-bottom : 32px;
 
 
@@ -130,7 +130,7 @@
 	border-radius   : 999px;
 	cursor          : pointer;
 	display         : inline-flex;
-	font-family     : var(--sans);
+	font-family     : var( --fon-fam-mai ); /* Font Family Main = 'Outfit', system-ui, sans-serif */
 	font-size       : 1rem;
 	font-weight     : 600;
 	gap             : 10px;
@@ -143,17 +143,17 @@
 .btn-primary { /* What: Primary Button Anchor. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
 
 
-	background : var(--navy);
-	box-shadow : 4px 4px 0 var(--ink);
-	color      : var(--cream);
+	background : var( --acc-mai-col );           /* Accent Main Color = #1e3a8a */
+	box-shadow : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	color      : var( --tex-acc-col );           /* Text Accent Color = #fdf9ee */
 
 
 }
 .btn-primary:hover { /* What: Hovered Primary Button Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
-	box-shadow : 6px 6px 0 var(--ink);
-	transform  : translate(-2px, -2px);
+	box-shadow : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	transform  : translate( -2px, -2px );
 
 
 }

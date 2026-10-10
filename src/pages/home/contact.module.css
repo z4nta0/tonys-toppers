@@ -47,8 +47,8 @@
 .contact-section { /* What: Contact Section. Why: The page ends on a bold navy band that sets the contact details apart. How: This fills it navy with cream text and clips its glow at the edges. */
 
 
-	background : var(--navy);
-	color      : var(--cream);
+	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	color      : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
 	overflow   : hidden;
 
 
@@ -56,7 +56,7 @@
 .contact-section::before { /* What: Contact Section Glow. Why: A soft yellow glow warms the band's top right corner. How: This draws a 600px circle fading out from yellow, faint and partly off the corner, out of the way of the pointer. */
 
 
-	background     : radial-gradient(circle, var(--yellow) 0%, transparent 60%);
+	background     : radial-gradient( circle, var( --acc-sec-col ) 0%, transparent 60% ); /* Accent Secondary Color = #fbbf24 */
 	border-radius  : 50%;
 	content        : '';
 	height         : 600px;
@@ -116,7 +116,7 @@
 
 
 	align-items    : center;
-	color          : var(--yellow);
+	color          : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	display        : flex;
 	font-size      : 0.8rem;
 	font-weight    : 600;
@@ -130,7 +130,7 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var(--yellow);
+	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : 2px;
 	width      : 32px;
@@ -145,9 +145,9 @@
 .contact-title { /* What: Contact Title Heading. Why: The heading invites visitors to write. How: This sets it in the heavy cream serif, growing with the screen between 32px and about 54px, tightly leaded, with room below. */
 
 
-	color          : var(--cream);
-	font-family    : var(--serif);
-	font-size      : clamp(2rem, 4.5vw, 3.4rem);
+	color          : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( 2rem, 4.5vw, 3.4rem );
 	font-weight    : 800;
 	letter-spacing : -0.02em;
 	line-height    : 1.05;
@@ -159,7 +159,7 @@
 .contact-title-accent { /* What: Contact Title Accent Emphasis. Why: The question carries the heading's warmth. How: This sets it in yellow italics. */
 
 
-	color      : var(--yellow);
+	color      : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	font-style : italic;
 
 
@@ -171,7 +171,7 @@
 .contact-note { /* What: Contact Note Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in softened cream, capped at 440px, with room below. */
 
 
-	color         : rgba(253, 249, 238, 0.8);
+	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 	font-size     : 1.05rem;
 	margin-bottom : 32px;
 	max-width     : 440px;
@@ -187,8 +187,8 @@
 
 
 	align-items     : center;
-	background      : rgba(255, 255, 255, 0.07);
-	border          : 1px solid rgba(253, 249, 238, 0.18);
+	background      : oklch( from var( --bac-sur-col ) l c h / 0.07 );                               /* Background Surface Color = #ffffff @ 0.07 opacity */
+	border          : 1px solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-006-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	border-radius   : 16px;
 	color           : inherit;
 	display         : flex;
@@ -203,9 +203,9 @@
 .icon { /* What: Icon Div. Why: A symbol marks each row at a glance. How: This centers it large in a 48px rounded yellow square that never shrinks. */
 
 
-	background    : var(--yellow);
+	background    : var( --acc-sec-col );                                                                    /* Accent Secondary Color = #fbbf24 */
 	border-radius : 12px;
-	color         : var(--navy-deep);
+	color         : oklch( from var( --acc-mai-col ) calc( l - 0.097 ) calc( c - 0.050 ) calc( h + 2.42 ) ); /* Accent Main Color = #1e3a8a, darkened to ~= #172554 */
 	display       : grid;
 	flex-shrink   : 0;
 	font-size     : 1.4rem;
@@ -219,7 +219,7 @@
 .label { /* What: Label Div. Why: Each row says what it is quietly. How: This sets it small, spaced, and uppercase in faded cream above the row's value. */
 
 
-	color          : rgba(253, 249, 238, 0.6);
+	color          : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	font-size      : 0.78rem;
 	letter-spacing : 0.14em;
 	margin-bottom  : 2px;
@@ -231,8 +231,8 @@
 .value { /* What: Value Div. Why: The number, page name, or town is the row's main line. How: This sets it large in the semibold cream serif. */
 
 
-	color       : var(--cream);
-	font-family : var(--serif);
+	color       : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
 	font-size   : 1.3rem;
 	font-weight : 600;
 
@@ -241,7 +241,7 @@
 .contact-direct[href]:hover .value { /* What: Hovered Contact Direct Value Div. Why: A row that's a link should respond to the pointer, and the home town row isn't one. How: This turns the value yellow while its row, if it has an address, is hovered. */
 
 
-	color : var(--yellow);
+	color : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 
 
 }
@@ -255,10 +255,10 @@
 .contact-form { /* What: Contact Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
 
 
-	background    : var(--cream);
+	background    : var( --bac-pag-col );             /* Background Page Color = #fdf9ee */
 	border-radius : 24px;
-	box-shadow    : 12px 12px 0 var(--yellow);
-	color         : var(--ink);
+	box-shadow    : 12px 12px 0 var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	color         : var( --tex-mai-col );             /* Text Main Color = #1a1a2e */
 	padding       : 40px;
 
 
@@ -280,10 +280,10 @@
 .form-success { /* What: Form Success Div. Why: The visitor should see the message went. How: This sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
 
 
-	background    : var(--yellow-soft);
-	border        : 2px solid var(--yellow-deep);
+	background    : var( --suc-tin-col );           /* Success Tint Color = #fde68a */
+	border        : 2px solid var( --suc-mai-col ); /* Success Main Color = #d97706 */
 	border-radius : 12px;
-	color         : var(--ink);
+	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
 	margin-bottom : 18px;
 	padding       : 16px;
@@ -332,7 +332,7 @@
 .form-label { /* What: Form Label. Why: Each field needs a clear, visible name. How: This sets it small, bold, spaced, and uppercase in ink, on its own line above the control. */
 
 
-	color          : var(--ink);
+	color          : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
 	display        : block;
 	font-size      : 0.8rem;
 	font-weight    : 600;
@@ -346,11 +346,11 @@
 .form-control { /* What: Form Control Input. Why: The inputs, dropdown, and message box share one look. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, and eases its border and background. */
 
 
-	background    : white;
-	border        : 2px solid var(--line);
+	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
+	border        : 2px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius : 12px;
-	color         : var(--ink);
-	font-family   : var(--sans);
+	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
+	font-family   : var( --fon-fam-mai );           /* Font Family Main = 'Outfit', system-ui, sans-serif */
 	font-size     : 1rem;
 	padding       : 14px 16px;
 	transition    : border-color 0.2s, background 0.2s;
@@ -361,7 +361,7 @@
 .form-control:focus { /* What: Focused Form Control Input. Why: The field being typed in should stand out. How: This swaps the browser's outline for a navy border. */
 
 
-	border-color : var(--navy);
+	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	outline      : none;
 
 
@@ -399,10 +399,10 @@
 .form-error { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
 
 
-	background    : #fde8e8;
-	border        : 2px solid #b91c1c;
+	background    : var( --err-tin-col );           /* Error Tint Color = #fde8e8 */
+	border        : 2px solid var( --err-mai-col ); /* Error Main Color = #b91c1c */
 	border-radius : 12px;
-	color         : var(--ink);
+	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
 	margin-bottom : 18px;
 	padding       : 16px;
@@ -426,13 +426,13 @@
 .form-submit { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its lift and press. */
 
 
-	background    : var(--navy);
-	border        : 2px solid var(--ink);
+	background    : var( --acc-mai-col );           /* Accent Main Color = #1e3a8a */
+	border        : 2px solid var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
 	border-radius : 12px;
-	box-shadow    : 4px 4px 0 var(--ink);
-	color         : var(--cream);
+	box-shadow    : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	color         : var( --tex-acc-col );           /* Text Accent Color = #fdf9ee */
 	cursor        : pointer;
-	font-family   : var(--sans);
+	font-family   : var( --fon-fam-mai );           /* Font Family Main = 'Outfit', system-ui, sans-serif */
 	font-size     : 1.05rem;
 	font-weight   : 600;
 	padding       : 16px;
@@ -444,16 +444,16 @@
 .form-submit:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
-	box-shadow : 6px 6px 0 var(--ink);
-	transform  : translate(-2px, -2px);
+	box-shadow : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	transform  : translate( -2px, -2px );
 
 
 }
 .form-submit:active { /* What: Pressed Form Submit Button. Why: A press should feel like pushing the button in. How: This drops it back into place with a shallower shadow. */
 
 
-	box-shadow : 2px 2px 0 var(--ink);
-	transform  : translate(0, 0);
+	box-shadow : 2px 2px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
+	transform  : translate( 0, 0 );
 
 
 }
@@ -461,7 +461,7 @@
 .form-submit:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting place even under the pointer. */
 
 
-	box-shadow : 4px 4px 0 var(--ink);
+	box-shadow : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
 	cursor     : progress;
 	opacity    : 0.7;
 	transform  : none;

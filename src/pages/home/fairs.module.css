@@ -87,7 +87,7 @@
 
 
 	align-items    : center;
-	color          : var(--navy);
+	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display        : flex;
 	font-size      : 0.8rem;
 	font-weight    : 600;
@@ -101,7 +101,7 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var(--yellow);
+	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : 2px;
 	width      : 32px;
@@ -115,8 +115,8 @@
 .section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, copied from the shared section title. */
 
 
-	font-family    : var(--serif);
-	font-size      : clamp(2rem, 4.5vw, 3.4rem);
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( 2rem, 4.5vw, 3.4rem );
 	font-weight    : 800;
 	letter-spacing : -0.02em;
 	line-height    : 1.05;
@@ -127,7 +127,7 @@
 .section-title-accent { /* What: Section Title Accent Emphasis. Why: The heading's second half carries its warmth. How: This sets it in navy italics. */
 
 
-	color      : var(--navy);
+	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	font-style : italic;
 
 
@@ -139,7 +139,7 @@
 .section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped at 420px, copied from the shared section note. */
 
 
-	color     : var(--ink-soft);
+	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
 	font-size : 1.05rem;
 	max-width : 420px;
 
@@ -157,7 +157,7 @@
 
 	display               : grid;
 	gap                   : 20px;
-	grid-template-columns : repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+	grid-template-columns : repeat( auto-fit, minmax( min( 150px, 100% ), 1fr ) );
 
 
 }
@@ -169,8 +169,8 @@
 
 
 	aspect-ratio  : 4 / 5;
-	background    : white;
-	border        : 1px solid var(--line);
+	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
+	border        : 1px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius : 18px;
 	overflow      : hidden;
 
