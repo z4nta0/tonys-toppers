@@ -172,7 +172,18 @@ passes on `close-out`.
    the Google Fonts tags fit none of the HTML rules' head sections); and
    `ui/section-link.ts` replacing `HashLink` and its 50ms scroll timeout.
 6. **Formatting, naming, and comment pass**, one file per commit, with the
-   copy fixes (no em dashes, "Down syndrome" capitalized).
+   copy fixes (no em dashes, "Down syndrome" capitalized). Done 2026-10-10:
+   `vite.config.ts` (adding the shipped-page minifier), `index.html` (after
+   the hidden form's rebuild), and every TypeScript file under `src/`, each
+   checked by every suite. The components are now `AppRooCom`, `NavBarCom`,
+   `SitFooCom`, `HomPagCom`, `HerSecCom`, `ProSecCom`, `FaiSecCom`,
+   `AboSecCom`, `ConSecCom`, and `NotFouCom`. Along the way, the footer's
+   phone link gained an underline, every decorative arrow and emoji in a
+   link's or button's name is hidden from screen readers (through an
+   `aria-label` where a wrapper would have shifted a flex layout), the hero's
+   sticker is hidden as decoration, and `catalog.ts` reads each category's
+   photos from the folder. The README's em dashes go with its rewrite at
+   close-out.
 7. **Contact form fixes**: the success message waits for Netlify's answer,
    and the browser's required-field checks come back on. The hidden form in
    `index.html` became a bare, valid copy of the real form's four fields in
