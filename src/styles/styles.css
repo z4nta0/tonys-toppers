@@ -471,7 +471,7 @@ section { /* What: Section. Why: No section should ever be wider than the screen
 
 /* #region Shared Keyframes */
 
-@keyframes fadeUp { /* What: Fade Up. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from 24px below and from transparent to fully shown; modules play it through global(). */
+@keyframes fadeUp { /* What: Fade Up. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from about 26px below and from transparent to fully shown; modules play it through global(). */
 
 
 	from {

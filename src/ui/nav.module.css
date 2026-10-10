@@ -104,7 +104,7 @@
 
 }
 
-.nav-brand-logo { /* What: Navigation Brand Logo Image. Why: The mark should sit at a fixed, small size beside the name. How: This sizes it to a 44px circle. */
+.nav-brand-logo { /* What: Navigation Brand Logo Image. Why: The mark should sit at a fixed, small size beside the name. How: This sizes it to a circle about 45px across. */
 
 
 	border-radius : 50%;
@@ -261,7 +261,7 @@
 
 /* #region nav-toggle */
 
-.nav-toggle { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon in a 32px square with no button chrome, hidden until the narrow layout shows it. */
+.nav-toggle { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon in a square about 34px across with no button chrome, hidden until the narrow layout shows it. */
 
 
 	background      : none;

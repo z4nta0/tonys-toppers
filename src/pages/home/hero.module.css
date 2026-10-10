@@ -64,7 +64,7 @@
 
 
 }
-.blob-1 { /* What: First Blob Div. Why: A yellow glow warms the top left corner. How: This sizes the circle at 320px and sets it partly off the corner. */
+.blob-1 { /* What: First Blob Div. Why: A yellow glow warms the top left corner. How: This sizes the circle at about 321px and sets it partly off the corner. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -75,7 +75,7 @@
 
 
 }
-.blob-2 { /* What: Second Blob Div. Why: A blue glow balances the first in the bottom right corner. How: This sizes the circle at 280px, sets it partly off the corner, and starts it half a cycle behind the first. */
+.blob-2 { /* What: Second Blob Div. Why: A blue glow balances the first in the bottom right corner. How: This sizes the circle at about 243px, sets it partly off the corner, and starts it half a cycle behind the first. */
 
 
 	animation-delay : calc( var( --dur-ani-p16 ) / -2 );                                                       /* Duration Animation Base Plus 16 ~= 14,197.0ms, halved to ~= -7,098.5ms */
@@ -176,7 +176,7 @@
 
 
 }
-.hero-eyebrow::before { /* What: Hero Eyebrow Dot. Why: A small yellow dot leads the eye into the line. How: This draws an 8px yellow circle with a soft yellow halo. */
+.hero-eyebrow::before { /* What: Hero Eyebrow Dot. Why: A small yellow dot leads the eye into the line. How: This draws a yellow circle about 8px across with a soft yellow halo. */
 
 
 	background    : var( --acc-sec-col );                                                                                          /* Accent Secondary Color = #fbbf24 */
@@ -205,7 +205,7 @@
 
 /* #region hero-title */
 
-.hero-title { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 45px and 88px, tightly leaded, rising in second. */
+.hero-title { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 45px and 79px, tightly leaded, rising in second. */
 
 
 	animation      : global( fadeUp ) 0.9s 0.2s both;                          /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
@@ -430,7 +430,7 @@
 
 /* #region hero-logo */
 
-.hero-logo { /* What: Hero Logo Div. Why: The portrait sits in a round frame that turns slowly. How: This fills the stage, sizes a 270px circle, and spins it once every 40 seconds. */
+.hero-logo { /* What: Hero Logo Div. Why: The portrait sits in a round frame that turns slowly. How: This fills the stage, sizes a 270px circle, and spins it once about every 44 seconds. */
 
 
 	animation     : spin-slow var( --dur-ani-p20 ) linear infinite; /* Duration Animation Base Plus 20 ~= 43,721.0ms */
@@ -449,7 +449,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Logo Div. Why: The portrait shrinks with the narrow stage. How: This applies 900px wide and below. */
 
 
-	.hero-logo { /* What: Small Hero Logo Div. Why: A smaller frame fits the narrow stage. How: This sizes the frame at 150px, with a 10px height the portrait inside overflows. */
+	.hero-logo { /* What: Small Hero Logo Div. Why: A smaller frame fits the narrow stage. How: This sizes the frame at 150px, with an 11px height the portrait inside overflows. */
 
 
 		height : calc( var( --ver-rhy-m01 ) * 1rem ); /* Vertical Rhythm Base Minus 1 = 11px */
@@ -560,7 +560,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Sticker Div. Why: The sticker shrinks with the narrow stage. How: This applies 900px wide and below. */
 
 
-	.hero-sticker { /* What: Small Hero Sticker Div. Why: A smaller sticker keeps its place on the smaller portrait. How: This sizes it at 90px with smaller text. */
+	.hero-sticker { /* What: Small Hero Sticker Div. Why: A smaller sticker keeps its place on the smaller portrait. How: This sizes it at about 79px. */
 
 
 		font-size : var( --fon-siz-p01 );                /* Font Size Base Plus 1 ~= 14.572px */

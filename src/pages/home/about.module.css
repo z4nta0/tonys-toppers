@@ -88,7 +88,7 @@
 
 /* #region bio-photo-wrap */
 
-.bio-photo-wrap { /* What: Biography Photo Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it 110px below the top of the screen, which also places the logo badge against it. */
+.bio-photo-wrap { /* What: Biography Photo Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it about 104px below the top of the screen, which also places the logo badge against it. */
 
 
 	position : sticky;
@@ -167,7 +167,7 @@
 
 /* #region bio-cartoon */
 
-.bio-cartoon { /* What: Biography Cartoon Div. Why: A round logo badge marks the portrait as Tony's Toppers. How: This draws a 140px white circle with a thick ink border and a hard ink shadow, tilted the other way, overlapping the portrait's bottom right corner. */
+.bio-cartoon { /* What: Biography Cartoon Div. Why: A round logo badge marks the portrait as Tony's Toppers. How: This draws a white circle about 138px across with a thick ink border and a hard ink shadow, tilted the other way, overlapping the portrait's bottom right corner. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
@@ -188,7 +188,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Biography Cartoon Div. Why: The badge shrinks with the narrower portrait. How: This applies 900px wide and below. */
 
 
-	.bio-cartoon { /* What: Small Biography Cartoon Div. Why: A smaller badge keeps its place on the smaller portrait. How: This sizes it at 110px and tucks it closer to the corner. */
+	.bio-cartoon { /* What: Small Biography Cartoon Div. Why: A smaller badge keeps its place on the smaller portrait. How: This sizes it at about 104px and tucks it closer to the corner. */
 
 
 		bottom : calc( var( --spa-ver-p04 ) * -1 );   /* Spacing Vertical Base Plus 4 ~= 44.876px */
@@ -248,7 +248,7 @@
 
 /* #region bio-title */
 
-.bio-title { /* What: Biography Title Heading. Why: The heading names Tony and sums him up. How: This sets it in the heavy serif, growing with the screen between 32px and 48px, tightly leaded, with room below. */
+.bio-title { /* What: Biography Title Heading. Why: The heading names Tony and sums him up. How: This sets it in the heavy serif, growing with the screen between about 34px and 45px, tightly leaded, with room below. */
 
 
 	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', Georgia, serif */

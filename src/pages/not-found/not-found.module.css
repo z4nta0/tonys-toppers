@@ -21,7 +21,7 @@
 
 /* #region section */
 
-.section { /* What: Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with 160px on top and positions it, copied from the shared section with the page's own top padding merged in. */
+.section { /* What: Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with about 138px on top and positions it, copied from the shared section with the page's own top padding merged in. */
 
 
 	padding  : var( --spa-ver-p08 ) var( --spa-hor-p04 ) var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
@@ -32,7 +32,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide side and bottom padding crowds a narrow screen. How: This applies 900px wide and below. */
 
 
-	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps 160px on top. */
+	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps about 138px on top. */
 
 
 		padding : var( --spa-ver-p08 ) var( --spa-hor-p01 ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 6 ~= 78.751px */
@@ -88,7 +88,7 @@
 
 /* #region section-title */
 
-.section-title { /* What: Section Title Heading. Why: The heading says the page wasn't found. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, with room below, copied from the shared section title. */
+.section-title { /* What: Section Title Heading. Why: The heading says the page wasn't found. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, with room below, copied from the shared section title. */
 
 
 	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */

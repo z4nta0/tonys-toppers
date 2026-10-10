@@ -112,7 +112,7 @@
 
 /* #region section-title */
 
-.section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, copied from the shared section title. */
+.section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, copied from the shared section title. */
 
 
 	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
@@ -136,7 +136,7 @@
 /* #endregion section-title */
 
 
-.section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped at 420px, copied from the shared section note. */
+.section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
 
 
 	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */

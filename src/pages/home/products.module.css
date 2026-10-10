@@ -52,7 +52,7 @@
 
 
 }
-.products-section::before { /* What: Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 1px ink dots every 22px, out of the way of the pointer. */
+.products-section::before { /* What: Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 1px ink dots about every 19px, out of the way of the pointer. */
 
 
 	background-image : radial-gradient( circle, oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) 1px, transparent 1px ); /* Text Main Color = #1a1a2e, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
@@ -145,7 +145,7 @@
 
 /* #region section-title */
 
-.section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, copied from the shared section title. */
+.section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, copied from the shared section title. */
 
 
 	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
@@ -169,7 +169,7 @@
 /* #endregion section-title */
 
 
-.section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped at 420px, copied from the shared section note. */
+.section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
 
 
 	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */

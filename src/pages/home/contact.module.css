@@ -53,7 +53,7 @@
 
 
 }
-.contact-section::before { /* What: Contact Section Glow. Why: A soft yellow glow warms the band's top right corner. How: This draws a 600px circle fading out from yellow, faint and partly off the corner, out of the way of the pointer. */
+.contact-section::before { /* What: Contact Section Glow. Why: A soft yellow glow warms the band's top right corner. How: This draws a circle about 564px across fading out from yellow, faint and partly off the corner, out of the way of the pointer. */
 
 
 	background     : radial-gradient( circle, var( --acc-sec-col ) 0%, transparent 60% ); /* Accent Secondary Color = #fbbf24 */
@@ -142,7 +142,7 @@
 
 /* #region contact-title */
 
-.contact-title { /* What: Contact Title Heading. Why: The heading invites visitors to write. How: This sets it in the heavy cream serif, growing with the screen between 32px and about 54px, tightly leaded, with room below. */
+.contact-title { /* What: Contact Title Heading. Why: The heading invites visitors to write. How: This sets it in the heavy cream serif, growing with the screen between about 34px and 59px, tightly leaded, with room below. */
 
 
 	color          : var( --bac-pag-col );                                       /* Background Page Color = #fdf9ee */
@@ -168,7 +168,7 @@
 /* #endregion contact-title */
 
 
-.contact-note { /* What: Contact Note Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in softened cream, capped at 440px, with room below. */
+.contact-note { /* What: Contact Note Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in softened cream, capped near 50 characters a line, with room below. */
 
 
 	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -200,7 +200,7 @@
 
 }
 
-.icon { /* What: Icon Div. Why: A symbol marks each row at a glance. How: This centers it large in a 48px rounded yellow square that never shrinks. */
+.icon { /* What: Icon Div. Why: A symbol marks each row at a glance. How: This centers it large in a rounded yellow square about 45px across that never shrinks. */
 
 
 	background    : var( --acc-sec-col );                                                                    /* Accent Secondary Color = #fbbf24 */
@@ -366,7 +366,7 @@
 
 
 }
-.form-control--message { /* What: Message Form Control Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a 120px minimum height that can only be dragged taller. */
+.form-control--message { /* What: Message Form Control Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px that can only be dragged taller. */
 
 
 	min-height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
