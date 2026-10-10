@@ -91,8 +91,10 @@ const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The int
  * ConSecCom = Contact Section Component
  *
  * @summary
- * Renders the contact section. The form's fields are controlled, and typing
- * in any of them hides the thank-you note. Sending it posts the fields to
+ * Renders the contact section. The form's fields are controlled, the browser
+ * won't send it until the required name, email, and message are filled in
+ * and the email looks like an address, and typing in any field hides the
+ * thank-you note. Sending it posts the fields to
  * Netlify Forms in the background, shows the thank-you note at once, empties
  * the form, and hides the note again after 6 seconds; a failed request only
  * raises an alert, which step 7 of the cleanup plan replaces with a note that
@@ -318,10 +320,8 @@ function ConSecCom () : React.JSX.Element {
 						data-netlify='true'
 						name='contactForm'
 
-						noValidate
-
 						onSubmit={ forSubFun }
-					>{ /* What: Contact Form Element. Why: Visitors can send Tony a message without leaving the site. How: Netlify Forms records it under the contactForm name, matching the hidden copy in index.html, while forSubFun sends it in the background; noValidate turns off the browser's required-field checks until step 7 restores them. */ }
+					>{ /* What: Contact Form Element. Why: Visitors can send Tony a message without leaving the site. How: Netlify Forms records it under the contactForm name, matching the hidden copy in index.html, while forSubFun sends it in the background once the browser's own checks pass: the name, email, and message are required, and the email has to look like an address. */ }
 
 
 						{ forSenBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending. How: This renders it while forSenBoo is true.
