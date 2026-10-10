@@ -5,7 +5,7 @@ import { HerSecCom } from './hero.tsx';
 import { ProSecCom } from './products.tsx';
 import About from './about.tsx';
 import Contact from './contact.tsx';
-import Fairs from './fairs.tsx'; // What: Fairs. Why: The craft fair gallery sits between the products and Tony's story. How: This is rendered after the products section.
+import { FaiSecCom } from './fairs.tsx'; // What: Fairs Section Component. Why: The craft fair gallery sits between the products and Tony's story. How: This is rendered after the products section.
 
 export default function Home() {
   const { hash } = useLocation();
@@ -31,7 +31,7 @@ export default function Home() {
     <>
       <HerSecCom />
       <ProSecCom />
-      <Fairs />
+      <FaiSecCom />
       <About />
       <Contact />
     </>
