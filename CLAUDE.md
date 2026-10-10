@@ -88,7 +88,21 @@ passes on `close-out`.
    projects' versions; the source lints with no findings.
 4. **Playwright and axe** in all three engines, with baseline screenshots
    taken before anything moves, so later steps can prove nothing changed on
-   screen.
+   screen. Done 2026-10-10 (see "## Test suites"). The accessibility suite
+   fails on the live site's own problems, each fixed in a later step:
+   - **No reduced motion** anywhere (the hero's blobs, logo ring, and sticker,
+     and every product card's entrance): step 9.
+   - **Decorative glyphs read aloud**: the arrows in "See the collection",
+     "Send Message", and "Back home", and the contact links' ☎ and 📲
+     icons: step 6.
+   - **Form fields with no visible focus**: the name, email, interest, and
+     message fields: step 9.
+   - **Closed phone menu still focusable**: Tab reaches its four links while
+     they're off screen: step 8.
+   - **The known axe violations** listed under step 2.
+   - **Needs review by hand**: axe can't judge the contrast of text over the
+     hero's gradient and the photos, and flags the hidden form's repeated
+     ids (step 7).
 5. **Directory structure**, matching reese-roofing and seal-and-shield
    (`pages/home/`, `pages/not-found/`, `ui/`, `styles/`, `assets/`,
    `utils/`), with `ui/section-link.ts` replacing `HashLink` and the product
@@ -107,3 +121,51 @@ passes on `close-out`.
     accessibility review.
 11. **New features**: the 404 page, security headers, image optimization,
     SEO, social previews and the favicon set, and interaction feedback.
+
+## Test suites
+Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
+`tests/`, one project per suite and engine in `tests/playwright.config.ts`,
+which starts its own dev server on port 5192 (never the usual 5173, nor the
+sibling projects' 5190 and 5191) and stops it afterwards. Every suite runs in
+Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
+`tests/output/` (git-ignored); `npx playwright show-report
+tests/output/report` opens the HTML report. The states the suites visit (the
+home page and the 404 page at 390px and 1,440px, plus the phone menu open at
+390px) are listed in `tests/support/states.ts`. Its `opeStaFun` scrolls
+through the page before checking it, since the product photos load lazily,
+and skips animations that repeat forever (the hero's floating blobs, spinning
+logo ring, and wobbling sticker) when waiting for the page to settle.
+- `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
+  checks each state against WCAG 2.2 A and AA plus best practices
+  (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
+  button names (a decorative arrow or emoji in a name fails), a Tab walk
+  (order, traps, focus on screen, uncovered, and visible), reflow at 320px,
+  and motion under reduced motion. axe's "needs review" results are printed
+  and attached to the report rather than failing the run.
+- `npm run test:rendering`: compares a full-page screenshot of every state
+  with its baseline in `tests/rendering/baselines/`, with zero tolerance and
+  a per-pixel color threshold of 0. The page's clock is fixed to one date
+  rather than masking text, since the footer's year and Tony's age in the
+  About section both come from it. WebKit drew the page differently from one
+  full-page capture to the next in two places, so the page never held still
+  long enough to compare: the 64 full-size product photos, which are masked
+  (their boxes still show), and the hero's blurred blobs, whose floating
+  animation is switched off before the capture, the same as reduced motion
+  support will do once the site has it (step 9), when that line can go. The
+  photo mask is retried without once step 11 shrinks the photos. Both find
+  their elements by tag and position until step 8 gives them hooks. After an
+  intended visual change, refresh with `npm run test:rendering --
+  --update-snapshots` and commit the baselines with it. Baselines are
+  captured on Linux. Chromium once failed the open menu state on its text's
+  antialiasing alone, across the whole page, while all three engines ran at
+  once, and passed every rerun after; a lone failure like that gets a rerun,
+  not new baselines.
+- `npm run test:responsive`: measures the home page, the 404 page, and the
+  open menu at 14 widths from 320 to 1,920px (the 900px and 1,000px
+  breakpoints and the pixel past each included), failing on sideways
+  scrolling, an unclipped element past either edge, text spilling its box,
+  or two reachable controls overlapping. Unlike seal-and-shield's, the spill
+  check measures each line of an element's own text rather than its scroll
+  width, since the hero's highlight bar reaches 4px past its italic line on
+  purpose and counted as a spill at every width.
+- `npm test` runs every suite.
