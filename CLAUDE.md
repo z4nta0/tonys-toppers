@@ -73,6 +73,9 @@ passes on `close-out`.
      (filters, menu, section links, form typing, the 404 page's button) and
      no console errors. The production bundle grows from 58 to 81 KB
      gzipped, React 19's own size and in line with seal-and-shield.
+   - **React Router 8**: done 2026-10-10, with every import moved to
+     `react-router`, identical checks (a direct visit to `/#about` included),
+     and `npm audit` clear of the old router's three moderate advisories.
    - **Known axe violations**, already on the live site and fixed in their own
      steps: the footer's phone link told apart by color alone (step 6), the
      hidden Netlify form repeating the contact form's ids (step 7), and the

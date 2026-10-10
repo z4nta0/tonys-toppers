@@ -1,5 +1,5 @@
 import { forwardRef, type AnchorHTMLAttributes, type MouseEvent } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 interface HashLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   /** Target like "/#products" or "#products" */

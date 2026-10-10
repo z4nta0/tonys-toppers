@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import Hero from '../sections/Hero';
 import Products from '../sections/Products';
 import About from '../sections/About';
