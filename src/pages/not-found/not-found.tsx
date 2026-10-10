@@ -4,6 +4,9 @@
 
 // #region Imports
 
+import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+
+
 import { Link } from 'react-router'; // What: Link. Why: The page's button returns home without a full page load. How: This renders it as a router link to the root.
 
 // #endregion Imports
@@ -60,52 +63,28 @@ function NotFouCom () : React.JSX.Element {
 	return (
 
 
-		<section
-			className='section'
-
-			style={{ paddingTop : '160px' }}
-		>{ /* What: Not Found Section Element. Why: An unknown address should land somewhere useful. How: Its extra top padding clears the fixed bar. */ }
+		<section className={ cssModObj.section }>{ /* What: Not Found Section Element. Why: An unknown address should land somewhere useful. How: Its extra top padding clears the fixed bar. */ }
 
 
-			<div
-				className='container'
-
-				style={{
-					padding   : '60px 0',
-					textAlign : 'center'
-				}}
-			>{ /* What: Not Found Container Div Element. Why: The page's few lines read best centered. How: This centers them at the page's width with room above and below. */ }
+			<div className={ cssModObj.container }>{ /* What: Not Found Container Div Element. Why: The page's few lines read best centered. How: This centers them at the page's width with room above and below. */ }
 
 
-				<div
-					className='section-label'
-
-					style={{ justifyContent : 'center' }}
-				>{ /* What: Not Found Label Div Element. Why: A small label says what happened. How: This shows 404, centered with its leading line. */ }
+				<div className={ cssModObj.sectionLabel }>{ /* What: Not Found Label Div Element. Why: A small label says what happened. How: This shows 404, centered with its leading line. */ }
 					404
 				</div>
 
-				<h2
-					className='section-title'
-
-					style={{ marginBottom : '20px' }}
-				>{ /* What: Not Found Heading Element. Why: The heading says the page wasn't found. How: The last word sits in an italic accent. */ }
-					Page not <em>found.</em>
+				<h2 className={ cssModObj.sectionTitle }>{ /* What: Not Found Heading Element. Why: The heading says the page wasn't found. How: The last word sits in an italic accent. */ }
+					Page not <em className={ cssModObj.sectionTitleAccent }>found.</em>
 				</h2>
 
-				<p
-					style={{
-						color        : 'var( --ink-soft )', // Ink Soft = #4a4a5e
-						marginBottom : '32px'
-					}}
-				>{ /* What: Not Found Note Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one line in the soft ink color. */ }
+				<p className={ cssModObj.notFoundNote }>{ /* What: Not Found Note Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one line in the soft ink color. */ }
 					That page doesn't exist, but Tony's pens and stoppers do.
 				</p>
 
 
 
 				<Link
-					className='btn btn-primary'
+					className={` ${ cssModObj.btn }   ${ cssModObj.btnPrimary } `}
 
 					to='/'
 

@@ -56,91 +56,6 @@ section {
 
 }
 
-/* ---------- SECTION SHARED ---------- */
-.section {
-  padding: 110px 40px;
-  position: relative;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 40px;
-  margin-bottom: 60px;
-  flex-wrap: wrap;
-}
-.section-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--navy);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.section-label::before {
-  content: '';
-  width: 32px;
-  height: 2px;
-  background: var(--yellow);
-}
-.section-title {
-  font-family: var(--serif);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-.section-title em {
-  font-style: italic;
-  color: var(--navy);
-}
-.section-sub {
-  max-width: 420px;
-  color: var(--ink-soft);
-  font-size: 1.05rem;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 26px;
-  border-radius: 999px;
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
-}
-.btn-primary {
-  background: var(--navy);
-  color: var(--cream);
-  box-shadow: 4px 4px 0 var(--ink);
-}
-.btn-primary:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--ink);
-}
-.btn-ghost {
-  background: transparent;
-  color: var(--ink);
-  border-color: var(--ink);
-}
-.btn-ghost:hover {
-  background: var(--ink);
-  color: var(--cream);
-}
-
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -149,21 +64,5 @@ section {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) {
-  .section {
-    padding: 80px 20px;
-  }
-
-
-
-
-  .section-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
   }
 }

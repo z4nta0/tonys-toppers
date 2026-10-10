@@ -1,0 +1,178 @@
+
+
+
+/**
+ * not-found.module.css = Not Found Page Module
+ *
+ * @summary
+ * Styles for NotFouCom: the 404 page's centered message below the bar, with
+ * its 404 label, heading, short note, and button home. The shared section,
+ * container, label, heading, and button classes the page used to borrow from
+ * the global stylesheet are copied here, with the page's own inline
+ * adjustments (the extra room below the bar, the centering, and the
+ * heading's and note's spacing) merged into them, and the button's
+ * transition stops for anyone who asked for less motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region section */
+
+.section { /* What: Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with 160px on top and positions it, copied from the shared section with the page's own top padding merged in. */
+
+
+	padding  : 160px 40px 110px;
+	position : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide side and bottom padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps 160px on top. */
+
+
+		padding : 160px 20px 80px;
+
+
+	}
+
+
+}
+
+
+/* #region container */
+
+.container { /* What: Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column capped at 1200px with room above and below, and centers its text, copied from the shared container with the page's own spacing merged in. */
+
+
+	margin     : 0 auto;
+	max-width  : 1200px;
+	padding    : 60px 0;
+	text-align : center;
+
+
+}
+
+.section-label { /* What: Section Label Div. Why: A short label names the error above the heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, centered, copied from the shared section label. */
+
+
+	align-items     : center;
+	color           : var(--navy);
+	display         : flex;
+	font-size       : 0.8rem;
+	font-weight     : 600;
+	gap             : 12px;
+	justify-content : center;
+	letter-spacing  : 0.22em;
+	margin-bottom   : 12px;
+	text-transform  : uppercase;
+
+
+}
+.section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var(--yellow);
+	content    : '';
+	height     : 2px;
+	width      : 32px;
+
+
+}
+
+
+
+/* #region section-title */
+
+.section-title { /* What: Section Title Heading. Why: The heading says the page wasn't found. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, with room below, copied from the shared section title. */
+
+
+	font-family    : var(--serif);
+	font-size      : clamp(2rem, 4.5vw, 3.4rem);
+	font-weight    : 800;
+	letter-spacing : -0.02em;
+	line-height    : 1.05;
+	margin-bottom  : 20px;
+
+
+}
+
+.section-title-accent { /* What: Section Title Accent Emphasis. Why: The last word carries the heading's emphasis. How: This sets it in navy italics. */
+
+
+	color      : var(--navy);
+	font-style : italic;
+
+
+}
+
+/* #endregion section-title */
+
+
+.not-found-note { /* What: Not Found Note Paragraph. Why: The note points the visitor back to Tony's work without competing with the heading. How: This sets it in the soft ink color with room below. */
+
+
+	color         : var(--ink-soft);
+	margin-bottom : 32px;
+
+
+}
+
+.btn { /* What: Button Anchor. Why: The way home reads as the site's main button. How: This sets a pill with the sans font in semibold and a clear border, and eases every change between its looks, copied from the shared button. */
+
+
+	align-items     : center;
+	border          : 2px solid transparent;
+	border-radius   : 999px;
+	cursor          : pointer;
+	display         : inline-flex;
+	font-family     : var(--sans);
+	font-size       : 1rem;
+	font-weight     : 600;
+	gap             : 10px;
+	padding         : 14px 26px;
+	text-decoration : none;
+	transition      : transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+
+
+}
+.btn-primary { /* What: Primary Button Anchor. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
+
+
+	background : var(--navy);
+	box-shadow : 4px 4px 0 var(--ink);
+	color      : var(--cream);
+
+
+}
+.btn-primary:hover { /* What: Hovered Primary Button Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+
+
+	box-shadow : 6px 6px 0 var(--ink);
+	transform  : translate(-2px, -2px);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.btn { /* What: Motionless Button Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion container */
+
+/* #endregion section */
+
+
