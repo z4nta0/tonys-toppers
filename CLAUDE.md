@@ -83,7 +83,9 @@ passes on `close-out`.
      steps: the footer's phone link told apart by color alone (step 6), the
      hidden Netlify form repeating the contact form's ids (step 7), and the
      404 page with no `h1` (step 11).
-3. **ESLint**, set up from ease-my-life's `eslint.config.ts`.
+3. **ESLint**, set up from ease-my-life's `eslint.config.ts`. Done
+   2026-10-10 with seal-and-shield's copy unchanged and the sibling
+   projects' versions; the source lints with no findings.
 4. **Playwright and axe** in all three engines, with baseline screenshots
    taken before anything moves, so later steps can prove nothing changed on
    screen.
