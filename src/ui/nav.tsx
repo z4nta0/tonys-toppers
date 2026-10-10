@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
-import { HashLink } from './HashLink';
+import { HashLink } from './hash-link.tsx';
 
 const SECTIONS = [
   { id: 'home', label: 'Home' },

@@ -1,4 +1,4 @@
-import { HashLink } from '../components/HashLink';
+import { HashLink } from '../../ui/hash-link.tsx';
 
 export default function Hero() {
   return (

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import Hero from '../sections/Hero';
-import Products from '../sections/Products';
-import About from '../sections/About';
-import Contact from '../sections/Contact';
+import Hero from './hero.tsx';
+import Products from './products.tsx';
+import About from './about.tsx';
+import Contact from './contact.tsx';
 
 export default function Home() {
   const { hash } = useLocation();

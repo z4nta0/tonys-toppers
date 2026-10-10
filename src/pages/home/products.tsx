@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { PRODUCTS, CATEGORIES, type ProductType } from '../data/products';
+import { PRODUCTS, CATEGORIES, type ProductType } from './catalog.ts';
 
 type Filter = 'all' | ProductType;
 

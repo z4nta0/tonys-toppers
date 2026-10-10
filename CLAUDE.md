@@ -45,6 +45,36 @@ the vertical rhythm numbers, and the horizontal rhythm numbers before
 choosing which fits best. The core design numbers match the other projects:
 the plastic ratio, with 1rem as the 11px base and body text at Base Plus 1.
 
+## Directory structure
+Decided 2026-10-10, matching reese-roofing's and seal-and-shield's adaptation
+of the user-level "### Directory structure" layout to a website with routes
+rather than a web app with tabs.
+```
+src/
+  main.tsx               entry point
+  app.tsx                React Router setup, the bar, and the footer
+  pages/
+    home/                the home page, its four sections, and catalog.ts
+    not-found/           the 404 page
+  ui/                    components used by 2 or more pages (nav, footer,
+                         hash-link)
+  styles/                global CSS only (styles.css)
+```
+Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
+- **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
+  and a component only that page uses (the hero, products, about, and
+  contact sections) lives in that folder.
+- **A page's main file is named after its folder, with no prefix**
+  (`pages/home/home.tsx`), the same as the sibling projects.
+- **The product data is `pages/home/catalog.ts`**, not `products.ts`,
+  so it doesn't share a name with the products section beside it.
+- **The bar, footer, and section links live in `ui/`** as `nav.tsx`,
+  `footer.tsx`, and `hash-link.tsx`, since the 404 page uses the bar and
+  footer too, and the hero uses the section links.
+- **Still to come**: `assets/` and `utils/` once something needs them, and
+  the 64 product photos, which stay in `public/images/` until step 11's
+  optimization script writes their resized copies into `src/`.
+
 ## Unused files
 Decided 2026-10-10. An unused image is listed for the user to confirm before
 it's removed. Any other file that nothing references is removed without

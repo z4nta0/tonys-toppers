@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import NotFound from './pages/NotFound';
+import Navbar from './ui/nav.tsx';
+import Footer from './ui/footer.tsx';
+import Home from './pages/home/home.tsx';
+import NotFound from './pages/not-found/not-found.tsx';
 
 /**
  * Router is in place even though the site is currently a single page,
