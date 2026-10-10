@@ -59,7 +59,20 @@ passes on `close-out`.
 2. **Dependency upgrades**, one major version at a time with a build check
    after each: Vite 8 with `@vitejs/plugin-react` 6, React 19, React Router 8
    (the single `react-router` package, replacing `react-router-dom`), then
-   TypeScript 6.0.
+   TypeScript 6.0. Each is checked against the previous build with full-page
+   screenshots, a computed-style comparison of every element at rest, hovered,
+   and focused, and axe, all in three engines. Chromium's phone screenshots
+   vary run to run on the product photos, so they don't count as a match.
+   - **Vite 8**: done 2026-10-10. Its CSS minifier keeps only the last of two
+     declarations it treats as one property, so the nav's `backdrop-filter`
+     now comes after its `-webkit-` prefix, or Chromium and Firefox lose the
+     blur. It also writes colors as hex, which moves the nav's translucent
+     background by one color level, and `background : none` as a position of
+     `0px 0px`, which draws nothing different.
+   - **Known axe violations**, already on the live site and fixed in their own
+     steps: the footer's phone link told apart by color alone (step 6), the
+     hidden Netlify form repeating the contact form's ids (step 7), and the
+     404 page with no `h1` (step 11).
 3. **ESLint**, set up from ease-my-life's `eslint.config.ts`.
 4. **Playwright and axe** in all three engines, with baseline screenshots
    taken before anything moves, so later steps can prove nothing changed on
