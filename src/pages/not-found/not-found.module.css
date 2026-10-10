@@ -24,7 +24,7 @@
 .section { /* What: Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with 160px on top and positions it, copied from the shared section with the page's own top padding merged in. */
 
 
-	padding  : 160px 40px 110px;
+	padding  : var( --spa-ver-p08 ) var( --spa-hor-p04 ) var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
 	position : relative;
 
 
@@ -35,7 +35,7 @@
 	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps 160px on top. */
 
 
-		padding : 160px 20px 80px;
+		padding : var( --spa-ver-p08 ) var( --spa-hor-p01 ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 6 ~= 78.751px */
 
 
 	}
@@ -51,7 +51,7 @@
 
 	margin     : 0 auto;
 	max-width  : 1200px;
-	padding    : 60px 0;
+	padding    : var( --spa-ver-p05 ) 0; /* Spacing Vertical Base Plus 5 ~= 59.447px */
 	text-align : center;
 
 
@@ -63,12 +63,12 @@
 	align-items     : center;
 	color           : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display         : flex;
-	font-size       : 0.8rem;
+	font-size       : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight     : 600;
-	gap             : 12px;
+	gap             : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	justify-content : center;
 	letter-spacing  : 0.22em;
-	margin-bottom   : 12px;
+	margin-bottom   : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
 	text-transform  : uppercase;
 
 
@@ -76,9 +76,9 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
-	height     : 2px;
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	width      : 32px;
 
 
@@ -91,12 +91,12 @@
 .section-title { /* What: Section Title Heading. Why: The heading says the page wasn't found. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, with room below, copied from the shared section title. */
 
 
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( 2rem, 4.5vw, 3.4rem );
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4.5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
 	font-weight    : 800;
-	letter-spacing : -0.02em;
-	line-height    : 1.05;
-	margin-bottom  : 20px;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                    /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p01 );                                       /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }
@@ -117,7 +117,7 @@
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
-	margin-bottom : 32px;
+	margin-bottom : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 }
@@ -126,15 +126,15 @@
 
 
 	align-items     : center;
-	border          : 2px solid transparent;
+	border          : var( --bor-wid-lar ) solid transparent;    /* Border Width Large ~= 2.035px */
 	border-radius   : 999px;
 	cursor          : pointer;
 	display         : inline-flex;
-	font-family     : var( --fon-fam-mai ); /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size       : 1rem;
+	font-family     : var( --fon-fam-mai );                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size       : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight     : 600;
-	gap             : 10px;
-	padding         : 14px 26px;
+	gap             : var( --spa-hor-m01 );                      /* Spacing Horizontal Base Minus 1 = 11px */
+	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	text-decoration : none;
 	transition      : transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
 
@@ -152,8 +152,8 @@
 .btn-primary:hover { /* What: Hovered Primary Button Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
-	box-shadow : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
-	transform  : translate( -2px, -2px );
+	box-shadow : 6px 6px 0 var( --sha-mai-col );                                                    /* Shadow Main Color = #1a1a2e */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
 
 
 }

@@ -26,7 +26,7 @@
 .section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
 
 
-	padding  : 110px 40px;
+	padding  : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	position : relative;
 
 
@@ -37,7 +37,7 @@
 	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
-		padding : 80px 20px;
+		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 	}
@@ -65,7 +65,7 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : 70px;
+	gap                   : var( --spa-ver-p06 ) var( --spa-hor-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 0.85fr 1.15fr;
 
 
@@ -76,7 +76,7 @@
 	.bio-grid { /* What: Stacked Biography Grid Div. Why: The portrait and the story read best one above the other. How: This sets a single column with a smaller gap. */
 
 
-		gap                   : 50px;
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
 
 
@@ -92,7 +92,7 @@
 
 
 	position : sticky;
-	top      : 110px;
+	top      : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
 
 
 }
@@ -121,7 +121,7 @@
 
 	aspect-ratio  : 4 / 5;
 	border        : 4px solid var( --bor-str-col );   /* Border Strong Color = #1a1a2e */
-	border-radius : 24px;
+	border-radius : var( --rad-bor-xla );             /* Radius Border Extra Large ~= 19.304px */
 	box-shadow    : 14px 14px 0 var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	overflow      : hidden;
 	transform     : rotate( -2deg );
@@ -170,17 +170,17 @@
 .bio-cartoon { /* What: Biography Cartoon Div. Why: A round logo badge marks the portrait as Tony's Toppers. How: This draws a 140px white circle with a thick ink border and a hard ink shadow, tilted the other way, overlapping the portrait's bottom right corner. */
 
 
-	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
-	border        : 4px solid var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-xla ) solid var( --bor-str-col ); /* Border Width Extra Large ~= 4.732px, Border Strong Color = #1a1a2e */
 	border-radius : 50%;
-	bottom        : -60px;
-	box-shadow    : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
-	height        : 140px;
+	bottom        : calc( var( --spa-ver-p05 ) * -1 );               /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	box-shadow    : 6px 6px 0 var( --sha-mai-col );                  /* Shadow Main Color = #1a1a2e */
+	height        : calc( var( --ver-rhy-p08 ) * 1rem );             /* Vertical Rhythm Base Plus 8 ~= 138.199px */
 	overflow      : hidden;
 	position      : absolute;
-	right         : -40px;
+	right         : calc( var( --spa-hor-p04 ) * -1 );               /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 	transform     : rotate( 8deg );
-	width         : 140px;
+	width         : calc( var( --ver-rhy-p08 ) * 1rem );             /* Vertical Rhythm Base Plus 8 ~= 138.199px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 	z-index       : 3;
 
 
@@ -191,10 +191,10 @@
 	.bio-cartoon { /* What: Small Biography Cartoon Div. Why: A smaller badge keeps its place on the smaller portrait. How: This sizes it at 110px and tucks it closer to the corner. */
 
 
-		bottom : -40px;
-		height : 110px;
-		right  : -20px;
-		width  : 110px;
+		bottom : calc( var( --spa-ver-p04 ) * -1 );   /* Spacing Vertical Base Plus 4 ~= 44.876px */
+		height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
+		right  : calc( var( --spa-hor-p01 ) * -1 );   /* Spacing Horizontal Base Plus 1 ~= 19.304px */
+		width  : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 	}
@@ -224,11 +224,11 @@
 	align-items    : center;
 	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display        : flex;
-	font-size      : 0.8rem;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	gap            : 12px;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.22em;
-	margin-bottom  : 12px;
+	margin-bottom  : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
 	text-transform : uppercase;
 
 
@@ -236,9 +236,9 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
-	height     : 2px;
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	width      : 32px;
 
 
@@ -251,12 +251,12 @@
 .bio-title { /* What: Biography Title Heading. Why: The heading names Tony and sums him up. How: This sets it in the heavy serif, growing with the screen between 32px and 48px, tightly leaded, with room below. */
 
 
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( 2rem, 4vw, 3rem );
+	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-weight    : 800;
-	letter-spacing : -0.02em;
-	line-height    : 1.05;
-	margin-bottom  : 28px;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                  /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -277,22 +277,22 @@
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
-	font-size     : 1.05rem;
-	line-height   : 1.75;
-	margin-bottom : 18px;
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }
 .bio-paragraph:first-of-type::first-letter { /* What: Biography Paragraph Drop Cap. Why: A drop cap opens the story like a book. How: This floats the first paragraph's first letter large in the heavy navy serif, spanning about two lines. */
 
 
-	color       : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	color       : var( --acc-mai-col );                          /* Accent Main Color = #1e3a8a */
 	float       : left;
-	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size   : 4.2rem;
+	font-family : var( --fon-fam-sec );                          /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size   : var( --fon-siz-p06 );                          /* Font Size Base Plus 6 ~= 59.447px */
 	font-weight : 800;
-	line-height : 0.9;
-	margin      : 6px 12px 0 0;
+	line-height : var( --ver-rhy-m01 );                          /* Vertical Rhythm Base Minus 1 = 1 */
+	margin      : var( --spa-ver-m03 ) var( --spa-hor-m01 ) 0 0; /* Spacing Vertical Base Minus 3 ~= 6.268px, Spacing Horizontal Base Minus 1 = 11px */
 
 
 }
@@ -302,7 +302,7 @@
 	.bio-paragraph:first-of-type::first-letter { /* What: Small Biography Paragraph Drop Cap. Why: A smaller drop cap suits the narrow column. How: This shrinks the letter. */
 
 
-		font-size : 3.4rem;
+		font-size : var( --fon-siz-p06 ); /* Font Size Base Plus 6 ~= 59.447px */
 
 
 	}
@@ -317,13 +317,13 @@
 .bio-stats { /* What: Biography Stats Div. Why: Three short facts round off the story. How: This sets them in three even, centered columns below a hairline. */
 
 
-	border-top            : 1px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-top            : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	display               : grid;
-	gap                   : 16px;
+	gap                   : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	grid-template-columns : repeat( 3, 1fr );
 	justify-items         : center;
-	margin-top            : 36px;
-	padding-top           : 32px;
+	margin-top            : var( --spa-ver-p03 );                            /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	padding-top           : var( --spa-ver-p03 );                            /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 }
@@ -331,13 +331,13 @@
 .num { /* What: Number Span. Why: Each stat's figure leads. How: This sets it large in the heavy navy serif, on a line of its own. */
 
 
-	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	color          : var( --acc-mai-col );                    /* Accent Main Color = #1e3a8a */
 	display        : block;
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : 2.4rem;
+	font-family    : var( --fon-fam-sec );                    /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : var( --fon-siz-p04 );                    /* Font Size Base Plus 4 ~= 33.876px */
 	font-weight    : 800;
-	letter-spacing : -0.02em;
-	line-height    : 1;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                    /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -345,10 +345,10 @@
 .label { /* What: Label Div. Why: Each figure needs a quiet caption. How: This sets it small, spaced, and uppercase in soft ink just below the figure. */
 
 
-	color          : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
-	font-size      : 0.78rem;
-	letter-spacing : 0.14em;
-	margin-top     : 6px;
+	color          : var( --tex-sec-col );                   /* Text Secondary Color = #4a4a5e */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
+	letter-spacing : calc( var( --cdn-pow-007-rec ) * 1em ); /* Core-Design-Number to the Power of 7 Reciprocal ~= 0.140em */
+	margin-top     : var( --spa-ver-m03 );                   /* Spacing Vertical Base Minus 3 ~= 6.268px */
 	text-transform : uppercase;
 
 

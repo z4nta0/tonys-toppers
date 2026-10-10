@@ -26,7 +26,7 @@
 .section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
 
 
-	padding  : 110px 40px;
+	padding  : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	position : relative;
 
 
@@ -37,7 +37,7 @@
 	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
-		padding : 80px 20px;
+		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 	}
@@ -59,13 +59,13 @@
 	background     : radial-gradient( circle, var( --acc-sec-col ) 0%, transparent 60% ); /* Accent Secondary Color = #fbbf24 */
 	border-radius  : 50%;
 	content        : '';
-	height         : 600px;
+	height         : calc( var( --ver-rhy-p13 ) * 1rem );                                 /* Vertical Rhythm Base Plus 13 ~= 563.794px */
 	opacity        : 0.18;
 	pointer-events : none;
 	position       : absolute;
-	right          : -200px;
-	top            : -200px;
-	width          : 600px;
+	right          : calc( var( --spa-hor-p09 ) * -1 );                                   /* Spacing Horizontal Base Plus 9 ~= 183.074px */
+	top            : calc( var( --spa-ver-p09 ) * -1 );                                   /* Spacing Vertical Base Plus 9 ~= 183.074px */
+	width          : calc( var( --ver-rhy-p13 ) * 1rem );                                 /* Vertical Rhythm Base Plus 13 ~= 563.794px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -90,7 +90,7 @@
 
 	align-items           : stretch;
 	display               : grid;
-	gap                   : 70px;
+	gap                   : var( --spa-ver-p06 ) var( --spa-hor-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 1fr 1fr;
 	position              : relative;
 	z-index               : 2;
@@ -103,7 +103,7 @@
 	.contact-grid { /* What: Stacked Contact Grid Div. Why: The details and the form read best one above the other. How: This sets a single column with a smaller gap. */
 
 
-		gap                   : 40px;
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
 
 
@@ -118,11 +118,11 @@
 	align-items    : center;
 	color          : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
 	display        : flex;
-	font-size      : 0.8rem;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	gap            : 12px;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.22em;
-	margin-bottom  : 12px;
+	margin-bottom  : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
 	text-transform : uppercase;
 
 
@@ -130,9 +130,9 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
-	height     : 2px;
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	width      : 32px;
 
 
@@ -145,13 +145,13 @@
 .contact-title { /* What: Contact Title Heading. Why: The heading invites visitors to write. How: This sets it in the heavy cream serif, growing with the screen between 32px and about 54px, tightly leaded, with room below. */
 
 
-	color          : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( 2rem, 4.5vw, 3.4rem );
+	color          : var( --bac-pag-col );                                       /* Background Page Color = #fdf9ee */
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4.5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
 	font-weight    : 800;
-	letter-spacing : -0.02em;
-	line-height    : 1.05;
-	margin-bottom  : 24px;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                    /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                       /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -172,9 +172,9 @@
 
 
 	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
-	font-size     : 1.05rem;
-	margin-bottom : 32px;
-	max-width     : 440px;
+	font-size     : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
+	margin-bottom : var( --spa-ver-p03 );                                                /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-sma );                                                /* Text Width Small Maximum ~= 22.047em */
 
 
 }
@@ -187,14 +187,14 @@
 
 
 	align-items     : center;
-	background      : oklch( from var( --bac-sur-col ) l c h / 0.07 );                               /* Background Surface Color = #ffffff @ 0.07 opacity */
-	border          : 1px solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-006-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
-	border-radius   : 16px;
+	background      : oklch( from var( --bac-sur-col ) l c h / 0.07 );                                                /* Background Surface Color = #ffffff @ 0.07 opacity */
+	border          : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-006-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #fdf9ee, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	border-radius   : var( --rad-bor-lar );                                                                           /* Radius Border Large ~= 14.572px */
 	color           : inherit;
 	display         : flex;
-	gap             : 16px;
-	margin-bottom   : 16px;
-	padding         : 24px;
+	gap             : var( --spa-hor-bas );                                                                           /* Spacing Horizontal Base ~= 14.572px */
+	margin-bottom   : var( --spa-ver-bas );                                                                           /* Spacing Vertical Base ~= 14.572px */
+	padding         : var( --spa-ver-p02 ) var( --spa-hor-p02 );                                                      /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	text-decoration : none;
 
 
@@ -204,14 +204,14 @@
 
 
 	background    : var( --acc-sec-col );                                                                    /* Accent Secondary Color = #fbbf24 */
-	border-radius : 12px;
+	border-radius : var( --rad-bor-med );                                                                    /* Radius Border Medium = 11px */
 	color         : oklch( from var( --acc-mai-col ) calc( l - 0.097 ) calc( c - 0.050 ) calc( h + 2.42 ) ); /* Accent Main Color = #1e3a8a, darkened to ~= #172554 */
 	display       : grid;
 	flex-shrink   : 0;
-	font-size     : 1.4rem;
-	height        : 48px;
+	font-size     : var( --fon-siz-p02 );                                                                    /* Font Size Base Plus 2 ~= 19.304px */
+	height        : calc( var( --ver-rhy-p04 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	place-items   : center;
-	width         : 48px;
+	width         : calc( var( --ver-rhy-p04 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -220,9 +220,9 @@
 
 
 	color          : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
-	font-size      : 0.78rem;
-	letter-spacing : 0.14em;
-	margin-bottom  : 2px;
+	font-size      : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
+	letter-spacing : calc( var( --cdn-pow-007-rec ) * 1em );                              /* Core-Design-Number to the Power of 7 Reciprocal ~= 0.140em */
+	margin-bottom  : var( --spa-ver-m07 );                                                /* Spacing Vertical Base Minus 7 ~= 2.035px */
 	text-transform : uppercase;
 
 
@@ -233,7 +233,7 @@
 
 	color       : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
 	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size   : 1.3rem;
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight : 600;
 
 
@@ -255,11 +255,11 @@
 .contact-form { /* What: Contact Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
 
 
-	background    : var( --bac-pag-col );             /* Background Page Color = #fdf9ee */
-	border-radius : 24px;
-	box-shadow    : 12px 12px 0 var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
-	color         : var( --tex-mai-col );             /* Text Main Color = #1a1a2e */
-	padding       : 40px;
+	background    : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
+	border-radius : var( --rad-bor-xla );                      /* Radius Border Extra Large ~= 19.304px */
+	box-shadow    : 12px 12px 0 var( --acc-sec-col );          /* Accent Secondary Color = #fbbf24 */
+	color         : var( --tex-mai-col );                      /* Text Main Color = #1a1a2e */
+	padding       : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
@@ -269,7 +269,7 @@
 	.contact-form { /* What: Compact Contact Form. Why: The fields need the narrow screen's width. How: This trims the card's padding. */
 
 
-		padding : 28px;
+		padding : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 
 
 	}
@@ -280,13 +280,13 @@
 .form-success { /* What: Form Success Div. Why: The visitor should see the message went. How: This sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
 
 
-	background    : var( --suc-tin-col );           /* Success Tint Color = #fde68a */
-	border        : 2px solid var( --suc-mai-col ); /* Success Main Color = #d97706 */
-	border-radius : 12px;
-	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
+	background    : var( --suc-tin-col );                            /* Success Tint Color = #fde68a */
+	border        : var( --bor-wid-lar ) solid var( --suc-mai-col ); /* Border Width Large ~= 2.035px, Success Main Color = #d97706 */
+	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
-	margin-bottom : 18px;
-	padding       : 16px;
+	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
@@ -299,7 +299,7 @@
 
 
 	display               : grid;
-	gap                   : 16px;
+	gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	grid-template-columns : 1fr 1fr;
 
 
@@ -324,7 +324,7 @@
 .form-field { /* What: Form Field Div. Why: Each field's label and control read as one field, apart from the next. How: This leaves room below it. */
 
 
-	margin-bottom : 18px;
+	margin-bottom : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }
@@ -334,10 +334,10 @@
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
 	display        : block;
-	font-size      : 0.8rem;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
 	letter-spacing : 0.12em;
-	margin-bottom  : 8px;
+	margin-bottom  : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	text-transform : uppercase;
 
 
@@ -346,13 +346,13 @@
 .form-control { /* What: Form Control Input. Why: The inputs, dropdown, and message box share one look. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, and eases its border and background. */
 
 
-	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
-	border        : 2px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
-	border-radius : 12px;
-	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
-	font-family   : var( --fon-fam-mai );           /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size     : 1rem;
-	padding       : 14px 16px;
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-lar ) solid var( --bor-mai-col ); /* Border Width Large ~= 2.035px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	font-family   : var( --fon-fam-mai );                            /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	transition    : border-color 0.2s, background 0.2s;
 	width         : 100%;
 
@@ -369,7 +369,7 @@
 .form-control--message { /* What: Message Form Control Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a 120px minimum height that can only be dragged taller. */
 
 
-	min-height : 120px;
+	min-height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
 	resize     : vertical;
 
 
@@ -399,13 +399,13 @@
 .form-error { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
 
 
-	background    : var( --err-tin-col );           /* Error Tint Color = #fde8e8 */
-	border        : 2px solid var( --err-mai-col ); /* Error Main Color = #b91c1c */
-	border-radius : 12px;
-	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
+	background    : var( --err-tin-col );                            /* Error Tint Color = #fde8e8 */
+	border        : var( --bor-wid-lar ) solid var( --err-mai-col ); /* Border Width Large ~= 2.035px, Error Main Color = #b91c1c */
+	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
-	margin-bottom : 18px;
-	padding       : 16px;
+	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
@@ -426,16 +426,16 @@
 .form-submit { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its lift and press. */
 
 
-	background    : var( --acc-mai-col );           /* Accent Main Color = #1e3a8a */
-	border        : 2px solid var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
-	border-radius : 12px;
-	box-shadow    : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
-	color         : var( --tex-acc-col );           /* Text Accent Color = #fdf9ee */
+	background    : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
+	border        : var( --bor-wid-lar ) solid var( --bor-str-col ); /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
+	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	box-shadow    : 4px 4px 0 var( --sha-mai-col );                  /* Shadow Main Color = #1a1a2e */
+	color         : var( --tex-acc-col );                            /* Text Accent Color = #fdf9ee */
 	cursor        : pointer;
-	font-family   : var( --fon-fam-mai );           /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size     : 1.05rem;
+	font-family   : var( --fon-fam-mai );                            /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 600;
-	padding       : 16px;
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	transition    : transform 0.15s, box-shadow 0.15s;
 	width         : 100%;
 
@@ -444,8 +444,8 @@
 .form-submit:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
-	box-shadow : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
-	transform  : translate( -2px, -2px );
+	box-shadow : 6px 6px 0 var( --sha-mai-col );                                                    /* Shadow Main Color = #1a1a2e */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
 
 
 }

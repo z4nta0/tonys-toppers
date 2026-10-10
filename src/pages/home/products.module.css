@@ -27,7 +27,7 @@
 .section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
 
 
-	padding  : 110px 40px;
+	padding  : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	position : relative;
 
 
@@ -38,7 +38,7 @@
 	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
-		padding : 80px 20px;
+		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 	}
@@ -56,7 +56,7 @@
 
 
 	background-image : radial-gradient( circle, oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) 1px, transparent 1px ); /* Text Main Color = #1a1a2e, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
-	background-size  : 22px 22px;
+	background-size  : var( --spa-hor-p01 ) var( --spa-ver-p01 );                                                                           /* Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 1 ~= 19.304px */
 	content          : '';
 	inset            : 0;
 	pointer-events   : none;
@@ -86,9 +86,9 @@
 	align-items     : end;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : 40px;
+	gap             : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	justify-content : space-between;
-	margin-bottom   : 60px;
+	margin-bottom   : var( --spa-ver-p05 );                      /* Spacing Vertical Base Plus 5 ~= 59.447px */
 
 
 }
@@ -100,7 +100,7 @@
 
 		align-items    : flex-start;
 		flex-direction : column;
-		gap            : 16px;
+		gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 	}
@@ -122,11 +122,11 @@
 	align-items    : center;
 	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display        : flex;
-	font-size      : 0.8rem;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	gap            : 12px;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.22em;
-	margin-bottom  : 12px;
+	margin-bottom  : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
 	text-transform : uppercase;
 
 
@@ -134,9 +134,9 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
-	height     : 2px;
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	width      : 32px;
 
 
@@ -148,11 +148,11 @@
 .section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, copied from the shared section title. */
 
 
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( 2rem, 4.5vw, 3.4rem );
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4.5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
 	font-weight    : 800;
-	letter-spacing : -0.02em;
-	line-height    : 1.05;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                    /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -173,8 +173,8 @@
 
 
 	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
-	font-size : 1.05rem;
-	max-width : 420px;
+	font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	max-width : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
 
 
 }
@@ -188,15 +188,15 @@
 .filter-tabs { /* What: Filter Tabs Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen. */
 
 
-	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
-	border        : 1px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
-	border-radius : 27px;
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
 	display       : inline-flex;
 	flex-wrap     : wrap;
-	margin-bottom : 24px;
-	margin-top    : 16px;
+	margin-bottom : var( --spa-ver-p02 );                            /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	margin-top    : var( --spa-ver-bas );                            /* Spacing Vertical Base ~= 14.572px */
 	max-width     : 100%;
-	padding       : 4px;
+	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
 
 
 }
@@ -207,12 +207,12 @@
 	background    : transparent;
 	border        : none;
 	border-radius : 999px;
-	color         : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
+	color         : var( --tex-sec-col );                      /* Text Secondary Color = #4a4a5e */
 	cursor        : pointer;
-	font-family   : var( --fon-fam-mai ); /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size     : 0.9rem;
+	font-family   : var( --fon-fam-mai );                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 500;
-	padding       : 8px 18px;
+	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	transition    : all 0.2s;
 
 
@@ -262,7 +262,7 @@
 
 
 	display               : grid;
-	gap                   : 20px;
+	gap                   : var( --spa-ver-p01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	grid-template-columns : repeat( auto-fill, minmax( 180px, 1fr ) );
 	position              : relative;
 	z-index               : 2;
@@ -275,7 +275,7 @@
 	.products-grid { /* What: Tight Products Grid Div. Why: Smaller cards with smaller gaps fit two across a phone. How: This lowers the cards' minimum width to 140px and tightens the gap. */
 
 
-		gap                   : 14px;
+		gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 		grid-template-columns : repeat( auto-fill, minmax( 140px, 1fr ) );
 
 
@@ -290,10 +290,10 @@
 .product-card { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global fadeUp keyframes, and eases its hover look. */
 
 
-	animation     : global( fadeUp ) 0.4s both;     /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
-	border        : 1px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
-	border-radius : 18px;
+	animation     : global( fadeUp ) 0.4s both;                      /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
 	cursor        : pointer;
 	overflow      : hidden;
 	position      : relative;
@@ -306,7 +306,7 @@
 
 	border-color : var( --acc-mai-col );                                                                  /* Accent Main Color = #1e3a8a */
 	box-shadow   : 0 20px 40px -20px oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-004-rec ) ); /* Accent Main Color = #1e3a8a, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
-	transform    : translateY( -6px );
+	transform    : translateY( calc( var( --spa-ver-m03 ) * -1 ) );                                       /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
 }
@@ -328,18 +328,18 @@
 .product-tag { /* What: Product Tag Div. Why: A tag over the photo names what kind of piece it shows. How: This sets the label in small, bold, spaced capitals on a yellow pill with an ink outline in the card's top left corner. */
 
 
-	background     : var( --acc-sec-col );           /* Accent Secondary Color = #fbbf24 */
-	border         : 1px solid var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
+	background     : var( --acc-sec-col );                            /* Accent Secondary Color = #fbbf24 */
+	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color = #1a1a2e */
 	border-radius  : 999px;
-	color          : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
-	font-size      : 0.65rem;
+	color          : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	font-size      : var( --fon-siz-bas );                            /* Font Size Base = 11px */
 	font-weight    : 700;
-	left           : 10px;
-	letter-spacing : 0.1em;
-	padding        : 4px 10px;
+	left           : var( --spa-hor-m01 );                            /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );          /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	padding        : var( --spa-ver-m05 ) var( --spa-hor-m01 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 1 = 11px */
 	position       : absolute;
 	text-transform : uppercase;
-	top            : 10px;
+	top            : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
 
 
 }
@@ -398,8 +398,8 @@
 .product-info { /* What: Product Info Div. Why: The card's name and kind sit beneath its photo. How: This pads them below a hairline. */
 
 
-	border-top : 1px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
-	padding    : 12px 14px 14px;
+	border-top : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	padding    : var( --spa-ver-m01 ) var( --spa-hor-bas ) var( --spa-ver-bas ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px, Spacing Vertical Base ~= 14.572px */
 
 
 }
@@ -409,9 +409,9 @@
 
 	color         : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
 	font-family   : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size     : 0.95rem;
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 600;
-	margin-bottom : 2px;
+	margin-bottom : var( --spa-ver-m07 ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
 
 
 }
@@ -419,9 +419,9 @@
 .product-type { /* What: Product Type Div. Why: The card repeats its kind quietly beneath its title. How: This sets it small, spaced, and uppercase in soft ink. */
 
 
-	color          : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
-	font-size      : 0.75rem;
-	letter-spacing : 0.1em;
+	color          : var( --tex-sec-col );                   /* Text Secondary Color = #4a4a5e */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
 	text-transform : uppercase;
 
 

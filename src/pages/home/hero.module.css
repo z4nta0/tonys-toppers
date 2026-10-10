@@ -30,9 +30,9 @@
 	background  : radial-gradient( ellipse at 20% 10%, oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-006-rec ) ), transparent 50% ),
 		radial-gradient( ellipse at 85% 80%, oklch( from var( --acc-mai-col ) l c h / 0.12 ), transparent 55% ), var( --bac-pag-col ); /* Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185, Accent Main Color = #1e3a8a @ 0.12 opacity, Background Page Color = #fdf9ee */
 	display     : grid;
-	min-height  : calc( 100vh - 80px );
+	min-height  : calc( 100vh - var( --spa-ver-p06 ) );                           /* Spacing Vertical Base Plus 6 ~= 78.751px */
 	overflow    : hidden;
-	padding     : 110px 40px 80px;
+	padding     : var( --spa-ver-p07 ) var( --spa-hor-p04 ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
 	place-items : center;
 	position    : relative;
 
@@ -44,7 +44,7 @@
 	.hero { /* What: Compact Hero Section. Why: A narrow screen needs its width for the content. How: This trims the side and bottom padding. */
 
 
-		padding : 110px 20px 60px;
+		padding : var( --spa-ver-p07 ) var( --spa-hor-p01 ) var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 5 ~= 59.447px */
 
 
 	}
@@ -67,11 +67,11 @@
 .blob-1 { /* What: First Blob Div. Why: A yellow glow warms the top left corner. How: This sizes the circle at 320px and sets it partly off the corner. */
 
 
-	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
-	height     : 320px;
-	left       : -80px;
-	top        : -80px;
-	width      : 320px;
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
+	height     : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */
+	left       : calc( var( --spa-hor-p06 ) * -1 );   /* Spacing Horizontal Base Plus 6 ~= 78.751px */
+	top        : calc( var( --spa-ver-p06 ) * -1 );   /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	width      : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -80,10 +80,10 @@
 
 	animation-delay : -7s;
 	background      : oklch( from var( --acc-mai-col ) calc( l + 0.132 ) calc( c + 0.037 ) calc( h + 2.02 ) ); /* Accent Main Color = #1e3a8a, lightened to ~= #3b5bc9 */
-	bottom          : -100px;
-	height          : 280px;
-	right           : -60px;
-	width           : 280px;
+	bottom          : calc( var( --spa-ver-p07 ) * -1 );                                                       /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	height          : calc( var( --ver-rhy-p10 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 10 ~= 242.522px */
+	right           : calc( var( --spa-hor-p05 ) * -1 );                                                       /* Spacing Horizontal Base Plus 5 ~= 59.447px */
+	width           : calc( var( --ver-rhy-p10 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 10 ~= 242.522px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -115,7 +115,7 @@
 	50% {
 
 
-		transform : translate( 30px, -20px ) scale( 1.08 );
+		transform : translate( 30px, calc( var( --spa-ver-p01 ) * -1 ) ) scale( 1.08 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 	}
@@ -132,7 +132,7 @@
 
 	align-items           : center;
 	display               : grid;
-	gap                   : 60px;
+	gap                   : var( --spa-ver-p05 ) var( --spa-hor-p05 ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 5 ~= 59.447px */
 	grid-template-columns : 1.1fr 1fr;
 	max-width             : 1200px;
 	position              : relative;
@@ -147,7 +147,7 @@
 	.hero-inner { /* What: Stacked Hero Inner Div. Why: The words and the portrait read best one above the other. How: This sets a single column with a smaller gap. */
 
 
-		gap                   : 40px;
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
 
 
@@ -166,12 +166,12 @@
 	border-radius  : 999px;
 	color          : var( --acc-mai-col );                                                /* Accent Main Color = #1e3a8a */
 	display        : inline-flex;
-	font-size      : 0.85rem;
+	font-size      : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	gap            : 10px;
-	letter-spacing : 0.18em;
-	margin-bottom  : 28px;
-	padding        : 8px 16px;
+	gap            : var( --spa-hor-m01 );                                                /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em );                              /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
+	margin-bottom  : var( --spa-ver-p02 );                                                /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	padding        : var( --spa-ver-m02 ) var( --spa-hor-bas );                           /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
 	text-transform : uppercase;
 
 
@@ -183,8 +183,8 @@
 	border-radius : 50%;
 	box-shadow    : 0 0 0 4px oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-004-rec ) ); /* Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
 	content       : '';
-	height        : 8px;
-	width         : 8px;
+	height        : calc( var( --ver-rhy-m02 ) * 1rem );                                           /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+	width         : calc( var( --ver-rhy-m02 ) * 1rem );                                           /* Vertical Rhythm Base Minus 2 ~= 8.304px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -208,14 +208,14 @@
 .hero-title { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 45px and 88px, tightly leaded, rising in second. */
 
 
-	animation      : global( fadeUp ) 0.9s 0.2s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	color          : var( --tex-mai-col );            /* Text Main Color = #1a1a2e */
-	font-family    : var( --fon-fam-sec );            /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( 2.8rem, 7vw, 5.5rem );
+	animation      : global( fadeUp ) 0.9s 0.2s both;                          /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	color          : var( --tex-mai-col );                                     /* Text Main Color = #1a1a2e */
+	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
 	font-weight    : 800;
-	letter-spacing : -0.035em;
-	line-height    : 0.98;
-	margin-bottom  : 28px;
+	letter-spacing : calc( var( --cdn-pow-012-rec ) * -1em );                  /* Core-Design-Number to the Power of 12 Reciprocal ~= -0.034em */
+	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -246,14 +246,14 @@
 .accent::after { /* What: Accent Highlight Bar. Why: A yellow bar under the words reads like a hand-drawn highlight. How: This draws a slightly skewed yellow band across the bottom of the words, behind them. */
 
 
-	background    : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
-	border-radius : 2px;
-	bottom        : 4px;
+	background    : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
+	border-radius : var( --rad-bor-xsm );                /* Radius Border Extra Small ~= 3.572px */
+	bottom        : var( --spa-ver-m05 );                /* Spacing Vertical Base Minus 5 ~= 3.572px */
 	content       : '';
-	height        : 14px;
-	left          : -4px;
+	height        : calc( var( --ver-rhy-bas ) * 1rem ); /* Vertical Rhythm Base ~= 14.572px */
+	left          : calc( var( --spa-hor-m05 ) * -1 );   /* Spacing Horizontal Base Minus 5 ~= 3.572px */
 	position      : absolute;
-	right         : -4px;
+	right         : calc( var( --spa-hor-m05 ) * -1 );   /* Spacing Horizontal Base Minus 5 ~= 3.572px */
 	transform     : skew( -3deg );
 	z-index       : -1;
 
@@ -268,9 +268,9 @@
 
 	animation     : global( fadeUp ) 1s 0.35s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	color         : var( --tex-sec-col );           /* Text Secondary Color = #4a4a5e */
-	font-size     : 1.18rem;
-	margin-bottom : 36px;
-	max-width     : 520px;
+	font-size     : var( --fon-siz-p02 );           /* Font Size Base Plus 2 ~= 19.304px */
+	margin-bottom : var( --spa-ver-p03 );           /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-bas );           /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -294,10 +294,10 @@
 .hero-actions { /* What: Hero Actions Div. Why: The two main ways into the page sit together. How: This sets the buttons in a row that wraps when it runs out of room, rising in last. */
 
 
-	animation : global( fadeUp ) 1.1s 0.5s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation : global( fadeUp ) 1.1s 0.5s both;           /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : 14px;
+	gap       : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
@@ -319,15 +319,15 @@
 
 
 	align-items     : center;
-	border          : 2px solid transparent;
+	border          : var( --bor-wid-lar ) solid transparent;    /* Border Width Large ~= 2.035px */
 	border-radius   : 999px;
 	cursor          : pointer;
 	display         : inline-flex;
-	font-family     : var( --fon-fam-mai ); /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size       : 1rem;
+	font-family     : var( --fon-fam-mai );                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size       : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight     : 600;
-	gap             : 10px;
-	padding         : 14px 26px;
+	gap             : var( --spa-hor-m01 );                      /* Spacing Horizontal Base Minus 1 = 11px */
+	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	text-decoration : none;
 	transition      : transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
 
@@ -345,8 +345,8 @@
 .btn-primary:hover { /* What: Hovered Primary Button Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
-	box-shadow : 6px 6px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
-	transform  : translate( -2px, -2px );
+	box-shadow : 6px 6px 0 var( --sha-mai-col );                                                    /* Shadow Main Color = #1a1a2e */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
 
 
 }
@@ -404,7 +404,7 @@
 	.hero-visual { /* What: Leading Hero Visual Div. Why: The portrait opens the narrow layout above the words. How: This moves it first, caps it at 320px, and leaves room below it. */
 
 
-		margin-bottom : 100px;
+		margin-bottom : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
 		max-width     : 320px;
 		order         : -1;
 
@@ -452,7 +452,7 @@
 	.hero-logo { /* What: Small Hero Logo Div. Why: A smaller frame fits the narrow stage. How: This sizes the frame at 150px, with a 10px height the portrait inside overflows. */
 
 
-		height : 10px;
+		height : calc( var( --ver-rhy-m01 ) * 1rem ); /* Vertical Rhythm Base Minus 1 = 11px */
 		width  : 150px;
 
 
@@ -534,25 +534,25 @@
 
 
 	animation     : wobble 6s ease-in-out infinite;
-	background    : var( --acc-sec-col );           /* Accent Secondary Color = #fbbf24 */
-	border        : 2px solid var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
+	background    : var( --acc-sec-col );                            /* Accent Secondary Color = #fbbf24 */
+	border        : var( --bor-wid-lar ) solid var( --bor-str-col ); /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
 	border-radius : 50%;
-	box-shadow    : 4px 4px 0 var( --sha-mai-col ); /* Shadow Main Color = #1a1a2e */
-	color         : var( --tex-mai-col );           /* Text Main Color = #1a1a2e */
+	box-shadow    : 4px 4px 0 var( --sha-mai-col );                  /* Shadow Main Color = #1a1a2e */
+	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
 	display       : grid;
-	font-family   : var( --fon-fam-sec );           /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size     : 0.95rem;
+	font-family   : var( --fon-fam-sec );                            /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size     : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-style    : italic;
 	font-weight   : 600;
-	height        : 110px;
-	line-height   : 1.15;
+	height        : calc( var( --ver-rhy-p07 ) * 1rem );             /* Vertical Rhythm Base Plus 7 ~= 104.323px */
+	line-height   : var( --ver-rhy-m01 );                            /* Vertical Rhythm Base Minus 1 = 1 */
 	place-items   : center;
 	position      : absolute;
-	right         : -10px;
+	right         : calc( var( --spa-hor-m01 ) * -1 );               /* Spacing Horizontal Base Minus 1 = 11px */
 	text-align    : center;
-	top           : -10px;
+	top           : calc( var( --spa-ver-m01 ) * -1 );               /* Spacing Vertical Base Minus 1 = 11px */
 	transform     : rotate( -12deg );
-	width         : 110px;
+	width         : calc( var( --ver-rhy-p07 ) * 1rem );             /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 	z-index       : 3;
 
 
@@ -563,9 +563,9 @@
 	.hero-sticker { /* What: Small Hero Sticker Div. Why: A smaller sticker keeps its place on the smaller portrait. How: This sizes it at 90px with smaller text. */
 
 
-		font-size : 0.8rem;
-		height    : 90px;
-		width     : 90px;
+		font-size : var( --fon-siz-p01 );                /* Font Size Base Plus 1 ~= 14.572px */
+		height    : calc( var( --ver-rhy-p06 ) * 1rem ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */
+		width     : calc( var( --ver-rhy-p06 ) * 1rem ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 	}

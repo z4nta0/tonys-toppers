@@ -21,7 +21,7 @@
 .section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
 
 
-	padding  : 110px 40px;
+	padding  : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	position : relative;
 
 
@@ -32,7 +32,7 @@
 	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
-		padding : 80px 20px;
+		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 	}
@@ -61,9 +61,9 @@
 	align-items     : end;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : 40px;
+	gap             : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	justify-content : space-between;
-	margin-bottom   : 60px;
+	margin-bottom   : var( --spa-ver-p05 );                      /* Spacing Vertical Base Plus 5 ~= 59.447px */
 
 
 }
@@ -75,7 +75,7 @@
 
 		align-items    : flex-start;
 		flex-direction : column;
-		gap            : 16px;
+		gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 	}
@@ -89,11 +89,11 @@
 	align-items    : center;
 	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	display        : flex;
-	font-size      : 0.8rem;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	gap            : 12px;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : 0.22em;
-	margin-bottom  : 12px;
+	margin-bottom  : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
 	text-transform : uppercase;
 
 
@@ -101,9 +101,9 @@
 .section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
-	background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
-	height     : 2px;
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	width      : 32px;
 
 
@@ -115,11 +115,11 @@
 .section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, copied from the shared section title. */
 
 
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( 2rem, 4.5vw, 3.4rem );
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4.5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
 	font-weight    : 800;
-	letter-spacing : -0.02em;
-	line-height    : 1.05;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                    /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -140,8 +140,8 @@
 
 
 	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
-	font-size : 1.05rem;
-	max-width : 420px;
+	font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	max-width : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
 
 
 }
@@ -156,7 +156,7 @@
 
 
 	display               : grid;
-	gap                   : 20px;
+	gap                   : var( --spa-ver-p01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	grid-template-columns : repeat( auto-fit, minmax( min( 150px, 100% ), 1fr ) );
 
 
@@ -169,9 +169,9 @@
 
 
 	aspect-ratio  : 4 / 5;
-	background    : var( --bac-sur-col );           /* Background Surface Color = #ffffff */
-	border        : 1px solid var( --bor-mai-col ); /* Border Main Color = #1a1a2e @ 0.12 opacity */
-	border-radius : 18px;
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
 	overflow      : hidden;
 
 

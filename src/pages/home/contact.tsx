@@ -335,13 +335,7 @@ function ConSecCom () : React.JSX.Element {
 
 								<div className={ cssModObj.label }>Based in</div>{ /* What: Location Label Div Element. Why: The row says what it shows. How: This shows based in. */ }
 
-								<div
-									className={ cssModObj.value }
-
-									style={{ fontSize : '1.15rem' }}
-								>{ /* What: Location Value Div Element. Why: The town is the row's main line. How: This shows it a little smaller than the other rows' values, so it fits on one line. */ }
-									Bolivar, Missouri
-								</div>
+								<div className={ cssModObj.value }>Bolivar, Missouri</div>{ /* What: Location Value Div Element. Why: The town is the row's main line. How: This shows it at the same size as the other rows' values. */ }
 
 
 							</div>

@@ -20,11 +20,11 @@
 .footer { /* What: Site Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the ink color and centers its line of small cream text, never wider than the screen. */
 
 
-	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1a2e */
-	color      : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
-	font-size  : 0.9rem;
+	background : var( --bac-inv-col );                      /* Background Inverse Color = #1a1a2e */
+	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
+	font-size  : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	max-width  : 100vw;
-	padding    : 40px;
+	padding    : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	text-align : center;
 
 
@@ -33,9 +33,9 @@
 .footer-link { /* What: Footer Link. Why: The phone number should stand out from the rest of the line as something to tap. How: This sets it in yellow with an underline held a little below the text. */
 
 
-	color                 : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	color                 : var( --acc-sec-col );                   /* Accent Secondary Color = #fbbf24 */
 	text-decoration       : underline;
-	text-underline-offset : 0.2em;
+	text-underline-offset : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 
 
 }
