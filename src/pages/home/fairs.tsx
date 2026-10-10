@@ -1,6 +1,6 @@
-import { PRODUCTS } from './catalog.ts'; // What: Products. Why: The booth shots live in the catalog beside the pieces they show. How: The gallery keeps only the entries marked as booth shots.
+import { PRO_RCD_ARR } from './catalog.ts'; // What: Products. Why: The booth shots live in the catalog beside the pieces they show. How: The gallery keeps only the entries marked as booth shots.
 
-const BOOTH_SHOTS = PRODUCTS.filter((p) => p.booth); // What: Booth Shots. Why: Only the craft fair table photos belong in the gallery. How: This keeps the catalog entries marked as booth shots, in catalog order.
+const BOOTH_SHOTS = PRO_RCD_ARR.filter((p) => p.faiBoo); // What: Booth Shots. Why: Only the craft fair table photos belong in the gallery. How: This keeps the catalog entries marked as booth shots, in catalog order.
 
 export default function Fairs() {
   return (
@@ -21,8 +21,8 @@ export default function Fairs() {
 
         <div className="fairs-grid">
           {BOOTH_SHOTS.map((shot) => (
-            <figure key={shot.id} className="fair-photo">
-              <img src={shot.img} alt={shot.alt} loading="lazy" />
+            <figure key={shot.ideStr} className="fair-photo">
+              <img src={shot.imaStr} alt={shot.altStr} loading="lazy" />
             </figure>
           ))}
         </div>
