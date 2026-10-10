@@ -913,12 +913,15 @@ footer a {
     border-bottom: 1px solid var(--line);
     padding: 16px;
     transform: translateY(-210%);
-    transition: transform 0.3s;
+    transition: transform 0.3s, visibility 0s 0.3s;
     pointer-events: none;
+    visibility: hidden;
   }
   .nav-links[data-mobile-menu-open] {
     transform: translateY(0);
     pointer-events: all;
+    transition: transform 0.3s;
+    visibility: visible;
   }
   .nav-links > li {
     margin: 16px 0;
