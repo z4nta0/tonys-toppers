@@ -1,11 +1,85 @@
-export default function Footer() {
-  const year = new Date().getFullYear();
-  return (
-    <footer>
-      <p>
-        © {year} Tony's Toppers · Handcrafted in Bolivar, MO ·{' '}
-        <a href="tel:4177330681">(417) 733-0681</a>
-      </p>
-    </footer>
-  );
+
+
+
+/**
+ * footer.tsx = Footer
+ *
+ * @summary
+ * The site's footer: one line naming the business, the year, and where Tony
+ * works, ending in his phone number, which dials on phones. It reads the
+ * current year each time it renders, so the copyright never goes stale. Every
+ * page renders it below its content.
+ *
+ * Sections:
+ *  - Components
+ *  - Exports
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+// #region Components
+
+// #region SitFooCom
+
+/**
+ * SitFooCom = Site Footer Component
+ *
+ * @summary
+ * Renders the footer's single line: the copyright with the current year, the
+ * business name, Bolivar, MO, and the phone number as a click-to-call link.
+ * The line is one run of text, so it stays on one source line, where JSX keeps
+ * the spaces between its words and the link.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param props - This component does not use any props.
+ *
+ * @returns The footer element.
+ *
+ * @example
+ * ```tsx
+ * SitFooCom() // => <SitFooCom />
+ * ```
+ *
+*/
+
+function SitFooCom () : React.JSX.Element {
+
+
+	const curYeaNum = new Date().getFullYear(); // What: Current Year Number. Why: The copyright line names the current year. How: This reads it from today's date.
+
+
+
+	return (
+
+
+		<footer>{ /* What: Site Footer Footer Element. Why: Every page ends with the business's name, home town, and phone number. How: This holds the footer's one line. */ }
+
+
+			<p>© { curYeaNum } Tony's Toppers · Handcrafted in Bolivar, MO · <a href='tel:4177330681'>(417) 733-0681</a></p>{ /* What: Footer Copyright Paragraph Element. Why: The footer names the year, the business, and where Tony works, and ends in a way to reach him. How: This prints the current year read on each render, with the phone number as a link that dials it on phones. */ }
+
+
+		</footer>
+
+
+	);
+
+
 }
+
+// #endregion SitFooCom
+
+// #endregion Components
+
+
+
+// #region Exports
+
+export { SitFooCom }; // What: Named Exports. Why: Every page renders the footer below its content. How: This exports SitFooCom.
+
+// #endregion Exports
+
+

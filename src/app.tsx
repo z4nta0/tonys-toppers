@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router';
 import Navbar from './ui/nav.tsx';
-import Footer from './ui/footer.tsx';
+import { SitFooCom } from './ui/footer.tsx';
 import Home from './pages/home/home.tsx';
 import NotFound from './pages/not-found/not-found.tsx';
 
@@ -23,7 +23,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <Footer />
+      <SitFooCom />
     </>
   );
 }
