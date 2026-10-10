@@ -3,6 +3,7 @@
 
 // #region Imports
 
+import cssModObj from './nav.module.css';  // What: CSS Module Object. Why: The bar is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 import lntSvgUrl from './logo-notext.svg'; // What: Logo-No-Text SVG URL. Why: The bar shows the logo's mark without its wordmark, and Vite fingerprints and checks an imported image. How: This imports the mark's built URL for the brand's img.
 
 
@@ -228,14 +229,14 @@ function NavBarCom () : React.JSX.Element {
 
 
 		<nav
-			className='nav'
+			className={ cssModObj.nav }
 
 			data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar raises into a pill once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
 		>{ /* What: Container Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the section links, and the phone menu toggle, carrying data-page-scroll-active once the page scrolls. */ }
 
 
 			<Link
-				className='nav-brand'
+				className={ cssModObj.navBrand }
 
 				to='/'
 
@@ -244,6 +245,8 @@ function NavBarCom () : React.JSX.Element {
 
 
 				<img
+					className={ cssModObj.navBrandLogo }
+
 					src={ lntSvgUrl }
 
 					alt="Tony's Toppers logo"
@@ -257,7 +260,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<ul
-				className='nav-links'
+				className={ cssModObj.navLinks }
 
 				data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Flag. Why: On a phone the links drop down as a menu only while it's open. How: This marks the list while menOpeBoo is true, and drops the attribute otherwise.
 			>{ /* What: Navigation Links List Element. Why: The section links sit in a row on wide screens and in a dropdown menu on a phone. How: This holds one item per section, carrying data-mobile-menu-open while the menu is open. */ }
@@ -266,10 +269,16 @@ function NavBarCom () : React.JSX.Element {
 				{ NAV_SEC_ARR.map( ( secRcdObj ) => ( // What: Section Link Map. Why: Each section gets a link. How: This renders one list item per section row.
 
 
-					<li key={ secRcdObj.ideStr }>{ /* What: Navigation Link Item Element. Why: Each link is one item of the list. How: This holds the section's link. */ }
+					<li
+						key={ secRcdObj.ideStr }
+
+						className={ cssModObj.navItem }
+					>{ /* What: Navigation Link Item Element. Why: Each link is one item of the list. How: This holds the section's link. */ }
 
 
 						<a
+							className={ cssModObj.navLink }
+
 							data-section-link-active={ ( isaHomBoo && actSecStr === secRcdObj.ideStr ) || undefined } // What: Section Link Active Flag. Why: The link for the section being read is marked on the home page. How: This marks the link when its section is the active one there, and drops the attribute otherwise.
 
 							href={ `/#${ secRcdObj.ideStr }` }
@@ -291,7 +300,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<button
-				className='nav-toggle'
+				className={ cssModObj.navToggle }
 
 				type='button'
 
@@ -302,11 +311,11 @@ function NavBarCom () : React.JSX.Element {
 			>{ /* What: Menu Toggle Button Element. Why: On a phone the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
 
 
-				<span />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+				<span className={ cssModObj.navToggleBar } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
 
-				<span />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+				<span className={ cssModObj.navToggleBar } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
 
-				<span />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+				<span className={ cssModObj.navToggleBar } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
 
 
 			</button>
