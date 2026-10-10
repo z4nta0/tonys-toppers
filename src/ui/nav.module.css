@@ -25,20 +25,20 @@
 .nav { /* What: Navigation Bar. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it. */
 
 
-	-webkit-backdrop-filter : blur( 12px );                                    /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
+	-webkit-backdrop-filter : blur( 12px );                                                                                              /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
 	align-items             : center;
 	backdrop-filter         : blur( 12px );
-	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 ); /* Background Page Color = #fdf9ee @ 0.85 opacity */
-	border-bottom           : var( --bor-wid-bas ) solid transparent;          /* Border Width Base ~= 1.160px */
+	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );                                                           /* Background Page Color = #fdf9ee @ 0.85 opacity */
+	border-bottom           : var( --bor-wid-bas ) solid transparent;                                                                    /* Border Width Base ~= 1.160px */
 	display                 : flex;
 	justify-content         : space-between;
 	left                    : 0;
 	max-width               : 100vw;
-	padding                 : var( --spa-ver-p01 ) var( --spa-hor-p04 );       /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding                 : var( --spa-ver-p01 ) var( --spa-hor-p04 );                                                                 /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	position                : fixed;
 	right                   : 0;
 	top                     : 0;
-	transition              : border-color 0.3s, padding 0.3s;
+	transition              : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 	z-index                 : 100;
 
 
@@ -146,7 +146,7 @@
 		right          : 0;
 		top            : 100%;
 		transform      : translateY( -210% );
-		transition     : transform 0.3s, visibility 0s 0.3s;        /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's 0.3s before it takes effect. */
+		transition     : transform 0.3s, visibility 0s 0.3s;        /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
 		visibility     : hidden;
 
 
@@ -156,7 +156,7 @@
 
 		pointer-events : all;
 		transform      : translateY( 0 );
-		transition     : transform 0.3s;
+		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 		visibility     : visible;
 
 
@@ -200,13 +200,13 @@
 
 
 	border-radius   : 999px;
-	color           : var( --tex-mai-col );                      /* Text Main Color = #1a1a2e */
-	font-size       : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	color           : var( --tex-mai-col );                                                                                  /* Text Main Color = #1a1a2e */
+	font-size       : var( --fon-siz-p01 );                                                                                  /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight     : 500;
-	padding         : var( --spa-ver-m02 ) var( --spa-hor-bas ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
+	padding         : var( --spa-ver-m02 ) var( --spa-hor-bas );                                                             /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
 	position        : relative;
 	text-decoration : none;
-	transition      : background 0.2s, color 0.2s;
+	transition      : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
@@ -294,10 +294,10 @@
 .nav-toggle-bar { /* What: Navigation Toggle Bar. Why: Three bars draw the menu icon. How: This draws each as a thin, rounded ink line. */
 
 
-	background    : var( --tex-mai-col );                /* Text Main Color = #1a1a2e */
-	border-radius : var( --rad-bor-xsm );                /* Radius Border Extra Small ~= 3.572px */
-	height        : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	transition    : transform 0.3s, opacity 0.3s;
+	background    : var( --tex-mai-col );                                                                                   /* Text Main Color = #1a1a2e */
+	border-radius : var( --rad-bor-xsm );                                                                                   /* Radius Border Extra Small ~= 3.572px */
+	height        : calc( var( --ver-rhy-m07 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 7 ~= 2.035px */
+	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }

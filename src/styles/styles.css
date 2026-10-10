@@ -10,7 +10,8 @@
  * element styles every page relies on, the layout of the mount element
  * index.html ships, and the fadeUp keyframes the hero and the product cards
  * share. Every component's own styles are in its CSS module, and each
- * transition and animation turns itself off for reduced motion there. The
+ * transition and animation turns itself off for reduced motion there; only
+ * the page's smooth scrolling is turned off here. The
  * tokens are the plastic-ratio core design numbers and the standard color
  * and font roles, which every module reads by role.
  *
@@ -172,6 +173,64 @@
 
 
 
+	/* #region Duration Tokens */
+
+	--dur-ani-m03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Animation Base Minus 3 ~= 67.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the third power of the core design number. */
+	--dur-ani-m02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Animation Base Minus 2 ~= 89.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the second power of the core design number. */
+	--dur-ani-m01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Animation Base Minus 1 ~= 119.2ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number. */
+	--dur-ani-bas : calc( var( --cdn-pow-018 ) * 1ms ); /* What: Duration Animation Base ~= 157.8ms. Why: Animations share one duration scale drawn from the core design number. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
+	--dur-ani-p01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Animation Base Plus 1 ~= 209.1ms. Why: Animations share one duration scale drawn from the core design number, and the hero heading's entrance delay read this step. How: This multiplies the base step by the core design number. */
+	--dur-ani-p02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Animation Base Plus 2 ~= 277.0ms. Why: Animations share one duration scale drawn from the core design number, and the portrait's entrance delay read this step. How: This multiplies the base step by the second power of the core design number. */
+	--dur-ani-p03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Animation Base Plus 3 ~= 366.9ms. Why: Animations share one duration scale drawn from the core design number, and the cards' entrance and the pitch's entrance delay read this step. How: This multiplies the base step by the third power of the core design number. */
+	--dur-ani-p04 : calc( var( --dur-ani-bas ) * var( --cdn-pow-004 ) );     /* What: Duration Animation Base Plus 4 ~= 486.1ms. Why: Animations share one duration scale drawn from the core design number, and the buttons' entrance delay read this step. How: This multiplies the base step by the fourth power of the core design number. */
+	--dur-ani-p05 : calc( var( --dur-ani-bas ) * var( --cdn-pow-005 ) );     /* What: Duration Animation Base Plus 5 ~= 643.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the fifth power of the core design number. */
+	--dur-ani-p06 : calc( var( --dur-ani-bas ) * var( --cdn-pow-006 ) );     /* What: Duration Animation Base Plus 6 ~= 853.0ms. Why: Animations share one duration scale drawn from the core design number, and the eyebrow's and heading's entrances read this step. How: This multiplies the base step by the sixth power of the core design number. */
+	--dur-ani-p07 : calc( var( --dur-ani-bas ) * var( --cdn-pow-007 ) );     /* What: Duration Animation Base Plus 7 ~= 1,130.0ms. Why: Animations share one duration scale drawn from the core design number, and the pitch's, buttons', and portrait's entrances read this step. How: This multiplies the base step by the seventh power of the core design number. */
+	--dur-ani-p08 : calc( var( --dur-ani-bas ) * var( --cdn-pow-008 ) );     /* What: Duration Animation Base Plus 8 ~= 1,497.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the eighth power of the core design number. */
+	--dur-ani-p09 : calc( var( --dur-ani-bas ) * var( --cdn-pow-009 ) );     /* What: Duration Animation Base Plus 9 ~= 1,983.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the ninth power of the core design number. */
+	--dur-ani-p10 : calc( var( --dur-ani-bas ) * var( --cdn-pow-010 ) );     /* What: Duration Animation Base Plus 10 ~= 2,627.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the tenth power of the core design number. */
+	--dur-ani-p11 : calc( var( --dur-ani-bas ) * var( --cdn-pow-011 ) );     /* What: Duration Animation Base Plus 11 ~= 3,480.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the eleventh power of the core design number. */
+	--dur-ani-p12 : calc( var( --dur-ani-bas ) * var( --cdn-pow-012 ) );     /* What: Duration Animation Base Plus 12 ~= 4,610.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the twelfth power of the core design number. */
+	--dur-ani-p13 : calc( var( --dur-ani-bas ) * var( --cdn-pow-013 ) );     /* What: Duration Animation Base Plus 13 ~= 6,107.0ms. Why: Animations share one duration scale drawn from the core design number, and the sticker's wobble read this step. How: This multiplies the base step by the thirteenth power of the core design number. */
+	--dur-ani-p14 : calc( var( --dur-ani-bas ) * var( --cdn-pow-014 ) );     /* What: Duration Animation Base Plus 14 ~= 8,090.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the fourteenth power of the core design number. */
+	--dur-ani-p15 : calc( var( --dur-ani-bas ) * var( --cdn-pow-015 ) );     /* What: Duration Animation Base Plus 15 ~= 10,717.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the fifteenth power of the core design number. */
+	--dur-ani-p16 : calc( var( --dur-ani-bas ) * var( --cdn-pow-016 ) );     /* What: Duration Animation Base Plus 16 ~= 14,197.0ms. Why: Animations share one duration scale drawn from the core design number, and the blobs' float read this step. How: This multiplies the base step by the sixteenth power of the core design number. */
+	--dur-ani-p17 : calc( var( --dur-ani-bas ) * var( --cdn-pow-017 ) );     /* What: Duration Animation Base Plus 17 ~= 18,807.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the seventeenth power of the core design number. */
+	--dur-ani-p18 : calc( var( --dur-ani-bas ) * var( --cdn-pow-018 ) );     /* What: Duration Animation Base Plus 18 ~= 24,914.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the eighteenth power of the core design number. */
+	--dur-ani-p19 : calc( var( --dur-ani-bas ) * var( --cdn-pow-019 ) );     /* What: Duration Animation Base Plus 19 ~= 33,004.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the nineteenth power of the core design number. */
+	--dur-ani-p20 : calc( var( --dur-ani-bas ) * var( --cdn-pow-020 ) );     /* What: Duration Animation Base Plus 20 ~= 43,721.0ms. Why: Animations share one duration scale drawn from the core design number, and the portrait ring's slow spin read this step. How: This multiplies the base step by the twentieth power of the core design number. */
+
+
+	--dur-tra-m03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Transition Base Minus 3 ~= 67.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the third power of the core design number. */
+	--dur-tra-m02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Transition Base Minus 2 ~= 89.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the second power of the core design number. */
+	--dur-tra-m01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Transition Base Minus 1 ~= 119.2ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number. */
+	--dur-tra-bas : calc( var( --cdn-pow-018 ) * 1ms ); /* What: Duration Transition Base ~= 157.8ms. Why: Transitions share one duration scale drawn from the core design number, and the send button's lift and press read this step. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
+	--dur-tra-p01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Transition Base Plus 1 ~= 209.1ms. Why: Transitions share one duration scale drawn from the core design number, and the bar links', buttons', filters', and form fields' color and lift changes read this step. How: This multiplies the base step by the core design number. */
+	--dur-tra-p02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Transition Base Plus 2 ~= 277.0ms. Why: Transitions share one duration scale drawn from the core design number, and the bar's scrolled look, the phone menu's slide, and the cards' hover look read this step. How: This multiplies the base step by the second power of the core design number. */
+	--dur-tra-p03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Transition Base Plus 3 ~= 366.9ms. Why: Transitions share one duration scale drawn from the core design number, and the photo zoom and the portrait's tilt read this step. How: This multiplies the base step by the third power of the core design number. */
+	--dur-tra-p04 : calc( var( --dur-tra-bas ) * var( --cdn-pow-004 ) );     /* What: Duration Transition Base Plus 4 ~= 486.1ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the fourth power of the core design number. */
+	--dur-tra-p05 : calc( var( --dur-tra-bas ) * var( --cdn-pow-005 ) );     /* What: Duration Transition Base Plus 5 ~= 643.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the fifth power of the core design number. */
+	--dur-tra-p06 : calc( var( --dur-tra-bas ) * var( --cdn-pow-006 ) );     /* What: Duration Transition Base Plus 6 ~= 853.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the sixth power of the core design number. */
+	--dur-tra-p07 : calc( var( --dur-tra-bas ) * var( --cdn-pow-007 ) );     /* What: Duration Transition Base Plus 7 ~= 1,130.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the seventh power of the core design number. */
+	--dur-tra-p08 : calc( var( --dur-tra-bas ) * var( --cdn-pow-008 ) );     /* What: Duration Transition Base Plus 8 ~= 1,497.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the eighth power of the core design number. */
+	--dur-tra-p09 : calc( var( --dur-tra-bas ) * var( --cdn-pow-009 ) );     /* What: Duration Transition Base Plus 9 ~= 1,983.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the ninth power of the core design number. */
+
+	/* #endregion Duration Tokens */
+
+
+
+	/* #region Easing Tokens */
+
+	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for rare celebrations, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target for a touch of flair, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: The color changes, lifts, slides, entrances, and the blobs' and sticker's loops share one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
+
+	/* #endregion Easing Tokens */
+
+
+
 	/* #region Font Family Tokens */
 
 	--fon-fam-mai : 'Outfit', system-ui, sans-serif; /* What: Font Family Main. Why: The page's text, buttons, and form fields read in one clean sans serif. How: This names Outfit, self-hosted in fonts.css, falling back to the system font. */
@@ -323,6 +382,19 @@ html { /* What: HTML. Why: One rem should equal the 11px base font size, and in-
 	font-size          : 68.75%;
 	scroll-behavior    : smooth;
 	scroll-padding-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion HTML. Why: Someone who asked for less motion shouldn't see the page glide, and a section link's own scroll asks for the instant jump the html element's smooth scrolling would otherwise override. How: This applies only when the reduced-motion preference is set. */
+
+
+	html { /* What: Instant Scrolling HTML. Why: In-page links and section links should jump straight to their sections. How: This turns smooth scrolling off. */
+
+
+		scroll-behavior : auto;
+
+
+	}
 
 
 }

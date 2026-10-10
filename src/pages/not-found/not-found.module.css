@@ -136,7 +136,7 @@
 	gap             : var( --spa-hor-m01 );                      /* Spacing Horizontal Base Minus 1 = 11px */
 	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	text-decoration : none;
-	transition      : transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }

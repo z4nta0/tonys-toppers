@@ -207,13 +207,13 @@
 	background    : transparent;
 	border        : none;
 	border-radius : 999px;
-	color         : var( --tex-sec-col );                      /* Text Secondary Color = #4a4a5e */
+	color         : var( --tex-sec-col );                          /* Text Secondary Color = #4a4a5e */
 	cursor        : pointer;
-	font-family   : var( --fon-fam-mai );                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size     : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-family   : var( --fon-fam-mai );                          /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                          /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 500;
-	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	transition    : all 0.2s;
+	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 );     /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	transition    : all var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
@@ -297,7 +297,7 @@
 	cursor        : pointer;
 	overflow      : hidden;
 	position      : relative;
-	transition    : transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
@@ -364,7 +364,7 @@
 
 	height     : 100%;
 	object-fit : contain;
-	transition : transform 0.4s;
+	transition : transform var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */
 	width      : 100%;
 
 

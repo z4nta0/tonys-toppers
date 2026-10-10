@@ -55,7 +55,7 @@
 .blob { /* What: Blob Div. Why: Soft glows give the hero depth without drawing the eye. How: This draws a blurred, half-transparent circle that floats slowly, out of the way of the pointer. */
 
 
-	animation      : float 14s ease-in-out infinite;
+	animation      : float var( --dur-ani-p16 ) var( --mot-sta-eas ) infinite; /* Duration Animation Base Plus 16 ~= 14,197.0ms, Motion Standard Easing = ease */
 	border-radius  : 50%;
 	filter         : blur( 40px );
 	opacity        : 0.5;
@@ -78,7 +78,7 @@
 .blob-2 { /* What: Second Blob Div. Why: A blue glow balances the first in the bottom right corner. How: This sizes the circle at 280px, sets it partly off the corner, and starts it half a cycle behind the first. */
 
 
-	animation-delay : -7s;
+	animation-delay : calc( var( --dur-ani-p16 ) / -2 );                                                       /* Duration Animation Base Plus 16 ~= 14,197.0ms, halved to ~= -7,098.5ms */
 	background      : oklch( from var( --acc-mai-col ) calc( l + 0.132 ) calc( c + 0.037 ) calc( h + 2.02 ) ); /* Accent Main Color = #1e3a8a, lightened to ~= #3b5bc9 */
 	bottom          : calc( var( --spa-ver-p07 ) * -1 );                                                       /* Spacing Vertical Base Plus 7 ~= 104.323px */
 	height          : calc( var( --ver-rhy-p10 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 10 ~= 242.522px */
@@ -266,11 +266,11 @@
 .lede { /* What: Lede Paragraph. Why: The pitch should read easily without competing with the headline. How: This sets it a little large in the soft ink color, capped at a comfortable line length, rising in third. */
 
 
-	animation     : global( fadeUp ) 1s 0.35s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	color         : var( --tex-sec-col );           /* Text Secondary Color = #4a4a5e */
-	font-size     : var( --fon-siz-p02 );           /* Font Size Base Plus 2 ~= 19.304px */
-	margin-bottom : var( --spa-ver-p03 );           /* Spacing Vertical Base Plus 3 ~= 33.876px */
-	max-width     : var( --tex-wid-bas );           /* Text Width Base Maximum ~= 29.207em */
+	animation     : global( fadeUp ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p03 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 3 ~= 366.9ms */ /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	color         : var( --tex-sec-col );                                                                 /* Text Secondary Color = #4a4a5e */
+	font-size     : var( --fon-siz-p02 );                                                                 /* Font Size Base Plus 2 ~= 19.304px */
+	margin-bottom : var( --spa-ver-p03 );                                                                 /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-bas );                                                                 /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -329,7 +329,7 @@
 	gap             : var( --spa-hor-m01 );                      /* Spacing Horizontal Base Minus 1 = 11px */
 	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	text-decoration : none;
-	transition      : transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
@@ -390,7 +390,7 @@
 .hero-visual { /* What: Hero Visual Div. Why: The portrait and its sticker need a square stage. How: This sets a centered square up to 480px wide that the frame and sticker are placed within, rising in with the words. */
 
 
-	animation    : global( fadeUp ) 1s 0.3s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation    : global( fadeUp ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 2 ~= 277.0ms */ /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	aspect-ratio : 1;
 	margin       : 0 auto;
 	max-width    : 480px;
@@ -433,7 +433,7 @@
 .hero-logo { /* What: Hero Logo Div. Why: The portrait sits in a round frame that turns slowly. How: This fills the stage, sizes a 270px circle, and spins it once every 40 seconds. */
 
 
-	animation     : spin-slow 40s linear infinite;
+	animation     : spin-slow var( --dur-ani-p20 ) linear infinite; /* Duration Animation Base Plus 20 ~= 43,721.0ms */
 	border-radius : 50%;
 	bottom        : 0;
 	display       : grid;
@@ -490,7 +490,7 @@
 .hero-logo-image { /* What: Hero Logo Image. Why: The portrait fills its round frame and stays upright while the frame turns. How: This crops it to a circle, spins it the other way at the same speed, and casts a soft navy shadow below it. */
 
 
-	animation     : spin-slow-reverse 40s linear infinite;
+	animation     : spin-slow-reverse var( --dur-ani-p20 ) linear infinite; /* Duration Animation Base Plus 20 ~= 43,721.0ms */
 	aspect-ratio  : 1 / 1;
 	border-radius : 50%;
 	filter        : drop-shadow( 20px 40px 15px oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ) drop-shadow( 0 0 1px oklch( from var( --sha-mai-col ) l c h / 0.04 ) ); /* Accent Main Color = #1e3a8a, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430, Shadow Main Color = #1a1a2e @ 0.04 opacity */
@@ -533,26 +533,26 @@
 .hero-sticker { /* What: Hero Sticker Div. Why: A round sticker adds a warm, playful note on the portrait's corner. How: This draws a tilted yellow circle with an ink outline and hard shadow, holding three short italic lines, and wobbles it gently. */
 
 
-	animation     : wobble 6s ease-in-out infinite;
-	background    : var( --acc-sec-col );                            /* Accent Secondary Color = #fbbf24 */
-	border        : var( --bor-wid-lar ) solid var( --bor-str-col ); /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
+	animation     : wobble var( --dur-ani-p13 ) var( --mot-sta-eas ) infinite; /* Duration Animation Base Plus 13 ~= 6,107.0ms, Motion Standard Easing = ease */
+	background    : var( --acc-sec-col );                                      /* Accent Secondary Color = #fbbf24 */
+	border        : var( --bor-wid-lar ) solid var( --bor-str-col );           /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
 	border-radius : 50%;
-	box-shadow    : 4px 4px 0 var( --sha-mai-col );                  /* Shadow Main Color = #1a1a2e */
-	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	box-shadow    : 4px 4px 0 var( --sha-mai-col );                            /* Shadow Main Color = #1a1a2e */
+	color         : var( --tex-mai-col );                                      /* Text Main Color = #1a1a2e */
 	display       : grid;
-	font-family   : var( --fon-fam-sec );                            /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size     : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-family   : var( --fon-fam-sec );                                      /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size     : var( --fon-siz-p01 );                                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-style    : italic;
 	font-weight   : 600;
-	height        : calc( var( --ver-rhy-p07 ) * 1rem );             /* Vertical Rhythm Base Plus 7 ~= 104.323px */
-	line-height   : var( --ver-rhy-m01 );                            /* Vertical Rhythm Base Minus 1 = 1 */
+	height        : calc( var( --ver-rhy-p07 ) * 1rem );                       /* Vertical Rhythm Base Plus 7 ~= 104.323px */
+	line-height   : var( --ver-rhy-m01 );                                      /* Vertical Rhythm Base Minus 1 = 1 */
 	place-items   : center;
 	position      : absolute;
-	right         : calc( var( --spa-hor-m01 ) * -1 );               /* Spacing Horizontal Base Minus 1 = 11px */
+	right         : calc( var( --spa-hor-m01 ) * -1 );                         /* Spacing Horizontal Base Minus 1 = 11px */
 	text-align    : center;
-	top           : calc( var( --spa-ver-m01 ) * -1 );               /* Spacing Vertical Base Minus 1 = 11px */
+	top           : calc( var( --spa-ver-m01 ) * -1 );                         /* Spacing Vertical Base Minus 1 = 11px */
 	transform     : rotate( -12deg );
-	width         : calc( var( --ver-rhy-p07 ) * 1rem );             /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+	width         : calc( var( --ver-rhy-p07 ) * 1rem );                       /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 	z-index       : 3;
 
 

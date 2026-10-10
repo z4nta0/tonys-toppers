@@ -120,12 +120,12 @@
 
 
 	aspect-ratio  : 4 / 5;
-	border        : 4px solid var( --bor-str-col );   /* Border Strong Color = #1a1a2e */
-	border-radius : var( --rad-bor-xla );             /* Radius Border Extra Large ~= 19.304px */
-	box-shadow    : 14px 14px 0 var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	border        : 4px solid var( --bor-str-col );                      /* Border Strong Color = #1a1a2e */
+	border-radius : var( --rad-bor-xla );                                /* Radius Border Extra Large ~= 19.304px */
+	box-shadow    : 14px 14px 0 var( --acc-sec-col );                    /* Accent Secondary Color = #fbbf24 */
 	overflow      : hidden;
 	transform     : rotate( -2deg );
-	transition    : transform 0.4s;
+	transition    : transform var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */
 	width         : 100%;
 
 
