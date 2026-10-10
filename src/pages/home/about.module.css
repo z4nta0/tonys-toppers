@@ -1,0 +1,365 @@
+
+
+
+/**
+ * about.module.css = About Section Module
+ *
+ * @summary
+ * Styles for AboSecCom: Tony's story beside his portrait. The portrait sits
+ * in a tilted, ink-framed photo with a yellow shadow that straightens on
+ * hover, with the round logo badge overlapping its corner, and stays in view
+ * while the story scrolls past on wide screens. The story opens with a navy
+ * drop cap and ends in a row of three stats. On screens 900px wide or
+ * narrower the portrait moves above the story in a single column. The shared
+ * section, container, and label classes the section used to borrow from the
+ * global stylesheet are copied here, and the portrait's transition stops for
+ * anyone who asked for less motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region section */
+
+.section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+
+
+	padding  : 110px 40px;
+	position : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+
+
+		padding : 80px 20px;
+
+
+	}
+
+
+}
+
+
+/* #region container */
+
+.container { /* What: Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : 1200px;
+
+
+}
+
+
+/* #region bio-grid */
+
+.bio-grid { /* What: Biography Grid Div. Why: The portrait and the story sit side by side on wide screens. How: This lays out two columns, the story a little wider, aligned along their tops. */
+
+
+	align-items           : start;
+	display               : grid;
+	gap                   : 70px;
+	grid-template-columns : 0.85fr 1.15fr;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Biography Grid Div. Why: Two columns don't fit a narrow screen. How: This applies 900px wide and below. */
+
+
+	.bio-grid { /* What: Stacked Biography Grid Div. Why: The portrait and the story read best one above the other. How: This sets a single column with a smaller gap. */
+
+
+		gap                   : 50px;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region bio-photo-wrap */
+
+.bio-photo-wrap { /* What: Biography Photo Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it 110px below the top of the screen, which also places the logo badge against it. */
+
+
+	position : sticky;
+	top      : 110px;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Biography Photo Wrap Div. Why: In the single column the portrait scrolls with the page above the story. How: This applies 900px wide and below. */
+
+
+	.bio-photo-wrap { /* What: Centered Biography Photo Wrap Div. Why: The portrait shouldn't stick or fill the narrow screen's full width. How: This stops it sticking and centers it at 90% of the width. */
+
+
+		margin    : 0 auto;
+		max-width : 90%;
+		position  : relative;
+		top       : 0;
+
+
+	}
+
+
+}
+
+
+/* #region bio-photo */
+
+.bio-photo { /* What: Biography Photo Div. Why: The portrait sits in a playful frame. How: This frames it at a 4:5 shape with a thick ink border and a hard yellow shadow, tilted slightly, and eases its tilt. */
+
+
+	aspect-ratio  : 4 / 5;
+	border        : 4px solid var(--ink);
+	border-radius : 24px;
+	box-shadow    : 14px 14px 0 var(--yellow);
+	overflow      : hidden;
+	transform     : rotate(-2deg);
+	transition    : transform 0.4s;
+	width         : 100%;
+
+
+}
+.bio-photo:hover { /* What: Hovered Biography Photo Div. Why: The frame should respond to the pointer. How: This straightens it. */
+
+
+	transform : rotate(0deg);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Biography Photo Div. Why: Someone who asked for less motion shouldn't see the frame turn. How: This applies only when the reduced-motion preference is set. */
+
+
+	.bio-photo { /* What: Motionless Biography Photo Div. Why: The frame should simply straighten. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.bio-photo-image { /* What: Biography Photo Image. Why: The portrait should fill its frame. How: This covers the frame with the photo, cropping its edges, as a block so no gap shows beneath it. */
+
+
+	display    : block;
+	height     : 100%;
+	object-fit : cover;
+	width      : 100%;
+
+
+}
+
+/* #endregion bio-photo */
+
+
+/* #region bio-cartoon */
+
+.bio-cartoon { /* What: Biography Cartoon Div. Why: A round logo badge marks the portrait as Tony's Toppers. How: This draws a 140px white circle with a thick ink border and a hard ink shadow, tilted the other way, overlapping the portrait's bottom right corner. */
+
+
+	background    : #FFFFFF;
+	border        : 4px solid var(--ink);
+	border-radius : 50%;
+	bottom        : -60px;
+	box-shadow    : 6px 6px 0 var(--ink);
+	height        : 140px;
+	overflow      : hidden;
+	position      : absolute;
+	right         : -40px;
+	transform     : rotate(8deg);
+	width         : 140px;
+	z-index       : 3;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Biography Cartoon Div. Why: The badge shrinks with the narrower portrait. How: This applies 900px wide and below. */
+
+
+	.bio-cartoon { /* What: Small Biography Cartoon Div. Why: A smaller badge keeps its place on the smaller portrait. How: This sizes it at 110px and tucks it closer to the corner. */
+
+
+		bottom : -40px;
+		height : 110px;
+		right  : -20px;
+		width  : 110px;
+
+
+	}
+
+
+}
+
+.bio-cartoon-image { /* What: Biography Cartoon Image. Why: The logo should fill its badge. How: This covers the circle with the logo. */
+
+
+	height     : 100%;
+	object-fit : cover;
+	width      : 100%;
+
+
+}
+
+/* #endregion bio-cartoon */
+
+/* #endregion bio-photo-wrap */
+
+
+
+.section-label { /* What: Section Label Div. Why: A short label names the section above Tony's name. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+
+
+	align-items    : center;
+	color          : var(--navy);
+	display        : flex;
+	font-size      : 0.8rem;
+	font-weight    : 600;
+	gap            : 12px;
+	letter-spacing : 0.22em;
+	margin-bottom  : 12px;
+	text-transform : uppercase;
+
+
+}
+.section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var(--yellow);
+	content    : '';
+	height     : 2px;
+	width      : 32px;
+
+
+}
+
+
+
+/* #region bio-title */
+
+.bio-title { /* What: Biography Title Heading. Why: The heading names Tony and sums him up. How: This sets it in the heavy serif, growing with the screen between 32px and 48px, tightly leaded, with room below. */
+
+
+	font-family    : var(--serif);
+	font-size      : clamp(2rem, 4vw, 3rem);
+	font-weight    : 800;
+	letter-spacing : -0.02em;
+	line-height    : 1.05;
+	margin-bottom  : 28px;
+
+
+}
+
+.bio-title-accent { /* What: Biography Title Accent Emphasis. Why: The description of Tony carries the heading's warmth. How: This sets it in navy italics. */
+
+
+	color      : var(--navy);
+	font-style : italic;
+
+
+}
+
+/* #endregion bio-title */
+
+
+.bio-paragraph { /* What: Biography Paragraph. Why: The story should read comfortably. How: This sets it a little large in the soft ink color, generously leaded, with room between paragraphs. */
+
+
+	color         : var(--ink-soft);
+	font-size     : 1.05rem;
+	line-height   : 1.75;
+	margin-bottom : 18px;
+
+
+}
+.bio-paragraph:first-of-type::first-letter { /* What: Biography Paragraph Drop Cap. Why: A drop cap opens the story like a book. How: This floats the first paragraph's first letter large in the heavy navy serif, spanning about two lines. */
+
+
+	color       : var(--navy);
+	float       : left;
+	font-family : var(--serif);
+	font-size   : 4.2rem;
+	font-weight : 800;
+	line-height : 0.9;
+	margin      : 6px 12px 0 0;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Biography Paragraph Drop Cap. Why: The full-size drop cap crowds a narrow column. How: This applies 900px wide and below. */
+
+
+	.bio-paragraph:first-of-type::first-letter { /* What: Small Biography Paragraph Drop Cap. Why: A smaller drop cap suits the narrow column. How: This shrinks the letter. */
+
+
+		font-size : 3.4rem;
+
+
+	}
+
+
+}
+
+
+
+/* #region bio-stats */
+
+.bio-stats { /* What: Biography Stats Div. Why: Three short facts round off the story. How: This sets them in three even, centered columns below a hairline. */
+
+
+	border-top            : 1px solid var(--line);
+	display               : grid;
+	gap                   : 16px;
+	grid-template-columns : repeat(3, 1fr);
+	justify-items         : center;
+	margin-top            : 36px;
+	padding-top           : 32px;
+
+
+}
+
+.num { /* What: Number Span. Why: Each stat's figure leads. How: This sets it large in the heavy navy serif, on a line of its own. */
+
+
+	color          : var(--navy);
+	display        : block;
+	font-family    : var(--serif);
+	font-size      : 2.4rem;
+	font-weight    : 800;
+	letter-spacing : -0.02em;
+	line-height    : 1;
+
+
+}
+
+.label { /* What: Label Div. Why: Each figure needs a quiet caption. How: This sets it small, spaced, and uppercase in soft ink just below the figure. */
+
+
+	color          : var(--ink-soft);
+	font-size      : 0.78rem;
+	letter-spacing : 0.14em;
+	margin-top     : 6px;
+	text-transform : uppercase;
+
+
+}
+
+/* #endregion bio-stats */
+
+/* #endregion bio-grid */
+
+/* #endregion container */
+
+/* #endregion section */
+
+

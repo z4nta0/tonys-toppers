@@ -152,113 +152,6 @@ section {
   }
 }
 
-/* ---------- BIO ---------- */
-.bio-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 70px;
-  align-items: start;
-}
-.bio-photo-wrap {
-  position: sticky;
-  top: 110px;
-}
-.bio-photo {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 4px solid var(--ink);
-  box-shadow: 14px 14px 0 var(--yellow);
-  transform: rotate(-2deg);
-  transition: transform 0.4s;
-}
-
-.bio-photo:hover {
-  transform: rotate(0deg);
-}
-.bio-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.bio-cartoon {
-  position: absolute;
-  bottom: -60px;
-  right: -40px;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  border: 4px solid var(--ink);
-  background: #FFFFFF;
-  overflow: hidden;
-  transform: rotate(8deg);
-  box-shadow: 6px 6px 0 var(--ink);
-  z-index: 3;
-}
-.bio-cartoon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* background-color: white; */
-}
-
-.bio-content h2 {
-  font-family: var(--serif);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin-bottom: 28px;
-}
-.bio-content h2 em {
-  font-style: italic;
-  color: var(--navy);
-}
-.bio-content p {
-  font-size: 1.05rem;
-  color: var(--ink-soft);
-  margin-bottom: 18px;
-  line-height: 1.75;
-}
-.bio-content p:first-of-type::first-letter {
-  font-family: var(--serif);
-  font-weight: 800;
-  float: left;
-  font-size: 4.2rem;
-  line-height: 0.9;
-  margin: 6px 12px 0 0;
-  color: var(--navy);
-}
-
-.bio-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 36px;
-  padding-top: 32px;
-  border-top: 1px solid var(--line);
-  justify-items: center;
-}
-.bio-stat .num {
-  font-family: var(--serif);
-  font-weight: 800;
-  font-size: 2.4rem;
-  color: var(--navy);
-  letter-spacing: -0.02em;
-  display: block;
-  line-height: 1;
-}
-.bio-stat .label {
-  font-size: 0.78rem;
-  color: var(--ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-top: 6px;
-}
-
 /* ---------- CONTACT ---------- */
 .contact-section {
   background: var(--navy);
@@ -457,25 +350,6 @@ a.contact-direct:hover .value {
     padding: 80px 20px;
   }
 
-  .bio-grid {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-  .bio-photo-wrap {
-    position: relative;
-    top: 0;
-    max-width: 90%;
-    margin: 0 auto;
-  }
-  .bio-cartoon {
-    width: 110px;
-    height: 110px;
-    bottom: -40px;
-    right: -20px;
-  }
-  .bio-content p:first-of-type::first-letter {
-    font-size: 3.4rem;
-  }
 
   .contact-grid {
     grid-template-columns: 1fr;
