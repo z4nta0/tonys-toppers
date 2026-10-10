@@ -25,10 +25,10 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
  * come from the current year and would otherwise fail the baselines every
  * January. The product and gallery photos are masked, since WebKit redraws the
  * full-size photos differently from one full-page capture to the next, while
- * their masks still show where each one sits. The hero's two blurred blobs
- * have their floating animation switched off before the capture, since WebKit
- * redraws their blur differently each time a capture pauses and resumes them;
- * either way, the page never held still long enough to compare. Baselines live
+ * their masks still show where each one sits; otherwise the page never held
+ * still long enough to compare. Reduced motion also keeps the hero's blurred
+ * blobs from floating, whose blur WebKit redrew differently each time a
+ * capture paused and resumed them. Baselines live
  * in tests/rendering/baselines, one per state and engine, captured on Linux;
  * another system's font rendering would differ, so baselines are refreshed on
  * the machine that runs the suite. When a change is meant to alter how a page
@@ -72,8 +72,6 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Entrance animations would otherwise be caught partway. How: This makes the page match prefers-reduced-motion, which turns them off.
 
 		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
-
-		await curPagObj.addStyleTag( { content : '[data-element-name-hook~="herBloDiv"] { animation : none; }' } ); // What: Blob Animation Stop Call. Why: The hero's two blurred blobs float forever, and WebKit redraws their blur differently each time a capture pauses and resumes them, so the page never held still. How: This switches off the animation on both blobs, found by their shared herBloDiv hook, leaving them where they rest, which is what reduced motion support will do on its own once the site has it.
 
 
 		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the product photos masked, and compares it with the state's baseline pixel for pixel, color for color.

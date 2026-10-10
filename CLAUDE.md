@@ -237,12 +237,15 @@ logo ring, and wobbling sticker) when waiting for the page to settle.
   section both come from it. WebKit drew the page differently from one
   full-page capture to the next in two places, so the page never held still
   long enough to compare: the 64 full-size product photos, which are masked
-  (their boxes still show), and the hero's blurred blobs, whose floating
-  animation is switched off before the capture, the same as reduced motion
-  support will do once the site has it (step 9), when that line can go. The
-  photo mask is retried without once step 11 shrinks the photos. Both find
-  their elements by hook: `proPhoIma` and `faiPhoIma` for the photos, and
-  `herBloDiv`, shared by both blobs. After an intended visual change, refresh
+  (their boxes still show) through their `proPhoIma` and `faiPhoIma` hooks,
+  and the hero's blurred blobs, which stay still because every capture runs
+  under reduced motion, where the hero's module switches their floating off.
+  The photo mask is retried without once step 11 shrinks the photos. Since
+  the captures run under reduced motion, a change to a reduced-motion
+  variant alters the baselines even when the full-motion page is untouched,
+  so check that the diff stays within what the variant affects (step 8 did,
+  once by capturing with full motion against the old baselines and once by
+  reading the diff) before refreshing. After an intended visual change, refresh
   with `npm run test:rendering -- --update-snapshots` and commit the baselines
   with it. Baselines are captured on Linux. Chromium once failed the open menu
   state on its text's antialiasing alone, across the whole page, while all
