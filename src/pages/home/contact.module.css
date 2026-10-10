@@ -343,26 +343,35 @@
 
 }
 
-.form-control { /* What: Form Control Input. Why: The inputs, dropdown, and message box share one look. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, and eases its border and background. */
+.form-control { /* What: Form Control Input. Why: The inputs, dropdown, and message box share one look, and keyboard focus has to show clearly. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, holds a zero-width navy ring 6px out, and eases its border, background, and ring. */
 
 
-	background    : var( --bac-sur-col );                                                                                         /* Background Surface Color = #ffffff */
-	border        : var( --bor-wid-lar ) solid var( --bor-mai-col );                                                              /* Border Width Large ~= 2.035px, Border Main Color = #1a1a2e @ 0.12 opacity */
-	border-radius : var( --rad-bor-med );                                                                                         /* Radius Border Medium = 11px */
-	color         : var( --tex-mai-col );                                                                                         /* Text Main Color = #1a1a2e */
-	font-family   : var( --fon-fam-mai );                                                                                         /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size     : var( --fon-siz-p01 );                                                                                         /* Font Size Base Plus 1 ~= 14.572px */
-	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                                    /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition    : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
-	width         : 100%;
+	background     : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border         : var( --bor-wid-lar ) solid var( --bor-mai-col ); /* Border Width Large ~= 2.035px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius  : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	color          : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	font-family    : var( --fon-fam-mai );                            /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	outline        : 0 solid var( --foc-rin-col );                    /* Focus Ring Color = #1e3a8a */
+	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );             /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	transition     : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	width          : 100%;
 
 
 }
-.form-control:focus { /* What: Focused Form Control Input. Why: The field being typed in should stand out. How: This swaps the browser's outline for a navy border. */
+.form-control:focus { /* What: Focused Form Control Input. Why: The field being typed in should stand out. How: This turns its border navy. */
 
 
 	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
-	outline      : none;
+
+
+}
+.form-control:focus-visible { /* What: Keyboard Focused Form Control Input. Why: A keyboard user has to see clearly where focus is. How: This grows the ring to 2px and draws it in to 2px from the field. */
+
+
+	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+	outline-width  : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
 
 
 }
