@@ -1,0 +1,440 @@
+
+
+
+/**
+ * products.module.css = Products Section Module
+ *
+ * @summary
+ * Styles for ProSecCom: the collection's deeper cream band, dotted with a
+ * faint grid, with the section's heading and note, the row of filter
+ * buttons, and the responsive grid of product cards. Each card holds its
+ * photo in a portrait frame with a tag over its corner and its name and kind
+ * beneath, and rises in through the global fadeUp keyframes, which the hero
+ * shares. The shared section, container, heading, and note classes the
+ * section used to borrow from the global stylesheet are copied here, and
+ * every animation and transition stops for anyone who asked for less motion.
+ * The card's hover lift never shows while its entrance animation holds its
+ * transform, a known gap the interaction feedback pass takes up.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region products-section */
+
+.section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+
+
+	padding  : 110px 40px;
+	position : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+
+
+		padding : 80px 20px;
+
+
+	}
+
+
+}
+.products-section { /* What: Products Section. Why: The collection sits on its own band apart from the hero. How: This fills it with the deeper cream. */
+
+
+	background : var(--cream-deep);
+
+
+}
+.products-section::before { /* What: Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 1px ink dots every 22px, out of the way of the pointer. */
+
+
+	background-image : radial-gradient(circle, rgba(26, 26, 46, 0.06) 1px, transparent 1px);
+	background-size  : 22px 22px;
+	content          : '';
+	inset            : 0;
+	pointer-events   : none;
+	position         : absolute;
+
+
+}
+
+
+/* #region container */
+
+.container { /* What: Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : 1200px;
+
+
+}
+
+
+/* #region section-head */
+
+.section-head { /* What: Section Head Div. Why: The heading and the note about Tony's work sit side by side. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, copied from the shared section head. */
+
+
+	align-items     : end;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : 40px;
+	justify-content : space-between;
+	margin-bottom   : 60px;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section Head Div. Why: The heading and note don't fit side by side on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.section-head { /* What: Stacked Section Head Div. Why: The note reads best below the heading. How: This stacks them on the left with a smaller gap. */
+
+
+		align-items    : flex-start;
+		flex-direction : column;
+		gap            : 16px;
+
+
+	}
+
+
+}
+.products-head { /* What: Products Head Div. Why: The heading has to sit above the band's dot grid. How: This lifts it onto its own layer above the grid. */
+
+
+	position : relative;
+	z-index  : 2;
+
+
+}
+
+.section-label { /* What: Section Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+
+
+	align-items    : center;
+	color          : var(--navy);
+	display        : flex;
+	font-size      : 0.8rem;
+	font-weight    : 600;
+	gap            : 12px;
+	letter-spacing : 0.22em;
+	margin-bottom  : 12px;
+	text-transform : uppercase;
+
+
+}
+.section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var(--yellow);
+	content    : '';
+	height     : 2px;
+	width      : 32px;
+
+
+}
+
+
+/* #region section-title */
+
+.section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between 32px and about 54px, tightly leaded, copied from the shared section title. */
+
+
+	font-family    : var(--serif);
+	font-size      : clamp(2rem, 4.5vw, 3.4rem);
+	font-weight    : 800;
+	letter-spacing : -0.02em;
+	line-height    : 1.05;
+
+
+}
+
+.section-title-accent { /* What: Section Title Accent Emphasis. Why: The heading's second half carries its warmth. How: This sets it in navy italics. */
+
+
+	color      : var(--navy);
+	font-style : italic;
+
+
+}
+
+/* #endregion section-title */
+
+
+.section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped at 420px, copied from the shared section note. */
+
+
+	color     : var(--ink-soft);
+	font-size : 1.05rem;
+	max-width : 420px;
+
+
+}
+
+/* #endregion section-head */
+
+
+
+/* #region filter-tabs */
+
+.filter-tabs { /* What: Filter Tabs Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen. */
+
+
+	background    : white;
+	border        : 1px solid var(--line);
+	border-radius : 27px;
+	display       : inline-flex;
+	flex-wrap     : wrap;
+	margin-bottom : 24px;
+	margin-top    : 16px;
+	max-width     : 100%;
+	padding       : 4px;
+
+
+}
+
+.filter-tab { /* What: Filter Tab Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing every change between its looks. */
+
+
+	background    : transparent;
+	border        : none;
+	border-radius : 999px;
+	color         : var(--ink-soft);
+	cursor        : pointer;
+	font-family   : var(--sans);
+	font-size     : 0.9rem;
+	font-weight   : 500;
+	padding       : 8px 18px;
+	transition    : all 0.2s;
+
+
+}
+@media ( max-width : 1000px ) { /* What: Narrow Filter Tab Button. Why: Nine buttons in one wrapping row scatter on a narrower screen. How: This applies 1000px wide and below. */
+
+
+	.filter-tab { /* What: Gridded Filter Tab Button. Why: The buttons line up better in even columns. How: This bases each button on a third of the strip's width. */
+
+
+		flex-basis : 33.3%;
+
+
+	}
+
+
+}
+.filter-tab[aria-pressed='true'] { /* What: Pressed Filter Tab Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text. */
+
+
+	background : var(--navy);
+	color      : var(--cream);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Filter Tab Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.filter-tab { /* What: Motionless Filter Tab Button. Why: The pressed look should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion filter-tabs */
+
+
+
+/* #region products-grid */
+
+.products-grid { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This fills each row with cards at least 180px wide and lifts the grid onto its own layer. */
+
+
+	display               : grid;
+	gap                   : 20px;
+	grid-template-columns : repeat(auto-fill, minmax(180px, 1fr));
+	position              : relative;
+	z-index               : 2;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Products Grid Div. Why: Two cards should still fit side by side on a phone. How: This applies 900px wide and below. */
+
+
+	.products-grid { /* What: Tight Products Grid Div. Why: Smaller cards with smaller gaps fit two across a phone. How: This lowers the cards' minimum width to 140px and tightens the gap. */
+
+
+		gap                   : 14px;
+		grid-template-columns : repeat(auto-fill, minmax(140px, 1fr));
+
+
+	}
+
+
+}
+
+
+/* #region product-card */
+
+.product-card { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global fadeUp keyframes, and eases its hover look. */
+
+
+	animation     : global( fadeUp ) 0.4s both; /* What: Global Fade Up Keyframes. Why: The fadeUp keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	background    : white;
+	border        : 1px solid var(--line);
+	border-radius : 18px;
+	cursor        : pointer;
+	overflow      : hidden;
+	position      : relative;
+	transition    : transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+
+
+}
+.product-card:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This casts a soft navy shadow and turns its border navy, while its lift waits on the entrance animation's held transform. */
+
+
+	border-color : var(--navy);
+	box-shadow   : 0 20px 40px -20px rgba(30, 58, 138, 0.3);
+	transform    : translateY(-6px);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Product Card Article. Why: Someone who asked for less motion shouldn't see the cards rise in or ease their hover look. How: This applies only when the reduced-motion preference is set. */
+
+
+	.product-card { /* What: Still Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transition off. */
+
+
+		animation  : none;
+		transition : none;
+
+
+	}
+
+
+}
+
+.product-tag { /* What: Product Tag Div. Why: A tag over the photo names what kind of piece it shows. How: This sets the label in small, bold, spaced capitals on a yellow pill with an ink outline in the card's top left corner. */
+
+
+	background     : var(--yellow);
+	border         : 1px solid var(--ink);
+	border-radius  : 999px;
+	color          : var(--ink);
+	font-size      : 0.65rem;
+	font-weight    : 700;
+	left           : 10px;
+	letter-spacing : 0.1em;
+	padding        : 4px 10px;
+	position       : absolute;
+	text-transform : uppercase;
+	top            : 10px;
+
+
+}
+
+
+/* #region product-img */
+
+.product-img { /* What: Product Image Div. Why: Every photo sits in the same portrait frame. How: This frames the photo at a 3:4 shape on a soft cream gradient, centering it and clipping its zoom. */
+
+
+	aspect-ratio : 3 / 4;
+	background   : linear-gradient(180deg, #fefcf6, #f5efe0);
+	display      : grid;
+	overflow     : hidden;
+	place-items  : center;
+
+
+}
+
+.product-photo { /* What: Product Photo Image. Why: The whole piece should show, uncropped, in its frame. How: This fills the frame, fits the photo inside it, and eases its zoom. */
+
+
+	height     : 100%;
+	object-fit : contain;
+	transition : transform 0.4s;
+	width      : 100%;
+
+
+}
+.product-card:hover .product-photo { /* What: Hovered Product Photo Image. Why: The photo draws the eye in when its card is hovered. How: This zooms it slightly within its frame. */
+
+
+	transform : scale(1.06);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Product Photo Image. Why: Someone who asked for less motion shouldn't see the photo zoom. How: This applies only when the reduced-motion preference is set. */
+
+
+	.product-photo { /* What: Motionless Product Photo Image. Why: The zoom should simply switch on. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion product-img */
+
+
+/* #region product-info */
+
+.product-info { /* What: Product Info Div. Why: The card's name and kind sit beneath its photo. How: This pads them below a hairline. */
+
+
+	border-top : 1px solid var(--line);
+	padding    : 12px 14px 14px;
+
+
+}
+
+.product-name { /* What: Product Name Div. Why: Each card has a title. How: This sets it in the semibold serif in ink. */
+
+
+	color         : var(--ink);
+	font-family   : var(--serif);
+	font-size     : 0.95rem;
+	font-weight   : 600;
+	margin-bottom : 2px;
+
+
+}
+
+.product-type { /* What: Product Type Div. Why: The card repeats its kind quietly beneath its title. How: This sets it small, spaced, and uppercase in soft ink. */
+
+
+	color          : var(--ink-soft);
+	font-size      : 0.75rem;
+	letter-spacing : 0.1em;
+	text-transform : uppercase;
+
+
+}
+
+/* #endregion product-info */
+
+/* #endregion product-card */
+
+/* #endregion products-grid */
+
+/* #endregion container */
+
+/* #endregion products-section */
+
+
