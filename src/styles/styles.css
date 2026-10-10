@@ -1,68 +1,172 @@
-:root {
-  --navy: #1e3a8a;
-  --navy-deep: #172554;
-  --navy-soft: #3b5bc9;
-  --yellow: #fbbf24;
-  --yellow-soft: #fde68a;
-  --yellow-deep: #d97706;
-  --cream: #fdf9ee;
-  --cream-deep: #f5edd6;
-  --ink: #1a1a2e;
-  --ink-soft: #4a4a5e;
-  --line: rgba(26, 26, 46, 0.12);
-  --serif: 'Fraunces', Georgia, serif;
-  --sans: 'Outfit', system-ui, sans-serif;
+
+
+
+/**
+ * styles.css = Global Styles
+ *
+ * @summary
+ * The site's one global stylesheet, holding only what can't belong to a
+ * single component: the design tokens every module reads, the reset and base
+ * element styles every page relies on, the layout of the mount element
+ * index.html ships, and the fadeUp keyframes the hero and the product cards
+ * share. Every component's own styles are in its CSS module, and each
+ * transition and animation turns itself off for reduced motion there. The
+ * tokens keep their original names and values until the design-token pass
+ * renames them and fits them to the scale.
+ *
+ * Sections:
+ *  - Tokens
+ *  - Base Elements
+ *  - Body State
+ *  - Shared Keyframes
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region Tokens */
+
+:root { /* What: Root Tokens. Why: Every module reads the site's colors and fonts from one place. How: This defines them as custom properties on the root element, grouped into sections. */
+
+
+	/* #region Color Tokens */
+
+	--cream       : #fdf9ee;                /* What: Cream = #fdf9ee. Why: The page, the form card, and light text on navy share one warm off-white. How: The body and modules read it for backgrounds and text. */
+	--cream-deep  : #f5edd6;                /* What: Cream Deep = #f5edd6. Why: The collection's band needs a deeper cream apart from the page. How: The products module reads it for that band's background. */
+	--ink         : #1a1a2e;                /* What: Ink = #1a1a2e. Why: Text, outlines, and hard shadows share one near-black with a hint of blue. How: The body sets it as the text color, and modules read it for borders, shadows, and fills. */
+	--ink-soft    : #4a4a5e;                /* What: Ink Soft = #4a4a5e. Why: Secondary text should step back from the main ink. How: Modules read it for notes, captions, and the story's paragraphs. */
+	--line        : rgba(26, 26, 46, 0.12); /* What: Line = #1a1a2e @ 0.12 opacity. Why: Hairlines and soft borders shouldn't compete with content. How: Modules read it for dividers and quiet borders. */
+	--navy        : #1e3a8a;                /* What: Navy = #1e3a8a. Why: The brand's blue marks accents, labels, buttons, and the contact band. How: Modules read it for those fills and text. */
+	--navy-deep   : #172554;                /* What: Navy Deep = #172554. Why: The contact rows' icons need a darker navy on yellow. How: The contact module reads it for the icons' color. */
+	--navy-soft   : #3b5bc9;                /* What: Navy Soft = #3b5bc9. Why: The hero's second glow needs a lighter blue. How: The hero module reads it for that glow. */
+	--yellow      : #fbbf24;                /* What: Yellow = #fbbf24. Why: The brand's warm yellow marks highlights, tags, the sticker, and accents on navy. How: Modules read it for those fills, shadows, and text. */
+	--yellow-deep : #d97706;                /* What: Yellow Deep = #d97706. Why: The thank-you note's border needs a deeper yellow than its fill. How: The contact module reads it for that border. */
+	--yellow-soft : #fde68a;                /* What: Yellow Soft = #fde68a. Why: The thank-you note sits on a pale yellow. How: The contact module reads it for that note's background. */
+
+	/* #endregion Color Tokens */
+
+
+
+	/* #region Font Family Tokens */
+
+	--sans  : 'Outfit', system-ui, sans-serif; /* What: Sans. Why: The page's text, buttons, and form fields read in one clean sans serif. How: This names Outfit, self-hosted in fonts.css, falling back to the system font. */
+	--serif : 'Fraunces', Georgia, serif;      /* What: Serif. Why: Headings, names, and figures share one expressive serif. How: This names Fraunces, self-hosted in fonts.css, falling back to Georgia. */
+
+	/* #endregion Font Family Tokens */
+
+
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* #endregion Tokens */
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
 
-body {
-  font-family: var(--sans);
-  background: var(--cream);
-  color: var(--ink);
-  line-height: 1.6;
-  overflow-x: hidden;
-  min-height: 100vh;
-}
 
-#appMouDiv {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+/* #region Base Elements */
 
-main {
-  flex: 1;
-}
+* { /* What: Universal Reset. Why: Every element should size by its border box and start without the browser's margins and padding. How: This applies to every element. */
 
-a {
-  color: inherit;
-}
 
-/* * { outline: 1px solid red !important; }  */
+	box-sizing : border-box;
+	margin     : 0;
+	padding    : 0;
 
-section {
-    
-    max-width: 100vw;
 
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+html { /* What: HTML. Why: In-page links should glide to their sections and land clear of the fixed bar. How: This turns on smooth scrolling and stops each section 80px below the top. */
+
+
+	scroll-behavior    : smooth;
+	scroll-padding-top : 80px;
+
+
 }
+
+body { /* What: Body. Why: The page's default text and background set the tone everything else inherits, and nothing should scroll sideways. How: This sets the sans font in ink on cream with comfortable leading, at least a screen tall, with sideways overflow hidden. */
+
+
+	background  : var(--cream);
+	color       : var(--ink);
+	font-family : var(--sans);
+	line-height : 1.6;
+	min-height  : 100vh;
+	overflow-x  : hidden;
+
+
+}
+
+main { /* What: Main. Why: The footer should sit at the bottom of the screen on a short page. How: This lets the main landmark grow to fill the mount element's column. */
+
+
+	flex : 1;
+
+
+}
+
+a { /* What: Anchor. Why: Links should take their surroundings' color until a module styles them. How: This inherits the text color. */
+
+
+	color : inherit;
+
+
+}
+
+section { /* What: Section. Why: No section should ever be wider than the screen. How: This caps every section at the viewport's width. */
+
+
+	max-width : 100vw;
+
+
+}
+
+/* #endregion Base Elements */
+
+
+
+/* #region Body State */
+
+#appMouDiv { /* What: App Mount Div. Why: index.html ships the element React renders into, outside any component, and the footer should sit at the bottom of a short page. How: This stacks the bar, main landmark, and footer in a column at least a screen tall. */
+
+
+	display        : flex;
+	flex-direction : column;
+	min-height     : 100vh;
+
+
+}
+
+/* #endregion Body State */
+
+
+
+/* #region Shared Keyframes */
+
+@keyframes fadeUp { /* What: Fade Up. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from 24px below and from transparent to fully shown; modules play it through global(). */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY(24px);
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY(0);
+
+
+	}
+
+
+}
+
+/* #endregion Shared Keyframes */
+
+
