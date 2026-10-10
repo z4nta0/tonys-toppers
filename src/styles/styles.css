@@ -56,12 +56,6 @@ section {
 
 }
 
-footer {
-
-    max-width: 100vw;
-
-}
-
 /* ---------- SECTION SHARED ---------- */
 .section {
   padding: 110px 40px;
@@ -802,19 +796,6 @@ a.contact-direct:hover .value {
 }
 
 /* ---------- FOOTER ---------- */
-footer {
-  background: var(--ink);
-  color: var(--cream);
-  padding: 40px;
-  text-align: center;
-  font-size: 0.9rem;
-}
-footer a {
-  color: var(--yellow);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .section {

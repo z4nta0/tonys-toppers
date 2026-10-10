@@ -1,6 +1,14 @@
 
 
 
+// #region Imports
+
+import cssModObj from './footer.module.css'; // What: CSS Module Object. Why: The footer is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+
+// #endregion Imports
+
+
+
 /**
  * footer.tsx = Footer
  *
@@ -56,10 +64,10 @@ function SitFooCom () : React.JSX.Element {
 	return (
 
 
-		<footer>{ /* What: Site Footer Footer Element. Why: Every page ends with the business's name, home town, and phone number. How: This holds the footer's one line. */ }
+		<footer className={ cssModObj.footer }>{ /* What: Site Footer Footer Element. Why: Every page ends with the business's name, home town, and phone number. How: This holds the footer's one line. */ }
 
 
-			<p>© { curYeaNum } Tony's Toppers · Handcrafted in Bolivar, MO · <a href='tel:4177330681'>(417) 733-0681</a></p>{ /* What: Footer Copyright Paragraph Element. Why: The footer names the year, the business, and where Tony works, and ends in a way to reach him. How: This prints the current year read on each render, with the phone number as a link that dials it on phones. */ }
+			<p>© { curYeaNum } Tony's Toppers · Handcrafted in Bolivar, MO · <a className={ cssModObj.footerLink } href='tel:4177330681'>(417) 733-0681</a></p>{ /* What: Footer Copyright Paragraph Element. Why: The footer names the year, the business, and where Tony works, and ends in a way to reach him. How: This prints the current year read on each render, with the phone number as a link that dials it on phones. */ }
 
 
 		</footer>
