@@ -140,9 +140,10 @@ passes on `close-out`.
      compiles), so the source checking cleanly and a byte-for-byte identical
      build stood in for the browser checks.
    - **Known axe violations**, already on the live site and fixed in their own
-     steps: the footer's phone link told apart by color alone (step 6), the
-     hidden Netlify form repeating the contact form's ids (step 7), and the
-     404 page with no `h1` (step 11).
+     steps: the footer's phone link told apart by color alone (step 6) and the
+     404 page with no `h1` (step 11). The hidden Netlify form repeating the
+     contact form's ids was fixed early, in step 6, before `index.html`'s
+     formatting.
 3. **ESLint**, set up from ease-my-life's `eslint.config.ts`. Done
    2026-10-10 with seal-and-shield's copy unchanged and the sibling
    projects' versions; the source lints with no findings.
@@ -161,8 +162,7 @@ passes on `close-out`.
      they're off screen: step 8.
    - **The known axe violations** listed under step 2.
    - **Needs review by hand**: axe can't judge the contrast of text over the
-     hero's gradient and the photos, and flags the hidden form's repeated
-     ids (step 7).
+     hero's gradient and the photos.
 5. **Directory structure**, matching reese-roofing and seal-and-shield (see
    "## Directory structure"). Done 2026-10-10 in six commits: the Netlify
    fallback moved to `public/_redirects`; the source files moved with only
@@ -174,8 +174,10 @@ passes on `close-out`.
 6. **Formatting, naming, and comment pass**, one file per commit, with the
    copy fixes (no em dashes, "Down syndrome" capitalized).
 7. **Contact form fixes**: the success message waits for Netlify's answer,
-   the browser's required-field checks come back on, and the hidden form in
-   `index.html` becomes valid HTML.
+   and the browser's required-field checks come back on. The hidden form in
+   `index.html` became a bare, valid copy of the real form's four fields in
+   step 6, as in seal-and-shield. After the next deploy, the user sends a
+   test submission to confirm Netlify still records every field.
 8. **Hooks and CSS modules**, including the product filter buttons moving
    from a partial tablist to `aria-pressed` toggles.
 9. **Design tokens** in five commits: role colors and font tokens, the type

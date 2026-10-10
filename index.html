@@ -8,59 +8,36 @@
   </head>
   <body>
     <div id="root"></div>
-    <form hidden name='contactForm' className="contact-form" onSubmit={handleSubmit} noValidate data-netlify="true">
-        <div className="form-row">
-            <div className="form-field">
-            <label htmlFor="name">Your Name</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                required
-            />
-            </div>
-            <div className="form-field">
-            <label htmlFor="email">Email</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
-            />
-            </div>
-        </div>
-        <div className="form-field">
-            <label htmlFor="interest">I'm interested in</label>
-            <select id="interest" name="interest">
-            <option value="A pen topper">A pen topper</option>
-            <option value="A wine stopper">A wine stopper</option>
-            <option value="A keychain">A keychain</option>
-            <option value="A dog necklace">A dog necklace</option>
-            <option value="A car freshie">A car freshie</option>
-            <option value="A name badge reel">A name badge reel</option>
-            <option value="A phone grip">A phone grip</option>
-            <option value="A custom piece">A custom piece</option>
-            <option value="Just saying hi">Just saying hi</option>
-        </select>
-        </div>
-        <div className="form-field">
-            <label htmlFor="message">Message</label>
-            <textarea
-            id="message"
-            name="message"
-            value={form.message}
-            onChange={handleChange}
-            placeholder="Tell Tony what you have in mind..."
-            required
-            ></textarea>
-        </div>
-        <button type="submit" className="form-submit">
-            Send Message →
-        </button>
+    <form
+      data-netlify='true'
+      name='contactForm'
+
+      hidden
+    ><!-- What: Netlify Detection Form Element. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no ids, so it never duplicates the real form's, and an aria-label on each field so accessibility checkers find every control named. -->
+      <input
+        name='name'
+
+        type='text'
+
+        aria-label='Name'
+      /><!-- What: Name Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the name field, which carries the visitor's name. -->
+      <input
+        name='email'
+
+        type='email'
+
+        aria-label='Email'
+      /><!-- What: Email Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the email field, which carries the visitor's email address. -->
+      <select
+        name='interest'
+
+        aria-label='Interest'
+      ></select><!-- What: Interest Select Element. Why: Netlify records only the fields it finds in this copy. How: This declares the interest field, which carries the kind of piece the visitor asked about. -->
+      <textarea
+        name='message'
+
+        aria-label='Message'
+      ></textarea><!-- What: Message Textarea Element. Why: Netlify records only the fields it finds in this copy. How: This declares the message field, which carries the visitor's note to Tony. -->
     </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
