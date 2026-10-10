@@ -9,6 +9,7 @@ export type ProductType =
   | 'straw-charm';
 
 export interface Product {
+  alt: string; // What: Alt. Why: A screen reader announces each photo by its text alternative. How: A booth shot carries a description of the table, and every other photo its card's name until the content pass describes them.
   booth: boolean; // What: Booth. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the All list. How: This is true for a booth shot and false for a piece or set.
   id: string;
   img: string;
@@ -62,11 +63,11 @@ const SETS: { file: string; types: ProductType[] }[] = [ // What: Sets. Why: A f
 
 
 
-const BOOTH: { file: string; types: ProductType[] }[] = [ // What: Booth. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo and the categories it shows.
-  { file: 'booth-1', types: ['pen-topper', 'wine-stopper'] },
-  { file: 'booth-2', types: ['pen-topper', 'wine-stopper', 'dog-necklace'] },
-  { file: 'booth-3', types: ['pen-topper', 'straw-charm'] },
-  { file: 'booth-4', types: ['pen-topper', 'wine-stopper'] },
+const BOOTH: { alt: string; file: string; types: ProductType[] }[] = [ // What: Booth. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo and the categories it shows.
+  { alt: "Tony's pen toppers lined up in clear stands on a wooden shelf by a shop window, with beaded wine stoppers and bagged keychains on the shelf below and a framed card about Tony", file: 'booth-1', types: ['pen-topper', 'wine-stopper'] },
+  { alt: 'A craft fair table crowded with clear cups of pen toppers and wine stoppers, beaded dog necklaces on a stand, keychains hanging from a rack, and a framed cartoon of Tony', file: 'booth-2', types: ['pen-topper', 'wine-stopper', 'dog-necklace'] },
+  { alt: "Beaded charms and keychains hanging from a rack beside bagged pens in glass vases, with a framed cartoon of Tony in a Tony's Toppers shirt and a cup of pen toppers in front", file: 'booth-3', types: ['pen-topper', 'straw-charm'] },
+  { alt: 'Tony seated behind his table at an outdoor craft fair, its black cloth covered with rows of pen toppers, wine stoppers, and beaded badge reels', file: 'booth-4', types: ['pen-topper', 'wine-stopper'] },
 ];
 
 
@@ -85,6 +86,7 @@ const urlFor = (file: string) => PRO_URL_OBJ[ `../../assets/products/${ file }.j
 export const PRODUCTS: Product[] = [
   ...CATEGORIES.flatMap((cat) => [
     ...NAMES[cat.value].map((file, i) => ({
+      alt: `${LABELS[cat.value]} ${i + 1}`,
       booth: false,
       id: file,
       img: urlFor(file),
@@ -94,6 +96,7 @@ export const PRODUCTS: Product[] = [
     })),
     ...(cat.value === 'wine-stopper'
       ? SETS.map((set, i) => ({
+          alt: `Pen Topper & Wine Stopper Set ${i + 1}`,
           booth: false,
           id: set.file,
           img: urlFor(set.file),
@@ -104,6 +107,7 @@ export const PRODUCTS: Product[] = [
       : []),
   ]),
   ...BOOTH.map((shot, i) => ({
+    alt: shot.alt,
     booth: true,
     id: shot.file,
     img: urlFor(shot.file),

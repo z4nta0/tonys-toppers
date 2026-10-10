@@ -5,6 +5,7 @@ import Hero from './hero.tsx';
 import Products from './products.tsx';
 import About from './about.tsx';
 import Contact from './contact.tsx';
+import Fairs from './fairs.tsx'; // What: Fairs. Why: The craft fair gallery sits between the products and Tony's story. How: This is rendered after the products section.
 
 export default function Home() {
   const { hash } = useLocation();
@@ -30,6 +31,7 @@ export default function Home() {
     <>
       <Hero />
       <Products />
+      <Fairs />
       <About />
       <Contact />
     </>

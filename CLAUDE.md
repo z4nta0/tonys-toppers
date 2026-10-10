@@ -31,12 +31,21 @@ form a shop could build on.
 ## Content
 Decided 2026-10-10. Claude drafts the product photos' alt text and an About
 paragraph covering all 8 categories, and the user confirms them for accuracy.
-- **Duplicate photos, awaiting the user**: eight photos are byte-for-byte
-  copies of others, so the same picture shows under two or three cards.
-  Pen toppers 1, 4, 10, 11, 14, and 15 repeat as wine stoppers 8, 2, 3, 4,
-  6, and 7; pen topper 13 repeats as straw charm 1; and pen topper 12
-  repeats as both wine stopper 5 and dog necklace 13. Some may show both
-  kinds of piece on purpose; the user is confirming which are mislabeled.
+- **Photos showing more than one kind of piece** (decided 2026-10-10): ten
+  photos had been listed under every category they show, as byte-for-byte
+  copies, and the user moved the copies out. The four wide booth shots
+  (`booth-1` to `booth-4`) live in the "At the craft fairs" gallery between
+  Products and About Tony, and each category filter also shows the booth
+  shots tagged with it, so Straw Charms isn't empty, while All lists only
+  the pieces and sets, once each. The three small mixed displays
+  (`pen-wine-set-1` to `-3`) are one card each, tagged as both pen toppers
+  and wine stoppers. Each catalog entry lists every category it shows.
+- **`booth-1` is a phone screenshot**, sharper than the copy that was moved
+  out: step 11's image script crops off the phone's interface, keeping the
+  original in `design/photos/`. The gallery's 4:5 crop already hides most
+  of it; the product cards still show it until then.
+- **The gallery has no bar link yet**: the bar keeps its four links until
+  the user decides whether "At the craft fairs" should join them.
 
 ## Images
 Decided 2026-10-10, under the user-level "## Images" rule. The original

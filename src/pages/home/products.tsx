@@ -60,7 +60,7 @@ export default function Products() {
             >
               <div className={`product-tag tag--${p.types[0]}`}>{p.typeLabel}</div>
               <div className="product-img">
-                <img src={p.img} alt={p.name} loading="lazy" />
+                <img src={p.img} alt={p.alt} loading="lazy" />
               </div>
               <div className="product-info">
                 <div className="product-name">{p.name}</div>
