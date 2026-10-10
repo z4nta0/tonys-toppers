@@ -1,3 +1,6 @@
+import carJpgUrl from './tony-cartoon.jpg'; // What: Cartoon JPG URL. Why: The hero shows Tony's cartoon portrait, and Vite fingerprints and checks an imported image. How: This imports the image's built URL for the hero's img.
+
+
 import { HashLink } from '../../ui/hash-link.tsx';
 
 export default function Hero() {
@@ -26,7 +29,7 @@ export default function Hero() {
         </div>
         <div className="hero-visual">
           <div className="hero-logo">
-            <img src="/images/tony-cartoon.jpg" alt="Cartoon illustration of Tony" />
+            <img src={ carJpgUrl } alt="Cartoon illustration of Tony" />
           </div>
           <div className="hero-sticker">
             Made

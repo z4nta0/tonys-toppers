@@ -1,3 +1,8 @@
+import logSvgUrl from './logo.svg';          // What: Logo SVG URL. Why: The About section shows the Tony's Toppers logo beside his portrait, and Vite fingerprints and checks an imported image. How: This imports the logo's built URL for its img.
+import porJpgUrl from './tony-portrait.jpg'; // What: Portrait JPG URL. Why: The About section shows Tony's portrait, and Vite fingerprints and checks an imported image. How: This imports the photo's built URL for its img.
+
+
+
 export default function About() {
     const date = new Date();
     const age = date.getFullYear() - 1982; // Tony was born in 1982, so this calculates his current age. It's a bit hacky but it means we won't have to update this every year.
@@ -7,10 +12,10 @@ export default function About() {
         <div className="bio-grid">
           <div className="bio-photo-wrap">
             <div className="bio-photo">
-              <img src="/images/tony-portrait.jpg" alt="Portrait of Tony Mawhiney" />
+              <img src={ porJpgUrl } alt="Portrait of Tony Mawhiney" />
             </div>
             <div className="bio-cartoon">
-              <img src="/images/logo.svg" alt="Tony's Toppers logo" />
+              <img src={ logSvgUrl } alt="Tony's Toppers logo" />
             </div>
           </div>
 

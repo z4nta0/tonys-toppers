@@ -1,3 +1,6 @@
+import lntSvgUrl from './logo-notext.svg'; // What: Logo-No-Text SVG URL. Why: The bar shows the logo's mark without its wordmark, and Vite fingerprints and checks an imported image. How: This imports the mark's built URL for the brand's img.
+
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { HashLink } from './hash-link.tsx';
@@ -59,7 +62,7 @@ export default function Navbar() {
   return (
     <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
       <Link to="/" className="nav-brand" onClick={close}>
-        <img src="/images/logo-notext.svg" alt="Tony's Toppers logo" />
+        <img src={ lntSvgUrl } alt="Tony's Toppers logo" />
         <span>Tony's Toppers</span>
       </Link>
 
