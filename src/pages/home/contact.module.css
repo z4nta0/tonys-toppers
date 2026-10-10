@@ -1,0 +1,493 @@
+
+
+
+/**
+ * contact.module.css = Contact Section Module
+ *
+ * @summary
+ * Styles for ConSecCom: the navy band that ends the home page, warmed by a
+ * yellow glow, with the ways to reach Tony on one side (the heading, a note,
+ * and rows for his phone, his Facebook page, and his home town) and the
+ * cream message form on the other, with its thank-you and error notes. On
+ * screens 900px wide or narrower the two sides stack, and so do the form's
+ * name and email fields. The shared section, container, and label classes
+ * the section used to borrow from the global stylesheet are copied here, and
+ * the fields' and send button's transitions stop for anyone who asked for
+ * less motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region section */
+
+.section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+
+
+	padding  : 110px 40px;
+	position : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+
+
+		padding : 80px 20px;
+
+
+	}
+
+
+}
+.contact-section { /* What: Contact Section. Why: The page ends on a bold navy band that sets the contact details apart. How: This fills it navy with cream text and clips its glow at the edges. */
+
+
+	background : var(--navy);
+	color      : var(--cream);
+	overflow   : hidden;
+
+
+}
+.contact-section::before { /* What: Contact Section Glow. Why: A soft yellow glow warms the band's top right corner. How: This draws a 600px circle fading out from yellow, faint and partly off the corner, out of the way of the pointer. */
+
+
+	background     : radial-gradient(circle, var(--yellow) 0%, transparent 60%);
+	border-radius  : 50%;
+	content        : '';
+	height         : 600px;
+	opacity        : 0.18;
+	pointer-events : none;
+	position       : absolute;
+	right          : -200px;
+	top            : -200px;
+	width          : 600px;
+
+
+}
+
+
+/* #region container */
+
+.container { /* What: Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : 1200px;
+
+
+}
+
+
+/* #region contact-grid */
+
+.contact-grid { /* What: Contact Grid Div. Why: The ways to reach Tony and the form sit side by side on wide screens, above the glow. How: This lays out two even columns stretched to the same height and lifts them onto their own layer. */
+
+
+	align-items           : stretch;
+	display               : grid;
+	gap                   : 70px;
+	grid-template-columns : 1fr 1fr;
+	position              : relative;
+	z-index               : 2;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Contact Grid Div. Why: Two columns don't fit a narrow screen. How: This applies 900px wide and below. */
+
+
+	.contact-grid { /* What: Stacked Contact Grid Div. Why: The details and the form read best one above the other. How: This sets a single column with a smaller gap. */
+
+
+		gap                   : 40px;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+.section-label { /* What: Section Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and yellow to stand out on the navy, led by a short yellow line, copied from the shared section label with the contact section's yellow merged in. */
+
+
+	align-items    : center;
+	color          : var(--yellow);
+	display        : flex;
+	font-size      : 0.8rem;
+	font-weight    : 600;
+	gap            : 12px;
+	letter-spacing : 0.22em;
+	margin-bottom  : 12px;
+	text-transform : uppercase;
+
+
+}
+.section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var(--yellow);
+	content    : '';
+	height     : 2px;
+	width      : 32px;
+
+
+}
+
+
+
+/* #region contact-title */
+
+.contact-title { /* What: Contact Title Heading. Why: The heading invites visitors to write. How: This sets it in the heavy cream serif, growing with the screen between 32px and about 54px, tightly leaded, with room below. */
+
+
+	color          : var(--cream);
+	font-family    : var(--serif);
+	font-size      : clamp(2rem, 4.5vw, 3.4rem);
+	font-weight    : 800;
+	letter-spacing : -0.02em;
+	line-height    : 1.05;
+	margin-bottom  : 24px;
+
+
+}
+
+.contact-title-accent { /* What: Contact Title Accent Emphasis. Why: The question carries the heading's warmth. How: This sets it in yellow italics. */
+
+
+	color      : var(--yellow);
+	font-style : italic;
+
+
+}
+
+/* #endregion contact-title */
+
+
+.contact-note { /* What: Contact Note Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in softened cream, capped at 440px, with room below. */
+
+
+	color         : rgba(253, 249, 238, 0.8);
+	font-size     : 1.05rem;
+	margin-bottom : 32px;
+	max-width     : 440px;
+
+
+}
+
+
+
+/* #region contact-direct */
+
+.contact-direct { /* What: Contact Direct Anchor. Why: Each way to reach Tony reads as a row of its own. How: This sets the icon beside its two lines on a faintly lighter, rounded panel with a soft cream border, with no link underline or color, the same for the two links and the home town row. */
+
+
+	align-items     : center;
+	background      : rgba(255, 255, 255, 0.07);
+	border          : 1px solid rgba(253, 249, 238, 0.18);
+	border-radius   : 16px;
+	color           : inherit;
+	display         : flex;
+	gap             : 16px;
+	margin-bottom   : 16px;
+	padding         : 24px;
+	text-decoration : none;
+
+
+}
+
+.icon { /* What: Icon Div. Why: A symbol marks each row at a glance. How: This centers it large in a 48px rounded yellow square that never shrinks. */
+
+
+	background    : var(--yellow);
+	border-radius : 12px;
+	color         : var(--navy-deep);
+	display       : grid;
+	flex-shrink   : 0;
+	font-size     : 1.4rem;
+	height        : 48px;
+	place-items   : center;
+	width         : 48px;
+
+
+}
+
+.label { /* What: Label Div. Why: Each row says what it is quietly. How: This sets it small, spaced, and uppercase in faded cream above the row's value. */
+
+
+	color          : rgba(253, 249, 238, 0.6);
+	font-size      : 0.78rem;
+	letter-spacing : 0.14em;
+	margin-bottom  : 2px;
+	text-transform : uppercase;
+
+
+}
+
+.value { /* What: Value Div. Why: The number, page name, or town is the row's main line. How: This sets it large in the semibold cream serif. */
+
+
+	color       : var(--cream);
+	font-family : var(--serif);
+	font-size   : 1.3rem;
+	font-weight : 600;
+
+
+}
+.contact-direct[href]:hover .value { /* What: Hovered Contact Direct Value Div. Why: A row that's a link should respond to the pointer, and the home town row isn't one. How: This turns the value yellow while its row, if it has an address, is hovered. */
+
+
+	color : var(--yellow);
+
+
+}
+
+/* #endregion contact-direct */
+
+
+
+/* #region contact-form */
+
+.contact-form { /* What: Contact Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
+
+
+	background    : var(--cream);
+	border-radius : 24px;
+	box-shadow    : 12px 12px 0 var(--yellow);
+	color         : var(--ink);
+	padding       : 40px;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Contact Form. Why: The card's wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.contact-form { /* What: Compact Contact Form. Why: The fields need the narrow screen's width. How: This trims the card's padding. */
+
+
+		padding : 28px;
+
+
+	}
+
+
+}
+
+.form-success { /* What: Form Success Div. Why: The visitor should see the message went. How: This sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
+
+
+	background    : var(--yellow-soft);
+	border        : 2px solid var(--yellow-deep);
+	border-radius : 12px;
+	color         : var(--ink);
+	font-weight   : 500;
+	margin-bottom : 18px;
+	padding       : 16px;
+
+
+}
+
+
+
+/* #region form-row */
+
+.form-row { /* What: Form Row Div. Why: The name and email fields sit side by side. How: This lays out two even columns with a small gap. */
+
+
+	display               : grid;
+	gap                   : 16px;
+	grid-template-columns : 1fr 1fr;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Form Row Div. Why: Two fields side by side are too cramped on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.form-row { /* What: Stacked Form Row Div. Why: The fields read best one above the other. How: This sets a single column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region form-field */
+
+.form-field { /* What: Form Field Div. Why: Each field's label and control read as one field, apart from the next. How: This leaves room below it. */
+
+
+	margin-bottom : 18px;
+
+
+}
+
+.form-label { /* What: Form Label. Why: Each field needs a clear, visible name. How: This sets it small, bold, spaced, and uppercase in ink, on its own line above the control. */
+
+
+	color          : var(--ink);
+	display        : block;
+	font-size      : 0.8rem;
+	font-weight    : 600;
+	letter-spacing : 0.12em;
+	margin-bottom  : 8px;
+	text-transform : uppercase;
+
+
+}
+
+.form-control { /* What: Form Control Input. Why: The inputs, dropdown, and message box share one look. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, and eases its border and background. */
+
+
+	background    : white;
+	border        : 2px solid var(--line);
+	border-radius : 12px;
+	color         : var(--ink);
+	font-family   : var(--sans);
+	font-size     : 1rem;
+	padding       : 14px 16px;
+	transition    : border-color 0.2s, background 0.2s;
+	width         : 100%;
+
+
+}
+.form-control:focus { /* What: Focused Form Control Input. Why: The field being typed in should stand out. How: This swaps the browser's outline for a navy border. */
+
+
+	border-color : var(--navy);
+	outline      : none;
+
+
+}
+.form-control--message { /* What: Message Form Control Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a 120px minimum height that can only be dragged taller. */
+
+
+	min-height : 120px;
+	resize     : vertical;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Control Input. Why: Someone who asked for less motion shouldn't see the fields animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.form-control { /* What: Motionless Form Control Input. Why: The focus border should simply switch on. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion form-field */
+
+/* #endregion form-row */
+
+
+
+/* #region form-error */
+
+.form-error { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
+
+
+	background    : #fde8e8;
+	border        : 2px solid #b91c1c;
+	border-radius : 12px;
+	color         : var(--ink);
+	font-weight   : 500;
+	margin-bottom : 18px;
+	padding       : 16px;
+
+
+}
+
+.form-error-link { /* What: Form Error Link. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color. */
+
+
+	color           : inherit;
+	font-weight     : 700;
+	text-decoration : underline;
+
+
+}
+
+/* #endregion form-error */
+
+
+.form-submit { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its lift and press. */
+
+
+	background    : var(--navy);
+	border        : 2px solid var(--ink);
+	border-radius : 12px;
+	box-shadow    : 4px 4px 0 var(--ink);
+	color         : var(--cream);
+	cursor        : pointer;
+	font-family   : var(--sans);
+	font-size     : 1.05rem;
+	font-weight   : 600;
+	padding       : 16px;
+	transition    : transform 0.15s, box-shadow 0.15s;
+	width         : 100%;
+
+
+}
+.form-submit:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+
+
+	box-shadow : 6px 6px 0 var(--ink);
+	transform  : translate(-2px, -2px);
+
+
+}
+.form-submit:active { /* What: Pressed Form Submit Button. Why: A press should feel like pushing the button in. How: This drops it back into place with a shallower shadow. */
+
+
+	box-shadow : 2px 2px 0 var(--ink);
+	transform  : translate(0, 0);
+
+
+}
+.form-submit:disabled,
+.form-submit:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting place even under the pointer. */
+
+
+	box-shadow : 4px 4px 0 var(--ink);
+	cursor     : progress;
+	opacity    : 0.7;
+	transform  : none;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.form-submit { /* What: Motionless Form Submit Button. Why: The lift and press should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion contact-form */
+
+/* #endregion contact-grid */
+
+/* #endregion container */
+
+/* #endregion section */
+
+
