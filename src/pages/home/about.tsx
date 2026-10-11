@@ -152,11 +152,12 @@ function AboSecCom () : React.JSX.Element {
 						</p>{ /* What: Beginning Paragraph Element. Why: Visitors like to know how the business began. How: This tells of the first beaded pen. */ }
 
 						<p className={ cssModObj.bioStoPar }>
-							Since that day Tony has grown his inventory of beads, expanded into wine stoppers
-							alongside the pens, and named his business <strong>Tony's Toppers</strong>. He's very
+							Since that day Tony has grown his inventory of beads, expanded beyond the pens into
+							wine stoppers, keychains, dog necklaces, car freshies, name badge reels, phone grips,
+							and straw charms, and named his business <strong>Tony's Toppers</strong>. He's very
 							proud of it, and he loves sharing pictures of finished pieces with friends and
 							family. They're all made with love.
-						</p>{ /* What: Growth Paragraph Element. Why: The story ends with where the business is now. How: This tells of the wine stoppers, the name, and his pride in it. */ }
+						</p>{ /* What: Growth Paragraph Element. Why: The story ends with where the business is now. How: This tells of every kind of piece he makes beyond the pens, the name, and his pride in it. */ }
 
 
 						<div className={ cssModObj.bioStaDiv }>{ /* What: Biography Stats Div Element. Why: Three short facts round off the story. How: This sets them in a row beneath the paragraphs. */ }
