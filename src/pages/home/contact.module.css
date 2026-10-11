@@ -7,12 +7,13 @@
  * @summary
  * Styles for ConSecCom: the navy band that ends the home page, warmed by a
  * yellow glow, with the ways to reach Tony on one side (the heading, a note,
- * and rows for his phone, his Facebook page, and his home town) and the
- * cream message form on the other, with its thank-you and error notes. On
- * screens 900px wide or narrower the two sides stack, and so do the form's
- * name and email fields. The shared section, container, and label classes
- * the section used to borrow from the global stylesheet are copied here, and
- * every transition stops for anyone who asked for less motion.
+ * and rows for his phone, his Facebook page, and his home town) and the cream
+ * message form on the other, with its thank-you and error notes, which rise in
+ * as they appear, the thank-you check popping once. On screens 900px wide or
+ * narrower the two sides stack, and so do the form's name and email fields.
+ * The shared section, container, and label classes the section used to borrow
+ * from the global stylesheet are copied here, and every animation and
+ * transition stops for anyone who asked for less motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -377,7 +378,7 @@
 
 }
 
-.sucIcoSpa { /* What: Success Icon Span. Why: One small flourish marks the message as sent. How: This lets the check scale as a block and pops it in once with a gentle overshoot, just after the note starts to rise. */
+.sucIcoSpa { /* What: Success Icon Span. Why: One small flourish marks the message as sent. How: This lets the check scale as a block and pops it in once with a gentle overshoot as the note rises. */
 
 
 	animation : sucIcoSpaShowPop var( --dur-ani-p03 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
@@ -398,7 +399,7 @@
 
 
 }
-@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the message as sent. How: This grows the check from a little smaller to full size, and the overshoot easing carries it just past full size before it settles. */
+@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the message as sent. How: This grows the check from just over half size to full size, and the overshoot easing carries it just past full size before it settles. */
 
 
 	from {
@@ -647,7 +648,7 @@
 
 /* #region forSubBut */
 
-.forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its color, lift, press, and focus ring. */
+.forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its color, lift, press, dim, and focus ring. */
 
 
 	background    : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
@@ -660,7 +661,7 @@
 	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 600;
 	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 	width         : 100%;
 
 

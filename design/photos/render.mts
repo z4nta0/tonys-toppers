@@ -162,7 +162,7 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 		const souImaEle = new Image(); // What: Source Image Element. Why: The original has to be decoded before it's drawn. How: This creates an image to load it into.
 
 
-		souImaEle.src = souUrlStr; // What: Source Load Call. Why: The image loads the original's data. How: This sets its source.
+		souImaEle.src = souUrlStr; // What: Source Address Assignment. Why: The image loads the original's data. How: This sets its source.
 
 		await souImaEle.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
 

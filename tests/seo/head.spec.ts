@@ -45,28 +45,44 @@ const LIV_URL_STR = 'https://tonystoppers.com/';                              //
 
 
 
+// #region SOC_KEY_ARR
+
+/**
+ * SOC_KEY_ARR = Social Key Array
+ *
+ * @summary
+ * Every Open Graph and Twitter tag key a complete social preview card needs,
+ * per the social preview rule. Every row is one tag key the home page must
+ * carry, so no row needs a comment of its own.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
 
 
-	'og:description',      // What: Open Graph Description Key. Why: Every card needs the summary under the title. How: This names the tag.
-	'og:image',            // What: Open Graph Image Key. Why: Every card needs the preview image. How: This names the tag.
-	'og:image:alt',        // What: Open Graph Image Alt Key. Why: Every card needs the image's description for screen readers. How: This names the tag.
-	'og:image:height',     // What: Open Graph Image Height Key. Why: Every card needs the image's height, for laying out the card early. How: This names the tag.
-	'og:image:type',       // What: Open Graph Image Type Key. Why: Every card needs the image's file type. How: This names the tag.
-	'og:image:width',      // What: Open Graph Image Width Key. Why: Every card needs the image's width, for laying out the card early. How: This names the tag.
-	'og:locale',           // What: Open Graph Locale Key. Why: Every card needs the page's language. How: This names the tag.
-	'og:site_name',        // What: Open Graph Site Name Key. Why: Every card needs the name of the site the link belongs to. How: This names the tag.
-	'og:title',            // What: Open Graph Title Key. Why: Every card needs the card's title. How: This names the tag.
-	'og:type',             // What: Open Graph Type Key. Why: Every card needs what kind of page it is. How: This names the tag.
-	'og:url',              // What: Open Graph URL Key. Why: Every card needs the address shares should count toward. How: This names the tag.
-	'twitter:card',        // What: Twitter Card Key. Why: Every card needs the layout X and similar apps use. How: This names the tag.
-	'twitter:description', // What: Twitter Description Key. Why: Every card needs the summary on X. How: This names the tag.
-	'twitter:image',       // What: Twitter Image Key. Why: Every card needs the image on X. How: This names the tag.
-	'twitter:image:alt',   // What: Twitter Image Alt Key. Why: Every card needs the image's description on X. How: This names the tag.
-	'twitter:title'        // What: Twitter Title Key. Why: Every card needs the card's title on X. How: This names the tag.
+	'og:description',
+	'og:image',
+	'og:image:alt',
+	'og:image:height',
+	'og:image:type',
+	'og:image:width',
+	'og:locale',
+	'og:site_name',
+	'og:title',
+	'og:type',
+	'og:url',
+	'twitter:card',
+	'twitter:description',
+	'twitter:image',
+	'twitter:image:alt',
+	'twitter:title'
 
 
 ];
+
+// #endregion SOC_KEY_ARR
 
 // #endregion Constants
 

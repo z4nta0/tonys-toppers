@@ -101,11 +101,12 @@ function cliBloFun () : void {
 /**
  * conLisFun = Control List Function
  *
- * @summary Collects every control a visitor can reach on the page as it
- * stands: each link and button that's visible, not taken out of the tab order
- * with tabindex -1, and not inside inert content (the page behind the open
- * mobile menu). Handles are taken once, so restyling while the checks scroll
- * (the nav bar's scrolled look) can't shift the list.
+ * @summary
+ * Collects every control a visitor can reach on the page as it stands: each
+ * link and button that's visible, not taken out of the tab order with tabindex
+ * -1, and not inside inert content (the page behind the open mobile menu).
+ * Handles are taken once, so restyling while the checks scroll (the nav bar's
+ * scrolled look) can't shift the list.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
