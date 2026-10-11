@@ -260,9 +260,9 @@ passes on `close-out`.
      matching seal-and-shield's for the shared pieces (`pagConDiv`,
      `eyeLabDiv`, `secTitHea`, `titAccEmp`, `butBasAnc`), and `fadeUp` is
      `blockEnterFadeIn`.
-   - **Found for later**: the form fields' text is now 14.57px, and iOS
-     Safari zooms the page when a field under 16px is tapped (step 11's
-     interaction feedback, raised with the user first).
+   - **Form field text stays at Base Plus 1** (decided 2026-10-10 by the
+     user), though iOS Safari zooms the page when a field under 16px is
+     tapped, the same as seal-and-shield.
 10. **Horizontal layout comparison** (see above), then a WAVE and
     accessibility review.
 11. **New features**: the 404 page, security headers, image optimization,
