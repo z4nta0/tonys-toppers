@@ -23,13 +23,12 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
  * it's always caught at rest, and with the page's clock fixed to one date,
  * since the footer's copyright year and Tony's age in the About section both
  * come from the current year and would otherwise fail the baselines every
- * January. The product and gallery photos are masked, since WebKit redraws the
- * full-size photos differently from one full-page capture to the next, while
- * their masks still show where each one sits; otherwise the page never held
- * still long enough to compare. Reduced motion also keeps the hero's blurred
- * blobs from floating, whose blur WebKit redrew differently each time a
- * capture paused and resumed them. Baselines live
- * in tests/rendering/baselines, one per state and engine, captured on Linux;
+ * January. The product and gallery photos are captured as they are: WebKit
+ * redrew the old full-size photos differently from one capture to the next, so
+ * they were masked, but the resized photos hold still. Reduced motion also
+ * keeps the hero's blurred blobs from floating, whose blur WebKit redrew
+ * differently each time a capture paused and resumed them. Baselines live in
+ * tests/rendering/baselines, one per state and engine, captured on Linux;
  * another system's font rendering would differ, so baselines are refreshed on
  * the machine that runs the suite. When a change is meant to alter how a page
  * looks, review the failing diff in the report, then refresh the baselines
@@ -74,14 +73,13 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every pa
 		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
 
-		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the product photos masked, and compares it with the state's baseline pixel for pixel, color for color.
+		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and compares it with the state's baseline pixel for pixel, color for color.
 
 
-			animations        : 'disabled',                                                                                              // What: Animations. Why: A looping animation would never hold still for the capture. How: This stops every animation at its start.
-			fullPage          : true,                                                                                                    // What: Full Page. Why: The whole state has to match, not just the first screen. How: This captures the page's full height.
-			mask              : [ curPagObj.locator( '[data-element-name-hook~="proPhoIma"], [data-element-name-hook~="faiPhoIma"]' ) ], // What: Mask. Why: WebKit draws the full-size product photos differently on each full-page capture, so the page never held still. How: This covers every product card photo and gallery photo with a solid box, found by their hooks.
-			maxDiffPixelRatio : MAX_DIF_NUM,                                                                                             // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.
-			threshold         : PIX_THR_NUM                                                                                              // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.
+			animations        : 'disabled',  // What: Animations. Why: A looping animation would never hold still for the capture. How: This stops every animation at its start.
+			fullPage          : true,        // What: Full Page. Why: The whole state has to match, not just the first screen. How: This captures the page's full height.
+			maxDiffPixelRatio : MAX_DIF_NUM, // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.
+			threshold         : PIX_THR_NUM  // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.
 
 
 		} );

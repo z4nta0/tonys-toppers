@@ -48,16 +48,20 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
   (`pen-wine-set-1` to `-3`) are one card each, tagged as both pen toppers
   and wine stoppers. Each catalog entry lists every category it shows.
 - **`booth-1` is a phone screenshot**, sharper than the copy that was moved
-  out: step 11's image script crops off the phone's interface, keeping the
-  original in `design/photos/`. The gallery's 4:5 crop already hides most
-  of it; the product cards still show it until then.
+  out: the image script crops off the phone's interface, keeping the
+  original in `design/photos/products/`.
 - **The bar links to the gallery** as "Craft Fairs" (decided 2026-10-10),
   between Products and About Tony, in page order.
 
 ## Images
 Decided 2026-10-10, under the user-level "## Images" rule. The original
-photos are kept in `design/photos/`, outside the served tree, and a script
-beside them writes resized WebP copies into `src/`. The logo and favicon
+photos are kept in `design/photos/` (the pieces and booth shots in
+`products/`), outside the served tree, and `npm run photos`
+(`design/photos/render.mts`) writes resized WebP copies into `src/`, at
+quality 0.85, plus `src/pages/home/photo-sizes.ts`, which gives every img its
+width and height. A product photo fits within 562 by 750px, a booth shot is
+696px wide, the cartoon 710px, and the portrait keeps its 756px. Adding or
+replacing a photo means dropping the original in and rerunning the script. The logo and favicon
 come from the existing SVGs (`logo.svg`, `logo-notext.svg`).
 
 ## Horizontal layout
@@ -225,14 +229,14 @@ passes on `close-out`.
    button is disabled and reads Sending... while a request is out. The
    error note's reds are literal until step 9 gives them their status
    roles. The hidden form in `index.html` became a bare, valid copy of the
-   real form's four fields in step 6, as in seal-and-shield. After the next
-   deploy, the user sends a test submission to confirm Netlify still
-   records every field.
+   real form's four fields in step 6, as in seal-and-shield. The user sent
+   a test submission after the 1.6.0 deploy, and Netlify recorded it.
 8. **Hooks and CSS modules**: done 2026-10-10.
    - **State and hooks**: the bar's scrolled, open-menu, and active-link
      classes became `data-page-scroll-active`, `data-mobile-menu-open`, and
-     `data-section-link-active`, and the photos carry the `proPhoIma` and
-     `faiPhoIma` hooks the rendering suite masks them by.
+     `data-section-link-active`. The photos carried `proPhoIma` and
+     `faiPhoIma` hooks for the rendering suite's mask until step 11's
+     resized photos let it go.
    - **Accessibility fixes**: the product filters became a labelled group of
      `aria-pressed` toggles in place of a partial tablist, and the closed
      phone menu is `visibility: hidden` once its slide-out ends, so its links
@@ -311,6 +315,13 @@ passes on `close-out`.
     links: WebKit has no scroll anchoring, so a link far down the page lands
     a few hundred pixels short while the photos above it load and grow
     their cards, the same as before the section links arrived.
+    - **404 page**: done 2026-10-10, with an `h1`, its own title, `noindex`,
+      and a See the collection button beside Back home.
+    - **Security headers**: done 2026-10-10, seal-and-shield's `_headers`,
+      with Vite emitting every asset as a file (`assetsInlineLimit: 0`) so
+      the policy needn't allow data URLs.
+    - **Images**: done 2026-10-10 (see "## Images"), 56 photos from 6,351 KB
+      to 2,698 KB, and the rendering suite's photo mask dropped.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
@@ -338,11 +349,10 @@ logo ring, and wobbling sticker) when waiting for the page to settle.
   than masking text, since the footer's year and Tony's age in the About
   section both come from it. WebKit drew the page differently from one
   full-page capture to the next in two places, so the page never held still
-  long enough to compare: the 64 full-size product photos, which are masked
-  (their boxes still show) through their `proPhoIma` and `faiPhoIma` hooks,
-  and the hero's blurred blobs, which stay still because every capture runs
-  under reduced motion, where the hero's module switches their floating off.
-  The photo mask is retried without once step 11 shrinks the photos. Since
+  long enough to compare: the full-size product photos, which were masked
+  until step 11's resized photos held still in every engine, and the hero's
+  blurred blobs, which stay still because every capture runs under reduced
+  motion, where the hero's module switches their floating off. Since
   the captures run under reduced motion, a change to a reduced-motion
   variant alters the baselines even when the full-motion page is untouched,
   so check that the diff stays within what the variant affects (step 8 did,

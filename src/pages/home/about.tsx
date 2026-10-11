@@ -4,9 +4,12 @@
 
 // #region Imports
 
-import cssModObj from './about.module.css';  // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import logSvgUrl from './logo.svg';          // What: Logo SVG URL. Why: The About section shows the Tony's Toppers logo beside his portrait, and Vite fingerprints and checks an imported image. How: This imports the logo's built URL for its img.
-import porJpgUrl from './tony-portrait.jpg'; // What: Portrait JPG URL. Why: The About section shows Tony's portrait, and Vite fingerprints and checks an imported image. How: This imports the photo's built URL for its img.
+import cssModObj from './about.module.css';   // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import logSvgUrl from './logo.svg';           // What: Logo SVG URL. Why: The About section shows the Tony's Toppers logo beside his portrait, and Vite fingerprints and checks an imported image. How: This imports the logo's built URL for its img.
+import porWebUrl from './tony-portrait.webp'; // What: Portrait WebP URL. Why: The About section shows Tony's portrait, and Vite fingerprints and checks an imported image. How: This imports the photo's built URL for its img.
+
+
+import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why: The portrait's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the portrait's width and height.
 
 // #endregion Imports
 
@@ -97,7 +100,9 @@ function AboSecCom () : React.JSX.Element {
 							<img
 								className={ cssModObj.porPhoIma }
 
-								src={ porJpgUrl }
+								height={ PHO_SIZ_OBJ[ 'tony-portrait' ].heiNum }
+								src={ porWebUrl }
+								width={ PHO_SIZ_OBJ[ 'tony-portrait' ].widNum }
 
 								alt='Portrait of Tony Mawhiney'
 							/>{ /* What: Biography Portrait Image Element. Why: Visitors see who Tony is. How: This loads his portrait. */ }
