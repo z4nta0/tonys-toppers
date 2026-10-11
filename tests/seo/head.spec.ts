@@ -221,7 +221,7 @@ test( 'the social preview image is a 1,200x630 JPEG under 300 KB', async ( { req
 	let segOffNum = 2; // What: Segment Offset Number. Why: A JPEG's size sits in its frame segment, after a varying run of other segments. How: This starts just past the file's opening marker.
 
 
-	while ( segOffNum < jpgBufObj.length && ( jpgBufObj[ segOffNum + 1 ]! < 0xC0 || jpgBufObj[ segOffNum + 1 ]! > 0xC2 ) ) segOffNum += 2 + jpgBufObj.readUInt16BE( segOffNum + 2 ); // What: Frame Segment Search. Why: The frame segment's marker is 0xC0, 0xC1, or 0xC2, and every segment before it gives its own length. How: This hops from segment to segment until it lands on the frame. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: The loop's own bound keeps every read inside the file.
+	while ( segOffNum < jpgBufObj.length && ( jpgBufObj[ segOffNum + 1 ] < 0xC0 || jpgBufObj[ segOffNum + 1 ] > 0xC2 ) ) segOffNum += 2 + jpgBufObj.readUInt16BE( segOffNum + 2 ); // What: Frame Segment Search. Why: The frame segment's marker is 0xC0, 0xC1, or 0xC2, and every segment before it gives its own length. How: This hops from segment to segment until it lands on the frame.
 
 
 

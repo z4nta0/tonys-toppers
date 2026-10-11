@@ -149,7 +149,7 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 
 
 	const filNamStr = souFilStr.slice( souFilStr.lastIndexOf( '/' ) + 1, -4 );                                             // What: File Name String. Why: The photo is keyed by its name without folder or extension. How: This cuts both off.
-	const boxRcdObj = BOX_RCD_OBJ[ boxKeyFun( filNamStr ) ]!;                                                              // What: Box Record Object. Why: The photo fits into its kind's box. How: This looks the box up by kind. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: boxKeyFun only returns keys BOX_RCD_OBJ has.
+	const boxRcdObj = BOX_RCD_OBJ[ boxKeyFun( filNamStr ) ];                                                               // What: Box Record Object. Why: The photo fits into its kind's box. How: This looks the box up by kind.
 	const souUrlStr = `data:image/jpeg;base64,${ readFileSync( `${ PHO_DIR_STR }${ souFilStr }` ).toString( 'base64' ) }`; // What: Source URL String. Why: A canvas drawn from a file URL can't be read back, while one drawn from data can. How: This hands the original to the page as a data URL.
 	const croBoxObj = CRO_BOX_OBJ[ filNamStr ] ?? null;                                                                    // What: Crop Box Object. Why: Only some photos are cropped. How: This reads the photo's crop, or null.
 
@@ -188,9 +188,9 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 		return { // What: Encode Result Return. Why: Node writes the file and records its size. How: This hands back the WebP's base64 data, its height, and its width.
 
 
-			b64Str : outCanEle.toDataURL( 'image/webp', quaValArg ).split( ',' )[ 1 ]!, // What: Base64 String. Why: Only text crosses back from the page. How: This encodes the canvas as WebP and keeps the data after the data URL's comma. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: A data URL always has a comma before its data.
-			heiNum : outHeiNum,                                                         // What: Height Number. Why: The sizes file records the photo's height. How: This is the canvas's height.
-			widNum : outWidNum                                                          // What: Width Number. Why: The sizes file records the photo's width. How: This is the canvas's width.
+			b64Str : outCanEle.toDataURL( 'image/webp', quaValArg ).split( ',' )[ 1 ], // What: Base64 String. Why: Only text crosses back from the page. How: This encodes the canvas as WebP and keeps the data after the data URL's comma.
+			heiNum : outHeiNum,                                                        // What: Height Number. Why: The sizes file records the photo's height. How: This is the canvas's height.
+			widNum : outWidNum                                                         // What: Width Number. Why: The sizes file records the photo's width. How: This is the canvas's width.
 
 
 		};

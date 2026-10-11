@@ -150,7 +150,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 
 
-		return finCanObj.toDataURL( 'image/png' ).split( ',' )[ 1 ]!; // What: PNG Data Return. Why: The bytes have to leave the page as text. How: This encodes the canvas as a PNG and returns its base64 part. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: A data URL always has a comma before its data.
+		return finCanObj.toDataURL( 'image/png' ).split( ',' )[ 1 ]; // What: PNG Data Return. Why: The bytes have to leave the page as text. How: This encodes the canvas as a PNG and returns its base64 part.
 
 
 	}, [ SOU_B64_STR, icoSizNum, icoOpaBoo, TOU_SCA_NUM ] as const ); // What: Drawing Arguments. Why: The page can't read this script's variables. How: This hands the mark's data, the target size, the opaque flag, and the touch scale into the page. // What: Type Assertion Note. Why: Without it the array widens to one mixed type, so the page function's destructured parameters lose their own types. How: as const keeps it a readonly tuple, so each parameter is typed by its position.
@@ -184,8 +184,8 @@ let icoOffNum = icoHeaBuf.length; // What: ICO Offset Number. Why: Each director
 for ( const [ icoIndNum, icoPngBuf ] of icoPngArr.entries() ) { // What: ICO Entry Loop. Why: Each image needs a directory entry. How: This writes one per size, in order.
 
 
-	const entOffNum = 6 + 16 * icoIndNum;        // What: Entry Offset Number. Why: Each entry has its own place in the directory. How: This finds it.
-	const entSizNum = ICO_SIZ_ARR[ icoIndNum ]!; // What: Entry Size Number. Why: The entry names its image's width and height. How: This reads the size it was rendered at. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: icoPngArr was built from ICO_SIZ_ARR, so every index has a size.
+	const entOffNum = 6 + 16 * icoIndNum;       // What: Entry Offset Number. Why: Each entry has its own place in the directory. How: This finds it.
+	const entSizNum = ICO_SIZ_ARR[ icoIndNum ]; // What: Entry Size Number. Why: The entry names its image's width and height. How: This reads the size it was rendered at.
 
 
 	icoHeaBuf.writeUInt8( entSizNum, entOffNum );               // What: Entry Width Write. Why: The entry names the image's width. How: This writes it.
