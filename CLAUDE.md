@@ -31,6 +31,10 @@ form a shop could build on.
 ## Content
 Decided 2026-10-10. Claude drafts the product photos' alt text and an About
 paragraph covering all 8 categories, and the user confirms them for accuracy.
+- **Alt text**: done 2026-10-10 and confirmed by the user. Each photo's
+  description lives in `catalog.ts`'s `PHO_ALT_OBJ`, keyed by file name, or
+  in its booth row, under 100 characters and never repeating the card's
+  name. A new photo needs its own row.
 - **Photos showing more than one kind of piece** (decided 2026-10-10): ten
   photos had been listed under every category they show, as byte-for-byte
   copies, and the user moved the copies out. The four wide booth shots
