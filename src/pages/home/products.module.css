@@ -366,7 +366,7 @@
 
 	height     : 100%;
 	object-fit : contain;
-	transition : transform var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */
+	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 	width      : 100%;
 
 

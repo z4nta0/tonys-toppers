@@ -110,7 +110,7 @@ const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft f
 
 	{ altStr : "A craft fair table of pen toppers, wine stoppers, dog necklaces, keychains, and Tony's cartoon", catArr : [ 'pen-topper', 'wine-stopper', 'keychain', 'dog-necklace' ], filStr : 'booth-2' }, // What: Second Booth Row. Why: This photo shows a full craft fair table. How: This tags it under pen toppers, wine stoppers, keychains, and dog necklaces.
 
-	{ altStr : 'Beaded keychains on a rack beside bagged pens and a framed cartoon of Tony', catArr : [ 'pen-topper', 'keychain', 'straw-charm' ], filStr : 'booth-3' }, // What: Third Booth Row. Why: This photo is a close view of keychains, charms, and pens beside his cartoon. How: This tags it under pen toppers, keychains, and straw charms.
+	{ altStr : 'Beaded keychains and straw charms beside bagged pens and a framed cartoon of Tony', catArr : [ 'pen-topper', 'keychain', 'straw-charm' ], filStr : 'booth-3' }, // What: Third Booth Row. Why: This photo is a close view of keychains, charms, and pens beside his cartoon. How: This tags it under pen toppers, keychains, and straw charms.
 
 	{ altStr : 'Tony behind his outdoor craft fair table of pen toppers, wine stoppers, and badge reels', catArr : [ 'pen-topper', 'wine-stopper', 'name-badge-reel' ], filStr : 'booth-4' } // What: Fourth Booth Row. Why: This photo shows Tony at his own table outdoors. How: This tags it under pen toppers, wine stoppers, and name badge reels.
 

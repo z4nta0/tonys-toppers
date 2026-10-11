@@ -9,8 +9,9 @@ import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: T
 import { useState } from 'react'; // What: Use State. Why: The form remembers its fields, whether a send is out, and whether the last one went through or failed. How: Four state pairs hold them.
 
 
-import type { ChangeEvent } from 'react'; // What: Change Event. Why: Every field reports its changes the same way. How: This types fieChaFun's event.
-import type { FormEvent   } from 'react'; // What: Form Event. Why: Sending the form starts from its submit event. How: This types forSubFun's event.
+import type { AnimationEvent } from 'react'; // What: Animation Event. Why: A leaving note unmounts once its own exit animation ends. How: This types the end handler's event.
+import type { ChangeEvent    } from 'react'; // What: Change Event. Why: Every field reports its changes the same way. How: This types fieChaFun's event.
+import type { FormEvent      } from 'react'; // What: Form Event. Why: Sending the form starts from its submit event. How: This types forSubFun's event.
 
 // #endregion Imports
 
@@ -29,6 +30,7 @@ import type { FormEvent   } from 'react'; // What: Form Event. Why: Sending the 
  * Sections:
  *  - Types
  *  - Constants
+ *  - Hooks
  *  - Components
  *  - Exports
  *
@@ -40,7 +42,7 @@ import type { FormEvent   } from 'react'; // What: Form Event. Why: Sending the 
 
 // #region Types
 
-type IntOptTyp = 'A pen topper' | 'A wine stopper' | 'A keychain' | 'A dog necklace' | 'A car freshie' | 'A name badge reel' | 'A phone grip' | 'A custom piece' | 'Just saying hi'; // What: Interest Option Type. Why: The interest field offers a fixed set of choices. How: This lists every choice, each one also the value sent.
+type IntOptTyp = 'A pen topper' | 'A wine stopper' | 'A keychain' | 'A dog necklace' | 'A car freshie' | 'A name badge reel' | 'A phone grip' | 'A straw charm' | 'A custom piece' | 'Just saying hi'; // What: Interest Option Type. Why: The interest field offers a fixed set of choices. How: This lists every choice, each one also the value sent.
 
 
 
@@ -91,6 +93,7 @@ const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The int
 	'A car freshie',
 	'A name badge reel',
 	'A phone grip',
+	'A straw charm',
 	'A custom piece', // What: Custom Piece Option. Why: Tony makes pieces to order. How: This offers a custom request.
 	'Just saying hi'  // What: Saying Hi Option. Why: Not every message is an order. How: This offers a friendly note.
 
@@ -100,6 +103,67 @@ const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The int
 // #endregion INT_OPT_ARR
 
 // #endregion Constants
+
+
+
+// #region Hooks
+
+type NotExiTyp = { endFun : ( aniEveObj : AnimationEvent< HTMLElement > ) => void, leaBoo : boolean, mouBoo : boolean }; // What: Note Exit Type. Why: A note's exit needs to know whether it's mounted, whether it's leaving, and when to finish. How: This names those three, which the notes read by property.
+
+// #region useNotExiFun
+
+/**
+ * useNotExiFun = Use Note Exit Function
+ *
+ * @summary
+ * Keeps a form note on the page long enough to play its exit. While the note
+ * should show, it's mounted. When it stops showing, it stays mounted and is
+ * marked as leaving, so its module can play the exit animation, and it
+ * unmounts once that animation ends on the note itself, ignoring any
+ * animation ending on an element inside it. Under reduced motion the exit
+ * still runs, at a hundredth of a millisecond, so the end event still fires.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param shoBoo - Show Boolean: Whether the note should be showing.
+ *
+ * @returns Whether to mount the note, whether it's leaving, and the handler
+ *          its onAnimationEnd calls.
+ *
+ * @example
+ * ```ts
+ * useNotExiFun(forSenBoo) // => { endFun, leaBoo, mouBoo }
+ * ```
+ *
+*/
+
+function useNotExiFun ( shoBoo : boolean ) : NotExiTyp {
+
+
+	const [ mouBoo, setMouBoo ] = useState( shoBoo ); // What: Mounted Boolean And Setter. Why: A note that stops showing has to stay mounted while it leaves. How: This holds whether it's mounted, starting with whether it shows.
+
+
+
+	if ( shoBoo && !mouBoo ) setMouBoo( true ); // What: Mount Guard. Why: A note asked to show has to mount at once. How: This mounts it during render, which React applies before committing.
+
+
+
+	return { // What: Note Exit Return. Why: The note reads all three by property. How: This hands back the mount flag, the leaving flag, and the end handler.
+
+
+		endFun : ( aniEveObj ) => { if ( !shoBoo && aniEveObj.target === aniEveObj.currentTarget ) setMouBoo( false ); }, // What: End Function. Why: The note should unmount only when its own exit finishes. How: This unmounts it when an animation ends on the note itself while it isn't meant to show.
+		leaBoo : mouBoo && !shoBoo,                                                                                          // What: Leaving Boolean. Why: The module plays the exit only while the note is leaving. How: This is true while it's still mounted but no longer meant to show.
+		mouBoo : mouBoo                                                                                                        // What: Mounted Boolean. Why: The note renders only while mounted. How: This passes the mount flag on.
+
+
+	};
+
+
+}
+
+// #endregion useNotExiFun
+
+// #endregion Hooks
 
 
 
@@ -140,6 +204,9 @@ function ConSecCom () : React.JSX.Element {
 	const [ forErrBoo, setForErrBoo ] = useState( false );                    // What: Form Error Boolean And Setter. Why: A visitor whose message didn't go through has to be told, with their details kept for a retry. How: This holds whether the error note is showing.
 	const [ forSenBoo, setForSenBoo ] = useState( false );                    // What: Form Sent Boolean And Setter. Why: The thank-you note shows only right after a confirmed send. How: This holds whether it's showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );                    // What: Sending Progress Boolean And Setter. Why: The visitor should see a message is on its way, and shouldn't send it twice. How: This holds whether a request is out.
+
+	const errExiObj = useNotExiFun( forErrBoo ); // What: Error Exit Object. Why: The error note should fade out rather than vanish. How: This keeps it mounted while it leaves.
+	const sucExiObj = useNotExiFun( forSenBoo ); // What: Success Exit Object. Why: The thank-you note should fade out rather than vanish. How: This keeps it mounted while it leaves.
 
 
 	// #region fieChaFun
@@ -403,14 +470,18 @@ function ConSecCom () : React.JSX.Element {
 					>{ /* What: Contact Form Form Element. Why: Visitors can send Tony a message without leaving the site. How: Netlify Forms records it under the contactForm name, matching the hidden copy in index.html, while forSubFun sends it in the background once the browser's own checks pass: the name, email, and message are required, and the email has to look like an address. */ }
 
 
-						{ forSenBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending. How: This renders it while forSenBoo is true.
+						{ sucExiObj.mouBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending, and stays while it fades out. How: This renders it while it's mounted.
 
 
 							<div
 								className={ cssModObj.forSucDiv }
 
+								data-note-leaving={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+
 								role='status'
-							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: It rises in with its check popping once, and its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
+
+								onAnimationEnd={ sucExiObj.endFun }
+							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: It rises in with its check popping once and fades out when it goes, and its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
 								<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
 							</div>
 
@@ -558,14 +629,18 @@ function ConSecCom () : React.JSX.Element {
 							value='contactForm'
 						/>{ /* What: Form Name Input Element. Why: Netlify needs to know which form a background post belongs to. How: This sends the form's name with the other fields. */ }
 
-						{ forErrBoo && ( // What: Error Note Check. Why: A failed submission has to be explained. How: This shows the error note while forErrBoo is true.
+						{ errExiObj.mouBoo && ( // What: Error Note Check. Why: A failed submission has to be explained, and the note stays while it fades out. How: This renders it while it's mounted.
 
 
 							<p
 								className={ cssModObj.forErrPar }
 
+								data-note-leaving={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+
 								role='alert'
-							>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the message didn't go through and what to do next. How: Its alert role has screen readers announce it the moment it appears. */ }
+
+								onAnimationEnd={ errExiObj.endFun }
+							>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the message didn't go through and what to do next. How: It rises in and fades out when it goes, and its alert role has screen readers announce it the moment it appears. */ }
 								Sorry, your message didn't go through. Please try again, or call or text Tony at <a className={ cssModObj.errLinAnc } href='tel:4177330681'>(417) 733-0681</a>.
 							</p>
 

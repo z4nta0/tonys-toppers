@@ -49,8 +49,8 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
   and wine stoppers. Each catalog entry lists every category it shows
   (decided 2026-10-11: every kind its alt text names, so the booth shots
   also appear under Keychains and Name Badge Reels). Booth-3 is the only
-  photo tagged Straw Charms; until the user confirms it shows them, the
-  contact form's interest list leaves straw charms out.
+  photo tagged Straw Charms, and the user confirmed it shows them, so its
+  alt text names them and the contact form offers "A straw charm".
 - **`booth-1` is a phone screenshot**, sharper than the copy that was moved
   out: the image script crops off the phone's interface, keeping the
   original in `design/photos/products/`.
@@ -380,7 +380,10 @@ passes on `close-out`.
       so Tony's story spells out Grandview, Missouri. The phone menu's panel
       decelerates as it slides in and accelerates as it slides out, and the
       Products band's filter strip sits above the band's dot grid like the
-      heading and the cards.
+      heading and the cards. The contact form's thank-you and error notes fade
+      out as they leave, as well as rising in. The portrait's hover tilt and
+      the product photos' hover zoom run about 277ms, within the rule's range,
+      and the phone menu's rows keep their sideways nudge on hover.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
