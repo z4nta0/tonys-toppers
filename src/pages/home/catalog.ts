@@ -37,7 +37,7 @@ type CatSluTyp = 'pen-topper' | 'wine-stopper' | 'keychain' | 'dog-necklace' | '
 type ProRcdTyp = { // What: Product Record Type. Why: The products grid and the gallery read every photo the same way. How: This describes one photo's card.
 
 
-	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: A booth shot carries a description of the table, and every other photo its card's name until the content pass describes them.
+	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
 	catArr : CatSluTyp[], // What: Category Array. Why: One photo can show more than one kind of piece. How: This lists every category the photo is tagged with, the first one setting its card's look.
 	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the All list. How: This is true for a booth shot and false for a piece or set.
 	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
@@ -93,16 +93,94 @@ type FaiRcdTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // 
 const FAI_RCD_ARR : FaiRcdTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo, the categories it shows, and its description.
 
 
-	{ altStr : "Tony's pen toppers lined up in clear stands on a wooden shelf by a shop window, with beaded wine stoppers and bagged keychains on the shelf below and a framed card about Tony", catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'booth-1' }, // What: First Booth Row. Why: A shop window display of pens and stoppers. How: This tags it under pen toppers and wine stoppers.
+	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony', catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'booth-1' }, // What: First Booth Row. Why: A shop window display of pens and stoppers. How: This tags it under pen toppers and wine stoppers.
 
-	{ altStr : 'A craft fair table crowded with clear cups of pen toppers and wine stoppers, beaded dog necklaces on a stand, keychains hanging from a rack, and a framed cartoon of Tony', catArr : [ 'pen-topper', 'wine-stopper', 'dog-necklace' ], filStr : 'booth-2' }, // What: Second Booth Row. Why: A full craft fair table. How: This tags it under pen toppers, wine stoppers, and dog necklaces.
+	{ altStr : "A craft fair table of pen toppers, wine stoppers, dog necklaces, keychains, and Tony's cartoon", catArr : [ 'pen-topper', 'wine-stopper', 'dog-necklace' ], filStr : 'booth-2' }, // What: Second Booth Row. Why: A full craft fair table. How: This tags it under pen toppers, wine stoppers, and dog necklaces.
 
-	{ altStr : "Beaded charms and keychains hanging from a rack beside bagged pens in glass vases, with a framed cartoon of Tony in a Tony's Toppers shirt and a cup of pen toppers in front", catArr : [ 'pen-topper', 'straw-charm' ], filStr : 'booth-3' }, // What: Third Booth Row. Why: A close view of the charms and pens beside his cartoon. How: This tags it under pen toppers and straw charms.
+	{ altStr : 'Beaded keychains on a rack beside bagged pens and a framed cartoon of Tony', catArr : [ 'pen-topper', 'straw-charm' ], filStr : 'booth-3' }, // What: Third Booth Row. Why: A close view of the charms and pens beside his cartoon. How: This tags it under pen toppers and straw charms.
 
-	{ altStr : 'Tony seated behind his table at an outdoor craft fair, its black cloth covered with rows of pen toppers, wine stoppers, and beaded badge reels', catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'booth-4' } // What: Fourth Booth Row. Why: Tony at his own table outdoors. How: This tags it under pen toppers and wine stoppers.
+	{ altStr : 'Tony behind his outdoor craft fair table of pen toppers, wine stoppers, and badge reels', catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'booth-4' } // What: Fourth Booth Row. Why: Tony at his own table outdoors. How: This tags it under pen toppers and wine stoppers.
 
 
 ];
+
+
+
+// #region PHO_ALT_OBJ
+
+/**
+ * PHO_ALT_OBJ = Photo Alternative Object
+ *
+ * @summary
+ * The text alternative for each single piece's and set's photo, keyed by its
+ * file name without the extension. Each describes what the photo shows, the
+ * piece's colors, shapes, and charms, rather than repeating the card's name,
+ * which a screen reader already reads beside it, and stays under 100
+ * characters. Every row is a file name and its description, so no row needs
+ * a comment of its own.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const PHO_ALT_OBJ : Record< string, string > = { // What: Photo Alternative Object. Why: A screen reader should hear what each photo shows, not the card's name again. How: The cards look each photo's description up by its file name.
+
+
+	'car-freshie-1'     : 'Bagged car freshies hanging on wire racks and laid out on a black table at a craft fair',
+	'car-freshie-2'     : 'Car freshies shaped like a steer skull, a paw, a faith cross, a leopard tag, a moon, and a smiley',
+	'car-freshie-3'     : 'Six round car freshies printed with sayings, a daisy, and a rainbow, with dotted and leopard rims',
+	'car-freshie-4'     : 'Car freshies shaped like a bulldog, a mama bear, ducks, a cow, a flower hat, and a blessed cross',
+	'car-freshie-5'     : 'A white paw print car freshie with a black heart, bagged with its scent card',
+	'dog-necklace-1'    : 'Six beaded dog necklaces laid in rows of pearl, pink, rainbow, green, and lavender beads',
+	'dog-necklace-2'    : 'A lavender, red, and green beaded dog necklace with a silver ring and a stamped letter tag',
+	'dog-necklace-3'    : 'Beaded dog necklaces on a stand and in rows on a craft fair table, beside a plush puppy',
+	'dog-necklace-4'    : 'Orange, cream, and black beaded dog necklaces coiled on a craft fair table',
+	'dog-necklace-5'    : 'A plush puppy wearing a beaded necklace beside pink and pearl necklaces on a craft fair table',
+	'dog-necklace-6'    : 'A Halloween dog necklace of orange and black beads with pumpkins, bats, Boo, and the name Luna',
+	'dog-necklace-7'    : 'Six dog necklaces in pearl, lavender, green, and yellow beads, two with flower beads',
+	'dog-necklace-8'    : 'A dog necklace of blue and rainbow disco beads with a black heart clasp and a tag',
+	'dog-necklace-9'    : 'A dog necklace of large white and opal pearl beads',
+	'dog-necklace-10'   : 'A lavender, white, and purple striped beaded dog necklace with a gold ring and a tag',
+	'dog-necklace-11'   : 'Bright beaded dog necklaces with pumpkins, polka dots, and spiderwebs on a black floral cloth',
+	'dog-necklace-12'   : 'A dog necklace of dark beads with a rainbow sheen on a black table cloth',
+	'dog-necklace-13'   : "Beaded dog necklaces on Tony's outdoor craft fair table, with Tony seated behind it",
+	'dog-necklace-14'   : 'A red, green, and clear beaded dog necklace with polka dot beads and the name Luna',
+	'dog-necklace-15'   : 'A lavender, red, and green beaded dog necklace with a silver ring and a stamped tag',
+	'dog-necklace-16'   : 'A pink and purple striped beaded dog necklace with the name Luna',
+	'dog-necklace-17'   : 'A dog necklace of blue and rainbow disco beads with a black heart clasp, on a light cloth',
+	'dog-necklace-18'   : 'A rack of beaded dog necklaces in yellow, lavender, pink, green, and pearl beads',
+	'dog-necklace-19'   : 'A pink and lavender beaded dog necklace with a gold ring and a tag',
+	'keychain-1'        : 'Beaded keychains hanging from a metal stand on a blue craft fair table',
+	'name-badge-reel-1' : "Bagged name badge reels with colorful beads and saying charms, each with a Tony's Toppers card",
+	'pen-topper-1'      : 'Four bagged beaded pens topped with a skull, a pink bunny, and two saying charms',
+	'pen-topper-2'      : 'Three pink beaded pens with ribbon charms and tassels on a breast cancer awareness card',
+	'pen-topper-3'      : 'Tony seated behind his craft fair table of beaded pens, with his framed cartoon portrait',
+	'pen-topper-4'      : 'Four bagged beaded pens topped with a bulldog, a bee, a heart, and a pink jeep',
+	'pen-topper-5'      : 'Three bagged beaded pens with saying charms and a leopard cross',
+	'pen-topper-6'      : 'Three bagged beaded pens topped with a saying, a pink hand, and a puppy',
+	'pen-topper-7'      : 'Beaded pens with character charms in a clear tray on a blue craft fair table',
+	'pen-topper-8'      : 'Three bagged beaded pens topped with a coffee shop logo, a floral bead, and a blue jeep',
+	'pen-topper-9'      : 'A cup of Halloween beaded pens with ghost, cauldron, Hocus Pocus, and Stay Spooky charms',
+	'pen-topper-10'     : 'Bagged and loose beaded pens in a clear tray and a mug on a blue craft fair table',
+	'pen-topper-11'     : 'Three bagged beaded pens topped with a white bear, a bulldog, and a Faith Over Fear charm',
+	'pen-wine-set-1'    : 'Beaded pens and wine stoppers on clear stands, with bagged pens behind them',
+	'pen-wine-set-2'    : 'Beaded wine stoppers and pens with flowers, hearts, and characters on clear stands',
+	'pen-wine-set-3'    : 'Beaded wine stoppers and pens on a clear stand on a gray grid mat',
+	'phone-grip-1'      : 'A beaded phone grip strap with a black and white bulldog charm and a pink heart bead',
+	'phone-grip-2'      : "Five bagged pastel beaded phone grips, each with a flower bead and a Tony's Toppers card",
+	'phone-grip-3'      : 'Four bagged beaded phone grips with red, blue, orange, and pink flower beads',
+	'phone-grip-4'      : 'Beaded phone grips with puppy, football, and saying charms laid out on a teal tray',
+	'phone-grip-5'      : 'A lavender beaded phone grip with a flower bead and faceted beads, clipped to a white phone case',
+	'phone-grip-6'      : 'Bagged beaded phone grips with orange, gray, yellow, and red flower beads',
+	'phone-grip-7'      : 'Beaded phone grips hanging from a stand on a craft fair table',
+	'phone-grip-8'      : 'A beaded phone grip with a bulldog charm and pink and lavender beads, beside its heart mount',
+	'phone-grip-9'      : 'Beaded phone grips hanging from stands on a craft fair table in a hall',
+	'wine-stopper-1'    : 'Six beaded wine stoppers topped with a character, a rose, a yin-yang skull, a flower, and a cactus'
+
+
+};
+
+// #endregion PHO_ALT_OBJ
 
 
 
@@ -184,13 +262,13 @@ const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The prod
 		...phoNamFun( catRcdObj.sluStr ).map( ( filNamStr, filIndNum ) => ({ // What: Single Piece Cards Spread. Why: Each of the category's photos gets a card, numbered within its kind. How: This builds one record per photo.
 
 
-			altStr : `${ CAT_LAB_OBJ[ catRcdObj.sluStr ] } ${ filIndNum + 1 }`, // What: Alternative String. Why: The photo needs a text alternative until the content pass describes it. How: This repeats the card's name.
-			catArr : [ catRcdObj.sluStr ],                                      // What: Category Array. Why: A single piece shows one kind. How: This lists its category alone.
-			faiBoo : false,                                                     // What: Fair Boolean. Why: A single piece isn't a booth shot. How: This keeps it in the All list.
-			ideStr : filNamStr,                                                 // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
-			imaStr : phoUrlFun( filNamStr ),                                    // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
-			labStr : CAT_LAB_OBJ[ catRcdObj.sluStr ],                           // What: Label String. Why: The card names its kind. How: This is the category's singular label.
-			namStr : `${ CAT_LAB_OBJ[ catRcdObj.sluStr ] } ${ filIndNum + 1 }`  // What: Name String. Why: The card has a title. How: This joins the label and the photo's number.
+			altStr : PHO_ALT_OBJ[ filNamStr ],                                 // What: Alternative String. Why: A screen reader should hear what the photo shows. How: This looks up the photo's description by its file name.
+			catArr : [ catRcdObj.sluStr ],                                     // What: Category Array. Why: A single piece shows one kind. How: This lists its category alone.
+			faiBoo : false,                                                    // What: Fair Boolean. Why: A single piece isn't a booth shot. How: This keeps it in the All list.
+			ideStr : filNamStr,                                                // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
+			imaStr : phoUrlFun( filNamStr ),                                   // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
+			labStr : CAT_LAB_OBJ[ catRcdObj.sluStr ],                          // What: Label String. Why: The card names its kind. How: This is the category's singular label.
+			namStr : `${ CAT_LAB_OBJ[ catRcdObj.sluStr ] } ${ filIndNum + 1 }` // What: Name String. Why: The card has a title. How: This joins the label and the photo's number.
 
 
 		}) ),
@@ -198,13 +276,13 @@ const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The prod
 		...( catRcdObj.sluStr === 'wine-stopper' ? SET_RCD_ARR.map( ( setRcdObj, setIndNum ) => ({ // What: Set Cards Spread. Why: The pen and wine stopper sets sit right after the wine stoppers in the All list. How: This builds one record per set, only after the wine stopper category.
 
 
-			altStr : `Pen Topper & Wine Stopper Set ${ setIndNum + 1 }`, // What: Alternative String. Why: The photo needs a text alternative until the content pass describes it. How: This repeats the card's name.
-			catArr : setRcdObj.catArr,                                   // What: Category Array. Why: A set shows both kinds. How: This lists both categories.
-			faiBoo : false,                                              // What: Fair Boolean. Why: A set isn't a booth shot. How: This keeps it in the All list.
-			ideStr : setRcdObj.filStr,                                   // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
-			imaStr : phoUrlFun( setRcdObj.filStr ),                      // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
-			labStr : 'Pen Topper & Wine Stopper',                        // What: Label String. Why: The card names both kinds it shows. How: This joins the two labels.
-			namStr : `Pen Topper & Wine Stopper Set ${ setIndNum + 1 }`  // What: Name String. Why: The card has a title. How: This names the set and its number.
+			altStr : PHO_ALT_OBJ[ setRcdObj.filStr ],                   // What: Alternative String. Why: A screen reader should hear what the set shows. How: This looks up the photo's description by its file name.
+			catArr : setRcdObj.catArr,                                  // What: Category Array. Why: A set shows both kinds. How: This lists both categories.
+			faiBoo : false,                                             // What: Fair Boolean. Why: A set isn't a booth shot. How: This keeps it in the All list.
+			ideStr : setRcdObj.filStr,                                  // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
+			imaStr : phoUrlFun( setRcdObj.filStr ),                     // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
+			labStr : 'Pen Topper & Wine Stopper',                       // What: Label String. Why: The card names both kinds it shows. How: This joins the two labels.
+			namStr : `Pen Topper & Wine Stopper Set ${ setIndNum + 1 }` // What: Name String. Why: The card has a title. How: This names the set and its number.
 
 
 		}) ) : [] )
