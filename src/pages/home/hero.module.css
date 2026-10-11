@@ -160,18 +160,18 @@
 
 
 	align-items    : center;
-	animation      : global( blockEnterFadeIn ) 0.8s 0.1s both;                           /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	background     : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
-	border         : 1px solid var( --bor-mai-col );                                      /* Border Main Color = #1a1a2e @ 0.12 opacity */
+	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) 0.1s both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	background     : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-001-rec ) );            /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius  : 999px;
-	color          : var( --acc-mai-col );                                                /* Accent Main Color = #1e3a8a */
+	color          : var( --acc-mai-col );                                                           /* Accent Main Color = #1e3a8a */
 	display        : inline-flex;
-	font-size      : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
+	font-size      : var( --fon-siz-p01 );                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	gap            : var( --spa-hor-m01 );                                                /* Spacing Horizontal Base Minus 1 = 11px */
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em );                              /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
-	margin-bottom  : var( --spa-ver-p02 );                                                /* Spacing Vertical Base Plus 2 ~= 25.572px */
-	padding        : var( --spa-ver-m02 ) var( --spa-hor-bas );                           /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
+	gap            : var( --spa-hor-m01 );                                                           /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em );                                         /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
+	margin-bottom  : var( --spa-ver-p02 );                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	padding        : var( --spa-ver-m02 ) var( --spa-hor-bas );                                      /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
 	text-transform : uppercase;
 
 
@@ -208,14 +208,14 @@
 .herTitHea { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 45px and 79px, tightly leaded, rising in second. */
 
 
-	animation      : global( blockEnterFadeIn ) 0.9s 0.2s both;                /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	color          : var( --tex-mai-col );                                     /* Text Main Color = #1a1a2e */
-	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
+	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) var( --dur-ani-p01 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 1 ~= 209.1ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	color          : var( --tex-mai-col );                                                                           /* Text Main Color = #1a1a2e */
+	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) );                                       /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
 	font-weight    : 800;
-	letter-spacing : calc( var( --cdn-pow-012-rec ) * -1em );                  /* Core-Design-Number to the Power of 12 Reciprocal ~= -0.034em */
-	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
-	margin-bottom  : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	letter-spacing : calc( var( --cdn-pow-012-rec ) * -1em );                                                        /* Core-Design-Number to the Power of 12 Reciprocal ~= -0.034em */
+	line-height    : var( --ver-rhy-m01 );                                                                           /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -294,10 +294,10 @@
 .herActDiv { /* What: Hero Actions Div. Why: The two main ways into the page sit together. How: This sets the buttons in a row that wraps when it runs out of room, rising in last. */
 
 
-	animation : global( blockEnterFadeIn ) 1.1s 0.5s both; /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 4 ~= 486.1ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	gap       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }

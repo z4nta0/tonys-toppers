@@ -121,7 +121,7 @@
 
 
 	aspect-ratio  : 4 / 5;
-	border        : 4px solid var( --bor-str-col );                                                                 /* Border Strong Color = #1a1a2e */
+	border        : var( --bor-wid-xla ) solid var( --bor-str-col );                                                /* Border Width Extra Large ~= 4.732px, Border Strong Color = #1a1a2e */
 	border-radius : var( --rad-bor-xla );                                                                           /* Radius Border Extra Large ~= 19.304px */
 	box-shadow    : calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-bas ) * 1rem ) 0 var( --acc-sec-col ); /* Vertical Rhythm Base ~= 14.572px, Accent Secondary Color = #fbbf24 */
 	overflow      : hidden;

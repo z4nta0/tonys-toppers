@@ -135,18 +135,18 @@
 	.navLinUno { /* What: Closed Navigation Link Unordered List. Why: On a narrow screen the links become a menu below the bar, out of the way until the toggle opens it. How: This stacks them on the cream panel under the bar, slides it up out of view, and hides it once the slide ends, so its links leave the Tab order and screen readers. */
 
 
-		background     : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
-		border-bottom  : 1px solid var( --bor-mai-col );            /* Border Main Color = #1a1a2e @ 0.12 opacity */
+		background     : var( --bac-pag-col );                                                                                         /* Background Page Color = #fdf9ee */
+		border-bottom  : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                              /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 		flex-direction : column;
 		gap            : 0;
 		left           : 0;
-		padding        : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+		padding        : var( --spa-ver-bas ) var( --spa-hor-bas );                                                                    /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 		pointer-events : none;
 		position       : absolute;
 		right          : 0;
 		top            : 100%;
 		transform      : translateY( -210% );
-		transition     : transform 0.3s, visibility 0s 0.3s;        /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
+		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), visibility 0s var( --mot-sta-eas ) var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
 		visibility     : hidden;
 
 
