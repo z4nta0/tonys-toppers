@@ -384,6 +384,14 @@ passes on `close-out`.
       out as they leave, as well as rising in. The portrait's hover tilt and
       the product photos' hover zoom run about 277ms, within the rule's range,
       and the phone menu's rows keep their sideways nudge on hover.
+12. **Close-out**: done 2026-10-11 on `close-out`. The README was rewritten for
+    the finished site, and the rule pass ran seven full audits, each fixed and
+    rechecked, as the findings fell from 82 to 2 (82, 36, 20, 7, 16, 11, 2),
+    then a focused audit of the last new code, whose four findings were fixed.
+    The user's rulings along the way are recorded above and in the rules doc:
+    `Rcd` became `Rec`, a type sits 1 blank line above its declaration, every
+    classed element's label expands its class, and plain lookups and lists are
+    documented once.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
