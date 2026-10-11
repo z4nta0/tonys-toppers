@@ -61,8 +61,10 @@ photos are kept in `design/photos/` (the pieces and booth shots in
 quality 0.85, plus `src/pages/home/photo-sizes.ts`, which gives every img its
 width and height. A product photo fits within 562 by 750px, a booth shot is
 696px wide, the cartoon 710px, and the portrait keeps its 756px. Adding or
-replacing a photo means dropping the original in and rerunning the script. The logo and favicon
-come from the existing SVGs (`logo.svg`, `logo-notext.svg`).
+replacing a photo means dropping the original in and rerunning the script.
+The logo and favicon come from the existing SVGs (`logo.svg`,
+`logo-notext.svg`), and `npm run icons` renders the raster icons from
+`public/favicon.svg`.
 
 ## Horizontal layout
 Decided 2026-10-10 by the user after comparing the current numbers with the
@@ -139,8 +141,9 @@ Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
   hash. Unlike seal-and-shield's, its `modCliFun` leaves a Ctrl, Cmd,
   Shift, Alt, or middle click to the browser, so a section can still open in
   a new tab, as the old `HashLink` allowed.
-- **The bar's logo mark is copied into `ui/`** while `public/images/` keeps
-  its own copy as the favicon, until step 11's favicon set replaces it.
+- **The bar's logo mark lives in `ui/`**, and `public/favicon.svg` is its
+  own copy with a white disc behind the TT, so the favicon holds up on a
+  dark tab bar.
 
 ## Unused files
 Decided 2026-10-10. An unused image is listed for the user to confirm before
@@ -338,6 +341,18 @@ passes on `close-out`.
       publishes. `public/` gains `robots.txt` (every crawler allowed) and a
       sitemap listing the home page. The hero's h1 stays as written; the
       eyebrow above it names Bolivar.
+    - **Social previews and favicon set**: done 2026-10-10. `npm run
+      og-image` captures `design/og-image/card.html` (Tony's cartoon, the
+      name in the heavy serif, and "Handmade in Bolivar, MO" on the hero's
+      highlight bar, over the hero's cream wash and glows) as
+      `public/og-image.jpg`. It's a JPEG at quality 90 (about 63 KB), since
+      as a PNG the washes and portrait came to 441 KB, over WhatsApp's
+      limit, and 85 showed faint blocking at 3x zoom. `npm run icons`
+      renders the ICO, the 16 to 512px PNGs, and an inset apple touch icon
+      on white from `public/favicon.svg`, which the head lists first. The
+      head gains `theme-color` (the cream), the full Open Graph and Twitter
+      tags, and the structured data's logo and image. After the deploy,
+      check the card in a preview checker such as opengraph.xyz.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
@@ -391,5 +406,7 @@ logo ring, and wobbling sticker) when waiting for the page to settle.
   canonical, and lack of a robots tag; that the structured data's name,
   phone, town, Facebook page, and node links match what the page shows, with
   no street address or birth date; the 404 page's `noindex` and title; one
-  h1 per page; and `robots.txt` and the sitemap.
+  h1 per page; every Open Graph and Twitter tag, with absolute addresses
+  and copy matching the page; the card's type, size, and bytes; every icon
+  link; and `robots.txt` and the sitemap.
 - `npm test` runs every suite.
