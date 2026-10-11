@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
@@ -125,6 +124,32 @@ function ConSecCom () : React.JSX.Element {
 	const [ senProBoo, setSenProBoo ] = useState( false );                  // What: Sending Progress Boolean And Setter. Why: The visitor should see a message is on its way, and shouldn't send it twice. How: This holds whether a request is out.
 
 
+	// #region fieChaFun
+
+	/**
+	 * fieChaFun = Field Change Function
+	 *
+	 * @summary
+	 * Handles a change in any of the form's four fields. It reads which field
+	 * changed from its name attribute, so one handler serves them all, and
+	 * stores the new value in the form's data. It also hides the thank-you
+	 * note, since typing again means the visitor has moved on from the message
+	 * they last sent.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param chaEveObj - Change Event Object: The field's change event, whose
+	 *                    target carries the field's name and new value.
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * fieChaFun(chaEveObj) // => void
+	 * ```
+	 *
+	*/
+
 	const fieChaFun = ( chaEveObj : ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement > ) => { // What: Field Change Function. Why: Every field updates the form the same way. How: This stores the field's new value under its name and hides the thank-you note.
 
 
@@ -137,6 +162,8 @@ function ConSecCom () : React.JSX.Element {
 
 
 	};
+
+	// #endregion fieChaFun
 
 
 	// #region forSubFun
@@ -259,10 +286,10 @@ function ConSecCom () : React.JSX.Element {
 
 						<h2 className={ cssModObj.secTitHea }>Want a piece, or have a <em className={ cssModObj.titAccEmp }>question?</em></h2>{ /* What: Contact Heading Element. Why: The heading invites visitors to write. How: The question sits in an italic accent. */ }
 
-						<p className={ cssModObj.secSubPar }>
+						<p className={ cssModObj.secSubPar }>{ /* What: Contact Note Paragraph Element. Why: Visitors should know Tony welcomes messages. How: This shows two sentences beneath the heading. */ }
 							Tony loves hearing from people who appreciate his work. Reach out directly or drop a
 							note below, and he'll get back to you.
-						</p>{ /* What: Contact Note Paragraph Element. Why: Visitors should know Tony welcomes messages. How: This shows two sentences beneath the heading. */ }
+						</p>
 
 
 						<a
@@ -526,7 +553,6 @@ function ConSecCom () : React.JSX.Element {
 
 
 						) }
-
 
 						<button
 							className={ cssModObj.forSubBut }

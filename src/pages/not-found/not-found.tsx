@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
@@ -98,9 +97,7 @@ function NotFouCom () : React.JSX.Element {
 						That page doesn't exist, but Tony's pens and stoppers do.
 					</p>
 
-
-
-					<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the home and collection buttons side by side, wrapping when they run out of room. */ }
+					<div className={ cssModObj.nofActDiv }>{ /* What: Not Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the home and collection buttons side by side, wrapping when they run out of room. */ }
 
 
 						<Link
@@ -112,6 +109,8 @@ function NotFouCom () : React.JSX.Element {
 						>{ /* What: Back Home Link. Why: The visitor needs a clear way onward. How: This returns to the home page. */ }
 							Back home →
 						</Link>
+
+
 
 						<Link
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}

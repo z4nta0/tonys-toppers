@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import cssModObj from './products.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
@@ -111,10 +110,10 @@ function ProSecCom () : React.JSX.Element {
 					</div>
 
 
-					<p className={ cssModObj.secSubPar }>
+					<p className={ cssModObj.secSubPar }>{ /* What: Products Note Paragraph Element. Why: Visitors should know each piece is chosen by hand. How: This shows two sentences beside the heading. */ }
 						Tony hand-selects beads and silicone shapes for each piece, color-coordinating until
 						it's just right. No two are the same.
-					</p>{ /* What: Products Note Paragraph Element. Why: Visitors should know each piece is chosen by hand. How: This shows two sentences beside the heading. */ }
+					</p>
 
 
 				</div>
@@ -126,7 +125,7 @@ function ProSecCom () : React.JSX.Element {
 
 					aria-label='Filter products by category'
 					role='group'
-				>{ /* What: Filter Tabs Div Element. Why: Visitors can narrow the grid to one kind of piece. How: This groups the All button and one button per category under one label. */ }
+				>{ /* What: Filter Group Div Element. Why: Visitors can narrow the grid to one kind of piece. How: This groups the All button and one button per category under one label. */ }
 
 
 					<button
@@ -183,7 +182,6 @@ function ProSecCom () : React.JSX.Element {
 
 							<div className={ cssModObj.proTagDiv }>{ proRecObj.labStr }</div>{ /* What: Product Tag Div Element. Why: A tag over the photo names what kind of piece it shows. How: This shows the record's label. */ }
 
-
 							<div className={ cssModObj.proFraDiv }>{ /* What: Product Image Div Element. Why: Every photo sits in the same portrait frame. How: This frames the photo at a 3:4 shape. */ }
 
 
@@ -200,7 +198,6 @@ function ProSecCom () : React.JSX.Element {
 
 
 							</div>
-
 
 							<div className={ cssModObj.proInfDiv }>{ /* What: Product Info Div Element. Why: The card's name and kind sit beneath its photo. How: This stacks them. */ }
 

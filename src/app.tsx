@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import { HomPagCom } from './pages/home/home.tsx';          // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.

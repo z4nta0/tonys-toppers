@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import cssModObj from './about.module.css';   // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
@@ -101,16 +100,17 @@ function AboSecCom () : React.JSX.Element {
 								className={ cssModObj.porPhoIma }
 
 								height={ PHO_SIZ_OBJ[ 'tony-portrait' ].heiNum }
+								loading='lazy'
 								src={ porWebUrl }
 								width={ PHO_SIZ_OBJ[ 'tony-portrait' ].widNum }
 
 								alt='Portrait of Tony Mawhiney'
-							/>{ /* What: Biography Portrait Image Element. Why: Visitors see who Tony is. How: This loads his portrait. */ }
+							/>{ /* What: Biography Portrait Image Element. Why: Visitors see who Tony is. How: This loads his portrait only as it nears the screen, at its own width and height so the frame doesn't shift when it arrives. */ }
 
 
 						</div>
 
-						<div className={ cssModObj.logBadDiv }>{ /* What: Biography Cartoon Div Element. Why: A round logo badge marks the portrait as Tony's Toppers. How: This frames the logo over the portrait's corner. */ }
+						<div className={ cssModObj.logBadDiv }>{ /* What: Logo Badge Div Element. Why: A round logo badge marks the portrait as Tony's Toppers. How: This frames the logo over the portrait's corner. */ }
 
 
 							<img
@@ -136,33 +136,33 @@ function AboSecCom () : React.JSX.Element {
 
 						<h2 className={ cssModObj.secTitHea }>Tony Mawhiney: <em className={ cssModObj.titAccEmp }>artist, crafter, kind soul.</em></h2>{ /* What: About Heading Element. Why: The heading names Tony and sums him up. How: The description sits in an italic accent. */ }
 
-						<p className={ cssModObj.bioStoPar }>
+						<p className={ cssModObj.bioStoPar }>{ /* What: Introduction Paragraph Element. Why: The story opens with who Tony is. How: This gives his age, read on each render, his home town, and his character, with a drop cap on its first letter. */ }
 							Tony is a { tonAgeNum }-year-old young man with Down syndrome living in Bolivar, Missouri. He's quiet at first, but
 							once you know him you won't find a kinder, more polite person, and you wouldn't have
 							to look hard to know it.
-						</p>{ /* What: Introduction Paragraph Element. Why: The story opens with who Tony is. How: This gives his age, read on each render, his home town, and his character, with a drop cap on its first letter. */ }
+						</p>
 
-						<p className={ cssModObj.bioStoPar }>
+						<p className={ cssModObj.bioStoPar }>{ /* What: Background Paragraph Element. Why: Tony's art started long before the business. How: This tells of his schooling and his painting in the State Capitol. */ }
 							After graduating high school, Tony moved to Grandview, MO, where he had his own
 							apartment and attended Longview Jr. College through the Ace program. He's always been
 							artistic and crafty. In high school, a painting of his was chosen through a contest
 							that traveled around Missouri for a year before being hung in the State Capitol.
-						</p>{ /* What: Background Paragraph Element. Why: Tony's art started long before the business. How: This tells of his schooling and his painting in the State Capitol. */ }
+						</p>
 
-						<p className={ cssModObj.bioStoPar }>
+						<p className={ cssModObj.bioStoPar }>{ /* What: Beginning Paragraph Element. Why: Visitors like to know how the business began. How: This tells of the first beaded pen. */ }
 							A while back, a friend showed him some beaded pens she'd made and he mentioned he'd
 							love to try it. She sent him a starter package (assorted beads, silicone shapes, and
 							a few pens), and he was hooked. He carefully chose and color-coordinated every bead
 							on that very first pen, and that was the beginning of his business.
-						</p>{ /* What: Beginning Paragraph Element. Why: Visitors like to know how the business began. How: This tells of the first beaded pen. */ }
+						</p>
 
-						<p className={ cssModObj.bioStoPar }>
+						<p className={ cssModObj.bioStoPar }>{ /* What: Growth Paragraph Element. Why: The story ends with where the business is now. How: This tells of every kind of piece he makes beyond the pens, the name, and his pride in it. */ }
 							Since that day Tony has grown his inventory of beads, expanded beyond the pens into
 							wine stoppers, keychains, dog necklaces, car freshies, name badge reels, phone grips,
 							and straw charms, and named his business <strong>Tony's Toppers</strong>. He's very
 							proud of it, and he loves sharing pictures of finished pieces with friends and
 							family. They're all made with love.
-						</p>{ /* What: Growth Paragraph Element. Why: The story ends with where the business is now. How: This tells of every kind of piece he makes beyond the pens, the name, and his pride in it. */ }
+						</p>
 
 
 						<div className={ cssModObj.bioStaDiv }>{ /* What: Biography Stats Div Element. Why: Three short facts round off the story. How: This sets them in a row beneath the paragraphs. */ }

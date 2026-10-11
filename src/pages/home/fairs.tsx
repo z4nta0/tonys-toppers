@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import cssModObj from './fairs.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
@@ -95,10 +94,10 @@ function FaiSecCom () : React.JSX.Element {
 					</div>
 
 
-					<p className={ cssModObj.secSubPar }>
+					<p className={ cssModObj.secSubPar }>{ /* What: Fairs Note Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading. */ }
 						Tony sets up at craft fairs and events around Bolivar, Missouri. Here's what you'll
 						find when you stop by.
-					</p>{ /* What: Fairs Note Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading. */ }
+					</p>
 
 
 				</div>

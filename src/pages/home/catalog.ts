@@ -143,14 +143,6 @@ const PHO_ALT_OBJ : Record< string, string > = { // What: Photo Alternative Obje
 	'car-freshie-4'     : 'Car freshies shaped like a bulldog, a mama bear, ducks, a cow, a flower hat, and a blessed cross',
 	'car-freshie-5'     : 'A white paw print car freshie with a black heart, bagged with its scent card',
 	'dog-necklace-1'    : 'Six beaded dog necklaces laid in rows of pearl, pink, rainbow, green, and lavender beads',
-	'dog-necklace-2'    : 'A lavender, red, and green beaded dog necklace with a silver ring and a stamped letter tag',
-	'dog-necklace-3'    : 'Beaded dog necklaces on a stand and in rows on a craft fair table, beside a plush puppy',
-	'dog-necklace-4'    : 'Orange, cream, and black beaded dog necklaces coiled on a craft fair table',
-	'dog-necklace-5'    : 'A plush puppy wearing a beaded necklace beside pink and pearl necklaces on a craft fair table',
-	'dog-necklace-6'    : 'A Halloween dog necklace of orange and black beads with pumpkins, bats, Boo, and the name Luna',
-	'dog-necklace-7'    : 'Six dog necklaces in pearl, lavender, green, and yellow beads, two with flower beads',
-	'dog-necklace-8'    : 'A dog necklace of blue and rainbow disco beads with a black heart clasp and a tag',
-	'dog-necklace-9'    : 'A dog necklace of large white and opal pearl beads',
 	'dog-necklace-10'   : 'A lavender, white, and purple striped beaded dog necklace with a gold ring and a tag',
 	'dog-necklace-11'   : 'Bright beaded dog necklaces with pumpkins, polka dots, and spiderwebs on a black floral cloth',
 	'dog-necklace-12'   : 'A dog necklace of dark beads with a rainbow sheen on a black table cloth',
@@ -161,9 +153,19 @@ const PHO_ALT_OBJ : Record< string, string > = { // What: Photo Alternative Obje
 	'dog-necklace-17'   : 'A dog necklace of blue and rainbow disco beads with a black heart clasp, on a light cloth',
 	'dog-necklace-18'   : 'A rack of beaded dog necklaces in yellow, lavender, pink, green, and pearl beads',
 	'dog-necklace-19'   : 'A pink and lavender beaded dog necklace with a gold ring and a tag',
+	'dog-necklace-2'    : 'A lavender, red, and green beaded dog necklace with a silver ring and a stamped letter tag',
+	'dog-necklace-3'    : 'Beaded dog necklaces on a stand and in rows on a craft fair table, beside a plush puppy',
+	'dog-necklace-4'    : 'Orange, cream, and black beaded dog necklaces coiled on a craft fair table',
+	'dog-necklace-5'    : 'A plush puppy wearing a beaded necklace beside pink and pearl necklaces on a craft fair table',
+	'dog-necklace-6'    : 'A Halloween dog necklace of orange and black beads with pumpkins, bats, Boo, and the name Luna',
+	'dog-necklace-7'    : 'Six dog necklaces in pearl, lavender, green, and yellow beads, two with flower beads',
+	'dog-necklace-8'    : 'A dog necklace of blue and rainbow disco beads with a black heart clasp and a tag',
+	'dog-necklace-9'    : 'A dog necklace of large white and opal pearl beads',
 	'keychain-1'        : 'Beaded keychains hanging from a metal stand on a blue craft fair table',
 	'name-badge-reel-1' : "Bagged name badge reels with colorful beads and saying charms, each with a Tony's Toppers card",
 	'pen-topper-1'      : 'Four bagged beaded pens topped with a skull, a pink bunny, and two saying charms',
+	'pen-topper-10'     : 'Bagged and loose beaded pens in a clear tray and a mug on a blue craft fair table',
+	'pen-topper-11'     : 'Three bagged beaded pens topped with a white bear, a bulldog, and a Faith Over Fear charm',
 	'pen-topper-2'      : 'Three pink beaded pens with ribbon charms and tassels on a breast cancer awareness card',
 	'pen-topper-3'      : 'Tony seated behind his craft fair table of beaded pens, with his framed cartoon portrait',
 	'pen-topper-4'      : 'Four bagged beaded pens topped with a bulldog, a bee, a heart, and a pink jeep',
@@ -172,8 +174,6 @@ const PHO_ALT_OBJ : Record< string, string > = { // What: Photo Alternative Obje
 	'pen-topper-7'      : 'Beaded pens with character charms in a clear tray on a blue craft fair table',
 	'pen-topper-8'      : 'Three bagged beaded pens topped with a coffee shop logo, a floral bead, and a blue jeep',
 	'pen-topper-9'      : 'A cup of Halloween beaded pens with ghost, cauldron, Hocus Pocus, and Stay Spooky charms',
-	'pen-topper-10'     : 'Bagged and loose beaded pens in a clear tray and a mug on a blue craft fair table',
-	'pen-topper-11'     : 'Three bagged beaded pens topped with a white bear, a bulldog, and a Faith Over Fear charm',
 	'pen-wine-set-1'    : 'Beaded pens and wine stoppers on clear stands, with bagged pens behind them',
 	'pen-wine-set-2'    : 'Beaded wine stoppers and pens with flowers, hearts, and characters on clear stands',
 	'pen-wine-set-3'    : 'Beaded wine stoppers and pens on a clear stand on a gray grid mat',
@@ -216,10 +216,6 @@ const SET_REC_ARR : SetRecTyp[] = [ // What: Set Record Array. Why: A few photos
 
 // #region Helpers
 
-const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/${ filNamStr }.webp` ]; // What: Photo URL Function. Why: Every card looks its photo up the same way. How: This returns the photo's built URL by its file name.
-
-
-
 // #region phoNamFun
 
 /**
@@ -235,7 +231,8 @@ const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
- * @param sluStr - Slug String: The category's slug, e.g. 'pen-topper'.
+ * @param catSluStr - Category Slug String: The category's slug, e.g.
+ *                    'pen-topper'.
  *
  * @returns The category's photo file names, without their extension.
  *
@@ -246,11 +243,10 @@ const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/
  *
 */
 
-function phoNamFun ( sluStr : CatSluTyp ) : string[] {
+function phoNamFun ( catSluStr : CatSluTyp ) : string[] {
 
 
-	const filNamReg = new RegExp( `^${ sluStr }-(\\d+)$` ); // What: File Name Regular Expression. Why: A single piece's photo is named its category's slug, a dash, and a number. How: This matches that name and captures the number.
-
+	const filNamReg = new RegExp( `^${ catSluStr }-(\\d+)$` );                                                                    // What: File Name Regular Expression. Why: A single piece's photo is named its category's slug, a dash, and a number. How: This matches that name and captures the number.
 	const filNamArr = Object.keys( PRO_URL_OBJ ).map( ( souPatStr ) => souPatStr.slice( souPatStr.lastIndexOf( '/' ) + 1, -5 ) ); // What: File Name Array. Why: Each imported photo is keyed by its source path. How: This keeps just the file name, without its folder or its .webp extension.
 
 
@@ -261,6 +257,10 @@ function phoNamFun ( sluStr : CatSluTyp ) : string[] {
 }
 
 // #endregion phoNamFun
+
+
+
+const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/${ filNamStr }.webp` ]; // What: Photo URL Function. Why: Every card looks its photo up the same way. How: This returns the photo's built URL by its file name.
 
 
 
