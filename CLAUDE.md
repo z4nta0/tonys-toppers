@@ -35,6 +35,9 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
   description lives in `catalog.ts`'s `PHO_ALT_OBJ`, keyed by file name, or
   in its booth row, under 100 characters and never repeating the card's
   name. A new photo needs its own row.
+- **About paragraph**: done 2026-10-10 and confirmed by the user. Rather
+  than a new paragraph, the story's growth paragraph names all eight kinds
+  of piece where it said he expanded into wine stoppers.
 - **Photos showing more than one kind of piece** (decided 2026-10-10): ten
   photos had been listed under every category they show, as byte-for-byte
   copies, and the user moved the copies out. The four wide booth shots
@@ -294,8 +297,14 @@ passes on `close-out`.
      user), though iOS Safari zooms the page when a field under 16px is
      tapped, the same as seal-and-shield.
 10. **Horizontal layout comparison** (see above), then a WAVE and
-    accessibility review. The horizontal layout was done 2026-10-10 (see
-    "## Horizontal layout"); the review is still ahead.
+    accessibility review. Done 2026-10-10. The horizontal layout is
+    recorded under "## Horizontal layout". The user's review found three
+    fixes, all made: the About section moved to the deeper cream to set it
+    apart from the gallery, the hero's collapsed picture stage was rebuilt
+    (see "## Horizontal layout"), and the portrait grows below 900px. WAVE's
+    50 redundant and 4 long alt text alerts were fixed with the confirmed
+    descriptions (see "## Content"), after which WAVE reports nothing and
+    the user found no contrast problems over the hero or the photos.
 11. **New features**: the 404 page, security headers, image optimization,
     SEO, social previews and the favicon set, and interaction feedback. Once
     the photos carry their width and height, recheck WebKit's phone menu
