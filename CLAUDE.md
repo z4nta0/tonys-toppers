@@ -356,7 +356,7 @@ passes on `close-out`.
       head gains `theme-color` (the cream), the full Open Graph and Twitter
       tags, and the structured data's logo and image. After the 1.7.0
       deploy the user confirmed the favicon and the preview card, and
-      the sitemap is live for Google Search Console and Bing.
+      submitted the sitemap to Google Search Console and Bing.
     - **Interaction feedback**: done 2026-10-10. Every link and button
       grows seal-and-shield's focus ring in from a zero-width outline (the
       global rule in `styles.css`), and every control with its own
