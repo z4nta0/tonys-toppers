@@ -67,6 +67,7 @@ const CAT_LAB_OBJ : Record< CatSluTyp, string > = { // What: Category Label Obje
 
 
 type CatRecTyp = { labStr : string, sluStr : CatSluTyp }; // What: Category Record Type. Why: Each filter button has a slug and a label. How: This pairs them.
+
 const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The products grid offers a filter button per category, in this order, and lists single pieces in the same order. How: Each row pairs a category's slug with its plural label.
 
 
@@ -85,6 +86,7 @@ const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The pro
 
 
 type FaiRecTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // What: Fair Record Type. Why: A booth shot lists by hand the categories it shows and describes the table, which its card's name can't. How: This names the photo's description, its categories, and its file name without the extension.
+
 const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo, the categories it shows, and its description.
 
 
@@ -184,6 +186,7 @@ const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.webp', 
 
 
 type SetRecTyp = { catArr : CatSluTyp[], filStr : string }; // What: Set Record Type. Why: A set lists by hand the categories it shows. How: This names its categories and its file name without the extension.
+
 const SET_REC_ARR : SetRecTyp[] = [ // What: Set Record Array. Why: A few photos show pen toppers and wine stoppers displayed together, so each is one card under both filters rather than a copy under each. How: Each row names the photo and the categories it shows.
 
 
@@ -263,6 +266,7 @@ type ProRecTyp = { // What: Product Record Type. Why: The products grid and the 
 
 
 };
+
 const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The products grid and the gallery read every photo from one list. How: This lists every single piece in category order, with the sets right after the wine stoppers, then the booth shots, which only the filters and the gallery show.
 
 

@@ -44,6 +44,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 // #region Constants
 
 type BoxRecTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
+
 const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than twice that. How: This maps each kind to its box.
 
 
@@ -58,6 +59,7 @@ const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. 
 
 
 type CroBoxTyp = { heiNum : number, lefNum : number, topNum : number, widNum : number }; // What: Crop Box Type. Why: A crop keeps one rectangle of the original. How: This names its height, left edge, top edge, and width in the original's pixels.
+
 const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Why: A few originals carry more than the photo itself. How: This maps a file name to the rectangle to keep.
 
 

@@ -119,6 +119,7 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	const telHreArr = await curPagObj.locator( 'a[href^="tel:"]' ).evaluateAll( ( ancEleArr ) => ancEleArr.map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ) ); // What: Telephone Href Array. Why: The structured data's phone has to be the number the page's call links dial. How: This collects every call link's address.
 
 	type LdjNodTyp = { '@id'? : string, '@type'? : string, address? : object, birthDate? : string, founder? : { '@id' : string }, gender? : string, name? : string, publisher? : { '@id' : string }, sameAs? : string[], telephone? : string, url? : string, worksFor? : { '@id' : string } }; // What: Linked-Data-JSON Node Type. Why: Each node's fields are read by name, and a missing one should read as undefined rather than fail to type check. How: This lists every field the checks read, all optional.
+
 	const ldjGraArr : LdjNodTyp[] = JSON.parse( ldjTexStr )[ '@graph' ] ?? []; // What: Linked-Data-JSON Graph Array. Why: The business, Tony, and the site are separate nodes, each checked on its own. How: This parses the text and reads its graph, or an empty list if it's missing.
 
 	const orgNodObj = ldjGraArr.find( ( graNodObj ) => graNodObj[ '@type' ] === 'Organization' ) ?? {}; // What: Organization Node Object. Why: The business's details are checked together. How: This finds its node, or an empty object if it's missing.

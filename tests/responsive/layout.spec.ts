@@ -48,6 +48,7 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
 
 
 };
+
 const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page and the open menu are measured the same way. How: Each row names a case, its path, and whether it opens the menu.
 
 
