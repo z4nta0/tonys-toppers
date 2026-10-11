@@ -17,16 +17,16 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  *
  * @summary
  * Rebuilds the site's raster icons in public/ from favicon.svg, the Tony's
- * Toppers mark: the yellow and blue ring around the TT, on a transparent
- * background. Browsers that read SVG favicons use favicon.svg itself; this
- * script draws the fallbacks: PNG icons at 16, 32, 192, and 512px, a
- * favicon.ico holding the 16, 32, and 48px sizes for older browsers and the
- * request browsers make for /favicon.ico on their own, and a 180px
- * apple-touch-icon.png on a solid white square, since iOS fills transparency
- * with black and rounds the corners itself. The touch icon draws the mark a
- * little smaller than the square, so the rounded corners never crowd the
- * ring. Since the mark is a vector, each size is drawn straight from it.
- * Run it with npm run icons whenever the mark changes.
+ * Toppers mark: the yellow and blue ring around the TT, on a white disc, so
+ * only the corners are transparent. Browsers that read SVG favicons use
+ * favicon.svg itself; this script draws the fallbacks: PNG icons at 16, 32,
+ * 192, and 512px, a favicon.ico holding the 16, 32, and 48px sizes for older
+ * browsers and the request browsers make for /favicon.ico on their own, and a
+ * 180px apple-touch-icon.png on a solid white square, since iOS fills
+ * transparency with black and rounds the corners itself. The touch icon draws
+ * the mark a little smaller than the square, so the rounded corners never
+ * crowd the ring. Since the mark is a vector, each size is drawn straight from
+ * it. Run it with npm run icons whenever the mark changes.
  *
  * Sections:
  *  - Constants
@@ -113,22 +113,22 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 	const pngB64Str = await draPagObj.evaluate( async ( [ souB64Str, tarSizNum, solBacBoo, touScaNum ] ) => { // What: PNG Base64 String. Why: The canvas lives in the page, so the finished image comes back as text. How: This runs the drawing in the page and returns the PNG as base64.
 
 
-		const souImaObj = new Image(); // What: Source Image Object. Why: The mark has to be decoded before it's drawn. How: This loads it from its base64 data.
+		const souImaEle = new Image(); // What: Source Image Element. Why: The mark has to be decoded before it's drawn. How: This loads it from its base64 data.
 
 
-		souImaObj.src = `data:image/svg+xml;base64,${ souB64Str }`; // What: Source Address Assignment. Why: The image loads from the data handed in. How: This sets it as an SVG data URL.
+		souImaEle.src = `data:image/svg+xml;base64,${ souB64Str }`; // What: Source Address Assignment. Why: The image loads from the data handed in. How: This sets it as an SVG data URL.
 
-		await souImaObj.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
-
-
-		const finCanObj = document.createElement( 'canvas' ); // What: Final Canvas Object. Why: The icon draws at its exact target size. How: This creates the canvas.
+		await souImaEle.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
 
 
-		finCanObj.height = tarSizNum; // What: Final Height Assignment. Why: The icon is square at its target size. How: This sets the height.
-		finCanObj.width  = tarSizNum; // What: Final Width Assignment. Why: The icon is square at its target size. How: This sets the width.
+		const finCanEle = document.createElement( 'canvas' ); // What: Final Canvas Element. Why: The icon draws at its exact target size. How: This creates the canvas.
 
 
-		const finConObj = finCanObj.getContext( '2d' )!;                 // What: Final Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
+		finCanEle.height = tarSizNum; // What: Final Height Assignment. Why: The icon is square at its target size. How: This sets the height.
+		finCanEle.width  = tarSizNum; // What: Final Width Assignment. Why: The icon is square at its target size. How: This sets the width.
+
+
+		const finConObj = finCanEle.getContext( '2d' )!;                 // What: Final Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
 		const marSizNum = solBacBoo ? tarSizNum * touScaNum : tarSizNum; // What: Mark Size Number. Why: The touch icon leaves room around the ring for iOS's rounded corners. How: This shrinks the mark for the opaque icon and fills the square otherwise.
 		const marOffNum = ( tarSizNum - marSizNum ) / 2;                 // What: Mark Offset Number. Why: The shrunk mark sits in the middle of its square. How: This splits the spare room evenly on each side.
 
@@ -146,11 +146,11 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 
 
-		finConObj.drawImage( souImaObj, marOffNum, marOffNum, marSizNum, marSizNum ); // What: Mark Draw Call. Why: This draws the icon itself. How: This rasterizes the mark at its size and offset.
+		finConObj.drawImage( souImaEle, marOffNum, marOffNum, marSizNum, marSizNum ); // What: Mark Draw Call. Why: This draws the icon itself. How: This rasterizes the mark at its size and offset.
 
 
 
-		return finCanObj.toDataURL( 'image/png' ).split( ',' )[ 1 ]; // What: PNG Data Return. Why: The bytes have to leave the page as text. How: This encodes the canvas as a PNG and returns its base64 part.
+		return finCanEle.toDataURL( 'image/png' ).split( ',' )[ 1 ]; // What: PNG Data Return. Why: The bytes have to leave the page as text. How: This encodes the canvas as a PNG and returns its base64 part.
 
 
 	}, [ SOU_B64_STR, icoSizNum, icoOpaBoo, TOU_SCA_NUM ] as const ); // What: Drawing Arguments. Why: The page can't read this script's variables. How: This hands the mark's data, the target size, the opaque flag, and the touch scale into the page. // What: Type Assertion Note. Why: Without it the array widens to one mixed type, so the page function's destructured parameters lose their own types. How: as const keeps it a readonly tuple, so each parameter is typed by its position.

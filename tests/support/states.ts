@@ -183,13 +183,13 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
  * @summary
  * Waits until the page has stayed still for half a second: no animation or
  * transition running except ones that repeat forever, such as the hero's
- * floating blobs, spinning logo ring, and wobbling sticker, which never finish
- * and so are skipped (the reduced motion check is what catches one that
+ * floating blobs, turning portrait ring, and wobbling sticker, which never
+ * finish and so are skipped (the reduced motion check is what catches one that
  * shouldn't be playing). A single still moment isn't enough, since a fade can
- * start just after the last one ends, so the page has to read as still on
- * five checks in a row, 100ms apart. It fails after 5 seconds rather than
- * hanging, which leaves room for the product cards' staggered entrance, each
- * card starting 30ms after the one before.
+ * start just after the last one ends, so the page has to read as still on five
+ * checks in a row, 100ms apart. It fails after 5 seconds rather than hanging,
+ * which leaves room for the product cards' staggered entrance, each card
+ * starting 30ms after the one before.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

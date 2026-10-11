@@ -379,8 +379,8 @@ tests/output/report` opens the HTML report. The states the suites visit (the
 home page and the 404 page at 390px and 1,440px, plus the phone menu open at
 390px) are listed in `tests/support/states.ts`. Its `opeStaFun` scrolls
 through the page before checking it, since the product photos load lazily,
-and skips animations that repeat forever (the hero's floating blobs, spinning
-logo ring, and wobbling sticker) when waiting for the page to settle.
+and skips animations that repeat forever (the hero's floating blobs, turning
+portrait ring, and wobbling sticker) when waiting for the page to settle.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and

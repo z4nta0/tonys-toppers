@@ -217,7 +217,6 @@ test( 'the social preview image is a 1,200x630 JPEG under 300 KB', async ( { req
 	const imaResObj = await reqConObj.get( '/og-image.jpg' ); // What: Image Response Object. Why: The image has to exist where the tags point. How: This fetches it from the site.
 	const jpgBufObj = await imaResObj.body();                 // What: JPEG Buffer Object. Why: The image's size is written in its frame header. How: This reads the response bytes.
 
-
 	let segOffNum = 2; // What: Segment Offset Number. Why: A JPEG's size sits in its frame segment, after a varying run of other segments. How: This starts just past the file's opening marker.
 
 

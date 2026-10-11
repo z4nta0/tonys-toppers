@@ -198,7 +198,7 @@ function layProFun () : string[] {
 
 
 		const ownTexBoo = [ ...layCurEle.childNodes ].some( ( chiCurNod ) => chiCurNod.nodeType === Node.TEXT_NODE && !!chiCurNod.textContent?.trim() ); // What: Own Text Boolean. Why: Only an element holding text itself can spill it. How: This checks its direct children for text that isn't just whitespace.
-		const spiBoxBoo = texSpiFun( layCurEle );                                                                                                        // What: Spill Box Boolean. Why: Text running past its box has spilled out of it. How: This checks whether any line of the element's own text runs past an inner edge.
+		const spiBoxBoo = texSpiFun( layCurEle ); // What: Spill Box Boolean. Why: Text running past its box has spilled out of it. How: This checks whether any line of the element's own text runs past an inner edge.
 		const visOveBoo = styCurObj.overflowX === 'visible';                                                                                             // What: Visible Overflow Boolean. Why: Content a box clips or scrolls on purpose isn't a spill. How: This checks the box shows its overflow.
 		const bloBoxBoo = styCurObj.display !== 'inline';                                                                                                // What: Block Box Boolean. Why: An inline element has no box width to compare with. How: This checks it isn't inline.
 

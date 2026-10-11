@@ -25,9 +25,9 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  * indentation, and any JSON-LD whitespace stay out of what visitors download.
  * It also ships every imported asset as its own file, never an inline data
  * URL, which the security headers' image policy would block. Every other
- * setting stays at Vite's default, including copying the files in public/
- * (the favicon, Netlify's _redirects and _headers for now, and the icon set,
- * social card, and crawler files once they arrive) into the build untouched.
+ * setting stays at Vite's default, including copying the files in public/ (the
+ * icon set, the social card, robots.txt and sitemap.xml, and Netlify's
+ * _redirects and _headers) into the build untouched.
  *
  * Sections:
  *  - Helpers
