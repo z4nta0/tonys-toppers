@@ -24,7 +24,7 @@
 	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
 	font-size  : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	max-width  : 100vw;
-	padding    : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding    : var( --spa-ver-p04 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Gutter Side Padding, about 19.304px - 44.876px */
 	text-align : center;
 
 

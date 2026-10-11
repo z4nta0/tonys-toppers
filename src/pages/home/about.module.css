@@ -26,7 +26,7 @@
 .homAboSec { /* What: Home About Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
 
 
-	padding  : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding  : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
 	position : relative;
 
 
@@ -37,7 +37,7 @@
 	.homAboSec { /* What: Compact Home About Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
-		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 	}
@@ -48,11 +48,11 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at the shared content width, about 1,449px, copied from the shared container. */
 
 
 	margin    : 0 auto;
-	max-width : 1200px;
+	max-width : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.365px */
 
 
 }
@@ -65,7 +65,7 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) var( --spa-hor-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 6 ~= 78.751px */
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 0.85fr 1.15fr;
 
 

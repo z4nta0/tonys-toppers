@@ -28,7 +28,7 @@
 
 
 	background : var( --bac-sun-col );                      /* Background Sunken Color ~= #f5edd6 */
-	padding    : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding    : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
 	position   : relative;
 
 
@@ -39,7 +39,7 @@
 	.homProSec { /* What: Compact Home Products Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
-		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 	}
@@ -62,11 +62,11 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at the shared content width, about 1,449px, copied from the shared container. */
 
 
 	margin    : 0 auto;
-	max-width : 1200px;
+	max-width : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.365px */
 
 
 }
@@ -80,9 +80,9 @@
 	align-items     : end;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	gap             : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	justify-content : space-between;
-	margin-bottom   : var( --spa-ver-p05 );                      /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	margin-bottom   : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
 	position        : relative;
 	z-index         : 2;
 
@@ -250,7 +250,7 @@
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	grid-template-columns : repeat( auto-fill, minmax( 180px, 1fr ) );
 	position              : relative;
 	z-index               : 2;
@@ -260,10 +260,10 @@
 @media ( max-width : 900px ) { /* What: Narrow Products Grid Div. Why: Two cards should still fit side by side on a phone. How: This applies 900px wide and below. */
 
 
-	.proGriDiv { /* What: Tight Products Grid Div. Why: Smaller cards with smaller gaps fit two across a phone. How: This lowers the cards' minimum width to 140px and tightens the gap. */
+	.proGriDiv { /* What: Tight Products Grid Div. Why: Smaller cards with smaller gaps fit two across a phone. How: This lowers the cards' minimum width to 140px and tightens the row gap, while the column gap follows its clamp. */
 
 
-		gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+		row-gap : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 		grid-template-columns : repeat( auto-fill, minmax( 140px, 1fr ) );
 
 
@@ -278,7 +278,7 @@
 .proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global blockEnterFadeIn keyframes, and eases its hover look. */
 
 
-	animation     : global( blockEnterFadeIn ) 0.4s both;                      /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation     : global( blockEnterFadeIn ) 0.4s both;            /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
 	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */

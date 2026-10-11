@@ -34,7 +34,7 @@
 	justify-content         : space-between;
 	left                    : 0;
 	max-width               : 100vw;
-	padding                 : var( --spa-ver-p01 ) var( --spa-hor-p04 );                                                                 /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding                 : var( --spa-ver-p01 ) var( --gut-sid-pad );                                                                 /* Spacing Vertical Base Plus 1 ~= 19.304px, Gutter Side Padding, about 19.304px - 44.876px */
 	position                : fixed;
 	right                   : 0;
 	top                     : 0;
@@ -47,7 +47,7 @@
 
 
 	border-bottom-color : var( --bor-mai-col );                      /* Border Main Color = #1a1a2e @ 0.12 opacity */
-	padding             : var( --spa-ver-m01 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding             : var( --spa-ver-m01 ) var( --gut-sid-pad ); /* Spacing Vertical Base Minus 1 = 11px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 }
@@ -57,14 +57,14 @@
 	.navBarNav { /* What: Compact Navigation Bar Nav. Why: A narrow screen needs its room for the brand and toggle. How: This trims the bar's padding. */
 
 
-		padding : var( --spa-ver-bas ) var( --spa-hor-p01 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+		padding : var( --spa-ver-bas ) var( --gut-sid-pad ); /* Spacing Vertical Base ~= 14.572px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 	}
 	.navBarNav[data-page-scroll-active] { /* What: Compact Scrolled Navigation Bar Nav. Why: The scrolled bar tightens on a narrow screen too. How: This trims its padding a little further. */
 
 
-		padding : var( --spa-ver-m01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+		padding : var( --spa-ver-m01 ) var( --gut-sid-pad ); /* Spacing Vertical Base Minus 1 = 11px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 	}

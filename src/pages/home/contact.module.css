@@ -29,7 +29,7 @@
 	background : var( --acc-mai-col );                      /* Accent Main Color = #1e3a8a */
 	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
 	overflow   : hidden;
-	padding    : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding    : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
 	position   : relative;
 
 
@@ -40,7 +40,7 @@
 	.homConSec { /* What: Compact Home Contact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
-		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 	}
@@ -67,11 +67,11 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at the shared content width, about 1,449px, copied from the shared container. */
 
 
 	margin    : 0 auto;
-	max-width : 1200px;
+	max-width : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.365px */
 
 
 }
@@ -84,7 +84,7 @@
 
 	align-items           : stretch;
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) var( --spa-hor-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 6 ~= 78.751px */
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 1fr 1fr;
 	position              : relative;
 	z-index               : 2;
@@ -189,7 +189,7 @@
 	display         : flex;
 	gap             : var( --spa-hor-bas );                                                                           /* Spacing Horizontal Base ~= 14.572px */
 	margin-bottom   : var( --spa-ver-bas );                                                                           /* Spacing Vertical Base ~= 14.572px */
-	padding         : var( --spa-ver-p02 ) var( --spa-hor-p02 );                                                      /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	padding         : var( --spa-ver-p02 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-014 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-decoration : none;
 
 
@@ -254,7 +254,7 @@
 	border-radius : var( --rad-bor-xla );                                                                           /* Radius Border Extra Large ~= 19.304px */
 	box-shadow    : calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-m01 ) * 1rem ) 0 var( --acc-sec-col ); /* Vertical Rhythm Base Minus 1 = 11px, Accent Secondary Color = #fbbf24 */
 	color         : var( --tex-mai-col );                                                                           /* Text Main Color = #1a1a2e */
-	padding       : var( --spa-ver-p04 ) var( --spa-hor-p04 );                                                      /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding       : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
@@ -264,7 +264,7 @@
 	.conForFor { /* What: Compact Contact Form Form. Why: The fields need the narrow screen's width. How: This trims the card's padding. */
 
 
-		padding : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+		padding : var( --spa-ver-p02 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 	}

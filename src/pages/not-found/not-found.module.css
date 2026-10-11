@@ -24,7 +24,7 @@
 .nofPagSec { /* What: Not-Found Page Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with about 138px on top and positions it, copied from the shared section with the page's own top padding merged in. */
 
 
-	padding  : var( --spa-ver-p08 ) var( --spa-hor-p04 ) var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
+	padding  : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
 	position : relative;
 
 
@@ -35,7 +35,7 @@
 	.nofPagSec { /* What: Compact Not-Found Page Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps about 138px on top. */
 
 
-		padding : var( --spa-ver-p08 ) var( --spa-hor-p01 ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 6 ~= 78.751px */
+		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
 
 
 	}
@@ -46,11 +46,11 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column capped at 1200px with room above and below, and centers its text, copied from the shared container with the page's own spacing merged in. */
+.pagConDiv { /* What: Page Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column capped at the shared content width, about 1,449px with room above and below, and centers its text, copied from the shared container with the page's own spacing merged in. */
 
 
 	margin     : 0 auto;
-	max-width  : 1200px;
+	max-width  : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
 	padding    : var( --spa-ver-p05 ) 0; /* Spacing Vertical Base Plus 5 ~= 59.447px */
 	text-align : center;
 
@@ -126,15 +126,15 @@
 
 
 	align-items     : center;
-	border          : var( --bor-wid-lar ) solid transparent;    /* Border Width Large ~= 2.035px */
+	border          : var( --bor-wid-lar ) solid transparent;                                                         /* Border Width Large ~= 2.035px */
 	border-radius   : 999px;
 	cursor          : pointer;
 	display         : inline-flex;
-	font-family     : var( --fon-fam-mai );                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size       : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-family     : var( --fon-fam-mai );                                                                           /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size       : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight     : 600;
-	gap             : var( --spa-hor-m01 );                      /* Spacing Horizontal Base Minus 1 = 11px */
-	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	gap             : var( --spa-hor-m01 );                                                                           /* Spacing Horizontal Base Minus 1 = 11px */
+	padding         : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-decoration : none;
 	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
