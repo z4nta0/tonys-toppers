@@ -34,7 +34,7 @@
 	position   : fixed;
 	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	visibility : hidden;
-	z-index    : 99;                                                                                           /* What: Scrim Stack Level. Why: The scrim has to cover every section's content, the highest at 3, while staying under the bar at 100. How: This sits one level below the bar. */
+	z-index    : 2;                                                                                            /* What: Scrim Stack Level. Why: The scrim has to cover every section's content, the highest at 1, while staying under the bar at 3. How: This sits one level above the content and one below the bar. */
 
 
 }
@@ -95,8 +95,8 @@
 	position                : fixed;
 	right                   : 0;
 	top                     : 0;
-	transition              : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	z-index                 : 100;
+	transition              : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Animated Padding. Why: The bar slims down once the page scrolls, and a transform would squeeze its logo and links rather than trim the space around them. How: The bar is fixed, so its padding change moves nothing else on the page. */
+	z-index                 : 3; /* What: Bar Stack Level. Why: The bar has to stay over the page's content, the highest at 1, and over the open menu's scrim at 2. How: This sits one level above the scrim. */
 
 
 }
@@ -277,13 +277,13 @@
 
 }
 
-.togBarSpa { /* What: Toggle Bar Span. Why: Three bars draw the menu icon. How: This draws each as a thin, rounded ink line, easing its color and its turn into the close cross. */
+.togBarSpa { /* What: Toggle Bar Span. Why: Three bars draw the menu icon. How: This draws each as a thin, rounded ink line, easing its hover color. */
 
 
-	background    : var( --tex-mai-col );                /* Text Main Color = #1a1a2e */
-	border-radius : var( --rad-bor-xsm );                /* Radius Border Extra Small ~= 3.572px */
-	height        : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms */
+	background    : var( --tex-mai-col );                                 /* Text Main Color = #1a1a2e */
+	border-radius : var( --rad-bor-xsm );                                 /* Radius Border Extra Small ~= 3.572px */
+	height        : calc( var( --ver-rhy-m07 ) * 1rem );                  /* Vertical Rhythm Base Minus 7 ~= 2.035px */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
@@ -297,7 +297,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Toggle Bar Span. Why: Someone who asked for less motion shouldn't see the icon animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.togBarSpa { /* What: Motionless Toggle Bar Span. Why: Any change to the bars should simply switch. How: This turns the transitions off. */
+	.togBarSpa { /* What: Motionless Toggle Bar Span. Why: Any change to the bars should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -394,7 +394,6 @@
 
 
 }
-
 
 
 /* #region navLinUno */
@@ -564,7 +563,8 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navLinAnc { /* What: Motionless Navigation Link Anchor. Why: The hover and active colors should simply switch. How: This turns the transition off. */
+	.navLinAnc,
+	.navLinAnc::before { /* What: Motionless Navigation Link Anchor And Dot. Why: The hover, active, press, and nudge looks, and the menu row's dot, should simply switch. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -597,9 +597,9 @@
 
 
 		display       : grid;
-		gap           : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 		justify-items : start;
 		padding-top   : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+		row-gap       : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 	}
@@ -642,7 +642,7 @@
 	justify-self    : stretch;
 	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	text-decoration : none;
-	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and shrinks as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 
 
 }

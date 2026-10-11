@@ -6,15 +6,13 @@
  *
  * @summary
  * Styles for ProSecCom: the collection's deeper cream band, dotted with a
- * faint grid, with the section's heading and note, the row of filter
- * buttons, and the responsive grid of product cards. Each card holds its
- * photo in a portrait frame with a tag over its corner and its name and kind
- * beneath, and rises in through the global blockEnterFadeIn keyframes, which the hero
- * shares. The shared section, container, heading, and note classes the
- * section used to borrow from the global stylesheet are copied here, and
- * every animation and transition stops for anyone who asked for less motion.
- * The card's hover lift never shows while its entrance animation holds its
- * transform, a known gap the interaction feedback pass takes up.
+ * faint grid, with the section's heading and note, the row of filter buttons,
+ * and the responsive grid of product cards. Each card holds its photo in a
+ * portrait frame with a tag over its corner and its name and kind beneath, and
+ * rises in through the global blockEnterFadeIn keyframes, which the hero
+ * shares. The shared section, container, heading, and note classes the section
+ * used to borrow from the global stylesheet are copied here, and every
+ * animation and transition stops for anyone who asked for less motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -84,7 +82,7 @@
 	justify-content : space-between;
 	margin-bottom   : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
 	position        : relative;
-	z-index         : 2;
+	z-index         : 1;                                                                                              /* What: Heading Stack Level. Why: The heading has to sit over the band's dot grid, which is positioned at 0. How: This lifts it one level above the grid. */
 
 
 }
@@ -119,13 +117,13 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	width      : 32px;
+	width      : calc( var( --ver-rhy-p03 ) * 1rem ); /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
@@ -269,7 +267,7 @@
 	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );       /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	grid-template-columns : repeat( auto-fill, minmax( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-020 ) ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 20 ~= 268.187px @ 1,920px width */
 	position              : relative;
-	z-index               : 2;
+	z-index               : 1;                                                                                                    /* What: Grid Stack Level. Why: The cards have to sit over the band's dot grid, which is positioned at 0. How: This lifts them one level above the grid. */
 
 
 }
@@ -300,7 +298,7 @@
 	cursor        : pointer;
 	overflow      : hidden;
 	position      : relative;
-	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the card clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the card itself, which only repaints the one card. */
 
 
 }

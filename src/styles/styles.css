@@ -5,15 +5,16 @@
  * styles.css = Global Styles
  *
  * @summary
- * The site's one global stylesheet, holding only what can't belong to a
- * single component: the design tokens every module reads, the reset and base
- * element styles every page relies on, the layout of the mount element
- * index.html ships, and the blockEnterFadeIn keyframes the hero and the product cards
- * share. Every component's own styles are in its CSS module, and each
- * transition and animation turns itself off for reduced motion there; only
- * the page's smooth scrolling is turned off here. The
- * tokens are the plastic-ratio core design numbers and the standard color
- * and font roles, which every module reads by role.
+ * The site's one global stylesheet, holding only what can't belong to a single
+ * component: the design tokens every module reads, the reset and base element
+ * styles every page relies on, the focus ring every link and button grows on
+ * keyboard focus, the layout of the mount element index.html ships, and the
+ * blockEnterFadeIn keyframes the hero and the product cards share. Every
+ * component's own styles are in its CSS module, and each transition and
+ * animation turns itself off for reduced motion there; only the page's smooth
+ * scrolling and the focus ring's ease are turned off here. The tokens are the
+ * plastic-ratio core design numbers and the standard color and font roles,
+ * which every module reads by role.
  *
  * Sections:
  *  - Tokens
@@ -178,7 +179,7 @@
 	--dur-ani-m03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Animation Base Minus 3 ~= 67.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the third power of the core design number. */
 	--dur-ani-m02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Animation Base Minus 2 ~= 89.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the second power of the core design number. */
 	--dur-ani-m01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Animation Base Minus 1 ~= 119.2ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number. */
-	--dur-ani-bas : calc( var( --cdn-pow-018 ) * 1ms ); /* What: Duration Animation Base ~= 157.8ms. Why: Animations share one duration scale drawn from the core design number. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
+	--dur-ani-bas : calc( var( --cdn-pow-018 ) * 1ms );                      /* What: Duration Animation Base ~= 157.8ms. Why: Animations share one duration scale drawn from the core design number. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
 	--dur-ani-p01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Animation Base Plus 1 ~= 209.1ms. Why: Animations share one duration scale drawn from the core design number, and the hero heading's entrance delay read this step. How: This multiplies the base step by the core design number. */
 	--dur-ani-p02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Animation Base Plus 2 ~= 277.0ms. Why: Animations share one duration scale drawn from the core design number, and the portrait's entrance delay read this step. How: This multiplies the base step by the second power of the core design number. */
 	--dur-ani-p03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Animation Base Plus 3 ~= 366.9ms. Why: Animations share one duration scale drawn from the core design number, and the cards' entrance and the pitch's entrance delay read this step. How: This multiplies the base step by the third power of the core design number. */
@@ -204,7 +205,7 @@
 	--dur-tra-m03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Transition Base Minus 3 ~= 67.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the third power of the core design number. */
 	--dur-tra-m02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Transition Base Minus 2 ~= 89.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the second power of the core design number. */
 	--dur-tra-m01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Transition Base Minus 1 ~= 119.2ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number. */
-	--dur-tra-bas : calc( var( --cdn-pow-018 ) * 1ms ); /* What: Duration Transition Base ~= 157.8ms. Why: Transitions share one duration scale drawn from the core design number, and the send button's lift and press read this step. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
+	--dur-tra-bas : calc( var( --cdn-pow-018 ) * 1ms );                      /* What: Duration Transition Base ~= 157.8ms. Why: Transitions share one duration scale drawn from the core design number, and the send button's lift and press read this step. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
 	--dur-tra-p01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Transition Base Plus 1 ~= 209.1ms. Why: Transitions share one duration scale drawn from the core design number, and the bar links', buttons', filters', and form fields' color and lift changes read this step. How: This multiplies the base step by the core design number. */
 	--dur-tra-p02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Transition Base Plus 2 ~= 277.0ms. Why: Transitions share one duration scale drawn from the core design number, and the bar's scrolled look, the phone menu's slide, and the cards' hover look read this step. How: This multiplies the base step by the second power of the core design number. */
 	--dur-tra-p03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Transition Base Plus 3 ~= 366.9ms. Why: Transitions share one duration scale drawn from the core design number, and the photo zoom and the portrait's tilt read this step. How: This multiplies the base step by the third power of the core design number. */
@@ -393,7 +394,7 @@
 	--ver-rhy-m03 : var( --cdn-pow-002-rec ); /* What: Vertical Rhythm Base Minus 3 ~= 0.570. Why: This is 3 steps below the base step. How: This is the reciprocal of the second power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m02 : var( --cdn-pow-001-rec ); /* What: Vertical Rhythm Base Minus 2 ~= 0.755. Why: This is 2 steps below the base step. How: This is the reciprocal of the first power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: Headings and single-line elements need no breathing room between lines. How: This is read unitless as line-height, so each line is exactly its own font size tall, or multiplied by 1rem where a length is needed. */
-	--ver-rhy-bas : var( --cdn-pow-001 ); /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is the first power of the core design number, read unitless as line-height or multiplied by 1rem where a length is needed. */
+	--ver-rhy-bas : var( --cdn-pow-001 );     /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is the first power of the core design number, read unitless as line-height or multiplied by 1rem where a length is needed. */
 	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Body text and the story's paragraphs need a roomy line. How: This is the second power of the core design number, read unitless as line-height or multiplied by 1rem where a length is needed. */
 	--ver-rhy-p02 : var( --cdn-pow-003 );     /* What: Vertical Rhythm Base Plus 2 ~= 2.325. Why: This is 2 steps above the base step. How: This is the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p03 : var( --cdn-pow-004 );     /* What: Vertical Rhythm Base Plus 3 ~= 3.080. Why: This is 3 steps above the base step. How: This is the fourth power of the core design number, multiplied by 1rem where a length is needed. */
@@ -548,14 +549,14 @@ section { /* What: Section. Why: No section should ever be wider than the screen
 
 /* #region Shared Keyframes */
 
-@keyframes blockEnterFadeIn { /* What: Block Enter Fade In. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from about 26px below and from transparent to fully shown; modules play it through global(). */
+@keyframes blockEnterFadeIn { /* What: Block Enter Fade In. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from about 25.6px below and from transparent to fully shown; modules play it through global(). */
 
 
 	from {
 
 
 		opacity   : 0;
-		transform : translateY(24px);
+		transform : translateY( var( --spa-ver-p02 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 	}
@@ -564,7 +565,7 @@ section { /* What: Section. Why: No section should ever be wider than the screen
 
 
 		opacity   : 1;
-		transform : translateY(0);
+		transform : translateY( 0 );
 
 
 	}

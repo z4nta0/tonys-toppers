@@ -74,17 +74,16 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	width      : 32px;
+	width      : calc( var( --ver-rhy-p03 ) * 1rem ); /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
-
 
 
 /* #region secTitHea */
@@ -151,7 +150,7 @@
 	gap             : var( --spa-hor-m01 );                                                                           /* Spacing Horizontal Base Minus 1 = 11px */
 	padding         : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-decoration : none;
-	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and shrinks as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 
 
 }

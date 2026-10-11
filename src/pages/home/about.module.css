@@ -183,7 +183,7 @@
 	right         : calc( var( --spa-hor-p04 ) * -1 );               /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 	transform     : rotate( 8deg );
 	width         : calc( var( --ver-rhy-p08 ) * 1rem );             /* Vertical Rhythm Base Plus 8 ~= 138.199px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
-	z-index       : 3;
+	z-index       : 1;                                               /* What: Badge Stack Level. Why: The badge has to sit over the portrait's tilted frame, whose transform gives it a layer of its own at 0. How: This lifts the badge one level above it. */
 
 
 }
@@ -235,17 +235,16 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	width      : 32px;
+	width      : calc( var( --ver-rhy-p03 ) * 1rem ); /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
-
 
 
 /* #region secTitHea */
@@ -295,19 +294,6 @@
 	font-weight : 800;
 	line-height : var( --ver-rhy-m01 );                          /* Vertical Rhythm Base Minus 1 = 1 */
 	margin      : var( --spa-ver-m03 ) var( --spa-hor-m01 ) 0 0; /* Spacing Vertical Base Minus 3 ~= 6.268px, Spacing Horizontal Base Minus 1 = 11px */
-
-
-}
-@media ( max-width : 900px ) { /* What: Narrow Biography Story Paragraph Drop Cap. Why: The full-size drop cap crowds a narrow column. How: This applies 900px wide and below. */
-
-
-	.bioStoPar:first-of-type::first-letter { /* What: Small Biography Story Paragraph Drop Cap. Why: A smaller drop cap suits the narrow column. How: This shrinks the letter. */
-
-
-		font-size : var( --fon-siz-p06 ); /* Font Size Base Plus 6 ~= 59.447px */
-
-
-	}
 
 
 }

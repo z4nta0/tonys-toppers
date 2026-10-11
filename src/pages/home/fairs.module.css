@@ -98,13 +98,13 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	width      : 32px;
+	width      : calc( var( --ver-rhy-p03 ) * 1rem ); /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
