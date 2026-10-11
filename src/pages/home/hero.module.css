@@ -41,10 +41,10 @@
 @media ( max-width : 900px ) { /* What: Narrow Home Hero Section. Why: The wide side padding crowds a narrow screen. How: This applies 900px wide and below. */
 
 
-	.homHerSec { /* What: Compact Home Hero Section. Why: A narrow screen needs its width for the content. How: This trims the side and bottom padding. */
+	.homHerSec { /* What: Compact Home Hero Section. Why: A narrow screen needs its width for the content, and the portrait at the top needs room below the bar. How: This trims the bottom padding and adds a step of room on top. */
 
 
-		padding : var( --spa-ver-p07 ) var( --gut-sid-pad ) var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 5 ~= 59.447px */
+		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 5 ~= 59.447px */
 
 
 	}
@@ -387,26 +387,32 @@
 
 /* #region herVisDiv */
 
-.herVisDiv { /* What: Hero Visual Div. Why: The portrait and its sticker need a square stage. How: This sets a centered square that the frame and sticker are placed within, capped at about 426px or a horizontal step that grows past it on wide screens, rising in with the words. */
+.herVisDiv { /* What: Hero Visual Div. Why: The portrait and its sticker need a stage of their own. How: This sets a centered stage that fills its column, capped at about 426px or a horizontal step that grows past it on wide screens, as tall as the ring plus room for its drift and the sticker, sizes the portrait ring and the sticker its children read, and rises in with the words. */
 
+
+	--her-sti-wid : calc( var( --ver-rhy-p07 ) * 1rem );                              /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Hero Sticker Width. Why: The sticker's size also sets how far the ring moves over to make room for it. How: The sticker sizes itself from this, and the ring reads it to center the pair. */
+	--por-rin-wid : max( calc( var( --ver-rhy-p10 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */ /* What: Portrait Ring Width. Why: The ring and the sticker placed against it both need the ring's size. How: The ring sizes itself from this, and the sticker reads it to sit on the ring's edge. */
 
 	animation    : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 2 ~= 277.0ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	aspect-ratio : 1;
+	height       : calc( var( --por-rin-wid ) + var( --ver-rhy-bas ) * 2rem + var( --spa-ver-m01 ) * 2 );          /* Portrait Ring Width, set by its own rule, Vertical Rhythm Base ~= 14.572px, Spacing Vertical Base Minus 1 = 11px */ /* What: Ring Room Height. Why: The stage should hold the ring, its drift, and the sticker above it without empty space below. How: This adds the drift's reach on both sides and the sticker's rise on both sides to the ring's width. */
 	margin       : 0 auto;
 	max-width    : max( calc( var( --ver-rhy-p12 ) * 1rem ), var( --hor-rhy-023 ) );                               /* Vertical Rhythm Base Plus 12 ~= 425.596px, Horizontal Rhythm 23 ~= 623.458px @ 1,920px width */
 	position     : relative;
+	width        : 100%;
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Hero Visual Div. Why: In the single column the portrait should come first and smaller. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Hero Visual Div. Why: In the single column the portrait should come first, sized to the narrower screen. How: This applies 900px wide and below. */
 
 
-	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait opens the narrow layout above the words. How: This moves it first, caps it at about 321px or a horizontal step if that's wider, and leaves room below it. */
+	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait opens the narrow layout above the words, large enough to fill its space. How: This moves it first, caps it at about 321px or a horizontal step if that's wider, shrinks the sticker, and grows the ring with the screen between about 183px and 243px. */
 
 
-		margin-bottom : var( --spa-ver-p07 );                                             /* Spacing Vertical Base Plus 7 ~= 104.323px */
-		max-width     : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) ); /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
-		order         : -1;
+		--her-sti-wid : calc( var( --ver-rhy-p06 ) * 1rem );                                                                     /* Vertical Rhythm Base Plus 6 ~= 78.751px */
+		--por-rin-wid : clamp( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-023 ), calc( var( --ver-rhy-p10 ) * 1rem ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 23 ~= 623.458px @ 1,920px width, Vertical Rhythm Base Plus 10 ~= 242.522px */
+
+		max-width : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) ); /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
+		order     : -1;
 
 
 	}
@@ -430,33 +436,19 @@
 
 /* #region porRinDiv */
 
-.porRinDiv { /* What: Portrait Ring Div. Why: The portrait sits in a round frame that turns slowly. How: This fills the stage, sizes a circle at least about 243px across that grows with a horizontal step on wide screens, and spins it once about every 44 seconds. */
+.porRinDiv { /* What: Portrait Ring Div. Why: The portrait sits in a round frame that drifts slowly in a small circle. How: This centers a circle the ring width across in the stage, shifted right by half the sticker's overhang so the pair sits centered, and turns it about a point about 15px above its middle, so it drifts in a 15px circle rather than spinning in place. */
 
 
-	animation     : porRinDivLoopSpin var( --dur-ani-p20 ) linear infinite;           /* Duration Animation Base Plus 20 ~= 43,721.0ms */
-	border-radius : 50%;
-	bottom        : 0;
-	display       : grid;
-	left          : 0;
-	place-items   : center;
-	position      : absolute;
-	right         : 0;
-	top           : 0;
-	width         : max( calc( var( --ver-rhy-p10 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
-
-
-}
-@media ( max-width : 900px ) { /* What: Narrow Portrait Ring Div. Why: The portrait shrinks with the narrow stage. How: This applies 900px wide and below. */
-
-
-	.porRinDiv { /* What: Small Portrait Ring Div. Why: A smaller frame fits the narrow stage. How: This sizes the frame at least about 138px across, with an 11px height the portrait inside overflows. */
-
-
-		height : calc( var( --ver-rhy-m01 ) * 1rem );                              /* Vertical Rhythm Base Minus 1 = 11px */
-		width  : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-019 ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 19 ~= 202.448px @ 1,920px width */
-
-
-	}
+	animation        : porRinDivLoopSpin var( --dur-ani-p20 ) linear infinite;    /* Duration Animation Base Plus 20 ~= 43,721.0ms */
+	border-radius    : 50%;
+	display          : grid;
+	height           : var( --por-rin-wid );                                      /* Portrait Ring Width, set by its parent */
+	inset            : 0 0 0 calc( var( --her-sti-wid ) - var( --spa-hor-m01 ) ); /* Hero Sticker Width, set by its parent, Spacing Horizontal Base Minus 1 = 11px */ /* What: Sticker Room Inset. Why: The sticker hangs off the ring's left edge, so the pair would sit off center. How: The left inset is the sticker's overhang, and the auto margins center the ring in the rest of the stage. */
+	margin           : auto;
+	place-items      : center;
+	position         : absolute;
+	transform-origin : 50% calc( 50% - var( --ver-rhy-bas ) * 1rem );             /* Vertical Rhythm Base ~= 14.572px */ /* What: Drift Center. Why: Turning about the ring's own middle would show nothing, since the portrait counter-turns to stay upright, while turning about its top edge sent it far off the stage. How: Turning about a point about 15px above the middle moves the ring in a 15px circle. */
+	width            : var( --por-rin-wid );                                      /* Portrait Ring Width, set by its parent */
 
 
 }
@@ -530,7 +522,7 @@
 /* #endregion porRinDiv */
 
 
-.herStiDiv { /* What: Hero Sticker Div. Why: A round sticker adds a warm, playful note on the portrait's corner. How: This draws a tilted yellow circle with an ink outline and hard shadow, holding three short italic lines, and wobbles it gently. */
+.herStiDiv { /* What: Hero Sticker Div. Why: A round sticker adds a warm, playful note on the portrait's corner. How: This draws a tilted yellow circle the sticker width across, with an ink outline and hard shadow, holding three short italic lines, on the ring's top-left edge, and wobbles it gently. */
 
 
 	animation     : herStiDivLoopWobble var( --dur-ani-p13 ) var( --mot-sta-eas ) infinite;                         /* Duration Animation Base Plus 13 ~= 6,107.0ms, Motion Standard Easing = ease */
@@ -544,31 +536,16 @@
 	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-style    : italic;
 	font-weight   : 600;
-	height        : calc( var( --ver-rhy-p07 ) * 1rem );                                                            /* Vertical Rhythm Base Plus 7 ~= 104.323px */
+	height        : var( --her-sti-wid );                                                                           /* Hero Sticker Width, set by its parent */
 	line-height   : var( --ver-rhy-m01 );                                                                           /* Vertical Rhythm Base Minus 1 = 1 */
 	place-items   : center;
 	position      : absolute;
-	right         : calc( var( --spa-hor-m01 ) * -1 );                                                              /* Spacing Horizontal Base Minus 1 = 11px */
+	right         : calc( 50% + var( --por-rin-wid ) / 2 - var( --her-sti-wid ) / 2 - var( --spa-hor-m01 ) / 2 );   /* Portrait Ring Width, set by its parent, Hero Sticker Width, set by its parent, Spacing Horizontal Base Minus 1 = 11px */ /* What: Ring Edge Position. Why: The sticker should overlap the ring's top-left edge wherever the ring sits. How: This works back from the ring's centered, shifted position so the sticker's right edge lands about 11px inside the ring. */
 	text-align    : center;
-	top           : calc( var( --spa-ver-m01 ) * -1 );                                                              /* Spacing Vertical Base Minus 1 = 11px */
+	top           : calc( 50% - var( --por-rin-wid ) / 2 - var( --spa-ver-m01 ) );                                  /* Portrait Ring Width, set by its parent, Spacing Vertical Base Minus 1 = 11px */ /* What: Ring Top Position. Why: The sticker should sit just above the ring's top edge. How: This places it about 11px above the ring's top. */
 	transform     : rotate( -12deg );
-	width         : calc( var( --ver-rhy-p07 ) * 1rem );                                                            /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+	width         : var( --her-sti-wid );                                                                           /* Hero Sticker Width, set by its parent */
 	z-index       : 3;
-
-
-}
-@media ( max-width : 900px ) { /* What: Narrow Hero Sticker Div. Why: The sticker shrinks with the narrow stage. How: This applies 900px wide and below. */
-
-
-	.herStiDiv { /* What: Small Hero Sticker Div. Why: A smaller sticker keeps its place on the smaller portrait. How: This sizes it at about 79px. */
-
-
-		font-size : var( --fon-siz-p01 );                /* Font Size Base Plus 1 ~= 14.572px */
-		height    : calc( var( --ver-rhy-p06 ) * 1rem ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */
-		width     : calc( var( --ver-rhy-p06 ) * 1rem ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
-
-
-	}
 
 
 }
