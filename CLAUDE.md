@@ -229,10 +229,40 @@ passes on `close-out`.
      entrance animation's `both` fill holds `transform` (step 11's
      interaction feedback), and the form fields swap the browser's focus
      outline for a border color alone (step 9's focus rings).
-9. **Design tokens** in five commits: role colors and font tokens, the type
-   and spacing scale, durations and easing, elevation shadows, and class and
-   keyframe names. The reduced-motion pass also turns off `html`'s smooth
-   scrolling, which still glides a section link's `'auto'` scroll today.
+9. **Design tokens**: done 2026-10-10, in seven commits.
+   - **Colors and fonts**: the core design numbers and the full color role
+     set, with this site's colors by role: cream is the page and light text,
+     white the surface, the deeper cream band a sunken shade, ink the main
+     text, strong border, shadow, and dark surface, ink-soft the secondary
+     text, navy the main accent, yellow the second, and the thank-you and
+     error notes the success and error families. Single-use shades are
+     relative colors of their roles, and alphas snap to a reciprocal power
+     where one is within 10%. Outfit is the main font and Fraunces the
+     secondary.
+   - **Type and spacing**: the 68.75% root with body text at Base Plus 1,
+     and every length on its step, measured from the old 16px rem. Outfit
+     averages 2.28 characters per em, so the hero pitch caps at `pow-012`
+     (about 67 characters) and the section notes at `pow-011` (about 50).
+     **This project's `--bor-wid-xla` is `m04`** (about 4.73px, drawn as
+     4px) rather than the usual `m05`, since the portrait's frame and the
+     logo badge draw 4px borders and nothing draws 3px. The contact rows'
+     inline size went, since every row's value now shares one step and
+     still fits a line at every width.
+   - **Durations and easing**: the animation family runs to `p20` for the
+     portrait ring's 43.7-second turn, the 100ms entrance delay and the
+     cards' 30ms stagger stay literal, every curve folds into the standard
+     ease, and `html` turns smooth scrolling off under reduced motion.
+   - **Shadows**: the hovered card reads the medium elevation, and the hard
+     offset shadows rest on `m05` with each button's hover and press offset
+     written as the resting offset plus or minus its lift step.
+   - **Focus ring**: the form fields grow a 2px ring on focus-visible.
+   - **Names**: every class and keyframe has its three-segment name,
+     matching seal-and-shield's for the shared pieces (`pagConDiv`,
+     `eyeLabDiv`, `secTitHea`, `titAccEmp`, `butBasAnc`), and `fadeUp` is
+     `blockEnterFadeIn`.
+   - **Found for later**: the form fields' text is now 14.57px, and iOS
+     Safari zooms the page when a field under 16px is tapped (step 11's
+     interaction feedback, raised with the user first).
 10. **Horizontal layout comparison** (see above), then a WAVE and
     accessibility review.
 11. **New features**: the 404 page, security headers, image optimization,
