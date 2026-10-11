@@ -16,9 +16,9 @@
 
 
 
-/* #region section */
+/* #region homFaiSec */
 
-.section { /* What: Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+.homFaiSec { /* What: Home Fairs Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
 
 
 	padding  : var( --spa-ver-p07 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -26,10 +26,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Home Fairs Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
 
 
-	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+	.homFaiSec { /* What: Compact Home Fairs Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
 
 
 		padding : var( --spa-ver-p06 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 1 ~= 19.304px */
@@ -41,9 +41,9 @@
 }
 
 
-/* #region container */
+/* #region pagConDiv */
 
-.container { /* What: Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at 1200px, copied from the shared container. */
 
 
 	margin    : 0 auto;
@@ -53,9 +53,9 @@
 }
 
 
-/* #region section-head */
+/* #region secHeaDiv */
 
-.section-head { /* What: Section Head Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, copied from the shared section head. */
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, copied from the shared section head. */
 
 
 	align-items     : end;
@@ -67,10 +67,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Section Head Div. Why: The heading and note don't fit side by side on a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Section Heading Div. Why: The heading and note don't fit side by side on a narrow screen. How: This applies 900px wide and below. */
 
 
-	.section-head { /* What: Stacked Section Head Div. Why: The note reads best below the heading. How: This stacks them on the left with a smaller gap. */
+	.secHeaDiv { /* What: Stacked Section Heading Div. Why: The note reads best below the heading. How: This stacks them on the left with a smaller gap. */
 
 
 		align-items    : flex-start;
@@ -83,7 +83,7 @@
 
 }
 
-.section-label { /* What: Section Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
 
 
 	align-items    : center;
@@ -98,7 +98,7 @@
 
 
 }
-.section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -110,9 +110,9 @@
 }
 
 
-/* #region section-title */
+/* #region secTitHea */
 
-.section-title { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, copied from the shared section title. */
+.secTitHea { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, copied from the shared section title. */
 
 
 	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
@@ -124,7 +124,7 @@
 
 }
 
-.section-title-accent { /* What: Section Title Accent Emphasis. Why: The heading's second half carries its warmth. How: This sets it in navy italics. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: The heading's second half carries its warmth. How: This sets it in navy italics. */
 
 
 	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
@@ -133,10 +133,10 @@
 
 }
 
-/* #endregion section-title */
+/* #endregion secTitHea */
 
 
-.section-sub { /* What: Section Sub Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
 
 
 	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
@@ -146,13 +146,13 @@
 
 }
 
-/* #endregion section-head */
+/* #endregion secHeaDiv */
 
 
 
-/* #region fairs-grid */
+/* #region faiGriDiv */
 
-.fairs-grid { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least 150px wide, or the full width when that's narrower. */
+.faiGriDiv { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least 150px wide, or the full width when that's narrower. */
 
 
 	display               : grid;
@@ -163,9 +163,9 @@
 }
 
 
-/* #region fair-photo */
+/* #region faiPhoFig */
 
-.fair-photo { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners. */
+.faiPhoFig { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners. */
 
 
 	aspect-ratio  : 4 / 5;
@@ -177,7 +177,7 @@
 
 }
 
-.fair-photo-image { /* What: Fair Photo Image. Why: The booth shot should fill its frame. How: This covers the frame with the photo, cropping its edges, as a block so no gap shows beneath it. */
+.faiPhoIma { /* What: Fair Photo Image. Why: The booth shot should fill its frame. How: This covers the frame with the photo, cropping its edges, as a block so no gap shows beneath it. */
 
 
 	display    : block;
@@ -188,12 +188,12 @@
 
 }
 
-/* #endregion fair-photo */
+/* #endregion faiPhoFig */
 
-/* #endregion fairs-grid */
+/* #endregion faiGriDiv */
 
-/* #endregion container */
+/* #endregion pagConDiv */
 
-/* #endregion section */
+/* #endregion homFaiSec */
 
 

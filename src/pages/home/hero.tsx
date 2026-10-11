@@ -118,37 +118,37 @@ function HerSecCom () : React.JSX.Element {
 		<section
 			id='home'
 
-			className={ cssModObj.hero }
+			className={ cssModObj.homHerSec }
 		>{ /* What: Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
 
 
-			<div className={` ${ cssModObj.blob }   ${ cssModObj.blob1 } `} />{ /* What: First Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: First Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
 
-			<div className={` ${ cssModObj.blob }   ${ cssModObj.blob2 } `} />{ /* What: Second Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivBlue } `} />{ /* What: Second Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
 
 
 
-			<div className={ cssModObj.heroInner }>{ /* What: Hero Inner Div Element. Why: The text and the portrait sit side by side on wide screens. How: This lays out the two columns. */ }
+			<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the portrait sit side by side on wide screens. How: This lays out the two columns. */ }
 
 
 				<div>{ /* What: Hero Text Div Element. Why: The words read as one column. How: This stacks the eyebrow, headline, pitch, and buttons, with no styling of its own. */ }
 
 
-					<span className={ cssModObj.heroEyebrow }>Handcrafted in Bolivar, Missouri</span>{ /* What: Hero Eyebrow Span Element. Why: Visitors should know where the pieces are made before anything else. How: This shows the town above the headline. */ }
+					<span className={ cssModObj.herEyeSpa }>Handcrafted in Bolivar, Missouri</span>{ /* What: Hero Eyebrow Span Element. Why: Visitors should know where the pieces are made before anything else. How: This shows the town above the headline. */ }
 
-					<h1 className={ cssModObj.heroTitle }>Crafted by hand &amp; <span className={ cssModObj.accent }>made with love.</span></h1>{ /* What: Hero Heading Element. Why: The headline sums up the business in one line. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
+					<h1 className={ cssModObj.herTitHea }>Crafted by hand &amp; <span className={ cssModObj.titAccSpa }>made with love.</span></h1>{ /* What: Hero Heading Element. Why: The headline sums up the business in one line. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
 
-					<p className={ cssModObj.lede }>
+					<p className={ cssModObj.herLedPar }>
 						Tony Mawhiney designs and beads every piece by hand: color-coordinated, carefully
 						chosen, and one of a kind. Small art for everyday moments.
 					</p>{ /* What: Hero Lede Paragraph Element. Why: A short pitch says what Tony makes and why it's special. How: This shows two sentences beneath the headline. */ }
 
 
-					<div className={ cssModObj.heroActions }>{ /* What: Hero Actions Div Element. Why: The two main ways into the page sit together. How: This sets the buttons in a row. */ }
+					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The two main ways into the page sit together. How: This sets the buttons in a row. */ }
 
 
 						<a
-							className={` ${ cssModObj.btn }   ${ cssModObj.btnPrimary } `}
+							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
 							href='/#products'
 
@@ -160,7 +160,7 @@ function HerSecCom () : React.JSX.Element {
 						</a>
 
 						<a
-							className={` ${ cssModObj.btn }   ${ cssModObj.btnGhost } `}
+							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
 							href='/#about'
 
@@ -176,14 +176,14 @@ function HerSecCom () : React.JSX.Element {
 				</div>
 
 
-				<div className={ cssModObj.heroVisual }>{ /* What: Hero Visual Div Element. Why: Tony's cartoon portrait is the hero's picture. How: This holds the portrait ring and the sticker beside it. */ }
+				<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: Tony's cartoon portrait is the hero's picture. How: This holds the portrait ring and the sticker beside it. */ }
 
 
-					<div className={ cssModObj.heroLogo }>{ /* What: Hero Logo Div Element. Why: The portrait sits in a round frame with a slowly turning ring. How: This frames the image. */ }
+					<div className={ cssModObj.porRinDiv }>{ /* What: Hero Logo Div Element. Why: The portrait sits in a round frame with a slowly turning ring. How: This frames the image. */ }
 
 
 						<img
-							className={ cssModObj.heroLogoImage }
+							className={ cssModObj.porCarIma }
 
 							src={ carJpgUrl }
 
@@ -195,7 +195,7 @@ function HerSecCom () : React.JSX.Element {
 
 
 					<div
-						className={ cssModObj.heroSticker }
+						className={ cssModObj.herStiDiv }
 
 						aria-hidden='true'
 					>{ /* What: Hero Sticker Div Element. Why: A round sticker adds a warm note beside the portrait. How: This shows three short lines, hidden from screen readers, since it only repeats the headline's made with love and its heart would be read aloud. */ }

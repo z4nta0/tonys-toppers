@@ -15,9 +15,9 @@
 
 
 
-/* #region footer */
+/* #region sitFooFoo */
 
-.footer { /* What: Site Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the ink color and centers its line of small cream text, never wider than the screen. */
+.sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the ink color and centers its line of small cream text, never wider than the screen. */
 
 
 	background : var( --bac-inv-col );                      /* Background Inverse Color = #1a1a2e */
@@ -30,7 +30,7 @@
 
 }
 
-.footer-link { /* What: Footer Link. Why: The phone number should stand out from the rest of the line as something to tap. How: This sets it in yellow with an underline held a little below the text. */
+.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number should stand out from the rest of the line as something to tap. How: This sets it in yellow with an underline held a little below the text. */
 
 
 	color                 : var( --acc-sec-col );                   /* Accent Secondary Color = #fbbf24 */
@@ -40,6 +40,6 @@
 
 }
 
-/* #endregion footer */
+/* #endregion sitFooFoo */
 
 

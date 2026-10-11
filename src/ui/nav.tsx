@@ -229,14 +229,14 @@ function NavBarCom () : React.JSX.Element {
 
 
 		<nav
-			className={ cssModObj.nav }
+			className={ cssModObj.navBarNav }
 
 			data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar raises into a pill once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
 		>{ /* What: Container Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the section links, and the phone menu toggle, carrying data-page-scroll-active once the page scrolls. */ }
 
 
 			<Link
-				className={ cssModObj.navBrand }
+				className={ cssModObj.navBraAnc }
 
 				to='/'
 
@@ -245,7 +245,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 				<img
-					className={ cssModObj.navBrandLogo }
+					className={ cssModObj.navLogIma }
 
 					src={ lntSvgUrl }
 
@@ -260,7 +260,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<ul
-				className={ cssModObj.navLinks }
+				className={ cssModObj.navLinUno }
 
 				data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Flag. Why: On a phone the links drop down as a menu only while it's open. How: This marks the list while menOpeBoo is true, and drops the attribute otherwise.
 			>{ /* What: Navigation Links List Element. Why: The section links sit in a row on wide screens and in a dropdown menu on a phone. How: This holds one item per section, carrying data-mobile-menu-open while the menu is open. */ }
@@ -272,12 +272,12 @@ function NavBarCom () : React.JSX.Element {
 					<li
 						key={ secRcdObj.ideStr }
 
-						className={ cssModObj.navItem }
+						className={ cssModObj.navLinIte }
 					>{ /* What: Navigation Link Item Element. Why: Each link is one item of the list. How: This holds the section's link. */ }
 
 
 						<a
-							className={ cssModObj.navLink }
+							className={ cssModObj.navLinAnc }
 
 							data-section-link-active={ ( isaHomBoo && actSecStr === secRcdObj.ideStr ) || undefined } // What: Section Link Active Flag. Why: The link for the section being read is marked on the home page. How: This marks the link when its section is the active one there, and drops the attribute otherwise.
 
@@ -300,7 +300,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<button
-				className={ cssModObj.navToggle }
+				className={ cssModObj.navTogBut }
 
 				type='button'
 
@@ -311,11 +311,11 @@ function NavBarCom () : React.JSX.Element {
 			>{ /* What: Menu Toggle Button Element. Why: On a phone the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
 
 
-				<span className={ cssModObj.navToggleBar } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+				<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
 
-				<span className={ cssModObj.navToggleBar } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+				<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
 
-				<span className={ cssModObj.navToggleBar } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+				<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
 
 
 			</button>

@@ -8,7 +8,7 @@
  * The site's one global stylesheet, holding only what can't belong to a
  * single component: the design tokens every module reads, the reset and base
  * element styles every page relies on, the layout of the mount element
- * index.html ships, and the fadeUp keyframes the hero and the product cards
+ * index.html ships, and the blockEnterFadeIn keyframes the hero and the product cards
  * share. Every component's own styles are in its CSS module, and each
  * transition and animation turns itself off for reduced motion there; only
  * the page's smooth scrolling is turned off here. The
@@ -471,7 +471,7 @@ section { /* What: Section. Why: No section should ever be wider than the screen
 
 /* #region Shared Keyframes */
 
-@keyframes fadeUp { /* What: Fade Up. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from about 26px below and from transparent to fully shown; modules play it through global(). */
+@keyframes blockEnterFadeIn { /* What: Block Enter Fade In. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from about 26px below and from transparent to fully shown; modules play it through global(). */
 
 
 	from {

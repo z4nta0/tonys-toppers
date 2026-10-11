@@ -19,9 +19,9 @@
 
 
 
-/* #region section */
+/* #region nofPagSec */
 
-.section { /* What: Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with about 138px on top and positions it, copied from the shared section with the page's own top padding merged in. */
+.nofPagSec { /* What: Not-Found Page Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with about 138px on top and positions it, copied from the shared section with the page's own top padding merged in. */
 
 
 	padding  : var( --spa-ver-p08 ) var( --spa-hor-p04 ) var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
@@ -29,10 +29,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Section. Why: The wide side and bottom padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Not-Found Page Section. Why: The wide side and bottom padding crowds a narrow screen. How: This applies 900px wide and below. */
 
 
-	.section { /* What: Compact Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps about 138px on top. */
+	.nofPagSec { /* What: Compact Not-Found Page Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps about 138px on top. */
 
 
 		padding : var( --spa-ver-p08 ) var( --spa-hor-p01 ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 6 ~= 78.751px */
@@ -44,9 +44,9 @@
 }
 
 
-/* #region container */
+/* #region pagConDiv */
 
-.container { /* What: Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column capped at 1200px with room above and below, and centers its text, copied from the shared container with the page's own spacing merged in. */
+.pagConDiv { /* What: Page Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column capped at 1200px with room above and below, and centers its text, copied from the shared container with the page's own spacing merged in. */
 
 
 	margin     : 0 auto;
@@ -57,7 +57,7 @@
 
 }
 
-.section-label { /* What: Section Label Div. Why: A short label names the error above the heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, centered, copied from the shared section label. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the error above the heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, centered, copied from the shared section label. */
 
 
 	align-items     : center;
@@ -73,7 +73,7 @@
 
 
 }
-.section-label::before { /* What: Section Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -86,9 +86,9 @@
 
 
 
-/* #region section-title */
+/* #region secTitHea */
 
-.section-title { /* What: Section Title Heading. Why: The heading says the page wasn't found. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, with room below, copied from the shared section title. */
+.secTitHea { /* What: Section Title Heading. Why: The heading says the page wasn't found. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, with room below, copied from the shared section title. */
 
 
 	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
@@ -101,7 +101,7 @@
 
 }
 
-.section-title-accent { /* What: Section Title Accent Emphasis. Why: The last word carries the heading's emphasis. How: This sets it in navy italics. */
+.titAccEmp { /* What: Title Accent Emphasis. Why: The last word carries the heading's emphasis. How: This sets it in navy italics. */
 
 
 	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
@@ -110,10 +110,10 @@
 
 }
 
-/* #endregion section-title */
+/* #endregion secTitHea */
 
 
-.not-found-note { /* What: Not Found Note Paragraph. Why: The note points the visitor back to Tony's work without competing with the heading. How: This sets it in the soft ink color with room below. */
+.nofLedPar { /* What: Not-Found Lede Paragraph. Why: The note points the visitor back to Tony's work without competing with the heading. How: This sets it in the soft ink color with room below. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
@@ -122,7 +122,7 @@
 
 }
 
-.btn { /* What: Button Anchor. Why: The way home reads as the site's main button. How: This sets a pill with the sans font in semibold and a clear border, and eases every change between its looks, copied from the shared button. */
+.butBasAnc { /* What: Button Base Anchor. Why: The way home reads as the site's main button. How: This sets a pill with the sans font in semibold and a clear border, and eases every change between its looks, copied from the shared button. */
 
 
 	align-items     : center;
@@ -140,7 +140,7 @@
 
 
 }
-.btn-primary { /* What: Primary Button Anchor. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
 
 
 	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
@@ -149,7 +149,7 @@
 
 
 }
-.btn-primary:hover { /* What: Hovered Primary Button Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
 
 
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
@@ -157,10 +157,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.btn { /* What: Motionless Button Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -171,8 +171,8 @@
 
 }
 
-/* #endregion container */
+/* #endregion pagConDiv */
 
-/* #endregion section */
+/* #endregion nofPagSec */
 
 

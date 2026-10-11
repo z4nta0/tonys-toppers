@@ -78,24 +78,24 @@ function AboSecCom () : React.JSX.Element {
 		<section
 			id='about'
 
-			className={ cssModObj.section }
+			className={ cssModObj.homAboSec }
 		>{ /* What: About Section Element. Why: Visitors want to meet the maker. How: Its id stays the plain word about, since the bar and the hero link to it and it can appear in the page's address. */ }
 
 
-			<div className={ cssModObj.container }>{ /* What: About Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: About Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.bioGrid }>{ /* What: Biography Grid Div Element. Why: The portrait and the story sit side by side on wide screens. How: This lays out the two columns. */ }
+				<div className={ cssModObj.bioGriDiv }>{ /* What: Biography Grid Div Element. Why: The portrait and the story sit side by side on wide screens. How: This lays out the two columns. */ }
 
 
-					<div className={ cssModObj.bioPhotoWrap }>{ /* What: Biography Photo Wrap Div Element. Why: The portrait and its logo badge read as one picture. How: This holds both, the badge overlapping the portrait's corner. */ }
+					<div className={ cssModObj.porWraDiv }>{ /* What: Biography Photo Wrap Div Element. Why: The portrait and its logo badge read as one picture. How: This holds both, the badge overlapping the portrait's corner. */ }
 
 
-						<div className={ cssModObj.bioPhoto }>{ /* What: Biography Photo Div Element. Why: The portrait sits in a tilted frame. How: This frames the photo. */ }
+						<div className={ cssModObj.porFraDiv }>{ /* What: Biography Photo Div Element. Why: The portrait sits in a tilted frame. How: This frames the photo. */ }
 
 
 							<img
-								className={ cssModObj.bioPhotoImage }
+								className={ cssModObj.porPhoIma }
 
 								src={ porJpgUrl }
 
@@ -105,11 +105,11 @@ function AboSecCom () : React.JSX.Element {
 
 						</div>
 
-						<div className={ cssModObj.bioCartoon }>{ /* What: Biography Cartoon Div Element. Why: A round logo badge marks the portrait as Tony's Toppers. How: This frames the logo over the portrait's corner. */ }
+						<div className={ cssModObj.logBadDiv }>{ /* What: Biography Cartoon Div Element. Why: A round logo badge marks the portrait as Tony's Toppers. How: This frames the logo over the portrait's corner. */ }
 
 
 							<img
-								className={ cssModObj.bioCartoonImage }
+								className={ cssModObj.logBadIma }
 
 								src={ logSvgUrl }
 
@@ -127,31 +127,31 @@ function AboSecCom () : React.JSX.Element {
 					<div>{ /* What: Biography Content Div Element. Why: The story reads as one column. How: This stacks the label, name, paragraphs, and stats, with no styling of its own. */ }
 
 
-						<div className={ cssModObj.sectionLabel }>Meet the Maker</div>{ /* What: About Label Div Element. Why: A small label names the section. How: This shows it above the name. */ }
+						<div className={ cssModObj.eyeLabDiv }>Meet the Maker</div>{ /* What: About Label Div Element. Why: A small label names the section. How: This shows it above the name. */ }
 
-						<h2 className={ cssModObj.bioTitle }>Tony Mawhiney: <em className={ cssModObj.bioTitleAccent }>artist, crafter, kind soul.</em></h2>{ /* What: About Heading Element. Why: The heading names Tony and sums him up. How: The description sits in an italic accent. */ }
+						<h2 className={ cssModObj.secTitHea }>Tony Mawhiney: <em className={ cssModObj.titAccEmp }>artist, crafter, kind soul.</em></h2>{ /* What: About Heading Element. Why: The heading names Tony and sums him up. How: The description sits in an italic accent. */ }
 
-						<p className={ cssModObj.bioParagraph }>
+						<p className={ cssModObj.bioStoPar }>
 							Tony is a { tonAgeNum }-year-old young man with Down syndrome living in Bolivar, Missouri. He's quiet at first, but
 							once you know him you won't find a kinder, more polite person, and you wouldn't have
 							to look hard to know it.
 						</p>{ /* What: Introduction Paragraph Element. Why: The story opens with who Tony is. How: This gives his age, read on each render, his home town, and his character, with a drop cap on its first letter. */ }
 
-						<p className={ cssModObj.bioParagraph }>
+						<p className={ cssModObj.bioStoPar }>
 							After graduating high school, Tony moved to Grandview, MO, where he had his own
 							apartment and attended Longview Jr. College through the Ace program. He's always been
 							artistic and crafty. In high school, a painting of his was chosen through a contest
 							that traveled around Missouri for a year before being hung in the State Capitol.
 						</p>{ /* What: Background Paragraph Element. Why: Tony's art started long before the business. How: This tells of his schooling and his painting in the State Capitol. */ }
 
-						<p className={ cssModObj.bioParagraph }>
+						<p className={ cssModObj.bioStoPar }>
 							A while back, a friend showed him some beaded pens she'd made and he mentioned he'd
 							love to try it. She sent him a starter package (assorted beads, silicone shapes, and
 							a few pens), and he was hooked. He carefully chose and color-coordinated every bead
 							on that very first pen, and that was the beginning of his business.
 						</p>{ /* What: Beginning Paragraph Element. Why: Visitors like to know how the business began. How: This tells of the first beaded pen. */ }
 
-						<p className={ cssModObj.bioParagraph }>
+						<p className={ cssModObj.bioStoPar }>
 							Since that day Tony has grown his inventory of beads, expanded into wine stoppers
 							alongside the pens, and named his business <strong>Tony's Toppers</strong>. He's very
 							proud of it, and he loves sharing pictures of finished pieces with friends and
@@ -159,15 +159,15 @@ function AboSecCom () : React.JSX.Element {
 						</p>{ /* What: Growth Paragraph Element. Why: The story ends with where the business is now. How: This tells of the wine stoppers, the name, and his pride in it. */ }
 
 
-						<div className={ cssModObj.bioStats }>{ /* What: Biography Stats Div Element. Why: Three short facts round off the story. How: This sets them in a row beneath the paragraphs. */ }
+						<div className={ cssModObj.bioStaDiv }>{ /* What: Biography Stats Div Element. Why: Three short facts round off the story. How: This sets them in a row beneath the paragraphs. */ }
 
 
 							<div>{ /* What: Age Stat Div Element. Why: Tony's age is a fun fact. How: This shows it above its caption. */ }
 
 
-								<span className={ cssModObj.num }>{ tonAgeNum }</span>{ /* What: Age Number Span Element. Why: The stat's figure leads. How: This shows Tony's age, read on each render. */ }
+								<span className={ cssModObj.staValSpa }>{ tonAgeNum }</span>{ /* What: Age Number Span Element. Why: The stat's figure leads. How: This shows Tony's age, read on each render. */ }
 
-								<div className={ cssModObj.label }>Years young</div>{ /* What: Age Label Div Element. Why: The figure needs a caption. How: This names it years young. */ }
+								<div className={ cssModObj.staLabDiv }>Years young</div>{ /* What: Age Label Div Element. Why: The figure needs a caption. How: This names it years young. */ }
 
 
 							</div>
@@ -175,9 +175,9 @@ function AboSecCom () : React.JSX.Element {
 							<div>{ /* What: Handmade Stat Div Element. Why: Every piece is made by hand. How: This shows the figure above its caption. */ }
 
 
-								<span className={ cssModObj.num }>100%</span>{ /* What: Handmade Number Span Element. Why: The stat's figure leads. How: This shows 100%. */ }
+								<span className={ cssModObj.staValSpa }>100%</span>{ /* What: Handmade Number Span Element. Why: The stat's figure leads. How: This shows 100%. */ }
 
-								<div className={ cssModObj.label }>Handmade</div>{ /* What: Handmade Label Div Element. Why: The figure needs a caption. How: This names it handmade. */ }
+								<div className={ cssModObj.staLabDiv }>Handmade</div>{ /* What: Handmade Label Div Element. Why: The figure needs a caption. How: This names it handmade. */ }
 
 
 							</div>
@@ -185,9 +185,9 @@ function AboSecCom () : React.JSX.Element {
 							<div>{ /* What: One Of One Stat Div Element. Why: No two pieces are the same. How: This shows the figure above its caption. */ }
 
 
-								<span className={ cssModObj.num }>1of1</span>{ /* What: One Of One Number Span Element. Why: The stat's figure leads. How: This shows 1of1. */ }
+								<span className={ cssModObj.staValSpa }>1of1</span>{ /* What: One Of One Number Span Element. Why: The stat's figure leads. How: This shows 1of1. */ }
 
-								<div className={ cssModObj.label }>Every piece</div>{ /* What: One Of One Label Div Element. Why: The figure needs a caption. How: This names it every piece. */ }
+								<div className={ cssModObj.staLabDiv }>Every piece</div>{ /* What: One Of One Label Div Element. Why: The figure needs a caption. How: This names it every piece. */ }
 
 
 							</div>

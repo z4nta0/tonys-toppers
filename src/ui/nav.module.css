@@ -20,9 +20,9 @@
 
 
 
-/* #region nav */
+/* #region navBarNav */
 
-.nav { /* What: Navigation Bar. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it. */
+.navBarNav { /* What: Navigation Bar Nav. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it. */
 
 
 	-webkit-backdrop-filter : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                               /* Vertical Rhythm Base Minus 1 = 11px */ /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
@@ -43,7 +43,7 @@
 
 
 }
-.nav[data-page-scroll-active] { /* What: Scrolled Navigation Bar. Why: Once content slides under the bar, it should read as a separate layer. How: This draws its bottom hairline and tightens its padding while the page is scrolled. */
+.navBarNav[data-page-scroll-active] { /* What: Scrolled Navigation Bar Nav. Why: Once content slides under the bar, it should read as a separate layer. How: This draws its bottom hairline and tightens its padding while the page is scrolled. */
 
 
 	border-bottom-color : var( --bor-mai-col );                      /* Border Main Color = #1a1a2e @ 0.12 opacity */
@@ -51,17 +51,17 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Navigation Bar. Why: The bar's wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Navigation Bar Nav. Why: The bar's wide padding crowds a narrow screen. How: This applies 900px wide and below. */
 
 
-	.nav { /* What: Compact Navigation Bar. Why: A narrow screen needs its room for the brand and toggle. How: This trims the bar's padding. */
+	.navBarNav { /* What: Compact Navigation Bar Nav. Why: A narrow screen needs its room for the brand and toggle. How: This trims the bar's padding. */
 
 
 		padding : var( --spa-ver-bas ) var( --spa-hor-p01 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 	}
-	.nav[data-page-scroll-active] { /* What: Compact Scrolled Navigation Bar. Why: The scrolled bar tightens on a narrow screen too. How: This trims its padding a little further. */
+	.navBarNav[data-page-scroll-active] { /* What: Compact Scrolled Navigation Bar Nav. Why: The scrolled bar tightens on a narrow screen too. How: This trims its padding a little further. */
 
 
 		padding : var( --spa-ver-m01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 1 ~= 19.304px */
@@ -71,10 +71,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Bar. Why: Someone who asked for less motion shouldn't see the bar animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Bar Nav. Why: Someone who asked for less motion shouldn't see the bar animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.nav { /* What: Motionless Navigation Bar. Why: The scrolled look should simply switch on. How: This turns the transition off. */
+	.navBarNav { /* What: Motionless Navigation Bar Nav. Why: The scrolled look should simply switch on. How: This turns the transition off. */
 
 
 		transition : none;
@@ -86,9 +86,9 @@
 }
 
 
-/* #region nav-brand */
+/* #region navBraAnc */
 
-.nav-brand { /* What: Navigation Brand Link. Why: The mark and the name read as one link home. How: This sets the mark beside the name in the bold serif, with no underline. */
+.navBraAnc { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link home. How: This sets the mark beside the name in the bold serif, with no underline. */
 
 
 	align-items     : center;
@@ -104,7 +104,7 @@
 
 }
 
-.nav-brand-logo { /* What: Navigation Brand Logo Image. Why: The mark should sit at a fixed, small size beside the name. How: This sizes it to a circle about 45px across. */
+.navLogIma { /* What: Navigation Logo Image. Why: The mark should sit at a fixed, small size beside the name. How: This sizes it to a circle about 45px across. */
 
 
 	border-radius : 50%;
@@ -114,13 +114,13 @@
 
 }
 
-/* #endregion nav-brand */
+/* #endregion navBraAnc */
 
 
 
-/* #region nav-links */
+/* #region navLinUno */
 
-.nav-links { /* What: Navigation Links List. Why: Wide screens show the section links in a row in the bar. How: This lines them up with small gaps and no list markers. */
+.navLinUno { /* What: Navigation Link Unordered List. Why: Wide screens show the section links in a row in the bar. How: This lines them up with small gaps and no list markers. */
 
 
 	display    : flex;
@@ -129,10 +129,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Navigation Links List. Why: The links don't fit the bar on a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Navigation Link Unordered List. Why: The links don't fit the bar on a narrow screen. How: This applies 900px wide and below. */
 
 
-	.nav-links { /* What: Closed Navigation Menu List. Why: On a narrow screen the links become a menu below the bar, out of the way until the toggle opens it. How: This stacks them on the cream panel under the bar, slides it up out of view, and hides it once the slide ends, so its links leave the Tab order and screen readers. */
+	.navLinUno { /* What: Closed Navigation Link Unordered List. Why: On a narrow screen the links become a menu below the bar, out of the way until the toggle opens it. How: This stacks them on the cream panel under the bar, slides it up out of view, and hides it once the slide ends, so its links leave the Tab order and screen readers. */
 
 
 		background     : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
@@ -151,7 +151,7 @@
 
 
 	}
-	.nav-links[data-mobile-menu-open] { /* What: Open Navigation Menu List. Why: The menu should show its links once the toggle opens it. How: This slides it down into place, takes pointer input, and shows it at once. */
+	.navLinUno[data-mobile-menu-open] { /* What: Open Navigation Link Unordered List. Why: The menu should show its links once the toggle opens it. How: This slides it down into place, takes pointer input, and shows it at once. */
 
 
 		pointer-events : all;
@@ -164,11 +164,11 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Links List. Why: Someone who asked for less motion shouldn't see the menu slide. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Unordered List. Why: Someone who asked for less motion shouldn't see the menu slide. How: This applies only when the reduced-motion preference is set. */
 
 
-	.nav-links,
-	.nav-links[data-mobile-menu-open] { /* What: Motionless Navigation Links List. Why: The menu should simply open and close. How: This turns the transitions off, the open state included, since its own transition would otherwise win by specificity. */
+	.navLinUno,
+	.navLinUno[data-mobile-menu-open] { /* What: Motionless Navigation Link Unordered List. Why: The menu should simply open and close. How: This turns the transitions off, the open state included, since its own transition would otherwise win by specificity. */
 
 
 		transition : none;
@@ -180,12 +180,12 @@
 }
 
 
-/* #region nav-item */
+/* #region navLinIte */
 
-@media ( max-width : 900px ) { /* What: Narrow Navigation Item. Why: The menu's links need room between them to be tapped, while the row on a wide screen needs no item styling at all. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Navigation Link Item. Why: The menu's links need room between them to be tapped, while the row on a wide screen needs no item styling at all. How: This applies 900px wide and below. */
 
 
-	.nav-item { /* What: Spaced Navigation Item. Why: A finger needs room between links. How: This spaces the items apart down the menu. */
+	.navLinIte { /* What: Spaced Navigation Link Item. Why: A finger needs room between links. How: This spaces the items apart down the menu. */
 
 
 		margin : var( --spa-ver-bas ) 0; /* Spacing Vertical Base ~= 14.572px */
@@ -196,7 +196,7 @@
 
 }
 
-.nav-link { /* What: Navigation Link. Why: Each link names a section as a soft pill. How: This sets it in medium weight with pill padding and rounding, easing its colors. */
+.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section as a soft pill. How: This sets it in medium weight with pill padding and rounding, easing its colors. */
 
 
 	border-radius   : 999px;
@@ -210,7 +210,7 @@
 
 
 }
-.nav-link:hover { /* What: Hovered Navigation Link. Why: The link should respond to the pointer. How: This fills the pill navy with cream text. */
+.navLinAnc:hover { /* What: Hovered Navigation Link Anchor. Why: The link should respond to the pointer. How: This fills the pill navy with cream text. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
@@ -218,7 +218,7 @@
 
 
 }
-.nav-link[data-section-link-active] { /* What: Active Navigation Link. Why: The link for the section being read should stand out. How: This fills the pill with the ink color and cream text, winning over the hover look by coming after it. */
+.navLinAnc[data-section-link-active] { /* What: Active Navigation Link Anchor. Why: The link for the section being read should stand out. How: This fills the pill with the ink color and cream text, winning over the hover look by coming after it. */
 
 
 	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1a2e */
@@ -226,10 +226,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Navigation Link. Why: The menu's links are tapped rather than clicked. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Navigation Link Anchor. Why: The menu's links are tapped rather than clicked. How: This applies 900px wide and below. */
 
 
-	.nav-link { /* What: Roomy Navigation Link. Why: A bigger target is easier to tap. How: This deepens the pill's padding. */
+	.navLinAnc { /* What: Roomy Navigation Link Anchor. Why: A bigger target is easier to tap. How: This deepens the pill's padding. */
 
 
 		padding : var( --spa-ver-m01 ) var( --spa-hor-bas ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
@@ -239,10 +239,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.nav-link { /* What: Motionless Navigation Link. Why: The hover and active colors should simply switch. How: This turns the transition off. */
+	.navLinAnc { /* What: Motionless Navigation Link Anchor. Why: The hover and active colors should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -253,15 +253,15 @@
 
 }
 
-/* #endregion nav-item */
+/* #endregion navLinIte */
 
-/* #endregion nav-links */
+/* #endregion navLinUno */
 
 
 
-/* #region nav-toggle */
+/* #region navTogBut */
 
-.nav-toggle { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon in a square about 34px across with no button chrome, hidden until the narrow layout shows it. */
+.navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon in a square about 34px across with no button chrome, hidden until the narrow layout shows it. */
 
 
 	background      : none;
@@ -279,7 +279,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Navigation Toggle Button. Why: The toggle replaces the row of links on a narrow screen. How: This applies 900px wide and below. */
 
 
-	.nav-toggle { /* What: Shown Navigation Toggle Button. Why: The toggle has to appear where the links no longer fit. How: This shows it, stacked above the menu panel. */
+	.navTogBut { /* What: Shown Navigation Toggle Button. Why: The toggle has to appear where the links no longer fit. How: This shows it, stacked above the menu panel. */
 
 
 		display : flex;
@@ -291,7 +291,7 @@
 
 }
 
-.nav-toggle-bar { /* What: Navigation Toggle Bar. Why: Three bars draw the menu icon. How: This draws each as a thin, rounded ink line. */
+.togBarSpa { /* What: Toggle Bar Span. Why: Three bars draw the menu icon. How: This draws each as a thin, rounded ink line. */
 
 
 	background    : var( --tex-mai-col );                                                                                   /* Text Main Color = #1a1a2e */
@@ -301,10 +301,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Toggle Bar. Why: Someone who asked for less motion shouldn't see the icon animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Toggle Bar Span. Why: Someone who asked for less motion shouldn't see the icon animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.nav-toggle-bar { /* What: Motionless Navigation Toggle Bar. Why: Any change to the bars should simply switch. How: This turns the transitions off. */
+	.togBarSpa { /* What: Motionless Toggle Bar Span. Why: Any change to the bars should simply switch. How: This turns the transitions off. */
 
 
 		transition : none;
@@ -315,8 +315,8 @@
 
 }
 
-/* #endregion nav-toggle */
+/* #endregion navTogBut */
 
-/* #endregion nav */
+/* #endregion navBarNav */
 
 

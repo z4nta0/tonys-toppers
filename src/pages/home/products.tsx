@@ -90,28 +90,28 @@ function ProSecCom () : React.JSX.Element {
 		<section
 			id='products'
 
-			className={` ${ cssModObj.section }   ${ cssModObj.productsSection } `}
+			className={ cssModObj.homProSec }
 		>{ /* What: Products Section Element. Why: The collection is the site's main content. How: Its id stays the plain word products, since the bar links to it and it can appear in the page's address. */ }
 
 
-			<div className={ cssModObj.container }>{ /* What: Products Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Products Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={` ${ cssModObj.sectionHead }   ${ cssModObj.productsHead } `}>{ /* What: Products Head Div Element. Why: The heading and the note about Tony's work sit side by side. How: This lays them out in a row. */ }
+				<div className={ cssModObj.secHeaDiv }>{ /* What: Products Head Div Element. Why: The heading and the note about Tony's work sit side by side. How: This lays them out in a row. */ }
 
 
 					<div>{ /* What: Products Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }
 
 
-						<div className={ cssModObj.sectionLabel }>The Collection</div>{ /* What: Products Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>The Collection</div>{ /* What: Products Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
 
-						<h2 className={ cssModObj.sectionTitle }>Every piece, <em className={ cssModObj.sectionTitleAccent }>one of a kind.</em></h2>{ /* What: Products Heading Element. Why: The heading sums up the collection. How: The second half sits in an italic accent. */ }
+						<h2 className={ cssModObj.secTitHea }>Every piece, <em className={ cssModObj.titAccEmp }>one of a kind.</em></h2>{ /* What: Products Heading Element. Why: The heading sums up the collection. How: The second half sits in an italic accent. */ }
 
 
 					</div>
 
 
-					<p className={ cssModObj.sectionSub }>
+					<p className={ cssModObj.secSubPar }>
 						Tony hand-selects beads and silicone shapes for each piece, color-coordinating until
 						it's just right. No two are the same.
 					</p>{ /* What: Products Note Paragraph Element. Why: Visitors should know each piece is chosen by hand. How: This shows two sentences beside the heading. */ }
@@ -122,7 +122,7 @@ function ProSecCom () : React.JSX.Element {
 
 
 				<div
-					className={ cssModObj.filterTabs }
+					className={ cssModObj.filGroDiv }
 
 					aria-label='Filter products by category'
 					role='group'
@@ -130,7 +130,7 @@ function ProSecCom () : React.JSX.Element {
 
 
 					<button
-						className={ cssModObj.filterTab }
+						className={ cssModObj.filTogBut }
 
 						type='button'
 
@@ -147,7 +147,7 @@ function ProSecCom () : React.JSX.Element {
 						<button
 							key={ catRcdObj.sluStr }
 
-							className={ cssModObj.filterTab }
+							className={ cssModObj.filTogBut }
 
 							type='button'
 
@@ -166,7 +166,7 @@ function ProSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.productsGrid }>{ /* What: Products Grid Div Element. Why: The cards lay out in a responsive grid. How: This holds one card per visible record. */ }
+				<div className={ cssModObj.proGriDiv }>{ /* What: Products Grid Div Element. Why: The cards lay out in a responsive grid. How: This holds one card per visible record. */ }
 
 
 					{ visRcdArr.map( ( proRcdObj, proIndNum ) => ( // What: Product Card Map. Why: Each visible record gets a card. How: This renders one article per record, in order.
@@ -175,20 +175,20 @@ function ProSecCom () : React.JSX.Element {
 						<article
 							key={ proRcdObj.ideStr }
 
-							className={ cssModObj.productCard }
+							className={ cssModObj.proCarArt }
 
 							style={{ animationDelay : `${ proIndNum * 30 }ms` }} // What: Staggered Animation Delay. Why: The cards fade in one after another rather than all at once. How: Each card waits 30ms longer than the one before it.
 						>{ /* What: Product Card Article Element. Why: Each photo is shown as a card. How: Its place in the list sets when it fades in. */ }
 
 
-							<div className={ cssModObj.productTag }>{ proRcdObj.labStr }</div>{ /* What: Product Tag Div Element. Why: A tag over the photo names what kind of piece it shows. How: This shows the record's label. */ }
+							<div className={ cssModObj.proTagDiv }>{ proRcdObj.labStr }</div>{ /* What: Product Tag Div Element. Why: A tag over the photo names what kind of piece it shows. How: This shows the record's label. */ }
 
 
-							<div className={ cssModObj.productImg }>{ /* What: Product Image Div Element. Why: Every photo sits in the same portrait frame. How: This frames the photo at a 3:4 shape. */ }
+							<div className={ cssModObj.proFraDiv }>{ /* What: Product Image Div Element. Why: Every photo sits in the same portrait frame. How: This frames the photo at a 3:4 shape. */ }
 
 
 								<img
-									className={ cssModObj.productPhoto }
+									className={ cssModObj.proPhoIma }
 
 									data-element-name-hook='proPhoIma'
 
@@ -202,12 +202,12 @@ function ProSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={ cssModObj.productInfo }>{ /* What: Product Info Div Element. Why: The card's name and kind sit beneath its photo. How: This stacks them. */ }
+							<div className={ cssModObj.proInfDiv }>{ /* What: Product Info Div Element. Why: The card's name and kind sit beneath its photo. How: This stacks them. */ }
 
 
-								<div className={ cssModObj.productName }>{ proRcdObj.namStr }</div>{ /* What: Product Name Div Element. Why: Each card has a title. How: This shows the record's name. */ }
+								<div className={ cssModObj.proNamDiv }>{ proRcdObj.namStr }</div>{ /* What: Product Name Div Element. Why: Each card has a title. How: This shows the record's name. */ }
 
-								<div className={ cssModObj.productType }>{ proRcdObj.labStr }</div>{ /* What: Product Type Div Element. Why: The card repeats its kind beneath its title. How: This shows the record's label. */ }
+								<div className={ cssModObj.proTypDiv }>{ proRcdObj.labStr }</div>{ /* What: Product Type Div Element. Why: The card repeats its kind beneath its title. How: This shows the record's label. */ }
 
 
 							</div>
