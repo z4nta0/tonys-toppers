@@ -354,8 +354,9 @@ passes on `close-out`.
       renders the ICO, the 16 to 512px PNGs, and an inset apple touch icon
       on white from `public/favicon.svg`, which the head lists first. The
       head gains `theme-color` (the cream), the full Open Graph and Twitter
-      tags, and the structured data's logo and image. After the deploy,
-      check the card in a preview checker such as opengraph.xyz.
+      tags, and the structured data's logo and image. After the 1.7.0
+      deploy the user confirmed the favicon and the preview card, and
+      the sitemap is live for Google Search Console and Bing.
     - **Interaction feedback**: done 2026-10-10. Every link and button
       grows seal-and-shield's focus ring in from a zero-width outline (the
       global rule in `styles.css`), and every control with its own
@@ -391,7 +392,8 @@ passes on `close-out`.
     The user's rulings along the way are recorded above and in the rules doc:
     `Rcd` became `Rec`, a type sits 1 blank line above its declaration, every
     classed element's label expands its class, and plain lookups and lists are
-    documented once.
+    documented once. The user-level rules repo has both its Images rule and
+    these rulings committed (`35e0e71`, `d3d6e15`).
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
