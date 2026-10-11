@@ -90,27 +90,27 @@ function ProSecCom () : React.JSX.Element {
 			id='products'
 
 			className={ cssModObj.homProSec }
-		>{ /* What: Products Section Element. Why: The collection is the site's main content. How: Its id stays the plain word products, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Products Section Element. Why: The collection is the site's main content. How: Its id stays the plain word products, since the bar links to it and it can appear in the page's address. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Products Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.secHeaDiv }>{ /* What: Products Head Div Element. Why: The heading and the note about Tony's work sit side by side. How: This lays them out in a row. */ }
+				<div className={ cssModObj.secHeaDiv }>{ /* What: Section Heading Div Element. Why: The heading and the note about Tony's work sit side by side. How: This lays them out in a row. */ }
 
 
 					<div>{ /* What: Products Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>The Collection</div>{ /* What: Products Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>The Collection</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
 
-						<h2 className={ cssModObj.secTitHea }>Every piece, <em className={ cssModObj.titAccEmp }>one of a kind.</em></h2>{ /* What: Products Heading Element. Why: The heading sums up the collection. How: The second half sits in an italic accent. */ }
+						<h2 className={ cssModObj.secTitHea }>Every piece, <em className={ cssModObj.titAccEmp }>one of a kind.</em></h2>{ /* What: Section Title Heading Element. Why: The heading sums up the collection. How: The second half sits in an italic accent. */ }
 
 
 					</div>
 
 
-					<p className={ cssModObj.secSubPar }>{ /* What: Products Note Paragraph Element. Why: Visitors should know each piece is chosen by hand. How: This shows two sentences beside the heading. */ }
+					<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know each piece is chosen by hand. How: This shows two sentences beside the heading. */ }
 						Tony hand-selects beads and silicone shapes for each piece, color-coordinating until
 						it's just right. No two are the same.
 					</p>
@@ -136,7 +136,7 @@ function ProSecCom () : React.JSX.Element {
 						aria-pressed={ filKeyStr === 'all' }
 
 						onClick={ () => setFilKeyStr( 'all' ) }
-					>{ /* What: All Filter Button Element. Why: Visitors can go back to every piece. How: This chooses the all filter, and shows as pressed while it's chosen. */ }
+					>{ /* What: Filter Toggle Button Element. Why: Visitors can go back to every piece. How: This chooses the all filter, and shows as pressed while it's chosen. */ }
 						All
 					</button>
 
@@ -153,7 +153,7 @@ function ProSecCom () : React.JSX.Element {
 							aria-pressed={ filKeyStr === catRecObj.sluStr }
 
 							onClick={ () => setFilKeyStr( catRecObj.sluStr ) }
-						>{ /* What: Category Filter Button Element. Why: Visitors can narrow the grid to this category. How: This chooses the category's slug as the filter, and shows as pressed while it's chosen. */ }
+						>{ /* What: Filter Toggle Button Element. Why: Visitors can narrow the grid to this category. How: This chooses the category's slug as the filter, and shows as pressed while it's chosen. */ }
 							{ catRecObj.labStr }
 						</button>
 
@@ -182,7 +182,7 @@ function ProSecCom () : React.JSX.Element {
 
 							<div className={ cssModObj.proTagDiv }>{ proRecObj.labStr }</div>{ /* What: Product Tag Div Element. Why: A tag over the photo names what kind of piece it shows. How: This shows the record's label. */ }
 
-							<div className={ cssModObj.proFraDiv }>{ /* What: Product Image Div Element. Why: Every photo sits in the same portrait frame. How: This frames the photo at a 3:4 shape. */ }
+							<div className={ cssModObj.proFraDiv }>{ /* What: Product Frame Div Element. Why: Every photo sits in the same portrait frame. How: This frames the photo at a 3:4 shape. */ }
 
 
 								<img

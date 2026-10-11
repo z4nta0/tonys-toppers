@@ -318,7 +318,7 @@ function NavBarCom () : React.JSX.Element {
 				className={ cssModObj.navBarNav }
 
 				data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar raises into a pill once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
-			>{ /* What: Container Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, carrying data-page-scroll-active once the page scrolls. */ }
+			>{ /* What: Navigation Bar Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, carrying data-page-scroll-active once the page scrolls. */ }
 
 
 				<Link
@@ -336,7 +336,7 @@ function NavBarCom () : React.JSX.Element {
 						src={ lntSvgUrl }
 
 						alt="Tony's Toppers logo"
-					/>{ /* What: Brand Mark Image Element. Why: The bar opens with the Tony's Toppers mark. How: This shows the mark without its wordmark, since the name sits right beside it. */ }
+					/>{ /* What: Navigation Logo Image Element. Why: The bar opens with the Tony's Toppers mark. How: This shows the mark without its wordmark, since the name sits right beside it. */ }
 
 					<span>Tony's Toppers</span>{ /* What: Brand Name Span Element. Why: The bar names the business. How: This shows the name beside the mark. */ }
 
@@ -356,7 +356,7 @@ function NavBarCom () : React.JSX.Element {
 					aria-label='Toggle menu'
 
 					onClick={ () => setMenOpeBoo( ( preOpeBoo ) => !preOpeBoo ) }
-				>{ /* What: Menu Toggle Button Element. Why: On a phone the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
+				>{ /* What: Navigation Toggle Button Element. Why: On a phone the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
 
 
 					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
@@ -377,7 +377,7 @@ function NavBarCom () : React.JSX.Element {
 				>{ /* What: Navigation Menu Div Element. Why: On a phone the section links and the ways to reach Tony drop down together as one menu, while on wide screens the links sit in the bar. How: This holds the link list and the contact block, carrying data-mobile-menu-open while the menu is open. */ }
 
 
-					<ul className={ cssModObj.navLinUno }>{ /* What: Navigation Links List Element. Why: The section links sit in a row on wide screens and stack in the menu on a phone. How: This holds one item per section. */ }
+					<ul className={ cssModObj.navLinUno }>{ /* What: Navigation Link Unordered List Element. Why: The section links sit in a row on wide screens and stack in the menu on a phone. How: This holds one item per section. */ }
 
 
 						{ NAV_SEC_ARR.map( ( secRecObj, secIndNum ) => ( // What: Section Link Map. Why: Each section gets a link, and its place sets when it rises into the open menu. How: This renders one list item per section row, with its index.
@@ -400,7 +400,7 @@ function NavBarCom () : React.JSX.Element {
 									href={ `/#${ secRecObj.ideStr }` }
 
 									onClick={ ( cliEveObj ) => navSecFun( cliEveObj, secRecObj.ideStr ) }
-								>{ /* What: Section Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through navSecFun. */ }
+								>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through navSecFun. */ }
 									{ secRecObj.labStr }
 								</a>
 

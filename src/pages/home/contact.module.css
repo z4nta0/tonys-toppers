@@ -162,7 +162,7 @@
 /* #endregion secTitHea */
 
 
-.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in softened cream, capped near 50 characters a line, with room below. */
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it at the body size in softened cream, capped near 50 characters a line, with room below. */
 
 
 	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -323,19 +323,104 @@
 
 }
 
-.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went. How: This sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
+
+/* #region forSucDiv */
+
+.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went. How: This rises and fades in once as it appears, and sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
 
 
-	background    : var( --suc-tin-col );                            /* Success Tint Color = #fde68a */
-	border        : var( --bor-wid-lar ) solid var( --suc-mai-col ); /* Border Width Large ~= 2.035px, Success Main Color = #d97706 */
-	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
-	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	animation     : forSucDivShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	background    : var( --suc-tin-col );                                               /* Success Tint Color = #fde68a */
+	border        : var( --bor-wid-lar ) solid var( --suc-mai-col );                    /* Border Width Large ~= 2.035px, Success Main Color = #d97706 */
+	border-radius : var( --rad-bor-med );                                               /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                                               /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
-	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	margin-bottom : var( --spa-ver-p01 );                                               /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                          /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the note rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forSucDiv { /* What: Motionless Form Success Div. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you note should arrive rather than snap into place. How: This rises it a little from below and fades it in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+
+}
+
+.sucIcoSpa { /* What: Success Icon Span. Why: One small flourish marks the message as sent. How: This lets the check scale as a block and pops it in once with a gentle overshoot, just after the note starts to rise. */
+
+
+	animation : sucIcoSpaShowPop var( --dur-ani-p03 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	display   : inline-block;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Success Icon Span. Why: Someone who asked for less motion shouldn't see the check pop. How: This applies only when the reduced-motion preference is set. */
+
+
+	.sucIcoSpa { /* What: Motionless Success Icon Span. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the message as sent. How: This grows the check from a little smaller to full size, and the overshoot easing carries it just past full size before it settles. */
+
+
+	from {
+
+
+		transform : scale( var( --cdn-pow-002-rec ) ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+
+
+	}
+
+	to {
+
+
+		transform : scale( 1 );
+
+
+	}
+
+
+}
+
+/* #endregion forSucDiv */
 
 
 
@@ -375,7 +460,7 @@
 
 }
 
-.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it small, bold, spaced, and uppercase in ink, on its own line above the control. */
+.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it small, semibold, spaced, and uppercase in ink, on its own line above the control. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
@@ -468,16 +553,53 @@
 
 /* #region forErrPar */
 
-.forErrPar { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
+.forErrPar { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This rises and fades in once as it appears, and sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
 
 
-	background    : var( --err-tin-col );                            /* Error Tint Color = #fde8e8 */
-	border        : var( --bor-wid-lar ) solid var( --err-mai-col ); /* Border Width Large ~= 2.035px, Error Main Color = #b91c1c */
-	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
-	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	animation     : forErrParShowFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	background    : var( --err-tin-col );                                               /* Error Tint Color = #fde8e8 */
+	border        : var( --bor-wid-lar ) solid var( --err-mai-col );                    /* Border Width Large ~= 2.035px, Error Main Color = #b91c1c */
+	border-radius : var( --rad-bor-med );                                               /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                                               /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
-	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	margin-bottom : var( --spa-ver-p01 );                                               /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                          /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the note rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forErrPar { /* What: Motionless Form Error Paragraph. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This rises it a little from below and fades it in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
 
 
 }
@@ -522,6 +644,8 @@
 
 /* #endregion forErrPar */
 
+
+/* #region forSubBut */
 
 .forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its color, lift, press, and focus ring. */
 
@@ -583,6 +707,50 @@
 
 
 }
+
+.subLabSpa { /* What: Submit Label Span. Why: The label fades to its new text when a message goes out. How: This fades each new label in as it mounts. */
+
+
+	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ); /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Submit Label Span. Why: Someone who asked for less motion shouldn't see the label fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.subLabSpa { /* What: Motionless Submit Label Span. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that cross-fades reads as a response to the press. How: This fades the new label up from transparent. */
+
+
+	from {
+
+
+		opacity : 0;
+
+
+	}
+
+	to {
+
+
+		opacity : 1;
+
+
+	}
+
+
+}
+
+/* #endregion forSubBut */
 
 /* #endregion conForFor */
 

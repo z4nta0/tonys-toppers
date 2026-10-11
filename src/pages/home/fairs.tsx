@@ -74,27 +74,27 @@ function FaiSecCom () : React.JSX.Element {
 			id='fairs'
 
 			className={ cssModObj.homFaiSec }
-		>{ /* What: Fairs Section Element. Why: Visitors meet Tony at craft fairs, and the gallery shows what his table looks like. How: Its id stays the plain word fairs, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Fairs Section Element. Why: Visitors meet Tony at craft fairs, and the gallery shows what his table looks like. How: Its id stays the plain word fairs, since the bar links to it and it can appear in the page's address. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Fairs Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.secHeaDiv }>{ /* What: Fairs Head Div Element. Why: The heading and the note about the fairs sit side by side. How: This lays them out in a row. */ }
+				<div className={ cssModObj.secHeaDiv }>{ /* What: Section Heading Div Element. Why: The heading and the note about the fairs sit side by side. How: This lays them out in a row. */ }
 
 
 					<div>{ /* What: Fairs Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>At the Craft Fairs</div>{ /* What: Fairs Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>At the Craft Fairs</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
 
-						<h2 className={ cssModObj.secTitHea }>Come see Tony <em className={ cssModObj.titAccEmp }>at his table.</em></h2>{ /* What: Fairs Heading Element. Why: The heading invites visitors to find Tony in person. How: The second half sits in an italic accent. */ }
+						<h2 className={ cssModObj.secTitHea }>Come see Tony <em className={ cssModObj.titAccEmp }>at his table.</em></h2>{ /* What: Section Title Heading Element. Why: The heading invites visitors to find Tony in person. How: The second half sits in an italic accent. */ }
 
 
 					</div>
 
 
-					<p className={ cssModObj.secSubPar }>{ /* What: Fairs Note Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading. */ }
+					<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading. */ }
 						Tony sets up at craft fairs and events around Bolivar, Missouri. Here's what you'll
 						find when you stop by.
 					</p>
@@ -114,7 +114,7 @@ function FaiSecCom () : React.JSX.Element {
 							key={ faiRecObj.ideStr }
 
 							className={ cssModObj.faiPhoFig }
-						>{ /* What: Booth Photo Figure Element. Why: Each booth shot sits in the same rounded 4:5 frame. How: This frames the photo. */ }
+						>{ /* What: Fair Photo Figure Element. Why: Each booth shot sits in the same rounded 4:5 frame. How: This frames the photo. */ }
 
 
 							<img
@@ -126,7 +126,7 @@ function FaiSecCom () : React.JSX.Element {
 								width={ faiRecObj.widNum }
 
 								alt={ faiRecObj.altStr }
-							/>{ /* What: Booth Photo Image Element. Why: The gallery shows Tony's table. How: This loads the photo only as it nears the screen, described by its alt text, at its own width and height so the frame doesn't shift when it arrives. */ }
+							/>{ /* What: Fair Photo Image Element. Why: The gallery shows Tony's table. How: This loads the photo only as it nears the screen, described by its alt text, at its own width and height so the frame doesn't shift when it arrives. */ }
 
 
 						</figure>

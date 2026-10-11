@@ -73,7 +73,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and compares it with the state's baseline pixel for pixel, color for color.
 
 
-			animations        : 'disabled',  // What: Animations. Why: A looping animation would never hold still for the capture. How: This stops every animation at its start.
+			animations        : 'disabled',  // What: Animations. Why: A looping animation would never hold still for the capture. How: This fast-forwards every finite animation and transition to its end, and resets each looping one to its start, for the capture.
 			fullPage          : true,        // What: Full Page. Why: The whole state has to match, not just the first screen. How: This captures the page's full height.
 			maxDiffPixelRatio : MAX_DIF_NUM, // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.
 			threshold         : PIX_THR_NUM  // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.

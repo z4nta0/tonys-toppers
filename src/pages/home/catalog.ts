@@ -49,6 +49,8 @@ type CatSluTyp = 'pen-topper' | 'wine-stopper' | 'keychain' | 'dog-necklace' | '
 
 // #region Constants
 
+// #region CAT_LAB_OBJ
+
 /**
  * CAT_LAB_OBJ = Category Label Object
  *
@@ -75,6 +77,8 @@ const CAT_LAB_OBJ : Record< CatSluTyp, string > = { // What: Category Label Obje
 
 
 };
+
+// #endregion CAT_LAB_OBJ
 
 
 

@@ -79,25 +79,25 @@ function NotFouCom () : React.JSX.Element {
 
 
 
-			<section className={ cssModObj.nofPagSec }>{ /* What: Not Found Section Element. Why: An unknown address should land somewhere useful. How: Its extra top padding clears the fixed bar. */ }
+			<section className={ cssModObj.nofPagSec }>{ /* What: Not-Found Page Section Element. Why: An unknown address should land somewhere useful. How: Its extra top padding clears the fixed bar. */ }
 
 
-				<div className={ cssModObj.pagConDiv }>{ /* What: Not Found Container Div Element. Why: The page's few lines read best centered. How: This centers them at the page's width with room above and below. */ }
+				<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The page's few lines read best centered. How: This centers them at the page's width with room above and below. */ }
 
 
-					<div className={ cssModObj.eyeLabDiv }>{ /* What: Not Found Label Div Element. Why: A small label says what happened. How: This shows 404, centered with its leading line. */ }
+					<div className={ cssModObj.eyeLabDiv }>{ /* What: Eyebrow Label Div Element. Why: A small label says what happened. How: This shows 404, centered with its leading line. */ }
 						404
 					</div>
 
-					<h1 className={ cssModObj.secTitHea }>{ /* What: Not Found Heading Element. Why: The heading says the page wasn't found. How: The last word sits in an italic accent. */ }
+					<h1 className={ cssModObj.secTitHea }>{ /* What: Section Title Heading Element. Why: The heading says the page wasn't found. How: The last word sits in an italic accent. */ }
 						Page not <em className={ cssModObj.titAccEmp }>found.</em>
 					</h1>
 
-					<p className={ cssModObj.nofLedPar }>{ /* What: Not Found Note Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one line in the soft ink color. */ }
+					<p className={ cssModObj.nofLedPar }>{ /* What: Not-Found Lede Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one line in the soft ink color. */ }
 						That page doesn't exist, but Tony's pens and stoppers do.
 					</p>
 
-					<div className={ cssModObj.nofActDiv }>{ /* What: Not Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the home and collection buttons side by side, wrapping when they run out of room. */ }
+					<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the home and collection buttons side by side, wrapping when they run out of room. */ }
 
 
 						<Link

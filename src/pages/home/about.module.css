@@ -274,7 +274,7 @@
 /* #endregion secTitHea */
 
 
-.bioStoPar { /* What: Biography Story Paragraph. Why: The story should read comfortably. How: This sets it a little large in the soft ink color, generously leaded, with room between paragraphs. */
+.bioStoPar { /* What: Biography Story Paragraph. Why: The story should read comfortably. How: This sets it in the soft ink color at the body's size and leading, with room between paragraphs. */
 
 
 	color         : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */

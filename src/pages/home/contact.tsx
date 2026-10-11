@@ -288,10 +288,10 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Contact Section Element. Why: The page ends where visitors reach Tony. How: Its id stays the plain word contact, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach Tony. How: Its id stays the plain word contact, since the bar links to it and it can appear in the page's address. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Contact Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
 				<div className={ cssModObj.conGriDiv }>{ /* What: Contact Grid Div Element. Why: The ways to reach Tony and the form sit side by side on wide screens. How: This lays out the two columns. */ }
@@ -300,11 +300,11 @@ function ConSecCom () : React.JSX.Element {
 					<div>{ /* What: Contact Info Div Element. Why: The direct ways to reach Tony read as one column. How: This stacks the label, heading, note, and contact rows, with no styling of its own. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>Get in Touch</div>{ /* What: Contact Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>Get in Touch</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
 
-						<h2 className={ cssModObj.secTitHea }>Want a piece, or have a <em className={ cssModObj.titAccEmp }>question?</em></h2>{ /* What: Contact Heading Element. Why: The heading invites visitors to write. How: The question sits in an italic accent. */ }
+						<h2 className={ cssModObj.secTitHea }>Want a piece, or have a <em className={ cssModObj.titAccEmp }>question?</em></h2>{ /* What: Section Title Heading Element. Why: The heading invites visitors to write. How: The question sits in an italic accent. */ }
 
-						<p className={ cssModObj.secSubPar }>{ /* What: Contact Note Paragraph Element. Why: Visitors should know Tony welcomes messages. How: This shows two sentences beneath the heading. */ }
+						<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know Tony welcomes messages. How: This shows two sentences beneath the heading. */ }
 							Tony loves hearing from people who appreciate his work. Reach out directly or drop a
 							note below, and he'll get back to you.
 						</p>
@@ -314,21 +314,21 @@ function ConSecCom () : React.JSX.Element {
 							className={ cssModObj.infRowAnc }
 
 							href='tel:4177330681'
-						>{ /* What: Phone Contact Anchor Element. Why: Calling or texting is the quickest way to reach Tony. How: This dials his number on phones. */ }
+						>{ /* What: Info Row Anchor Element. Why: Calling or texting is the quickest way to reach Tony. How: This dials his number on phones. */ }
 
 
 							<div
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>☎</div>{ /* What: Phone Icon Div Element. Why: A telephone marks the row at a glance. How: It's hidden from screen readers, which would read it aloud as black telephone. */ }
+							>☎</div>{ /* What: Info Icon Div Element. Why: A telephone marks the row at a glance. How: It's hidden from screen readers, which would read it aloud as black telephone. */ }
 
 							<div>{ /* What: Phone Text Div Element. Why: The row's label and number stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Call or text</div>{ /* What: Phone Label Div Element. Why: The row says what to do. How: This shows call or text. */ }
+								<div className={ cssModObj.infLabDiv }>Call or text</div>{ /* What: Info Label Div Element. Why: The row says what to do. How: This shows call or text. */ }
 
-								<div className={ cssModObj.infValDiv }>(417) 733-0681</div>{ /* What: Phone Value Div Element. Why: The number itself is the row's main line. How: This shows it. */ }
+								<div className={ cssModObj.infValDiv }>(417) 733-0681</div>{ /* What: Info Value Div Element. Why: The number itself is the row's main line. How: This shows it. */ }
 
 
 							</div>
@@ -343,21 +343,21 @@ function ConSecCom () : React.JSX.Element {
 							href='https://www.facebook.com/profile.php?id=61560009400871'
 							rel='noopener noreferrer'
 							target='_blank'
-						>{ /* What: Facebook Contact Anchor Element. Why: Tony shares new pieces and where he'll be on his Facebook page. How: This opens the page in a new tab, without giving it access to this one. */ }
+						>{ /* What: Info Row Anchor Element. Why: Tony shares new pieces and where he'll be on his Facebook page. How: This opens the page in a new tab, without giving it access to this one. */ }
 
 
 							<div
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>📲</div>{ /* What: Facebook Icon Div Element. Why: A phone marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
+							>📲</div>{ /* What: Info Icon Div Element. Why: A phone marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
 
 							<div>{ /* What: Facebook Text Div Element. Why: The row's label and name stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Facebook Page</div>{ /* What: Facebook Label Div Element. Why: The row says where it goes. How: This shows Facebook page. */ }
+								<div className={ cssModObj.infLabDiv }>Facebook Page</div>{ /* What: Info Label Div Element. Why: The row says where it goes. How: This shows Facebook page. */ }
 
-								<div className={ cssModObj.infValDiv }>Tony's Toppers</div>{ /* What: Facebook Value Div Element. Why: The page's name is the row's main line. How: This shows it. */ }
+								<div className={ cssModObj.infValDiv }>Tony's Toppers</div>{ /* What: Info Value Div Element. Why: The page's name is the row's main line. How: This shows it. */ }
 
 
 							</div>
@@ -366,21 +366,21 @@ function ConSecCom () : React.JSX.Element {
 						</a>
 
 
-						<div className={ cssModObj.infRowDiv }>{ /* What: Location Contact Div Element. Why: Visitors should know where Tony is based. How: This shows his home town in the same style as the links, without being one. */ }
+						<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: Visitors should know where Tony is based. How: This shows his home town in the same style as the links, without being one. */ }
 
 
 							<div
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>📍</div>{ /* What: Location Icon Div Element. Why: A pin marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
+							>📍</div>{ /* What: Info Icon Div Element. Why: A pin marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
 
 							<div>{ /* What: Location Text Div Element. Why: The row's label and town stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Based in</div>{ /* What: Location Label Div Element. Why: The row says what it shows. How: This shows based in. */ }
+								<div className={ cssModObj.infLabDiv }>Based in</div>{ /* What: Info Label Div Element. Why: The row says what it shows. How: This shows based in. */ }
 
-								<div className={ cssModObj.infValDiv }>Bolivar, Missouri</div>{ /* What: Location Value Div Element. Why: The town is the row's main line. How: This shows it at the same size as the other rows' values. */ }
+								<div className={ cssModObj.infValDiv }>Bolivar, Missouri</div>{ /* What: Info Value Div Element. Why: The town is the row's main line. How: This shows it at the same size as the other rows' values. */ }
 
 
 							</div>
@@ -400,7 +400,7 @@ function ConSecCom () : React.JSX.Element {
 						name='contactForm'
 
 						onSubmit={ forSubFun }
-					>{ /* What: Contact Form Element. Why: Visitors can send Tony a message without leaving the site. How: Netlify Forms records it under the contactForm name, matching the hidden copy in index.html, while forSubFun sends it in the background once the browser's own checks pass: the name, email, and message are required, and the email has to look like an address. */ }
+					>{ /* What: Contact Form Form Element. Why: Visitors can send Tony a message without leaving the site. How: Netlify Forms records it under the contactForm name, matching the hidden copy in index.html, while forSubFun sends it in the background once the browser's own checks pass: the name, email, and message are required, and the email has to look like an address. */ }
 
 
 						{ forSenBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending. How: This renders it while forSenBoo is true.
@@ -410,8 +410,8 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forSucDiv }
 
 								role='status'
-							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: Its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
-								<span aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
+							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: It rises in with its check popping once, and its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
+								<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
 							</div>
 
 
@@ -421,14 +421,14 @@ function ConSecCom () : React.JSX.Element {
 						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields sit side by side. How: This lays out the two fields in a row. */ }
 
 
-							<div className={ cssModObj.forFieDiv }>{ /* What: Name Field Div Element. Why: The label and input read as one field. How: This stacks them. */ }
+							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The label and input read as one field. How: This stacks them. */ }
 
 
 								<label
 									className={ cssModObj.forFieLab }
 
 									htmlFor='namFieInp'
-								>{ /* What: Name Label Element. Why: The field needs a visible name. How: This labels the name input. */ }
+								>{ /* What: Form Field Label Element. Why: The field needs a visible name. How: This labels the name input. */ }
 									Your Name
 								</label>
 
@@ -444,19 +444,19 @@ function ConSecCom () : React.JSX.Element {
 									value={ forDatObj.name }
 
 									onChange={ fieChaFun }
-								/>{ /* What: Name Input Element. Why: Tony should know who's writing. How: Its name, name, is the field Netlify records. */ }
+								/>{ /* What: Form Field Input Element. Why: Tony should know who's writing. How: Its name, name, is the field Netlify records. */ }
 
 
 							</div>
 
-							<div className={ cssModObj.forFieDiv }>{ /* What: Email Field Div Element. Why: The label and input read as one field. How: This stacks them. */ }
+							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The label and input read as one field. How: This stacks them. */ }
 
 
 								<label
 									className={ cssModObj.forFieLab }
 
 									htmlFor='emaFieInp'
-								>{ /* What: Email Label Element. Why: The field needs a visible name. How: This labels the email input. */ }
+								>{ /* What: Form Field Label Element. Why: The field needs a visible name. How: This labels the email input. */ }
 									Email
 								</label>
 
@@ -472,7 +472,7 @@ function ConSecCom () : React.JSX.Element {
 									value={ forDatObj.email }
 
 									onChange={ fieChaFun }
-								/>{ /* What: Email Input Element. Why: Tony needs a way to reply. How: Its name, email, is the field Netlify records. */ }
+								/>{ /* What: Form Field Input Element. Why: Tony needs a way to reply. How: Its name, email, is the field Netlify records. */ }
 
 
 							</div>
@@ -481,14 +481,14 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.forFieDiv }>{ /* What: Interest Field Div Element. Why: The label and dropdown read as one field. How: This stacks them. */ }
+						<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The label and dropdown read as one field. How: This stacks them. */ }
 
 
 							<label
 								className={ cssModObj.forFieLab }
 
 								htmlFor='intFieSel'
-							>{ /* What: Interest Label Element. Why: The field needs a visible name. How: This labels the interest dropdown. */ }
+							>{ /* What: Form Field Label Element. Why: The field needs a visible name. How: This labels the interest dropdown. */ }
 								I'm interested in
 							</label>
 
@@ -502,7 +502,7 @@ function ConSecCom () : React.JSX.Element {
 								value={ forDatObj.interest }
 
 								onChange={ fieChaFun }
-							>{ /* What: Interest Select Element. Why: Tony should know what the visitor is after. How: Its name, interest, is the field Netlify records. */ }
+							>{ /* What: Form Field Select Element. Why: Tony should know what the visitor is after. How: Its name, interest, is the field Netlify records. */ }
 
 
 								{ INT_OPT_ARR.map( ( intOptStr ) => ( // What: Interest Option Map. Why: Each choice gets an option. How: This renders one option per interest.
@@ -523,14 +523,14 @@ function ConSecCom () : React.JSX.Element {
 
 						</div>
 
-						<div className={ cssModObj.forFieDiv }>{ /* What: Message Field Div Element. Why: The label and text box read as one field. How: This stacks them. */ }
+						<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The label and text box read as one field. How: This stacks them. */ }
 
 
 							<label
 								className={ cssModObj.forFieLab }
 
 								htmlFor='mesFieTex'
-							>{ /* What: Message Label Element. Why: The field needs a visible name. How: This labels the message box. */ }
+							>{ /* What: Form Field Label Element. Why: The field needs a visible name. How: This labels the message box. */ }
 								Message
 							</label>
 
@@ -546,7 +546,7 @@ function ConSecCom () : React.JSX.Element {
 								value={ forDatObj.message }
 
 								onChange={ fieChaFun }
-							/>{ /* What: Message Textarea Element. Why: The visitor says what they have in mind. How: Its name, message, is the field Netlify records. */ }
+							/>{ /* What: Form Field Textarea Element. Why: The visitor says what they have in mind. How: Its name, message, is the field Netlify records. */ }
 
 
 						</div>
@@ -579,8 +579,18 @@ function ConSecCom () : React.JSX.Element {
 							type='submit'
 
 							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
-						>{ /* What: Send Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is disabled while a request is out. */ }
-							{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads Sending... while a request is out and Send Message otherwise. */ }
+						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is disabled while a request is out. */ }
+
+
+							<span
+								key={ senProBoo ? 'sending' : 'ready' } // What: Label Key. Why: A new key remounts the label, which replays its fade-in. How: This changes whenever the button switches between ready and sending.
+
+								className={ cssModObj.subLabSpa }
+							>{ /* What: Submit Label Span Element. Why: The label fades to its new text when a message goes out. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
+								{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads Sending... while a request is out and Send Message otherwise. */ }
+							</span>
+
+
 						</button>
 
 

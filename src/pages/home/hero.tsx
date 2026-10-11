@@ -120,12 +120,12 @@ function HerSecCom () : React.JSX.Element {
 			id='home'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
+		>{ /* What: Home Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
 
 
-			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: First Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: Hero Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
 
-			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivBlue } `} />{ /* What: Second Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivBlue } `} />{ /* What: Hero Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
 
 
 
@@ -137,7 +137,7 @@ function HerSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.herEyeSpa }>Handcrafted in Bolivar, Missouri</span>{ /* What: Hero Eyebrow Span Element. Why: Visitors should know where the pieces are made before anything else. How: This shows the town above the headline. */ }
 
-					<h1 className={ cssModObj.herTitHea }>Crafted by hand &amp; <span className={ cssModObj.titAccSpa }>made with love.</span></h1>{ /* What: Hero Heading Element. Why: The headline sums up the business in one line. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
+					<h1 className={ cssModObj.herTitHea }>Crafted by hand &amp; <span className={ cssModObj.titAccSpa }>made with love.</span></h1>{ /* What: Hero Title Heading Element. Why: The headline sums up the business in one line. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
 
 					<p className={ cssModObj.herLedPar }>{ /* What: Hero Lede Paragraph Element. Why: A short pitch says what Tony makes and why it's special. How: This shows two sentences beneath the headline. */ }
 						Tony Mawhiney designs and beads every piece by hand: color-coordinated, carefully
@@ -155,7 +155,7 @@ function HerSecCom () : React.JSX.Element {
 							aria-label='See the collection' // What: Collection Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
 
 							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'products' ) }
-						>{ /* What: Collection Button Anchor Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the products section through scrSecFun. */ }
+						>{ /* What: Button Base Anchor Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the products section through scrSecFun. */ }
 							See the collection →
 						</a>
 
@@ -165,7 +165,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#about'
 
 							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'about' ) }
-						>{ /* What: Meet Tony Button Anchor Element. Why: Visitors want to meet the maker. How: This scrolls to Tony's story through scrSecFun. */ }
+						>{ /* What: Button Base Anchor Element. Why: Visitors want to meet the maker. How: This scrolls to Tony's story through scrSecFun. */ }
 							Meet Tony
 						</a>
 
@@ -190,7 +190,7 @@ function HerSecCom () : React.JSX.Element {
 							width={ PHO_SIZ_OBJ[ 'tony-cartoon' ].widNum }
 
 							alt='Cartoon illustration of Tony'
-						/>{ /* What: Hero Cartoon Image Element. Why: The hero shows Tony as his cartoon. How: This loads the cartoon portrait. */ }
+						/>{ /* What: Portrait Cartoon Image Element. Why: The hero shows Tony as his cartoon. How: This loads the cartoon portrait. */ }
 
 
 					</div>
