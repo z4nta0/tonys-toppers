@@ -54,11 +54,32 @@ beside them writes resized WebP copies into `src/`. The logo and favicon
 come from the existing SVGs (`logo.svg`, `logo-notext.svg`).
 
 ## Horizontal layout
-Decided 2026-10-10. Everything else is converted first, the vertical rhythm
-included; then the work stops so the user can compare the current numbers,
-the vertical rhythm numbers, and the horizontal rhythm numbers before
-choosing which fits best. The core design numbers match the other projects:
-the plastic ratio, with 1rem as the 11px base and body text at Base Plus 1.
+Decided 2026-10-10 by the user after comparing the current numbers with the
+horizontal rhythm, following reese-roofing's and seal-and-shield's method.
+The core design numbers match the other projects: the plastic ratio, with
+1rem as the 11px base and body text at Base Plus 1. Built in three commits
+so any of it can be rolled back with `git revert` (newest first, since the
+later two read the first one's tokens): `d852b2f` (layout clamps and the
+content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
+- **Fluid (horizontal rhythm)**: layout values only. The page gutter
+  (`--gut-sid-pad`, seal-and-shield's own), the column gaps between section
+  columns, the section head's gap, the grid gaps, the contact form card's
+  side padding, the contact rows' side padding, and the buttons' side
+  padding are each a `clamp()` of a `--hor-rhy-*` step between two
+  `--spa-hor-*` steps.
+- **Fixed (rem steps)**: everything inside a component: small gaps, the
+  filter, tag, card, and field padding, and the bar links' padding.
+- **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as the
+  other projects, up from 1,200px.
+- **Hero picture**: the portrait ring takes `max()` of a rhythm-step floor
+  and a horizontal step, as seal-and-shield's logo does. The picture stage
+  around it collapses to no size, since its auto side margins shrink it to
+  its absolutely placed contents, so its cap has no effect; step 11 can
+  revisit the hero's structure.
+- **Grid cards**: the products' and gallery's minimum card widths take
+  `max()` of about 138px and a horizontal step (020 and 019), replacing the
+  narrow-screen override. A 320px screen shows one column of each, the
+  same as before.
 
 ## Directory structure
 Decided 2026-10-10, matching reese-roofing's and seal-and-shield's adaptation
@@ -264,7 +285,8 @@ passes on `close-out`.
      user), though iOS Safari zooms the page when a field under 16px is
      tapped, the same as seal-and-shield.
 10. **Horizontal layout comparison** (see above), then a WAVE and
-    accessibility review.
+    accessibility review. The horizontal layout was done 2026-10-10 (see
+    "## Horizontal layout"); the review is still ahead.
 11. **New features**: the 404 page, security headers, image optimization,
     SEO, social previews and the favicon set, and interaction feedback. Once
     the photos carry their width and height, recheck WebKit's phone menu
