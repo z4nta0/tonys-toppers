@@ -65,21 +65,39 @@ const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message
 
 
 
+// #region INT_OPT_ARR
+
+/**
+ * INT_OPT_ARR = Interest Option Array
+ *
+ * @summary
+ * The choices the contact form's interest field offers, in the order they're
+ * listed, each both the option's text and the value sent. Most rows simply
+ * name one kind of piece Tony makes, so they carry no comment of their own;
+ * only the default first choice, the custom piece, and the friendly hello
+ * note why they're there.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The interest field lists every choice in this order. How: Each entry is one option's text and value.
 
 
-	'A pen topper',      // What: Pen Topper Option. Why: Pen toppers are Tony's first and biggest line. How: This is the default choice.
-	'A wine stopper',    // What: Wine Stopper Option. Why: Visitors may want a wine stopper. How: This offers it.
-	'A keychain',        // What: Keychain Option. Why: Visitors may want a keychain. How: This offers it.
-	'A dog necklace',    // What: Dog Necklace Option. Why: Visitors may want a dog necklace. How: This offers it.
-	'A car freshie',     // What: Car Freshie Option. Why: Visitors may want a car freshie. How: This offers it.
-	'A name badge reel', // What: Name Badge Reel Option. Why: Visitors may want a badge reel. How: This offers it.
-	'A phone grip',      // What: Phone Grip Option. Why: Visitors may want a phone grip. How: This offers it.
-	'A custom piece',    // What: Custom Piece Option. Why: Tony makes pieces to order. How: This offers a custom request.
-	'Just saying hi'     // What: Saying Hi Option. Why: Not every message is an order. How: This offers a friendly note.
+	'A pen topper',   // What: Pen Topper Option. Why: Pen toppers are Tony's first and biggest line. How: This is the default choice.
+	'A wine stopper',
+	'A keychain',
+	'A dog necklace',
+	'A car freshie',
+	'A name badge reel',
+	'A phone grip',
+	'A custom piece', // What: Custom Piece Option. Why: Tony makes pieces to order. How: This offers a custom request.
+	'Just saying hi'  // What: Saying Hi Option. Why: Not every message is an order. How: This offers a friendly note.
 
 
 ];
+
+// #endregion INT_OPT_ARR
 
 // #endregion Constants
 

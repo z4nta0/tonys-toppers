@@ -30,10 +30,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Not-Found Page Section. Why: The wide bottom padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.nofPagSec { /* What: Compact Not-Found Page Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the bottom padding and keeps about 138px on top. */
+	.nofPagSec { /* What: Compact Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen, while the top still has to clear the bar. How: This trims the bottom padding and keeps about 138px on top. */
 
 
 		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */

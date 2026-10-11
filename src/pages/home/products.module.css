@@ -31,10 +31,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Home Products Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Home Products Section. Why: The tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.homProSec { /* What: Compact Home Products Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+	.homProSec { /* What: Compact Home Products Section. Why: The tall padding wastes a phone's short screen. How: This trims the top and bottom padding, keeping the gutter. */
 
 
 		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
@@ -171,7 +171,7 @@
 
 /* #region filGroDiv */
 
-.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen. */
+.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen, above the band's dot grid. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
@@ -183,6 +183,8 @@
 	margin-top    : var( --spa-ver-bas );                            /* Spacing Vertical Base ~= 14.572px */
 	max-width     : 100%;
 	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
+	position      : relative;
+	z-index       : 1;                                               /* What: Strip Stack Level. Why: The strip's white has to sit over the band's dot grid, which is positioned at 0. How: This lifts the strip one level above the grid, like the heading and the cards. */
 
 
 }

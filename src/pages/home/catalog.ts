@@ -49,17 +49,29 @@ type CatSluTyp = 'pen-topper' | 'wine-stopper' | 'keychain' | 'dog-necklace' | '
 
 // #region Constants
 
+/**
+ * CAT_LAB_OBJ = Category Label Object
+ *
+ * @summary
+ * The singular name of each kind of piece, keyed by its category's slug, which
+ * a card shows as its tag and subtitle and numbers in its title. Every row is
+ * a slug and its label, so no row needs a comment of its own.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const CAT_LAB_OBJ : Record< CatSluTyp, string > = { // What: Category Label Object. Why: A card names its piece in the singular. How: This maps each category's slug to its singular label.
 
 
-	'car-freshie'     : 'Car Freshie',     // What: Car Freshie Label. Why: A car freshie card names its piece. How: This is the singular label.
-	'dog-necklace'    : 'Dog Necklace',    // What: Dog Necklace Label. Why: A dog necklace card names its piece. How: This is the singular label.
-	'keychain'        : 'Keychain',        // What: Keychain Label. Why: A keychain card names its piece. How: This is the singular label.
-	'name-badge-reel' : 'Name Badge Reel', // What: Name Badge Reel Label. Why: A badge reel card names its piece. How: This is the singular label.
-	'pen-topper'      : 'Pen Topper',      // What: Pen Topper Label. Why: A pen topper card names its piece. How: This is the singular label.
-	'phone-grip'      : 'Phone Grip',      // What: Phone Grip Label. Why: A phone grip card names its piece. How: This is the singular label.
-	'straw-charm'     : 'Straw Charm',     // What: Straw Charm Label. Why: A straw charm card names its piece. How: This is the singular label.
-	'wine-stopper'    : 'Wine Stopper'     // What: Wine Stopper Label. Why: A wine stopper card names its piece. How: This is the singular label.
+	'car-freshie'     : 'Car Freshie',
+	'dog-necklace'    : 'Dog Necklace',
+	'keychain'        : 'Keychain',
+	'name-badge-reel' : 'Name Badge Reel',
+	'pen-topper'      : 'Pen Topper',
+	'phone-grip'      : 'Phone Grip',
+	'straw-charm'     : 'Straw Charm',
+	'wine-stopper'    : 'Wine Stopper'
 
 
 };

@@ -40,7 +40,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Home Hero Section. Why: The portrait moves above the words, so the top needs more room below the bar and the bottom less. How: This applies 900px wide and below. */
 
 
-	.homHerSec { /* What: Compact Home Hero Section. Why: A narrow screen needs its width for the content, and the portrait at the top needs room below the bar. How: This trims the bottom padding and adds a step of room on top. */
+	.homHerSec { /* What: Compact Home Hero Section. Why: The portrait at the top needs room below the bar, and the bottom needs less. How: This trims the bottom padding and adds a step of room on top. */
 
 
 		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 5 ~= 59.447px */
@@ -459,7 +459,7 @@
 	border-radius    : 50%;
 	display          : grid;
 	height           : var( --por-rin-wid );                                      /* Portrait Ring Width, set by its parent */
-	inset            : 0 0 0 calc( var( --her-sti-wid ) - var( --spa-hor-m01 ) ); /* Hero Sticker Width, set by its parent, Spacing Horizontal Base Minus 1 = 11px, halved to = 5.5px */ /* What: Sticker Room Inset. Why: The sticker hangs off the ring's left edge, so the pair would sit off center. How: The left inset is the sticker's overhang, and the auto margins center the ring in the rest of the stage. */
+	inset            : 0 0 0 calc( var( --her-sti-wid ) - var( --spa-hor-m01 ) ); /* Hero Sticker Width, set by its parent, Spacing Horizontal Base Minus 1 = 11px */ /* What: Sticker Room Inset. Why: The sticker hangs off the ring's left edge, so the pair would sit off center. How: The left inset is the sticker's overhang, and the auto margins center the ring in the rest of the stage. */
 	margin           : auto;
 	place-items      : center;
 	position         : absolute;

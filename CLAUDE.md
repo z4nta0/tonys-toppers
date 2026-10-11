@@ -368,16 +368,19 @@ passes on `close-out`.
       filters shade and lift, the secondary buttons and contact rows lift,
       and the form fields darken their borders. The product cards' entrance
       now fills `backwards`, so their hover lift finally shows.
-    - **Close-out rulings** (decided 2026-10-11 by the user): the navy
-      buttons with hard shadows (the hero's and 404 page's primary
-      buttons, the form's Send Message, the menu's call button) lighten to
-      `--acc-hov-col` on hover as they lift, and press in to 0.97 back onto
-      their resting shadow, like every other button. The product cards lift
-      about 2px, the rule's size, not 6px, and show the normal cursor, since
-      they aren't links. The footer spells out Bolivar, Missouri, like the
-      rest of the page; only the page title, the preview card, and the
-      structured data use MO, where length or format needs it. The same holds for every Missouri
-      town the page names, so Tony's story spells out Grandview, Missouri.
+    - **Close-out rulings** (decided 2026-10-11 by the user): the navy buttons
+      with hard shadows (the hero's and 404 page's primary buttons, the form's
+      Send Message, the menu's call button) lighten to `--acc-hov-col` on hover
+      as they lift, and press in to 0.97 back onto their resting shadow, like
+      every other button. The product cards lift about 2px, the rule's size,
+      not 6px, and show the normal cursor, since they aren't links. The footer
+      spells out Bolivar, Missouri, like the rest of the page; only the page
+      title, the preview card, and the structured data use MO, where length or
+      format needs it. The same holds for every Missouri town the page names,
+      so Tony's story spells out Grandview, Missouri. The phone menu's panel
+      decelerates as it slides in and accelerates as it slides out, and the
+      Products band's filter strip sits above the band's dot grid like the
+      heading and the cards.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in

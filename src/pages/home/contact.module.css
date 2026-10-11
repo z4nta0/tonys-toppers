@@ -35,10 +35,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Home Contact Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Home Contact Section. Why: The tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.homConSec { /* What: Compact Home Contact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+	.homConSec { /* What: Compact Home Contact Section. Why: The tall padding wastes a phone's short screen. How: This trims the top and bottom padding, keeping the gutter. */
 
 
 		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
@@ -309,10 +309,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Contact Form Form. Why: The card's wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Contact Form Form. Why: The card's tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.conForFor { /* What: Compact Contact Form Form. Why: The fields need the narrow screen's width. How: This trims the card's padding. */
+	.conForFor { /* What: Compact Contact Form Form. Why: The card's tall padding wastes a phone's short screen. How: This trims the card's top and bottom padding, keeping its sides. */
 
 
 		padding : var( --spa-ver-p02 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */

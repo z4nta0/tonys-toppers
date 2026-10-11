@@ -32,10 +32,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Home About Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Home About Section. Why: The tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.homAboSec { /* What: Compact Home About Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+	.homAboSec { /* What: Compact Home About Section. Why: The tall padding wastes a phone's short screen. How: This trims the top and bottom padding, keeping the gutter. */
 
 
 		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
