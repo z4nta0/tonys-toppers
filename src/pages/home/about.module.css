@@ -23,11 +23,12 @@
 
 /* #region homAboSec */
 
-.homAboSec { /* What: Home About Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+.homAboSec { /* What: Home About Section. Why: Tony's story sits on its own band, set apart from the craft fair gallery above it, with the same generous padding as every home page section. How: This fills it with the deeper cream the products band uses, pads it all round, and positions it, with the padding copied from the shared section. */
 
 
-	padding  : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
-	position : relative;
+	background : var( --bac-sun-col );                      /* Background Sunken Color ~= #f5edd6 */
+	padding    : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
+	position   : relative;
 
 
 }
