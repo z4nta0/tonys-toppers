@@ -18,13 +18,14 @@ import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why
  * carries its size from photo-sizes.ts. A single piece's photo is named after
  * its category and its number (pen-topper-3.webp), so each category's photos
  * are read straight from the folder in number order, and adding one only means
- * adding its file, after running npm run photos. The sets and booth shots are
- * named by hand, so a misspelled or missing one would stop the page from
- * loading, and a new one's name has to match its file exactly. Two kinds of
- * photo show more than one category at once, and list theirs by hand: the pen
- * and wine stopper sets, one card each under both filters, and the craft fair
- * booth shots, which the gallery shows and each tagged category's filter
- * includes, while the All list leaves them out.
+ * adding its file and its description in PHO_ALT_OBJ, then running npm run
+ * photos. The sets and booth shots are named by hand, so a misspelled or
+ * missing one would stop the page from loading, and a new one's name has to
+ * match its file exactly. Two kinds of photo show more than one category at
+ * once, and list theirs by hand: the pen and wine stopper sets, one card each
+ * under both filters, and the craft fair booth shots, which the gallery shows
+ * and each tagged category's filter includes, while the All list leaves them
+ * out.
  *
  * Sections:
  *  - Types
@@ -256,8 +257,8 @@ type ProRecTyp = { // What: Product Record Type. Why: The products grid and the 
 	heiNum : number,      // What: Height Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's height in pixels, from photo-sizes.ts.
 	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
 	imaStr : string,      // What: Image String. Why: The card shows its photo. How: This is the photo's built URL.
-	labStr : string,      // What: Label String. Why: The card's tag and subtitle name what kind of piece it shows. How: This is the category's singular label, or both labels for a set.
-	namStr : string,      // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind.
+	labStr : string,      // What: Label String. Why: The card's tag and subtitle name what kind of piece it shows. How: This is the category's singular label, both labels for a set, or Craft Fair Table for a booth shot.
+	namStr : string,      // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind, with Set before the number for a set.
 	widNum : number       // What: Width Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's width in pixels, from photo-sizes.ts.
 
 

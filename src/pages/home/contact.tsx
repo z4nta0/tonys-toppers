@@ -119,9 +119,9 @@ function ConSecCom () : React.JSX.Element {
 
 
 	const [ forDatObj, setForDatObj ] = useState< ForStaTyp >( FOR_EMP_OBJ ); // What: Form Data Object And Setter. Why: The form's fields are controlled. How: This holds every field's value, starting empty.
-	const [ forErrBoo, setForErrBoo ] = useState( false );                  // What: Form Error Boolean And Setter. Why: A visitor whose message didn't go through has to be told, with their details kept for a retry. How: This holds whether the error note is showing.
-	const [ forSenBoo, setForSenBoo ] = useState( false );                  // What: Form Sent Boolean And Setter. Why: The thank-you note shows only right after a confirmed send. How: This holds whether it's showing.
-	const [ senProBoo, setSenProBoo ] = useState( false );                  // What: Sending Progress Boolean And Setter. Why: The visitor should see a message is on its way, and shouldn't send it twice. How: This holds whether a request is out.
+	const [ forErrBoo, setForErrBoo ] = useState( false );                    // What: Form Error Boolean And Setter. Why: A visitor whose message didn't go through has to be told, with their details kept for a retry. How: This holds whether the error note is showing.
+	const [ forSenBoo, setForSenBoo ] = useState( false );                    // What: Form Sent Boolean And Setter. Why: The thank-you note shows only right after a confirmed send. How: This holds whether it's showing.
+	const [ senProBoo, setSenProBoo ] = useState( false );                    // What: Sending Progress Boolean And Setter. Why: The visitor should see a message is on its way, and shouldn't send it twice. How: This holds whether a request is out.
 
 
 	// #region fieChaFun
@@ -203,7 +203,7 @@ function ConSecCom () : React.JSX.Element {
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: The browser would otherwise leave the page for Netlify's own thank-you page. How: This stops the form's own submission.
 
 
-		const forCurEle = subEveObj.target as HTMLFormElement;                               // What: Form Current Element. Why: The fields are read from the form itself. How: This is the submitted form. // What: Type Assertion Note. Why: A submit event's target types as a plain event target. How: Only this form's submit event reaches forSubFun.
+		const forCurEle = subEveObj.target as HTMLFormElement;                              // What: Form Current Element. Why: The fields are read from the form itself. How: This is the submitted form. // What: Type Assertion Note. Why: A submit event's target types as a plain event target. How: Only this form's submit event reaches forSubFun.
 		const forFieObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Fields Object. Why: Netlify reads the fields as a URL-encoded body. How: This collects every named field, the hidden form-name included. // What: Type Assertion Note. Why: URLSearchParams accepts string pairs, while FormData can also hold files. How: This form has no file fields, so every value is a string.
 
 		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you note. How: This starts false and turns true only when Netlify answers OK.

@@ -43,14 +43,6 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 
 // #region Constants
 
-const PHO_DIR_STR = fileURLToPath( new URL( './', import.meta.url ) );                                  // What: Photo Directory String. Why: The originals live beside this script. How: This resolves this script's own folder.
-const PRO_OUT_STR = fileURLToPath( new URL( '../../src/assets/products/', import.meta.url ) );          // What: Products Output String. Why: The product photos are imported from src/assets/products. How: This resolves that folder.
-const QUA_VAL_NUM = 0.85;                                                                               // What: Quality Value Number. Why: This is the lowest WebP quality that showed no difference from the originals at 3x zoom. How: Every photo is encoded at it.
-const SIZ_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/photo-sizes.ts', import.meta.url ) ); // What: Sizes Output String. Why: The page reads every photo's width and height from one generated file. How: This resolves where it's written.
-const TON_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/', import.meta.url ) );               // What: Tony Output String. Why: Tony's cartoon and portrait are imported from the home page's folder. How: This resolves that folder.
-
-
-
 type BoxRecTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
 const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than twice that. How: This maps each kind to its box.
 
@@ -73,6 +65,14 @@ const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Wh
 
 
 };
+
+
+
+const PHO_DIR_STR = fileURLToPath( new URL( './', import.meta.url ) );                                  // What: Photo Directory String. Why: The originals live beside this script. How: This resolves this script's own folder.
+const PRO_OUT_STR = fileURLToPath( new URL( '../../src/assets/products/', import.meta.url ) );          // What: Products Output String. Why: The product photos are imported from src/assets/products. How: This resolves that folder.
+const QUA_VAL_NUM = 0.85;                                                                               // What: Quality Value Number. Why: This is the lowest WebP quality that showed no difference from the originals at 3x zoom. How: Every photo is encoded at it.
+const SIZ_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/photo-sizes.ts', import.meta.url ) ); // What: Sizes Output String. Why: The page reads every photo's width and height from one generated file. How: This resolves where it's written.
+const TON_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/', import.meta.url ) );               // What: Tony Output String. Why: Tony's cartoon and portrait are imported from the home page's folder. How: This resolves that folder.
 
 // #endregion Constants
 

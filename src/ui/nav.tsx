@@ -9,7 +9,7 @@ import lntSvgUrl from './logo-notext.svg'; // What: Logo-No-Text SVG URL. Why: T
 
 import { Link         } from 'react-router';      // What: Link. Why: The brand returns to the home page without a full page load. How: This renders the brand as a router link to the root.
 import { modCliFun    } from './section-link.ts'; // What: Modified Click Function. Why: A section link opened in a new tab should be left to the browser. How: navSecFun steps aside when this is true.
-import { useEffect    } from 'react';             // What: Use Effect. Why: The bar listens to scrolling and watches the sections. How: Two effects register and clean up those watchers.
+import { useEffect    } from 'react';             // What: Use Effect. Why: The bar listens to scrolling, watches the sections, and holds the open menu's inert page and listeners. How: Three effects register and clean up those watchers.
 import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to track and mark active. How: This reads the current path.
 import { useRef       } from 'react';             // What: Use Ref. Why: The open menu's effect has to reach the bar, the scrim, and the toggle. How: Three refs hold them.
 import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Function. Why: Section links have to work from every page, not only the home page. How: This returns visSecFun, which scrolls in place or navigates home.

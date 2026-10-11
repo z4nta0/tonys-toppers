@@ -10,8 +10,8 @@
  * and the responsive grid of product cards. Each card holds its photo in a
  * portrait frame with a tag over its corner and its name and kind beneath, and
  * rises in through the global blockEnterFadeIn keyframes, which the hero
- * shares. The shared section, container, heading, and note classes the section
- * used to borrow from the global stylesheet are copied here, and every
+ * shares. The shared section, container, heading, label, and note classes the
+ * section used to borrow from the global stylesheet are copied here, and every
  * animation and transition stops for anyone who asked for less motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -301,7 +301,7 @@
 
 
 }
-.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft navy shadow, and turns its border navy. */
+.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft ink shadow, and turns its border navy. */
 
 
 	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */

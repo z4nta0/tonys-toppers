@@ -376,7 +376,8 @@ passes on `close-out`.
       about 2px, the rule's size, not 6px, and show the normal cursor, since
       they aren't links. The footer spells out Bolivar, Missouri, like the
       rest of the page; only the page title, the preview card, and the
-      structured data use MO, where length or format needs it.
+      structured data use MO, where length or format needs it. The same holds for every Missouri
+      town the page names, so Tony's story spells out Grandview, Missouri.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
