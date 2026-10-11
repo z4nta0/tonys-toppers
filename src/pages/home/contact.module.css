@@ -341,7 +341,7 @@
 
 
 }
-.forSucDiv[data-note-leaving] { /* What: Leaving Form Success Div. Why: The note should leave the way it arrived rather than vanish. How: This fades it out and drops it a little, after which the component unmounts it. */
+.forSucDiv[data-note-exit-active] { /* What: Leaving Form Success Div. Why: The note should leave the way it arrived rather than vanish. How: This fades it out and drops it a little, after which the component unmounts it. */
 
 
 	animation : forSucDivHideFadeOut var( --dur-ani-p02 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
@@ -358,7 +358,7 @@
 
 
 	}
-	.forSucDiv[data-note-leaving] { /* What: Quick Leaving Form Success Div. Why: The component waits for the exit to end before unmounting the note, and an animation turned off would never end. How: This shortens the exit to a hundredth of a millisecond instead of turning it off. */
+	.forSucDiv[data-note-exit-active] { /* What: Quick Leaving Form Success Div. Why: The component waits for the exit to end before unmounting the note, and an animation turned off would never end. How: This shortens the exit to a hundredth of a millisecond instead of turning it off. */
 
 
 		animation-duration : .01ms;
@@ -605,7 +605,7 @@
 
 
 }
-.forErrPar[data-note-leaving] { /* What: Leaving Form Error Paragraph. Why: The note should leave the way it arrived rather than vanish. How: This fades it out and drops it a little, after which the component unmounts it. */
+.forErrPar[data-note-exit-active] { /* What: Leaving Form Error Paragraph. Why: The note should leave the way it arrived rather than vanish. How: This fades it out and drops it a little, after which the component unmounts it. */
 
 
 	animation : forErrParHideFadeOut var( --dur-ani-p02 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
@@ -622,7 +622,7 @@
 
 
 	}
-	.forErrPar[data-note-leaving] { /* What: Quick Leaving Form Error Paragraph. Why: The component waits for the exit to end before unmounting the note, and an animation turned off would never end. How: This shortens the exit to a hundredth of a millisecond instead of turning it off. */
+	.forErrPar[data-note-exit-active] { /* What: Quick Leaving Form Error Paragraph. Why: The component waits for the exit to end before unmounting the note, and an animation turned off would never end. How: This shortens the exit to a hundredth of a millisecond instead of turning it off. */
 
 
 		animation-duration : .01ms;

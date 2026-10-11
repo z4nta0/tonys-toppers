@@ -86,7 +86,7 @@ const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message
 const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The interest field lists every choice in this order. How: Each entry is one option's text and value.
 
 
-	'A pen topper',   // What: Pen Topper Option. Why: Pen toppers are Tony's first and biggest line. How: This is the default choice.
+	'A pen topper', // What: Pen Topper Option. Why: Pen toppers are Tony's first and biggest line. How: This is the default choice.
 	'A wine stopper',
 	'A keychain',
 	'A dog necklace',
@@ -108,7 +108,15 @@ const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The int
 
 // #region Hooks
 
-type NotExiTyp = { endFun : ( aniEveObj : AnimationEvent< HTMLElement > ) => void, leaBoo : boolean, mouBoo : boolean }; // What: Note Exit Type. Why: A note's exit needs to know whether it's mounted, whether it's leaving, and when to finish. How: This names those three, which the notes read by property.
+type NotExiTyp = { // What: Note Exit Type. Why: A note's exit needs to know whether it's mounted, whether it's leaving, and when to finish. How: This names those three, which the notes read by property.
+
+
+	endFun : ( aniEveObj : AnimationEvent< HTMLElement > ) => void, // What: End Function. Why: The note unmounts once its own exit ends. How: Its onAnimationEnd calls this.
+	leaBoo : boolean,                                               // What: Leaving Boolean. Why: The module plays the exit only while the note leaves. How: This is true while it's leaving.
+	mouBoo : boolean                                                // What: Mounted Boolean. Why: The note renders only while mounted. How: This is true while it's mounted.
+
+
+};
 
 // #region useNotExiFun
 
@@ -125,7 +133,7 @@ type NotExiTyp = { endFun : ( aniEveObj : AnimationEvent< HTMLElement > ) => voi
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
- * @param shoBoo - Show Boolean: Whether the note should be showing.
+ * @param notShoBoo - Note Show Boolean: Whether the note should be showing.
  *
  * @returns Whether to mount the note, whether it's leaving, and the handler
  *          its onAnimationEnd calls.
@@ -137,23 +145,22 @@ type NotExiTyp = { endFun : ( aniEveObj : AnimationEvent< HTMLElement > ) => voi
  *
 */
 
-function useNotExiFun ( shoBoo : boolean ) : NotExiTyp {
+function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
 
 
-	const [ mouBoo, setMouBoo ] = useState( shoBoo ); // What: Mounted Boolean And Setter. Why: A note that stops showing has to stay mounted while it leaves. How: This holds whether it's mounted, starting with whether it shows.
+	const [ notMouBoo, setNotMouBoo ] = useState( notShoBoo ); // What: Note Mounted Boolean And Setter. Why: A note that stops showing has to stay mounted while it leaves. How: This holds whether it's mounted, starting with whether it shows.
 
 
-
-	if ( shoBoo && !mouBoo ) setMouBoo( true ); // What: Mount Guard. Why: A note asked to show has to mount at once. How: This mounts it during render, which React applies before committing.
+	if ( notShoBoo && !notMouBoo ) setNotMouBoo( true ); // What: Mount Guard. Why: A note asked to show has to mount at once. How: This mounts it during render, which React applies before committing.
 
 
 
 	return { // What: Note Exit Return. Why: The note reads all three by property. How: This hands back the mount flag, the leaving flag, and the end handler.
 
 
-		endFun : ( aniEveObj ) => { if ( !shoBoo && aniEveObj.target === aniEveObj.currentTarget ) setMouBoo( false ); }, // What: End Function. Why: The note should unmount only when its own exit finishes. How: This unmounts it when an animation ends on the note itself while it isn't meant to show.
-		leaBoo : mouBoo && !shoBoo,                                                                                          // What: Leaving Boolean. Why: The module plays the exit only while the note is leaving. How: This is true while it's still mounted but no longer meant to show.
-		mouBoo : mouBoo                                                                                                        // What: Mounted Boolean. Why: The note renders only while mounted. How: This passes the mount flag on.
+		endFun : ( aniEveObj ) => { if ( !notShoBoo && aniEveObj.target === aniEveObj.currentTarget ) setNotMouBoo( false ); }, // What: End Function. Why: The note should unmount only when its own exit finishes. How: This unmounts it when an animation ends on the note itself while it isn't meant to show.
+		leaBoo : notMouBoo && !notShoBoo,                                                                                       // What: Leaving Boolean. Why: The module plays the exit only while the note is leaving. How: This is true while it's still mounted but no longer meant to show.
+		mouBoo : notMouBoo // What: Mounted Boolean. Why: The note renders only while mounted. How: This passes the mount flag on.
 
 
 	};
@@ -476,7 +483,7 @@ function ConSecCom () : React.JSX.Element {
 							<div
 								className={ cssModObj.forSucDiv }
 
-								data-note-leaving={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+								data-note-exit-active={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
 
 								role='status'
 
@@ -635,7 +642,7 @@ function ConSecCom () : React.JSX.Element {
 							<p
 								className={ cssModObj.forErrPar }
 
-								data-note-leaving={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+								data-note-exit-active={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
 
 								role='alert'
 
