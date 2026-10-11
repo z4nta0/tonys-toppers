@@ -140,7 +140,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-		const secEleArr = NAV_SEC_ARR.map( ( secRcdObj ) => document.getElementById( secRcdObj.ideStr ) ).filter( ( secCurEle ) : secCurEle is HTMLElement => secCurEle !== null ); // What: Section Element Array. Why: Only sections on the page can be watched. How: This looks up each linked section by its id and keeps the ones found.
+		const secEleArr = NAV_SEC_ARR.map( ( secRecObj ) => document.getElementById( secRecObj.ideStr ) ).filter( ( secCurEle ) : secCurEle is HTMLElement => secCurEle !== null ); // What: Section Element Array. Why: Only sections on the page can be watched. How: This looks up each linked section by its id and keeps the ones found.
 
 
 		if ( secEleArr.length === 0 ) return; // What: No Sections Guard. Why: There's nothing to watch if no section rendered. How: This skips the observer.
@@ -380,11 +380,11 @@ function NavBarCom () : React.JSX.Element {
 					<ul className={ cssModObj.navLinUno }>{ /* What: Navigation Links List Element. Why: The section links sit in a row on wide screens and stack in the menu on a phone. How: This holds one item per section. */ }
 
 
-						{ NAV_SEC_ARR.map( ( secRcdObj, secIndNum ) => ( // What: Section Link Map. Why: Each section gets a link, and its place sets when it rises into the open menu. How: This renders one list item per section row, with its index.
+						{ NAV_SEC_ARR.map( ( secRecObj, secIndNum ) => ( // What: Section Link Map. Why: Each section gets a link, and its place sets when it rises into the open menu. How: This renders one list item per section row, with its index.
 
 
 							<li
-								key={ secRcdObj.ideStr }
+								key={ secRecObj.ideStr }
 
 								className={ cssModObj.navLinIte }
 
@@ -395,13 +395,13 @@ function NavBarCom () : React.JSX.Element {
 								<a
 									className={ cssModObj.navLinAnc }
 
-									data-section-link-active={ ( isaHomBoo && actSecStr === secRcdObj.ideStr ) || undefined } // What: Section Link Active Flag. Why: The link for the section being read is marked on the home page. How: This marks the link when its section is the active one there, and drops the attribute otherwise.
+									data-section-link-active={ ( isaHomBoo && actSecStr === secRecObj.ideStr ) || undefined } // What: Section Link Active Flag. Why: The link for the section being read is marked on the home page. How: This marks the link when its section is the active one there, and drops the attribute otherwise.
 
-									href={ `/#${ secRcdObj.ideStr }` }
+									href={ `/#${ secRecObj.ideStr }` }
 
-									onClick={ ( cliEveObj ) => navSecFun( cliEveObj, secRcdObj.ideStr ) }
+									onClick={ ( cliEveObj ) => navSecFun( cliEveObj, secRecObj.ideStr ) }
 								>{ /* What: Section Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through navSecFun. */ }
-									{ secRcdObj.labStr }
+									{ secRecObj.labStr }
 								</a>
 
 

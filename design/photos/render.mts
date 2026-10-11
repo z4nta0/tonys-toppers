@@ -51,8 +51,8 @@ const TON_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/', import.meta
 
 
 
-type BoxRcdTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
-const BOX_RCD_OBJ : Record< string, BoxRcdTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than twice that. How: This maps each kind to its box.
+type BoxRecTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
+const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than twice that. How: This maps each kind to its box.
 
 
 	'booth'    : { heiNum : Infinity, widNum : 696 }, // What: Booth Box. Why: The gallery crops a booth shot to fill frames up to about 348px wide. How: This caps its width at twice that.
@@ -94,7 +94,7 @@ const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Wh
  * @param filNamStr - File Name String: The photo's file name without its
  *                    extension, e.g. 'booth-2'.
  *
- * @returns The key of the photo's box in BOX_RCD_OBJ.
+ * @returns The key of the photo's box in BOX_REC_OBJ.
  *
  * @example
  * ```ts
@@ -149,12 +149,12 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 
 
 	const filNamStr = souFilStr.slice( souFilStr.lastIndexOf( '/' ) + 1, -4 );                                             // What: File Name String. Why: The photo is keyed by its name without folder or extension. How: This cuts both off.
-	const boxRcdObj = BOX_RCD_OBJ[ boxKeyFun( filNamStr ) ];                                                               // What: Box Record Object. Why: The photo fits into its kind's box. How: This looks the box up by kind.
+	const boxRecObj = BOX_REC_OBJ[ boxKeyFun( filNamStr ) ];                                                               // What: Box Record Object. Why: The photo fits into its kind's box. How: This looks the box up by kind.
 	const souUrlStr = `data:image/jpeg;base64,${ readFileSync( `${ PHO_DIR_STR }${ souFilStr }` ).toString( 'base64' ) }`; // What: Source URL String. Why: A canvas drawn from a file URL can't be read back, while one drawn from data can. How: This hands the original to the page as a data URL.
 	const croBoxObj = CRO_BOX_OBJ[ filNamStr ] ?? null;                                                                    // What: Crop Box Object. Why: Only some photos are cropped. How: This reads the photo's crop, or null.
 
 
-	const encResObj = await encPagObj.evaluate( async ( [ souUrlArg, croBoxArg, boxRcdArg, quaValArg ] ) => { // What: Encode Result Object. Why: The browser crops, scales, and encodes the photo. How: This decodes the original, draws the kept part onto a canvas at the fitted size, and returns the WebP data and its size.
+	const encResObj = await encPagObj.evaluate( async ( [ souUrlArg, croBoxArg, boxRecArg, quaValArg ] ) => { // What: Encode Result Object. Why: The browser crops, scales, and encodes the photo. How: This decodes the original, draws the kept part onto a canvas at the fitted size, and returns the WebP data and its size.
 
 
 		const souImaEle = new Image(); // What: Source Image Element. Why: The original has to be decoded before it's drawn. How: This creates an image to load it into.
@@ -166,7 +166,7 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 
 
 		const croBoxVal = croBoxArg ?? { heiNum : souImaEle.naturalHeight, lefNum : 0, topNum : 0, widNum : souImaEle.naturalWidth }; // What: Crop Box Value. Why: An uncropped photo keeps all of itself. How: This uses the crop, or the whole image.
-		const scaValNum = Math.min( 1, boxRcdArg.widNum / croBoxVal.widNum, boxRcdArg.heiNum / croBoxVal.heiNum );                    // What: Scale Value Number. Why: The photo fits its box but is never enlarged. How: This takes the smaller of the two fits, capped at 1.
+		const scaValNum = Math.min( 1, boxRecArg.widNum / croBoxVal.widNum, boxRecArg.heiNum / croBoxVal.heiNum );                    // What: Scale Value Number. Why: The photo fits its box but is never enlarged. How: This takes the smaller of the two fits, capped at 1.
 		const outHeiNum = Math.round( croBoxVal.heiNum * scaValNum );                                                                 // What: Output Height Number. Why: The canvas is the fitted size. How: This scales the kept height.
 		const outWidNum = Math.round( croBoxVal.widNum * scaValNum );                                                                 // What: Output Width Number. Why: The canvas is the fitted size. How: This scales the kept width.
 		const outCanEle = document.createElement( 'canvas' );                                                                         // What: Output Canvas Element. Why: The photo is redrawn at its new size. How: This creates the canvas.
@@ -196,7 +196,7 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 		};
 
 
-	}, [ souUrlStr, croBoxObj, boxRcdObj, QUA_VAL_NUM ] as const ); // What: Encode Arguments. Why: The page can't read this script's variables. How: This passes the original, its crop, its box, and the quality in.
+	}, [ souUrlStr, croBoxObj, boxRecObj, QUA_VAL_NUM ] as const ); // What: Encode Arguments. Why: The page can't read this script's variables. How: This passes the original, its crop, its box, and the quality in.
 
 
 	const outPatStr = `${ souFilStr.startsWith( 'products/' ) ? PRO_OUT_STR : TON_OUT_STR }${ filNamStr }.webp`; // What: Output Path String. Why: Product photos and Tony's photos are imported from different folders. How: This picks the folder and names the file .webp.

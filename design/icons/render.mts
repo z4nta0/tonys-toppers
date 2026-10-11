@@ -40,7 +40,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 
 // #region Constants
 
-type IcoRcdTyp = { // What: Icon Record Type. Why: Every PNG icon is described the same way. How: This names its file, its size, and whether it needs a solid background.
+type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described the same way. How: This names its file, its size, and whether it needs a solid background.
 
 
 	filStr : string,  // What: File String. Why: Each icon is saved under its own name in public/. How: This is the file name.
@@ -49,7 +49,7 @@ type IcoRcdTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
 
 
 };
-const ICO_RCD_ARR : IcoRcdTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
+const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
 
 
 	{ filStr : 'favicon-16x16.png',    opaBoo : false, sizNum : 16  }, // What: Small Icon Row. Why: Tabs draw small icons crisper at their own size. How: This renders the 16px icon.
@@ -166,7 +166,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 
 
-for ( const icoRcdObj of ICO_RCD_ARR ) writeFileSync( OUT_DIR_STR + icoRcdObj.filStr, await renPngFun( icoRcdObj.sizNum, icoRcdObj.opaBoo ) ); // What: PNG Icon Loop. Why: Each PNG icon is saved under its own name. How: This renders every row and writes it into public/.
+for ( const icoRecObj of ICO_REC_ARR ) writeFileSync( OUT_DIR_STR + icoRecObj.filStr, await renPngFun( icoRecObj.sizNum, icoRecObj.opaBoo ) ); // What: PNG Icon Loop. Why: Each PNG icon is saved under its own name. How: This renders every row and writes it into public/.
 
 
 
@@ -207,7 +207,7 @@ writeFileSync( OUT_DIR_STR + 'favicon.ico', Buffer.concat( [ icoHeaBuf, ...icoPn
 
 await broInsObj.close(); // What: Browser Close Call. Why: The script should exit once the icons are saved. How: This shuts Chromium down.
 
-console.log( `Wrote ${ ICO_RCD_ARR.length } PNG icons and favicon.ico to ${ OUT_DIR_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count and folder.
+console.log( `Wrote ${ ICO_REC_ARR.length } PNG icons and favicon.ico to ${ OUT_DIR_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count and folder.
 
 // #endregion Module Init
 

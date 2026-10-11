@@ -43,7 +43,7 @@ type CatSluTyp = 'pen-topper' | 'wine-stopper' | 'keychain' | 'dog-necklace' | '
 
 
 
-type ProRcdTyp = { // What: Product Record Type. Why: The products grid and the gallery read every photo the same way. How: This describes one photo's card.
+type ProRecTyp = { // What: Product Record Type. Why: The products grid and the gallery read every photo the same way. How: This describes one photo's card.
 
 
 	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
@@ -82,8 +82,8 @@ const CAT_LAB_OBJ : Record< CatSluTyp, string > = { // What: Category Label Obje
 
 
 
-type CatRcdTyp = { labStr : string, sluStr : CatSluTyp }; // What: Category Record Type. Why: Each filter button has a slug and a label. How: This pairs them.
-const CAT_RCD_ARR : CatRcdTyp[] = [ // What: Category Record Array. Why: The products grid offers a filter button per category, in this order, and lists single pieces in the same order. How: Each row pairs a category's slug with its plural label.
+type CatRecTyp = { labStr : string, sluStr : CatSluTyp }; // What: Category Record Type. Why: Each filter button has a slug and a label. How: This pairs them.
+const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The products grid offers a filter button per category, in this order, and lists single pieces in the same order. How: Each row pairs a category's slug with its plural label.
 
 
 	{ labStr : 'Pen Toppers',      sluStr : 'pen-topper'      }, // What: Pen Toppers Row. Why: Beaded pen toppers are Tony's first and biggest line. How: This names their category.
@@ -100,8 +100,8 @@ const CAT_RCD_ARR : CatRcdTyp[] = [ // What: Category Record Array. Why: The pro
 
 
 
-type FaiRcdTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // What: Fair Record Type. Why: A booth shot lists by hand the categories it shows and describes the table, which its card's name can't. How: This names the photo's description, its categories, and its file name without the extension.
-const FAI_RCD_ARR : FaiRcdTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo, the categories it shows, and its description.
+type FaiRecTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // What: Fair Record Type. Why: A booth shot lists by hand the categories it shows and describes the table, which its card's name can't. How: This names the photo's description, its categories, and its file name without the extension.
+const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo, the categories it shows, and its description.
 
 
 	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony', catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'booth-1' }, // What: First Booth Row. Why: A shop window display of pens and stoppers. How: This tags it under pen toppers and wine stoppers.
@@ -199,8 +199,8 @@ const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.webp', 
 
 
 
-type SetRcdTyp = { catArr : CatSluTyp[], filStr : string }; // What: Set Record Type. Why: A set lists by hand the categories it shows. How: This names its categories and its file name without the extension.
-const SET_RCD_ARR : SetRcdTyp[] = [ // What: Set Record Array. Why: A few photos show pen toppers and wine stoppers displayed together, so each is one card under both filters rather than a copy under each. How: Each row names the photo and the categories it shows.
+type SetRecTyp = { catArr : CatSluTyp[], filStr : string }; // What: Set Record Type. Why: A set lists by hand the categories it shows. How: This names its categories and its file name without the extension.
+const SET_REC_ARR : SetRecTyp[] = [ // What: Set Record Array. Why: A few photos show pen toppers and wine stoppers displayed together, so each is one card under both filters rather than a copy under each. How: Each row names the photo and the categories it shows.
 
 
 	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-1' }, // What: First Set Row. Why: Pens and stoppers in a shop display. How: This tags it under both.
@@ -264,40 +264,40 @@ function phoNamFun ( sluStr : CatSluTyp ) : string[] {
 
 
 
-const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The products grid and the gallery read every photo from one list. How: This lists every single piece in category order, with the sets right after the wine stoppers, then the booth shots, which only the filters and the gallery show.
+const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The products grid and the gallery read every photo from one list. How: This lists every single piece in category order, with the sets right after the wine stoppers, then the booth shots, which only the filters and the gallery show.
 
 
-	...CAT_RCD_ARR.flatMap( ( catRcdObj ) => [ // What: Category Pieces Spread. Why: Single pieces are listed category by category. How: This builds each category's cards, adding the sets after the wine stoppers.
+	...CAT_REC_ARR.flatMap( ( catRecObj ) => [ // What: Category Pieces Spread. Why: Single pieces are listed category by category. How: This builds each category's cards, adding the sets after the wine stoppers.
 
 
-		...phoNamFun( catRcdObj.sluStr ).map( ( filNamStr, filIndNum ) => ({ // What: Single Piece Cards Spread. Why: Each of the category's photos gets a card, numbered within its kind. How: This builds one record per photo.
+		...phoNamFun( catRecObj.sluStr ).map( ( filNamStr, filIndNum ) => ({ // What: Single Piece Cards Spread. Why: Each of the category's photos gets a card, numbered within its kind. How: This builds one record per photo.
 
 
 			altStr : PHO_ALT_OBJ[ filNamStr ],                                  // What: Alternative String. Why: A screen reader should hear what the photo shows. How: This looks up the photo's description by its file name.
-			catArr : [ catRcdObj.sluStr ],                                      // What: Category Array. Why: A single piece shows one kind. How: This lists its category alone.
+			catArr : [ catRecObj.sluStr ],                                      // What: Category Array. Why: A single piece shows one kind. How: This lists its category alone.
 			faiBoo : false,                                                     // What: Fair Boolean. Why: A single piece isn't a booth shot. How: This keeps it in the All list.
 			heiNum : PHO_SIZ_OBJ[ filNamStr ].heiNum,                           // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
 			ideStr : filNamStr,                                                 // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
 			imaStr : phoUrlFun( filNamStr ),                                    // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
-			labStr : CAT_LAB_OBJ[ catRcdObj.sluStr ],                           // What: Label String. Why: The card names its kind. How: This is the category's singular label.
-			namStr : `${ CAT_LAB_OBJ[ catRcdObj.sluStr ] } ${ filIndNum + 1 }`, // What: Name String. Why: The card has a title. How: This joins the label and the photo's number.
+			labStr : CAT_LAB_OBJ[ catRecObj.sluStr ],                           // What: Label String. Why: The card names its kind. How: This is the category's singular label.
+			namStr : `${ CAT_LAB_OBJ[ catRecObj.sluStr ] } ${ filIndNum + 1 }`, // What: Name String. Why: The card has a title. How: This joins the label and the photo's number.
 			widNum : PHO_SIZ_OBJ[ filNamStr ].widNum                            // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
 
 
 		}) ),
 
-		...( catRcdObj.sluStr === 'wine-stopper' ? SET_RCD_ARR.map( ( setRcdObj, setIndNum ) => ({ // What: Set Cards Spread. Why: The pen and wine stopper sets sit right after the wine stoppers in the All list. How: This builds one record per set, only after the wine stopper category.
+		...( catRecObj.sluStr === 'wine-stopper' ? SET_REC_ARR.map( ( setRecObj, setIndNum ) => ({ // What: Set Cards Spread. Why: The pen and wine stopper sets sit right after the wine stoppers in the All list. How: This builds one record per set, only after the wine stopper category.
 
 
-			altStr : PHO_ALT_OBJ[ setRcdObj.filStr ],                    // What: Alternative String. Why: A screen reader should hear what the set shows. How: This looks up the photo's description by its file name.
-			catArr : setRcdObj.catArr,                                   // What: Category Array. Why: A set shows both kinds. How: This lists both categories.
+			altStr : PHO_ALT_OBJ[ setRecObj.filStr ],                    // What: Alternative String. Why: A screen reader should hear what the set shows. How: This looks up the photo's description by its file name.
+			catArr : setRecObj.catArr,                                   // What: Category Array. Why: A set shows both kinds. How: This lists both categories.
 			faiBoo : false,                                              // What: Fair Boolean. Why: A set isn't a booth shot. How: This keeps it in the All list.
-			heiNum : PHO_SIZ_OBJ[ setRcdObj.filStr ].heiNum,             // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
-			ideStr : setRcdObj.filStr,                                   // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
-			imaStr : phoUrlFun( setRcdObj.filStr ),                      // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
+			heiNum : PHO_SIZ_OBJ[ setRecObj.filStr ].heiNum,             // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
+			ideStr : setRecObj.filStr,                                   // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
+			imaStr : phoUrlFun( setRecObj.filStr ),                      // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
 			labStr : 'Pen Topper & Wine Stopper',                        // What: Label String. Why: The card names both kinds it shows. How: This joins the two labels.
 			namStr : `Pen Topper & Wine Stopper Set ${ setIndNum + 1 }`, // What: Name String. Why: The card has a title. How: This names the set and its number.
-			widNum : PHO_SIZ_OBJ[ setRcdObj.filStr ].widNum              // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
+			widNum : PHO_SIZ_OBJ[ setRecObj.filStr ].widNum              // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
 
 
 		}) ) : [] )
@@ -305,18 +305,18 @@ const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The prod
 
 	] ),
 
-	...FAI_RCD_ARR.map( ( faiRcdObj, faiIndNum ) => ({ // What: Booth Cards Spread. Why: The booth shots come last, for the filters and the gallery. How: This builds one record per booth shot.
+	...FAI_REC_ARR.map( ( faiRecObj, faiIndNum ) => ({ // What: Booth Cards Spread. Why: The booth shots come last, for the filters and the gallery. How: This builds one record per booth shot.
 
 
-		altStr : faiRcdObj.altStr,                       // What: Alternative String. Why: A booth shot shows a whole table, which its name can't describe. How: This takes the row's description.
-		catArr : faiRcdObj.catArr,                       // What: Category Array. Why: A booth shot shows several kinds. How: This lists every category it's tagged with.
+		altStr : faiRecObj.altStr,                       // What: Alternative String. Why: A booth shot shows a whole table, which its name can't describe. How: This takes the row's description.
+		catArr : faiRecObj.catArr,                       // What: Category Array. Why: A booth shot shows several kinds. How: This lists every category it's tagged with.
 		faiBoo : true,                                   // What: Fair Boolean. Why: A booth shot belongs in the gallery and the filters, not the All list. How: This marks it.
-		heiNum : PHO_SIZ_OBJ[ faiRcdObj.filStr ].heiNum, // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
-		ideStr : faiRcdObj.filStr,                       // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
-		imaStr : phoUrlFun( faiRcdObj.filStr ),          // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
+		heiNum : PHO_SIZ_OBJ[ faiRecObj.filStr ].heiNum, // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
+		ideStr : faiRecObj.filStr,                       // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
+		imaStr : phoUrlFun( faiRecObj.filStr ),          // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
 		labStr : 'Craft Fair Table',                     // What: Label String. Why: The card names what it shows. How: This calls it a craft fair table.
 		namStr : `Craft Fair Table ${ faiIndNum + 1 }`,  // What: Name String. Why: The card has a title. How: This names the table and its number.
-		widNum : PHO_SIZ_OBJ[ faiRcdObj.filStr ].widNum  // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
+		widNum : PHO_SIZ_OBJ[ faiRecObj.filStr ].widNum  // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
 
 
 	}) )
@@ -330,7 +330,7 @@ const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The prod
 
 // #region Exports
 
-export { CAT_RCD_ARR, PRO_RCD_ARR, type CatSluTyp, type ProRcdTyp }; // What: Named Exports. Why: The products grid needs the categories and every photo, and the gallery the booth shots. How: This exports the two lists and the types that describe them.
+export { CAT_REC_ARR, PRO_REC_ARR, type CatSluTyp, type ProRecTyp }; // What: Named Exports. Why: The products grid needs the categories and every photo, and the gallery the booth shots. How: This exports the two lists and the types that describe them.
 
 // #endregion Exports
 
