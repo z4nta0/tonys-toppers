@@ -72,10 +72,15 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
 - **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as the
   other projects, up from 1,200px.
 - **Hero picture**: the portrait ring takes `max()` of a rhythm-step floor
-  and a horizontal step, as seal-and-shield's logo does. The picture stage
-  around it collapses to no size, since its auto side margins shrink it to
-  its absolutely placed contents, so its cap has no effect; step 11 can
-  revisit the hero's structure.
+  and a horizontal step, as seal-and-shield's logo does, and grows from
+  about 183px to 243px below 900px. The stage fills its column at the
+  ring's height plus room for its drift and the sticker, and hands the ring
+  and sticker their widths (`--por-rin-wid`, `--her-sti-wid`). The ring
+  turns about a point about 15px above its middle, so the portrait drifts
+  in a small circle (fixed 2026-10-10: the stage used to collapse to no
+  size, sending the portrait around a wide circle off the hero's edges).
+  Firefox alone shows a brief cross flashing over the sticker now and
+  then, which no screenshot catches; the user chose to leave it.
 - **Grid cards**: the products' and gallery's minimum card widths take
   `max()` of about 138px and a horizontal step (020 and 019), replacing the
   narrow-screen override. A 320px screen shows one column of each, the
