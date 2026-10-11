@@ -6,11 +6,12 @@
  *
  * @summary
  * Styles for NotFouCom: the 404 page's centered message below the bar, with
- * its 404 label, heading, short note, and button home. The shared section,
+ * its 404 label, heading, short note, and its two buttons, home and to the
+ * collection, side by side in a row that wraps. The shared section,
  * container, label, heading, and button classes the page used to borrow from
  * the global stylesheet are copied here, with the page's own inline
  * adjustments (the extra room below the bar, the centering, and the
- * heading's and note's spacing) merged into them, and the button's
+ * heading's and note's spacing) merged into them, and the buttons'
  * transition stops for anyone who asked for less motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -122,7 +123,21 @@
 
 }
 
-.butBasAnc { /* What: Button Base Anchor. Why: The way home reads as the site's main button. How: This sets a pill with the sans font in semibold and a clear border, and eases every change between its looks, copied from the shared button. */
+
+/* #region nofActDiv */
+
+.nofActDiv { /* What: Not-Found Actions Div. Why: The two ways onward sit side by side under the note. How: This centers them in a row that wraps when it runs out of room. */
+
+
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	justify-content : center;
+
+
+}
+
+.butBasAnc { /* What: Button Base Anchor. Why: Both ways onward read as the site's buttons. How: This sets a pill with the sans font in semibold and a clear border, and eases every change between its looks, copied from the shared button. */
 
 
 	align-items     : center;
@@ -157,6 +172,23 @@
 
 
 }
+.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: Seeing the collection is the quieter second way onward. How: This leaves it unfilled with ink text and an ink outline. */
+
+
+	background   : transparent;
+	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
+	color        : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+
+
+}
+.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text cream. */
+
+
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1a2e */
+	color      : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
@@ -170,6 +202,8 @@
 
 
 }
+
+/* #endregion nofActDiv */
 
 /* #endregion pagConDiv */
 
