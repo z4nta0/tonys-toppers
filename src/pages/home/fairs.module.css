@@ -152,12 +152,12 @@
 
 /* #region faiGriDiv */
 
-.faiGriDiv { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least 150px wide, or the full width when that's narrower. */
+.faiGriDiv { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least about 138px wide, or horizontal step 019 on wider screens, or the full width when that's narrower. */
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	grid-template-columns : repeat( auto-fit, minmax( min( 150px, 100% ), 1fr ) );
+	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );                   /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	grid-template-columns : repeat( auto-fit, minmax( min( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-019 ) ), 100% ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 19 ~= 202.448px @ 1,920px width */
 
 
 }

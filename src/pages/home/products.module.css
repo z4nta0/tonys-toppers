@@ -246,25 +246,24 @@
 
 /* #region proGriDiv */
 
-.proGriDiv { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This fills each row with cards at least 180px wide and lifts the grid onto its own layer. */
+.proGriDiv { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This fills each row with cards at least about 138px wide, or horizontal step 020 on wider screens, and lifts the grid onto its own layer. */
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	grid-template-columns : repeat( auto-fill, minmax( 180px, 1fr ) );
+	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );       /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	grid-template-columns : repeat( auto-fill, minmax( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-020 ) ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 20 ~= 268.187px @ 1,920px width */
 	position              : relative;
 	z-index               : 2;
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Products Grid Div. Why: Two cards should still fit side by side on a phone. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Products Grid Div. Why: Rows of cards should sit closer together on a phone. How: This applies 900px wide and below. */
 
 
-	.proGriDiv { /* What: Tight Products Grid Div. Why: Smaller cards with smaller gaps fit two across a phone. How: This lowers the cards' minimum width to 140px and tightens the row gap, while the column gap follows its clamp. */
+	.proGriDiv { /* What: Tight Products Grid Div. Why: Rows of cards sit closer together on a phone. How: This tightens the row gap, while the cards' minimum width and the column gap follow their own floors and clamps. */
 
 
 		row-gap : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
-		grid-template-columns : repeat( auto-fill, minmax( 140px, 1fr ) );
 
 
 	}
