@@ -9,14 +9,71 @@
  * a hairline once the page scrolls, with the brand on the left and the
  * section links in a row on the right. On screens 900px wide or narrower the
  * links move into a menu that slides down below the bar from the toggle's
- * three bars, and is hidden from the Tab order and screen readers once it has
- * slid away. The bar's states are attributes rather than classes:
- * data-page-scroll-active on the bar, data-section-link-active on the link for
- * the section being read, and data-mobile-menu-open on the menu.
+ * three bars, over a scrim that dims the page, and is hidden from the Tab
+ * order and screen readers once it has slid away. The menu's rows are set in
+ * the serif with hairlines between them and a yellow dot for the section
+ * being read, rise in one after another, and end with a call button, a
+ * Facebook link, and Tony's home town. The bar's states are attributes
+ * rather than classes: data-page-scroll-active on the bar,
+ * data-section-link-active on the link for the section being read, and
+ * data-mobile-menu-open on the menu and the scrim.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
+
+
+
+.navScrDiv { /* What: Navigation Scrim Div. Why: The open phone menu should stand apart from a dimmed page, and the page should only dim on screens that have the menu. How: This covers the screen in the scrim color just under the bar, hidden by default and shown 900px wide and below, fading in while the menu is open. */
+
+
+	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = #1a1a2e, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	display    : none;
+	inset      : 0;
+	opacity    : 0;
+	position   : fixed;
+	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	visibility : hidden;
+	z-index    : 99;                                                                                           /* What: Scrim Stack Level. Why: The scrim has to cover every section's content, the highest at 3, while staying under the bar at 100. How: This sits one level below the bar. */
+
+
+}
+.navScrDiv[data-mobile-menu-open] { /* What: Open Navigation Scrim Div. Why: The page dims while the menu is open. How: This shows the scrim at once, then fades it in. */
+
+
+	opacity    : 1;
+	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear 0s; /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	visibility : visible;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the phone menu need the scrim. How: This applies 900px wide and below. */
+
+
+	.navScrDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the menu can open. How: This turns its display on, leaving it hidden until the menu opens. */
+
+
+		display : block;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Scrim Div. Why: Someone who asked for less motion shouldn't see the page fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navScrDiv,
+	.navScrDiv[data-mobile-menu-open] { /* What: Motionless Navigation Scrim Div. Why: The dimming should simply switch on and off. How: This turns the transitions off in both states, matching the open state's own selector so it wins. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
 
 
 
@@ -118,147 +175,6 @@
 
 
 
-/* #region navLinUno */
-
-.navLinUno { /* What: Navigation Link Unordered List. Why: Wide screens show the section links in a row in the bar. How: This lines them up with small gaps and no list markers. */
-
-
-	display    : flex;
-	gap        : var( --spa-hor-m02 ); /* Spacing Horizontal Base Minus 2 ~= 8.304px */
-	list-style : none;
-
-
-}
-@media ( max-width : 900px ) { /* What: Narrow Navigation Link Unordered List. Why: The links don't fit the bar on a narrow screen. How: This applies 900px wide and below. */
-
-
-	.navLinUno { /* What: Closed Navigation Link Unordered List. Why: On a narrow screen the links become a menu below the bar, out of the way until the toggle opens it. How: This stacks them on the cream panel under the bar, slides it up out of view, and hides it once the slide ends, so its links leave the Tab order and screen readers. */
-
-
-		background     : var( --bac-pag-col );                                                                                         /* Background Page Color = #fdf9ee */
-		border-bottom  : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                              /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
-		flex-direction : column;
-		gap            : 0;
-		left           : 0;
-		padding        : var( --spa-ver-bas ) var( --spa-hor-bas );                                                                    /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-		pointer-events : none;
-		position       : absolute;
-		right          : 0;
-		top            : 100%;
-		transform      : translateY( -210% );
-		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), visibility 0s var( --mot-sta-eas ) var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
-		visibility     : hidden;
-
-
-	}
-	.navLinUno[data-mobile-menu-open] { /* What: Open Navigation Link Unordered List. Why: The menu should show its links once the toggle opens it. How: This slides it down into place, takes pointer input, and shows it at once. */
-
-
-		pointer-events : all;
-		transform      : translateY( 0 );
-		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-		visibility     : visible;
-
-
-	}
-
-
-}
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Unordered List. Why: Someone who asked for less motion shouldn't see the menu slide. How: This applies only when the reduced-motion preference is set. */
-
-
-	.navLinUno,
-	.navLinUno[data-mobile-menu-open] { /* What: Motionless Navigation Link Unordered List. Why: The menu should simply open and close. How: This turns the transitions off, the open state included, since its own transition would otherwise win by specificity. */
-
-
-		transition : none;
-
-
-	}
-
-
-}
-
-
-/* #region navLinIte */
-
-@media ( max-width : 900px ) { /* What: Narrow Navigation Link Item. Why: The menu's links need room between them to be tapped, while the row on a wide screen needs no item styling at all. How: This applies 900px wide and below. */
-
-
-	.navLinIte { /* What: Spaced Navigation Link Item. Why: A finger needs room between links. How: This spaces the items apart down the menu. */
-
-
-		margin : var( --spa-ver-bas ) 0; /* Spacing Vertical Base ~= 14.572px */
-
-
-	}
-
-
-}
-
-.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section as a soft pill. How: This sets it in medium weight with pill padding and rounding, easing its colors. */
-
-
-	border-radius   : 999px;
-	color           : var( --tex-mai-col );                                                                                  /* Text Main Color = #1a1a2e */
-	font-size       : var( --fon-siz-p01 );                                                                                  /* Font Size Base Plus 1 ~= 14.572px */
-	font-weight     : 500;
-	padding         : var( --spa-ver-m02 ) var( --spa-hor-bas );                                                             /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
-	position        : relative;
-	text-decoration : none;
-	transition      : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
-
-
-}
-.navLinAnc:hover { /* What: Hovered Navigation Link Anchor. Why: The link should respond to the pointer. How: This fills the pill navy with cream text. */
-
-
-	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
-	color      : var( --tex-acc-col ); /* Text Accent Color = #fdf9ee */
-
-
-}
-.navLinAnc[data-section-link-active] { /* What: Active Navigation Link Anchor. Why: The link for the section being read should stand out. How: This fills the pill with the ink color and cream text, winning over the hover look by coming after it. */
-
-
-	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1a2e */
-	color      : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
-
-
-}
-@media ( max-width : 900px ) { /* What: Narrow Navigation Link Anchor. Why: The menu's links are tapped rather than clicked. How: This applies 900px wide and below. */
-
-
-	.navLinAnc { /* What: Roomy Navigation Link Anchor. Why: A bigger target is easier to tap. How: This deepens the pill's padding. */
-
-
-		padding : var( --spa-ver-m01 ) var( --spa-hor-bas ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
-
-
-	}
-
-
-}
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
-
-
-	.navLinAnc { /* What: Motionless Navigation Link Anchor. Why: The hover and active colors should simply switch. How: This turns the transition off. */
-
-
-		transition : none;
-
-
-	}
-
-
-}
-
-/* #endregion navLinIte */
-
-/* #endregion navLinUno */
-
-
-
 /* #region navTogBut */
 
 .navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon in a square about 34px across with no button chrome, hidden until the narrow layout shows it. */
@@ -316,6 +232,404 @@
 }
 
 /* #endregion navTogBut */
+
+
+
+/* #region navMenDiv */
+
+.navMenDiv { /* What: Navigation Menu Div. Why: On wide screens the section links sit in the bar itself, as if the menu weren't there. How: This drops the menu's own box, so its link list lays out as one of the bar's own items. */
+
+
+	display : contents;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Navigation Menu Div. Why: The links and the ways to reach Tony don't fit the bar on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.navMenDiv { /* What: Closed Navigation Menu Div. Why: On a narrow screen the links and the contact block become a menu below the bar, out of the way until the toggle opens it. How: This sets the cream panel under the bar, scrolling if it's taller than the screen, slides it up out of view, and hides it once the slide ends, so its links leave the Tab order and screen readers. */
+
+
+		background     : var( --bac-pag-col );                                                                                         /* Background Page Color = #fdf9ee */
+		border-bottom  : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                              /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+		display        : block;
+		left           : 0;
+		max-height     : calc( 100vh - var( --spa-ver-bas ) * 2 - var( --ver-rhy-p04 ) * 1rem );                                       /* Spacing Vertical Base ~= 14.572px, Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Below The Bar Height. Why: A tall menu on a short screen would run off the bottom with no way to reach its end. How: This caps it at the screen's height less the bar's padding and logo, and the overflow below scrolls. */
+		overflow-y     : auto;
+		padding        : var( --spa-ver-bas ) var( --gut-sid-pad ) var( --spa-ver-p02 );                                               /* Spacing Vertical Base ~= 14.572px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
+		pointer-events : none;
+		position       : absolute;
+		right          : 0;
+		top            : 100%;
+		transform      : translateY( -210% );
+		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), visibility 0s var( --mot-sta-eas ) var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
+		visibility     : hidden;
+
+
+	}
+	.navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The menu should show once the toggle opens it. How: This slides it down into place, takes pointer input, and shows it at once. */
+
+
+		pointer-events : all;
+		transform      : translateY( 0 );
+		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+		visibility     : visible;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Menu Div. Why: Someone who asked for less motion shouldn't see the menu slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navMenDiv,
+	.navMenDiv[data-mobile-menu-open] { /* What: Motionless Navigation Menu Div. Why: The menu should simply open and close. How: This turns the transitions off, the open state included, since its own transition would otherwise win by specificity. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+@keyframes menuItemOpenFadeIn { /* What: Menu Item Open Fade In. Why: The menu's rows arrive one after another as it opens. How: This moves a row up from a small rhythm step below and from transparent to fully shown. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+
+}
+
+
+
+/* #region navLinUno */
+
+.navLinUno { /* What: Navigation Link Unordered List. Why: Wide screens show the section links in a row in the bar. How: This lines them up with small gaps and no list markers. */
+
+
+	display    : flex;
+	gap        : var( --spa-hor-m02 ); /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	list-style : none;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Navigation Link Unordered List. Why: In the menu the links stack. How: This applies 900px wide and below. */
+
+
+	.navLinUno { /* What: Stacked Navigation Link Unordered List. Why: The menu's links read best one above another. How: This stacks them with no gap, since each row draws its own divider. */
+
+
+		flex-direction : column;
+		gap            : 0;
+
+
+	}
+
+
+}
+
+
+/* #region navLinIte */
+
+@media ( max-width : 900px ) { /* What: Narrow Navigation Link Item. Why: The menu's rows need dividers between them, while the row on a wide screen needs no item styling at all. How: This applies 900px wide and below. */
+
+
+	.navLinIte { /* What: Divided Navigation Link Item. Why: A hairline sets each row apart. How: This draws one under every row. */
+
+
+		border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+
+
+	}
+
+
+}
+.navMenDiv[data-mobile-menu-open] .navLinIte { /* What: Entering Navigation Link Item. Why: The rows should arrive one after another as the menu opens. How: This plays the entrance, delayed by one stagger step per row above it, read from the index the component sets on each item. */
+
+
+	animation : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --nav-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Navigation Item Index, set inline by the component */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Item. Why: Someone who asked for less motion shouldn't see the rows rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navMenDiv[data-mobile-menu-open] .navLinIte { /* What: Still Navigation Link Item. Why: The rows should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section as a soft pill. How: This sets it in medium weight with pill padding and rounding, easing its colors. */
+
+
+	border-radius   : 999px;
+	color           : var( --tex-mai-col );                                                                                  /* Text Main Color = #1a1a2e */
+	font-size       : var( --fon-siz-p01 );                                                                                  /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight     : 500;
+	padding         : var( --spa-ver-m02 ) var( --spa-hor-bas );                                                             /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
+	position        : relative;
+	text-decoration : none;
+	transition      : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.navLinAnc:hover { /* What: Hovered Navigation Link Anchor. Why: The link should respond to the pointer. How: This fills the pill navy with cream text. */
+
+
+	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	color      : var( --tex-acc-col ); /* Text Accent Color = #fdf9ee */
+
+
+}
+.navLinAnc[data-section-link-active] { /* What: Active Navigation Link Anchor. Why: The link for the section being read should stand out. How: This fills the pill with the ink color and cream text, winning over the hover look by coming after it. */
+
+
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1a2e */
+	color      : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Navigation Link Anchor. Why: The menu's links are tapped rather than clicked, and should look like Tony's site rather than a plain list. How: This applies 900px wide and below. */
+
+
+	.navLinAnc { /* What: Menu Row Navigation Link Anchor. Why: A bigger target is easier to tap, and the serif matches the site's headings. How: This fills the row in the semibold serif a step larger, with room above and below, a dot slot before the name, and no pill. */
+
+
+		align-items   : center;
+		border-radius : 0;
+		display       : flex;
+		font-family   : var( --fon-fam-sec );   /* Font Family Secondary = 'Fraunces', Georgia, serif */
+		font-size     : var( --fon-siz-p02 );   /* Font Size Base Plus 2 ~= 19.304px */
+		font-weight   : 600;
+		gap           : var( --spa-hor-m01 );   /* Spacing Horizontal Base Minus 1 = 11px */
+		padding       : var( --spa-ver-bas ) 0; /* Spacing Vertical Base ~= 14.572px */
+
+
+	}
+	.navLinAnc::before { /* What: Menu Row Dot. Why: The section being read is marked with a small yellow dot rather than a filled pill. How: This holds an empty circle slot before every name, so the names line up whether or not their row is marked. */
+
+
+		background    : transparent;
+		border-radius : 50%;
+		content       : '';
+		flex-shrink   : 0;
+		height        : calc( var( --ver-rhy-m02 ) * 1rem );                  /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+		transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+		width         : calc( var( --ver-rhy-m02 ) * 1rem );                  /* Vertical Rhythm Base Minus 2 ~= 8.304px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+	}
+	.navLinAnc:hover,
+	.navLinAnc[data-section-link-active] { /* What: Hovered And Active Menu Row Navigation Link Anchor. Why: The row under the finger and the section being read should stand out without a filled pill. How: This clears the pill and turns the name navy. */
+
+
+		background : transparent;
+		color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+
+
+	}
+	.navLinAnc[data-section-link-active]::before { /* What: Active Menu Row Dot. Why: The dot marks the section being read. How: This fills the dot yellow. */
+
+
+		background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navLinAnc { /* What: Motionless Navigation Link Anchor. Why: The hover and active colors should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion navLinIte */
+
+/* #endregion navLinUno */
+
+
+
+/* #region menConDiv */
+
+.menConDiv { /* What: Menu Contact Div. Why: The ways to reach Tony belong only in the phone menu, since wide screens show the contact section's own. How: This hides the block outside the narrow layout. */
+
+
+	display : none;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Menu Contact Div. Why: The contact block shows in the phone menu. How: This applies 900px wide and below. */
+
+
+	.menConDiv { /* What: Shown Menu Contact Div. Why: The call button, the Facebook link, and Tony's home town end the menu as one group. How: This stacks them with even gaps below the last row. */
+
+
+		display       : grid;
+		gap           : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+		justify-items : start;
+		padding-top   : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+
+
+	}
+
+
+}
+.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Entering Menu Contact Div. Why: The contact block should arrive right after the last row. How: This plays the rows' entrance, one stagger step after the last row, from the index the component sets on it. */
+
+
+	animation : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --nav-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Navigation Item Index, set inline by the component */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Contact Div. Why: Someone who asked for less motion shouldn't see the block rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Still Menu Contact Div. Why: The block should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.menCalAnc { /* What: Menu Call Anchor. Why: Calling or texting is the quickest way to reach Tony, so the menu gives it a button in the site's sticker style. How: This sets a full-width navy pill with cream text and a hard ink shadow, centering its label, and eases its lift and press. */
+
+
+	align-items     : center;
+	background      : var( --acc-mai-col );                                                                                      /* Accent Main Color = #1e3a8a */
+	border-radius   : 999px;
+	box-shadow      : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col );            /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	color           : var( --tex-acc-col );                                                                                      /* Text Accent Color = #fdf9ee */
+	display         : flex;
+	font-size       : var( --fon-siz-p01 );                                                                                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight     : 600;
+	justify-content : center;
+	justify-self    : stretch;
+	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 );                                                                 /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	text-decoration : none;
+	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.menCalAnc:hover { /* What: Hovered Menu Call Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+
+
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+
+
+}
+.menCalAnc:active { /* What: Pressed Menu Call Anchor. Why: A press should feel like pushing the button in before the phone opens. How: This drops it back into place with a shallower shadow. */
+
+
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Pressed Shadow Offset. Why: A press should read as the button sinking toward its shadow. How: Each offset takes the lift's own step off the resting offset. */
+	transform  : translate( 0, 0 );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Call Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.menCalAnc { /* What: Motionless Menu Call Anchor. Why: The lift and press should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.menFacAnc { /* What: Menu Facebook Anchor. Why: Tony's Facebook page is the second way to reach him, quieter than the call button. How: This sets it in semibold navy with an underline held a little below the text, easing its color and press. */
+
+
+	color                 : var( --acc-mai-col );                                                                               /* Accent Main Color = #1e3a8a */
+	font-weight           : 600;
+	text-underline-offset : calc( var( --cdn-pow-006-rec ) * 1em );                                                             /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
+	transition            : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.menFacAnc:hover { /* What: Hovered Menu Facebook Anchor. Why: The link should respond to the pointer. How: This turns it ink. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+
+
+}
+.menFacAnc:active { /* What: Pressed Menu Facebook Anchor. Why: A press should register before the page opens, and a text link can't scale in its line. How: This dims it slightly while held. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Facebook Anchor. Why: Someone who asked for less motion shouldn't see the link fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.menFacAnc { /* What: Motionless Menu Facebook Anchor. Why: The color and dim should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.menHomPar { /* What: Menu Home Paragraph. Why: The menu closes on where Tony makes his pieces, quietly. How: This sets the town small, spaced, and uppercase in the secondary ink. */
+
+
+	color          : var( --tex-sec-col );                   /* Text Secondary Color = #4a4a5e */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
+	font-weight    : 600;
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
+	text-transform : uppercase;
+
+
+}
+
+/* #endregion menConDiv */
+
+/* #endregion navMenDiv */
 
 /* #endregion navBarNav */
 
