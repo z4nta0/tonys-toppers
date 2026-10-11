@@ -30,10 +30,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Not-Found Page Section. Why: The wide side and bottom padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Not-Found Page Section. Why: The wide bottom padding crowds a narrow screen. How: This applies 900px wide and below. */
 
 
-	.nofPagSec { /* What: Compact Not-Found Page Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the side and bottom padding and keeps about 138px on top. */
+	.nofPagSec { /* What: Compact Not-Found Page Section. Why: A narrow screen needs its width for the content, while the top still has to clear the bar. How: This trims the bottom padding and keeps about 138px on top. */
 
 
 		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
@@ -150,7 +150,7 @@
 	gap             : var( --spa-hor-m01 );                                                                           /* Spacing Horizontal Base Minus 1 = 11px */
 	padding         : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-decoration : none;
-	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and shrinks as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
+	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 
 
 }
@@ -163,19 +163,20 @@
 
 
 }
-.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
 
 
+	background : var( --acc-hov-col ); /* Accent Hover Color ~= #2d4c9d */
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
-	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
-.butBasAnc--primary:active { /* What: Pressed Primary Button Base Anchor. Why: A press should feel like pushing the button in before the page responds. How: This drops it back into place with a shallower shadow, as the site's other shadowed buttons do. */
+.butBasAnc--primary:active { /* What: Pressed Primary Button Base Anchor. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
 
 
-	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Press Shadow Offset. Why: The shadow should stay where it was while the button drops in. How: Each offset takes the press's own step from the resting offset, so the shadow shrinks by exactly as much as the button sinks. */
-	transform  : translate( 0, 0 );
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	transform  : scale( 0.97 );                                                                                  /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes its hover lift, a literal since no scale step lands within 10%. */
 
 
 }
@@ -193,7 +194,7 @@
 
 	background : var( --bac-inv-col );                            /* Background Inverse Color = #1a1a2e */
 	color      : var( --bac-pag-col );                            /* Background Page Color = #fdf9ee */
-	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
@@ -204,10 +205,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
 
 
 		transition : none;

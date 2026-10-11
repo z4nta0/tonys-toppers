@@ -76,8 +76,8 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * scrim, pressing Escape, or widening the screen past the menu's breakpoint
  * closes it. While it's open the page behind it is inert, so keyboard and
  * screen reader users stay in the bar. Each link reaches its section through
- * section-link.ts, scrolling in place on the home page or navigating home
- * from any other page, and leaves a Ctrl, Cmd, or middle click to the
+ * section-link.ts, scrolling in place on the home page or navigating home from
+ * any other page, and leaves a Ctrl, Cmd, Shift, Alt, or middle click to the
  * browser.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -273,7 +273,7 @@ function NavBarCom () : React.JSX.Element {
 	const navSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Navigate Section Function. Why: A section link should reach its section without a full page load or a hash left in the address. How: This leaves a modified click to the browser, and otherwise cancels the link's own navigation, visits the section, and closes the menu.
 
 
-		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
+		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
 
 
 
@@ -412,7 +412,6 @@ function NavBarCom () : React.JSX.Element {
 
 
 					</ul>
-
 
 
 					<div

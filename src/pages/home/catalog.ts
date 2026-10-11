@@ -14,16 +14,17 @@ import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why
  *
  * @summary
  * The product photos the home page shows, and the categories they belong to.
- * Every photo lives in src/assets/products and is imported at build time, so a
- * missing one fails the build, and carries its size from photo-sizes.ts. A
- * single piece's photo is named after its category and its number
- * (pen-topper-3.webp), so each category's photos are read straight from the
- * folder in number order, and adding one only means adding its file, after
- * running npm run photos. Two kinds of photo show more than one category at
- * once, and list theirs by hand: the pen and wine stopper sets, one card each
- * under both filters, and the craft fair booth shots, which the gallery shows
- * and each tagged category's filter includes, while the All list leaves them
- * out.
+ * Every photo lives in src/assets/products, is imported at build time, and
+ * carries its size from photo-sizes.ts. A single piece's photo is named after
+ * its category and its number (pen-topper-3.webp), so each category's photos
+ * are read straight from the folder in number order, and adding one only means
+ * adding its file, after running npm run photos. The sets and booth shots are
+ * named by hand, so a misspelled or missing one would stop the page from
+ * loading, and a new one's name has to match its file exactly. Two kinds of
+ * photo show more than one category at once, and list theirs by hand: the pen
+ * and wine stopper sets, one card each under both filters, and the craft fair
+ * booth shots, which the gallery shows and each tagged category's filter
+ * includes, while the All list leaves them out.
  *
  * Sections:
  *  - Types
@@ -40,24 +41,6 @@ import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why
 // #region Types
 
 type CatSluTyp = 'pen-topper' | 'wine-stopper' | 'keychain' | 'dog-necklace' | 'car-freshie' | 'name-badge-reel' | 'phone-grip' | 'straw-charm'; // What: Category Slug Type. Why: Every photo and filter names its category the same way. How: This lists every category's slug, which also starts each single piece's file name.
-
-
-
-type ProRecTyp = { // What: Product Record Type. Why: The products grid and the gallery read every photo the same way. How: This describes one photo's card.
-
-
-	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
-	catArr : CatSluTyp[], // What: Category Array. Why: One photo can show more than one kind of piece. How: This lists every category the photo is tagged with, the first one setting its card's look.
-	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the All list. How: This is true for a booth shot and false for a piece or set.
-	heiNum : number,      // What: Height Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's height in pixels, from photo-sizes.ts.
-	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
-	imaStr : string,      // What: Image String. Why: The card shows its photo. How: This is the photo's built URL.
-	labStr : string,      // What: Label String. Why: The card's tag and subtitle name what kind of piece it shows. How: This is the category's singular label, or both labels for a set.
-	namStr : string,      // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind.
-	widNum : number       // What: Width Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's width in pixels, from photo-sizes.ts.
-
-
-};
 
 // #endregion Types
 
@@ -104,13 +87,13 @@ type FaiRecTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // 
 const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo, the categories it shows, and its description.
 
 
-	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony', catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'booth-1' }, // What: First Booth Row. Why: A shop window display of pens and stoppers. How: This tags it under pen toppers and wine stoppers.
+	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony', catArr : [ 'pen-topper', 'wine-stopper', 'keychain' ], filStr : 'booth-1' }, // What: First Booth Row. Why: This photo shows a shop window display of pens and stoppers with keychains below. How: This tags it under pen toppers, wine stoppers, and keychains.
 
-	{ altStr : "A craft fair table of pen toppers, wine stoppers, dog necklaces, keychains, and Tony's cartoon", catArr : [ 'pen-topper', 'wine-stopper', 'dog-necklace' ], filStr : 'booth-2' }, // What: Second Booth Row. Why: A full craft fair table. How: This tags it under pen toppers, wine stoppers, and dog necklaces.
+	{ altStr : "A craft fair table of pen toppers, wine stoppers, dog necklaces, keychains, and Tony's cartoon", catArr : [ 'pen-topper', 'wine-stopper', 'keychain', 'dog-necklace' ], filStr : 'booth-2' }, // What: Second Booth Row. Why: This photo shows a full craft fair table. How: This tags it under pen toppers, wine stoppers, keychains, and dog necklaces.
 
-	{ altStr : 'Beaded keychains on a rack beside bagged pens and a framed cartoon of Tony', catArr : [ 'pen-topper', 'straw-charm' ], filStr : 'booth-3' }, // What: Third Booth Row. Why: A close view of the charms and pens beside his cartoon. How: This tags it under pen toppers and straw charms.
+	{ altStr : 'Beaded keychains on a rack beside bagged pens and a framed cartoon of Tony', catArr : [ 'pen-topper', 'keychain', 'straw-charm' ], filStr : 'booth-3' }, // What: Third Booth Row. Why: This photo is a close view of keychains, charms, and pens beside his cartoon. How: This tags it under pen toppers, keychains, and straw charms.
 
-	{ altStr : 'Tony behind his outdoor craft fair table of pen toppers, wine stoppers, and badge reels', catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'booth-4' } // What: Fourth Booth Row. Why: Tony at his own table outdoors. How: This tags it under pen toppers and wine stoppers.
+	{ altStr : 'Tony behind his outdoor craft fair table of pen toppers, wine stoppers, and badge reels', catArr : [ 'pen-topper', 'wine-stopper', 'name-badge-reel' ], filStr : 'booth-4' } // What: Fourth Booth Row. Why: This photo shows Tony at his own table outdoors. How: This tags it under pen toppers, wine stoppers, and name badge reels.
 
 
 ];
@@ -195,7 +178,7 @@ const PHO_ALT_OBJ : Record< string, string > = { // What: Photo Alternative Obje
 
 
 
-const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.webp', { eager : true, import : 'default' } ); // What: Product URL Object. Why: The product photos live in src/assets/products, where Vite fingerprints each one and fails the build when a listed photo is missing from its import. How: This imports every photo in the folder at build time and maps each one's source path to its built URL.
+const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.webp', { eager : true, import : 'default' } ); // What: Product URL Object. Why: The product photos live in src/assets/products, where Vite fingerprints each one. How: This imports every photo in the folder at build time and maps each one's source path to its built URL.
 
 
 
@@ -203,9 +186,9 @@ type SetRecTyp = { catArr : CatSluTyp[], filStr : string }; // What: Set Record 
 const SET_REC_ARR : SetRecTyp[] = [ // What: Set Record Array. Why: A few photos show pen toppers and wine stoppers displayed together, so each is one card under both filters rather than a copy under each. How: Each row names the photo and the categories it shows.
 
 
-	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-1' }, // What: First Set Row. Why: Pens and stoppers in a shop display. How: This tags it under both.
-	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-2' }, // What: Second Set Row. Why: Pens and stoppers on acrylic stands. How: This tags it under both.
-	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-3' }  // What: Third Set Row. Why: A few pens and stoppers laid out together. How: This tags it under both.
+	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-1' }, // What: First Set Row. Why: This photo shows pens and stoppers in a shop display. How: This tags it under both.
+	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-2' }, // What: Second Set Row. Why: This photo shows pens and stoppers on acrylic stands. How: This tags it under both.
+	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-3' }  // What: Third Set Row. Why: This photo shows a few pens and stoppers laid out together. How: This tags it under both.
 
 
 ];
@@ -264,6 +247,21 @@ const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/
 
 
 
+type ProRecTyp = { // What: Product Record Type. Why: The products grid and the gallery read every photo the same way, through PRO_REC_ARR. How: This describes one photo's card.
+
+
+	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
+	catArr : CatSluTyp[], // What: Category Array. Why: One photo can show more than one kind of piece. How: This lists every category the photo is tagged with.
+	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the All list. How: This is true for a booth shot and false for a piece or set.
+	heiNum : number,      // What: Height Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's height in pixels, from photo-sizes.ts.
+	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
+	imaStr : string,      // What: Image String. Why: The card shows its photo. How: This is the photo's built URL.
+	labStr : string,      // What: Label String. Why: The card's tag and subtitle name what kind of piece it shows. How: This is the category's singular label, or both labels for a set.
+	namStr : string,      // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind.
+	widNum : number       // What: Width Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's width in pixels, from photo-sizes.ts.
+
+
+};
 const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The products grid and the gallery read every photo from one list. How: This lists every single piece in category order, with the sets right after the wine stoppers, then the booth shots, which only the filters and the gallery show.
 
 
@@ -330,7 +328,7 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The prod
 
 // #region Exports
 
-export { CAT_REC_ARR, PRO_REC_ARR, type CatSluTyp, type ProRecTyp }; // What: Named Exports. Why: The products grid needs the categories and every photo, and the gallery the booth shots. How: This exports the two lists and the types that describe them.
+export { CAT_REC_ARR, PRO_REC_ARR, type CatSluTyp }; // What: Named Exports. Why: The products grid needs the categories and every photo, and the gallery the booth shots. How: This exports the two lists and the category type their rows use.
 
 // #endregion Exports
 

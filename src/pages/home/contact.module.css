@@ -12,8 +12,7 @@
  * screens 900px wide or narrower the two sides stack, and so do the form's
  * name and email fields. The shared section, container, and label classes
  * the section used to borrow from the global stylesheet are copied here, and
- * the fields' and send button's transitions stop for anyone who asked for
- * less motion.
+ * every transition stops for anyone who asked for less motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -59,8 +58,8 @@
 	opacity        : var( --cdn-pow-006-rec );                                            /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	pointer-events : none;
 	position       : absolute;
-	right          : calc( var( --spa-hor-p09 ) * -1 );                                   /* Spacing Horizontal Base Plus 9 ~= 183.074px */
-	top            : calc( var( --spa-ver-p09 ) * -1 );                                   /* Spacing Vertical Base Plus 9 ~= 183.074px */
+	right          : calc( var( --spa-hor-p09 ) * -1 );                                   /* Spacing Horizontal Base Plus 9 ~= -183.074px */
+	top            : calc( var( --spa-ver-p09 ) * -1 );                                   /* Spacing Vertical Base Plus 9 ~= -183.074px */
 	width          : calc( var( --ver-rhy-p13 ) * 1rem );                                 /* Vertical Rhythm Base Plus 13 ~= 563.794px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
@@ -206,7 +205,7 @@
 
 
 	background : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-007-rec ) ); /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
-	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) );                     /* Spacing Vertical Base Minus 7 ~= 2.035px */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) );                     /* Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
@@ -392,7 +391,7 @@
 
 .forFieInp,
 .forFieSel,
-.forFieTex { /* What: Form Field Input, Select, And Textarea. Why: The inputs, dropdown, and message box share one look, and keyboard focus has to show clearly. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, holds a zero-width navy ring 6px out, and eases its border, background, and ring. */
+.forFieTex { /* What: Form Field Input, Select, And Textarea. Why: The inputs, dropdown, and message box share one look, and keyboard focus has to show clearly. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, holds a zero-width navy ring 6px out, and eases its border and ring. */
 
 
 	background     : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
@@ -404,7 +403,7 @@
 	outline        : 0 solid var( --foc-rin-col );                    /* Focus Ring Color = #1e3a8a */
 	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );             /* Vertical Rhythm Base Minus 3 ~= 6.268px */
 	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition     : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width          : 100%;
 
 
@@ -537,31 +536,33 @@
 	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 600;
 	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition    : transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and shrinks as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 	width         : 100%;
 
 
 }
-.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
 
 
+	background : var( --acc-hov-col ); /* Accent Hover Color ~= #2d4c9d */
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
-	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
-.forSubBut:active { /* What: Pressed Form Submit Button. Why: A press should feel like pushing the button in. How: This drops it back into place with a shallower shadow. */
+.forSubBut:active { /* What: Pressed Form Submit Button. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
 
 
-	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Pressed Shadow Offset. Why: A press should read as the button sinking toward its shadow. How: Each offset takes the lift's own step off the resting offset. */
-	transform  : translate( 0, 0 );
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	transform  : scale( 0.97 );                                                                                  /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes its hover lift, a literal since no scale step lands within 10%. */
 
 
 }
 .forSubBut:disabled,
-.forSubBut:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting place even under the pointer. */
+.forSubBut:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting navy and place even under the pointer. */
 
 
+	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
 	cursor     : progress;
 	opacity    : var( --cdn-pow-001-rec );                                                                       /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -572,7 +573,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.forSubBut { /* What: Motionless Form Submit Button. Why: The lift and press should simply switch. How: This turns the transition off. */
+	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
 
 
 		transition : none;

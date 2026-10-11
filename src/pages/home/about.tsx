@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './about.module.css';   // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import logSvgUrl from './logo.svg';           // What: Logo SVG URL. Why: The About section shows the Tony's Toppers logo beside his portrait, and Vite fingerprints and checks an imported image. How: This imports the logo's built URL for its img.
+import logSvgUrl from './logo.svg';           // What: Logo SVG URL. Why: The About section shows the Tony's Toppers logo over his portrait's corner, and Vite fingerprints and checks an imported image. How: This imports the logo's built URL for its img.
 import porWebUrl from './tony-portrait.webp'; // What: Portrait WebP URL. Why: The About section shows Tony's portrait, and Vite fingerprints and checks an imported image. How: This imports the photo's built URL for its img.
 
 

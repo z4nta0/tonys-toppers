@@ -58,7 +58,7 @@ const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. 
 	'booth'    : { heiNum : Infinity, widNum : 696 }, // What: Booth Box. Why: The gallery crops a booth shot to fill frames up to about 348px wide. How: This caps its width at twice that.
 	'cartoon'  : { heiNum : Infinity, widNum : 710 }, // What: Cartoon Box. Why: The hero's portrait ring grows to about 355px wide. How: This caps its width at twice that.
 	'portrait' : { heiNum : Infinity, widNum : 756 }, // What: Portrait Box. Why: The About portrait is shown wider than half its original, so it keeps its own width. How: This caps it at the original's 756px, so it's never enlarged.
-	'product'  : { heiNum : 750,      widNum : 562 } // What: Product Box. Why: A product card's frame is at most about 281 by 375px, and the photo fits inside it. How: This caps the photo at twice the frame.
+	'product'  : { heiNum : 750,      widNum : 562 }  // What: Product Box. Why: A product card's frame is at most about 281 by 375px, and the photo fits inside it. How: This caps the photo at twice the frame.
 
 
 };
@@ -176,12 +176,12 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 		outCanEle.width  = outWidNum; // What: Canvas Width Assignment. Why: The canvas has to match the fitted size. How: This sets its width.
 
 
-		const outCtxObj = outCanEle.getContext( '2d' )!; // What: Output Context Object. Why: Drawing goes through the canvas's 2D context. How: This reads it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: Every browser supports a 2D context.
+		const outConObj = outCanEle.getContext( '2d' )!; // What: Output Context Object. Why: Drawing goes through the canvas's 2D context. How: This reads it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: Every browser supports a 2D context.
 
 
-		outCtxObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: A large downscale should stay sharp without jagged edges. How: This asks for the browser's best resampling.
+		outConObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: A large downscale should stay sharp without jagged edges. How: This asks for the browser's best resampling.
 
-		outCtxObj.drawImage( souImaEle, croUseObj.lefNum, croUseObj.topNum, croUseObj.widNum, croUseObj.heiNum, 0, 0, outWidNum, outHeiNum ); // What: Photo Draw Call. Why: The kept part of the original fills the canvas. How: This draws the crop rectangle scaled to the canvas.
+		outConObj.drawImage( souImaEle, croUseObj.lefNum, croUseObj.topNum, croUseObj.widNum, croUseObj.heiNum, 0, 0, outWidNum, outHeiNum ); // What: Photo Draw Call. Why: The kept part of the original fills the canvas. How: This draws the crop rectangle scaled to the canvas.
 
 
 

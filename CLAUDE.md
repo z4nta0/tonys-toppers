@@ -46,7 +46,11 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
   shots tagged with it, so Straw Charms isn't empty, while All lists only
   the pieces and sets, once each. The three small mixed displays
   (`pen-wine-set-1` to `-3`) are one card each, tagged as both pen toppers
-  and wine stoppers. Each catalog entry lists every category it shows.
+  and wine stoppers. Each catalog entry lists every category it shows
+  (decided 2026-10-11: every kind its alt text names, so the booth shots
+  also appear under Keychains and Name Badge Reels). Booth-3 is the only
+  photo tagged Straw Charms; until the user confirms it shows them, the
+  contact form's interest list leaves straw charms out.
 - **`booth-1` is a phone screenshot**, sharper than the copy that was moved
   out: the image script crops off the phone's interface, keeping the
   original in `design/photos/products/`.
@@ -108,10 +112,11 @@ src/
   main.tsx               entry point
   app.tsx                React Router setup, the bar, and the footer
   assets/                fonts/ (the self-hosted fonts) and products/ (the
-                         64 product photos)
+                         54 resized product and booth photos)
   pages/
-    home/                the home page, its four sections, catalog.ts, and
-                         the images only it shows (Tony's photos, the logo)
+    home/                the home page, its five sections, catalog.ts,
+                         photo-sizes.ts, and the images only it shows
+                         (Tony's photos, the logo)
     not-found/           the 404 page
   ui/                    components used by 2 or more pages (nav, footer),
                          section-link.ts, and the bar's logo mark
@@ -120,8 +125,8 @@ src/
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
-  and a component only that page uses (the hero, products, about, and
-  contact sections) lives in that folder.
+  and a component only that page uses (the hero, products, fairs, about,
+  and contact sections) lives in that folder.
 - **A page's main file is named after its folder, with no prefix**
   (`pages/home/home.tsx`), the same as the sibling projects.
 - **The product data is `pages/home/catalog.ts`**, not `products.ts`,
@@ -313,11 +318,9 @@ passes on `close-out`.
     descriptions (see "## Content"), after which WAVE reports nothing and
     the user found no contrast problems over the hero or the photos.
 11. **New features**: the 404 page, security headers, image optimization,
-    SEO, social previews and the favicon set, and interaction feedback. Once
-    the photos carry their width and height, recheck WebKit's phone menu
-    links: WebKit has no scroll anchoring, so a link far down the page lands
-    a few hundred pixels short while the photos above it load and grow
-    their cards, the same as before the section links arrived.
+    SEO, social previews and the favicon set, and interaction feedback,
+    plus a recheck of WebKit's phone menu links once the photos had their
+    sizes. Done 2026-10-10 and released as 1.7.0.
     - **404 page**: done 2026-10-10, with an `h1`, its own title, `noindex`,
       and a See the collection button beside Back home.
     - **Security headers**: done 2026-10-10, seal-and-shield's `_headers`,
@@ -358,15 +361,22 @@ passes on `close-out`.
       global rule in `styles.css`), and every control with its own
       transition lists the two outline properties. The contact band and the
       footer hand the ring yellow (`--foc-rin-col`), and the form card hands
-      it back navy. Shadowed buttons press by dropping into a shallower
-      shadow, as the submit and menu call buttons already did; other
-      buttons, rows, and the filters press in to 0.97, and text links dim.
-      New hovers: the brand turns navy while its mark tilts (the one
-      flourish, on the overshoot easing), the toggle's bars turn navy, the
-      active bar link turns navy, menu rows nudge 3.6px, the filters shade
-      and lift, the secondary buttons and contact rows lift, and the form
-      fields darken their borders. The product cards' entrance now fills
-      `backwards`, so their hover lift finally shows.
+      it back navy. Buttons, rows, and the filters press in to 0.97, and
+      text links dim. New hovers: the brand turns navy while its mark tilts
+      (the one flourish, on the overshoot easing), the toggle's bars turn
+      navy, the active bar link turns navy, menu rows nudge 3.6px, the
+      filters shade and lift, the secondary buttons and contact rows lift,
+      and the form fields darken their borders. The product cards' entrance
+      now fills `backwards`, so their hover lift finally shows.
+    - **Close-out rulings** (decided 2026-10-11 by the user): the navy
+      buttons with hard shadows (the hero's and 404 page's primary
+      buttons, the form's Send Message, the menu's call button) lighten to
+      `--acc-hov-col` on hover as they lift, and press in to 0.97 back onto
+      their resting shadow, like every other button. The product cards lift
+      about 2px, the rule's size, not 6px, and show the normal cursor, since
+      they aren't links. The footer spells out Bolivar, Missouri, like the
+      rest of the page; only the page title, the preview card, and the
+      structured data use MO, where length or format needs it.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in

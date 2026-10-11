@@ -6,7 +6,7 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { useState } from 'react'; // What: Use State. Why: The form remembers its fields and whether it was just sent. How: Two state pairs hold them.
+import { useState } from 'react'; // What: Use State. Why: The form remembers its fields, whether a send is out, and whether the last one went through or failed. How: Four state pairs hold them.
 
 
 import type { ChangeEvent } from 'react'; // What: Change Event. Why: Every field reports its changes the same way. How: This types fieChaFun's event.
@@ -392,8 +392,8 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.forSucDiv }
 
 								role='status'
-							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: Its status role has screen readers announce it. */ }
-								✓ Thanks! Your message was sent, and Tony will be in touch soon.
+							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: Its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
+								<span aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
 							</div>
 
 

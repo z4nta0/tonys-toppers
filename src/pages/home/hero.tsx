@@ -42,11 +42,12 @@ import { useSecLinFun } from '../../ui/section-link.ts'; // What: Use Section Li
  * HerSecCom = Hero Section Component
  *
  * @summary
- * Renders the hero. Its buttons reach their sections through scrSecFun, the
- * same shared path the bar's links use, scrolling in place and leaving a Ctrl,
- * Cmd, Shift, Alt, or middle click to the browser. The collection button is
- * named by its words alone, so its decorative arrow isn't read aloud, and the
- * sticker, which only repeats the headline, is hidden from screen readers.
+ * Renders the hero. Its buttons reach their sections through scrSecFun, which
+ * hands them to visSecFun, the same shared path the bar's links use, scrolling
+ * in place and leaving a Ctrl, Cmd, Shift, Alt, or middle click to the
+ * browser. The collection button is named by its words alone, so its
+ * decorative arrow isn't read aloud, and the sticker, which only repeats the
+ * headline, is hidden from screen readers.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
