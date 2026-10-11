@@ -5,16 +5,25 @@
 <html lang='en'><!-- What: Root HTML Element. Why: Screen readers and translation tools need the page's language. How: This marks the document as English. -->
 
 
-	<head><!-- What: Document Head Element. Why: The page's metadata and icon load before the body paints. How: This holds them in the sections below. -->
+	<head><!-- What: Document Head Element. Why: The page's metadata, icon, and structured data load before the body paints. How: This holds them in the sections below. -->
 
 
 		<!-- #region Document -->
 
 		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1,024 bytes the browser checks. -->
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
-		<title>Tony's Toppers | Handcrafted Beaded Pens & Wine Stoppers</title>  <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title. How: This names the business and what it makes, until the SEO pass writes the final title. -->
+		<title>Tony's Toppers | Handmade Beaded Crafts in Bolivar, MO</title>    <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title, and most visitors met Tony at a fair nearby and search for him afterward. How: This names the business, what it makes, and its town, in under 60 characters. -->
 
 		<!-- #endregion Document -->
+
+
+		<!-- #region Search -->
+
+		<meta name='author'      content="Tony's Toppers" /> <!-- What: Author Meta. Why: Search engines and link preview inspectors look for who a page belongs to, and on a real business's site that's the business itself. How: This names Tony's Toppers. -->
+		<link href='https://tonystoppers.com/' rel='canonical' />                                                                                                        <!-- What: Canonical Link. Why: Netlify also serves the site at deploy preview and netlify.app addresses, which should all count as one page. How: This names the live address as the page's own. -->
+		<meta name='description' content='Handmade beaded pens, wine stoppers, keychains, and more by Tony Mawhiney of Bolivar, Missouri, sold at local craft fairs.' /> <!-- What: Description Meta. Why: Search listings show a short summary under the title, and it should name the maker, his town, and what he makes. How: This sums up Tony's pieces and where to find them, in about 120 characters so phones show it whole. -->
+
+		<!-- #endregion Search -->
 
 
 		<!-- #region Icons -->
@@ -22,6 +31,64 @@
 		<link href='/images/logo-notext.svg' rel='icon' type='image/svg+xml' /> <!-- What: SVG Icon Link. Why: The tab shows the Tony's Toppers mark beside the page title. How: This points at the mark's SVG in public/, which is an SVG rather than the JPEG the link used to claim, until the favicon set replaces it. -->
 
 		<!-- #endregion Icons -->
+
+
+		<!-- #region Structured Data -->
+
+		<script type='application/ld+json'>
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "Organization",
+						"@id": "https://tonystoppers.com/#organization",
+						"name": "Tony's Toppers",
+						"url": "https://tonystoppers.com/",
+						"telephone": "+1-417-733-0681",
+						"description": "Handmade beaded pens, wine stoppers, keychains, and more by Tony Mawhiney of Bolivar, Missouri, sold at local craft fairs.",
+						"address": {
+							"@type": "PostalAddress",
+							"addressLocality": "Bolivar",
+							"addressRegion": "MO",
+							"addressCountry": "US"
+						},
+						"founder": {
+							"@id": "https://tonystoppers.com/#tony"
+						},
+						"sameAs": [
+							"https://www.facebook.com/profile.php?id=61560009400871"
+						]
+					},
+					{
+						"@type": "Person",
+						"@id": "https://tonystoppers.com/#tony",
+						"name": "Tony Mawhiney",
+						"description": "Artist and crafter who designs and beads every Tony's Toppers piece by hand.",
+						"address": {
+							"@type": "PostalAddress",
+							"addressLocality": "Bolivar",
+							"addressRegion": "MO",
+							"addressCountry": "US"
+						},
+						"worksFor": {
+							"@id": "https://tonystoppers.com/#organization"
+						}
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://tonystoppers.com/#website",
+						"name": "Tony's Toppers",
+						"url": "https://tonystoppers.com/",
+						"inLanguage": "en-US",
+						"publisher": {
+							"@id": "https://tonystoppers.com/#organization"
+						}
+					}
+				]
+			}
+		</script><!-- What: Site Structured Data Script. Why: Search engines read JSON-LD to tell who the site belongs to and who makes the pieces, and every detail has to match what the page shows. How: This links an Organization for Tony's Toppers, with its live address, phone, Bolivar, Missouri with no street address, and its Facebook page, to a Person for Tony as its founder and maker, with no birth date, and a WebSite published by the business. -->
+
+		<!-- #endregion Structured Data -->
 
 
 	</head>
