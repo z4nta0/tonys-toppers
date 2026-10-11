@@ -436,7 +436,7 @@ html { /* What: HTML. Why: One rem should equal the 11px base font size, and in-
 
 	font-size          : 68.75%;
 	scroll-behavior    : smooth;
-	scroll-padding-top : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	scroll-padding-top : calc( var( --ver-rhy-p06 ) * 1em ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */ /* What: Root Em Padding. Why: WebKit resolves a rem on the root element against the browser's 16px default rather than this rule's 11px, which landed every section link about 36px short, so the spacing token can't be read here. How: This multiplies the same rhythm step by 1em, which on the root is its own 11px in every engine. */
 
 
 }
