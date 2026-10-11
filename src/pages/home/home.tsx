@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import { AboSecCom   } from './about.tsx';    // What: About Section Component. Why: Tony's story follows the gallery. How: This is rendered fourth.

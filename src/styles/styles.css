@@ -5,15 +5,16 @@
  * styles.css = Global Styles
  *
  * @summary
- * The site's one global stylesheet, holding only what can't belong to a
- * single component: the design tokens every module reads, the reset and base
- * element styles every page relies on, the layout of the mount element
- * index.html ships, and the blockEnterFadeIn keyframes the hero and the product cards
- * share. Every component's own styles are in its CSS module, and each
- * transition and animation turns itself off for reduced motion there; only
- * the page's smooth scrolling is turned off here. The
- * tokens are the plastic-ratio core design numbers and the standard color
- * and font roles, which every module reads by role.
+ * The site's one global stylesheet, holding only what can't belong to a single
+ * component: the design tokens every module reads, the reset and base element
+ * styles every page relies on, the focus ring every link and button grows on
+ * keyboard focus, the layout of the mount element index.html ships, and the
+ * blockEnterFadeIn keyframes the hero and the product cards share. Every
+ * component's own styles are in its CSS module, and each transition and
+ * animation turns itself off for reduced motion there; only the page's smooth
+ * scrolling and the focus ring's ease are turned off here. The tokens are the
+ * plastic-ratio core design numbers and the standard color and font roles,
+ * which every module reads by role.
  *
  * Sections:
  *  - Tokens
@@ -132,7 +133,7 @@
 
 	--bor-wid-sma : calc( var( --ver-rhy-m12 ) * 1rem ); /* What: Border Width Small ~= 0.499px. Why: This is the scale's hairline step, which nothing on this site draws yet. How: This multiplies the m12 rhythm step by 1rem, which browsers snap to whole pixels. */
 	--bor-wid-bas : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Border Width Base ~= 1.160px. Why: Hairlines, dividers, and the thin outlines on tags and cards share one width. How: This multiplies the m09 rhythm step by 1rem, which browsers snap to 1px. */
-	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: The buttons', form fields', and notes' outlines and the sticker's border draw a heavier line. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to 2px. */
+	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: The buttons', form fields', and notes' outlines, the sticker's border, and every focus ring's width and offset draw a heavier line. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to 2px. */
 	--bor-wid-xla : calc( var( --ver-rhy-m04 ) * 1rem ); /* What: Border Width Extra Large ~= 4.732px. Why: The portrait's frame and the logo badge draw the heaviest outline on the site, 4px; this site uses m04 here rather than the usual m05, which would draw 3px. How: This multiplies the m04 rhythm step by 1rem, which browsers snap to 4px. */
 
 	/* #endregion Border Width Tokens */
@@ -141,17 +142,18 @@
 
 	/* #region Color Tokens */
 
-	--acc-mai-col : #1e3a8a;                                                                                /* What: Accent Main Color = #1e3a8a. Why: Labels, buttons, the chosen filter, and the contact band share the brand's navy. How: Fills, text, and borders read it. */
-	--acc-sec-col : #fbbf24;                                                                                /* What: Accent Secondary Color = #fbbf24. Why: The brand's warm yellow marks highlights, tags, the sticker, and accents on navy. How: Fills, shadows, glows, and text read it. */
+	--acc-hov-col : oklch( from var( --acc-mai-col ) calc( l + 0.06 ) c h );                                /* What: Accent Hover Color ~= #2d4c9d. Why: The navy buttons with hard shadows should shift color under the pointer, as the rule asks of every hover. How: This lightens the main accent a little, and the hero's, the 404 page's, the form's, and the menu's shadowed buttons fill with it on hover. */
+	--acc-mai-col : #1e3a8a;                                                                                /* What: Accent Main Color = #1e3a8a. Why: Labels, buttons, the chosen filter, and the contact band share the brand's navy. How: Fills, text, borders, the hero's blue glow, the portrait's shadow, and the focus rings read it. */
+	--acc-sec-col : #fbbf24;                                                                                /* What: Accent Secondary Color = #fbbf24. Why: The brand's warm yellow marks highlights, tags, the sticker, and accents on navy. How: Fills, shadows, glows, text, and the focus rings on the dark bands read it. */
 	--acc-tin-col : ;                                                                                       /* What: Accent Tint Color. Why: The standard role set includes a pale accent tint. How: This site doesn't use one, so it stays empty. */
 	--att-rin-col : ;                                                                                       /* What: Attention Ring Color. Why: The standard role set includes an attention ring. How: This site doesn't use one, so it stays empty. */
 	--bac-hov-col : ;                                                                                       /* What: Background Hover Color. Why: The standard role set includes a hover overlay. How: This site's hovers use their own colors, so it stays empty. */
 	--bac-inv-col : var( --tex-mai-col );                                                                   /* What: Background Inverse Color. Why: The footer, the active link, and the ghost button's hover sit on a near-black ink. How: This reads the main text color, so the dark surfaces can change apart from it later, with light text on top. */
 	--bac-pag-col : #fdf9ee;                                                                                /* What: Background Page Color = #fdf9ee. Why: The page, the menu panel, and the form card sit on a warm cream, which is also the light text on dark surfaces. How: The body, those panels, and light text read it, at full strength or faded. */
-	--bac-sun-col : oklch( from var( --bac-pag-col ) calc( l - 0.036 ) calc( c + 0.016 ) calc( h + 0.8 ) ); /* What: Background Sunken Color. Why: The collection's band sits on a deeper cream apart from the page. How: This darkens and warms the page color to ~= #f5edd6, and the products section reads it. */
-	--bac-sur-col : #ffffff;                                                                                /* What: Background Surface Color = #ffffff. Why: Cards, the filter strip, photo frames, and form fields sit on white above the cream. How: Those read it, the eyebrow and the contact rows faded. */
+	--bac-sun-col : oklch( from var( --bac-pag-col ) calc( l - 0.036 ) calc( c + 0.016 ) calc( h + 0.8 ) ); /* What: Background Sunken Color. Why: The collection's and About section's bands sit on a deeper cream apart from the page, and a hovered filter shades with it. How: This darkens and warms the page color to ~= #f5edd6, and the products and About sections read it. */
+	--bac-sur-col : #ffffff;                                                                                /* What: Background Surface Color = #ffffff. Why: Cards, the filter strip, photo frames, the logo badge, and form fields sit on white above the cream. How: Those read it, the eyebrow and the contact rows faded. */
 	--bor-mai-col : oklch( from var( --tex-mai-col ) l c h / 0.12 );                                        /* What: Border Main Color. Why: Hairlines and soft borders shouldn't compete with content. How: This reads the main text color at 0.12 opacity, and dividers and quiet borders draw in it. */
-	--bor-str-col : var( --tex-mai-col );                                                                   /* What: Border Strong Color. Why: The site's playful outlines (the sticker, tags, buttons, and portrait frames) are drawn in solid ink. How: This reads the main text color, and those borders draw in it. */
+	--bor-str-col : var( --tex-mai-col );                                                                   /* What: Border Strong Color. Why: The site's playful outlines (the sticker, tags, buttons, the portrait frame, and the logo badge) are drawn in solid ink. How: This reads the main text color, and those borders draw in it. */
 	--err-dar-col : ;                                                                                       /* What: Error Dark Color. Why: The standard role set includes the error family. How: This site's error note keeps its text in ink, so it stays empty. */
 	--err-mai-col : #b91c1c;                                                                                /* What: Error Main Color = #b91c1c. Why: The error note needs a red border that reads as a problem. How: The contact form's error note draws its border in it. */
 	--err-tin-col : #fde8e8;                                                                                /* What: Error Tint Color = #fde8e8. Why: The error note sits on a pale red. How: The contact form's error note fills with it. */
@@ -164,7 +166,7 @@
 	--tex-acc-col : var( --bac-pag-col );                                                                   /* What: Text Accent Color. Why: Text on a navy button or pill has to stay readable. How: This reads the page cream, and every navy-filled button's label reads it. */
 	--tex-mai-col : #1a1a2e;                                                                                /* What: Text Main Color = #1a1a2e. Why: Text across the light sections reads in one near-black with a hint of blue. How: The body sets it, and headings, names, and labels read it. */
 	--tex-mut-col : ;                                                                                       /* What: Text Muted Color. Why: The standard role set includes muted text. How: This site's quieter text all uses the secondary color, so it stays empty. */
-	--tex-sec-col : #4a4a5e;                                                                                /* What: Text Secondary Color = #4a4a5e. Why: Notes, paragraphs, and captions should step back from the main text. How: The pitch, the section notes, the story, and the captions read it. */
+	--tex-sec-col : #4a4a5e;                                                                                /* What: Text Secondary Color = #4a4a5e. Why: Notes, paragraphs, and captions should step back from the main text. How: The pitch, the section notes, the story, the captions, the product filters, the 404 page's lede, and the phone menu's home town read it. */
 	--war-dar-col : ;                                                                                       /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-mai-col : ;                                                                                       /* What: Warning Main Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 	--war-tin-col : ;                                                                                       /* What: Warning Tint Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
@@ -175,14 +177,14 @@
 
 	/* #region Duration Tokens */
 
-	--dur-ani-m03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Animation Base Minus 3 ~= 67.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the third power of the core design number. */
+	--dur-ani-m03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Animation Base Minus 3 ~= 67.9ms. Why: Animations share one duration scale drawn from the core design number, and the phone menu's rows and contact block stagger their entrances by this step. How: This multiplies the base step by the reciprocal of the third power of the core design number. */
 	--dur-ani-m02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Animation Base Minus 2 ~= 89.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the second power of the core design number. */
 	--dur-ani-m01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Animation Base Minus 1 ~= 119.2ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number. */
-	--dur-ani-bas : calc( var( --cdn-pow-018 ) * 1ms ); /* What: Duration Animation Base ~= 157.8ms. Why: Animations share one duration scale drawn from the core design number. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
-	--dur-ani-p01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Animation Base Plus 1 ~= 209.1ms. Why: Animations share one duration scale drawn from the core design number, and the hero heading's entrance delay read this step. How: This multiplies the base step by the core design number. */
-	--dur-ani-p02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Animation Base Plus 2 ~= 277.0ms. Why: Animations share one duration scale drawn from the core design number, and the portrait's entrance delay read this step. How: This multiplies the base step by the second power of the core design number. */
-	--dur-ani-p03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Animation Base Plus 3 ~= 366.9ms. Why: Animations share one duration scale drawn from the core design number, and the cards' entrance and the pitch's entrance delay read this step. How: This multiplies the base step by the third power of the core design number. */
-	--dur-ani-p04 : calc( var( --dur-ani-bas ) * var( --cdn-pow-004 ) );     /* What: Duration Animation Base Plus 4 ~= 486.1ms. Why: Animations share one duration scale drawn from the core design number, and the buttons' entrance delay read this step. How: This multiplies the base step by the fourth power of the core design number. */
+	--dur-ani-bas : calc( var( --cdn-pow-018 ) * 1ms );                      /* What: Duration Animation Base ~= 157.8ms. Why: Animations share one duration scale drawn from the core design number. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
+	--dur-ani-p01 : calc( var( --dur-ani-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Animation Base Plus 1 ~= 209.1ms. Why: Animations share one duration scale drawn from the core design number, and the hero heading's entrance delay reads this step. How: This multiplies the base step by the core design number. */
+	--dur-ani-p02 : calc( var( --dur-ani-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Animation Base Plus 2 ~= 277.0ms. Why: Animations share one duration scale drawn from the core design number, and the portrait's entrance delay, the phone menu's rows and contact block as they rise in, the contact form's error note as it rises, both form notes as they fade out, and the send button's label fade read this step. How: This multiplies the base step by the second power of the core design number. */
+	--dur-ani-p03 : calc( var( --dur-ani-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Animation Base Plus 3 ~= 366.9ms. Why: Animations share one duration scale drawn from the core design number, and the cards' entrance, the pitch's entrance delay, and the contact form's thank-you note and check as they arrive read this step. How: This multiplies the base step by the third power of the core design number. */
+	--dur-ani-p04 : calc( var( --dur-ani-bas ) * var( --cdn-pow-004 ) );     /* What: Duration Animation Base Plus 4 ~= 486.1ms. Why: Animations share one duration scale drawn from the core design number, and the buttons' entrance delay reads this step. How: This multiplies the base step by the fourth power of the core design number. */
 	--dur-ani-p05 : calc( var( --dur-ani-bas ) * var( --cdn-pow-005 ) );     /* What: Duration Animation Base Plus 5 ~= 643.9ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the fifth power of the core design number. */
 	--dur-ani-p06 : calc( var( --dur-ani-bas ) * var( --cdn-pow-006 ) );     /* What: Duration Animation Base Plus 6 ~= 853.0ms. Why: Animations share one duration scale drawn from the core design number, and the eyebrow's and heading's entrances read this step. How: This multiplies the base step by the sixth power of the core design number. */
 	--dur-ani-p07 : calc( var( --dur-ani-bas ) * var( --cdn-pow-007 ) );     /* What: Duration Animation Base Plus 7 ~= 1,130.0ms. Why: Animations share one duration scale drawn from the core design number, and the pitch's, buttons', and portrait's entrances read this step. How: This multiplies the base step by the seventh power of the core design number. */
@@ -191,23 +193,23 @@
 	--dur-ani-p10 : calc( var( --dur-ani-bas ) * var( --cdn-pow-010 ) );     /* What: Duration Animation Base Plus 10 ~= 2,627.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the tenth power of the core design number. */
 	--dur-ani-p11 : calc( var( --dur-ani-bas ) * var( --cdn-pow-011 ) );     /* What: Duration Animation Base Plus 11 ~= 3,480.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the eleventh power of the core design number. */
 	--dur-ani-p12 : calc( var( --dur-ani-bas ) * var( --cdn-pow-012 ) );     /* What: Duration Animation Base Plus 12 ~= 4,610.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the twelfth power of the core design number. */
-	--dur-ani-p13 : calc( var( --dur-ani-bas ) * var( --cdn-pow-013 ) );     /* What: Duration Animation Base Plus 13 ~= 6,107.0ms. Why: Animations share one duration scale drawn from the core design number, and the sticker's wobble read this step. How: This multiplies the base step by the thirteenth power of the core design number. */
+	--dur-ani-p13 : calc( var( --dur-ani-bas ) * var( --cdn-pow-013 ) );     /* What: Duration Animation Base Plus 13 ~= 6,107.0ms. Why: Animations share one duration scale drawn from the core design number, and the sticker's wobble reads this step. How: This multiplies the base step by the thirteenth power of the core design number. */
 	--dur-ani-p14 : calc( var( --dur-ani-bas ) * var( --cdn-pow-014 ) );     /* What: Duration Animation Base Plus 14 ~= 8,090.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the fourteenth power of the core design number. */
 	--dur-ani-p15 : calc( var( --dur-ani-bas ) * var( --cdn-pow-015 ) );     /* What: Duration Animation Base Plus 15 ~= 10,717.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the fifteenth power of the core design number. */
-	--dur-ani-p16 : calc( var( --dur-ani-bas ) * var( --cdn-pow-016 ) );     /* What: Duration Animation Base Plus 16 ~= 14,197.0ms. Why: Animations share one duration scale drawn from the core design number, and the blobs' float read this step. How: This multiplies the base step by the sixteenth power of the core design number. */
+	--dur-ani-p16 : calc( var( --dur-ani-bas ) * var( --cdn-pow-016 ) );     /* What: Duration Animation Base Plus 16 ~= 14,197.0ms. Why: Animations share one duration scale drawn from the core design number, and the blobs' float reads this step. How: This multiplies the base step by the sixteenth power of the core design number. */
 	--dur-ani-p17 : calc( var( --dur-ani-bas ) * var( --cdn-pow-017 ) );     /* What: Duration Animation Base Plus 17 ~= 18,807.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the seventeenth power of the core design number. */
 	--dur-ani-p18 : calc( var( --dur-ani-bas ) * var( --cdn-pow-018 ) );     /* What: Duration Animation Base Plus 18 ~= 24,914.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the eighteenth power of the core design number. */
 	--dur-ani-p19 : calc( var( --dur-ani-bas ) * var( --cdn-pow-019 ) );     /* What: Duration Animation Base Plus 19 ~= 33,004.0ms. Why: Animations share one duration scale drawn from the core design number. How: This multiplies the base step by the nineteenth power of the core design number. */
-	--dur-ani-p20 : calc( var( --dur-ani-bas ) * var( --cdn-pow-020 ) );     /* What: Duration Animation Base Plus 20 ~= 43,721.0ms. Why: Animations share one duration scale drawn from the core design number, and the portrait ring's slow spin read this step. How: This multiplies the base step by the twentieth power of the core design number. */
+	--dur-ani-p20 : calc( var( --dur-ani-bas ) * var( --cdn-pow-020 ) );     /* What: Duration Animation Base Plus 20 ~= 43,721.0ms. Why: Animations share one duration scale drawn from the core design number, and the portrait ring's slow spin reads this step. How: This multiplies the base step by the twentieth power of the core design number. */
 
 
 	--dur-tra-m03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003-rec ) ); /* What: Duration Transition Base Minus 3 ~= 67.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the third power of the core design number. */
 	--dur-tra-m02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002-rec ) ); /* What: Duration Transition Base Minus 2 ~= 89.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the second power of the core design number. */
 	--dur-tra-m01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001-rec ) ); /* What: Duration Transition Base Minus 1 ~= 119.2ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the reciprocal of the core design number. */
-	--dur-tra-bas : calc( var( --cdn-pow-018 ) * 1ms ); /* What: Duration Transition Base ~= 157.8ms. Why: Transitions share one duration scale drawn from the core design number, and the send button's lift and press read this step. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
-	--dur-tra-p01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Transition Base Plus 1 ~= 209.1ms. Why: Transitions share one duration scale drawn from the core design number, and the bar links', buttons', filters', and form fields' color and lift changes read this step. How: This multiplies the base step by the core design number. */
-	--dur-tra-p02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Transition Base Plus 2 ~= 277.0ms. Why: Transitions share one duration scale drawn from the core design number, and the bar's scrolled look, the phone menu's slide, and the cards' hover look read this step. How: This multiplies the base step by the second power of the core design number. */
-	--dur-tra-p03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Transition Base Plus 3 ~= 366.9ms. Why: Transitions share one duration scale drawn from the core design number, and the photo zoom and the portrait's tilt read this step. How: This multiplies the base step by the third power of the core design number. */
+	--dur-tra-bas : calc( var( --cdn-pow-018 ) * 1ms );                      /* What: Duration Transition Base ~= 157.8ms. Why: Transitions share one duration scale drawn from the core design number, and the send button's lift and press read this step. How: This is the eighteenth power of the core design number in milliseconds, which every other step multiplies. */
+	--dur-tra-p01 : calc( var( --dur-tra-bas ) * var( --cdn-pow-001 ) );     /* What: Duration Transition Base Plus 1 ~= 209.1ms. Why: Transitions share one duration scale drawn from the core design number, and every link's, button's, filter's, contact row's, and form field's hover, press, and focus ring changes read this step. How: This multiplies the base step by the core design number. */
+	--dur-tra-p02 : calc( var( --dur-tra-bas ) * var( --cdn-pow-002 ) );     /* What: Duration Transition Base Plus 2 ~= 277.0ms. Why: Transitions share one duration scale drawn from the core design number, and the bar's scrolled look, the logo mark's turn, the phone menu's slide, the cards' hover look, the photo zoom, and the portrait's tilt read this step. How: This multiplies the base step by the second power of the core design number. */
+	--dur-tra-p03 : calc( var( --dur-tra-bas ) * var( --cdn-pow-003 ) );     /* What: Duration Transition Base Plus 3 ~= 366.9ms. Why: Transitions share one duration scale drawn from the core design number, and the phone menu's scrim fade reads this step. How: This multiplies the base step by the third power of the core design number. */
 	--dur-tra-p04 : calc( var( --dur-tra-bas ) * var( --cdn-pow-004 ) );     /* What: Duration Transition Base Plus 4 ~= 486.1ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the fourth power of the core design number. */
 	--dur-tra-p05 : calc( var( --dur-tra-bas ) * var( --cdn-pow-005 ) );     /* What: Duration Transition Base Plus 5 ~= 643.9ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the fifth power of the core design number. */
 	--dur-tra-p06 : calc( var( --dur-tra-bas ) * var( --cdn-pow-006 ) );     /* What: Duration Transition Base Plus 6 ~= 853.0ms. Why: Transitions share one duration scale drawn from the core design number. How: This multiplies the base step by the sixth power of the core design number. */
@@ -221,10 +223,10 @@
 
 	/* #region Easing Tokens */
 
-	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, as the phone menu's panel does when it closes and the contact form's notes do when they fade out. How: Transitions and animations read it as their timing function. */
 	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for rare celebrations, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
-	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly, as the form fields' focus ring does as it grows in. How: Transitions and animations read it as their timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target for a touch of flair, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
+	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly, as the focus rings growing in, the phone menu's scrim, panel, rows, and contact block, the contact form's notes, and the send button's label all do. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target for a touch of flair, which the bar's logo mark turns with on hover and the thank-you check pops in with. How: Transitions and animations read it as their timing function. */
 	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: The color changes, lifts, slides, entrances, and the blobs' and sticker's loops share one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
 
 	/* #endregion Easing Tokens */
@@ -254,9 +256,9 @@
 
 	/* #region Font Size Tokens */
 
-	--fon-siz-bas : 1rem; /* What: Font Size Base = 11px. Why: This is the smallest font size accessibility tools accept, and every other step multiplies it; html sets 1rem to 11px by default. How: Each step above reads it, and the product tags', product types', and stat and contact captions' small text read it directly. */
+	--fon-siz-bas : 1rem;                                                /* What: Font Size Base = 11px. Why: This is the smallest font size accessibility tools accept, and every other step multiplies it; html sets 1rem to 11px by default. How: Each step above reads it, and the product tags', product types', stat and contact captions', and the phone menu's home-town line's small text read it directly. */
 	--fon-siz-p01 : calc( var( --fon-siz-bas ) * var( --cdn-pow-001 ) ); /* What: Font Size Base Plus 1 ~= 14.572px. Why: This is one step up the scale from the base, for body text, labels, buttons, and form fields. How: This multiplies the base by the first power of the core design number. */
-	--fon-siz-p02 : calc( var( --fon-siz-bas ) * var( --cdn-pow-002 ) ); /* What: Font Size Base Plus 2 ~= 19.304px. Why: This is two steps up the scale from the base, for the bar's brand, the hero pitch, and the contact rows' icons and values. How: This multiplies the base by the second power of the core design number. */
+	--fon-siz-p02 : calc( var( --fon-siz-bas ) * var( --cdn-pow-002 ) ); /* What: Font Size Base Plus 2 ~= 19.304px. Why: This is two steps up the scale from the base, for the bar's brand, the phone menu's rows, the hero pitch, and the contact rows' icons and values. How: This multiplies the base by the second power of the core design number. */
 	--fon-siz-p03 : calc( var( --fon-siz-bas ) * var( --cdn-pow-003 ) ); /* What: Font Size Base Plus 3 ~= 25.572px. Why: This is three steps up the scale from the base, which nothing on this site uses yet. How: This multiplies the base by the third power of the core design number. */
 	--fon-siz-p04 : calc( var( --fon-siz-bas ) * var( --cdn-pow-004 ) ); /* What: Font Size Base Plus 4 ~= 33.876px. Why: This is four steps up the scale from the base, for the stats' figures and the smallest end of every section heading. How: This multiplies the base by the fourth power of the core design number. */
 	--fon-siz-p05 : calc( var( --fon-siz-bas ) * var( --cdn-pow-005 ) ); /* What: Font Size Base Plus 5 ~= 44.876px. Why: This is five steps up the scale from the base, for the hero heading's smallest size and the About heading's largest. How: This multiplies the base by the fifth power of the core design number. */
@@ -305,7 +307,7 @@
 	/* #region Layout Tokens */
 
 	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: Every section's container and the hero's row cap their width at a 1,920px viewport divided by the core design number, about 1,449.4px, the same cap as reese-roofing and seal-and-shield. */
-	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: Every section, the bar, and the footer pad their sides with horizontal step 016, held between the p01 and p04 horizontal spacing steps, about 19.304px to 44.876px, the same gutter as reese-roofing and seal-and-shield. */
+	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: Every section, the bar, the phone menu, and the footer pad their sides with horizontal step 016, held between the p01 and p04 horizontal spacing steps, about 19.304px to 44.876px, the same gutter as reese-roofing and seal-and-shield. */
 
 	/* #endregion Layout Tokens */
 
@@ -393,7 +395,7 @@
 	--ver-rhy-m03 : var( --cdn-pow-002-rec ); /* What: Vertical Rhythm Base Minus 3 ~= 0.570. Why: This is 3 steps below the base step. How: This is the reciprocal of the second power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m02 : var( --cdn-pow-001-rec ); /* What: Vertical Rhythm Base Minus 2 ~= 0.755. Why: This is 2 steps below the base step. How: This is the reciprocal of the first power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: Headings and single-line elements need no breathing room between lines. How: This is read unitless as line-height, so each line is exactly its own font size tall, or multiplied by 1rem where a length is needed. */
-	--ver-rhy-bas : var( --cdn-pow-001 ); /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is the first power of the core design number, read unitless as line-height or multiplied by 1rem where a length is needed. */
+	--ver-rhy-bas : var( --cdn-pow-001 );     /* What: Vertical Rhythm Base ~= 1.325. Why: Line height and every other height-related value share one base rhythm drawn from the core design number. How: This is the first power of the core design number, read unitless as line-height or multiplied by 1rem where a length is needed. */
 	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: Body text and the story's paragraphs need a roomy line. How: This is the second power of the core design number, read unitless as line-height or multiplied by 1rem where a length is needed. */
 	--ver-rhy-p02 : var( --cdn-pow-003 );     /* What: Vertical Rhythm Base Plus 2 ~= 2.325. Why: This is 2 steps above the base step. How: This is the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p03 : var( --cdn-pow-004 );     /* What: Vertical Rhythm Base Plus 3 ~= 3.080. Why: This is 3 steps above the base step. How: This is the fourth power of the core design number, multiplied by 1rem where a length is needed. */
@@ -548,14 +550,14 @@ section { /* What: Section. Why: No section should ever be wider than the screen
 
 /* #region Shared Keyframes */
 
-@keyframes blockEnterFadeIn { /* What: Block Enter Fade In. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from about 26px below and from transparent to fully shown; modules play it through global(). */
+@keyframes blockEnterFadeIn { /* What: Block Enter Fade In. Why: The hero's blocks and the product cards rise into place as they appear. How: This moves an element up from about 25.6px below and from transparent to fully shown; modules play it through global(). */
 
 
 	from {
 
 
 		opacity   : 0;
-		transform : translateY(24px);
+		transform : translateY( var( --spa-ver-p02 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 	}
@@ -564,7 +566,7 @@ section { /* What: Section. Why: No section should ever be wider than the screen
 
 
 		opacity   : 1;
-		transform : translateY(0);
+		transform : translateY( 0 );
 
 
 	}

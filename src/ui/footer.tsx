@@ -37,9 +37,9 @@ import cssModObj from './footer.module.css'; // What: CSS Module Object. Why: Th
  *
  * @summary
  * Renders the footer's single line: the copyright with the current year, the
- * business name, Bolivar, MO, and the phone number as a click-to-call link.
- * The line is one run of text, so it stays on one source line, where JSX keeps
- * the spaces between its words and the link.
+ * business name, Bolivar, Missouri, and the phone number as a click-to-call
+ * link. The line is one run of text, so it stays on one source line, where JSX
+ * keeps the spaces between its words and the link.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -67,7 +67,7 @@ function SitFooCom () : React.JSX.Element {
 		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: Every page ends with the business's name, home town, and phone number. How: This holds the footer's one line. */ }
 
 
-			<p>© { curYeaNum } Tony's Toppers · Handcrafted in Bolivar, MO · <a className={ cssModObj.fooPhoAnc } href='tel:4177330681'>(417) 733-0681</a></p>{ /* What: Footer Copyright Paragraph Element. Why: The footer names the year, the business, and where Tony works, and ends in a way to reach him. How: This prints the current year read on each render, with the phone number as a link that dials it on phones. */ }
+			<p>© { curYeaNum } Tony's Toppers · Handcrafted in Bolivar, Missouri · <a className={ cssModObj.fooPhoAnc } href='tel:4177330681'>(417) 733-0681</a></p>{ /* What: Footer Copyright Paragraph Element. Why: The footer names the year, the business, and where Tony works, and ends in a way to reach him. How: This prints the current year read on each render, with the phone number as a link that dials it on phones. */ }
 
 
 		</footer>

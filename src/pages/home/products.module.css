@@ -6,15 +6,13 @@
  *
  * @summary
  * Styles for ProSecCom: the collection's deeper cream band, dotted with a
- * faint grid, with the section's heading and note, the row of filter
- * buttons, and the responsive grid of product cards. Each card holds its
- * photo in a portrait frame with a tag over its corner and its name and kind
- * beneath, and rises in through the global blockEnterFadeIn keyframes, which the hero
- * shares. The shared section, container, heading, and note classes the
- * section used to borrow from the global stylesheet are copied here, and
- * every animation and transition stops for anyone who asked for less motion.
- * The card's hover lift never shows while its entrance animation holds its
- * transform, a known gap the interaction feedback pass takes up.
+ * faint grid, with the section's heading and note, the row of filter buttons,
+ * and the responsive grid of product cards. Each card holds its photo in a
+ * portrait frame with a tag over its corner and its name and kind beneath, and
+ * rises in through the global blockEnterFadeIn keyframes, which the hero
+ * shares. The shared section, container, heading, label, and note classes the
+ * section used to borrow from the global stylesheet are copied here, and every
+ * animation and transition stops for anyone who asked for less motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -33,10 +31,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Home Products Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Home Products Section. Why: The tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.homProSec { /* What: Compact Home Products Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+	.homProSec { /* What: Compact Home Products Section. Why: The tall padding wastes a phone's short screen. How: This trims the top and bottom padding, keeping the gutter. */
 
 
 		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
@@ -84,7 +82,7 @@
 	justify-content : space-between;
 	margin-bottom   : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
 	position        : relative;
-	z-index         : 2;
+	z-index         : 1;                                                                                              /* What: Heading Stack Level. Why: The heading has to sit over the band's dot grid, which is positioned at 0. How: This lifts it one level above the grid. */
 
 
 }
@@ -119,13 +117,13 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	width      : 32px;
+	width      : calc( var( --ver-rhy-p03 ) * 1rem ); /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
@@ -157,7 +155,7 @@
 /* #endregion secTitHea */
 
 
-.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it at the body size in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
 
 
 	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
@@ -173,7 +171,7 @@
 
 /* #region filGroDiv */
 
-.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen. */
+.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen, above the band's dot grid. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
@@ -185,6 +183,8 @@
 	margin-top    : var( --spa-ver-bas );                            /* Spacing Vertical Base ~= 14.572px */
 	max-width     : 100%;
 	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
+	position      : relative;
+	z-index       : 1;                                               /* What: Strip Stack Level. Why: The strip's white has to sit over the band's dot grid, which is positioned at 0. How: This lifts the strip one level above the grid, like the heading and the cards. */
 
 
 }
@@ -223,7 +223,7 @@
 
 	background : var( --bac-sun-col );                            /* Background Sunken Color ~= #f5edd6 */
 	color      : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
-	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
@@ -269,7 +269,7 @@
 	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );       /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	grid-template-columns : repeat( auto-fill, minmax( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-020 ) ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 20 ~= 268.187px @ 1,920px width */
 	position              : relative;
-	z-index               : 2;
+	z-index               : 1;                                                                                                    /* What: Grid Stack Level. Why: The cards have to sit over the band's dot grid, which is positioned at 0. How: This lifts them one level above the grid. */
 
 
 }
@@ -297,19 +297,18 @@
 	background    : var( --bac-sur-col );                                                           /* Background Surface Color = #ffffff */
 	border        : var( --bor-wid-bas ) solid var( --bor-mai-col );                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius : var( --rad-bor-xla );                                                           /* Radius Border Extra Large ~= 19.304px */
-	cursor        : pointer;
 	overflow      : hidden;
 	position      : relative;
-	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the card clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the card itself, which only repaints the one card. */
 
 
 }
-.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft navy shadow, and turns its border navy. */
+.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft ink shadow, and turns its border navy. */
 
 
 	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
 	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
-	transform    : translateY( calc( var( --spa-ver-m03 ) * -1 ) ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
@@ -367,7 +366,7 @@
 
 	height     : 100%;
 	object-fit : contain;
-	transition : transform var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */
+	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 	width      : 100%;
 
 

@@ -34,7 +34,7 @@
 	position   : fixed;
 	transition : opacity var( --dur-tra-p03 ) var( --mot-dec-eas ), visibility 0s linear var( --dur-tra-p03 ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	visibility : hidden;
-	z-index    : 99;                                                                                           /* What: Scrim Stack Level. Why: The scrim has to cover every section's content, the highest at 3, while staying under the bar at 100. How: This sits one level below the bar. */
+	z-index    : 2;                                                                                            /* What: Scrim Stack Level. Why: The scrim has to cover every section's content, the highest at 1, while staying under the bar at 3. How: This sits one level above the content and one below the bar. */
 
 
 }
@@ -95,8 +95,8 @@
 	position                : fixed;
 	right                   : 0;
 	top                     : 0;
-	transition              : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	z-index                 : 100;
+	transition              : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Animated Padding. Why: The bar slims down once the page scrolls, and a transform would squeeze its logo and links rather than trim the space around them. How: The bar is fixed, so its padding change moves nothing else on the page. */
+	z-index                 : 3; /* What: Bar Stack Level. Why: The bar has to stay over the page's content, the highest at 1, and over the open menu's scrim at 2. How: This sits one level above the scrim. */
 
 
 }
@@ -249,7 +249,7 @@
 
 
 		display : flex;
-		z-index : 1;
+		z-index : 1; /* What: Toggle Stack Level. Why: The toggle has to stay clickable above the sliding menu panel, which shares the bar's layer at its default level. How: This lifts the toggle one level above the panel. */
 
 
 	}
@@ -277,13 +277,13 @@
 
 }
 
-.togBarSpa { /* What: Toggle Bar Span. Why: Three bars draw the menu icon. How: This draws each as a thin, rounded ink line, easing its color and its turn into the close cross. */
+.togBarSpa { /* What: Toggle Bar Span. Why: Three bars draw the menu icon. How: This draws each as a thin, rounded ink line, easing its hover color. */
 
 
-	background    : var( --tex-mai-col );                /* Text Main Color = #1a1a2e */
-	border-radius : var( --rad-bor-xsm );                /* Radius Border Extra Small ~= 3.572px */
-	height        : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms */
+	background    : var( --tex-mai-col );                                 /* Text Main Color = #1a1a2e */
+	border-radius : var( --rad-bor-xsm );                                 /* Radius Border Extra Small ~= 3.572px */
+	height        : calc( var( --ver-rhy-m07 ) * 1rem );                  /* Vertical Rhythm Base Minus 7 ~= 2.035px */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
@@ -297,7 +297,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Toggle Bar Span. Why: Someone who asked for less motion shouldn't see the icon animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.togBarSpa { /* What: Motionless Toggle Bar Span. Why: Any change to the bars should simply switch. How: This turns the transitions off. */
+	.togBarSpa { /* What: Motionless Toggle Bar Span. Why: Any change to the bars should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -327,19 +327,19 @@
 	.navMenDiv { /* What: Closed Navigation Menu Div. Why: On a narrow screen the links and the contact block become a menu below the bar, out of the way until the toggle opens it. How: This sets the cream panel under the bar, scrolling if it's taller than the screen, slides it up out of view, and hides it once the slide ends, so its links leave the Tab order and screen readers. */
 
 
-		background     : var( --bac-pag-col );                                                                                         /* Background Page Color = #fdf9ee */
-		border-bottom  : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                              /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+		background     : var( --bac-pag-col );                                                                           /* Background Page Color = #fdf9ee */
+		border-bottom  : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 		display        : block;
 		left           : 0;
-		max-height     : calc( 100vh - var( --spa-ver-bas ) * 2 - var( --ver-rhy-p04 ) * 1rem );                                       /* Spacing Vertical Base ~= 14.572px, Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Below The Bar Height. Why: A tall menu on a short screen would run off the bottom with no way to reach its end. How: This caps it at the screen's height less the bar's padding and logo, and the overflow below scrolls. */
+		max-height     : calc( 100vh - var( --spa-ver-bas ) * 2 - var( --ver-rhy-p04 ) * 1rem );                         /* Spacing Vertical Base ~= 14.572px, doubled to ~= 29.144px, Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Below The Bar Height. Why: A tall menu on a short screen would run off the bottom with no way to reach its end. How: This caps it at the screen's height less the bar's padding and logo, and the overflow below scrolls. */
 		overflow-y     : auto;
-		padding        : var( --spa-ver-bas ) var( --gut-sid-pad ) var( --spa-ver-p02 );                                               /* Spacing Vertical Base ~= 14.572px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
+		padding        : var( --spa-ver-bas ) var( --gut-sid-pad ) var( --spa-ver-p02 );                                 /* Spacing Vertical Base ~= 14.572px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
 		pointer-events : none;
 		position       : absolute;
 		right          : 0;
 		top            : 100%;
 		transform      : translateY( -210% );
-		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), visibility 0s var( --mot-sta-eas ) var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
+		transition     : transform var( --dur-tra-p02 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Leaving Ease. Why: A panel leaving the screen should pick up speed as it goes. How: The slide out accelerates, and the panel hides once it has finished. */ /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
 		visibility     : hidden;
 
 
@@ -349,7 +349,7 @@
 
 		pointer-events : all;
 		transform      : translateY( 0 );
-		transition     : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+		transition     : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Arriving Ease. Why: A panel arriving should land softly. How: The slide in decelerates. */
 		visibility     : visible;
 
 
@@ -396,7 +396,6 @@
 }
 
 
-
 /* #region navLinUno */
 
 .navLinUno { /* What: Navigation Link Unordered List. Why: Wide screens show the section links in a row in the bar. How: This lines them up with small gaps and no list markers. */
@@ -439,7 +438,7 @@
 
 
 }
-.navMenDiv[data-mobile-menu-open] .navLinIte { /* What: Entering Navigation Link Item. Why: The rows should arrive one after another as the menu opens. How: This plays the entrance, delayed by one stagger step per row above it, read from the index the component sets on each item. */
+.navMenDiv[data-mobile-menu-open] .navLinIte { /* What: Entering Navigation Link Item. Why: The rows should arrive one after another as the menu opens. How: This plays the entrance, delayed by one stagger step more than the row above it, the first row included, read from the index the component sets on each item. */
 
 
 	animation : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) calc( var( --dur-ani-m03 ) * ( var( --nav-ite-ind ) + 1 ) ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Animation Base Minus 3 ~= 67.9ms, Navigation Item Index, set inline by the component */
@@ -564,7 +563,8 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navLinAnc { /* What: Motionless Navigation Link Anchor. Why: The hover and active colors should simply switch. How: This turns the transition off. */
+	.navLinAnc,
+	.navLinAnc::before { /* What: Motionless Navigation Link Anchor And Dot. Why: The hover, active, press, and nudge looks, and the menu row's dot, should simply switch. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -597,9 +597,9 @@
 
 
 		display       : grid;
-		gap           : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 		justify-items : start;
 		padding-top   : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+		row-gap       : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 	}
@@ -642,23 +642,24 @@
 	justify-self    : stretch;
 	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	text-decoration : none;
-	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition      : background var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 
 
 }
-.menCalAnc:hover { /* What: Hovered Menu Call Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+.menCalAnc:hover { /* What: Hovered Menu Call Anchor. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
 
 
+	background : var( --acc-hov-col ); /* Accent Hover Color ~= #2d4c9d */
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
-	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
-.menCalAnc:active { /* What: Pressed Menu Call Anchor. Why: A press should feel like pushing the button in before the phone opens. How: This drops it back into place with a shallower shadow. */
+.menCalAnc:active { /* What: Pressed Menu Call Anchor. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
 
 
-	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Pressed Shadow Offset. Why: A press should read as the button sinking toward its shadow. How: Each offset takes the lift's own step off the resting offset. */
-	transform  : translate( 0, 0 );
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	transform  : scale( 0.97 );                                                                                  /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes its hover lift, a literal since no scale step lands within 10%. */
 
 
 }

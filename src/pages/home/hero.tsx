@@ -1,7 +1,6 @@
 
 
 
-
 // #region Imports
 
 import carWebUrl from './tony-cartoon.webp'; // What: Cartoon WebP URL. Why: The hero shows Tony's cartoon portrait, and Vite fingerprints and checks an imported image. How: This imports the image's built URL for the hero's img.
@@ -43,11 +42,12 @@ import { useSecLinFun } from '../../ui/section-link.ts'; // What: Use Section Li
  * HerSecCom = Hero Section Component
  *
  * @summary
- * Renders the hero. Its buttons reach their sections through scrSecFun, the
- * same shared path the bar's links use, scrolling in place and leaving a
- * Ctrl, Cmd, or middle click to the browser. The collection button is named
- * by its words alone, so its decorative arrow isn't read aloud, and the
- * sticker, which only repeats the headline, is hidden from screen readers.
+ * Renders the hero. Its buttons reach their sections through scrSecFun, which
+ * hands them to visSecFun, the same shared path the bar's links use, scrolling
+ * in place and leaving a Ctrl, Cmd, Shift, Alt, or middle click to the
+ * browser. The collection button is named by its words alone, so its
+ * decorative arrow isn't read aloud, and the sticker, which only repeats the
+ * headline, is hidden from screen readers.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -74,11 +74,11 @@ function HerSecCom () : React.JSX.Element {
 	 * scrSecFun = Scroll Section Function
 	 *
 	 * @summary
-	 * Handles a click on either hero button. A Ctrl, Cmd, Shift, Alt, or middle
-	 * click is left to the browser, which opens the button's own address. Any
-	 * other click stops the browser's jump to the hash and hands the section's
-	 * id to visSecFun, which scrolls to it without leaving the hash in the
-	 * address.
+	 * Handles a click on either hero button. A Ctrl, Cmd, Shift, Alt, or
+	 * middle click is left to the browser, which opens the button's own
+	 * address. Any other click stops the browser's jump to the hash and hands
+	 * the section's id to visSecFun, which scrolls to it without leaving the
+	 * hash in the address.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -98,7 +98,7 @@ function HerSecCom () : React.JSX.Element {
 	const scrSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Scroll Section Function. Why: Both hero buttons scroll in place instead of jumping or leaving a hash in the address. How: This leaves a modified click to the browser, and otherwise cancels the link's own jump and hands the section to visSecFun.
 
 
-		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
+		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
 
 
 
@@ -120,12 +120,12 @@ function HerSecCom () : React.JSX.Element {
 			id='home'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
+		>{ /* What: Home Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
 
 
-			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: First Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: Hero Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
 
-			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivBlue } `} />{ /* What: Second Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivBlue } `} />{ /* What: Hero Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
 
 
 
@@ -137,13 +137,12 @@ function HerSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.herEyeSpa }>Handcrafted in Bolivar, Missouri</span>{ /* What: Hero Eyebrow Span Element. Why: Visitors should know where the pieces are made before anything else. How: This shows the town above the headline. */ }
 
-					<h1 className={ cssModObj.herTitHea }>Crafted by hand &amp; <span className={ cssModObj.titAccSpa }>made with love.</span></h1>{ /* What: Hero Heading Element. Why: The headline sums up the business in one line. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
+					<h1 className={ cssModObj.herTitHea }>Crafted by hand &amp; <span className={ cssModObj.titAccSpa }>made with love.</span></h1>{ /* What: Hero Title Heading Element. Why: The headline sums up the business in one line. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
 
-					<p className={ cssModObj.herLedPar }>
+					<p className={ cssModObj.herLedPar }>{ /* What: Hero Lede Paragraph Element. Why: A short pitch says what Tony makes and why it's special. How: This shows two sentences beneath the headline. */ }
 						Tony Mawhiney designs and beads every piece by hand: color-coordinated, carefully
 						chosen, and one of a kind. Small art for everyday moments.
-					</p>{ /* What: Hero Lede Paragraph Element. Why: A short pitch says what Tony makes and why it's special. How: This shows two sentences beneath the headline. */ }
-
+					</p>
 
 					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The two main ways into the page sit together. How: This sets the buttons in a row. */ }
 
@@ -156,7 +155,7 @@ function HerSecCom () : React.JSX.Element {
 							aria-label='See the collection' // What: Collection Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
 
 							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'products' ) }
-						>{ /* What: Collection Button Anchor Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the products section through scrSecFun. */ }
+						>{ /* What: Button Base Anchor Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the products section through scrSecFun. */ }
 							See the collection →
 						</a>
 
@@ -166,7 +165,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#about'
 
 							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'about' ) }
-						>{ /* What: Meet Tony Button Anchor Element. Why: Visitors want to meet the maker. How: This scrolls to Tony's story through scrSecFun. */ }
+						>{ /* What: Button Base Anchor Element. Why: Visitors want to meet the maker. How: This scrolls to Tony's story through scrSecFun. */ }
 							Meet Tony
 						</a>
 
@@ -180,7 +179,7 @@ function HerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: Tony's cartoon portrait is the hero's picture. How: This holds the portrait ring and the sticker beside it. */ }
 
 
-					<div className={ cssModObj.porRinDiv }>{ /* What: Hero Logo Div Element. Why: The portrait sits in a round frame with a slowly turning ring. How: This frames the image. */ }
+					<div className={ cssModObj.porRinDiv }>{ /* What: Portrait Ring Div Element. Why: The portrait sits in a round frame with a slowly turning ring. How: This frames the image. */ }
 
 
 						<img
@@ -191,11 +190,10 @@ function HerSecCom () : React.JSX.Element {
 							width={ PHO_SIZ_OBJ[ 'tony-cartoon' ].widNum }
 
 							alt='Cartoon illustration of Tony'
-						/>{ /* What: Hero Cartoon Image Element. Why: The hero shows Tony as his cartoon. How: This loads the cartoon portrait. */ }
+						/>{ /* What: Portrait Cartoon Image Element. Why: The hero shows Tony as his cartoon. How: This loads the cartoon portrait. */ }
 
 
 					</div>
-
 
 					<div
 						className={ cssModObj.herStiDiv }

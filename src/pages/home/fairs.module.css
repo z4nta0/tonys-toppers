@@ -5,10 +5,10 @@
  * fairs.module.css = Fairs Section Module
  *
  * @summary
- * Styles for FaiSecCom: the craft fair gallery's section, with its heading
- * and note above a responsive grid of booth shots, each in a rounded 4:5
- * frame. The shared section, container, heading, and note classes the
- * section used to borrow from the global stylesheet are copied here.
+ * Styles for FaiSecCom: the craft fair gallery's section, with its heading and
+ * note above a responsive grid of booth shots, each in a rounded 4:5 frame.
+ * The shared section, container, heading, label, and note classes the section
+ * used to borrow from the global stylesheet are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -18,18 +18,17 @@
 
 /* #region homFaiSec */
 
-.homFaiSec { /* What: Home Fairs Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+.homFaiSec { /* What: Home Fairs Section. Why: Every home page section shares the same generous padding. How: This pads it all round, copied from the shared section. */
 
 
-	padding  : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
-	position : relative;
+	padding : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Home Fairs Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Home Fairs Section. Why: The tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.homFaiSec { /* What: Compact Home Fairs Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+	.homFaiSec { /* What: Compact Home Fairs Section. Why: The tall padding wastes a phone's short screen. How: This trims the top and bottom padding, keeping the gutter. */
 
 
 		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
@@ -98,13 +97,13 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	width      : 32px;
+	width      : calc( var( --ver-rhy-p03 ) * 1rem ); /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
@@ -136,7 +135,7 @@
 /* #endregion secTitHea */
 
 
-.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it at the body size in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
 
 
 	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */

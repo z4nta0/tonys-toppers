@@ -25,9 +25,9 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  * indentation, and any JSON-LD whitespace stay out of what visitors download.
  * It also ships every imported asset as its own file, never an inline data
  * URL, which the security headers' image policy would block. Every other
- * setting stays at Vite's default, including copying the files in public/
- * (the favicon, Netlify's _redirects and _headers for now, and the icon set,
- * social card, and crawler files once they arrive) into the build untouched.
+ * setting stays at Vite's default, including copying the files in public/ (the
+ * icon set, the social card, robots.txt and sitemap.xml, and Netlify's
+ * _redirects and _headers) into the build untouched.
  *
  * Sections:
  *  - Helpers
@@ -111,7 +111,7 @@ const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads 
 
 
 	build   : { assetsInlineLimit : 0 },                            // What: Build. Why: The Content-Security-Policy in public/_headers allows images only from the site's own origin, which rules out the data URLs Vite would otherwise inline small files as, such as the two logo SVGs. How: This sets the inline limit to zero, so every imported asset ships as its own fingerprinted file.
-	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so a modifier class such as .proCarArt--wide would be read as cssModObj.proCarArtWide, per the CSS modules rules. How: This sets the locals convention.
+	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so a modifier class such as .butBasAnc--primary is read as cssModObj.butBasAncPrimary, per the CSS modules rules. How: This sets the locals convention.
 	plugins : [ react(), minHtmFun() ]                              // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React and the page minifier.
 
 

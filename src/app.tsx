@@ -1,15 +1,14 @@
 
 
 
-
 // #region Imports
 
-import { HomPagCom } from './pages/home/home.tsx';          // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.
-import { NavBarCom } from './ui/nav.tsx';                   // What: Navigation Bar Component. Why: Every page starts with the shared bar. How: This renders above the routes.
+import { HomPagCom } from './pages/home/home.tsx';           // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.
+import { NavBarCom } from './ui/nav.tsx';                    // What: Navigation Bar Component. Why: Every page starts with the shared bar. How: This renders above the routes.
 import { NotFouCom } from './pages/not-found/not-found.tsx'; // What: Not Found Component. Why: Unknown addresses need a page of their own. How: The catch-all route renders it.
-import { Route     } from 'react-router';                   // What: Route. Why: Each page is matched to its path. How: This declares one route per page.
-import { Routes    } from 'react-router';                   // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
-import { SitFooCom } from './ui/footer.tsx';                // What: Site Footer Component. Why: Every page ends with the shared footer. How: This renders below the routes.
+import { Route     } from 'react-router';                    // What: Route. Why: Each page is matched to its path. How: This declares one route per page.
+import { Routes    } from 'react-router';                    // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
+import { SitFooCom } from './ui/footer.tsx';                 // What: Site Footer Component. Why: Every page ends with the shared footer. How: This renders below the routes.
 
 // #endregion Imports
 

@@ -1,13 +1,12 @@
 
 
 
-
 // #region Imports
 
 import cssModObj from './fairs.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { PRO_RCD_ARR } from './catalog.ts'; // What: Product Record Array. Why: The booth shots live in the catalog beside the pieces they show. How: The gallery keeps only the records marked as booth shots.
+import { PRO_REC_ARR } from './catalog.ts'; // What: Product Record Array. Why: The booth shots live in the catalog beside the pieces they show. How: The gallery keeps only the records marked as booth shots.
 
 // #endregion Imports
 
@@ -35,7 +34,7 @@ import { PRO_RCD_ARR } from './catalog.ts'; // What: Product Record Array. Why: 
 
 // #region Constants
 
-const GAL_RCD_ARR = PRO_RCD_ARR.filter( ( proRcdObj ) => proRcdObj.faiBoo ); // What: Gallery Record Array. Why: Only the craft fair table photos belong in the gallery. How: This keeps the catalog's records marked as booth shots, in catalog order.
+const GAL_REC_ARR = PRO_REC_ARR.filter( ( proRecObj ) => proRecObj.faiBoo ); // What: Gallery Record Array. Why: Only the craft fair table photos belong in the gallery. How: This keeps the catalog's records marked as booth shots, in catalog order.
 
 // #endregion Constants
 
@@ -75,30 +74,30 @@ function FaiSecCom () : React.JSX.Element {
 			id='fairs'
 
 			className={ cssModObj.homFaiSec }
-		>{ /* What: Fairs Section Element. Why: Visitors meet Tony at craft fairs, and the gallery shows what his table looks like. How: Its id stays the plain word fairs, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Fairs Section Element. Why: Visitors meet Tony at craft fairs, and the gallery shows what his table looks like. How: Its id stays the plain word fairs, since the bar links to it and it can appear in the page's address. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Fairs Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.secHeaDiv }>{ /* What: Fairs Head Div Element. Why: The heading and the note about the fairs sit side by side. How: This lays them out in a row. */ }
+				<div className={ cssModObj.secHeaDiv }>{ /* What: Section Heading Div Element. Why: The heading and the note about the fairs sit side by side. How: This lays them out in a row. */ }
 
 
 					<div>{ /* What: Fairs Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>At the Craft Fairs</div>{ /* What: Fairs Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>At the Craft Fairs</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
 
-						<h2 className={ cssModObj.secTitHea }>Come see Tony <em className={ cssModObj.titAccEmp }>at his table.</em></h2>{ /* What: Fairs Heading Element. Why: The heading invites visitors to find Tony in person. How: The second half sits in an italic accent. */ }
+						<h2 className={ cssModObj.secTitHea }>Come see Tony <em className={ cssModObj.titAccEmp }>at his table.</em></h2>{ /* What: Section Title Heading Element. Why: The heading invites visitors to find Tony in person. How: The second half sits in an italic accent. */ }
 
 
 					</div>
 
 
-					<p className={ cssModObj.secSubPar }>
+					<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading. */ }
 						Tony sets up at craft fairs and events around Bolivar, Missouri. Here's what you'll
 						find when you stop by.
-					</p>{ /* What: Fairs Note Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading. */ }
+					</p>
 
 
 				</div>
@@ -108,26 +107,26 @@ function FaiSecCom () : React.JSX.Element {
 				<div className={ cssModObj.faiGriDiv }>{ /* What: Fairs Grid Div Element. Why: The booth shots lay out in a responsive grid. How: This holds one figure per booth shot. */ }
 
 
-					{ GAL_RCD_ARR.map( ( faiRcdObj ) => ( // What: Booth Figure Map. Why: Each booth shot gets a figure. How: This renders one figure per record, in catalog order.
+					{ GAL_REC_ARR.map( ( faiRecObj ) => ( // What: Booth Figure Map. Why: Each booth shot gets a figure. How: This renders one figure per record, in catalog order.
 
 
 						<figure
-							key={ faiRcdObj.ideStr }
+							key={ faiRecObj.ideStr }
 
 							className={ cssModObj.faiPhoFig }
-						>{ /* What: Booth Photo Figure Element. Why: Each booth shot sits in the same rounded 4:5 frame. How: This frames the photo. */ }
+						>{ /* What: Fair Photo Figure Element. Why: Each booth shot sits in the same rounded 4:5 frame. How: This frames the photo. */ }
 
 
 							<img
 								className={ cssModObj.faiPhoIma }
 
-								height={ faiRcdObj.heiNum }
+								height={ faiRecObj.heiNum }
 								loading='lazy'
-								src={ faiRcdObj.imaStr }
-								width={ faiRcdObj.widNum }
+								src={ faiRecObj.imaStr }
+								width={ faiRecObj.widNum }
 
-								alt={ faiRcdObj.altStr }
-							/>{ /* What: Booth Photo Image Element. Why: The gallery shows Tony's table. How: This loads the photo only as it nears the screen, described by its alt text, at its own width and height so the frame doesn't shift when it arrives. */ }
+								alt={ faiRecObj.altStr }
+							/>{ /* What: Fair Photo Image Element. Why: The gallery shows Tony's table. How: This loads the photo only as it nears the screen, described by its alt text, at its own width and height so the frame doesn't shift when it arrives. */ }
 
 
 						</figure>

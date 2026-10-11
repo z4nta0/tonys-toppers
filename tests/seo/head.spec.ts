@@ -45,28 +45,44 @@ const LIV_URL_STR = 'https://tonystoppers.com/';                              //
 
 
 
+// #region SOC_KEY_ARR
+
+/**
+ * SOC_KEY_ARR = Social Key Array
+ *
+ * @summary
+ * Every Open Graph and Twitter tag key a complete social preview card needs,
+ * per the social preview rule. Every row is one tag key the home page must
+ * carry, so no row needs a comment of its own.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
 
 
-	'og:description',      // What: Open Graph Description Key. Why: Every card needs the summary under the title. How: This names the tag.
-	'og:image',            // What: Open Graph Image Key. Why: Every card needs the preview image. How: This names the tag.
-	'og:image:alt',        // What: Open Graph Image Alt Key. Why: Every card needs the image's description for screen readers. How: This names the tag.
-	'og:image:height',     // What: Open Graph Image Height Key. Why: Every card needs the image's height, for laying out the card early. How: This names the tag.
-	'og:image:type',       // What: Open Graph Image Type Key. Why: Every card needs the image's file type. How: This names the tag.
-	'og:image:width',      // What: Open Graph Image Width Key. Why: Every card needs the image's width, for laying out the card early. How: This names the tag.
-	'og:locale',           // What: Open Graph Locale Key. Why: Every card needs the page's language. How: This names the tag.
-	'og:site_name',        // What: Open Graph Site Name Key. Why: Every card needs the name of the site the link belongs to. How: This names the tag.
-	'og:title',            // What: Open Graph Title Key. Why: Every card needs the card's title. How: This names the tag.
-	'og:type',             // What: Open Graph Type Key. Why: Every card needs what kind of page it is. How: This names the tag.
-	'og:url',              // What: Open Graph URL Key. Why: Every card needs the address shares should count toward. How: This names the tag.
-	'twitter:card',        // What: Twitter Card Key. Why: Every card needs the layout X and similar apps use. How: This names the tag.
-	'twitter:description', // What: Twitter Description Key. Why: Every card needs the summary on X. How: This names the tag.
-	'twitter:image',       // What: Twitter Image Key. Why: Every card needs the image on X. How: This names the tag.
-	'twitter:image:alt',   // What: Twitter Image Alt Key. Why: Every card needs the image's description on X. How: This names the tag.
-	'twitter:title'        // What: Twitter Title Key. Why: Every card needs the card's title on X. How: This names the tag.
+	'og:description',
+	'og:image',
+	'og:image:alt',
+	'og:image:height',
+	'og:image:type',
+	'og:image:width',
+	'og:locale',
+	'og:site_name',
+	'og:title',
+	'og:type',
+	'og:url',
+	'twitter:card',
+	'twitter:description',
+	'twitter:image',
+	'twitter:image:alt',
+	'twitter:title'
 
 
 ];
+
+// #endregion SOC_KEY_ARR
 
 // #endregion Constants
 
@@ -119,6 +135,7 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	const telHreArr = await curPagObj.locator( 'a[href^="tel:"]' ).evaluateAll( ( ancEleArr ) => ancEleArr.map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ) ); // What: Telephone Href Array. Why: The structured data's phone has to be the number the page's call links dial. How: This collects every call link's address.
 
 	type LdjNodTyp = { '@id'? : string, '@type'? : string, address? : object, birthDate? : string, founder? : { '@id' : string }, gender? : string, name? : string, publisher? : { '@id' : string }, sameAs? : string[], telephone? : string, url? : string, worksFor? : { '@id' : string } }; // What: Linked-Data-JSON Node Type. Why: Each node's fields are read by name, and a missing one should read as undefined rather than fail to type check. How: This lists every field the checks read, all optional.
+
 	const ldjGraArr : LdjNodTyp[] = JSON.parse( ldjTexStr )[ '@graph' ] ?? []; // What: Linked-Data-JSON Graph Array. Why: The business, Tony, and the site are separate nodes, each checked on its own. How: This parses the text and reads its graph, or an empty list if it's missing.
 
 	const orgNodObj = ldjGraArr.find( ( graNodObj ) => graNodObj[ '@type' ] === 'Organization' ) ?? {}; // What: Organization Node Object. Why: The business's details are checked together. How: This finds its node, or an empty object if it's missing.
@@ -217,11 +234,10 @@ test( 'the social preview image is a 1,200x630 JPEG under 300 KB', async ( { req
 	const imaResObj = await reqConObj.get( '/og-image.jpg' ); // What: Image Response Object. Why: The image has to exist where the tags point. How: This fetches it from the site.
 	const jpgBufObj = await imaResObj.body();                 // What: JPEG Buffer Object. Why: The image's size is written in its frame header. How: This reads the response bytes.
 
-
 	let segOffNum = 2; // What: Segment Offset Number. Why: A JPEG's size sits in its frame segment, after a varying run of other segments. How: This starts just past the file's opening marker.
 
 
-	while ( segOffNum < jpgBufObj.length && ( jpgBufObj[ segOffNum + 1 ]! < 0xC0 || jpgBufObj[ segOffNum + 1 ]! > 0xC2 ) ) segOffNum += 2 + jpgBufObj.readUInt16BE( segOffNum + 2 ); // What: Frame Segment Search. Why: The frame segment's marker is 0xC0, 0xC1, or 0xC2, and every segment before it gives its own length. How: This hops from segment to segment until it lands on the frame. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: The loop's own bound keeps every read inside the file.
+	while ( segOffNum < jpgBufObj.length && ( jpgBufObj[ segOffNum + 1 ] < 0xC0 || jpgBufObj[ segOffNum + 1 ] > 0xC2 ) ) segOffNum += 2 + jpgBufObj.readUInt16BE( segOffNum + 2 ); // What: Frame Segment Search. Why: The frame segment's marker is 0xC0, 0xC1, or 0xC2, and every segment before it gives its own length. How: This hops from segment to segment until it lands on the frame.
 
 
 

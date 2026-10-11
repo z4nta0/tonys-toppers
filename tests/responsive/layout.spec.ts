@@ -48,6 +48,7 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
 
 
 };
+
 const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page and the open menu are measured the same way. How: Each row names a case, its path, and whether it opens the menu.
 
 
@@ -60,10 +61,7 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page an
 
 
 
-const MEN_MAX_NUM = 900; // What: Menu Maximum Number. Why: The mobile menu exists only up to the site's 900px breakpoint. How: The menu case is measured only at widths up to this.
-
-
-
+const MEN_MAX_NUM = 900;                                                                            // What: Menu Maximum Number. Why: The mobile menu exists only up to the site's 900px breakpoint. How: The menu case is measured only at widths up to this.
 const WID_LIS_ARR = [ 320, 360, 390, 414, 480, 768, 900, 901, 1000, 1001, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths (480px a landscape phone, 768px and 1,024px a tablet) plus the site's 900px and 1,000px breakpoints and the pixel past each.
 
 // #endregion Constants
@@ -198,7 +196,7 @@ function layProFun () : string[] {
 
 
 		const ownTexBoo = [ ...layCurEle.childNodes ].some( ( chiCurNod ) => chiCurNod.nodeType === Node.TEXT_NODE && !!chiCurNod.textContent?.trim() ); // What: Own Text Boolean. Why: Only an element holding text itself can spill it. How: This checks its direct children for text that isn't just whitespace.
-		const spiBoxBoo = texSpiFun( layCurEle );                                                                                                        // What: Spill Box Boolean. Why: Text running past its box has spilled out of it. How: This checks whether any line of the element's own text runs past an inner edge.
+		const spiBoxBoo = texSpiFun( layCurEle ); // What: Spill Box Boolean. Why: Text running past its box has spilled out of it. How: This checks whether any line of the element's own text runs past an inner edge.
 		const visOveBoo = styCurObj.overflowX === 'visible';                                                                                             // What: Visible Overflow Boolean. Why: Content a box clips or scrolls on purpose isn't a spill. How: This checks the box shows its overflow.
 		const bloBoxBoo = styCurObj.display !== 'inline';                                                                                                // What: Block Box Boolean. Why: An inline element has no box width to compare with. How: This checks it isn't inline.
 

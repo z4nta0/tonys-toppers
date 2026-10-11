@@ -7,13 +7,13 @@
  * @summary
  * Styles for ConSecCom: the navy band that ends the home page, warmed by a
  * yellow glow, with the ways to reach Tony on one side (the heading, a note,
- * and rows for his phone, his Facebook page, and his home town) and the
- * cream message form on the other, with its thank-you and error notes. On
- * screens 900px wide or narrower the two sides stack, and so do the form's
- * name and email fields. The shared section, container, and label classes
- * the section used to borrow from the global stylesheet are copied here, and
- * the fields' and send button's transitions stop for anyone who asked for
- * less motion.
+ * and rows for his phone, his Facebook page, and his home town) and the cream
+ * message form on the other, with its thank-you and error notes, which rise in
+ * as they appear, the thank-you check popping once. On screens 900px wide or
+ * narrower the two sides stack, and so do the form's name and email fields.
+ * The shared section, container, and label classes the section used to borrow
+ * from the global stylesheet are copied here, and every animation and
+ * transition stops for anyone who asked for less motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -36,10 +36,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Home Contact Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Home Contact Section. Why: The tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.homConSec { /* What: Compact Home Contact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+	.homConSec { /* What: Compact Home Contact Section. Why: The tall padding wastes a phone's short screen. How: This trims the top and bottom padding, keeping the gutter. */
 
 
 		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
@@ -56,11 +56,11 @@
 	border-radius  : 50%;
 	content        : '';
 	height         : calc( var( --ver-rhy-p13 ) * 1rem );                                 /* Vertical Rhythm Base Plus 13 ~= 563.794px */
-	opacity        : 0.18;
+	opacity        : var( --cdn-pow-006-rec );                                            /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	pointer-events : none;
 	position       : absolute;
-	right          : calc( var( --spa-hor-p09 ) * -1 );                                   /* Spacing Horizontal Base Plus 9 ~= 183.074px */
-	top            : calc( var( --spa-ver-p09 ) * -1 );                                   /* Spacing Vertical Base Plus 9 ~= 183.074px */
+	right          : calc( var( --spa-hor-p09 ) * -1 );                                   /* Spacing Horizontal Base Plus 9 ~= -183.074px */
+	top            : calc( var( --spa-ver-p09 ) * -1 );                                   /* Spacing Vertical Base Plus 9 ~= -183.074px */
 	width          : calc( var( --ver-rhy-p13 ) * 1rem );                                 /* Vertical Rhythm Base Plus 13 ~= 563.794px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
@@ -89,7 +89,7 @@
 	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 1fr 1fr;
 	position              : relative;
-	z-index               : 2;
+	z-index               : 1;                                                                                              /* What: Grid Stack Level. Why: The rows and the form have to sit over the band's glow, which is positioned at 0. How: This lifts the grid one level above it. */
 
 
 }
@@ -123,17 +123,16 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	content    : '';
 	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	width      : 32px;
+	width      : calc( var( --ver-rhy-p03 ) * 1rem ); /* Vertical Rhythm Base Plus 3 ~= 33.876px */
 
 
 }
-
 
 
 /* #region secTitHea */
@@ -164,7 +163,7 @@
 /* #endregion secTitHea */
 
 
-.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in softened cream, capped near 50 characters a line, with room below. */
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it at the body size in softened cream, capped near 50 characters a line, with room below. */
 
 
 	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -206,8 +205,8 @@
 .infRowAnc:hover { /* What: Hovered Info Row Anchor. Why: A row that's a link should respond to the pointer. How: This brightens its panel and lifts it slightly. */
 
 
-	background : oklch( from var( --bac-sur-col ) l c h / 0.14 ); /* Background Surface Color = #ffffff @ 0.14 opacity */
-	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
+	background : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-007-rec ) ); /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) );                     /* Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
@@ -311,10 +310,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Contact Form Form. Why: The card's wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Contact Form Form. Why: The card's tall padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.conForFor { /* What: Compact Contact Form Form. Why: The fields need the narrow screen's width. How: This trims the card's padding. */
+	.conForFor { /* What: Compact Contact Form Form. Why: The card's tall padding wastes a phone's short screen. How: This trims the card's top and bottom padding, keeping its sides. */
 
 
 		padding : var( --spa-ver-p02 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -325,19 +324,141 @@
 
 }
 
-.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went. How: This sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
+
+/* #region forSucDiv */
+
+.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went. How: This rises and fades in once as it appears, and sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
 
 
-	background    : var( --suc-tin-col );                            /* Success Tint Color = #fde68a */
-	border        : var( --bor-wid-lar ) solid var( --suc-mai-col ); /* Border Width Large ~= 2.035px, Success Main Color = #d97706 */
-	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
-	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	animation     : forSucDivShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	background    : var( --suc-tin-col );                                               /* Success Tint Color = #fde68a */
+	border        : var( --bor-wid-lar ) solid var( --suc-mai-col );                    /* Border Width Large ~= 2.035px, Success Main Color = #d97706 */
+	border-radius : var( --rad-bor-med );                                               /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                                               /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
-	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	margin-bottom : var( --spa-ver-p01 );                                               /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                          /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
+.forSucDiv[data-note-exit-active] { /* What: Leaving Form Success Div. Why: The note should leave the way it arrived rather than vanish. How: This fades it out and drops it a little, after which the component unmounts it. */
+
+
+	animation : forSucDivHideFadeOut var( --dur-ani-p02 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the note move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forSucDiv { /* What: Motionless Form Success Div. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+	.forSucDiv[data-note-exit-active] { /* What: Quick Leaving Form Success Div. Why: The component waits for the exit to end before unmounting the note, and an animation turned off would never end. How: This shortens the exit to a hundredth of a millisecond instead of turning it off. */
+
+
+		animation-duration : .01ms;
+
+
+	}
+
+
+}
+@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you note should arrive rather than snap into place. How: This rises it a little from below and fades it in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+
+}
+@keyframes forSucDivHideFadeOut { /* What: Form Success Div Hide Fade Out. Why: The note should leave the way it arrived. How: This fades it out as it drops a little. */
+
+
+	from {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+	to {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+
+}
+
+.sucIcoSpa { /* What: Success Icon Span. Why: One small flourish marks the message as sent. How: This lets the check scale as a block and pops it in once with a gentle overshoot as the note rises. */
+
+
+	animation : sucIcoSpaShowPop var( --dur-ani-p03 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	display   : inline-block;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Success Icon Span. Why: Someone who asked for less motion shouldn't see the check pop. How: This applies only when the reduced-motion preference is set. */
+
+
+	.sucIcoSpa { /* What: Motionless Success Icon Span. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the message as sent. How: This grows the check from just over half size to full size, and the overshoot easing carries it just past full size before it settles. */
+
+
+	from {
+
+
+		transform : scale( var( --cdn-pow-002-rec ) ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+
+
+	}
+
+	to {
+
+
+		transform : scale( 1 );
+
+
+	}
+
+
+}
+
+/* #endregion forSucDiv */
 
 
 
@@ -377,7 +498,7 @@
 
 }
 
-.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it small, bold, spaced, and uppercase in ink, on its own line above the control. */
+.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it small, semibold, spaced, and uppercase in ink, on its own line above the control. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
@@ -393,7 +514,7 @@
 
 .forFieInp,
 .forFieSel,
-.forFieTex { /* What: Form Field Input, Select, And Textarea. Why: The inputs, dropdown, and message box share one look, and keyboard focus has to show clearly. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, holds a zero-width navy ring 6px out, and eases its border, background, and ring. */
+.forFieTex { /* What: Form Field Input, Select, And Textarea. Why: The inputs, dropdown, and message box share one look, and keyboard focus has to show clearly. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, holds a zero-width navy ring 6px out, and eases its border and ring. */
 
 
 	background     : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
@@ -405,7 +526,7 @@
 	outline        : 0 solid var( --foc-rin-col );                    /* Focus Ring Color = #1e3a8a */
 	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );             /* Vertical Rhythm Base Minus 3 ~= 6.268px */
 	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition     : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width          : 100%;
 
 
@@ -438,26 +559,26 @@
 
 
 }
-.forFieTex { /* What: Form Field Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px that can only be dragged taller. */
-
-
-	min-height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
-	resize     : vertical;
-
-
-}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Input, Select, And Textarea. Why: Someone who asked for less motion shouldn't see the fields animate. How: This applies only when the reduced-motion preference is set. */
 
 
 	.forFieInp,
 	.forFieSel,
-	.forFieTex { /* What: Motionless Form Field Input, Select, And Textarea. Why: The focus border should simply switch on. How: This turns the transition off. */
+	.forFieTex { /* What: Motionless Form Field Input, Select, And Textarea. Why: The hover and focus borders and the focus ring should simply switch on. How: This turns the transition off. */
 
 
 		transition : none;
 
 
 	}
+
+
+}
+.forFieTex { /* What: Form Field Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px that can only be dragged taller. */
+
+
+	min-height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
+	resize     : vertical;
 
 
 }
@@ -470,16 +591,90 @@
 
 /* #region forErrPar */
 
-.forErrPar { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
+.forErrPar { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This rises and fades in once as it appears, and sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
 
 
-	background    : var( --err-tin-col );                            /* Error Tint Color = #fde8e8 */
-	border        : var( --bor-wid-lar ) solid var( --err-mai-col ); /* Border Width Large ~= 2.035px, Error Main Color = #b91c1c */
-	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
-	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	animation     : forErrParShowFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	background    : var( --err-tin-col );                                               /* Error Tint Color = #fde8e8 */
+	border        : var( --bor-wid-lar ) solid var( --err-mai-col );                    /* Border Width Large ~= 2.035px, Error Main Color = #b91c1c */
+	border-radius : var( --rad-bor-med );                                               /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                                               /* Text Main Color = #1a1a2e */
 	font-weight   : 500;
-	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	margin-bottom : var( --spa-ver-p01 );                                               /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                          /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+
+
+}
+.forErrPar[data-note-exit-active] { /* What: Leaving Form Error Paragraph. Why: The note should leave the way it arrived rather than vanish. How: This fades it out and drops it a little, after which the component unmounts it. */
+
+
+	animation : forErrParHideFadeOut var( --dur-ani-p02 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the note move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forErrPar { /* What: Motionless Form Error Paragraph. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+	.forErrPar[data-note-exit-active] { /* What: Quick Leaving Form Error Paragraph. Why: The component waits for the exit to end before unmounting the note, and an animation turned off would never end. How: This shortens the exit to a hundredth of a millisecond instead of turning it off. */
+
+
+		animation-duration : .01ms;
+
+
+	}
+
+
+}
+@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This rises it a little from below and fades it in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+
+}
+@keyframes forErrParHideFadeOut { /* What: Form Error Paragraph Hide Fade Out. Why: The note should leave the way it arrived. How: This fades it out as it drops a little. */
+
+
+	from {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
+
+
+	}
+
+	to {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
 
 
 }
@@ -494,10 +689,10 @@
 
 
 }
-.errLinAnc:hover { /* What: Hovered Error Link Anchor. Why: The link should respond to the pointer. How: This turns it ink. */
+.errLinAnc:hover { /* What: Hovered Error Link Anchor. Why: The link should respond to the pointer. How: This turns it navy, since the note's own text is already ink. */
 
 
-	color : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+	color : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 
 
 }
@@ -525,7 +720,9 @@
 /* #endregion forErrPar */
 
 
-.forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its lift and press. */
+/* #region forSubBut */
+
+.forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its color, lift, press, dim, and focus ring. */
 
 
 	background    : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
@@ -538,34 +735,36 @@
 	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 600;
 	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition    : transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 	width         : 100%;
 
 
 }
-.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
 
 
+	background : var( --acc-hov-col ); /* Accent Hover Color ~= #2d4c9d */
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
-	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 7 ~= -2.035px */
 
 
 }
-.forSubBut:active { /* What: Pressed Form Submit Button. Why: A press should feel like pushing the button in. How: This drops it back into place with a shallower shadow. */
+.forSubBut:active { /* What: Pressed Form Submit Button. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
 
 
-	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Pressed Shadow Offset. Why: A press should read as the button sinking toward its shadow. How: Each offset takes the lift's own step off the resting offset. */
-	transform  : translate( 0, 0 );
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	transform  : scale( 0.97 );                                                                                  /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes its hover lift, a literal since no scale step lands within 10%. */
 
 
 }
 .forSubBut:disabled,
-.forSubBut:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting place even under the pointer. */
+.forSubBut:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting navy and place even under the pointer. */
 
 
+	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
 	cursor     : progress;
-	opacity    : 0.7;
+	opacity    : var( --cdn-pow-001-rec );                                                                       /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 	transform  : none;
 
 
@@ -573,7 +772,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.forSubBut { /* What: Motionless Form Submit Button. Why: The lift and press should simply switch. How: This turns the transition off. */
+	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -583,6 +782,50 @@
 
 
 }
+
+.subLabSpa { /* What: Submit Label Span. Why: The label fades to its new text when a message goes out. How: This fades each new label in as it mounts. */
+
+
+	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ); /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Submit Label Span. Why: Someone who asked for less motion shouldn't see the label fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.subLabSpa { /* What: Motionless Submit Label Span. Why: It should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that cross-fades reads as a response to the press. How: This fades the new label up from transparent. */
+
+
+	from {
+
+
+		opacity : 0;
+
+
+	}
+
+	to {
+
+
+		opacity : 1;
+
+
+	}
+
+
+}
+
+/* #endregion forSubBut */
 
 /* #endregion conForFor */
 

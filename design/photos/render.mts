@@ -43,22 +43,15 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 
 // #region Constants
 
-const PHO_DIR_STR = fileURLToPath( new URL( './', import.meta.url ) );                                  // What: Photo Directory String. Why: The originals live beside this script. How: This resolves this script's own folder.
-const PRO_OUT_STR = fileURLToPath( new URL( '../../src/assets/products/', import.meta.url ) );          // What: Products Output String. Why: The product photos are imported from src/assets/products. How: This resolves that folder.
-const QUA_VAL_NUM = 0.85;                                                                               // What: Quality Value Number. Why: This is the lowest WebP quality that showed no difference from the originals at 3x zoom. How: Every photo is encoded at it.
-const SIZ_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/photo-sizes.ts', import.meta.url ) ); // What: Sizes Output String. Why: The page reads every photo's width and height from one generated file. How: This resolves where it's written.
-const TON_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/', import.meta.url ) );               // What: Tony Output String. Why: Tony's cartoon and portrait are imported from the home page's folder. How: This resolves that folder.
+type BoxRecTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
 
-
-
-type BoxRcdTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
-const BOX_RCD_OBJ : Record< string, BoxRcdTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than twice that. How: This maps each kind to its box.
+const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than twice that. How: This maps each kind to its box.
 
 
 	'booth'    : { heiNum : Infinity, widNum : 696 }, // What: Booth Box. Why: The gallery crops a booth shot to fill frames up to about 348px wide. How: This caps its width at twice that.
 	'cartoon'  : { heiNum : Infinity, widNum : 710 }, // What: Cartoon Box. Why: The hero's portrait ring grows to about 355px wide. How: This caps its width at twice that.
 	'portrait' : { heiNum : Infinity, widNum : 756 }, // What: Portrait Box. Why: The About portrait is shown wider than half its original, so it keeps its own width. How: This caps it at the original's 756px, so it's never enlarged.
-	'product'  : { heiNum : 750, widNum : 562 }       // What: Product Box. Why: A product card's frame is at most about 281 by 375px, and the photo fits inside it. How: This caps the photo at twice the frame.
+	'product'  : { heiNum : 750,      widNum : 562 }  // What: Product Box. Why: A product card's frame is at most about 281 by 375px, and the photo fits inside it. How: This caps the photo at twice the frame.
 
 
 };
@@ -66,6 +59,7 @@ const BOX_RCD_OBJ : Record< string, BoxRcdTyp > = { // What: Box Record Object. 
 
 
 type CroBoxTyp = { heiNum : number, lefNum : number, topNum : number, widNum : number }; // What: Crop Box Type. Why: A crop keeps one rectangle of the original. How: This names its height, left edge, top edge, and width in the original's pixels.
+
 const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Why: A few originals carry more than the photo itself. How: This maps a file name to the rectangle to keep.
 
 
@@ -73,6 +67,14 @@ const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Wh
 
 
 };
+
+
+
+const PHO_DIR_STR = fileURLToPath( new URL( './', import.meta.url ) );                                  // What: Photo Directory String. Why: The originals live beside this script. How: This resolves this script's own folder.
+const PRO_OUT_STR = fileURLToPath( new URL( '../../src/assets/products/', import.meta.url ) );          // What: Products Output String. Why: The product photos are imported from src/assets/products. How: This resolves that folder.
+const QUA_VAL_NUM = 0.85;                                                                               // What: Quality Value Number. Why: This is the lowest WebP quality that showed no difference from the originals at 3x zoom. How: Every photo is encoded at it.
+const SIZ_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/photo-sizes.ts', import.meta.url ) ); // What: Sizes Output String. Why: The page reads every photo's width and height from one generated file. How: This resolves where it's written.
+const TON_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/', import.meta.url ) );               // What: Tony Output String. Why: Tony's cartoon and portrait are imported from the home page's folder. How: This resolves that folder.
 
 // #endregion Constants
 
@@ -94,7 +96,7 @@ const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Wh
  * @param filNamStr - File Name String: The photo's file name without its
  *                    extension, e.g. 'booth-2'.
  *
- * @returns The key of the photo's box in BOX_RCD_OBJ.
+ * @returns The key of the photo's box in BOX_REC_OBJ.
  *
  * @example
  * ```ts
@@ -118,7 +120,7 @@ function boxKeyFun ( filNamStr : string ) : string {
 
 
 
-	return 'product';
+	return 'product'; // What: Product Box Return. Why: Every other photo shows a piece in a product card. How: This returns the product box.
 
 
 }
@@ -149,26 +151,26 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 
 
 	const filNamStr = souFilStr.slice( souFilStr.lastIndexOf( '/' ) + 1, -4 );                                             // What: File Name String. Why: The photo is keyed by its name without folder or extension. How: This cuts both off.
-	const boxRcdObj = BOX_RCD_OBJ[ boxKeyFun( filNamStr ) ]!;                                                              // What: Box Record Object. Why: The photo fits into its kind's box. How: This looks the box up by kind. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: boxKeyFun only returns keys BOX_RCD_OBJ has.
+	const boxRecObj = BOX_REC_OBJ[ boxKeyFun( filNamStr ) ];                                                               // What: Box Record Object. Why: The photo fits into its kind's box. How: This looks the box up by kind.
 	const souUrlStr = `data:image/jpeg;base64,${ readFileSync( `${ PHO_DIR_STR }${ souFilStr }` ).toString( 'base64' ) }`; // What: Source URL String. Why: A canvas drawn from a file URL can't be read back, while one drawn from data can. How: This hands the original to the page as a data URL.
 	const croBoxObj = CRO_BOX_OBJ[ filNamStr ] ?? null;                                                                    // What: Crop Box Object. Why: Only some photos are cropped. How: This reads the photo's crop, or null.
 
 
-	const encResObj = await encPagObj.evaluate( async ( [ souUrlArg, croBoxArg, boxRcdArg, quaValArg ] ) => { // What: Encode Result Object. Why: The browser crops, scales, and encodes the photo. How: This decodes the original, draws the kept part onto a canvas at the fitted size, and returns the WebP data and its size.
+	const encResObj = await encPagObj.evaluate( async ( [ souUrlStr, croBoxObj, boxRecObj, quaValNum ] ) => { // What: Encode Result Object. Why: The browser crops, scales, and encodes the photo. How: This decodes the original, draws the kept part onto a canvas at the fitted size, and returns the WebP data and its size.
 
 
 		const souImaEle = new Image(); // What: Source Image Element. Why: The original has to be decoded before it's drawn. How: This creates an image to load it into.
 
 
-		souImaEle.src = souUrlArg; // What: Source Load Call. Why: The image loads the original's data. How: This sets its source.
+		souImaEle.src = souUrlStr; // What: Source Address Assignment. Why: The image loads the original's data. How: This sets its source.
 
 		await souImaEle.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
 
 
-		const croBoxVal = croBoxArg ?? { heiNum : souImaEle.naturalHeight, lefNum : 0, topNum : 0, widNum : souImaEle.naturalWidth }; // What: Crop Box Value. Why: An uncropped photo keeps all of itself. How: This uses the crop, or the whole image.
-		const scaValNum = Math.min( 1, boxRcdArg.widNum / croBoxVal.widNum, boxRcdArg.heiNum / croBoxVal.heiNum );                    // What: Scale Value Number. Why: The photo fits its box but is never enlarged. How: This takes the smaller of the two fits, capped at 1.
-		const outHeiNum = Math.round( croBoxVal.heiNum * scaValNum );                                                                 // What: Output Height Number. Why: The canvas is the fitted size. How: This scales the kept height.
-		const outWidNum = Math.round( croBoxVal.widNum * scaValNum );                                                                 // What: Output Width Number. Why: The canvas is the fitted size. How: This scales the kept width.
+		const croUseObj = croBoxObj ?? { heiNum : souImaEle.naturalHeight, lefNum : 0, topNum : 0, widNum : souImaEle.naturalWidth }; // What: Crop Used Object. Why: An uncropped photo keeps all of itself. How: This uses the crop, or the whole image.
+		const scaValNum = Math.min( 1, boxRecObj.widNum / croUseObj.widNum, boxRecObj.heiNum / croUseObj.heiNum );                    // What: Scale Value Number. Why: The photo fits its box but is never enlarged. How: This takes the smaller of the two fits, capped at 1.
+		const outHeiNum = Math.round( croUseObj.heiNum * scaValNum );                                                                 // What: Output Height Number. Why: The canvas is the fitted size. How: This scales the kept height.
+		const outWidNum = Math.round( croUseObj.widNum * scaValNum );                                                                 // What: Output Width Number. Why: The canvas is the fitted size. How: This scales the kept width.
 		const outCanEle = document.createElement( 'canvas' );                                                                         // What: Output Canvas Element. Why: The photo is redrawn at its new size. How: This creates the canvas.
 
 
@@ -176,27 +178,27 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 		outCanEle.width  = outWidNum; // What: Canvas Width Assignment. Why: The canvas has to match the fitted size. How: This sets its width.
 
 
-		const outCtxObj = outCanEle.getContext( '2d' )!; // What: Output Context Object. Why: Drawing goes through the canvas's 2D context. How: This reads it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: Every browser supports a 2D context.
+		const outConObj = outCanEle.getContext( '2d' )!; // What: Output Context Object. Why: Drawing goes through the canvas's 2D context. How: This reads it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: Every browser supports a 2D context.
 
 
-		outCtxObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: A large downscale should stay sharp without jagged edges. How: This asks for the browser's best resampling.
+		outConObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: A large downscale should stay sharp without jagged edges. How: This asks for the browser's best resampling.
 
-		outCtxObj.drawImage( souImaEle, croBoxVal.lefNum, croBoxVal.topNum, croBoxVal.widNum, croBoxVal.heiNum, 0, 0, outWidNum, outHeiNum ); // What: Photo Draw Call. Why: The kept part of the original fills the canvas. How: This draws the crop rectangle scaled to the canvas.
+		outConObj.drawImage( souImaEle, croUseObj.lefNum, croUseObj.topNum, croUseObj.widNum, croUseObj.heiNum, 0, 0, outWidNum, outHeiNum ); // What: Photo Draw Call. Why: The kept part of the original fills the canvas. How: This draws the crop rectangle scaled to the canvas.
 
 
 
 		return { // What: Encode Result Return. Why: Node writes the file and records its size. How: This hands back the WebP's base64 data, its height, and its width.
 
 
-			b64Str : outCanEle.toDataURL( 'image/webp', quaValArg ).split( ',' )[ 1 ]!, // What: Base64 String. Why: Only text crosses back from the page. How: This encodes the canvas as WebP and keeps the data after the data URL's comma. // What: Non-Null Note. Why: An unchecked index read could come back undefined. How: A data URL always has a comma before its data.
-			heiNum : outHeiNum,                                                         // What: Height Number. Why: The sizes file records the photo's height. How: This is the canvas's height.
-			widNum : outWidNum                                                          // What: Width Number. Why: The sizes file records the photo's width. How: This is the canvas's width.
+			b64Str : outCanEle.toDataURL( 'image/webp', quaValNum ).split( ',' )[ 1 ], // What: Base64 String. Why: Only text crosses back from the page. How: This encodes the canvas as WebP and keeps the data after the data URL's comma.
+			heiNum : outHeiNum,                                                        // What: Height Number. Why: The sizes file records the photo's height. How: This is the canvas's height.
+			widNum : outWidNum                                                         // What: Width Number. Why: The sizes file records the photo's width. How: This is the canvas's width.
 
 
 		};
 
 
-	}, [ souUrlStr, croBoxObj, boxRcdObj, QUA_VAL_NUM ] as const ); // What: Encode Arguments. Why: The page can't read this script's variables. How: This passes the original, its crop, its box, and the quality in.
+	}, [ souUrlStr, croBoxObj, boxRecObj, QUA_VAL_NUM ] as const ); // What: Encode Arguments. Why: The page can't read this script's variables. How: This passes the original, its crop, its box, and the quality in. // What: Type Assertion Note. Why: Without it the array widens to one mixed type, so the page function's destructured parameters lose their own types. How: as const keeps it a readonly tuple, so each parameter is typed by its position.
 
 
 	const outPatStr = `${ souFilStr.startsWith( 'products/' ) ? PRO_OUT_STR : TON_OUT_STR }${ filNamStr }.webp`; // What: Output Path String. Why: Product photos and Tony's photos are imported from different folders. How: This picks the folder and names the file .webp.
@@ -222,9 +224,9 @@ await broInsObj.close(); // What: Browser Close Call. Why: The script should exi
 sizRowArr.sort( ( rowOneArr, rowTwoArr ) => rowOneArr[ 0 ].localeCompare( rowTwoArr[ 0 ] ) ); // What: Size Row Sort. Why: The sizes file should list its rows in a stable order. How: This sorts them by file name.
 
 
-const keyWidNum = Math.max( ...sizRowArr.map( ( sizRowVal ) => sizRowVal[ 0 ].length ) ) + 2;           // What: Key Width Number. Why: Every row's colon lines up after the longest quoted name. How: This measures the longest name plus its two quotes.
-const heiWidNum = Math.max( ...sizRowArr.map( ( sizRowVal ) => String( sizRowVal[ 1 ] ).length ) ) + 1; // What: Height Width Number. Why: Every row's width field starts in one column after the longest height. How: This measures the longest height plus its comma.
-const widWidNum = Math.max( ...sizRowArr.map( ( sizRowVal ) => String( sizRowVal[ 2 ] ).length ) );     // What: Width Width Number. Why: Every row's closing brace lines up after the longest width. How: This measures the longest width.
+const keyWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => sizCurArr[ 0 ].length ) ) + 2;           // What: Key Width Number. Why: Every row's colon lines up after the longest quoted name. How: This measures the longest name plus its two quotes.
+const heiWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => String( sizCurArr[ 1 ] ).length ) ) + 1; // What: Height Width Number. Why: Every row's width field starts in one column after the longest height. How: This measures the longest height plus its comma.
+const widWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => String( sizCurArr[ 2 ] ).length ) );     // What: Width Width Number. Why: Every row's closing brace lines up after the longest width. How: This measures the longest width.
 const sizLinArr = sizRowArr.map( ( [ filNamStr, heiValNum, widValNum ], rowIndNum ) => `\t${ `'${ filNamStr }'`.padEnd( keyWidNum ) } : { heiNum : ${ `${ heiValNum },`.padEnd( heiWidNum ) } widNum : ${ String( widValNum ).padEnd( widWidNum ) } }${ rowIndNum === sizRowArr.length - 1 ? '' : ',' }` ); // What: Size Line Array. Why: The rows form an aligned table, as stacked one-line rows do everywhere else. How: This pads each field to its column's width, and only the last row goes without a comma.
 
 

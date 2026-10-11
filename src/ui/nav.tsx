@@ -9,7 +9,7 @@ import lntSvgUrl from './logo-notext.svg'; // What: Logo-No-Text SVG URL. Why: T
 
 import { Link         } from 'react-router';      // What: Link. Why: The brand returns to the home page without a full page load. How: This renders the brand as a router link to the root.
 import { modCliFun    } from './section-link.ts'; // What: Modified Click Function. Why: A section link opened in a new tab should be left to the browser. How: navSecFun steps aside when this is true.
-import { useEffect    } from 'react';             // What: Use Effect. Why: The bar listens to scrolling and watches the sections. How: Two effects register and clean up those watchers.
+import { useEffect    } from 'react';             // What: Use Effect. Why: The bar listens to scrolling, watches the sections, and holds the open menu's inert page and listeners. How: Three effects register and clean up those watchers.
 import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to track and mark active. How: This reads the current path.
 import { useRef       } from 'react';             // What: Use Ref. Why: The open menu's effect has to reach the bar, the scrim, and the toggle. How: Three refs hold them.
 import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Function. Why: Section links have to work from every page, not only the home page. How: This returns visSecFun, which scrolls in place or navigates home.
@@ -76,8 +76,8 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * scrim, pressing Escape, or widening the screen past the menu's breakpoint
  * closes it. While it's open the page behind it is inert, so keyboard and
  * screen reader users stay in the bar. Each link reaches its section through
- * section-link.ts, scrolling in place on the home page or navigating home
- * from any other page, and leaves a Ctrl, Cmd, or middle click to the
+ * section-link.ts, scrolling in place on the home page or navigating home from
+ * any other page, and leaves a Ctrl, Cmd, Shift, Alt, or middle click to the
  * browser.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -140,7 +140,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-		const secEleArr = NAV_SEC_ARR.map( ( secRcdObj ) => document.getElementById( secRcdObj.ideStr ) ).filter( ( secCurEle ) : secCurEle is HTMLElement => secCurEle !== null ); // What: Section Element Array. Why: Only sections on the page can be watched. How: This looks up each linked section by its id and keeps the ones found.
+		const secEleArr = NAV_SEC_ARR.map( ( secRecObj ) => document.getElementById( secRecObj.ideStr ) ).filter( ( secCurEle ) : secCurEle is HTMLElement => secCurEle !== null ); // What: Section Element Array. Why: Only sections on the page can be watched. How: This looks up each linked section by its id and keeps the ones found.
 
 
 		if ( secEleArr.length === 0 ) return; // What: No Sections Guard. Why: There's nothing to watch if no section rendered. How: This skips the observer.
@@ -151,7 +151,6 @@ function NavBarCom () : React.JSX.Element {
 
 
 			const visEntArr = entObjArr.filter( ( entCurObj ) => entCurObj.isIntersecting ).sort( ( entOneObj, entTwoObj ) => entOneObj.boundingClientRect.top - entTwoObj.boundingClientRect.top ); // What: Visible Entry Array. Why: Several sections can sit in the band at once, and the highest is the one being read. How: This keeps the sections inside the band, sorted from the top of the screen down.
-
 
 
 			if ( visEntArr[ 0 ] ) setActSecStr( visEntArr[ 0 ].target.id ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the highest visible section's id, and leaves the active link alone when none is in the band.
@@ -178,8 +177,9 @@ function NavBarCom () : React.JSX.Element {
 	const [ menOpeBoo, setMenOpeBoo ] = useState( false ); // What: Menu Open Boolean And Setter. Why: The phone menu opens and closes from its toggle. How: This holds whether it's open, starting closed.
 
 	const cloMenFun = () => setMenOpeBoo( false ); // What: Close Menu Function. Why: The menu should get out of the way once a link is chosen. How: This closes it.
+	const visSecFun = useSecLinFun();              // What: Visit Section Function. Why: Every section link reaches its section through one shared path. How: This scrolls to the section on the home page, or navigates home to it from any other page.
 
-	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: Every section link reaches its section through one shared path. How: This scrolls to the section on the home page, or navigates home to it from any other page.
+
 
 	const navBarRef = useRef< HTMLElement >( null );       // What: Navigation Bar Reference. Why: The open menu leaves the bar usable while it makes the rest of the page inert. How: This attaches to the nav element.
 	const scrDivRef = useRef< HTMLDivElement >( null );    // What: Scrim Div Reference. Why: The scrim has to stay tappable while the page behind it is inert. How: This attaches to the scrim.
@@ -273,7 +273,7 @@ function NavBarCom () : React.JSX.Element {
 	const navSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Navigate Section Function. Why: A section link should reach its section without a full page load or a hash left in the address. How: This leaves a modified click to the browser, and otherwise cancels the link's own navigation, visits the section, and closes the menu.
 
 
-		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
+		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
 
 
 
@@ -318,7 +318,7 @@ function NavBarCom () : React.JSX.Element {
 				className={ cssModObj.navBarNav }
 
 				data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar raises into a pill once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
-			>{ /* What: Container Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, carrying data-page-scroll-active once the page scrolls. */ }
+			>{ /* What: Navigation Bar Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, carrying data-page-scroll-active once the page scrolls. */ }
 
 
 				<Link
@@ -336,7 +336,7 @@ function NavBarCom () : React.JSX.Element {
 						src={ lntSvgUrl }
 
 						alt="Tony's Toppers logo"
-					/>{ /* What: Brand Mark Image Element. Why: The bar opens with the Tony's Toppers mark. How: This shows the mark without its wordmark, since the name sits right beside it. */ }
+					/>{ /* What: Navigation Logo Image Element. Why: The bar opens with the Tony's Toppers mark. How: This shows the mark without its wordmark, since the name sits right beside it. */ }
 
 					<span>Tony's Toppers</span>{ /* What: Brand Name Span Element. Why: The bar names the business. How: This shows the name beside the mark. */ }
 
@@ -356,7 +356,7 @@ function NavBarCom () : React.JSX.Element {
 					aria-label='Toggle menu'
 
 					onClick={ () => setMenOpeBoo( ( preOpeBoo ) => !preOpeBoo ) }
-				>{ /* What: Menu Toggle Button Element. Why: On a phone the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
+				>{ /* What: Navigation Toggle Button Element. Why: On a phone the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
 
 
 					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
@@ -377,14 +377,14 @@ function NavBarCom () : React.JSX.Element {
 				>{ /* What: Navigation Menu Div Element. Why: On a phone the section links and the ways to reach Tony drop down together as one menu, while on wide screens the links sit in the bar. How: This holds the link list and the contact block, carrying data-mobile-menu-open while the menu is open. */ }
 
 
-					<ul className={ cssModObj.navLinUno }>{ /* What: Navigation Links List Element. Why: The section links sit in a row on wide screens and stack in the menu on a phone. How: This holds one item per section. */ }
+					<ul className={ cssModObj.navLinUno }>{ /* What: Navigation Link Unordered List Element. Why: The section links sit in a row on wide screens and stack in the menu on a phone. How: This holds one item per section. */ }
 
 
-						{ NAV_SEC_ARR.map( ( secRcdObj, secIndNum ) => ( // What: Section Link Map. Why: Each section gets a link, and its place sets when it rises into the open menu. How: This renders one list item per section row, with its index.
+						{ NAV_SEC_ARR.map( ( secRecObj, secIndNum ) => ( // What: Section Link Map. Why: Each section gets a link, and its place sets when it rises into the open menu. How: This renders one list item per section row, with its index.
 
 
 							<li
-								key={ secRcdObj.ideStr }
+								key={ secRecObj.ideStr }
 
 								className={ cssModObj.navLinIte }
 
@@ -395,13 +395,13 @@ function NavBarCom () : React.JSX.Element {
 								<a
 									className={ cssModObj.navLinAnc }
 
-									data-section-link-active={ ( isaHomBoo && actSecStr === secRcdObj.ideStr ) || undefined } // What: Section Link Active Flag. Why: The link for the section being read is marked on the home page. How: This marks the link when its section is the active one there, and drops the attribute otherwise.
+									data-section-link-active={ ( isaHomBoo && actSecStr === secRecObj.ideStr ) || undefined } // What: Section Link Active Flag. Why: The link for the section being read is marked on the home page. How: This marks the link when its section is the active one there, and drops the attribute otherwise.
 
-									href={ `/#${ secRcdObj.ideStr }` }
+									href={ `/#${ secRecObj.ideStr }` }
 
-									onClick={ ( cliEveObj ) => navSecFun( cliEveObj, secRcdObj.ideStr ) }
-								>{ /* What: Section Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through navSecFun. */ }
-									{ secRcdObj.labStr }
+									onClick={ ( cliEveObj ) => navSecFun( cliEveObj, secRecObj.ideStr ) }
+								>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through navSecFun. */ }
+									{ secRecObj.labStr }
 								</a>
 
 
@@ -412,7 +412,6 @@ function NavBarCom () : React.JSX.Element {
 
 
 					</ul>
-
 
 
 					<div
