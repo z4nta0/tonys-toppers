@@ -387,13 +387,13 @@
 
 /* #region herVisDiv */
 
-.herVisDiv { /* What: Hero Visual Div. Why: The portrait and its sticker need a square stage. How: This sets a centered square up to 480px wide that the frame and sticker are placed within, rising in with the words. */
+.herVisDiv { /* What: Hero Visual Div. Why: The portrait and its sticker need a square stage. How: This sets a centered square that the frame and sticker are placed within, capped at about 426px or a horizontal step that grows past it on wide screens, rising in with the words. */
 
 
 	animation    : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 2 ~= 277.0ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	aspect-ratio : 1;
 	margin       : 0 auto;
-	max-width    : 480px;
+	max-width    : max( calc( var( --ver-rhy-p12 ) * 1rem ), var( --hor-rhy-023 ) );                               /* Vertical Rhythm Base Plus 12 ~= 425.596px, Horizontal Rhythm 23 ~= 623.458px @ 1,920px width */
 	position     : relative;
 
 
@@ -401,11 +401,11 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Visual Div. Why: In the single column the portrait should come first and smaller. How: This applies 900px wide and below. */
 
 
-	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait opens the narrow layout above the words. How: This moves it first, caps it at 320px, and leaves room below it. */
+	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait opens the narrow layout above the words. How: This moves it first, caps it at about 321px or a horizontal step if that's wider, and leaves room below it. */
 
 
-		margin-bottom : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
-		max-width     : 320px;
+		margin-bottom : var( --spa-ver-p07 );                                             /* Spacing Vertical Base Plus 7 ~= 104.323px */
+		max-width     : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) ); /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
 		order         : -1;
 
 
@@ -430,10 +430,10 @@
 
 /* #region porRinDiv */
 
-.porRinDiv { /* What: Portrait Ring Div. Why: The portrait sits in a round frame that turns slowly. How: This fills the stage, sizes a 270px circle, and spins it once about every 44 seconds. */
+.porRinDiv { /* What: Portrait Ring Div. Why: The portrait sits in a round frame that turns slowly. How: This fills the stage, sizes a circle at least about 243px across that grows with a horizontal step on wide screens, and spins it once about every 44 seconds. */
 
 
-	animation     : porRinDivLoopSpin var( --dur-ani-p20 ) linear infinite; /* Duration Animation Base Plus 20 ~= 43,721.0ms */
+	animation     : porRinDivLoopSpin var( --dur-ani-p20 ) linear infinite;           /* Duration Animation Base Plus 20 ~= 43,721.0ms */
 	border-radius : 50%;
 	bottom        : 0;
 	display       : grid;
@@ -442,18 +442,18 @@
 	position      : absolute;
 	right         : 0;
 	top           : 0;
-	width         : 270px;
+	width         : max( calc( var( --ver-rhy-p10 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
 
 
 }
 @media ( max-width : 900px ) { /* What: Narrow Portrait Ring Div. Why: The portrait shrinks with the narrow stage. How: This applies 900px wide and below. */
 
 
-	.porRinDiv { /* What: Small Portrait Ring Div. Why: A smaller frame fits the narrow stage. How: This sizes the frame at 150px, with an 11px height the portrait inside overflows. */
+	.porRinDiv { /* What: Small Portrait Ring Div. Why: A smaller frame fits the narrow stage. How: This sizes the frame at least about 138px across, with an 11px height the portrait inside overflows. */
 
 
-		height : calc( var( --ver-rhy-m01 ) * 1rem ); /* Vertical Rhythm Base Minus 1 = 11px */
-		width  : 150px;
+		height : calc( var( --ver-rhy-m01 ) * 1rem );                              /* Vertical Rhythm Base Minus 1 = 11px */
+		width  : max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-019 ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 19 ~= 202.448px @ 1,920px width */
 
 
 	}
