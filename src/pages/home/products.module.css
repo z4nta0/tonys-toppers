@@ -189,19 +189,19 @@
 
 }
 
-.filTogBut { /* What: Filter Toggle Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing every change between its looks. */
+.filTogBut { /* What: Filter Toggle Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing its colors, lift, press, and focus ring. */
 
 
 	background    : transparent;
 	border        : none;
 	border-radius : 999px;
-	color         : var( --tex-sec-col );                          /* Text Secondary Color = #4a4a5e */
+	color         : var( --tex-sec-col );                      /* Text Secondary Color = #4a4a5e */
 	cursor        : pointer;
-	font-family   : var( --fon-fam-mai );                          /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size     : var( --fon-siz-p01 );                          /* Font Size Base Plus 1 ~= 14.572px */
+	font-family   : var( --fon-fam-mai );                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 500;
-	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 );     /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	transition    : all var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -218,6 +218,15 @@
 
 
 }
+.filTogBut:hover { /* What: Hovered Filter Toggle Button. Why: The filter under the pointer should respond, chosen or not. How: This shades its pill a deeper cream, turns its label navy, and lifts it slightly; the chosen filter keeps its navy fill and only lifts. */
+
+
+	background : var( --bac-sun-col );                            /* Background Sunken Color ~= #f5edd6 */
+	color      : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
+
+
+}
 .filTogBut[aria-pressed='true'] { /* What: Pressed Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text. */
 
 
@@ -226,10 +235,17 @@
 
 
 }
+.filTogBut:active { /* What: Held Filter Toggle Button. Why: A press should register before the grid changes. How: This presses the pill in slightly while it's held, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Filter Toggle Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.filTogBut { /* What: Motionless Filter Toggle Button. Why: The pressed look should simply switch. How: This turns the transition off. */
+	.filTogBut { /* What: Motionless Filter Toggle Button. Why: The hover, chosen, and press looks should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -277,10 +293,10 @@
 .proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global blockEnterFadeIn keyframes, and eases its hover look. */
 
 
-	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
-	background    : var( --bac-sur-col );                                                      /* Background Surface Color = #ffffff */
-	border        : var( --bor-wid-bas ) solid var( --bor-mai-col );                           /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
-	border-radius : var( --rad-bor-xla );                                                      /* Radius Border Extra Large ~= 19.304px */
+	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) backwards; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */ /* What: Backwards Fill. Why: A both fill kept the keyframes' final transform in force after the entrance, which outranked the hover lift, so the card never rose. How: A backwards fill holds the hidden first frame only through each card's stagger delay, then lets go once the card has risen. */
+	background    : var( --bac-sur-col );                                                           /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col );                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-xla );                                                           /* Radius Border Extra Large ~= 19.304px */
 	cursor        : pointer;
 	overflow      : hidden;
 	position      : relative;
@@ -288,7 +304,7 @@
 
 
 }
-.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This casts a soft navy shadow and turns its border navy, while its lift waits on the entrance animation's held transform. */
+.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft navy shadow, and turns its border navy. */
 
 
 	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */

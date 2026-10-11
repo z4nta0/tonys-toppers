@@ -190,13 +190,13 @@ function ProSecCom () : React.JSX.Element {
 								<img
 									className={ cssModObj.proPhoIma }
 
-									data-element-name-hook='proPhoIma'
-
+									height={ proRcdObj.heiNum }
 									loading='lazy'
 									src={ proRcdObj.imaStr }
+									width={ proRcdObj.widNum }
 
 									alt={ proRcdObj.altStr }
-								/>{ /* What: Product Photo Image Element. Why: The card shows its piece. How: This loads the photo only as it nears the screen; the rendering suite masks it through its proPhoIma hook. */ }
+								/>{ /* What: Product Photo Image Element. Why: The card shows its piece. How: This loads the photo only as it nears the screen, at its own width and height so the card doesn't shift when it arrives. */ }
 
 
 							</div>

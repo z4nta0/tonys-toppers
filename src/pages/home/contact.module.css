@@ -26,6 +26,8 @@
 .homConSec { /* What: Home Contact Section. Why: The page ends on a bold navy band that sets the contact details apart, with the same generous padding as every home page section. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
 
 
+	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Yellow Focus Ring. Why: The navy ring would vanish on the navy band. How: Every link inside the band draws its ring yellow instead, until the form card hands back the navy. */
+
 	background : var( --acc-mai-col );                      /* Accent Main Color = #1e3a8a */
 	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
 	overflow   : hidden;
@@ -194,6 +196,41 @@
 
 
 }
+.infRowAnc { /* What: Info Row Anchor. Why: A row that's a link should ease its hover and press, while the home town row stays still. How: This eases its background, its lift and press, and its focus ring. */
+
+
+	transition : background var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.infRowAnc:hover { /* What: Hovered Info Row Anchor. Why: A row that's a link should respond to the pointer. How: This brightens its panel and lifts it slightly. */
+
+
+	background : oklch( from var( --bac-sur-col ) l c h / 0.14 ); /* Background Surface Color = #ffffff @ 0.14 opacity */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
+
+
+}
+.infRowAnc:active { /* What: Pressed Info Row Anchor. Why: A press should register before the phone or Facebook opens. How: This presses the row in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Info Row Anchor. Why: Someone who asked for less motion shouldn't see the rows move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.infRowAnc { /* What: Motionless Info Row Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
 
 .infIcoDiv { /* What: Info Icon Div. Why: A symbol marks each row at a glance. How: This centers it large in a rounded yellow square about 45px across that never shrinks. */
 
@@ -223,13 +260,14 @@
 
 }
 
-.infValDiv { /* What: Info Value Div. Why: The number, page name, or town is the row's main line. How: This sets it large in the semibold cream serif. */
+.infValDiv { /* What: Info Value Div. Why: The number, page name, or town is the row's main line. How: This sets it large in the semibold cream serif, easing its hover color. */
 
 
-	color       : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
-	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	color       : var( --bac-pag-col );                            /* Background Page Color = #fdf9ee */
+	font-family : var( --fon-fam-sec );                            /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size   : var( --fon-siz-p02 );                            /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight : 600;
+	transition  : color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
 
 
 }
@@ -237,6 +275,19 @@
 
 
 	color : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Info Value Div. Why: Someone who asked for less motion shouldn't see the value fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.infValDiv { /* What: Motionless Info Value Div. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -249,6 +300,8 @@
 
 .conForFor { /* What: Contact Form Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
 
+
+	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */ /* What: Navy Focus Ring. Why: On the cream card the band's yellow ring would be faint. How: The fields, the button, and the error note's link draw their rings navy again. */
 
 	background    : var( --bac-pag-col );                                                                           /* Background Page Color = #fdf9ee */
 	border-radius : var( --rad-bor-xla );                                                                           /* Radius Border Extra Large ~= 19.304px */
@@ -357,6 +410,15 @@
 
 
 }
+.forFieInp:hover,
+.forFieSel:hover,
+.forFieTex:hover { /* What: Hovered Form Field Input, Select, And Textarea. Why: A field under the pointer should respond before it's clicked into. How: This darkens its border. */
+
+
+	border-color : oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-004-rec ) ); /* Text Main Color = #1a1a2e, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+
+
+}
 .forFieInp:focus,
 .forFieSel:focus,
 .forFieTex:focus { /* What: Focused Form Field Input, Select, And Textarea. Why: The field being typed in should stand out. How: This turns its border navy. */
@@ -422,12 +484,40 @@
 
 }
 
-.errLinAnc { /* What: Error Link Anchor. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color. */
+.errLinAnc { /* What: Error Link Anchor. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color, easing its hover and press. */
 
 
 	color           : inherit;
 	font-weight     : 700;
 	text-decoration : underline;
+	transition      : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.errLinAnc:hover { /* What: Hovered Error Link Anchor. Why: The link should respond to the pointer. How: This turns it ink. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+
+
+}
+.errLinAnc:active { /* What: Pressed Error Link Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, as every text link does on press. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Error Link Anchor. Why: Someone who asked for less motion shouldn't see the link fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.errLinAnc { /* What: Motionless Error Link Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -438,17 +528,17 @@
 .forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its lift and press. */
 
 
-	background    : var( --acc-mai-col );                                                                                      /* Accent Main Color = #1e3a8a */
-	border        : var( --bor-wid-lar ) solid var( --bor-str-col );                                                           /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
-	border-radius : var( --rad-bor-med );                                                                                      /* Radius Border Medium = 11px */
-	box-shadow    : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col );            /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
-	color         : var( --tex-acc-col );                                                                                      /* Text Accent Color = #fdf9ee */
+	background    : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
+	border        : var( --bor-wid-lar ) solid var( --bor-str-col );                                                /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
+	border-radius : var( --rad-bor-med );                                                                           /* Radius Border Medium = 11px */
+	box-shadow    : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	color         : var( --tex-acc-col );                                                                           /* Text Accent Color = #fdf9ee */
 	cursor        : pointer;
-	font-family   : var( --fon-fam-mai );                                                                                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
-	font-size     : var( --fon-siz-p01 );                                                                                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-family   : var( --fon-fam-mai );                                                                           /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 600;
-	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                                 /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition    : transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	transition    : transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width         : 100%;
 
 

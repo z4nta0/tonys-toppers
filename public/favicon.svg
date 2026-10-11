@@ -8,6 +8,7 @@
       <rect x="-44" y="468" width="1024" height="512" style="stroke-width: 1px;"/>
     </clipPath>
   </defs>
+  <circle cx="468" cy="468" r="430" fill="#fff"/>
   <circle cx="468" cy="468" r="430" fill="none" stroke="#ecc132" stroke-width="76" clip-path="url(#topHalf)" style="stroke-width: 76px;"/>
   <circle cx="468" cy="468" r="430" fill="none" stroke="#2c1fb5" stroke-width="76" clip-path="url(#bottomHalf)" style="stroke-width: 76px;"/>
   <rect x="230" width="356" height="96" fill="#000" style="stroke-width: 1px;" y="238"/>

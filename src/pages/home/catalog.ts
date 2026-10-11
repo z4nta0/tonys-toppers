@@ -1,6 +1,13 @@
 
 
 
+// #region Imports
+
+import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why: Every card's img carries its photo's intrinsic size. How: Each record looks its photo's width and height up by file name.
+
+// #endregion Imports
+
+
 
 /**
  * catalog.ts = Catalog
@@ -8,13 +15,15 @@
  * @summary
  * The product photos the home page shows, and the categories they belong to.
  * Every photo lives in src/assets/products and is imported at build time, so a
- * missing one fails the build. A single piece's photo is named after its
- * category and its number (pen-topper-3.jpg), so each category's photos are
- * read straight from the folder in number order, and adding one only means
- * adding its file. Two kinds of photo show more than one category at once,
- * and list theirs by hand: the pen and wine stopper sets, one card each under
- * both filters, and the craft fair booth shots, which the gallery shows and
- * each tagged category's filter includes, while the All list leaves them out.
+ * missing one fails the build, and carries its size from photo-sizes.ts. A
+ * single piece's photo is named after its category and its number
+ * (pen-topper-3.webp), so each category's photos are read straight from the
+ * folder in number order, and adding one only means adding its file, after
+ * running npm run photos. Two kinds of photo show more than one category at
+ * once, and list theirs by hand: the pen and wine stopper sets, one card each
+ * under both filters, and the craft fair booth shots, which the gallery shows
+ * and each tagged category's filter includes, while the All list leaves them
+ * out.
  *
  * Sections:
  *  - Types
@@ -40,10 +49,12 @@ type ProRcdTyp = { // What: Product Record Type. Why: The products grid and the 
 	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
 	catArr : CatSluTyp[], // What: Category Array. Why: One photo can show more than one kind of piece. How: This lists every category the photo is tagged with, the first one setting its card's look.
 	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the All list. How: This is true for a booth shot and false for a piece or set.
+	heiNum : number,      // What: Height Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's height in pixels, from photo-sizes.ts.
 	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
 	imaStr : string,      // What: Image String. Why: The card shows its photo. How: This is the photo's built URL.
 	labStr : string,      // What: Label String. Why: The card's tag and subtitle name what kind of piece it shows. How: This is the category's singular label, or both labels for a set.
-	namStr : string       // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind.
+	namStr : string,      // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind.
+	widNum : number       // What: Width Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's width in pixels, from photo-sizes.ts.
 
 
 };
@@ -184,7 +195,7 @@ const PHO_ALT_OBJ : Record< string, string > = { // What: Photo Alternative Obje
 
 
 
-const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.jpg', { eager : true, import : 'default' } ); // What: Product URL Object. Why: The product photos live in src/assets/products, where Vite fingerprints each one and fails the build when a listed photo is missing from its import. How: This imports every photo in the folder at build time and maps each one's source path to its built URL.
+const PRO_URL_OBJ = import.meta.glob< string >( '../../assets/products/*.webp', { eager : true, import : 'default' } ); // What: Product URL Object. Why: The product photos live in src/assets/products, where Vite fingerprints each one and fails the build when a listed photo is missing from its import. How: This imports every photo in the folder at build time and maps each one's source path to its built URL.
 
 
 
@@ -205,7 +216,7 @@ const SET_RCD_ARR : SetRcdTyp[] = [ // What: Set Record Array. Why: A few photos
 
 // #region Helpers
 
-const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/${ filNamStr }.jpg` ]; // What: Photo URL Function. Why: Every card looks its photo up the same way. How: This returns the photo's built URL by its file name.
+const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/${ filNamStr }.webp` ]; // What: Photo URL Function. Why: Every card looks its photo up the same way. How: This returns the photo's built URL by its file name.
 
 
 
@@ -240,7 +251,7 @@ function phoNamFun ( sluStr : CatSluTyp ) : string[] {
 
 	const filNamReg = new RegExp( `^${ sluStr }-(\\d+)$` ); // What: File Name Regular Expression. Why: A single piece's photo is named its category's slug, a dash, and a number. How: This matches that name and captures the number.
 
-	const filNamArr = Object.keys( PRO_URL_OBJ ).map( ( souPatStr ) => souPatStr.slice( souPatStr.lastIndexOf( '/' ) + 1, -4 ) ); // What: File Name Array. Why: Each imported photo is keyed by its source path. How: This keeps just the file name, without its folder or its .jpg extension.
+	const filNamArr = Object.keys( PRO_URL_OBJ ).map( ( souPatStr ) => souPatStr.slice( souPatStr.lastIndexOf( '/' ) + 1, -5 ) ); // What: File Name Array. Why: Each imported photo is keyed by its source path. How: This keeps just the file name, without its folder or its .webp extension.
 
 
 
@@ -262,13 +273,15 @@ const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The prod
 		...phoNamFun( catRcdObj.sluStr ).map( ( filNamStr, filIndNum ) => ({ // What: Single Piece Cards Spread. Why: Each of the category's photos gets a card, numbered within its kind. How: This builds one record per photo.
 
 
-			altStr : PHO_ALT_OBJ[ filNamStr ],                                 // What: Alternative String. Why: A screen reader should hear what the photo shows. How: This looks up the photo's description by its file name.
-			catArr : [ catRcdObj.sluStr ],                                     // What: Category Array. Why: A single piece shows one kind. How: This lists its category alone.
-			faiBoo : false,                                                    // What: Fair Boolean. Why: A single piece isn't a booth shot. How: This keeps it in the All list.
-			ideStr : filNamStr,                                                // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
-			imaStr : phoUrlFun( filNamStr ),                                   // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
-			labStr : CAT_LAB_OBJ[ catRcdObj.sluStr ],                          // What: Label String. Why: The card names its kind. How: This is the category's singular label.
-			namStr : `${ CAT_LAB_OBJ[ catRcdObj.sluStr ] } ${ filIndNum + 1 }` // What: Name String. Why: The card has a title. How: This joins the label and the photo's number.
+			altStr : PHO_ALT_OBJ[ filNamStr ],                                  // What: Alternative String. Why: A screen reader should hear what the photo shows. How: This looks up the photo's description by its file name.
+			catArr : [ catRcdObj.sluStr ],                                      // What: Category Array. Why: A single piece shows one kind. How: This lists its category alone.
+			faiBoo : false,                                                     // What: Fair Boolean. Why: A single piece isn't a booth shot. How: This keeps it in the All list.
+			heiNum : PHO_SIZ_OBJ[ filNamStr ].heiNum,                           // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
+			ideStr : filNamStr,                                                 // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
+			imaStr : phoUrlFun( filNamStr ),                                    // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
+			labStr : CAT_LAB_OBJ[ catRcdObj.sluStr ],                           // What: Label String. Why: The card names its kind. How: This is the category's singular label.
+			namStr : `${ CAT_LAB_OBJ[ catRcdObj.sluStr ] } ${ filIndNum + 1 }`, // What: Name String. Why: The card has a title. How: This joins the label and the photo's number.
+			widNum : PHO_SIZ_OBJ[ filNamStr ].widNum                            // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
 
 
 		}) ),
@@ -276,13 +289,15 @@ const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The prod
 		...( catRcdObj.sluStr === 'wine-stopper' ? SET_RCD_ARR.map( ( setRcdObj, setIndNum ) => ({ // What: Set Cards Spread. Why: The pen and wine stopper sets sit right after the wine stoppers in the All list. How: This builds one record per set, only after the wine stopper category.
 
 
-			altStr : PHO_ALT_OBJ[ setRcdObj.filStr ],                   // What: Alternative String. Why: A screen reader should hear what the set shows. How: This looks up the photo's description by its file name.
-			catArr : setRcdObj.catArr,                                  // What: Category Array. Why: A set shows both kinds. How: This lists both categories.
-			faiBoo : false,                                             // What: Fair Boolean. Why: A set isn't a booth shot. How: This keeps it in the All list.
-			ideStr : setRcdObj.filStr,                                  // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
-			imaStr : phoUrlFun( setRcdObj.filStr ),                     // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
-			labStr : 'Pen Topper & Wine Stopper',                       // What: Label String. Why: The card names both kinds it shows. How: This joins the two labels.
-			namStr : `Pen Topper & Wine Stopper Set ${ setIndNum + 1 }` // What: Name String. Why: The card has a title. How: This names the set and its number.
+			altStr : PHO_ALT_OBJ[ setRcdObj.filStr ],                    // What: Alternative String. Why: A screen reader should hear what the set shows. How: This looks up the photo's description by its file name.
+			catArr : setRcdObj.catArr,                                   // What: Category Array. Why: A set shows both kinds. How: This lists both categories.
+			faiBoo : false,                                              // What: Fair Boolean. Why: A set isn't a booth shot. How: This keeps it in the All list.
+			heiNum : PHO_SIZ_OBJ[ setRcdObj.filStr ].heiNum,             // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
+			ideStr : setRcdObj.filStr,                                   // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
+			imaStr : phoUrlFun( setRcdObj.filStr ),                      // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
+			labStr : 'Pen Topper & Wine Stopper',                        // What: Label String. Why: The card names both kinds it shows. How: This joins the two labels.
+			namStr : `Pen Topper & Wine Stopper Set ${ setIndNum + 1 }`, // What: Name String. Why: The card has a title. How: This names the set and its number.
+			widNum : PHO_SIZ_OBJ[ setRcdObj.filStr ].widNum              // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
 
 
 		}) ) : [] )
@@ -293,13 +308,15 @@ const PRO_RCD_ARR : ProRcdTyp[] = [ // What: Product Record Array. Why: The prod
 	...FAI_RCD_ARR.map( ( faiRcdObj, faiIndNum ) => ({ // What: Booth Cards Spread. Why: The booth shots come last, for the filters and the gallery. How: This builds one record per booth shot.
 
 
-		altStr : faiRcdObj.altStr,                     // What: Alternative String. Why: A booth shot shows a whole table, which its name can't describe. How: This takes the row's description.
-		catArr : faiRcdObj.catArr,                     // What: Category Array. Why: A booth shot shows several kinds. How: This lists every category it's tagged with.
-		faiBoo : true,                                 // What: Fair Boolean. Why: A booth shot belongs in the gallery and the filters, not the All list. How: This marks it.
-		ideStr : faiRcdObj.filStr,                     // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
-		imaStr : phoUrlFun( faiRcdObj.filStr ),        // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
-		labStr : 'Craft Fair Table',                   // What: Label String. Why: The card names what it shows. How: This calls it a craft fair table.
-		namStr : `Craft Fair Table ${ faiIndNum + 1 }` // What: Name String. Why: The card has a title. How: This names the table and its number.
+		altStr : faiRcdObj.altStr,                       // What: Alternative String. Why: A booth shot shows a whole table, which its name can't describe. How: This takes the row's description.
+		catArr : faiRcdObj.catArr,                       // What: Category Array. Why: A booth shot shows several kinds. How: This lists every category it's tagged with.
+		faiBoo : true,                                   // What: Fair Boolean. Why: A booth shot belongs in the gallery and the filters, not the All list. How: This marks it.
+		heiNum : PHO_SIZ_OBJ[ faiRcdObj.filStr ].heiNum, // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
+		ideStr : faiRcdObj.filStr,                       // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
+		imaStr : phoUrlFun( faiRcdObj.filStr ),          // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
+		labStr : 'Craft Fair Table',                     // What: Label String. Why: The card names what it shows. How: This calls it a craft fair table.
+		namStr : `Craft Fair Table ${ faiIndNum + 1 }`,  // What: Name String. Why: The card has a title. How: This names the table and its number.
+		widNum : PHO_SIZ_OBJ[ faiRcdObj.filStr ].widNum  // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
 
 
 	}) )

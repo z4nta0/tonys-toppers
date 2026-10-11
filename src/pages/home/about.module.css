@@ -107,6 +107,7 @@
 		max-width : 90%;
 		position  : relative;
 		top       : 0;
+		width     : 100%; /* What: Definite Width. Why: Left to shrink around the photo, WebKit kept remeasuring it and grew the portrait a step at a time after the page loaded, moving everything below it. How: This fills the column, which the 90% cap then narrows, the same width the other engines already gave it. */
 
 
 	}

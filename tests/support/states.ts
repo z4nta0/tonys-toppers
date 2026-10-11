@@ -13,14 +13,15 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * states.ts = States
  *
  * @summary
- * The page states the accessibility and rendering suites visit, and the helper
- * that opens one; the responsive suite opens its own widths through the same
- * helper. A state is a page at a width, sometimes with something opened on it:
- * the home page and the 404 page at phone and desktop widths, and the mobile
- * menu open on a phone. opeStaFun sizes the viewport, loads the page, waits
- * for the fonts, scrolls through the page so its lazily loaded product photos
- * load, runs the state's own action, such as opening the menu, and then waits
- * for the page to stay still so nothing is measured mid-fade.
+ * The page states the accessibility, interaction, and rendering suites visit,
+ * and the helper that opens one; the responsive suite opens its own widths
+ * through the same helper. A state is a page at a width, sometimes with
+ * something opened on it: the home page and the 404 page at phone and desktop
+ * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport,
+ * loads the page, waits for the fonts, scrolls through the page so its lazily
+ * loaded product photos load, runs the state's own action, such as opening the
+ * menu, and then waits for the page to stay still so nothing is measured
+ * mid-fade.
  *
  * Sections:
  *  - Types
@@ -296,7 +297,7 @@ async function opeStaFun ( curPagObj : Page, staRcdObj : StaRcdTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_RCD_ARR, type StaRcdTyp }; // What: Named Exports. Why: The accessibility, rendering, and responsive specs share these states and their opener. How: This exports the state list, its type, and the helper that opens one.
+export { opeStaFun, STA_RCD_ARR, type StaRcdTyp }; // What: Named Exports. Why: The accessibility, interaction, rendering, and responsive specs share these states and their opener. How: This exports the state list, its type, and the helper that opens one.
 
 // #endregion Exports
 

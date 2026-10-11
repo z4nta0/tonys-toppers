@@ -121,13 +121,13 @@ function FaiSecCom () : React.JSX.Element {
 							<img
 								className={ cssModObj.faiPhoIma }
 
-								data-element-name-hook='faiPhoIma'
-
+								height={ faiRcdObj.heiNum }
 								loading='lazy'
 								src={ faiRcdObj.imaStr }
+								width={ faiRcdObj.widNum }
 
 								alt={ faiRcdObj.altStr }
-							/>{ /* What: Booth Photo Image Element. Why: The gallery shows Tony's table. How: This loads the photo only as it nears the screen, described by its alt text; the rendering suite masks it through its faiPhoIma hook. */ }
+							/>{ /* What: Booth Photo Image Element. Why: The gallery shows Tony's table. How: This loads the photo only as it nears the screen, described by its alt text, at its own width and height so the frame doesn't shift when it arrives. */ }
 
 
 						</figure>

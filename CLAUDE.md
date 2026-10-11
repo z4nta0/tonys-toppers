@@ -48,17 +48,23 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
   (`pen-wine-set-1` to `-3`) are one card each, tagged as both pen toppers
   and wine stoppers. Each catalog entry lists every category it shows.
 - **`booth-1` is a phone screenshot**, sharper than the copy that was moved
-  out: step 11's image script crops off the phone's interface, keeping the
-  original in `design/photos/`. The gallery's 4:5 crop already hides most
-  of it; the product cards still show it until then.
+  out: the image script crops off the phone's interface, keeping the
+  original in `design/photos/products/`.
 - **The bar links to the gallery** as "Craft Fairs" (decided 2026-10-10),
   between Products and About Tony, in page order.
 
 ## Images
 Decided 2026-10-10, under the user-level "## Images" rule. The original
-photos are kept in `design/photos/`, outside the served tree, and a script
-beside them writes resized WebP copies into `src/`. The logo and favicon
-come from the existing SVGs (`logo.svg`, `logo-notext.svg`).
+photos are kept in `design/photos/` (the pieces and booth shots in
+`products/`), outside the served tree, and `npm run photos`
+(`design/photos/render.mts`) writes resized WebP copies into `src/`, at
+quality 0.85, plus `src/pages/home/photo-sizes.ts`, which gives every img its
+width and height. A product photo fits within 562 by 750px, a booth shot is
+696px wide, the cartoon 710px, and the portrait keeps its 756px. Adding or
+replacing a photo means dropping the original in and rerunning the script.
+The logo and favicon come from the existing SVGs (`logo.svg`,
+`logo-notext.svg`), and `npm run icons` renders the raster icons from
+`public/favicon.svg`.
 
 ## Horizontal layout
 Decided 2026-10-10 by the user after comparing the current numbers with the
@@ -135,8 +141,9 @@ Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
   hash. Unlike seal-and-shield's, its `modCliFun` leaves a Ctrl, Cmd,
   Shift, Alt, or middle click to the browser, so a section can still open in
   a new tab, as the old `HashLink` allowed.
-- **The bar's logo mark is copied into `ui/`** while `public/images/` keeps
-  its own copy as the favicon, until step 11's favicon set replaces it.
+- **The bar's logo mark lives in `ui/`**, and `public/favicon.svg` is its
+  own copy with a white disc behind the TT, so the favicon holds up on a
+  dark tab bar.
 
 ## Unused files
 Decided 2026-10-10. An unused image is listed for the user to confirm before
@@ -225,14 +232,14 @@ passes on `close-out`.
    button is disabled and reads Sending... while a request is out. The
    error note's reds are literal until step 9 gives them their status
    roles. The hidden form in `index.html` became a bare, valid copy of the
-   real form's four fields in step 6, as in seal-and-shield. After the next
-   deploy, the user sends a test submission to confirm Netlify still
-   records every field.
+   real form's four fields in step 6, as in seal-and-shield. The user sent
+   a test submission after the 1.6.0 deploy, and Netlify recorded it.
 8. **Hooks and CSS modules**: done 2026-10-10.
    - **State and hooks**: the bar's scrolled, open-menu, and active-link
      classes became `data-page-scroll-active`, `data-mobile-menu-open`, and
-     `data-section-link-active`, and the photos carry the `proPhoIma` and
-     `faiPhoIma` hooks the rendering suite masks them by.
+     `data-section-link-active`. The photos carried `proPhoIma` and
+     `faiPhoIma` hooks for the rendering suite's mask until step 11's
+     resized photos let it go.
    - **Accessibility fixes**: the product filters became a labelled group of
      `aria-pressed` toggles in place of a partial tablist, and the closed
      phone menu is `visibility: hidden` once its slide-out ends, so its links
@@ -258,10 +265,10 @@ passes on `close-out`.
      cards, whose entrance animations no longer run there. With the motion
      variants in, the reduced-motion checks and the keyboard walks pass, and
      only the 404 page's missing `h1` still fails (step 11).
-   - **Found for later**: a product card's hover lift never shows, since its
-     entrance animation's `both` fill holds `transform` (step 11's
-     interaction feedback), and the form fields swap the browser's focus
-     outline for a border color alone (step 9's focus rings).
+   - **Found for later**: a product card's hover lift never showed, since its
+     entrance animation's `both` fill held `transform` (fixed in step 11's
+     interaction feedback), and the form fields swapped the browser's focus
+     outline for a border color alone (fixed in step 9's focus rings).
 9. **Design tokens**: done 2026-10-10, in seven commits.
    - **Colors and fonts**: the core design numbers and the full color role
      set, with this site's colors by role: cream is the page and light text,
@@ -311,6 +318,55 @@ passes on `close-out`.
     links: WebKit has no scroll anchoring, so a link far down the page lands
     a few hundred pixels short while the photos above it load and grow
     their cards, the same as before the section links arrived.
+    - **404 page**: done 2026-10-10, with an `h1`, its own title, `noindex`,
+      and a See the collection button beside Back home.
+    - **Security headers**: done 2026-10-10, seal-and-shield's `_headers`,
+      with Vite emitting every asset as a file (`assetsInlineLimit: 0`) so
+      the policy needn't allow data URLs.
+    - **Images**: done 2026-10-10 (see "## Images"), 56 photos from 6,351 KB
+      to 2,698 KB, and the rendering suite's photo mask dropped.
+    - **WebKit phone menu links**: rechecked 2026-10-10 once the photos had
+      their sizes. Two more causes turned up and were fixed: the About
+      portrait grew after load in WebKit, and WebKit resolves a rem on the
+      root element against 16px, so `html`'s scroll padding read about 36px
+      too tall. That one length on `html` uses `1em` times its rhythm step
+      instead of the spacing token, which is the only place a root rem is
+      read. Every section link now lands at 79px in all three engines.
+    - **SEO**: done 2026-10-10. `index.html` carries the home page's title
+      ("Tony's Toppers | Handmade Beaded Crafts in Bolivar, MO"), a
+      120-character description naming Tony, Bolivar, and his pieces, the
+      author and canonical tags, and one JSON-LD graph: an `Organization`
+      (phone, Bolivar, MO with no street, the Facebook page in `sameAs`)
+      founded by a `Person` for Tony (no birth date), and a `WebSite` it
+      publishes. `public/` gains `robots.txt` (every crawler allowed) and a
+      sitemap listing the home page. The hero's h1 stays as written; the
+      eyebrow above it names Bolivar.
+    - **Social previews and favicon set**: done 2026-10-10. `npm run
+      og-image` captures `design/og-image/card.html` (Tony's cartoon, the
+      name in the heavy serif, and "Handmade in Bolivar, MO" on the hero's
+      highlight bar, over the hero's cream wash and glows) as
+      `public/og-image.jpg`. It's a JPEG at quality 90 (about 63 KB), since
+      as a PNG the washes and portrait came to 441 KB, over WhatsApp's
+      limit, and 85 showed faint blocking at 3x zoom. `npm run icons`
+      renders the ICO, the 16 to 512px PNGs, and an inset apple touch icon
+      on white from `public/favicon.svg`, which the head lists first. The
+      head gains `theme-color` (the cream), the full Open Graph and Twitter
+      tags, and the structured data's logo and image. After the deploy,
+      check the card in a preview checker such as opengraph.xyz.
+    - **Interaction feedback**: done 2026-10-10. Every link and button
+      grows seal-and-shield's focus ring in from a zero-width outline (the
+      global rule in `styles.css`), and every control with its own
+      transition lists the two outline properties. The contact band and the
+      footer hand the ring yellow (`--foc-rin-col`), and the form card hands
+      it back navy. Shadowed buttons press by dropping into a shallower
+      shadow, as the submit and menu call buttons already did; other
+      buttons, rows, and the filters press in to 0.97, and text links dim.
+      New hovers: the brand turns navy while its mark tilts (the one
+      flourish, on the overshoot easing), the toggle's bars turn navy, the
+      active bar link turns navy, menu rows nudge 3.6px, the filters shade
+      and lift, the secondary buttons and contact rows lift, and the form
+      fields darken their borders. The product cards' entrance now fills
+      `backwards`, so their hover lift finally shows.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
@@ -332,17 +388,21 @@ logo ring, and wobbling sticker) when waiting for the page to settle.
   (order, traps, focus on screen, uncovered, and visible), reflow at 320px,
   and motion under reduced motion. axe's "needs review" results are printed
   and attached to the report rather than failing the run.
+- `npm run test:interaction`: seal-and-shield's feedback check on every
+  state. Each reachable link and button must look different hovered than at
+  rest and pressed than hovered (real clicks are blocked meanwhile), list
+  `outline-width` in its transitions, and transition nothing under reduced
+  motion, and the first Tab stop's ring must reach 2px.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance and a
   per-pixel color threshold of 0. The page's clock is fixed to one date rather
   than masking text, since the footer's year and Tony's age in the About
   section both come from it. WebKit drew the page differently from one
   full-page capture to the next in two places, so the page never held still
-  long enough to compare: the 64 full-size product photos, which are masked
-  (their boxes still show) through their `proPhoIma` and `faiPhoIma` hooks,
-  and the hero's blurred blobs, which stay still because every capture runs
-  under reduced motion, where the hero's module switches their floating off.
-  The photo mask is retried without once step 11 shrinks the photos. Since
+  long enough to compare: the full-size product photos, which were masked
+  until step 11's resized photos held still in every engine, and the hero's
+  blurred blobs, which stay still because every capture runs under reduced
+  motion, where the hero's module switches their floating off. Since
   the captures run under reduced motion, a change to a reduced-motion
   variant alters the baselines even when the full-motion page is untouched,
   so check that the diff stays within what the variant affects (step 8 did,
@@ -361,4 +421,11 @@ logo ring, and wobbling sticker) when waiting for the page to settle.
   check measures each line of an element's own text rather than its scroll
   width, since the hero's highlight bar reaches 4px past its italic line on
   purpose and counted as a spill at every width.
+- `npm run test:seo`: checks the home page's title, description, author,
+  canonical, and lack of a robots tag; that the structured data's name,
+  phone, town, Facebook page, and node links match what the page shows, with
+  no street address or birth date; the 404 page's `noindex` and title; one
+  h1 per page; every Open Graph and Twitter tag, with absolute addresses
+  and copy matching the page; the card's type, size, and bytes; every icon
+  link; and `robots.txt` and the sitemap.
 - `npm test` runs every suite.
