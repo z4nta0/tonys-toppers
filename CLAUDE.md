@@ -265,10 +265,10 @@ passes on `close-out`.
      cards, whose entrance animations no longer run there. With the motion
      variants in, the reduced-motion checks and the keyboard walks pass, and
      only the 404 page's missing `h1` still fails (step 11).
-   - **Found for later**: a product card's hover lift never shows, since its
-     entrance animation's `both` fill holds `transform` (step 11's
-     interaction feedback), and the form fields swap the browser's focus
-     outline for a border color alone (step 9's focus rings).
+   - **Found for later**: a product card's hover lift never showed, since its
+     entrance animation's `both` fill held `transform` (fixed in step 11's
+     interaction feedback), and the form fields swapped the browser's focus
+     outline for a border color alone (fixed in step 9's focus rings).
 9. **Design tokens**: done 2026-10-10, in seven commits.
    - **Colors and fonts**: the core design numbers and the full color role
      set, with this site's colors by role: cream is the page and light text,
@@ -353,6 +353,20 @@ passes on `close-out`.
       head gains `theme-color` (the cream), the full Open Graph and Twitter
       tags, and the structured data's logo and image. After the deploy,
       check the card in a preview checker such as opengraph.xyz.
+    - **Interaction feedback**: done 2026-10-10. Every link and button
+      grows seal-and-shield's focus ring in from a zero-width outline (the
+      global rule in `styles.css`), and every control with its own
+      transition lists the two outline properties. The contact band and the
+      footer hand the ring yellow (`--foc-rin-col`), and the form card hands
+      it back navy. Shadowed buttons press by dropping into a shallower
+      shadow, as the submit and menu call buttons already did; other
+      buttons, rows, and the filters press in to 0.97, and text links dim.
+      New hovers: the brand turns navy while its mark tilts (the one
+      flourish, on the overshoot easing), the toggle's bars turn navy, the
+      active bar link turns navy, menu rows nudge 3.6px, the filters shade
+      and lift, the secondary buttons and contact rows lift, and the form
+      fields darken their borders. The product cards' entrance now fills
+      `backwards`, so their hover lift finally shows.
 
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
@@ -374,6 +388,11 @@ logo ring, and wobbling sticker) when waiting for the page to settle.
   (order, traps, focus on screen, uncovered, and visible), reflow at 320px,
   and motion under reduced motion. axe's "needs review" results are printed
   and attached to the report rather than failing the run.
+- `npm run test:interaction`: seal-and-shield's feedback check on every
+  state. Each reachable link and button must look different hovered than at
+  rest and pressed than hovered (real clicks are blocked meanwhile), list
+  `outline-width` in its transitions, and transition nothing under reduced
+  motion, and the first Tab stop's ring must reach 2px.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance and a
   per-pixel color threshold of 0. The page's clock is fixed to one date rather

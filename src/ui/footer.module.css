@@ -20,6 +20,8 @@
 .sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the ink color and centers its line of small cream text, never wider than the screen. */
 
 
+	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Yellow Focus Ring. Why: The navy ring would vanish on the ink band. How: The phone link draws its ring yellow instead. */
+
 	background : var( --bac-inv-col );                      /* Background Inverse Color = #1a1a2e */
 	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
 	font-size  : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
@@ -36,6 +38,34 @@
 	color                 : var( --acc-sec-col );                   /* Accent Secondary Color = #fbbf24 */
 	text-decoration       : underline;
 	text-underline-offset : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
+	transition            : color var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.fooPhoAnc:hover { /* What: Hovered Footer Phone Anchor. Why: The number should respond to the pointer. How: This turns it cream. */
+
+
+	color : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
+
+
+}
+.fooPhoAnc:active { /* What: Pressed Footer Phone Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, as every text link does on press. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Phone Anchor. Why: Someone who asked for less motion shouldn't see the number fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.fooPhoAnc { /* What: Motionless Footer Phone Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
