@@ -1,0 +1,594 @@
+
+
+
+/**
+ * hero.module.css = Hero Section Module
+ *
+ * @summary
+ * Styles for HerSecCom: the screen-filling opening section, warmed by two
+ * soft glows that float slowly in its corners, with the eyebrow, headline,
+ * pitch, and buttons beside Tony's cartoon portrait, whose round frame turns
+ * slowly while the portrait inside it turns the other way to stay upright,
+ * and a wobbling sticker on its corner. On screens 900px wide or narrower the
+ * portrait moves above the words in a single column. The words rise into
+ * place one block after another through the global blockEnterFadeIn keyframes, which
+ * the product cards share. The shared button classes the hero's two buttons
+ * used to borrow from the global stylesheet are copied here, and every
+ * animation and transition stops for anyone who asked for less motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region homHerSec */
+
+.homHerSec { /* What: Home Hero Section. Why: The page opens on a warm, screen-filling welcome. How: This fills the screen below the bar, centers its content, clips the glows at its edges, and washes the cream background with a yellow glow at the top left and a blue one at the bottom right. */
+
+
+	background  : radial-gradient( ellipse at 20% 10%, oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-006-rec ) ), transparent 50% ),
+		radial-gradient( ellipse at 85% 80%, oklch( from var( --acc-mai-col ) l c h / 0.12 ), transparent 55% ), var( --bac-pag-col ); /* Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185, Accent Main Color = #1e3a8a @ 0.12 opacity, Background Page Color = #fdf9ee */
+	display     : grid;
+	min-height  : calc( 100vh - var( --spa-ver-p06 ) );                           /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	overflow    : hidden;
+	padding     : var( --spa-ver-p07 ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
+	place-items : center;
+	position    : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Home Hero Section. Why: The wide side padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.homHerSec { /* What: Compact Home Hero Section. Why: A narrow screen needs its width for the content, and the portrait at the top needs room below the bar. How: This trims the bottom padding and adds a step of room on top. */
+
+
+		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 5 ~= 59.447px */
+
+
+	}
+
+
+}
+
+.herBloDiv { /* What: Hero Blob Div. Why: Soft glows give the hero depth without drawing the eye. How: This draws a blurred, half-transparent circle that floats slowly, out of the way of the pointer. */
+
+
+	animation      : herBloDivLoopFloat var( --dur-ani-p16 ) var( --mot-sta-eas ) infinite; /* Duration Animation Base Plus 16 ~= 14,197.0ms, Motion Standard Easing = ease */
+	border-radius  : 50%;
+	filter         : blur( calc( var( --ver-rhy-p04 ) * 1rem ) );                           /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	opacity        : 0.5;
+	pointer-events : none;
+	position       : absolute;
+
+
+}
+.herBloDiv--yellow { /* What: Yellow Hero Blob Div. Why: A yellow glow warms the top left corner. How: This sizes the circle at about 321px and sets it partly off the corner. */
+
+
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
+	height     : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */
+	left       : calc( var( --spa-hor-p06 ) * -1 );   /* Spacing Horizontal Base Plus 6 ~= 78.751px */
+	top        : calc( var( --spa-ver-p06 ) * -1 );   /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	width      : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+}
+.herBloDiv--blue { /* What: Blue Hero Blob Div. Why: A blue glow balances the first in the bottom right corner. How: This sizes the circle at about 243px, sets it partly off the corner, and starts it half a cycle behind the first. */
+
+
+	animation-delay : calc( var( --dur-ani-p16 ) / -2 );                                                       /* Duration Animation Base Plus 16 ~= 14,197.0ms, halved to ~= -7,098.5ms */
+	background      : oklch( from var( --acc-mai-col ) calc( l + 0.132 ) calc( c + 0.037 ) calc( h + 2.02 ) ); /* Accent Main Color = #1e3a8a, lightened to ~= #3b5bc9 */
+	bottom          : calc( var( --spa-ver-p07 ) * -1 );                                                       /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	height          : calc( var( --ver-rhy-p10 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 10 ~= 242.522px */
+	right           : calc( var( --spa-hor-p05 ) * -1 );                                                       /* Spacing Horizontal Base Plus 5 ~= 59.447px */
+	width           : calc( var( --ver-rhy-p10 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 10 ~= 242.522px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Blob Div. Why: Someone who asked for less motion shouldn't see the glows drift. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herBloDiv { /* What: Still Hero Blob Div. Why: The glows should simply sit in their corners. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes herBloDivLoopFloat { /* What: Hero Blob Div Loop Float. Why: The glows drift gently so the hero feels alive. How: This moves a glow up and to the right and swells it slightly at the halfway point, then settles it back. */
+
+
+	0%,
+	100% {
+
+
+		transform : translate( 0, 0 ) scale( 1 );
+
+
+	}
+
+	50% {
+
+
+		transform : translate( 30px, calc( var( --spa-ver-p01 ) * -1 ) ) scale( 1.08 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+
+
+	}
+
+
+}
+
+
+
+/* #region herInnDiv */
+
+.herInnDiv { /* What: Hero Inner Div. Why: The words and the portrait sit side by side at the page's content width. How: This lays out two columns, the words a little wider, centered against each other above the glows. */
+
+
+	align-items           : center;
+	display               : grid;
+	gap                   : var( --spa-ver-p05 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
+	grid-template-columns : 1.1fr 1fr;
+	max-width             : var( --con-max-wid );                                                                           /* Container Maximum Width ~= 1,449.365px */
+	position              : relative;
+	width                 : 100%;
+	z-index               : 2;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Inner Div. Why: Two columns don't fit a narrow screen. How: This applies 900px wide and below. */
+
+
+	.herInnDiv { /* What: Stacked Hero Inner Div. Why: The words and the portrait read best one above the other. How: This sets a single column with a smaller gap. */
+
+
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+.herEyeSpa { /* What: Hero Eyebrow Span. Why: Visitors should know where the pieces are made before anything else. How: This sets the town in small, spaced navy capitals on a frosted pill with a yellow dot, rising in first. */
+
+
+	align-items    : center;
+	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) 0.1s both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	background     : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-001-rec ) );            /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius  : 999px;
+	color          : var( --acc-mai-col );                                                           /* Accent Main Color = #1e3a8a */
+	display        : inline-flex;
+	font-size      : var( --fon-siz-p01 );                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 600;
+	gap            : var( --spa-hor-m01 );                                                           /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em );                                         /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
+	margin-bottom  : var( --spa-ver-p02 );                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	padding        : var( --spa-ver-m02 ) var( --spa-hor-bas );                                      /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
+	text-transform : uppercase;
+
+
+}
+.herEyeSpa::before { /* What: Hero Eyebrow Dot. Why: A small yellow dot leads the eye into the line. How: This draws a yellow circle about 8px across with a soft yellow halo. */
+
+
+	background    : var( --acc-sec-col );                                                                                          /* Accent Secondary Color = #fbbf24 */
+	border-radius : 50%;
+	box-shadow    : 0 0 0 calc( var( --ver-rhy-m05 ) * 1rem ) oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-004-rec ) ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	content       : '';
+	height        : calc( var( --ver-rhy-m02 ) * 1rem );                                                                           /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+	width         : calc( var( --ver-rhy-m02 ) * 1rem );                                                                           /* Vertical Rhythm Base Minus 2 ~= 8.304px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Eyebrow Span. Why: Someone who asked for less motion shouldn't see the line rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herEyeSpa { /* What: Still Hero Eyebrow Span. Why: The line should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region herTitHea */
+
+.herTitHea { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 45px and 79px, tightly leaded, rising in second. */
+
+
+	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) var( --dur-ani-p01 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 1 ~= 209.1ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	color          : var( --tex-mai-col );                                                                           /* Text Main Color = #1a1a2e */
+	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) );                                       /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-012-rec ) * -1em );                                                        /* Core-Design-Number to the Power of 12 Reciprocal ~= -0.034em */
+	line-height    : var( --ver-rhy-m01 );                                                                           /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                                                           /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Title Heading. Why: Someone who asked for less motion shouldn't see the headline rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herTitHea { /* What: Still Hero Title Heading. Why: The headline should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.titAccSpa { /* What: Title Accent Span. Why: The headline's second half carries its warmth. How: This sets it in navy italics, as an inline block so its highlight bar can sit beneath it. */
+
+
+	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	display    : inline-block;
+	font-style : italic;
+	position   : relative;
+
+
+}
+.titAccSpa::after { /* What: Title Accent Highlight Bar. Why: A yellow bar under the words reads like a hand-drawn highlight. How: This draws a slightly skewed yellow band across the bottom of the words, behind them. */
+
+
+	background    : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
+	border-radius : var( --rad-bor-xsm );                /* Radius Border Extra Small ~= 3.572px */
+	bottom        : var( --spa-ver-m05 );                /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	content       : '';
+	height        : calc( var( --ver-rhy-bas ) * 1rem ); /* Vertical Rhythm Base ~= 14.572px */
+	left          : calc( var( --spa-hor-m05 ) * -1 );   /* Spacing Horizontal Base Minus 5 ~= 3.572px */
+	position      : absolute;
+	right         : calc( var( --spa-hor-m05 ) * -1 );   /* Spacing Horizontal Base Minus 5 ~= 3.572px */
+	transform     : skew( -3deg );
+	z-index       : -1;
+
+
+}
+
+/* #endregion herTitHea */
+
+
+.herLedPar { /* What: Hero Lede Paragraph. Why: The pitch should read easily without competing with the headline. How: This sets it a little large in the soft ink color, capped at a comfortable line length, rising in third. */
+
+
+	animation     : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p03 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 3 ~= 366.9ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	color         : var( --tex-sec-col );                                                                           /* Text Secondary Color = #4a4a5e */
+	font-size     : var( --fon-siz-p02 );                                                                           /* Font Size Base Plus 2 ~= 19.304px */
+	margin-bottom : var( --spa-ver-p03 );                                                                           /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-bas );                                                                           /* Text Width Base Maximum ~= 29.207em */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Lede Paragraph. Why: Someone who asked for less motion shouldn't see the pitch rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herLedPar { /* What: Still Hero Lede Paragraph. Why: The pitch should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region herActDiv */
+
+.herActDiv { /* What: Hero Actions Div. Why: The two main ways into the page sit together. How: This sets the buttons in a row that wraps when it runs out of room, rising in last. */
+
+
+	animation : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 4 ~= 486.1ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	display   : flex;
+	flex-wrap : wrap;
+	gap       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Actions Div. Why: Someone who asked for less motion shouldn't see the buttons rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herActDiv { /* What: Still Hero Actions Div. Why: The buttons should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.butBasAnc { /* What: Button Base Anchor. Why: Both hero buttons share one rounded shape and type. How: This sets a pill with the sans font in semibold, a clear border slot for the ghost style, and eases every change between their looks. */
+
+
+	align-items     : center;
+	border          : var( --bor-wid-lar ) solid transparent;                                                         /* Border Width Large ~= 2.035px */
+	border-radius   : 999px;
+	cursor          : pointer;
+	display         : inline-flex;
+	font-family     : var( --fon-fam-mai );                                                                           /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size       : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight     : 600;
+	gap             : var( --spa-hor-m01 );                                                                           /* Spacing Horizontal Base Minus 1 = 11px */
+	padding         : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-decoration : none;
+	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: The collection is the page's main goal, so its button leads. How: This fills it navy with cream text and a hard ink shadow. */
+
+
+	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	color      : var( --tex-acc-col );                                                                           /* Text Accent Color = #fdf9ee */
+
+
+}
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+
+
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+
+
+}
+.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: Meeting Tony is the quieter second option. How: This leaves it unfilled with ink text and an ink outline. */
+
+
+	background   : transparent;
+	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
+	color        : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+
+
+}
+.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink and turns its text cream. */
+
+
+	background : var( --bac-inv-col ); /* Background Inverse Color = #1a1a2e */
+	color      : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion herActDiv */
+
+
+
+/* #region herVisDiv */
+
+.herVisDiv { /* What: Hero Visual Div. Why: The portrait and its sticker need a stage of their own. How: This sets a centered stage that fills its column, capped at about 426px or a horizontal step that grows past it on wide screens, as tall as the ring plus room for its drift and the sticker, sizes the portrait ring and the sticker its children read, and rises in with the words. */
+
+
+	--her-sti-wid : calc( var( --ver-rhy-p07 ) * 1rem );                              /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Hero Sticker Width. Why: The sticker's size also sets how far the ring moves over to make room for it. How: The sticker sizes itself from this, and the ring reads it to center the pair. */
+	--por-rin-wid : max( calc( var( --ver-rhy-p10 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */ /* What: Portrait Ring Width. Why: The ring and the sticker placed against it both need the ring's size. How: The ring sizes itself from this, and the sticker reads it to sit on the ring's edge. */
+
+	animation    : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 2 ~= 277.0ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	height       : calc( var( --por-rin-wid ) + var( --ver-rhy-bas ) * 2rem + var( --spa-ver-m01 ) * 2 );          /* Portrait Ring Width, set by its own rule, Vertical Rhythm Base ~= 14.572px, Spacing Vertical Base Minus 1 = 11px */ /* What: Ring Room Height. Why: The stage should hold the ring, its drift, and the sticker above it without empty space below. How: This adds the drift's reach on both sides and the sticker's rise on both sides to the ring's width. */
+	margin       : 0 auto;
+	max-width    : max( calc( var( --ver-rhy-p12 ) * 1rem ), var( --hor-rhy-023 ) );                               /* Vertical Rhythm Base Plus 12 ~= 425.596px, Horizontal Rhythm 23 ~= 623.458px @ 1,920px width */
+	position     : relative;
+	width        : 100%;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Visual Div. Why: In the single column the portrait should come first, sized to the narrower screen. How: This applies 900px wide and below. */
+
+
+	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait opens the narrow layout above the words, large enough to fill its space. How: This moves it first, caps it at about 321px or a horizontal step if that's wider, shrinks the sticker, and grows the ring with the screen between about 183px and 243px. */
+
+
+		--her-sti-wid : calc( var( --ver-rhy-p06 ) * 1rem );                                                                     /* Vertical Rhythm Base Plus 6 ~= 78.751px */
+		--por-rin-wid : clamp( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-023 ), calc( var( --ver-rhy-p10 ) * 1rem ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 23 ~= 623.458px @ 1,920px width, Vertical Rhythm Base Plus 10 ~= 242.522px */
+
+		max-width : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) ); /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
+		order     : -1;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Visual Div. Why: Someone who asked for less motion shouldn't see the portrait rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herVisDiv { /* What: Still Hero Visual Div. Why: The portrait should simply be there. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region porRinDiv */
+
+.porRinDiv { /* What: Portrait Ring Div. Why: The portrait sits in a round frame that drifts slowly in a small circle. How: This centers a circle the ring width across in the stage, shifted right by half the sticker's overhang so the pair sits centered, and turns it about a point about 15px above its middle, so it drifts in a 15px circle rather than spinning in place. */
+
+
+	animation        : porRinDivLoopSpin var( --dur-ani-p20 ) linear infinite;    /* Duration Animation Base Plus 20 ~= 43,721.0ms */
+	border-radius    : 50%;
+	display          : grid;
+	height           : var( --por-rin-wid );                                      /* Portrait Ring Width, set by its parent */
+	inset            : 0 0 0 calc( var( --her-sti-wid ) - var( --spa-hor-m01 ) ); /* Hero Sticker Width, set by its parent, Spacing Horizontal Base Minus 1 = 11px */ /* What: Sticker Room Inset. Why: The sticker hangs off the ring's left edge, so the pair would sit off center. How: The left inset is the sticker's overhang, and the auto margins center the ring in the rest of the stage. */
+	margin           : auto;
+	place-items      : center;
+	position         : absolute;
+	transform-origin : 50% calc( 50% - var( --ver-rhy-bas ) * 1rem );             /* Vertical Rhythm Base ~= 14.572px */ /* What: Drift Center. Why: Turning about the ring's own middle would show nothing, since the portrait counter-turns to stay upright, while turning about its top edge sent it far off the stage. How: Turning about a point about 15px above the middle moves the ring in a 15px circle. */
+	width            : var( --por-rin-wid );                                      /* Portrait Ring Width, set by its parent */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Portrait Ring Div. Why: Someone who asked for less motion shouldn't see the frame turn. How: This applies only when the reduced-motion preference is set. */
+
+
+	.porRinDiv { /* What: Still Portrait Ring Div. Why: The frame should simply sit still. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes porRinDivLoopSpin { /* What: Portrait Ring Div Loop Spin. Why: The frame turns gently to keep the hero lively. How: This rotates it one full turn clockwise. */
+
+
+	to {
+
+
+		transform : rotate( 360deg );
+
+
+	}
+
+
+}
+
+.porCarIma { /* What: Portrait Cartoon Image. Why: The portrait fills its round frame and stays upright while the frame turns. How: This crops it to a circle, spins it the other way at the same speed, and casts a soft navy shadow below it. */
+
+
+	animation     : porCarImaLoopSpin var( --dur-ani-p20 ) linear infinite; /* Duration Animation Base Plus 20 ~= 43,721.0ms */
+	aspect-ratio  : 1 / 1;
+	border-radius : 50%;
+	filter        : drop-shadow( calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) calc( var( --ver-rhy-bas ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ) drop-shadow( 0 0 calc( var( --ver-rhy-m09 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / 0.04 ) ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 4 ~= 44.876px, Vertical Rhythm Base ~= 14.572px, Accent Main Color = #1e3a8a, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430, Vertical Rhythm Base Minus 9 ~= 1.160px, Shadow Main Color = #1a1a2e @ 0.04 opacity */
+	height        : 100%;
+	object-fit    : cover;
+	width         : 100%;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Portrait Cartoon Image. Why: Someone who asked for less motion shouldn't see the portrait turn. How: This applies only when the reduced-motion preference is set. */
+
+
+	.porCarIma { /* What: Still Portrait Cartoon Image. Why: The portrait should simply sit upright. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes porCarImaLoopSpin { /* What: Portrait Cartoon Image Loop Spin. Why: The portrait has to cancel its frame's turn to stay upright. How: This rotates it one full turn counterclockwise. */
+
+
+	to {
+
+
+		transform : rotate( -360deg );
+
+
+	}
+
+
+}
+
+/* #endregion porRinDiv */
+
+
+.herStiDiv { /* What: Hero Sticker Div. Why: A round sticker adds a warm, playful note on the portrait's corner. How: This draws a tilted yellow circle the sticker width across, with an ink outline and hard shadow, holding three short italic lines, on the ring's top-left edge, and wobbles it gently. */
+
+
+	animation     : herStiDivLoopWobble var( --dur-ani-p13 ) var( --mot-sta-eas ) infinite;                         /* Duration Animation Base Plus 13 ~= 6,107.0ms, Motion Standard Easing = ease */
+	background    : var( --acc-sec-col );                                                                           /* Accent Secondary Color = #fbbf24 */
+	border        : var( --bor-wid-lar ) solid var( --bor-str-col );                                                /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
+	border-radius : 50%;
+	box-shadow    : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	color         : var( --tex-mai-col );                                                                           /* Text Main Color = #1a1a2e */
+	display       : grid;
+	font-family   : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	font-style    : italic;
+	font-weight   : 600;
+	height        : var( --her-sti-wid );                                                                           /* Hero Sticker Width, set by its parent */
+	line-height   : var( --ver-rhy-m01 );                                                                           /* Vertical Rhythm Base Minus 1 = 1 */
+	place-items   : center;
+	position      : absolute;
+	right         : calc( 50% + var( --por-rin-wid ) / 2 - var( --her-sti-wid ) / 2 - var( --spa-hor-m01 ) / 2 );   /* Portrait Ring Width, set by its parent, Hero Sticker Width, set by its parent, Spacing Horizontal Base Minus 1 = 11px */ /* What: Ring Edge Position. Why: The sticker should overlap the ring's top-left edge wherever the ring sits. How: This works back from the ring's centered, shifted position so the sticker's right edge lands about 11px inside the ring. */
+	text-align    : center;
+	top           : calc( 50% - var( --por-rin-wid ) / 2 - var( --spa-ver-m01 ) );                                  /* Portrait Ring Width, set by its parent, Spacing Vertical Base Minus 1 = 11px */ /* What: Ring Top Position. Why: The sticker should sit just above the ring's top edge. How: This places it about 11px above the ring's top. */
+	transform     : rotate( -12deg );
+	width         : var( --her-sti-wid );                                                                           /* Hero Sticker Width, set by its parent */
+	z-index       : 3;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Sticker Div. Why: Someone who asked for less motion shouldn't see the sticker wobble. How: This applies only when the reduced-motion preference is set. */
+
+
+	.herStiDiv { /* What: Still Hero Sticker Div. Why: The sticker should simply sit at its tilt. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes herStiDivLoopWobble { /* What: Hero Sticker Div Loop Wobble. Why: The sticker sways a little, like it's been stuck on by hand. How: This eases its tilt from 12 degrees to 6 and swells it slightly at the halfway point, then settles it back. */
+
+
+	0%,
+	100% {
+
+
+		transform : rotate( -12deg );
+
+
+	}
+
+	50% {
+
+
+		transform : rotate( -6deg ) scale( 1.04 );
+
+
+	}
+
+
+}
+
+/* #endregion herVisDiv */
+
+/* #endregion herInnDiv */
+
+/* #endregion homHerSec */
+
+

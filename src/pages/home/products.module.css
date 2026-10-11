@@ -1,0 +1,427 @@
+
+
+
+/**
+ * products.module.css = Products Section Module
+ *
+ * @summary
+ * Styles for ProSecCom: the collection's deeper cream band, dotted with a
+ * faint grid, with the section's heading and note, the row of filter
+ * buttons, and the responsive grid of product cards. Each card holds its
+ * photo in a portrait frame with a tag over its corner and its name and kind
+ * beneath, and rises in through the global blockEnterFadeIn keyframes, which the hero
+ * shares. The shared section, container, heading, and note classes the
+ * section used to borrow from the global stylesheet are copied here, and
+ * every animation and transition stops for anyone who asked for less motion.
+ * The card's hover lift never shows while its entrance animation holds its
+ * transform, a known gap the interaction feedback pass takes up.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region homProSec */
+
+.homProSec { /* What: Home Products Section. Why: The collection sits on its own band apart from the hero, with the same generous padding as every home page section. How: This pads it all round, fills it with the deeper cream, and positions it so its dot grid can be placed against it, with the padding copied from the shared section. */
+
+
+	background : var( --bac-sun-col );                      /* Background Sunken Color ~= #f5edd6 */
+	padding    : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
+	position   : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Home Products Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.homProSec { /* What: Compact Home Products Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+
+
+		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
+
+
+	}
+
+
+}
+.homProSec::before { /* What: Home Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 1px ink dots about every 19px, out of the way of the pointer. */
+
+
+	background-image : radial-gradient( circle, oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) 1px, transparent 1px ); /* Text Main Color = #1a1a2e, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	background-size  : var( --spa-hor-p01 ) var( --spa-ver-p01 );                                                                           /* Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 1 ~= 19.304px */
+	content          : '';
+	inset            : 0;
+	pointer-events   : none;
+	position         : absolute;
+
+
+}
+
+
+/* #region pagConDiv */
+
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at the shared content width, about 1,449px, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.365px */
+
+
+}
+
+
+/* #region secHeaDiv */
+
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about Tony's work sit side by side, above the band's dot grid. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, and lifts it onto its own layer above the grid, copied from the shared section head. */
+
+
+	align-items     : end;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	justify-content : space-between;
+	margin-bottom   : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	position        : relative;
+	z-index         : 2;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section Heading Div. Why: The heading and note don't fit side by side on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.secHeaDiv { /* What: Stacked Section Heading Div. Why: The note reads best below the heading. How: This stacks them on the left with a smaller gap. */
+
+
+		align-items    : flex-start;
+		flex-direction : column;
+		gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+	}
+
+
+}
+
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+
+
+	align-items    : center;
+	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	display        : flex;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 600;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.22em;
+	margin-bottom  : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
+	text-transform : uppercase;
+
+
+}
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
+	content    : '';
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
+	width      : 32px;
+
+
+}
+
+
+/* #region secTitHea */
+
+.secTitHea { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, copied from the shared section title. */
+
+
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4.5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                    /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: The heading's second half carries its warmth. How: This sets it in navy italics. */
+
+
+	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	font-style : italic;
+
+
+}
+
+/* #endregion secTitHea */
+
+
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
+
+
+	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
+	font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	max-width : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
+
+
+}
+
+/* #endregion secHeaDiv */
+
+
+
+/* #region filGroDiv */
+
+.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen. */
+
+
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
+	display       : inline-flex;
+	flex-wrap     : wrap;
+	margin-bottom : var( --spa-ver-p02 );                            /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	margin-top    : var( --spa-ver-bas );                            /* Spacing Vertical Base ~= 14.572px */
+	max-width     : 100%;
+	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
+
+
+}
+
+.filTogBut { /* What: Filter Toggle Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing every change between its looks. */
+
+
+	background    : transparent;
+	border        : none;
+	border-radius : 999px;
+	color         : var( --tex-sec-col );                          /* Text Secondary Color = #4a4a5e */
+	cursor        : pointer;
+	font-family   : var( --fon-fam-mai );                          /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                          /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight   : 500;
+	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 );     /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	transition    : all var( --dur-tra-p01 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease */
+
+
+}
+@media ( max-width : 1000px ) { /* What: Narrow Filter Toggle Button. Why: Nine buttons in one wrapping row scatter on a narrower screen. How: This applies 1000px wide and below. */
+
+
+	.filTogBut { /* What: Gridded Filter Toggle Button. Why: The buttons line up better in even columns. How: This bases each button on a third of the strip's width. */
+
+
+		flex-basis : 33.3%;
+
+
+	}
+
+
+}
+.filTogBut[aria-pressed='true'] { /* What: Pressed Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text. */
+
+
+	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	color      : var( --tex-acc-col ); /* Text Accent Color = #fdf9ee */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Filter Toggle Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.filTogBut { /* What: Motionless Filter Toggle Button. Why: The pressed look should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion filGroDiv */
+
+
+
+/* #region proGriDiv */
+
+.proGriDiv { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This fills each row with cards at least about 138px wide, or horizontal step 020 on wider screens, and lifts the grid onto its own layer. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );       /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	grid-template-columns : repeat( auto-fill, minmax( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-020 ) ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 20 ~= 268.187px @ 1,920px width */
+	position              : relative;
+	z-index               : 2;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Products Grid Div. Why: Rows of cards should sit closer together on a phone. How: This applies 900px wide and below. */
+
+
+	.proGriDiv { /* What: Tight Products Grid Div. Why: Rows of cards sit closer together on a phone. How: This tightens the row gap, while the cards' minimum width and the column gap follow their own floors and clamps. */
+
+
+		row-gap : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+	}
+
+
+}
+
+
+/* #region proCarArt */
+
+.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global blockEnterFadeIn keyframes, and eases its hover look. */
+
+
+	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	background    : var( --bac-sur-col );                                                      /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col );                           /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-xla );                                                      /* Radius Border Extra Large ~= 19.304px */
+	cursor        : pointer;
+	overflow      : hidden;
+	position      : relative;
+	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This casts a soft navy shadow and turns its border navy, while its lift waits on the entrance animation's held transform. */
+
+
+	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
+	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	transform    : translateY( calc( var( --spa-ver-m03 ) * -1 ) ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Product Card Article. Why: Someone who asked for less motion shouldn't see the cards rise in or ease their hover look. How: This applies only when the reduced-motion preference is set. */
+
+
+	.proCarArt { /* What: Still Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transition off. */
+
+
+		animation  : none;
+		transition : none;
+
+
+	}
+
+
+}
+
+.proTagDiv { /* What: Product Tag Div. Why: A tag over the photo names what kind of piece it shows. How: This sets the label in small, bold, spaced capitals on a yellow pill with an ink outline in the card's top left corner. */
+
+
+	background     : var( --acc-sec-col );                            /* Accent Secondary Color = #fbbf24 */
+	border         : var( --bor-wid-bas ) solid var( --bor-str-col ); /* Border Width Base ~= 1.160px, Border Strong Color = #1a1a2e */
+	border-radius  : 999px;
+	color          : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	font-size      : var( --fon-siz-bas );                            /* Font Size Base = 11px */
+	font-weight    : 700;
+	left           : var( --spa-hor-m01 );                            /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );          /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	padding        : var( --spa-ver-m05 ) var( --spa-hor-m01 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 1 = 11px */
+	position       : absolute;
+	text-transform : uppercase;
+	top            : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
+
+
+}
+
+
+/* #region proFraDiv */
+
+.proFraDiv { /* What: Product Frame Div. Why: Every photo sits in the same portrait frame. How: This frames the photo at a 3:4 shape on a soft cream gradient, centering it and clipping its zoom. */
+
+
+	aspect-ratio : 3 / 4;
+	background   : linear-gradient( 180deg, oklch( from var( --bac-pag-col ) calc( l + 0.009 ) calc( c - 0.007 ) calc( h + 1.25 ) ), oklch( from var( --bac-pag-col ) calc( l - 0.029 ) calc( c + 0.006 ) calc( h - 1.51 ) ) ); /* Background Page Color = #fdf9ee, lightened to ~= #fefcf6, darkened to ~= #f5efe0 */
+	display      : grid;
+	overflow     : hidden;
+	place-items  : center;
+
+
+}
+
+.proPhoIma { /* What: Product Photo Image. Why: The whole piece should show, uncropped, in its frame. How: This fills the frame, fits the photo inside it, and eases its zoom. */
+
+
+	height     : 100%;
+	object-fit : contain;
+	transition : transform var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */
+	width      : 100%;
+
+
+}
+.proCarArt:hover .proPhoIma { /* What: Hovered Product Photo Image. Why: The photo draws the eye in when its card is hovered. How: This zooms it slightly within its frame. */
+
+
+	transform : scale( 1.06 );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Product Photo Image. Why: Someone who asked for less motion shouldn't see the photo zoom. How: This applies only when the reduced-motion preference is set. */
+
+
+	.proPhoIma { /* What: Motionless Product Photo Image. Why: The zoom should simply switch on. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion proFraDiv */
+
+
+/* #region proInfDiv */
+
+.proInfDiv { /* What: Product Info Div. Why: The card's name and kind sit beneath its photo. How: This pads them below a hairline. */
+
+
+	border-top : var( --bor-wid-bas ) solid var( --bor-mai-col );                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	padding    : var( --spa-ver-m01 ) var( --spa-hor-bas ) var( --spa-ver-bas ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px, Spacing Vertical Base ~= 14.572px */
+
+
+}
+
+.proNamDiv { /* What: Product Name Div. Why: Each card has a title. How: This sets it in the semibold serif in ink. */
+
+
+	color         : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+	font-family   : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight   : 600;
+	margin-bottom : var( --spa-ver-m07 ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
+
+
+}
+
+.proTypDiv { /* What: Product Type Div. Why: The card repeats its kind quietly beneath its title. How: This sets it small, spaced, and uppercase in soft ink. */
+
+
+	color          : var( --tex-sec-col );                   /* Text Secondary Color = #4a4a5e */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	text-transform : uppercase;
+
+
+}
+
+/* #endregion proInfDiv */
+
+/* #endregion proCarArt */
+
+/* #endregion proGriDiv */
+
+/* #endregion pagConDiv */
+
+/* #endregion homProSec */
+
+

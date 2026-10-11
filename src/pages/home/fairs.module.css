@@ -1,0 +1,199 @@
+
+
+
+/**
+ * fairs.module.css = Fairs Section Module
+ *
+ * @summary
+ * Styles for FaiSecCom: the craft fair gallery's section, with its heading
+ * and note above a responsive grid of booth shots, each in a rounded 4:5
+ * frame. The shared section, container, heading, and note classes the
+ * section used to borrow from the global stylesheet are copied here.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region homFaiSec */
+
+.homFaiSec { /* What: Home Fairs Section. Why: Every home page section shares the same generous padding. How: This pads it all round and positions it so its decorations can be placed against it, copied from the shared section. */
+
+
+	padding  : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
+	position : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Home Fairs Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.homFaiSec { /* What: Compact Home Fairs Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+
+
+		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
+
+
+	}
+
+
+}
+
+
+/* #region pagConDiv */
+
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at the shared content width, about 1,449px, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.365px */
+
+
+}
+
+
+/* #region secHeaDiv */
+
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, copied from the shared section head. */
+
+
+	align-items     : end;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	justify-content : space-between;
+	margin-bottom   : var( --spa-ver-p05 );                                                                           /* Spacing Vertical Base Plus 5 ~= 59.447px */
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Section Heading Div. Why: The heading and note don't fit side by side on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.secHeaDiv { /* What: Stacked Section Heading Div. Why: The note reads best below the heading. How: This stacks them on the left with a smaller gap. */
+
+
+		align-items    : flex-start;
+		flex-direction : column;
+		gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+	}
+
+
+}
+
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+
+
+	align-items    : center;
+	color          : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	display        : flex;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 600;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.22em;
+	margin-bottom  : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
+	text-transform : uppercase;
+
+
+}
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
+	content    : '';
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
+	width      : 32px;
+
+
+}
+
+
+/* #region secTitHea */
+
+.secTitHea { /* What: Section Title Heading. Why: The heading leads the section. How: This sets it in the heavy serif, growing with the screen between about 34px and 59px, tightly leaded, copied from the shared section title. */
+
+
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4.5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                    /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: The heading's second half carries its warmth. How: This sets it in navy italics. */
+
+
+	color      : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+	font-style : italic;
+
+
+}
+
+/* #endregion secTitHea */
+
+
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in the soft ink color, capped near 50 characters a line, copied from the shared section note. */
+
+
+	color     : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
+	font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	max-width : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
+
+
+}
+
+/* #endregion secHeaDiv */
+
+
+
+/* #region faiGriDiv */
+
+.faiGriDiv { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least about 138px wide, or horizontal step 019 on wider screens, or the full width when that's narrower. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );                   /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	grid-template-columns : repeat( auto-fit, minmax( min( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-019 ) ), 100% ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 19 ~= 202.448px @ 1,920px width */
+
+
+}
+
+
+/* #region faiPhoFig */
+
+.faiPhoFig { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners. */
+
+
+	aspect-ratio  : 4 / 5;
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
+	overflow      : hidden;
+
+
+}
+
+.faiPhoIma { /* What: Fair Photo Image. Why: The booth shot should fill its frame. How: This covers the frame with the photo, cropping its edges, as a block so no gap shows beneath it. */
+
+
+	display    : block;
+	height     : 100%;
+	object-fit : cover;
+	width      : 100%;
+
+
+}
+
+/* #endregion faiPhoFig */
+
+/* #endregion faiGriDiv */
+
+/* #endregion pagConDiv */
+
+/* #endregion homFaiSec */
+
+

@@ -1,0 +1,505 @@
+
+
+
+/**
+ * contact.module.css = Contact Section Module
+ *
+ * @summary
+ * Styles for ConSecCom: the navy band that ends the home page, warmed by a
+ * yellow glow, with the ways to reach Tony on one side (the heading, a note,
+ * and rows for his phone, his Facebook page, and his home town) and the
+ * cream message form on the other, with its thank-you and error notes. On
+ * screens 900px wide or narrower the two sides stack, and so do the form's
+ * name and email fields. The shared section, container, and label classes
+ * the section used to borrow from the global stylesheet are copied here, and
+ * the fields' and send button's transitions stop for anyone who asked for
+ * less motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region homConSec */
+
+.homConSec { /* What: Home Contact Section. Why: The page ends on a bold navy band that sets the contact details apart, with the same generous padding as every home page section. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
+
+
+	background : var( --acc-mai-col );                      /* Accent Main Color = #1e3a8a */
+	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
+	overflow   : hidden;
+	padding    : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
+	position   : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Home Contact Section. Why: The wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.homConSec { /* What: Compact Home Contact Section. Why: A narrow screen needs its width for the content. How: This trims the padding. */
+
+
+		padding : var( --spa-ver-p06 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
+
+
+	}
+
+
+}
+.homConSec::before { /* What: Home Contact Section Glow. Why: A soft yellow glow warms the band's top right corner. How: This draws a circle about 564px across fading out from yellow, faint and partly off the corner, out of the way of the pointer. */
+
+
+	background     : radial-gradient( circle, var( --acc-sec-col ) 0%, transparent 60% ); /* Accent Secondary Color = #fbbf24 */
+	border-radius  : 50%;
+	content        : '';
+	height         : calc( var( --ver-rhy-p13 ) * 1rem );                                 /* Vertical Rhythm Base Plus 13 ~= 563.794px */
+	opacity        : 0.18;
+	pointer-events : none;
+	position       : absolute;
+	right          : calc( var( --spa-hor-p09 ) * -1 );                                   /* Spacing Horizontal Base Plus 9 ~= 183.074px */
+	top            : calc( var( --spa-ver-p09 ) * -1 );                                   /* Spacing Vertical Base Plus 9 ~= 183.074px */
+	width          : calc( var( --ver-rhy-p13 ) * 1rem );                                 /* Vertical Rhythm Base Plus 13 ~= 563.794px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+}
+
+
+/* #region pagConDiv */
+
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a column capped at the shared content width, about 1,449px, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : var( --con-max-wid ); /* Container Maximum Width ~= 1,449.365px */
+
+
+}
+
+
+/* #region conGriDiv */
+
+.conGriDiv { /* What: Contact Grid Div. Why: The ways to reach Tony and the form sit side by side on wide screens, above the glow. How: This lays out two even columns stretched to the same height and lifts them onto their own layer. */
+
+
+	align-items           : stretch;
+	display               : grid;
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
+	grid-template-columns : 1fr 1fr;
+	position              : relative;
+	z-index               : 2;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Contact Grid Div. Why: Two columns don't fit a narrow screen. How: This applies 900px wide and below. */
+
+
+	.conGriDiv { /* What: Stacked Contact Grid Div. Why: The details and the form read best one above the other. How: This sets a single column with a smaller gap. */
+
+
+		gap                   : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and yellow to stand out on the navy, led by a short yellow line, copied from the shared section label with the contact section's yellow merged in. */
+
+
+	align-items    : center;
+	color          : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	display        : flex;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 600;
+	gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	letter-spacing : 0.22em;
+	margin-bottom  : var( --spa-ver-m01 ); /* Spacing Vertical Base Minus 1 = 11px */
+	text-transform : uppercase;
+
+
+}
+.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws a 32px by 2px yellow bar before the text. */
+
+
+	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
+	content    : '';
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
+	width      : 32px;
+
+
+}
+
+
+
+/* #region secTitHea */
+
+.secTitHea { /* What: Section Title Heading. Why: The heading invites visitors to write. How: This sets it in the heavy cream serif, growing with the screen between about 34px and 59px, tightly leaded, with room below. */
+
+
+	color          : var( --bac-pag-col );                                       /* Background Page Color = #fdf9ee */
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4.5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em );                    /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                       /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+
+.titAccEmp { /* What: Title Accent Emphasis. Why: The question carries the heading's warmth. How: This sets it in yellow italics. */
+
+
+	color      : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+	font-style : italic;
+
+
+}
+
+/* #endregion secTitHea */
+
+
+.secSubPar { /* What: Section Subtitle Paragraph. Why: The note should read as secondary to the heading. How: This sets it a little large in softened cream, capped near 50 characters a line, with room below. */
+
+
+	color         : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-001-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+	font-size     : var( --fon-siz-p01 );                                                /* Font Size Base Plus 1 ~= 14.572px */
+	margin-bottom : var( --spa-ver-p03 );                                                /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-sma );                                                /* Text Width Small Maximum ~= 22.047em */
+
+
+}
+
+
+
+/* #region infRowAnc */
+
+.infRowAnc,
+.infRowDiv { /* What: Info Row Anchor And Div. Why: Each way to reach Tony reads as a row of its own, whether it's a link or the home town row. How: This sets the icon beside its two lines on a faintly lighter, rounded panel with a soft cream border, with no link underline or color. */
+
+
+	align-items     : center;
+	background      : oklch( from var( --bac-sur-col ) l c h / 0.07 );                                                /* Background Surface Color = #ffffff @ 0.07 opacity */
+	border          : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-006-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #fdf9ee, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	border-radius   : var( --rad-bor-lar );                                                                           /* Radius Border Large ~= 14.572px */
+	color           : inherit;
+	display         : flex;
+	gap             : var( --spa-hor-bas );                                                                           /* Spacing Horizontal Base ~= 14.572px */
+	margin-bottom   : var( --spa-ver-bas );                                                                           /* Spacing Vertical Base ~= 14.572px */
+	padding         : var( --spa-ver-p02 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-014 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-decoration : none;
+
+
+}
+
+.infIcoDiv { /* What: Info Icon Div. Why: A symbol marks each row at a glance. How: This centers it large in a rounded yellow square about 45px across that never shrinks. */
+
+
+	background    : var( --acc-sec-col );                                                                    /* Accent Secondary Color = #fbbf24 */
+	border-radius : var( --rad-bor-med );                                                                    /* Radius Border Medium = 11px */
+	color         : oklch( from var( --acc-mai-col ) calc( l - 0.097 ) calc( c - 0.050 ) calc( h + 2.42 ) ); /* Accent Main Color = #1e3a8a, darkened to ~= #172554 */
+	display       : grid;
+	flex-shrink   : 0;
+	font-size     : var( --fon-siz-p02 );                                                                    /* Font Size Base Plus 2 ~= 19.304px */
+	height        : calc( var( --ver-rhy-p04 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	place-items   : center;
+	width         : calc( var( --ver-rhy-p04 ) * 1rem );                                                     /* Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+}
+
+.infLabDiv { /* What: Info Label Div. Why: Each row says what it is quietly. How: This sets it small, spaced, and uppercase in faded cream above the row's value. */
+
+
+	color          : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-002-rec ) ); /* Background Page Color = #fdf9ee, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	font-size      : var( --fon-siz-bas );                                                /* Font Size Base = 11px */
+	letter-spacing : calc( var( --cdn-pow-007-rec ) * 1em );                              /* Core-Design-Number to the Power of 7 Reciprocal ~= 0.140em */
+	margin-bottom  : var( --spa-ver-m07 );                                                /* Spacing Vertical Base Minus 7 ~= 2.035px */
+	text-transform : uppercase;
+
+
+}
+
+.infValDiv { /* What: Info Value Div. Why: The number, page name, or town is the row's main line. How: This sets it large in the semibold cream serif. */
+
+
+	color       : var( --bac-pag-col ); /* Background Page Color = #fdf9ee */
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'Fraunces', Georgia, serif */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	font-weight : 600;
+
+
+}
+.infRowAnc:hover .infValDiv { /* What: Hovered Info Value Div. Why: A row that's a link should respond to the pointer, and the home town row isn't one. How: This turns the value yellow while its link row is hovered. */
+
+
+	color : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
+
+
+}
+
+/* #endregion infRowAnc */
+
+
+
+/* #region conForFor */
+
+.conForFor { /* What: Contact Form Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
+
+
+	background    : var( --bac-pag-col );                                                                           /* Background Page Color = #fdf9ee */
+	border-radius : var( --rad-bor-xla );                                                                           /* Radius Border Extra Large ~= 19.304px */
+	box-shadow    : calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-m01 ) * 1rem ) 0 var( --acc-sec-col ); /* Vertical Rhythm Base Minus 1 = 11px, Accent Secondary Color = #fbbf24 */
+	color         : var( --tex-mai-col );                                                                           /* Text Main Color = #1a1a2e */
+	padding       : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Contact Form Form. Why: The card's wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+
+
+	.conForFor { /* What: Compact Contact Form Form. Why: The fields need the narrow screen's width. How: This trims the card's padding. */
+
+
+		padding : var( --spa-ver-p02 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
+
+
+	}
+
+
+}
+
+.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went. How: This sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
+
+
+	background    : var( --suc-tin-col );                            /* Success Tint Color = #fde68a */
+	border        : var( --bor-wid-lar ) solid var( --suc-mai-col ); /* Border Width Large ~= 2.035px, Success Main Color = #d97706 */
+	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	font-weight   : 500;
+	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+
+
+}
+
+
+
+/* #region forRowDiv */
+
+.forRowDiv { /* What: Form Row Div. Why: The name and email fields sit side by side. How: This lays out two even columns with a small gap. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	grid-template-columns : 1fr 1fr;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Form Row Div. Why: Two fields side by side are too cramped on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.forRowDiv { /* What: Stacked Form Row Div. Why: The fields read best one above the other. How: This sets a single column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region forFieDiv */
+
+.forFieDiv { /* What: Form Field Div. Why: Each field's label and control read as one field, apart from the next. How: This leaves room below it. */
+
+
+	margin-bottom : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+
+
+}
+
+.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it small, bold, spaced, and uppercase in ink, on its own line above the control. */
+
+
+	color          : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+	display        : block;
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 600;
+	letter-spacing : 0.12em;
+	margin-bottom  : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	text-transform : uppercase;
+
+
+}
+
+.forFieInp,
+.forFieSel,
+.forFieTex { /* What: Form Field Input, Select, And Textarea. Why: The inputs, dropdown, and message box share one look, and keyboard focus has to show clearly. How: This sets a full-width white box with a soft border and rounded corners, in the sans font, holds a zero-width navy ring 6px out, and eases its border, background, and ring. */
+
+
+	background     : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
+	border         : var( --bor-wid-lar ) solid var( --bor-mai-col ); /* Border Width Large ~= 2.035px, Border Main Color = #1a1a2e @ 0.12 opacity */
+	border-radius  : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	color          : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	font-family    : var( --fon-fam-mai );                            /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	outline        : 0 solid var( --foc-rin-col );                    /* Focus Ring Color = #1e3a8a */
+	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );             /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	transition     : border-color var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	width          : 100%;
+
+
+}
+.forFieInp:focus,
+.forFieSel:focus,
+.forFieTex:focus { /* What: Focused Form Field Input, Select, And Textarea. Why: The field being typed in should stand out. How: This turns its border navy. */
+
+
+	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
+
+
+}
+.forFieInp:focus-visible,
+.forFieSel:focus-visible,
+.forFieTex:focus-visible { /* What: Keyboard Focused Form Field Input, Select, And Textarea. Why: A keyboard user has to see clearly where focus is. How: This grows the ring to 2px and draws it in to 2px from the field. */
+
+
+	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+	outline-width  : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+
+
+}
+.forFieTex { /* What: Form Field Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px that can only be dragged taller. */
+
+
+	min-height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
+	resize     : vertical;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Input, Select, And Textarea. Why: Someone who asked for less motion shouldn't see the fields animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forFieInp,
+	.forFieSel,
+	.forFieTex { /* What: Motionless Form Field Input, Select, And Textarea. Why: The focus border should simply switch on. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion forFieDiv */
+
+/* #endregion forRowDiv */
+
+
+
+/* #region forErrPar */
+
+.forErrPar { /* What: Form Error Paragraph. Why: The visitor has to notice that the message didn't go through. How: This sets the note on a pale red panel with a deep red border, in medium-weight ink, above the send button. */
+
+
+	background    : var( --err-tin-col );                            /* Error Tint Color = #fde8e8 */
+	border        : var( --bor-wid-lar ) solid var( --err-mai-col ); /* Border Width Large ~= 2.035px, Error Main Color = #b91c1c */
+	border-radius : var( --rad-bor-med );                            /* Radius Border Medium = 11px */
+	color         : var( --tex-mai-col );                            /* Text Main Color = #1a1a2e */
+	font-weight   : 500;
+	margin-bottom : var( --spa-ver-p01 );                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+
+
+}
+
+.errLinAnc { /* What: Error Link Anchor. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color. */
+
+
+	color           : inherit;
+	font-weight     : 700;
+	text-decoration : underline;
+
+
+}
+
+/* #endregion forErrPar */
+
+
+.forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its lift and press. */
+
+
+	background    : var( --acc-mai-col );                                                                                      /* Accent Main Color = #1e3a8a */
+	border        : var( --bor-wid-lar ) solid var( --bor-str-col );                                                           /* Border Width Large ~= 2.035px, Border Strong Color = #1a1a2e */
+	border-radius : var( --rad-bor-med );                                                                                      /* Radius Border Medium = 11px */
+	box-shadow    : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col );            /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	color         : var( --tex-acc-col );                                                                                      /* Text Accent Color = #fdf9ee */
+	cursor        : pointer;
+	font-family   : var( --fon-fam-mai );                                                                                      /* Font Family Main = 'Outfit', system-ui, sans-serif */
+	font-size     : var( --fon-siz-p01 );                                                                                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight   : 600;
+	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                                 /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	transition    : transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */
+	width         : 100%;
+
+
+}
+.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This lifts it up and to the left while its shadow grows to match. */
+
+
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px */
+
+
+}
+.forSubBut:active { /* What: Pressed Form Submit Button. Why: A press should feel like pushing the button in. How: This drops it back into place with a shallower shadow. */
+
+
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem - var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Pressed Shadow Offset. Why: A press should read as the button sinking toward its shadow. How: Each offset takes the lift's own step off the resting offset. */
+	transform  : translate( 0, 0 );
+
+
+}
+.forSubBut:disabled,
+.forSubBut:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting place even under the pointer. */
+
+
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	cursor     : progress;
+	opacity    : 0.7;
+	transform  : none;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forSubBut { /* What: Motionless Form Submit Button. Why: The lift and press should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion conForFor */
+
+/* #endregion conGriDiv */
+
+/* #endregion pagConDiv */
+
+/* #endregion homConSec */
+
+

@@ -1,0 +1,69 @@
+
+
+
+
+/**
+ * fonts.css = Fonts
+ *
+ * @summary
+ * The site's self-hosted fonts: Fraunces for headings, the brand name, the
+ * italic accents, and the stats, and Outfit for everything else, replacing
+ * the Google Fonts stylesheet and preconnect links index.html used to load,
+ * so a visit makes no requests to a third party. Each file is the same latin
+ * subset Google served for the weights the site asked for, which covers every
+ * character the copy uses except its arrows, emoji, heart, and check mark;
+ * none of Google's files for either family has those, so they keep rendering
+ * from a fallback font as before. The upright Fraunces and Outfit files are
+ * variable across weights 100 to 900, read from each font's fvar table, so
+ * each face declares that range; the page uses Fraunces at 600 and 800 and
+ * Outfit at 400 to 700, all weights Google's own faces declared, so nothing
+ * draws differently. The italic Fraunces file holds weight 600 alone, varying
+ * only its optical size, so its face declares 600, and the hero's 800 italic
+ * accent is thickened from it by the browser, exactly as before. Fraunces's
+ * optical size axis (9 to 144) follows each heading's font size on its own.
+ * The files live in src/assets/fonts/ and are pulled in through url(), so
+ * Vite fingerprints them.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+@font-face { /* What: Fraunces Font Face. Why: Fraunces is the display font for the headings, the brand name, and the stats. How: This loads its latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Fraunces';
+	font-style   : normal;
+	font-weight  : 100 900;
+	src          : url( '../assets/fonts/fraunces-latin-normal.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Fraunces Italic Font Face. Why: Fraunces sets every italic accent in the headings, and a true italic draws different letterforms than a slanted upright. How: This loads its latin italic file, which holds weight 600 alone, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Fraunces';
+	font-style   : italic;
+	font-weight  : 600;
+	src          : url( '../assets/fonts/fraunces-latin-italic.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Outfit Font Face. Why: Outfit is the body font for paragraphs, labels, buttons, and the form. How: This loads its latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Outfit';
+	font-style   : normal;
+	font-weight  : 100 900;
+	src          : url( '../assets/fonts/outfit-latin-normal.woff2' ) format( 'woff2' );
+
+
+}
+
+
