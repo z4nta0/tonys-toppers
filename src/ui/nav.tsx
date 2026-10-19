@@ -25,11 +25,11 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  * @summary
  * The site's fixed top bar: the brand, which returns to the home page, a link
  * to each home page section, and a toggle that opens those links as a menu on
- * a phone. The bar turns into a raised pill once the page scrolls, and on the
- * home page it marks the link for the section being read. On a phone the menu
- * also offers a button to call or text Tony, his Facebook page, and his home
- * town, over a scrim that dims the page. Every page renders it above its
- * content.
+ * a phone. The bar tightens and gains a bottom hairline once the page
+ * scrolls, and on the home page it marks the link for the section being read.
+ * On a phone the menu also offers a button to call or text Tony, his Facebook
+ * page, and his home town, over a scrim that dims the page. Every page renders
+ * it above its content.
  *
  * Sections:
  *  - Constants
@@ -68,7 +68,7 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * NavBarCom = Navigation Bar Component
  *
  * @summary
- * Renders the bar. Scrolling more than 20px gives it its raised look. On the
+ * Renders the bar. Scrolling more than 20px gives it its scrolled look. On the
  * home page an IntersectionObserver marks the link for the section whose top
  * has crossed a band about a quarter of the way down the screen, while every
  * other page marks none. On a phone the links sit in a menu the toggle opens,
@@ -104,16 +104,16 @@ function NavBarCom () : React.JSX.Element {
 
 	// #region Scrolled Look
 
-	const [ isaScrBoo, setIsaScrBoo ] = useState( false ); // What: Is-A Scrolled Boolean And Setter. Why: The bar raises into a pill once content starts sliding under it. How: This holds whether the page has scrolled past the threshold.
+	const [ isaScrBoo, setIsaScrBoo ] = useState( false ); // What: Is-A Scrolled Boolean And Setter. Why: The bar tightens and gains a hairline once content starts sliding under it. How: This holds whether the page has scrolled past the threshold.
 
 
 	useEffect( () => { // What: Scroll Listener Effect. Why: The bar's look follows the scroll position. How: This sets the look for the current position, then registers the handler and removes it when the bar unmounts.
 
 
-		const scrStaFun = () => setIsaScrBoo( window.scrollY > 20 ); // What: Scroll State Function. Why: The bar should raise as soon as the page moves. How: This marks it scrolled once the page has moved more than 20px.
+		const scrStaFun = () => setIsaScrBoo( window.scrollY > 20 ); // What: Scroll State Function. Why: The bar should take its scrolled look as soon as the page moves. How: This marks it scrolled once the page has moved more than 20px.
 
 
-		scrStaFun(); // What: Initial Scroll Call. Why: A page opened partway down should start with the raised bar. How: This reads the current position once.
+		scrStaFun(); // What: Initial Scroll Call. Why: A page opened partway down should start with the scrolled bar. How: This reads the current position once.
 
 		window.addEventListener( 'scroll', scrStaFun ); // What: Scroll Listener Registration. Why: The look has to follow every scroll. How: This runs scrStaFun on each one.
 
@@ -317,7 +317,7 @@ function NavBarCom () : React.JSX.Element {
 
 				className={ cssModObj.navBarNav }
 
-				data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar raises into a pill once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
+				data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar tightens and gains a hairline once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
 			>{ /* What: Navigation Bar Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, carrying data-page-scroll-active once the page scrolls. */ }
 
 

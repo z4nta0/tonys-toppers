@@ -531,6 +531,14 @@
 
 
 }
+.forFieInp::placeholder,
+.forFieTex::placeholder { /* What: Form Field Input And Textarea Placeholder. Why: A placeholder should read as a sample, quieter than typed text, yet every engine draws its own default gray, and WebKit's falls well under 4.5:1 on white. How: This sets the secondary text color in every engine, lighter than the ink typed text uses and about 9:1 on the white field. */
+
+
+	color : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
+
+
+}
 .forFieInp:hover,
 .forFieSel:hover,
 .forFieTex:hover { /* What: Hovered Form Field Input, Select, And Textarea. Why: A field under the pointer should respond before it's clicked into. How: This darkens its border. */

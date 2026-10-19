@@ -79,32 +79,32 @@
 
 /* #region navBarNav */
 
-.navBarNav { /* What: Navigation Bar Nav. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it. */
+.navBarNav { /* What: Navigation Bar Nav. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it, within the page's content width. */
 
 
-	-webkit-backdrop-filter : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                               /* Vertical Rhythm Base Minus 1 = 11px */ /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
+	-webkit-backdrop-filter : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                   /* Vertical Rhythm Base Minus 1 = 11px */ /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
 	align-items             : center;
-	backdrop-filter         : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                               /* Vertical Rhythm Base Minus 1 = 11px */
-	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );                                                           /* Background Page Color = #fdf9ee @ 0.85 opacity */
-	border-bottom           : var( --bor-wid-bas ) solid transparent;                                                                    /* Border Width Base ~= 1.160px */
+	backdrop-filter         : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                   /* Vertical Rhythm Base Minus 1 = 11px */
+	background              : oklch( from var( --bac-pag-col ) l c h / 0.85 );                                               /* Background Page Color = #fdf9ee @ 0.85 opacity */
+	border-bottom           : var( --bor-wid-bas ) solid transparent;                                                        /* Border Width Base ~= 1.160px */
 	display                 : flex;
 	justify-content         : space-between;
 	left                    : 0;
 	max-width               : 100vw;
-	padding                 : var( --spa-ver-p01 ) var( --gut-sid-pad );                                                                 /* Spacing Vertical Base Plus 1 ~= 19.304px, Gutter Side Padding, about 19.304px - 44.876px */
+	padding                 : var( --spa-ver-p01 ) max( var( --gut-sid-pad ), calc( ( 100% - var( --con-max-wid ) ) / 2 ) ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Gutter Side Padding, about 19.304px - 44.876px, Container Maximum Width ~= 1,449.365px */ /* What: Content Cap Note. Why: The brand and links should line up with the sections' capped content on large screens, while the frosted bar still spans the screen. How: The side padding is the gutter until half the room beyond the cap is larger, then that half, which only happens wider than about 1,539px. */
 	position                : fixed;
 	right                   : 0;
 	top                     : 0;
 	transition              : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Animated Padding. Why: The bar slims down once the page scrolls, and a transform would squeeze its logo and links rather than trim the space around them. How: The bar is fixed, so its padding change moves nothing else on the page. */
-	z-index                 : 3; /* What: Bar Stack Level. Why: The bar has to stay over the page's content, the highest at 1, and over the open menu's scrim at 2. How: This sits one level above the scrim. */
+	z-index                 : 3;                                                                                             /* What: Bar Stack Level. Why: The bar has to stay over the page's content, the highest at 1, and over the open menu's scrim at 2. How: This sits one level above the scrim. */
 
 
 }
 .navBarNav[data-page-scroll-active] { /* What: Scrolled Navigation Bar Nav. Why: Once content slides under the bar, it should read as a separate layer. How: This draws its bottom hairline and tightens its padding while the page is scrolled. */
 
 
-	border-bottom-color : var( --bor-mai-col );                      /* Border Main Color = #1a1a2e @ 0.12 opacity */
-	padding             : var( --spa-ver-m01 ) var( --gut-sid-pad ); /* Spacing Vertical Base Minus 1 = 11px, Gutter Side Padding, about 19.304px - 44.876px */
+	border-bottom-color : var( --bor-mai-col );                                                                          /* Border Main Color = #1a1a2e @ 0.12 opacity */
+	padding             : var( --spa-ver-m01 ) max( var( --gut-sid-pad ), calc( ( 100% - var( --con-max-wid ) ) / 2 ) ); /* Spacing Vertical Base Minus 1 = 11px, Gutter Side Padding, about 19.304px - 44.876px, Container Maximum Width ~= 1,449.365px */ /* What: Content Cap Note. Why: The scrolled bar keeps its brand and links in line with the capped content. How: Only the top and bottom padding tighten, while the sides keep the base rule's capped value. */
 
 
 }
