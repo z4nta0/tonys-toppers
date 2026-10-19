@@ -88,7 +88,12 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
 - **Fixed (rem steps)**: everything inside a component: small gaps, the
   filter, tag, card, and field padding, and the bar links' padding.
 - **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as the
-  other projects, up from 1,200px.
+  other projects, up from 1,200px. The bar's brand and links follow it too
+  (decided 2026-10-18), as in hair-designs: the bar keeps spanning the
+  screen, and its side padding grows to `max( gutter, ( 100% - cap ) / 2 )`,
+  which only passes the gutter wider than about 1,539px. Checked in all three
+  engines from 901px to 3,840px, scrolled and not: the brand and last link
+  meet the content's edges, with no overlap, wrap, or sideways scroll.
 - **Hero picture**: the portrait ring takes `max()` of a rhythm-step floor
   and a horizontal step, as seal-and-shield's logo does, and grows from
   about 183px to 243px below 900px. The stage fills its column at the
