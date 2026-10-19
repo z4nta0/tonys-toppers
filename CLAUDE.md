@@ -5,10 +5,11 @@ a family member's son who has Down syndrome (React, Vite, React Router,
 deployed on Netlify at https://tonystoppers.com/). Tony lives in Bolivar,
 Missouri and sells his pieces (pen toppers, wine stoppers, keychains, dog
 necklaces, car freshies, name badge reels, phone grips, and straw charms) at
-craft fairs and similar events around the area. Every rule in the user-level
-CLAUDE.md applies here; this file records only what's specific to this
-project. ease-my-life, reese-roofing, and seal-and-shield have already been
-converted to those rules and serve as worked examples.
+craft fairs and similar events around the area. It's also a portfolio piece
+by techgeek.dev, linked from https://techgeek.dev. Every rule in the
+user-level CLAUDE.md applies here; this file records only what's specific to
+this project. ease-my-life, reese-roofing, and seal-and-shield have already
+been converted to those rules and serve as worked examples.
 
 ## Kind of site
 Decided 2026-10-10. A real person and brand, so the site is indexed and gets

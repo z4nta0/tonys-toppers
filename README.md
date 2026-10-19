@@ -1,6 +1,6 @@
 # Tony's Toppers
 
-The website for Tony's Toppers, the handmade craft business of Tony Mawhiney in Bolivar, Missouri. Tony designs and beads every piece by hand (pen toppers, wine stoppers, keychains, dog necklaces, car freshies, name badge reels, phone grips, and straw charms) and sells them at craft fairs and events around the area. The site is a showcase for Tony and his work, not a shop.
+The website for Tony's Toppers, the handmade craft business of Tony Mawhiney in Bolivar, Missouri. Tony designs and beads every piece by hand (pen toppers, wine stoppers, keychains, dog necklaces, car freshies, name badge reels, phone grips, and straw charms) and sells them at craft fairs and events around the area. The site is a showcase for Tony and his work, not a shop. It's built and maintained by [techgeek.dev](https://techgeek.dev/), whose portfolio links to it.
 
 Live at [tonystoppers.com](https://tonystoppers.com/).
 
