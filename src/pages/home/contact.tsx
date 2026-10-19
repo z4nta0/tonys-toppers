@@ -517,6 +517,7 @@ function ConSecCom () : React.JSX.Element {
 
 									name='name'
 
+									placeholder='Jane Smith'
 									required
 									type='text'
 									value={ forDatObj.name }
@@ -545,6 +546,7 @@ function ConSecCom () : React.JSX.Element {
 
 									name='email'
 
+									placeholder='jane@example.com'
 									required
 									type='email'
 									value={ forDatObj.email }
