@@ -199,7 +199,7 @@ function HerSecCom () : React.JSX.Element {
 						className={ cssModObj.herStiDiv }
 
 						aria-hidden='true'
-					>{ /* What: Hero Sticker Div Element. Why: A round sticker adds a warm note on the portrait's corner. How: This shows three short lines, hidden from screen readers, since it only repeats the headline's made with love and its heart would be read aloud. */ }
+					>{ /* What: Hero Sticker Div Element. Why: A round sticker adds a warm note on the portrait's corner. How: This shows three short lines, hidden from screen readers, since it only repeats the headline's "made with love", and its heart symbol would be read aloud. */ }
 						Made<br />with<br />love ♥
 					</div>
 
