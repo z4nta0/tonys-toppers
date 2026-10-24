@@ -243,6 +243,7 @@ function NavBarCom () : React.JSX.Element {
 	}, [ menOpeBoo ] ); // What: Effect Dependency Array. Why: The page's inert state and the listeners have to follow the menu opening and closing. How: menOpeBoo changing reruns the effect, which applies them while it's true and its cleanup removes them.
 
 
+
 	// #region navSecFun
 
 	/**
