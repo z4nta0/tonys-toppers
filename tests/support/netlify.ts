@@ -16,7 +16,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The fake answe
  * The stand-in for Netlify Forms that the form checks share, so a form check
  * can see the page react to Netlify's answer without sending anything.
  * fakNetFun answers every post to the site's root address in the browser with
- * a chosen status and counts each one, and lets every other request through.
+ * a chosen status and counts each one, and hands every other request on.
  *
  * Sections:
  *  - Helpers
@@ -68,7 +68,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 	await curPagObj.route( ( reqUrlObj ) => reqUrlObj.pathname === '/', async ( curRouObj ) => { // What: Root Route Handler. Why: Netlify Forms takes the form's post at the site's root address. How: This intercepts every request to the root and answers only the posts.
 
 
-		if ( curRouObj.request().method() !== 'POST' ) { await curRouObj.continue(); return; } // What: Page Load Pass Guard. Why: Loading the page itself also requests the root. How: This lets every request but a post through untouched.
+		if ( curRouObj.request().method() !== 'POST' ) { await curRouObj.fallback(); return; } // What: Page Load Pass Guard. Why: Loading the page itself also requests the root. How: This hands every request but a post on untouched, to an earlier route such as the security suite's headers, or to the network when there's none.
 
 
 

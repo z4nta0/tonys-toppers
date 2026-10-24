@@ -4,6 +4,7 @@
 // #region Imports
 
 import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy is enforced and the page breaks none of its rules. How: This asserts on what each check collects from the page.
+import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form's notes only show once Netlify answers a send, and nothing real should be sent. How: This answers the form's posts in the browser with a chosen status.
 import { heaAllFun   } from '../support/headers.ts'; // What: Headers All Function. Why: The pages are loaded under the policy Netlify really sends. How: This reads the /* block of public/_headers.
 import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state is opened the way every suite opens it. How: This loads the state and waits until it's settled.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: The policy has to hold in every state the suites visit. How: This is the list of states to load.
@@ -27,7 +28,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The policy set
  * so every response is given its headers here. First a check proves the policy
  * is live, by injecting an inline script and seeing it refused and reported.
  * Then every state the suites visit is checked for policy violations and
- * checked to close off every new tab link.
+ * checked to close off every new tab link, and the contact form is sent
+ * against each faked answer, so its post and its notes are checked under the
+ * policy too.
  *
  * Sections:
  *  - Helpers
@@ -201,6 +204,40 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Loop. Why: Every state t
 		expect( vioLisArr ).toEqual( [] );                                                                // What: No Violation Assertion. Why: Everything the state loads should be allowed by the policy. How: This checks none was refused.
 		expect( opeRelArr.filter( ( relValStr ) => !/\bnoopener\b/.test( relValStr ) ) ).toEqual( [] );   // What: No Opener Assertion. Why: The opened page shouldn't get a handle on this one. How: This checks every new tab link carries noopener.
 		expect( opeRelArr.filter( ( relValStr ) => !/\bnoreferrer\b/.test( relValStr ) ) ).toEqual( [] ); // What: No Referrer Assertion. Why: The opened site shouldn't learn the address it came from. How: This checks every new tab link carries noreferrer.
+
+
+	} );
+
+
+}
+
+
+
+for ( const [ staCodNum, notTexStr, resDesStr ] of [ [ 200, 'Your message was sent', 'sent' ], [ 500, "didn't go through", 'failed' ] ] as const ) { // What: Form Result Loop. Why: The form's post and its notes are states no page load reaches, and they have to work under the policy too. How: This declares one test per answer, pairing Netlify's status with words only that note shows and a name for the title.
+
+
+	test( `a ${ resDesStr } message breaks no rule of the security policy`, async ( { browserName : broNamStr, page : curPagObj } ) => { // What: Form Result Policy Test. Why: Sending the form posts to the site and shows a note with motion of its own, which would break once deployed if the policy refused any of it. How: This sends the form under the policy against the faked answer and checks nothing was refused.
+
+
+		await polSetFun( curPagObj ); // What: Policy Setup Call. Why: The page has to load under the policy. How: This adds the headers and the violation listener.
+
+		await fakNetFun( curPagObj, staCodNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers the form's post with the loop's status, tried before the headers route and handing every other request on to it.
+
+		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page under the policy.
+
+		await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Test Visitor' );                 // What: Name Fill Call. Why: The name is required. How: This types a name. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+		await curPagObj.locator( '#contact form' ).getByLabel( 'Email' ).fill( 'visitor@test.example' );             // What: Email Fill Call. Why: The email is required. How: This types an address on the reserved .example domain. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+		await curPagObj.locator( '#contact form' ).getByLabel( 'Message', { exact : true } ).fill( 'Hello, Tony!' ); // What: Message Fill Call. Why: The message is required. How: This types a short one, matching the label exactly, since the Send Message button's own label holds the word too. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+
+		await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The post and the note are what's checked. How: This sends the message, which the fake answers.
+
+		await expect( curPagObj.locator( '#contact form' ) ).toContainText( notTexStr ); // What: Note Shown Assertion. Why: The check has to see the note that answered. How: This waits for its words.
+
+
+		const vioLisArr = ( await polVioFun( curPagObj ) ).filter( ( vioCurStr ) => !( broNamStr === 'webkit' && vioCurStr === 'style-src-attr blocked inline on select' ) ); // What: Violation List Array. Why: WebKit reports a style attribute violation for every select element, as the state test notes. How: This keeps every violation but that one WebKit select report.
+
+
+		expect( vioLisArr ).toEqual( [] ); // What: No Violation Assertion. Why: Sending and its note should be allowed by the policy. How: This checks nothing was refused.
 
 
 	} );
