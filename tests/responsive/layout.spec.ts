@@ -15,9 +15,10 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * layout.spec.ts = Layout Spec
  *
  * @summary
- * Measures the home page, the 404 page, and the open mobile menu across a
- * range of screen widths, in whichever engine the project runs, and fails a
- * width whose layout breaks: the page scrolling sideways, a visible element
+ * Measures the home page and the 404 page across a range of screen widths,
+ * and the open mobile menu at the widths up to the site's 900px breakpoint,
+ * where it exists, in whichever engine the project runs, and fails a width
+ * whose layout breaks: the page scrolling sideways, a visible element
  * reaching past either edge of the screen (unless an ancestor clips it on
  * purpose), text spilling out of its own box, or two controls a visitor can
  * reach overlapping each other. The widths run from 320px, WCAG's narrowest

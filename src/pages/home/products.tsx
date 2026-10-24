@@ -48,9 +48,10 @@ type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's fi
  *
  * @summary
  * Renders the collection. Choosing a filter button re-renders the grid with
- * that filter's cards, which fade in one after another, each 30ms behind the
- * one before. The filter buttons are a labelled group of toggle buttons, the
- * chosen one pressed, so screen readers announce which filter is on.
+ * that filter's cards, and the cards that weren't already showing fade in one
+ * after another, each 30ms behind the one before. The filter buttons are a
+ * labelled group of toggle buttons, the chosen one pressed, so screen readers
+ * announce which filter is on.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -176,7 +177,7 @@ function ProSecCom () : React.JSX.Element {
 
 							className={ cssModObj.proCarArt }
 
-							style={{ animationDelay : `${ proIndNum * 30 }ms` }} // What: Staggered Animation Delay. Why: The cards fade in one after another rather than all at once. How: Each card waits 30ms longer than the one before it.
+							style={{ animationDelay : `${ proIndNum * 30 }ms` }} // What: Staggered Animation Delay. Why: Cards that mount together fade in one after another rather than all at once. How: Each card waits 30ms longer than the one before it.
 						>{ /* What: Product Card Article Element. Why: Each photo is shown as a card. How: Its place in the list sets when it fades in. */ }
 
 
