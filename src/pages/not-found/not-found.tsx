@@ -106,7 +106,7 @@ function NotFouCom () : React.JSX.Element {
 							to='/'
 
 							aria-label='Back home' // What: Back Home Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
-						>{ /* What: Back Home Link. Why: The visitor needs a clear way onward. How: This returns to the home page. */ }
+						>{ /* What: Button Base Anchor Primary Link. Why: The visitor needs a clear way onward. How: This returns to the home page. */ }
 							Back home →
 						</Link>
 
@@ -116,7 +116,7 @@ function NotFouCom () : React.JSX.Element {
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
 							to={{ hash : 'products', pathname : '/' }} // What: Products Section Address. Why: A visitor who came looking for Tony's pieces can go straight to them. How: This opens the home page with the products section's id as the hash, which the home page scrolls to and then clears.
-						>{ /* What: See Collection Link. Why: The site's main content stays one step away. How: This opens the home page at the products section. */ }
+						>{ /* What: Button Base Anchor Secondary Link. Why: The site's main content stays one step away. How: This opens the home page at the products section. */ }
 							See the collection
 						</Link>
 

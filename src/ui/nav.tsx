@@ -295,7 +295,7 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Navigation Fragment Element. Why: The scrim and the bar render side by side, the scrim first. How: This groups them without adding a wrapper element. */ }
+		<>{ /* What: Navigation Fragment. Why: The scrim and the bar render side by side, the scrim first. How: This groups them without adding a wrapper element. */ }
 
 
 			<div
@@ -327,7 +327,7 @@ function NavBarCom () : React.JSX.Element {
 					to='/'
 
 					onClick={ cloMenFun }
-				>{ /* What: Brand Link. Why: The brand is the way back to the home page. How: This links to the root and closes the phone menu. */ }
+				>{ /* What: Navigation Brand Anchor Link. Why: The brand is the way back to the home page. How: This links to the root and closes the phone menu. */ }
 
 
 					<img
