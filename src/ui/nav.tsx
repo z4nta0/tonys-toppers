@@ -425,7 +425,7 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.menConDiv }
 
 						style={ { '--nav-ite-ind' : NAV_SEC_ARR.length } as React.CSSProperties } // What: Navigation Item Index Style. Why: The contact block rises in after the last link. How: This hands it the place after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type doesn't list custom properties. How: The object holds only this one custom property, which React sets as written.
-					>{ /* What: Menu Contact Div Element. Why: Most people opening the menu want to reach Tony or find a section, so the menu ends with the ways to reach him. How: This holds the call button, the Facebook link, and Tony's home town, rising in after the last link, and shows only in the menu, at 900px wide and below. */ }
+					>{ /* What: Menu Contact Div Element. Why: Most people opening the menu want to reach Tony or find a section, so the menu ends with the ways to reach him. How: This holds the call button, the Facebook link, and Tony's hometown, rising in after the last link, and shows only in the menu, at 900px wide and below. */ }
 
 
 						<a
@@ -446,7 +446,7 @@ function NavBarCom () : React.JSX.Element {
 							Find Tony on Facebook
 						</a>
 
-						<p className={ cssModObj.menHomPar }>Handcrafted in Bolivar, Missouri</p>{ /* What: Menu Home Paragraph Element. Why: The menu closes on where Tony makes his pieces. How: This shows his home town. */ }
+						<p className={ cssModObj.menHomPar }>Handcrafted in Bolivar, Missouri</p>{ /* What: Menu Home Paragraph Element. Why: The menu closes on where Tony makes his pieces. How: This shows his hometown. */ }
 
 
 					</div>

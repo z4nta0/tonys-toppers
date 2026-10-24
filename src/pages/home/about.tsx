@@ -136,7 +136,7 @@ function AboSecCom () : React.JSX.Element {
 
 						<h2 className={ cssModObj.secTitHea }>Tony Mawhiney: <em className={ cssModObj.titAccEmp }>artist, crafter, kind soul.</em></h2>{ /* What: Section Title Heading Element. Why: The heading names Tony and sums him up. How: The description sits in an italic accent. */ }
 
-						<p className={ cssModObj.bioStoPar }>{ /* What: Biography Story Paragraph Element. Why: The story opens with who Tony is. How: This gives his age, read on each render, his home town, and his character, with a drop cap on its first letter. */ }
+						<p className={ cssModObj.bioStoPar }>{ /* What: Biography Story Paragraph Element. Why: The story opens with who Tony is. How: This gives his age, read on each render, his hometown, and his character, with a drop cap on its first letter. */ }
 							Tony is a { tonAgeNum }-year-old young man with Down syndrome living in Bolivar, Missouri. He's quiet at first, but
 							once you know him you won't find a kinder, more polite person, and you wouldn't have
 							to look hard to know it.

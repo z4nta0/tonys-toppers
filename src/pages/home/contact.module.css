@@ -177,7 +177,7 @@
 /* #region infRowAnc */
 
 .infRowAnc,
-.infRowDiv { /* What: Info Row Anchor And Div. Why: Each way to reach Tony reads as a row of its own, whether it's a link or the home town row. How: This sets the icon beside its two lines on a faintly lighter, rounded panel with a soft cream border, with no link underline or color. */
+.infRowDiv { /* What: Info Row Anchor And Div. Why: Each way to reach Tony reads as a row of its own, whether it's a link or the hometown row. How: This sets the icon beside its two lines on a faintly lighter, rounded panel with a soft cream border, with no link underline or color. */
 
 
 	align-items     : center;
@@ -193,7 +193,7 @@
 
 
 }
-.infRowAnc { /* What: Info Row Anchor. Why: A row that's a link should ease its hover and press, while the home town row stays still. How: This eases its background, its lift and press, and its focus ring. */
+.infRowAnc { /* What: Info Row Anchor. Why: A row that's a link should ease its hover and press, while the hometown row stays still. How: This eases its background, its lift and press, and its focus ring. */
 
 
 	transition : background var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -268,7 +268,7 @@
 
 
 }
-.infRowAnc:hover .infValDiv { /* What: Hovered Info Value Div. Why: A row that's a link should respond to the pointer, and the home town row isn't one. How: This turns the value yellow while its link row is hovered. */
+.infRowAnc:hover .infValDiv { /* What: Hovered Info Value Div. Why: A row that's a link should respond to the pointer, and the hometown row isn't one. How: This turns the value yellow while its link row is hovered. */
 
 
 	color : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */

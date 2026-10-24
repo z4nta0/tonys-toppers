@@ -442,7 +442,7 @@ function ConSecCom () : React.JSX.Element {
 						</a>
 
 
-						<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: Visitors should know where Tony is based. How: This shows his home town in the same style as the links, without being one. */ }
+						<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: Visitors should know where Tony is based. How: This shows his hometown in the same style as the links, without being one. */ }
 
 
 							<div

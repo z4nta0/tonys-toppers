@@ -65,7 +65,7 @@ function SitFooCom () : React.JSX.Element {
 	return (
 
 
-		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: Every page ends with the business's name, home town, and phone number. How: This holds the footer's line, which wraps at about 506px wide and below. */ }
+		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: Every page ends with the business's name, hometown, and phone number. How: This holds the footer's line, which wraps at about 506px wide and below. */ }
 
 
 			<p>© { curYeaNum } Tony's Toppers · Handcrafted in Bolivar, Missouri · <a className={ cssModObj.fooPhoAnc } href='tel:4177330681'>(417) 733-0681</a></p>{ /* What: Footer Copyright Paragraph Element. Why: The footer names the year, the business, and where Tony works, and ends in a way to reach him. How: This prints the current year read on each render, with the phone number as a link that dials it on phones. */ }
