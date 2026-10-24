@@ -17,9 +17,10 @@ import { PRO_REC_ARR } from './catalog.ts'; // What: Product Record Array. Why: 
  *
  * @summary
  * The home page's craft fair gallery: a heading, a line about where Tony sets
- * up, and his booth shots in a grid of four columns, stepping to two and then
- * one on narrower screens, so every row is full. The same photos also appear
- * under the product filters for the kinds of pieces they show.
+ * up, and his booth shots in a grid of four columns, stepping to two at 900px
+ * wide and below and to one at 360px and below, so every row is full. The same
+ * photos also appear under the product filters for the kinds of pieces they
+ * show.
  *
  * Sections:
  *  - Constants
@@ -104,7 +105,7 @@ function FaiSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.faiGriDiv }>{ /* What: Fairs Grid Div Element. Why: The booth shots lay out in a responsive grid. How: This holds one figure per booth shot. */ }
+				<div className={ cssModObj.faiGriDiv }>{ /* What: Fairs Grid Div Element. Why: The booth shots lay out in rows that stay full. How: This holds one figure per booth shot in four columns, stepping to two at 900px wide and below and to one at 360px and below. */ }
 
 
 					{ GAL_REC_ARR.map( ( faiRecObj ) => ( // What: Booth Figure Map. Why: Each booth shot gets a figure. How: This renders one figure per record, in catalog order.
