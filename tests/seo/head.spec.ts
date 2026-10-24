@@ -166,7 +166,6 @@ test( 'the 404 page stays out of search results', async ( { page : curPagObj } )
 
 	await curPagObj.goto( '/no-such-page' ); // What: Unknown Address Open Call. Why: Every unknown path shows the 404 page. How: This loads one.
 
-
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
 	await expect( curPagObj ).toHaveTitle( "Page Not Found | Tony's Toppers" );                         // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 );                   // What: Single Heading Assertion. Why: Every page should have exactly one h1. How: This checks the 404 page has one.
