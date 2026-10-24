@@ -514,19 +514,19 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 }
 
 
-for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'status', 'Your message was sent', 'sent', 'is sent' ], [ 500, 'alert', "didn't go through", 'failed', 'fails' ] ] as const ) { // What: Form Result Loop. Why: The thank-you and the error each have their own live region. How: This declares the region and focus tests once per answer, pairing Netlify's status with the region's role, words only that note shows, and two ways of naming the result in the titles.
+for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200, 'status', 'Your message was sent', 'sent', 'is sent' ], [ 500, 'alert', "didn't go through", 'failed', 'fails' ] ] as const ) { // What: Form Result Loop. Why: The thank-you and the error each have their own live region. How: This declares the region and focus tests once per answer, pairing Netlify's status with the region's role, words only that note shows, and two ways of naming the result in the titles.
 
 
-	test( `a ${ resDesStr } message fills ${ roleStr === 'alert' ? 'an' : 'a' } ${ roleStr } region that was in the page, empty, from the start`, async ( { page : curPagObj } ) => { // What: Result Announcement Test. Why: A live region added at the moment it speaks is often missed, so the note's region has to wait in the page, empty, and gain the note once the answer arrives. How: This checks the form holds exactly one such region, empty on load, sends the form, and checks the region then holds the note while the other region stays empty.
+	test( `a ${ resDesStr } message fills ${ rolNamStr === 'alert' ? 'an' : 'a' } ${ rolNamStr } region that was in the page, empty, from the start`, async ( { page : curPagObj } ) => { // What: Result Announcement Test. Why: A live region added at the moment it speaks is often missed, so the note's region has to wait in the page, empty, and gain the note once the answer arrives. How: This checks the form holds exactly one such region, empty on load, sends the form, and checks the region then holds the note while the other region stays empty.
 
 
-		await fakNetFun( curPagObj, codNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
+		await fakNetFun( curPagObj, staCodNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
 
 		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
 
 
-		const othRegObj = curPagObj.locator( `#contact form [role="${ roleStr === 'status' ? 'alert' : 'status' }"]` ); // What: Other Region Object. Why: Only the matching note should speak. How: This finds the form's other live region.
-		const resRegObj = curPagObj.locator( `#contact form [role="${ roleStr }"]` );                                   // What: Result Region Object. Why: The note is announced through this region. How: This finds it inside the form.
+		const othRegObj = curPagObj.locator( `#contact form [role="${ rolNamStr === 'status' ? 'alert' : 'status' }"]` ); // What: Other Region Object. Why: Only the matching note should speak. How: This finds the form's other live region.
+		const resRegObj = curPagObj.locator( `#contact form [role="${ rolNamStr }"]` );                                   // What: Result Region Object. Why: The note is announced through this region. How: This finds it inside the form.
 
 
 		await expect( resRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: The region has to be in the page before anything is sent. How: This checks there's exactly one.
@@ -536,8 +536,8 @@ for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'statu
 
 		await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: This is the action under test. How: This sends the message, which the fake answers.
 
-		await expect( resRegObj ).toContainText( texStr ); // What: Region Note Assertion. Why: The answer should reach screen readers. How: This checks the region now holds the note.
-		await expect( othRegObj ).toHaveText( '' );        // What: Other Region Empty Assertion. Why: Only one note answers each send. How: This checks the other region stayed empty.
+		await expect( resRegObj ).toContainText( notTexStr ); // What: Region Note Assertion. Why: The answer should reach screen readers. How: This checks the region now holds the note.
+		await expect( othRegObj ).toHaveText( '' );           // What: Other Region Empty Assertion. Why: Only one note answers each send. How: This checks the other region stayed empty.
 
 
 	} );
@@ -547,7 +547,7 @@ for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'statu
 	test( `the send button keeps focus when a message ${ resVerStr }`, async ( { page : curPagObj } ) => { // What: Send Focus Test. Why: A button disabled while it holds focus drops that focus to the page, so the send button has to keep it through the send. How: This sends from the focused button and checks it still holds focus once the answer has played out.
 
 
-		await fakNetFun( curPagObj, codNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
+		await fakNetFun( curPagObj, staCodNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
 
 		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
 
@@ -561,8 +561,8 @@ for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'statu
 
 		await curPagObj.keyboard.press( 'Enter' ); // What: Enter Press Call. Why: This is the action under test. How: This sends the message from the focused button.
 
-		await expect( curPagObj.locator( `#contact form [role="${ roleStr }"]` ) ).toContainText( texStr ); // What: Note Shown Assertion. Why: Focus is checked once the answer has played out. How: This waits for the note.
-		await expect( senButObj ).toBeFocused();                                                         // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the send button still holds it.
+		await expect( curPagObj.locator( `#contact form [role="${ rolNamStr }"]` ) ).toContainText( notTexStr ); // What: Note Shown Assertion. Why: Focus is checked once the answer has played out. How: This waits for the note.
+		await expect( senButObj ).toBeFocused();                                                                 // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the send button still holds it.
 
 
 	} );
@@ -574,7 +574,7 @@ for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'statu
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
-		await fakNetFun( curPagObj, codNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
+		await fakNetFun( curPagObj, staCodNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
 
 		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
 
@@ -582,7 +582,7 @@ for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'statu
 
 		await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The note only shows after a send. How: This sends the message, which the fake answers.
 
-		await expect( curPagObj.locator( `#contact form [role="${ roleStr }"]` ) ).toContainText( texStr ); // What: Note Shown Assertion. Why: The motion is checked once the note has arrived. How: This waits for the note.
+		await expect( curPagObj.locator( `#contact form [role="${ rolNamStr }"]` ) ).toContainText( notTexStr ); // What: Note Shown Assertion. Why: The motion is checked once the note has arrived. How: This waits for the note.
 
 		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The note should simply appear. How: This lists every animation or transition the page still holds that lasts longer than 1ms, by name, and compares the list with an empty one. // What: Type Assertion Note. Why: getAnimations types each entry as a plain Animation. How: A CSS animation or transition carries its name, so this reads each as one, falling back for a script's own.
 

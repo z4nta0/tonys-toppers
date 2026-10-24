@@ -263,9 +263,9 @@ function layProFun () : string[] {
 
 
 		const carEleArr = [ ...griCurEle.children ].filter( ( carCurEle ) => carCurEle.getBoundingClientRect().width > 0 && !/^(absolute|fixed)$/.test( getComputedStyle( carCurEle ).position ) ); // What: Card Element Array. Why: Only children on screen and in the grid's flow make up its rows. How: This keeps the children that take up room and aren't positioned out of the flow.
-		const carCouBoo = carEleArr.length >= 2;                                            // What: Card Count Boolean. Why: A grid of one child has no rows to compare. How: This is true when at least two children show.
-		const griDisBoo = /^(inline-)?grid$/.test( getComputedStyle( griCurEle ).display ); // What: Grid Display Boolean. Why: Only a grid lays its children out in rows of columns. How: This is true when the element displays as a grid.
-		const proGriBoo = griCurEle.className.includes( 'proGriDiv' );                      // What: Products Grid Boolean. Why: How the Products grid should fill its rows under each filter is still a question for the user (question 18 of the 2026-10-23 audit), so it's left out until that's decided. How: This is true for the Products grid, found by its module class.
+		const carCouBoo = carEleArr.length >= 2;                                               // What: Card Count Boolean. Why: A grid of one child has no rows to compare. How: This is true when at least two children show.
+		const griDisBoo = /^(inline-)?grid$/.test( getComputedStyle( griCurEle ).display );    // What: Grid Display Boolean. Why: Only a grid lays its children out in rows of columns. How: This is true when the element displays as a grid.
+		const proGriBoo = ( griCurEle.getAttribute( 'class' ) ?? '' ).includes( 'proGriDiv' ); // What: Products Grid Boolean. Why: How the Products grid should fill its rows under each filter is still undecided with the user, as CLAUDE.md records, so it's left out until that's settled. How: This is true for the Products grid, found by its module class attribute, which also reads safely on an SVG element, whose className isn't a string.
 
 
 		if ( !( griDisBoo && carCouBoo ) || proGriBoo ) continue; // What: Not A Card Grid Guard. Why: Only grids of two or more children are held to even rows, the Products grid aside for now. How: This skips anything else, and the Products grid.

@@ -116,6 +116,10 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
   Card Grids rule): four columns, two at 900px wide and below, and one at
   360px and below, where two would fall under the 138px minimum. That adds
   360px to the breakpoints, beside 900px and 1,000px.
+  The products grid still uses `auto-fill`, so most filters leave a short
+  last row; how it should fill its rows, given filters of 7 and 5 pieces, is
+  open with the user (2026-10-23), and the responsive suite's row check
+  leaves it out until that's settled.
 
 ## Directory structure
 Decided 2026-10-10, matching reese-roofing's and seal-and-shield's adaptation
