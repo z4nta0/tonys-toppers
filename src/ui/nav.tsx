@@ -388,7 +388,7 @@ function NavBarCom () : React.JSX.Element {
 
 								className={ cssModObj.navLinIte }
 
-								style={ { '--nav-ite-ind' : secIndNum } as React.CSSProperties } // Navigation Item Index, the item's place in the list // What: Type Assertion Note. Why: React's style type doesn't list custom properties. How: The object holds only this one custom property, which React sets as written.
+								style={ { '--nav-ite-ind' : secIndNum } as React.CSSProperties } // What: Navigation Item Index Style. Why: Each row rises into the open menu a beat after the one above it. How: This hands the row its place in the list, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type doesn't list custom properties. How: The object holds only this one custom property, which React sets as written.
 							>{ /* What: Navigation Link Item Element. Why: Each link is one item of the list. How: This holds the section's link, and hands its place to the menu's staggered entrance. */ }
 
 
@@ -417,7 +417,7 @@ function NavBarCom () : React.JSX.Element {
 					<div
 						className={ cssModObj.menConDiv }
 
-						style={ { '--nav-ite-ind' : NAV_SEC_ARR.length } as React.CSSProperties } // Navigation Item Index, after the last link // What: Type Assertion Note. Why: React's style type doesn't list custom properties. How: The object holds only this one custom property, which React sets as written.
+						style={ { '--nav-ite-ind' : NAV_SEC_ARR.length } as React.CSSProperties } // What: Navigation Item Index Style. Why: The contact block rises in after the last link. How: This hands it the place after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type doesn't list custom properties. How: The object holds only this one custom property, which React sets as written.
 					>{ /* What: Menu Contact Div Element. Why: Most people opening the menu on a phone want to reach Tony or find a section, so the menu ends with the ways to reach him. How: This holds the call button, the Facebook link, and Tony's home town, rising in after the last link, and shows only in the phone menu. */ }
 
 
