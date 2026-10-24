@@ -176,7 +176,7 @@ function HerSecCom () : React.JSX.Element {
 				</div>
 
 
-				<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: Tony's cartoon portrait is the hero's picture. How: This holds the portrait ring and the sticker beside it. */ }
+				<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: Tony's cartoon portrait is the hero's picture. How: This holds the portrait ring and the sticker on its corner. */ }
 
 
 					<div className={ cssModObj.porRinDiv }>{ /* What: Portrait Ring Div Element. Why: The portrait sits in a round frame with a slowly turning ring. How: This frames the image. */ }
@@ -199,7 +199,7 @@ function HerSecCom () : React.JSX.Element {
 						className={ cssModObj.herStiDiv }
 
 						aria-hidden='true'
-					>{ /* What: Hero Sticker Div Element. Why: A round sticker adds a warm note beside the portrait. How: This shows three short lines, hidden from screen readers, since it only repeats the headline's made with love and its heart would be read aloud. */ }
+					>{ /* What: Hero Sticker Div Element. Why: A round sticker adds a warm note on the portrait's corner. How: This shows three short lines, hidden from screen readers, since it only repeats the headline's made with love and its heart would be read aloud. */ }
 						Made<br />with<br />love ♥
 					</div>
 

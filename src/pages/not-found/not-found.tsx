@@ -41,8 +41,8 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
  *
  * @summary
  * Renders the 404 page's title, its noindex robots tag, which React moves
- * into the document head, and its content, centered below the bar, under the
- * page's one h1. The Back home button is named by its words alone, so its
+ * into the document head, and its content, centered below the bar and led by
+ * the page's one h1. The Back home button is named by its words alone, so its
  * decorative arrow isn't read aloud, and See the collection opens the home
  * page at the products section through the home page's hash arrival.
  *
@@ -92,7 +92,7 @@ function NotFouCom () : React.JSX.Element {
 						Page not <em className={ cssModObj.titAccEmp }>found.</em>
 					</h1>
 
-					<p className={ cssModObj.nofLedPar }>{ /* What: Not-Found Lede Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one line in the soft ink color. */ }
+					<p className={ cssModObj.nofLedPar }>{ /* What: Not-Found Lede Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one sentence in the soft ink color. */ }
 						That page doesn't exist, but Tony's pens and stoppers do.
 					</p>
 

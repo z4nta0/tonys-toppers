@@ -12,12 +12,11 @@
 # such as the one for fonts, so those need no lines of their own. The
 # directives listed either need a different value than 'self', are never
 # covered by default-src at all, such as frame-ancestors, or just state the
-# default for clarity, such as script-src. Like seal-and-shield's, style-src
-# needs no 'unsafe-inline': the build ships no inline styles, and React sets
-# its few dynamic styles, such as the cards' entrance delays, through the DOM,
-# which the policy doesn't restrict. The page's structured
-# data script is a data block that never runs, so script-src doesn't need to
-# allow it either.
+# default for clarity, such as script-src. style-src needs no
+# 'unsafe-inline': the build ships no inline styles, and React sets its few
+# dynamic styles, such as the cards' entrance delays, through the DOM, which
+# the policy doesn't restrict. The page's structured data script is a data
+# block that never runs, so script-src doesn't need to allow it either.
 #
 # Strict-Transport-Security keeps browsers on HTTPS for two years across
 # every subdomain, leaving out preload, which commits the domain to the

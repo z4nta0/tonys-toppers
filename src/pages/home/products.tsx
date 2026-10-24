@@ -110,7 +110,7 @@ function ProSecCom () : React.JSX.Element {
 					</div>
 
 
-					<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know each piece is chosen by hand. How: This shows two sentences beside the heading. */ }
+					<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know each piece is chosen by hand. How: This shows two sentences beside the heading, or below it at about 951px wide and below. */ }
 						Tony hand-selects beads and silicone shapes for each piece, color-coordinating until
 						it's just right. No two are the same.
 					</p>

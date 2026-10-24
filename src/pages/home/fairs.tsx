@@ -94,7 +94,7 @@ function FaiSecCom () : React.JSX.Element {
 					</div>
 
 
-					<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading. */ }
+					<p className={ cssModObj.secSubPar }>{ /* What: Section Subtitle Paragraph Element. Why: Visitors should know where Tony sells his pieces. How: This shows two sentences beside the heading, or below it at about 1,027px wide and below. */ }
 						Tony sets up at craft fairs and events around Bolivar, Missouri. Here's what you'll
 						find when you stop by.
 					</p>
