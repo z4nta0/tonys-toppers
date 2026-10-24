@@ -76,7 +76,15 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 
 		name      : `${ suiNamStr }-${ engNamStr }`, // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
 		testMatch : `${ suiNamStr }/**/*.spec.ts`,   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
-		use       : { browserName : engNamStr }      // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in.
+
+		use : { // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in, and which build of it.
+
+
+			browserName : engNamStr,                                        // What: Browser Name. Why: Each project runs in one engine. How: This names that engine's Playwright browser.
+			channel     : engNamStr === 'chromium' ? 'chromium' : undefined // What: Channel. Why: Chromium's default headless shell sometimes opens a modified click's new tab without Playwright ever reporting it, failing about 1 run in 10 in a sibling project. How: This runs Chromium as Chrome's full headless mode instead, and leaves Firefox and WebKit on their only builds.
+
+
+		}
 
 
 	}) ) ),
