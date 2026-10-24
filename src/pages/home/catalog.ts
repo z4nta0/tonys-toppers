@@ -144,7 +144,7 @@ const PHO_ALT_OBJ : Record< string, string > = { // What: Photo Alternative Obje
 	'dog-necklace-1'    : 'Six beaded dog necklaces laid in rows of pearl, pink, rainbow, green, and lavender beads',
 	'dog-necklace-10'   : 'A lavender, white, and purple striped beaded dog necklace with a gold ring and a tag',
 	'dog-necklace-11'   : 'Bright beaded dog necklaces with pumpkins, polka dots, and spiderwebs on a black floral cloth',
-	'dog-necklace-12'   : 'A dog necklace of dark beads with a rainbow sheen on a black table cloth',
+	'dog-necklace-12'   : 'A dog necklace of dark beads with a rainbow sheen on a black tablecloth',
 	'dog-necklace-13'   : "Beaded dog necklaces on Tony's outdoor craft fair table, with Tony seated behind it",
 	'dog-necklace-14'   : 'A red, green, and clear beaded dog necklace with polka dot beads and the name Luna',
 	'dog-necklace-15'   : 'A lavender, red, and green beaded dog necklace with a silver ring and a stamped tag',
