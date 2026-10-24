@@ -65,7 +65,7 @@ import { useSecLinFun } from '../../ui/section-link.ts'; // What: Use Section Li
 function HerSecCom () : React.JSX.Element {
 
 
-	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: The hero's buttons reach their sections through the same shared path as the bar. How: This scrolls to the section, smoothly unless the visitor asked for reduced motion.
+	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: The hero's buttons reach their sections through the same shared path as the bar. How: This scrolls to the section on the home page, or navigates home to it from any other page.
 
 
 	// #region scrSecFun
@@ -129,7 +129,7 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the portrait sit side by side on wide screens. How: This lays out the two columns. */ }
+			<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the portrait sit side by side. How: This lays out the two columns, stacking them in one column with the portrait first at 900px wide and below. */ }
 
 
 				<div>{ /* What: Hero Text Div Element. Why: The words read as one column. How: This stacks the eyebrow, headline, pitch, and buttons, with no styling of its own. */ }

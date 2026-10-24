@@ -368,7 +368,7 @@ function ConSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.conGriDiv }>{ /* What: Contact Grid Div Element. Why: The ways to reach Tony and the form sit side by side on wide screens. How: This lays out the two columns. */ }
+				<div className={ cssModObj.conGriDiv }>{ /* What: Contact Grid Div Element. Why: The ways to reach Tony and the form sit side by side. How: This lays out the two columns, stacking the form below the details at 900px wide and below. */ }
 
 
 					<div>{ /* What: Contact Info Div Element. Why: The direct ways to reach Tony read as one column. How: This stacks the label, heading, note, and contact rows, with no styling of its own. */ }
@@ -496,7 +496,7 @@ function ConSecCom () : React.JSX.Element {
 						) }
 
 
-						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields sit side by side. How: This lays out the two fields in a row. */ }
+						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields sit side by side. How: This lays out the two fields in a row, stacking them at 900px wide and below. */ }
 
 
 							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The label and input read as one field. How: This stacks them. */ }

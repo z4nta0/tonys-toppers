@@ -87,7 +87,7 @@ function AboSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.bioGriDiv }>{ /* What: Biography Grid Div Element. Why: The portrait and the story sit side by side on wide screens. How: This lays out the two columns. */ }
+				<div className={ cssModObj.bioGriDiv }>{ /* What: Biography Grid Div Element. Why: The portrait and the story sit side by side. How: This lays out the two columns, stacking them with the portrait on top at 900px wide and below. */ }
 
 
 					<div className={ cssModObj.porWraDiv }>{ /* What: Portrait Wrap Div Element. Why: The portrait and its logo badge read as one picture. How: This holds both, the badge overlapping the portrait's corner. */ }

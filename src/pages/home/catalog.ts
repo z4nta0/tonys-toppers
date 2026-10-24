@@ -222,7 +222,7 @@ const SET_REC_ARR : SetRecTyp[] = [ // What: Set Record Array. Why: A few photos
 // #region phoNamFun
 
 /**
- * phoNamFun = Photo Names Function
+ * phoNamFun = Photo Name Function
  *
  * @summary
  * Lists the file names of one category's single-piece photos, read from the
@@ -349,7 +349,7 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The prod
 
 // #region Exports
 
-export { CAT_REC_ARR, PRO_REC_ARR, type CatSluTyp }; // What: Named Exports. Why: The products grid needs the categories and every photo, and the gallery the booth shots. How: This exports the two lists and the category type their rows use.
+export { CAT_REC_ARR, PRO_REC_ARR, type CatSluTyp }; // What: Named Exports. Why: The sections that show the collection read these. How: This exports the two lists and the category type their rows use.
 
 // #endregion Exports
 

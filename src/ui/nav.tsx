@@ -24,12 +24,12 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  *
  * @summary
  * The site's fixed top bar: the brand, which returns to the home page, a link
- * to each home page section, and a toggle that opens those links as a menu on
- * a phone. The bar tightens and gains a bottom hairline once the page
- * scrolls, and on the home page it marks the link for the section being read.
- * On a phone the menu also offers a button to call or text Tony, his Facebook
- * page, and his home town, over a scrim that dims the page. Every page renders
- * it above its content.
+ * to each home page section, and a toggle that, at 900px wide and below,
+ * opens those links as a menu. The bar tightens and gains a bottom hairline
+ * once the page scrolls, and on the home page it marks the link for the
+ * section being read. The menu also offers a button to call or text Tony, his
+ * Facebook page, and his home town, over a scrim that dims the page. Every
+ * page renders it above its content.
  *
  * Sections:
  *  - Constants
@@ -71,9 +71,9 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * Renders the bar. Scrolling more than 20px gives it its scrolled look. On the
  * home page an IntersectionObserver marks the link for the section whose top
  * has crossed a band about a quarter of the way down the screen, while every
- * other page marks none. On a phone the links sit in a menu the toggle opens,
- * over a scrim that dims the page behind it, and choosing a link, tapping the
- * scrim, pressing Escape, or widening the screen past the menu's breakpoint
+ * other page marks none. At 900px wide and below the links sit in a menu the
+ * toggle opens, over a scrim that dims the page behind it, and choosing a
+ * link, tapping the scrim, pressing Escape, or widening the screen past 900px
  * closes it. While it's open the page behind it is inert, so keyboard and
  * screen reader users stay in the bar. Each link reaches its section through
  * section-link.ts, scrolling in place on the home page or navigating home from
@@ -295,7 +295,7 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Navigation Fragment. Why: The scrim and the bar render side by side, the scrim first. How: This groups them without adding a wrapper element. */ }
+		<>{ /* What: Navigation Fragment. Why: The scrim and the bar render together, the scrim first. How: This groups them without adding a wrapper element. */ }
 
 
 			<div
@@ -356,7 +356,7 @@ function NavBarCom () : React.JSX.Element {
 					aria-label='Toggle menu'
 
 					onClick={ () => setMenOpeBoo( ( preOpeBoo ) => !preOpeBoo ) }
-				>{ /* What: Navigation Toggle Button Element. Why: On a phone the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
+				>{ /* What: Navigation Toggle Button Element. Why: At 900px wide and below the section links sit in a menu. How: This opens or closes it, and tells screen readers whether it's open. */ }
 
 
 					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
@@ -373,11 +373,11 @@ function NavBarCom () : React.JSX.Element {
 				<div
 					className={ cssModObj.navMenDiv }
 
-					data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Flag. Why: On a phone the menu drops down only while it's open. How: This marks the menu while menOpeBoo is true, and drops the attribute otherwise.
-				>{ /* What: Navigation Menu Div Element. Why: On a phone the section links and the ways to reach Tony drop down together as one menu, while on wide screens the links sit in the bar. How: This holds the link list and the contact block, carrying data-mobile-menu-open while the menu is open. */ }
+					data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Flag. Why: At 900px wide and below the menu drops down only while it's open. How: This marks the menu while menOpeBoo is true, and drops the attribute otherwise.
+				>{ /* What: Navigation Menu Div Element. Why: At 900px wide and below the section links and the ways to reach Tony drop down together as one menu, while on wider screens the links sit in the bar. How: This holds the link list and the contact block, carrying data-mobile-menu-open while the menu is open. */ }
 
 
-					<ul className={ cssModObj.navLinUno }>{ /* What: Navigation Link Unordered List Element. Why: The section links sit in a row on wide screens and stack in the menu on a phone. How: This holds one item per section. */ }
+					<ul className={ cssModObj.navLinUno }>{ /* What: Navigation Link Unordered List Element. Why: The section links sit in a row on wide screens and stack in the menu at 900px wide and below. How: This holds one item per section. */ }
 
 
 						{ NAV_SEC_ARR.map( ( secRecObj, secIndNum ) => ( // What: Section Link Map. Why: Each section gets a link, and its place sets when it rises into the open menu. How: This renders one list item per section row, with its index.
@@ -418,7 +418,7 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.menConDiv }
 
 						style={ { '--nav-ite-ind' : NAV_SEC_ARR.length } as React.CSSProperties } // What: Navigation Item Index Style. Why: The contact block rises in after the last link. How: This hands it the place after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type doesn't list custom properties. How: The object holds only this one custom property, which React sets as written.
-					>{ /* What: Menu Contact Div Element. Why: Most people opening the menu on a phone want to reach Tony or find a section, so the menu ends with the ways to reach him. How: This holds the call button, the Facebook link, and Tony's home town, rising in after the last link, and shows only in the phone menu. */ }
+					>{ /* What: Menu Contact Div Element. Why: Most people opening the menu want to reach Tony or find a section, so the menu ends with the ways to reach him. How: This holds the call button, the Facebook link, and Tony's home town, rising in after the last link, and shows only in the menu, at 900px wide and below. */ }
 
 
 						<a

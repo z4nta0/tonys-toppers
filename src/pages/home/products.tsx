@@ -96,7 +96,7 @@ function ProSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.secHeaDiv }>{ /* What: Section Heading Div Element. Why: The heading and the note about Tony's work sit side by side. How: This lays them out in a row. */ }
+				<div className={ cssModObj.secHeaDiv }>{ /* What: Section Heading Div Element. Why: The heading and the note about Tony's work sit side by side. How: This lays them out in a row, stacking the note below the heading at 900px wide and below. */ }
 
 
 					<div>{ /* What: Products Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }

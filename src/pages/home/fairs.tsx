@@ -17,9 +17,9 @@ import { PRO_REC_ARR } from './catalog.ts'; // What: Product Record Array. Why: 
  *
  * @summary
  * The home page's craft fair gallery: a heading, a line about where Tony sets
- * up, and his booth shots in a grid, four across on a wide screen and two on a
- * phone. The same photos also appear under the product filters for the kinds
- * of pieces they show.
+ * up, and his booth shots in a grid with as many columns as fit. The same
+ * photos also appear under the product filters for the kinds of pieces they
+ * show.
  *
  * Sections:
  *  - Constants
@@ -80,7 +80,7 @@ function FaiSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.secHeaDiv }>{ /* What: Section Heading Div Element. Why: The heading and the note about the fairs sit side by side. How: This lays them out in a row. */ }
+				<div className={ cssModObj.secHeaDiv }>{ /* What: Section Heading Div Element. Why: The heading and the note about the fairs sit side by side. How: This lays them out in a row, stacking the note below the heading at 900px wide and below. */ }
 
 
 					<div>{ /* What: Fairs Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }

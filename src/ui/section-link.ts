@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { redMotFun   } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: A section link's smooth scroll has to respect the reduced-motion preference. How: visSecFun asks it before choosing the scroll behavior.
+import { redMotFun   } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: A section link's smooth scroll has to respect the reduced-motion preference. How: The returned function asks it before choosing the scroll behavior.
 import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A section link on any page but the home page has to take the visitor home first. How: This returns the router's navigate function.
 
 // #endregion Imports
@@ -93,11 +93,11 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
  * useSecLinFun = Use Section Link Function
  *
  * @summary
- * Returns visSecFun, the function a section link calls with its section's id.
- * When an element with that id is on the page, visSecFun scrolls it into view,
- * jumping instead of gliding under reduced motion. When there isn't one,
- * visSecFun navigates to the home page with the id as the hash, inside the
- * site without a full page load, where the home page scrolls to it.
+ * Returns the function a section link calls with its section's id. When an
+ * element with that id is on the page, it scrolls it into view, jumping
+ * instead of gliding under reduced motion. When there isn't one, it navigates
+ * to the home page with the id as the hash, inside the site without a full
+ * page load, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -107,7 +107,7 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
  *
  * @example
  * ```ts
- * useSecLinFun() // => visSecFun, the function a section link calls with an id
+ * useSecLinFun() // => the function a section link calls with an id
  * ```
  *
 */

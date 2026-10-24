@@ -65,7 +65,7 @@ function AppRooCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: App Root Fragment. Why: The bar, main content, and footer sit side by side in the mount element. How: This groups them without adding an element. */ }
+		<>{ /* What: App Root Fragment. Why: The bar, main content, and footer sit one above another in the mount element. How: This groups them without adding an element. */ }
 
 
 			<NavBarCom />{ /* What: Navigation Bar Component. Why: Every page starts with the shared bar. How: This renders it above the page. */ }
