@@ -778,8 +778,9 @@
 
 
 }
-.forSubBut:disabled,
-.forSubBut:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting navy and place even under the pointer. */
+.forSubBut[aria-disabled='true'],
+.forSubBut[aria-disabled='true']:active,
+.forSubBut[aria-disabled='true']:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting navy and place even under the pointer or a press; it reads aria-disabled rather than :disabled, since the button stays focusable while sending. */
 
 
 	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */

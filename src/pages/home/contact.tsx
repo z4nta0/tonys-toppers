@@ -269,12 +269,13 @@ function ConSecCom () : React.JSX.Element {
 	 * stops the page-reloading submit, hides any earlier error, and posts the
 	 * form's fields to Netlify Forms as URL-encoded data, whose form-name
 	 * field tells Netlify which form they belong to. While the request is out,
-	 * the send button is disabled and reads Sending... instead. Only an OK
-	 * answer from Netlify counts as sent: then the thank-you note shows, the
-	 * fields empty, and the note hides again six seconds later. A request that
-	 * fails outright, or one Netlify rejects, keeps the visitor's details in
-	 * place and shows the error note instead, so they can try again or call;
-	 * one that fails outright is also logged to the console.
+	 * the send button is marked disabled, keeping its focus, reads Sending...
+	 * instead, and a second submit is ignored. Only an OK answer from Netlify
+	 * counts as sent: then the thank-you note shows, the fields empty, and the
+	 * note hides again six seconds later. A request that fails outright, or
+	 * one Netlify rejects, keeps the visitor's details in place and shows the
+	 * error note instead, so they can try again or call; one that fails
+	 * outright is also logged to the console.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -296,6 +297,11 @@ function ConSecCom () : React.JSX.Element {
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: The browser would otherwise leave the page for Netlify's own thank-you page. How: This stops the form's own submission.
 
 
+
+		if ( senProBoo ) return; // What: Sending Guard. Why: The button stays focusable while a message is on its way, so a second press could send it twice. How: This ignores a submit while one is out.
+
+
+
 		const forCurEle = subEveObj.target as HTMLFormElement;                              // What: Form Current Element. Why: The fields are read from the form itself. How: This is the submitted form. // What: Type Assertion Note. Why: A submit event's target types as a plain event target. How: Only this form's submit event reaches forSubFun.
 		const forFieObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Fields Object. Why: Netlify reads the fields as a URL-encoded body. How: This collects every named field, the hidden form-name included. // What: Type Assertion Note. Why: URLSearchParams accepts string pairs, while FormData can also hold files. How: This form has no file fields, so every value is a string.
 
@@ -305,7 +311,7 @@ function ConSecCom () : React.JSX.Element {
 
 		setForErrBoo( false ); // What: Error Note Hide Call. Why: A new attempt shouldn't keep showing the last one's error. How: This hides the error note.
 
-		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the message is on its way, and shouldn't send it twice. How: This disables the button and switches its label to Sending...
+		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the message is on its way, and shouldn't send it twice. How: This marks the button disabled, which keeps its focus, and switches its label to Sending...
 
 
 
@@ -332,7 +338,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This re-enables the button and restores its label.
+		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This clears the button's disabled mark and restores its label.
 
 
 
@@ -479,23 +485,26 @@ function ConSecCom () : React.JSX.Element {
 					>{ /* What: Contact Form Form Element. Why: Visitors can send Tony a message without leaving the site. How: Netlify Forms records it under the contactForm name, matching the hidden copy in index.html, while forSubFun sends it in the background once the browser's own checks pass: the name, email, and message are required, and the email has to look like an address. */ }
 
 
-						{ sucExiObj.mouBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending, and stays while it fades out. How: This renders it while it's mounted.
+						<div role='status'>{ /* What: Form Status Div Element. Why: A live region added at the moment it speaks is often missed, so screen readers should find this one empty from the first render. How: This status region stays in the page and only gains the thank-you note once a message is sent. */ }
 
 
-							<div
-								className={ cssModObj.forSucDiv }
-
-								data-note-exit-active={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
-
-								role='status'
-
-								onAnimationEnd={ sucExiObj.endFun }
-							>{ /* What: Form Success Div Element. Why: The visitor should see the form went through. How: It rises in with its check popping once and fades out when it goes, and its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
-								<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
-							</div>
+							{ sucExiObj.mouBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending, and stays while it fades out. How: This renders it while it's mounted.
 
 
-						) }
+								<div
+									className={ cssModObj.forSucDiv }
+
+									data-note-exit-active={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+									onAnimationEnd={ sucExiObj.endFun }
+								>{ /* What: Form Success Div Element. Why: The visitor should see the form went through. How: It rises in with its check popping once and fades out when it goes, and the status region around it has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
+									<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
+								</div>
+
+
+							) }
+
+
+						</div>
 
 
 						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields sit side by side. How: This lays out the two fields in a row, stacking them at 900px wide and below. */ }
@@ -640,32 +649,37 @@ function ConSecCom () : React.JSX.Element {
 							value='contactForm'
 						/>{ /* What: Form Name Input Element. Why: Netlify needs to know which form a background post belongs to. How: This sends the form's name with the other fields. */ }
 
-						{ errExiObj.mouBoo && ( // What: Error Note Check. Why: A failed submission has to be explained, and the note stays while it fades out. How: This renders it while it's mounted.
+
+						<div role='alert'>{ /* What: Form Alert Div Element. Why: A live region added at the moment it speaks is often missed, so screen readers should find this one empty from the first render. How: This alert region stays in the page and only gains the error note when a message doesn't go through. */ }
 
 
-							<p
-								className={ cssModObj.forErrPar }
-
-								data-note-exit-active={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
-
-								role='alert'
-
-								onAnimationEnd={ errExiObj.endFun }
-							>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the message didn't go through and what to do next. How: It rises in and fades out when it goes, and its alert role has screen readers announce it the moment it appears. */ }
-								Sorry, your message didn't go through. Please try again, or call or text Tony at <a className={ cssModObj.errLinAnc } href='tel:4177330681'>(417) 733-0681</a>.
-							</p>
+							{ errExiObj.mouBoo && ( // What: Error Note Check. Why: A failed submission has to be explained, and the note stays while it fades out. How: This renders it while it's mounted.
 
 
-						) }
+								<p
+									className={ cssModObj.forErrPar }
+
+									data-note-exit-active={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+									onAnimationEnd={ errExiObj.endFun }
+								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the message didn't go through and what to do next. How: It rises in and fades out when it goes, and the alert region around it has screen readers announce it the moment it appears. */ }
+									Sorry, your message didn't go through. Please try again, or call or text Tony at <a className={ cssModObj.errLinAnc } href='tel:4177330681'>(417) 733-0681</a>.
+								</p>
+
+
+							) }
+
+
+						</div>
+
 
 						<button
 							className={ cssModObj.forSubBut }
 
-							disabled={ senProBoo }
 							type='submit'
 
+							aria-disabled={ senProBoo } // What: Sending Disabled Flag. Why: A disabled button drops keyboard focus to the page, so the button stays focusable while a message is on its way. How: This marks it disabled for screen readers and the module's dimmed look while sending, and forSubFun ignores a second submit meanwhile.
 							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
-						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is disabled while a request is out. */ }
+						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is marked disabled while a request is out, keeping its focus. */ }
 
 
 							<span
