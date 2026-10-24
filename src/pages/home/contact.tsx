@@ -495,6 +495,7 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forSucDiv }
 
 									data-note-exit-active={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+
 									onAnimationEnd={ sucExiObj.endFun }
 								>{ /* What: Form Success Div Element. Why: The visitor should see the form went through. How: It rises in with its check popping once and fades out when it goes, and the status region around it has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
 									<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
@@ -660,6 +661,7 @@ function ConSecCom () : React.JSX.Element {
 									className={ cssModObj.forErrPar }
 
 									data-note-exit-active={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+
 									onAnimationEnd={ errExiObj.endFun }
 								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the message didn't go through and what to do next. How: It rises in and fades out when it goes, and the alert region around it has screen readers announce it the moment it appears. */ }
 									Sorry, your message didn't go through. Please try again, or call or text Tony at <a className={ cssModObj.errLinAnc } href='tel:4177330681'>(417) 733-0681</a>.
