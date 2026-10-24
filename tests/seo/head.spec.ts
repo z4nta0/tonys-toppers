@@ -100,10 +100,28 @@ test( 'the home page names the town, the pieces, and the business', async ( { pa
 	expect( desConStr ).toContain( 'Tony Mawhiney of Bolivar, Missouri' );                                     // What: Description Maker Assertion. Why: The summary should say who makes the pieces and where. How: This checks the description names Tony and his town.
 	expect( desConStr.length ).toBeGreaterThanOrEqual( 120 );                                                  // What: Description Minimum Assertion. Why: A summary that's too short wastes the space a listing gives it, and link preview checkers flag one under 120 characters. How: This checks it runs at least 120 characters.
 	expect( desConStr.length ).toBeLessThanOrEqual( 125 );                                                     // What: Description Maximum Assertion. Why: Phones cut a summary off around 125 characters. How: This checks it stays within that.
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                          // What: Single Description Assertion. Why: React 19 adds a rendered description beside index.html's rather than replacing it, so a page could end up with two. How: This checks the home page has exactly one.
 	await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', "Tony's Toppers" ); // What: Author Assertion. Why: A real business's site names the business as its author. How: This checks the author tag.
 	await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR );       // What: Canonical Assertion. Why: Every address Netlify serves the site at should count as the live one. How: This checks the canonical link names the live address.
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveCount( 0 );                               // What: Indexable Assertion. Why: The home page has to stay findable. How: This checks it carries no robots tag that could keep it out.
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 );                          // What: Single Heading Assertion. Why: One h1 tells search engines and screen readers what the page is about. How: This checks there's exactly one.
+
+
+} );
+
+
+
+test( 'the raw page carries the home title and description for script-free readers', async ( { request : reqCotObj } ) => { // What: Raw Head Test. Why: Link checkers and many crawlers read the page without running the site's script, so the title and description have to be in index.html itself. How: This fetches the root as raw HTML and checks the title and the one description.
+
+
+	const rawHtmStr = await ( await reqCotObj.get( '/' ) ).text();                                                                       // What: Raw HTML String. Why: The page is read the way a script-free reader reads it. How: This fetches the root's HTML without a browser.
+	const desMatArr = [ ...rawHtmStr.matchAll( /<meta name='description' content='([^']*)'/g ) ].map( ( desMatObj ) => desMatObj[ 1 ] ); // What: Description Match Array. Why: The raw page should carry exactly one description. How: This collects the content of every description tag in it.
+
+
+	expect( rawHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ] ).toBe( "Tony's Toppers | Handmade Beaded Crafts in Bolivar, MO" ); // What: Raw Title Assertion. Why: The raw page should name the home page in full, not the bare site name. How: This checks the title element's text.
+	expect( desMatArr ).toHaveLength( 1 );                                                                                          // What: Raw Single Description Assertion. Why: Readers without the script see only what index.html carries. How: This checks there's exactly one description tag.
+	expect( desMatArr[ 0 ].length ).toBeGreaterThanOrEqual( 120 );                                                                  // What: Raw Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters. How: This checks the raw description's length.
+	expect( desMatArr[ 0 ].length ).toBeLessThanOrEqual( 125 );                                                                     // What: Raw Description Maximum Assertion. Why: Phones cut a summary off around 125 characters. How: This checks the raw description's length.
 
 
 } );
@@ -168,6 +186,7 @@ test( 'the 404 page stays out of search results', async ( { page : curPagObj } )
 
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
 	await expect( curPagObj ).toHaveTitle( "Page Not Found | Tony's Toppers" );                         // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                   // What: Single Description Assertion. Why: Every route should carry exactly one description, and the 404 page keeps index.html's. How: This checks there's exactly one.
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 );                   // What: Single Heading Assertion. Why: Every page should have exactly one h1. How: This checks the 404 page has one.
 
 
@@ -194,6 +213,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 	expect( [ socTagObj[ 'og:image:type' ], socTagObj[ 'og:image:width' ], socTagObj[ 'og:image:height' ] ] ).toEqual( [ 'image/jpeg', '1200', '630' ] );                                          // What: Image Facts Assertion. Why: The tags have to describe the file they point at. How: This checks the type and size they give.
 	expect( [ socTagObj[ 'og:title' ], socTagObj[ 'twitter:title' ] ] ).toEqual( [ await curPagObj.title(), await curPagObj.title() ] );                                                           // What: Title Match Assertion. Why: A card should name the page the way its tab does. How: This checks both card titles match the page title.
 	expect( [ socTagObj[ 'og:description' ], socTagObj[ 'twitter:description' ] ] ).toEqual( Array( 2 ).fill( await curPagObj.locator( 'meta[name="description"]' ).getAttribute( 'content' ) ) ); // What: Description Match Assertion. Why: A card should sum the page up the way its search listing does. How: This checks both card descriptions match the page's description.
+	await expect( curPagObj.locator( 'meta[name="theme-color"]' ) ).toHaveAttribute( 'content', /^#[0-9a-f]{6}$/i );                                                                               // What: Theme Color Assertion. Why: Discord edges a link's card in the theme color, and the social preview rule lists it among the tags. How: This checks the tag holds a hex color.
 
 
 } );

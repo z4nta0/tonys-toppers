@@ -485,12 +485,14 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   highlight bar reaches 4px past its italic line on purpose and counted as a
   spill at every width.
 - `npm run test:seo`: checks the home page's title, description, author,
-  canonical, and lack of a robots tag; that the structured data's name,
-  phone, town, Facebook page, and node links match what the page shows, with
-  no street address or birth date; the 404 page's `noindex` and title; one
-  h1 per page; every Open Graph and Twitter tag, with absolute addresses
-  and copy matching the page; the card's type, size, and bytes; every icon
-  link; and `robots.txt` and the sitemap.
+  canonical, lack of a robots tag, and single description; that the raw page,
+  fetched without a browser, carries the full title and one 120 to 125
+  character description; that the structured data's name, phone, town, Facebook
+  page, and node links match what the page shows, with no street address or
+  birth date; the 404 page's `noindex` and title; one h1 per page; every Open
+  Graph and Twitter tag and the theme color, with absolute addresses and copy
+  matching the page; the card's type, size, and bytes; every icon link; and
+  `robots.txt` and the sitemap.
 - `npm run test:security`: added 2026-10-23, from seal-and-shield's. It
   checks `public/_headers` against the security baseline (a strict
   Content-Security-Policy, HSTS for at least a year, nosniff, DENY framing,
