@@ -44,7 +44,7 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
  * into the document head, and its content, centered below the bar and led by
  * the page's one h1. The Back home button is named by its words alone, so its
  * decorative arrow isn't read aloud, and See the collection opens the home
- * page at the products section through the home page's hash arrival.
+ * page at the Products section through the home page's hash arrival.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -114,8 +114,8 @@ function NotFouCom () : React.JSX.Element {
 						<Link
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
-							to={{ hash : 'products', pathname : '/' }} // What: Products Section Address. Why: A visitor who came looking for Tony's pieces can go straight to them. How: This opens the home page with the products section's id as the hash, which the home page scrolls to and then clears.
-						>{ /* What: Button Base Anchor Secondary Link. Why: The site's main content stays one step away. How: This opens the home page at the products section. */ }
+							to={{ hash : 'products', pathname : '/' }} // What: Products Section Address. Why: A visitor who came looking for Tony's pieces can go straight to them. How: This opens the home page with the Products section's id as the hash, which the home page scrolls to and then clears.
+						>{ /* What: Button Base Anchor Secondary Link. Why: The site's main content stays one step away. How: This opens the home page at the Products section. */ }
 							See the collection
 						</Link>
 

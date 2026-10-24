@@ -56,7 +56,7 @@ type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's fi
  *
  * @param props - This component does not use any props.
  *
- * @returns The products section element.
+ * @returns The Products section element.
  *
  * @example
  * ```tsx

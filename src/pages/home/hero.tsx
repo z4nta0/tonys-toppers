@@ -155,7 +155,7 @@ function HerSecCom () : React.JSX.Element {
 							aria-label='See the collection' // What: Collection Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
 
 							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'products' ) }
-						>{ /* What: Button Base Anchor Primary Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the products section through scrSecFun. */ }
+						>{ /* What: Button Base Anchor Primary Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the Products section through scrSecFun. */ }
 							See the collection →
 						</a>
 

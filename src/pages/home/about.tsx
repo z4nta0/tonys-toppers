@@ -58,7 +58,7 @@ const TON_BIR_NUM = 1982; // What: Tony Birth Number. Why: The story and the fir
  *
  * @param props - This component does not use any props.
  *
- * @returns The about section element.
+ * @returns The About section element.
  *
  * @example
  * ```tsx

@@ -581,7 +581,7 @@
 
 /* #region menConDiv */
 
-.menConDiv { /* What: Menu Contact Div. Why: The ways to reach Tony belong only in the phone menu, since wide screens show the contact section's own. How: This hides the block outside the narrow layout. */
+.menConDiv { /* What: Menu Contact Div. Why: The ways to reach Tony belong only in the phone menu, since wide screens show the Contact section's own. How: This hides the block outside the narrow layout. */
 
 
 	display : none;

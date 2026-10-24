@@ -181,7 +181,7 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
  * ConSecCom = Contact Section Component
  *
  * @summary
- * Renders the contact section. The form's fields are controlled, the browser
+ * Renders the Contact section. The form's fields are controlled, the browser
  * won't send it until the required name, email, and message are filled in and
  * the email looks like an address, and typing in any field hides the thank-you
  * note. Sending it waits for Netlify's answer before showing the thank-you
@@ -194,7 +194,7 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
  *
  * @param props - This component does not use any props.
  *
- * @returns The contact section element.
+ * @returns The Contact section element.
  *
  * @example
  * ```tsx
@@ -702,7 +702,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Export. Why: The home page ends with the contact section. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The home page ends with the Contact section. How: This exports ConSecCom.
 
 // #endregion Exports
 

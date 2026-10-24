@@ -108,7 +108,7 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-			<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach Tony. How: This renders the contact section last. */ }
+			<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach Tony. How: This renders the Contact section last. */ }
 
 
 		</>

@@ -55,7 +55,7 @@ const GAL_REC_ARR = PRO_REC_ARR.filter( ( proRecObj ) => proRecObj.faiBoo ); // 
  *
  * @param props - This component does not use any props.
  *
- * @returns The fairs section element.
+ * @returns The Craft Fairs section element.
  *
  * @example
  * ```tsx

@@ -446,9 +446,10 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   state on its text's antialiasing alone, across the whole page, while all
   three engines ran at once, and passed every rerun after; a lone failure like
   that gets a rerun, not new baselines.
-- `npm run test:responsive`: measures the home page, the 404 page, and the
-  open menu at 14 widths from 320 to 1,920px (the 900px and 1,000px
-  breakpoints and the pixel past each included), failing on sideways
+- `npm run test:responsive`: measures the home page and the 404 page at 14
+  widths from 320 to 1,920px (the 900px and 1,000px breakpoints and the pixel
+  past each included), and the open menu at the 7 of those up to 900px, where
+  it exists, failing on sideways
   scrolling, an unclipped element past either edge, text spilling its box,
   or two reachable controls overlapping. Unlike seal-and-shield's, the spill
   check measures each line of an element's own text rather than its scroll

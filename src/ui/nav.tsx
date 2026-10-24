@@ -48,10 +48,10 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
 
 
 	{ ideStr : 'home',     labStr : 'Home'        }, // What: Home Section Row. Why: The hero is where a visitor starts. How: This links to the hero's home id.
-	{ ideStr : 'products', labStr : 'Products'    }, // What: Products Section Row. Why: The collection is the site's main content. How: This links to the products section.
+	{ ideStr : 'products', labStr : 'Products'    }, // What: Products Section Row. Why: The collection is the site's main content. How: This links to the Products section.
 	{ ideStr : 'fairs',    labStr : 'Craft Fairs' }, // What: Fairs Section Row. Why: The craft fair gallery shows where to find Tony. How: This links to the gallery.
 	{ ideStr : 'about',    labStr : 'About Tony'  }, // What: About Section Row. Why: Visitors want to meet the maker. How: This links to Tony's story.
-	{ ideStr : 'contact',  labStr : 'Contact'     }  // What: Contact Section Row. Why: The page ends where visitors reach Tony. How: This links to the contact section.
+	{ ideStr : 'contact',  labStr : 'Contact'     }  // What: Contact Section Row. Why: The page ends where visitors reach Tony. How: This links to the Contact section.
 
 
 ];
