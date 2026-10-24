@@ -366,7 +366,7 @@ passes on `close-out`.
     - **Interaction feedback**: done 2026-10-10. Every link and button
       grows seal-and-shield's focus ring in from a zero-width outline (the
       global rule in `styles.css`), and every control with its own
-      transition lists the two outline properties. The contact band and the
+      transition lists the two outline properties. The Contact band and the
       footer hand the ring yellow (`--foc-rin-col`), and the form card hands
       it back navy. Buttons, rows, and the filters press in to 0.97, and
       text links dim. New hovers: the brand turns navy while its mark tilts
