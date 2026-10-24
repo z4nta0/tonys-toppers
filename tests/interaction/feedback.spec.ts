@@ -112,7 +112,7 @@ function cliBloFun () : void {
  *
  * @param curPagObj - Current Page Object: The page to collect from.
  *
- * @returns Every reachable control.
+ * @returns A promise that resolves with every reachable control.
  * @see {@link conHanArr}
  *
  * @example
@@ -223,7 +223,7 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
  *                    reduced motion.
  *
- * @returns Every feedback problem found.
+ * @returns A promise that resolves with every feedback problem found.
  * @see {@link proLisArr}
  *
  * @example
