@@ -56,8 +56,6 @@ const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. 
 
 };
 
-
-
 type CroBoxTyp = { heiNum : number, lefNum : number, topNum : number, widNum : number }; // What: Crop Box Type. Why: A crop keeps one rectangle of the original. How: This names its height, left edge, top edge, and width in the original's pixels.
 
 const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Why: A few originals carry more than the photo itself. How: This maps a file name to the rectangle to keep.
@@ -67,8 +65,6 @@ const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Wh
 
 
 };
-
-
 
 const PHO_DIR_STR = fileURLToPath( new URL( './', import.meta.url ) );                                  // What: Photo Directory String. Why: The originals live beside this script. How: This resolves this script's own folder.
 const PRO_OUT_STR = fileURLToPath( new URL( '../../src/assets/products/', import.meta.url ) );          // What: Products Output String. Why: The product photos are imported from src/assets/products. How: This resolves that folder.
