@@ -71,7 +71,7 @@
 
 /* #region secHeaDiv */
 
-.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about Tony's work sit side by side, above the band's dot grid. How: This spreads them across a row that wraps the note below the heading at about 951px wide and below, aligned along their bottoms, with room below, and lifts it onto its own layer above the grid, copied from the shared section head. */
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about Tony's work sit side by side, above the band's dot grid. How: This spreads them across a row that wraps the note below the heading at about 951px wide and below, aligned along their bottoms, with room below, and lifts the row onto its own layer above the grid, copied from the shared section head. */
 
 
 	align-items     : end;
@@ -289,7 +289,7 @@
 
 /* #region proCarArt */
 
-.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global blockEnterFadeIn keyframes, and eases its hover lift, shadow, and border color. */
+.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, has it rise in through the global blockEnterFadeIn keyframes, and eases its hover lift, shadow, and border color. */
 
 
 	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) backwards; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */ /* What: Backwards Fill. Why: A both fill kept the keyframes' final transform in force after the entrance, which outranked the hover lift, so the card never rose. How: A backwards fill holds the hidden first frame only through each card's stagger delay, then lets go once the card has risen. */
