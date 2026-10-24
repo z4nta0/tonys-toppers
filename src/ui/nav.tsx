@@ -8,11 +8,10 @@ import lntSvgUrl from './logo-notext.svg'; // What: Logo-No-Text SVG URL. Why: T
 
 
 import { Link         } from 'react-router';      // What: Link. Why: The brand returns to the home page without a full page load. How: This renders the brand as a router link to the root.
-import { modCliFun    } from './section-link.ts'; // What: Modified Click Function. Why: A section link opened in a new tab should be left to the browser. How: navSecFun steps aside when this is true.
 import { useEffect    } from 'react';             // What: Use Effect. Why: The bar reacts to the page around it, such as its scroll position. How: This sets up the bar's listeners and watchers, and undoes them again.
 import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to track and mark active. How: This reads the current path.
 import { useRef       } from 'react';             // What: Use Ref. Why: The open menu works on elements this component renders, such as the toggle. How: This creates the refs those elements attach.
-import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Function. Why: Section links have to work from every page, not only the home page. How: This returns visSecFun, which scrolls in place or navigates home.
+import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns secCliFun, the shared section link click handler.
 import { useState     } from 'react';             // What: Use State. Why: The bar keeps state of its own, such as whether the menu is open. How: This holds each piece.
 
 // #endregion Imports
@@ -181,7 +180,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: Every section link reaches its section through one shared path. How: This scrolls to the section on the home page, or navigates home to it from any other page.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Every section link handles a click through one shared path. How: This leaves a modified click to the browser and otherwise scrolls to the section on the home page, or navigates home to it from any other page.
 
 
 
@@ -247,53 +246,6 @@ function NavBarCom () : React.JSX.Element {
 
 
 	}, [ menOpeBoo ] ); // What: Effect Dependency Array. Why: The page's inert state and the listeners have to follow the menu opening and closing. How: menOpeBoo changing reruns the effect, which applies them while it's true and its cleanup removes them.
-
-
-
-	// #region navSecFun
-
-	/**
-	 * navSecFun = Navigate Section Function
-	 *
-	 * @summary
-	 * Handles a click on any section link. A Ctrl, Cmd, Shift, Alt, or middle
-	 * click is left to the browser, which opens the link's own address. Any
-	 * other click stops the browser's navigation, hands the section's id to
-	 * visSecFun, which scrolls to it on the home page or navigates home to it
-	 * from any other page, and closes the menu.
-	 *
-	 * @author z4nta0 <https://github.com/z4nta0>
-	 *
-	 * @param cliEveObj - Click Event Object: The link's click event.
-	 * @param secIdeStr - Section Identifier String: The section's id, e.g.
-	 *                    'about'.
-	 *
-	 * @returns This function does not return anything.
-	 *
-	 * @example
-	 * ```ts
-	 * navSecFun(cliEveObj, 'about') // => void
-	 * ```
-	 *
-	*/
-
-	const navSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Navigate Section Function. Why: A section link should reach its section without a full page load or a hash left in the address. How: This leaves a modified click to the browser, and otherwise cancels the link's own navigation, visits the section, and closes the menu.
-
-
-		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
-
-
-
-		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise jump or reload and leave the hash in the address. How: This stops the link's own navigation.
-
-		visSecFun( secIdeStr ); // What: Section Visit Call. Why: The visitor should land on the section they chose. How: This scrolls to it, or navigates home to it from another page.
-
-		cloMenFun(); // What: Menu Close Call. Why: The menu should get out of the way once a link is chosen. How: This closes it.
-
-
-	};
-
-	// #endregion navSecFun
 
 	// #endregion Menu And Section Links
 
@@ -406,8 +358,8 @@ function NavBarCom () : React.JSX.Element {
 
 									href={ `/#${ secRecObj.ideStr }` }
 
-									onClick={ ( cliEveObj ) => navSecFun( cliEveObj, secRecObj.ideStr ) }
-								>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through navSecFun. */ }
+									onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, secRecObj.ideStr ) ) cloMenFun(); } } // What: Section Link Click Handler. Why: The menu should close only when the click took the visitor to a section, not when the browser opens it in a new tab. How: This hands the click to secCliFun and closes the menu when it reports the click handled.
+								>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through secCliFun and closes the menu. */ }
 									{ secRecObj.labStr }
 								</a>
 

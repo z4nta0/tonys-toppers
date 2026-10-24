@@ -6,7 +6,8 @@
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { Link } from 'react-router'; // What: Link. Why: The page's button returns home without a full page load. How: This renders it as a router link to the root.
+import { Link         } from 'react-router';             // What: Link. Why: The page's Back home button returns home without a full page load. How: This renders it as a router link to the root.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: See the collection reaches the Products section the same way the bar's links do. How: This returns secCliFun, the shared section link click handler.
 
 // #endregion Imports
 
@@ -40,11 +41,12 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
  * NotFouCom = Not Found Component
  *
  * @summary
- * Renders the 404 page's title, its noindex robots tag, which React moves
- * into the document head, and its content, centered below the bar and led by
- * the page's one h1. The Back home button is named by its words alone, so its
- * decorative arrow isn't read aloud, and See the collection opens the home
- * page at the Products section through the home page's hash arrival.
+ * Renders the 404 page's title, its noindex robots tag, which React moves into
+ * the document head, and its content, centered below the bar and led by the
+ * page's one h1. The Back home button is named by its words alone, so its
+ * decorative arrow isn't read aloud, and See the collection reaches the
+ * Products section through secCliFun, the click handler every section link
+ * shares.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -60,6 +62,10 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
 */
 
 function NotFouCom () : React.JSX.Element {
+
+
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: See the collection should reach its section the way every section link does. How: This is the shared click handler, which leaves a modified click to the browser and otherwise navigates home to the section.
+
 
 
 	return (
@@ -111,13 +117,15 @@ function NotFouCom () : React.JSX.Element {
 
 
 
-						<Link
+						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
-							to={{ hash : 'products', pathname : '/' }} // What: Products Section Address. Why: A visitor who came looking for Tony's pieces can go straight to them. How: This opens the home page with the Products section's id as the hash, which the home page scrolls to and then clears.
-						>{ /* What: Button Base Anchor Secondary Link. Why: The site's main content stays one step away. How: This opens the home page at the Products section. */ }
+							href='/#products'
+
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'products' ) }
+						>{ /* What: Button Base Anchor Secondary Element. Why: The site's main content stays one step away. How: Its address opens the home page at the Products section, which a modified click opens in a new tab, while a plain click goes through secCliFun, which navigates home to the section inside the site. */ }
 							See the collection
-						</Link>
+						</a>
 
 
 					</div>
