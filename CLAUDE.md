@@ -438,18 +438,21 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   `tests/support/netlify.ts`), scanning the thank-you and error notes with
   axe and checking that each note's live region is in the page, empty, from
   the first render and that the send button keeps focus through the send.
-- `npm run test:interaction`: seal-and-shield's feedback check on every
-  state. Each reachable link and button must look different hovered than at
-  rest and pressed than hovered (real clicks are blocked meanwhile), list
-  `outline-width` in its transitions, and transition nothing under reduced
-  motion, and the first Tab stop's ring must reach 2px. Its behavior spec
-  (added 2026-10-23) checks where links lead: every bar, menu, hero, and 404
-  page section link lands on its section with no hash left in the address, a
-  Ctrl, Cmd, or middle click opens the section in a new tab without moving
+- `npm run test:interaction`: seal-and-shield's feedback check on every state
+  (ported in full 2026-10-23). Each reachable link and button, form field,
+  product card, and the About portrait's frame must look different in each
+  state it responds to (hovered, pressed, or focused) and ease every property
+  that change touches, on it or anything inside it, while real clicks are
+  blocked; each control's focus ring must reach full width; under reduced
+  motion the changes stay but nothing transitions; and the contact form error's
+  phone link gets the same checks once a failed send is faked. Its behavior
+  spec (added 2026-10-23) checks where links lead: every bar, menu, hero, and
+  404 page section link lands on its section with no hash left in the address,
+  a Ctrl, Cmd, or middle click opens the section in a new tab without moving
   the page clicked from or closing the menu, an address with a hash lands on
-  its section, a link to another page opens it at its top while back
-  returns near the earlier position, and the first Tab on each page reaches
-  the skip link.
+  its section, a link to another page opens it at its top while back returns
+  near the earlier position, and the first Tab on each page reaches the skip
+  link.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance and a
   per-pixel color threshold of 0. The page's clock is fixed to one date rather
