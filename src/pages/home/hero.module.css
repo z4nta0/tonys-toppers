@@ -62,7 +62,7 @@
 
 
 }
-.herBloDiv--yellow { /* What: Hero Blob Div Yellow. Why: A yellow glow warms the top left corner. How: This sizes the circle at about 321px and sets it partly off the corner. */
+.herBloDiv--yellow { /* What: Hero Blob Div Yellow. Why: A yellow glow warms the top-left corner. How: This sizes the circle at about 321px and sets it partly off the corner. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -73,7 +73,7 @@
 
 
 }
-.herBloDiv--blue { /* What: Hero Blob Div Blue. Why: A blue glow balances the first in the bottom right corner. How: This sizes the circle at about 243px, sets it partly off the corner, and starts it half a cycle behind the first. */
+.herBloDiv--blue { /* What: Hero Blob Div Blue. Why: A blue glow balances the first in the bottom-right corner. How: This sizes the circle at about 243px, sets it partly off the corner, and starts it half a cycle behind the first. */
 
 
 	animation-delay : calc( var( --dur-ani-p16 ) / -2 );                                                       /* Duration Animation Base Plus 16 ~= 14,197.0ms, halved to ~= -7,098.5ms */
