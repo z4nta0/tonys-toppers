@@ -30,6 +30,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  *
  * Sections:
  *  - Constants
+ *  - Module State
  *  - Module Init
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -64,15 +65,19 @@ const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG ico
 
 
 
-const ICO_SIZ_ARR = [ 16, 32, 48 ]; // What: ICO Size Array. Why: favicon.ico should hold the sizes older browsers and Windows pick from. How: Each entry is one square size packed into the file.
-
-
-
-const OUT_DIR_STR = fileURLToPath( new URL( '../../public/', import.meta.url ) );                                // What: Output Directory String. Why: Browsers request icons from the site's root. How: This resolves public/ from this script's folder.
-const SOU_B64_STR = readFileSync( new URL( '../../public/favicon.svg', import.meta.url ) ).toString( 'base64' ); // What: Source Base64 String. Why: The browser draws the mark from data rather than a file path. How: This reads favicon.svg and encodes it.
-const TOU_SCA_NUM = 0.8;                                                                                         // What: Touch Scale Number. Why: iOS rounds the touch icon's corners, which would crowd a ring drawn edge to edge. How: The touch icon draws the mark at this share of its square, centered.
+const ICO_SIZ_ARR = [ 16, 32, 48 ];                                               // What: ICO Size Array. Why: favicon.ico should hold the sizes older browsers and Windows pick from. How: Each entry is one square size packed into the file.
+const OUT_DIR_STR = fileURLToPath( new URL( '../../public/', import.meta.url ) ); // What: Output Directory String. Why: Browsers request icons from the site's root. How: This resolves public/ from this script's folder.
+const TOU_SCA_NUM = 0.8;                                                          // What: Touch Scale Number. Why: iOS rounds the touch icon's corners, which would crowd a ring drawn edge to edge. How: The touch icon draws the mark at this share of its square, centered.
 
 // #endregion Constants
+
+
+
+// #region Module State
+
+const SOU_B64_STR = readFileSync( new URL( '../../public/favicon.svg', import.meta.url ) ).toString( 'base64' ); // What: Source Base64 String. Why: The browser draws the mark from data rather than a file path. How: This reads favicon.svg and encodes it.
+
+// #endregion Module State
 
 
 
