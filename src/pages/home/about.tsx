@@ -99,10 +99,10 @@ function AboSecCom () : React.JSX.Element {
 							<img
 								className={ cssModObj.porPhoIma }
 
-								height={ PHO_SIZ_OBJ[ 'tony-portrait' ].heiNum }
+								height={ PHO_SIZ_OBJ[ 'tony-portrait' ].heiNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 								loading='lazy'
 								src={ porWebUrl }
-								width={ PHO_SIZ_OBJ[ 'tony-portrait' ].widNum }
+								width={ PHO_SIZ_OBJ[ 'tony-portrait' ].widNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 								alt='Portrait of Tony Mawhiney'
 							/>{ /* What: Portrait Photo Image Element. Why: Visitors see who Tony is. How: This loads his portrait only as it nears the screen, at its own width and height so the frame doesn't shift when it arrives. */ }

@@ -185,9 +185,9 @@ function HerSecCom () : React.JSX.Element {
 						<img
 							className={ cssModObj.porCarIma }
 
-							height={ PHO_SIZ_OBJ[ 'tony-cartoon' ].heiNum }
+							height={ PHO_SIZ_OBJ[ 'tony-cartoon' ].heiNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 							src={ carWebUrl }
-							width={ PHO_SIZ_OBJ[ 'tony-cartoon' ].widNum }
+							width={ PHO_SIZ_OBJ[ 'tony-cartoon' ].widNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 							alt='Cartoon illustration of Tony'
 						/>{ /* What: Portrait Cartoon Image Element. Why: The hero shows Tony as his cartoon. How: This loads the cartoon portrait. */ }

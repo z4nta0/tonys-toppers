@@ -120,10 +120,10 @@ function FaiSecCom () : React.JSX.Element {
 							<img
 								className={ cssModObj.faiPhoIma }
 
-								height={ faiRecObj.heiNum }
+								height={ faiRecObj.heiNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 								loading='lazy'
 								src={ faiRecObj.imaStr }
-								width={ faiRecObj.widNum }
+								width={ faiRecObj.widNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 								alt={ faiRecObj.altStr }
 							/>{ /* What: Fair Photo Image Element. Why: The gallery shows Tony's table. How: This loads the photo only as it nears the screen, described by its alt text, at its own width and height so the frame doesn't shift when it arrives. */ }

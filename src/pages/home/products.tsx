@@ -188,10 +188,10 @@ function ProSecCom () : React.JSX.Element {
 								<img
 									className={ cssModObj.proPhoIma }
 
-									height={ proRecObj.heiNum }
+									height={ proRecObj.heiNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 									loading='lazy'
 									src={ proRecObj.imaStr }
-									width={ proRecObj.widNum }
+									width={ proRecObj.widNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 									alt={ proRecObj.altStr }
 								/>{ /* What: Product Photo Image Element. Why: The card shows its piece. How: This loads the photo only as it nears the screen, at its own width and height so the card doesn't shift when it arrives. */ }
