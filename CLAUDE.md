@@ -99,7 +99,7 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
   about 183px to 243px below 900px. The stage fills its column at the
   ring's height plus room for its drift and the sticker, and hands the ring
   and sticker their widths (`--por-rin-wid`, `--her-sti-wid`). The ring
-  turns about a point about 15px above its middle, so the portrait drifts
+  turns around a point about 15px above its middle, so the portrait drifts
   in a small circle (fixed 2026-10-10: the stage used to collapse to no
   size, sending the portrait around a wide circle off the hero's edges).
   Firefox alone shows a brief cross flashing over the sticker now and
@@ -357,7 +357,7 @@ passes on `close-out`.
       highlight bar, over the hero's cream wash and glows) as
       `public/og-image.jpg`. It's a JPEG at quality 90 (about 63 KB), since
       as a PNG the washes and portrait came to 441 KB, over WhatsApp's
-      limit, and 85 showed faint blocking at 3x zoom. `npm run icons`
+      limit, and quality 85 showed faint blocking at 3x zoom. `npm run icons`
       renders the ICO, the 16 to 512px PNGs, and an inset apple touch icon
       on white from `public/favicon.svg`, which the head lists first. The
       head gains `theme-color` (the cream), the full Open Graph and Twitter
