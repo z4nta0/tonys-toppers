@@ -157,7 +157,7 @@ function FaiSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { FaiSecCom }; // What: Named Exports. Why: The home page shows the gallery after the collection. How: This exports FaiSecCom.
+export { FaiSecCom }; // What: Named Export. Why: The home page shows the gallery after the collection. How: This exports FaiSecCom.
 
 // #endregion Exports
 

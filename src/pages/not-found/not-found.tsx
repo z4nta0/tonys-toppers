@@ -146,7 +146,7 @@ function NotFouCom () : React.JSX.Element {
 
 // #region Exports
 
-export { NotFouCom }; // What: Named Exports. Why: The router renders the 404 page for every unknown address. How: This exports NotFouCom.
+export { NotFouCom }; // What: Named Export. Why: The router renders the 404 page for every unknown address. How: This exports NotFouCom.
 
 // #endregion Exports
 

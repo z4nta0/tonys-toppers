@@ -238,7 +238,7 @@ function ProSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ProSecCom }; // What: Named Exports. Why: The home page shows the collection after the hero. How: This exports ProSecCom.
+export { ProSecCom }; // What: Named Export. Why: The home page shows the collection after the hero. How: This exports ProSecCom.
 
 // #endregion Exports
 

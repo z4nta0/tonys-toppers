@@ -287,7 +287,7 @@ ${ sizLinArr.join( '\n' ) }
 
 // #region Exports
 
-export { PHO_SIZ_OBJ }; // What: Named Exports. Why: The catalog and the hero and About sections read the photo sizes. How: This exports the sizes object.
+export { PHO_SIZ_OBJ }; // What: Named Export. Why: The catalog and the hero and About sections read the photo sizes. How: This exports the sizes object.
 
 // #endregion Exports
 

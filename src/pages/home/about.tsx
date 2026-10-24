@@ -227,7 +227,7 @@ function AboSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { AboSecCom }; // What: Named Exports. Why: The home page tells Tony's story after the gallery. How: This exports AboSecCom.
+export { AboSecCom }; // What: Named Export. Why: The home page tells Tony's story after the gallery. How: This exports AboSecCom.
 
 // #endregion Exports
 
