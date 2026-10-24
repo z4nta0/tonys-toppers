@@ -175,7 +175,7 @@
 
 
 }
-.herEyeSpa::before { /* What: Hero Eyebrow Dot. Why: A small yellow dot leads the eye into the line. How: This draws a yellow circle about 8px across with a soft yellow halo. */
+.herEyeSpa::before { /* What: Hero Eyebrow Span Dot. Why: A small yellow dot leads the eye into the line. How: This draws a yellow circle about 8px across with a soft yellow halo. */
 
 
 	background    : var( --acc-sec-col );                                                                                          /* Accent Secondary Color = #fbbf24 */
@@ -242,7 +242,7 @@
 
 
 }
-.titAccSpa::after { /* What: Title Accent Highlight Bar. Why: A yellow bar under the words reads like a hand-drawn highlight. How: This draws a slightly skewed yellow band across the bottom of the words, behind them. */
+.titAccSpa::after { /* What: Title Accent Span Highlight Bar. Why: A yellow bar under the words reads like a hand-drawn highlight. How: This draws a slightly skewed yellow band across the bottom of the words, behind them. */
 
 
 	background    : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */

@@ -520,7 +520,7 @@
 
 
 	}
-	.navLinAnc::before { /* What: Menu Row Dot. Why: The section being read is marked with a small yellow dot rather than a filled pill. How: This holds an empty circle slot before every name, so the names line up whether or not their row is marked. */
+	.navLinAnc::before { /* What: Menu Row Navigation Link Anchor Dot. Why: The section being read is marked with a small yellow dot rather than a filled pill. How: This holds an empty circle slot before every name, so the names line up whether or not their row is marked. */
 
 
 		background    : transparent;
@@ -550,7 +550,7 @@
 
 
 	}
-	.navLinAnc[data-section-link-active]::before { /* What: Active Menu Row Dot. Why: The dot marks the section being read. How: This fills the dot yellow. */
+	.navLinAnc[data-section-link-active]::before { /* What: Active Menu Row Navigation Link Anchor Dot. Why: The dot marks the section being read. How: This fills the dot yellow. */
 
 
 		background : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
