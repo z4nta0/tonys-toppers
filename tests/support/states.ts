@@ -16,12 +16,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * The page states the accessibility, interaction, and rendering suites visit,
  * and the helper that opens one; the responsive suite opens its own widths
  * through the same helper. A state is a page at a width, sometimes with
- * something opened on it: the home page and the 404 page at phone and desktop
- * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport,
- * loads the page, waits for the fonts, scrolls through the page so its lazily
- * loaded product photos load, runs the state's own action, such as opening the
- * menu, and then waits for the page to stay still so nothing is measured
- * mid-fade.
+ * something opened on it, such as the mobile menu on a phone. opeStaFun sizes
+ * the viewport, loads the page, waits for the fonts, scrolls through the page
+ * so its lazily loaded product photos load, runs the state's own action, and
+ * then waits for the page to stay still so nothing is measured mid-fade.
  *
  * Sections:
  *  - Types
@@ -66,11 +64,16 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  * open at the phone width, since the menu is only reachable there. Every row
  * shares the {@link StaRecTyp} shape, so its fields carry no comments of their
  * own:
+ *
  * - `actFun` (Function): Action Function, run after the page loads to open
  *   something on it, such as the menu. Only the menu row has one.
+ *
  * - `heiNum` (Number): Height Number, the viewport height in CSS pixels.
+ *
  * - `ideStr` (String): Identifier String, the state's name in test titles.
+ *
  * - `patStr` (String): Path String, the route loaded from the dev server.
+ *
  * - `widNum` (Number): Width Number, the viewport width in CSS pixels.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -183,13 +186,12 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
  * @summary
  * Waits until the page has stayed still for half a second: no animation or
  * transition running except ones that repeat forever, such as the hero's
- * floating blobs, turning portrait ring, and wobbling sticker, which never
- * finish and so are skipped (the reduced motion check is what catches one that
- * shouldn't be playing). A single still moment isn't enough, since a fade can
- * start just after the last one ends, so the page has to read as still on five
- * checks in a row, 100ms apart. It fails after 5 seconds rather than hanging,
- * which leaves room for the product cards' staggered entrance, each card
- * starting 30ms after the one before.
+ * floating blobs, which never finish and so are skipped (the reduced motion
+ * check is what catches one that shouldn't be playing). A single still moment
+ * isn't enough, since a fade can start just after the last one ends, so the
+ * page has to read as still on five checks in a row, 100ms apart. It fails
+ * after 5 seconds rather than hanging, which leaves room for the product
+ * cards' staggered entrance, each card starting 30ms after the one before.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

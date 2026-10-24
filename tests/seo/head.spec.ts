@@ -16,17 +16,11 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * @summary
  * Checks the site's SEO setup in whichever engine the project runs. Tony's
  * Toppers is a real maker's site, so the home page has to be findable and
- * describe him accurately: its title and description name his town and what he
- * makes, its canonical and author tags are in place, it carries no noindex,
- * and its structured data, an Organization for the business, a Person for
- * Tony, and a WebSite, matches what the page itself shows, its phone number,
- * town, and Facebook page, with no street address or birth date. The 404 page
- * carries noindex, and each page has exactly one h1. The social preview tags
- * are complete, use absolute addresses, and match the page's title and
- * description; the card they point at is a 1,200x630 JPEG under 300 KB; and
- * every icon the head links to is served, the PNGs at the size their links
- * promise. robots.txt lets every crawler in and names the sitemap, which lists
- * the home page alone.
+ * describe him accurately. That covers the head's tags, such as the canonical,
+ * and the structured data, which has to match what the page itself shows. The
+ * social preview tags and the card they point at, the icons the head links
+ * to, and the crawler files, such as the sitemap, are checked against what
+ * they promise.
  *
  * Sections:
  *  - Constants
@@ -92,7 +86,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 
 // #region Home Page Checks
 
-test( 'the home page names the town, the pieces, and the business', async ( { page : curPagObj } ) => { // What: Home Head Test. Why: Search listings show the title and description, and visitors who met Tony at a fair search for him by name and town. How: This loads the home page and checks its title, description, author, canonical, and robots tags.
+test( 'the home page names the town, the pieces, and the business', async ( { page : curPagObj } ) => { // What: Home Head Test. Why: Search listings show the title and description, and visitors who met Tony at a fair search for him by name and town. How: This loads the home page and checks its title, description, author, canonical, robots tag, and heading.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The checks read the home page's head. How: This loads the root path.

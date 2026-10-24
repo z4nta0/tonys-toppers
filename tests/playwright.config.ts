@@ -17,8 +17,8 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * The config behind npm test and its suites, each run against the real site in
  * all three of Playwright's engines (Chromium, Firefox, and WebKit), one
  * project per suite and engine, since a check that passes in one engine proves
- * nothing about the others. The suites are accessibility, which the pre-commit
- * check runs, interaction, rendering, responsive, and seo. Playwright starts
+ * nothing about the others. Each suite lives in its own folder under tests/,
+ * such as accessibility, which the pre-commit check runs. Playwright starts
  * the Vite dev server on port 5192 for the run and stops it afterwards, so a
  * dev server already running on the usual 5173, or a sibling project's suites
  * on 5190 or 5191, are never touched. Reports and failure screenshots land in
