@@ -247,27 +247,33 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 for ( const resRecObj of FOR_RES_ARR ) { // What: Form Result Test Loop. Why: The form's results bring text and colors no page state shows, so each must pass the scan too. How: This declares one axe test per result.
 
 
-	test( `${ resRecObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Form Result Axe Test. Why: The thank-you message and the error must be as accessible as the page. How: This sends the form against the faked answer, waits for the result to settle, then checks a scan of it finds no violations, reporting anything needing review.
+	for ( const staIdeStr of [ 'home-desktop', 'home-phone' ] ) { // What: Width Loop. Why: Each result is scanned at phone and desktop widths, as every page state is, since the notes stack and wrap differently on a phone. How: This declares the scan once per home state.
 
 
-		await fakNetFun( curPagObj, resRecObj.codNum ); // What: Netlify Fake Call. Why: The result depends on Netlify's answer, and no real request should go out. How: This answers every post to the site's root with the row's status.
-
-		await opeStaFun( curPagObj, STA_REC_ARR.find( ( staRecObj ) => staRecObj.ideStr === 'home-desktop' )! ); // What: Home Desktop Open Call. Why: The form lives in the Contact section, scanned at desktop width. How: This loads and settles the home page at 1,440px. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always holds the home-desktop state.
-
-		await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Test Visitor' );                 // What: Name Fill Call. Why: The name is required. How: This types a name. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
-		await curPagObj.locator( '#contact form' ).getByLabel( 'Email' ).fill( 'visitor@test.example' );             // What: Email Fill Call. Why: The email is required. How: This types an address on the reserved .example domain. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
-		await curPagObj.locator( '#contact form' ).getByLabel( 'Message', { exact : true } ).fill( 'Hello, Tony!' ); // What: Message Fill Call. Why: The message is required. How: This types a short one, matching the label exactly, since the Send Message button's own label holds the word too. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
-
-		await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The result only shows after a send. How: This sends the message, which the fake answers.
-
-		await expect( curPagObj.getByText( resRecObj.texStr ) ).toBeVisible(); // What: Result Shown Assertion. Why: The scan has to see the result, not the form before the answer arrives. How: This waits for the row's text.
-
-		await waiSetFun( curPagObj ); // What: Settled Page Wait. Why: Contrast measured mid-fade would be wrong. How: This waits until the result has finished fading in.
-
-		await scaRepFun( curPagObj, tesInfObj, resRecObj.ideStr ); // What: Scan Report Call. Why: The result passes only with zero violations. How: This scans it, reports anything needing review, and fails on any violation.
+		test( `${ resRecObj.ideStr } at ${ staIdeStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Form Result Axe Test. Why: The thank-you message and the error must be as accessible as the page. How: This sends the form against the faked answer, waits for the result to settle, then checks a scan of it finds no violations, reporting anything needing review.
 
 
-	} );
+			await fakNetFun( curPagObj, resRecObj.codNum ); // What: Netlify Fake Call. Why: The result depends on Netlify's answer, and no real request should go out. How: This answers every post to the site's root with the row's status.
+
+			await opeStaFun( curPagObj, STA_REC_ARR.find( ( staRecObj ) => staRecObj.ideStr === staIdeStr )! ); // What: Home Open Call. Why: The form lives in the Contact section, scanned at the loop's width. How: This loads and settles the loop's home state. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always holds both home states.
+
+			await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Test Visitor' );                 // What: Name Fill Call. Why: The name is required. How: This types a name. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+			await curPagObj.locator( '#contact form' ).getByLabel( 'Email' ).fill( 'visitor@test.example' );             // What: Email Fill Call. Why: The email is required. How: This types an address on the reserved .example domain. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+			await curPagObj.locator( '#contact form' ).getByLabel( 'Message', { exact : true } ).fill( 'Hello, Tony!' ); // What: Message Fill Call. Why: The message is required. How: This types a short one, matching the label exactly, since the Send Message button's own label holds the word too. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+
+			await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The result only shows after a send. How: This sends the message, which the fake answers.
+
+			await expect( curPagObj.getByText( resRecObj.texStr ) ).toBeVisible(); // What: Result Shown Assertion. Why: The scan has to see the result, not the form before the answer arrives. How: This waits for the row's text.
+
+			await waiSetFun( curPagObj ); // What: Settled Page Wait. Why: Contrast measured mid-fade would be wrong. How: This waits until the result has finished fading in.
+
+			await scaRepFun( curPagObj, tesInfObj, `${ resRecObj.ideStr } at ${ staIdeStr }` ); // What: Scan Report Call. Why: The result passes only with zero violations. How: This scans it, reports anything needing review, and fails on any violation.
+
+
+		} );
+
+
+	}
 
 
 }
