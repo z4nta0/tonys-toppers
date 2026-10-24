@@ -470,15 +470,17 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   state on its text's antialiasing alone, across the whole page, while all
   three engines ran at once, and passed every rerun after; a lone failure like
   that gets a rerun, not new baselines.
-- `npm run test:responsive`: measures the home page and the 404 page at 14
+- `npm run test:responsive`: measures the home page and the 404 page at 15
   widths from 320 to 1,920px (the 900px and 1,000px breakpoints and the pixel
-  past each included), and the open menu at the 7 of those up to 900px, where
-  it exists, failing on sideways
-  scrolling, an unclipped element past either edge, text spilling its box,
-  or two reachable controls overlapping. Unlike seal-and-shield's, the spill
-  check measures each line of an element's own text rather than its scroll
-  width, since the hero's highlight bar reaches 4px past its italic line on
-  purpose and counted as a spill at every width.
+  past each included), and the open menu at the 8 of those up to 900px, where
+  it exists, failing on sideways scrolling, an unclipped element past either
+  edge, text spilling its box, two reachable controls overlapping, or a grid
+  leaving uneven rows (the Card Grids rule, added 2026-10-23 with 361px, a
+  pixel past the gallery's 360px step; the Products grid is left out until its
+  question is settled). Unlike seal-and-shield's, the spill check measures each
+  line of an element's own text rather than its scroll width, since the hero's
+  highlight bar reaches 4px past its italic line on purpose and counted as a
+  spill at every width.
 - `npm run test:seo`: checks the home page's title, description, author,
   canonical, and lack of a robots tag; that the structured data's name,
   phone, town, Facebook page, and node links match what the page shows, with
