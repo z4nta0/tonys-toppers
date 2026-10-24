@@ -21,8 +21,8 @@ import { useSecLinFun } from '../../ui/section-link.ts'; // What: Use Section Li
  * @summary
  * The home page's opening section: Tony's headline and pitch, with buttons
  * into the page, such as the one to the collection, beside his cartoon
- * portrait in a slowly turning ring, or below it at 900px wide and below.
- * Soft blurred blobs float behind it all.
+ * portrait, which drifts slowly in a small circle, or below it at 900px wide
+ * and below. Soft blurred blobs float behind it all.
  *
  * Sections:
  *  - Components
@@ -179,7 +179,7 @@ function HerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: Tony's cartoon portrait is the hero's picture. How: This holds the portrait ring and the sticker on its corner. */ }
 
 
-					<div className={ cssModObj.porRinDiv }>{ /* What: Portrait Ring Div Element. Why: The portrait sits in a round frame with a slowly turning ring. How: This frames the image. */ }
+					<div className={ cssModObj.porRinDiv }>{ /* What: Portrait Ring Div Element. Why: The portrait sits in a round frame that drifts slowly in a small circle. How: This frames the image. */ }
 
 
 						<img
