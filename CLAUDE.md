@@ -339,8 +339,9 @@ passes on `close-out`.
       portrait grew after load in WebKit, and WebKit resolves a rem on the
       root element against 16px, so `html`'s scroll padding read about 36px
       too tall. That one length on `html` uses `1em` times its rhythm step
-      instead of the spacing token, which is the only place a root rem is
-      read. Every section link now lands at 79px in all three engines.
+      instead of the spacing token, since it's the only place a rem is read
+      on the root element. Every section link now lands at 79px in all three
+      engines.
     - **SEO**: done 2026-10-10. `index.html` carries the home page's title
       ("Tony's Toppers | Handmade Beaded Crafts in Bolivar, MO"), a
       120-character description naming Tony, Bolivar, and his pieces, the
