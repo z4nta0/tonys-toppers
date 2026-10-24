@@ -247,7 +247,7 @@
 
 
 		display : flex;
-		z-index : 1; /* What: Toggle Stack Level. Why: The toggle has to stay clickable above the sliding menu panel, which shares the bar's layer at its default level. How: This lifts the toggle one level above the panel. */
+		z-index : 1;    /* What: Toggle Stack Level. Why: The toggle has to stay clickable above the sliding menu panel, which shares the bar's layer at its default level. How: This lifts the toggle one level above the panel. */
 
 
 	}
