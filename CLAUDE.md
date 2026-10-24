@@ -416,8 +416,9 @@ passes on `close-out`.
 ## Test suites
 Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
 `tests/`, one project per suite and engine in `tests/playwright.config.ts`,
-which starts its own dev server on port 5192 (never the usual 5173, nor the
-sibling projects' 5190 and 5191) and stops it afterwards. Every suite runs in
+which starts its own dev server on port 5192 (never the usual 5173, nor a
+sibling project's port), plus a production preview on 5199 for the security
+suite, and stops both afterwards. Every suite runs in
 Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
 `tests/output/` (git-ignored); `npx playwright show-report
 tests/output/report` opens the HTML report. The states the suites visit (the
@@ -474,4 +475,16 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   h1 per page; every Open Graph and Twitter tag, with absolute addresses
   and copy matching the page; the card's type, size, and bytes; every icon
   link; and `robots.txt` and the sitemap.
+- `npm run test:security`: added 2026-10-23, from seal-and-shield's. It
+  checks `public/_headers` against the security baseline (a strict
+  Content-Security-Policy, HSTS for at least a year, nosniff, DENY framing,
+  and the referrer and permissions policies), searches the build for private
+  keys and provider tokens, and runs `npm audit` on the shipped
+  dependencies, those three in Chromium only, since a file reads the same in
+  every engine. Then it loads every state from a production build served by
+  `vite preview` on port 5199, with the headers file's headers added to
+  every response, and fails on any policy violation or any new tab link
+  without `noopener` and `noreferrer`. WebKit reports a style attribute
+  violation for every `select` element, even one built with no style of its
+  own, so that one WebKit report is set aside.
 - `npm test` runs every suite.
