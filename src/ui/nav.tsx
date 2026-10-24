@@ -325,7 +325,7 @@ function NavBarCom () : React.JSX.Element {
 				className={ cssModObj.navBarNav }
 
 				data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar tightens and gains a hairline once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
-			>{ /* What: Navigation Bar Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, carrying data-page-scroll-active once the page scrolls. */ }
+			>{ /* What: Navigation Bar Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, and the bar itself carries data-page-scroll-active once the page scrolls. */ }
 
 
 				<Link
