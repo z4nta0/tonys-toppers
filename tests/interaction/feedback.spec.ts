@@ -597,16 +597,17 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
  * fieProFun = Field Problems Function
  *
  * @summary
- * Probes every form field a visitor can reach (each visible input, select,
- * and textarea) and returns a problem for each one that gives no focus
- * feedback. Each field is scrolled into view and read at rest, then focused
- * by keyboard, by stepping back off it with Shift+Tab and onto it again with
- * Tab, and read once its transition has settled. A field the Tab press doesn't
- * land on, or that looks the same focused as at rest (its border color and
- * outline), is a problem. Normally every one of those that changes has to be
- * eased by a transition ({@link snaProFun}), outline-width included, so the
- * ring eases in; under reduced motion every one of its transition durations
- * must be zero instead.
+ * Probes every form field a visitor can reach (each visible input, select, and
+ * textarea) and returns a problem for each one that gives no hover or focus
+ * feedback. Each field is scrolled into view and read at rest, then hovered
+ * and read again, then, with the pointer moved away, focused by keyboard, by
+ * stepping back off it with Shift+Tab and onto it again with Tab, every look
+ * read once its transition has settled. A field that looks the same hovered as
+ * at rest, one the Tab press doesn't land on, or one that looks the same
+ * focused as at rest (its border color and outline), is a problem. Normally
+ * every one of those that changes has to be eased by a transition ({@link
+ * snaProFun}), outline-width included, so the ring eases in; under reduced
+ * motion every one of its transition durations must be zero instead.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -614,7 +615,8 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
  * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
  *                    reduced motion.
  *
- * @returns A promise that resolves with every focus feedback problem found.
+ * @returns A promise that resolves with every hover and focus feedback problem
+ *          found.
  * @see {@link proLisArr}
  *
  * @example
@@ -630,7 +632,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
 
 
-	for ( const fieCurObj of await conLisFun( curPagObj, 'input, select, textarea' ) ) { // What: Field Probe Loop. Why: Every reachable form field has to show focus. How: This reads each one at rest and focused by keyboard.
+	for ( const fieCurObj of await conLisFun( curPagObj, 'input, select, textarea' ) ) { // What: Field Probe Loop. Why: Every reachable form field has to answer hover and show focus. How: This reads each one at rest, hovered, and focused by keyboard.
 
 
 		const fieDesStr = await fieCurObj.evaluate( ( fieCurEle ) => `${ fieCurEle.tagName.toLowerCase() } "${ fieCurEle.getAttribute( 'name' ) || '' }"` ); // What: Field Description String. Why: A problem should name the field in terms of the form. How: This joins its tag with the name Netlify records it under.
@@ -639,8 +641,20 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await fieCurObj.scrollIntoViewIfNeeded(); // What: Field Scroll Call. Why: A field has to be on screen for its look to be read. How: This scrolls it into view.
 
 
-		const resSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false ); // What: Rest Snapshot Array. Why: The resting look is what focus is compared with. How: This records the field's border color and outline.
+		const resSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false ); // What: Rest Snapshot Array. Why: The resting look is what hover and focus are compared with. How: This records the field's border color and outline.
 
+
+		await fieCurObj.hover(); // What: Field Hover Call. Why: A field answers the pointer as well as the keyboard. How: This moves the pointer onto it.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const hovSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest. How: This records the field's border color and outline.
+
+
+		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The focused look should be read without the hover on top of it. How: This moves the pointer to the corner of the bar.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: The hover has to finish fading before focus is read. How: This pauses for the settle time.
 
 		await fieCurObj.focus(); // What: Field Focus Call. Why: The keyboard steps start from the field itself. How: This focuses it so Shift+Tab steps off it.
 
@@ -656,6 +670,10 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 
+		if ( valSigFun( resSnaArr ) === valSigFun( hovSnaArr ) ) proLisArr.push( `${ fieDesStr } looks the same hovered` ); // What: Hover Check. Why: A field under the pointer has to respond. How: This records one whose border and outline don't change.
+
+
+
 		if ( !focFieBoo ) proLisArr.push( `${ fieDesStr } isn't reached by Tab` ); // What: Keyboard Reach Check. Why: A keyboard user has to be able to reach every field. How: This records one the Tab press didn't land on.
 
 		else if ( valSigFun( resSnaArr ) === valSigFun( focSnaArr ) ) proLisArr.push( `${ fieDesStr } looks the same focused` ); // What: Focus Check. Why: A focused field has to stand out. How: This records one whose border and outline don't change.
@@ -664,7 +682,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a field with any duration above zero.
 
-		else if ( !redMotBoo && focFieBoo ) proLisArr.push( ...snaProFun( resSnaArr, focSnaArr, FIE_PRO_ARR, fieDesStr, 'when focused' ) ); // What: Snapped Change Check. Why: A field's focus change, its ring included, should ease rather than snap. How: This records each changed border or outline property without a transition, once the Tab press has landed on the field.
+		else if ( !redMotBoo ) proLisArr.push( ...snaProFun( resSnaArr, hovSnaArr, FIE_PRO_ARR, fieDesStr, 'when hovered' ), ...( focFieBoo ? snaProFun( resSnaArr, focSnaArr, FIE_PRO_ARR, fieDesStr, 'when focused' ) : [] ) ); // What: Snapped Change Check. Why: A field's hover and focus changes, its ring included, should ease rather than snap. How: This records each property that changes without a transition, on hover always and on focus when the Tab press landed.
 
 
 	}
@@ -709,7 +727,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  *
  * @example
  * ```ts
- * hovProFun(page, false) // => [ 'span "Topeka, KS" looks the same hovered' ]
+ * hovProFun(page, false) // => [ 'div "" looks the same hovered' ]
  * ```
  *
 */
@@ -780,10 +798,10 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every control, every form field, and on the home states every service card and area tag, and checks it finds no problems.
+	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every control, every form field, and on the home states every product card and the About portrait frame, and checks it finds no problems.
 
 
-		test.slow(); // What: Slow Test Mark. Why: Probing every control's hover, press, and focus takes about 28 seconds in Chromium alone, which ran past the default 30-second timeout when every suite shared the machine. How: This triples this test's timeout.
+		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past a tripled 90-second timeout while the engines shared the machine. How: This gives the test three minutes.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
 
@@ -816,10 +834,10 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control, every form field, and on the home states every service card and area tag, with reduced motion on and checks it finds no problems.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control, every form field, and on the home states every product card and the About portrait frame, with reduced motion on and checks it finds no problems.
 
 
-		test.slow(); // What: Slow Test Mark. Why: Probing every control's hover, press, and focus takes about 28 seconds in Chromium alone, which ran past the default 30-second timeout when every suite shared the machine. How: This triples this test's timeout.
+		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past a tripled 90-second timeout while the engines shared the machine. How: This gives the test three minutes.
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
