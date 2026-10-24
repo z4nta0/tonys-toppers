@@ -6,14 +6,15 @@
  *
  * @summary
  * The site's one global stylesheet, holding only what can't belong to a single
- * component: the design tokens every module reads, the reset and base element
- * styles every page relies on, the focus ring every link and button grows on
- * keyboard focus, the layout of the mount element index.html ships, and the
- * shared blockEnterFadeIn keyframes. Every component's own styles are in its
- * CSS module; for reduced motion this file turns off only the page's smooth
- * scrolling and the focus ring's ease. The tokens are the plastic-ratio core
- * design numbers and the standard color and font roles, which every module
- * reads by role.
+ * component. Its Tokens region defines every design token the modules read,
+ * the core design numbers first and then the rest, such as the colors. Its
+ * Base Elements region holds the reset and the bare element styles, such as
+ * the focus ring every link and button shares. Its Body State region styles
+ * what lives outside any component, such as the mount element index.html
+ * ships, and its Shared Keyframes region holds the keyframes several modules
+ * play. Each component's own styles live in its CSS module instead; for
+ * reduced motion this file turns off only the page's smooth scrolling and the
+ * focus ring's ease.
  *
  * Sections:
  *  - Tokens
@@ -224,11 +225,11 @@
 
 	/* #region Easing Tokens */
 
-	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go. How: Transitions and animations read it as their timing function. */
-	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for rare celebrations. How: Transitions and animations read it as their timing function. */
-	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly. How: Transitions and animations read it as their timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target for a touch of flair. How: Transitions and animations read it as their timing function. */
-	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Ordinary motion shares one smooth curve. How: Transitions and animations read it as their timing function. */
+	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go. How: This is a curve that starts slowly and speeds up, read as a timing function. */
+	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for rare celebrations. How: This is a curve whose first control point rises well past 1, read as a timing function. */
+	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly. How: This is a curve that starts fast and eases to a stop, read as a timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target for a touch of flair. How: This is a curve whose first control point rises a little past 1, read as a timing function. */
+	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Ordinary motion shares one smooth curve. How: This is the browser's own ease curve, read as a timing function. */
 
 	/* #endregion Easing Tokens */
 
