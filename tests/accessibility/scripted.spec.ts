@@ -621,6 +621,35 @@ test( 'under reduced motion the thank-you note still leaves when the visitor typ
 
 } );
 
+
+test( 'under reduced motion the error note still leaves when the visitor sends again', async ( { page : curPagObj } ) => { // What: Error Exit Test. Why: The error note unmounts when its exit animation ends too, so under reduced motion that exit has to stay long enough to fire its end event. How: This fails a send under reduced motion, sends again against an accepted answer, and checks the alert region empties.
+
+
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The error only shows after a failed send. How: This fakes a server error.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+	await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.
+
+	await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: First Send Click Call. Why: The error only shows after a send. How: This sends the message, which the fake fails.
+
+
+	const aleRegObj = curPagObj.locator( '#contact form [role="alert"]' ); // What: Alert Region Object. Why: The error's coming and going is read from its region. How: This finds the form's alert region.
+
+
+	await expect( aleRegObj ).toContainText( "didn't go through" ); // What: Error Shown Assertion. Why: The exit is checked once the error has arrived. How: This waits for the note.
+
+	await fakNetFun( curPagObj, 200 ); // What: Netlify OK Fake Call. Why: The retry should go through, which hides the error. How: This adds a route answering with success, which Playwright tries before the earlier one.
+
+	await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Retry Send Click Call. Why: A new send hides the last one's error. How: This sends the message again, which the new fake accepts.
+
+	await expect( aleRegObj ).toHaveText( '' ); // What: Region Emptied Assertion. Why: The error has to unmount once its near-instant exit ends. How: This waits until the region holds no text.
+
+
+} );
+
 // #endregion Module Init
 
 
