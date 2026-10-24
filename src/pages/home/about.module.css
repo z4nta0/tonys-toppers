@@ -12,8 +12,7 @@
  * drop cap and ends in a row of three stats. On screens 900px wide or
  * narrower the portrait moves above the story in a single column. The shared
  * section, container, and label classes the section used to borrow from the
- * global stylesheet are copied here, and the portrait's transition stops for
- * anyone who asked for less motion.
+ * global stylesheet are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -285,7 +284,7 @@
 
 
 }
-.bioStoPar:first-of-type::first-letter { /* What: Biography Story Paragraph Drop Cap. Why: A drop cap opens the story like a book. How: This floats the first paragraph's first letter large in the heavy navy serif, spanning about two lines. */
+.bioStoPar:first-of-type::first-letter { /* What: Biography Story Paragraph Drop Cap. Why: A drop cap opens the story like a book. How: This floats the first paragraph's first letter large in the heavy navy serif, with the first three lines of the story wrapping beside it. */
 
 
 	color       : var( --acc-mai-col );                          /* Accent Main Color = #1e3a8a */

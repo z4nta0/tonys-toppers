@@ -10,10 +10,8 @@
  * number, and the cream message form on the other, with its thank-you and
  * error notes, which rise in as they appear, the thank-you check popping once.
  * On screens 900px wide or narrower the two sides stack, and so do the form's
- * name and email fields.
- * The shared section, container, and label classes the section used to borrow
- * from the global stylesheet are copied here, and every animation and
- * transition stops for anyone who asked for less motion.
+ * name and email fields. The shared section, container, and label classes the
+ * section used to borrow from the global stylesheet are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -701,7 +699,7 @@
 
 }
 
-.errLinAnc { /* What: Error Link Anchor. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color, easing its hover and press. */
+.errLinAnc { /* What: Error Link Anchor. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color, easing its hover color, press dim, and focus ring. */
 
 
 	color           : inherit;

@@ -9,10 +9,9 @@
  * faint grid, with the section's heading and note, the row of filter buttons,
  * and the responsive grid of product cards. Each card holds its photo in a
  * portrait frame with a tag over its corner and its name and kind beneath, and
- * rises in through the global blockEnterFadeIn keyframes, which the hero
- * shares. The shared section, container, heading, label, and note classes the
- * section used to borrow from the global stylesheet are copied here, and every
- * animation and transition stops for anyone who asked for less motion.
+ * rises in through the global blockEnterFadeIn keyframes. The shared section,
+ * container, heading, label, and note classes the section used to borrow from
+ * the global stylesheet are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -327,7 +326,7 @@
 
 }
 
-.proTagDiv { /* What: Product Tag Div. Why: A tag over the photo names what kind of piece it shows. How: This sets the label in small, bold, spaced capitals on a yellow pill with an ink outline in the card's top left corner. */
+.proTagDiv { /* What: Product Tag Div. Why: A tag over the photo names what kind of piece it shows. How: This sets the label in small, bold, spaced, uppercase letters on a yellow pill with an ink outline in the card's top left corner. */
 
 
 	background     : var( --acc-sec-col );                            /* Accent Secondary Color = #fbbf24 */

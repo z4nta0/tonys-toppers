@@ -11,8 +11,7 @@
  * The shared section, container, label, heading, and button classes the page
  * used to borrow from the global stylesheet are copied here, with the page's
  * own inline adjustments, such as the extra room below the bar, merged into
- * them, and the buttons' transition stops for anyone who asked for less
- * motion.
+ * them.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

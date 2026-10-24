@@ -12,9 +12,8 @@
  * wobbling sticker on its corner. On screens 900px wide or narrower the
  * portrait moves above the words in a single column. The words rise into place
  * one block after another through the global blockEnterFadeIn keyframes. The
- * shared button classes the hero's two buttons
- * used to borrow from the global stylesheet are copied here, and every
- * animation and transition stops for anyone who asked for less motion.
+ * shared button classes the hero's two buttons used to borrow from the global
+ * stylesheet are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -155,7 +154,7 @@
 
 }
 
-.herEyeSpa { /* What: Hero Eyebrow Span. Why: Visitors should know where the pieces are made before anything else. How: This sets the town in spaced navy capitals on a translucent white pill with a yellow dot, rising in first. */
+.herEyeSpa { /* What: Hero Eyebrow Span. Why: Visitors should know where the pieces are made before anything else. How: This sets the town in spaced, uppercase navy letters on a translucent white pill with a yellow dot, rising in first. */
 
 
 	align-items    : center;
