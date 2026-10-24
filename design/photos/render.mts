@@ -164,6 +164,7 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 
 		souImaEle.src = souUrlStr; // What: Source Address Assignment. Why: The image loads the original's data. How: This sets its source.
 
+
 		await souImaEle.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
 
 
@@ -182,6 +183,7 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 
 
 		outCotObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: A large downscale should stay sharp without jagged edges. How: This asks for the browser's best resampling.
+
 
 		outCotObj.drawImage( souImaEle, croUseObj.lefNum, croUseObj.topNum, croUseObj.widNum, croUseObj.heiNum, 0, 0, outWidNum, outHeiNum ); // What: Photo Draw Call. Why: The kept part of the original fills the canvas. How: This draws the crop rectangle scaled to the canvas.
 
@@ -221,6 +223,7 @@ for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each orig
 await broInsObj.close(); // What: Browser Close Call. Why: The script should exit once every photo is written. How: This shuts Chromium down.
 
 
+
 sizRowArr.sort( ( rowOneArr, rowTwoArr ) => rowOneArr[ 0 ].localeCompare( rowTwoArr[ 0 ] ) ); // What: Size Row Sort. Why: The sizes file should list its rows in a stable order. How: This sorts them by file name.
 
 
@@ -228,7 +231,6 @@ const heiWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => String( sizCurArr
 const keyWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => sizCurArr[ 0 ].length ) ) + 2;           // What: Key Width Number. Why: Every row's colon lines up after the longest quoted name. How: This measures the longest name plus its two quotes.
 const widWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => String( sizCurArr[ 2 ] ).length ) );     // What: Width Width Number. Why: Every row's closing brace lines up after the longest width. How: This measures the longest width.
 const sizLinArr = sizRowArr.map( ( [ filNamStr, heiValNum, widValNum ], rowIndNum ) => `\t${ `'${ filNamStr }'`.padEnd( keyWidNum ) } : { heiNum : ${ `${ heiValNum },`.padEnd( heiWidNum ) } widNum : ${ String( widValNum ).padEnd( widWidNum ) } }${ rowIndNum === sizRowArr.length - 1 ? '' : ',' }` ); // What: Size Line Array. Why: The rows form an aligned table, as stacked one-line rows do everywhere else. How: This pads each field to its column's width, and only the last row goes without a comma.
-
 
 const sizTexStr = `
 
@@ -299,8 +301,6 @@ export { PHO_SIZ_OBJ }; // What: Named Export. Why: The components that show pho
 
 
 writeFileSync( SIZ_OUT_STR, sizTexStr ); // What: Sizes Write Call. Why: The page reads the photos' sizes from this file. How: This saves it.
-
-
 
 console.log( `Wrote ${ souFilArr.length } photos, ${ Math.round( befBytNum / 1024 ) } KB down to ${ Math.round( aftBytNum / 1024 ) } KB, and ${ SIZ_OUT_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count, the sizes before and after, and the sizes file's path.
 
