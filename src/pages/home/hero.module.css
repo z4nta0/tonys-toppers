@@ -158,7 +158,7 @@
 
 
 	align-items    : center;
-	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) 0.1s both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) 0.1s both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */ /* What: Literal Entrance Delay. Why: The eyebrow rises in a tenth of a second after the page loads, first of the hero's blocks. How: No duration step falls within 10% of 100ms, so the delay stays literal. */
 	background     : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-001-rec ) );            /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius  : 999px;
