@@ -72,7 +72,7 @@
 
 /* #region secHeaDiv */
 
-.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about Tony's work sit side by side, above the band's dot grid. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, and lifts it onto its own layer above the grid, copied from the shared section head. */
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about Tony's work sit side by side, above the band's dot grid. How: This spreads them across a row that wraps the note below the heading at about 951px wide and below, aligned along their bottoms, with room below, and lifts it onto its own layer above the grid, copied from the shared section head. */
 
 
 	align-items     : end;
@@ -171,7 +171,7 @@
 
 /* #region filGroDiv */
 
-.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen, above the band's dot grid. */
+.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps onto more lines at about 1,172px wide and below, above the band's dot grid. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */

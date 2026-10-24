@@ -54,7 +54,7 @@
 
 /* #region secHeaDiv */
 
-.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, copied from the shared section head. */
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps the note below the heading at about 1,027px wide and below, aligned along their bottoms, with room below, copied from the shared section head. */
 
 
 	align-items     : end;
