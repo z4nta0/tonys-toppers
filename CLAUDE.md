@@ -28,6 +28,11 @@ form a shop could build on.
 - **One name, city, and phone everywhere**: "Tony's Toppers", Bolivar,
   Missouri, and (417) 733-0681 as a click-to-call link.
 - **Author meta**: Tony's Toppers.
+- **Canonical**: the site counts as one indexed page, since its only other
+  route is the `noindex` 404 page (decided 2026-10-23, under the SEO rule), so
+  the canonical stays in `index.html`, where crawlers that never run scripts
+  can read it. The 404 page carries the home page's canonical beside its
+  `noindex`, which is accepted, since the `noindex` keeps it out of search.
 
 ## Content
 Decided 2026-10-10. Claude drafts the product photos' alt text and an About
