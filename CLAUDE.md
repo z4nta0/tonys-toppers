@@ -438,7 +438,14 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   state. Each reachable link and button must look different hovered than at
   rest and pressed than hovered (real clicks are blocked meanwhile), list
   `outline-width` in its transitions, and transition nothing under reduced
-  motion, and the first Tab stop's ring must reach 2px.
+  motion, and the first Tab stop's ring must reach 2px. Its behavior spec
+  (added 2026-10-23) checks where links lead: every bar, menu, hero, and 404
+  page section link lands on its section with no hash left in the address, a
+  Ctrl, Cmd, or middle click opens the section in a new tab without moving
+  the page clicked from or closing the menu, an address with a hash lands on
+  its section, a link to another page opens it at its top while back
+  returns near the earlier position, and the first Tab on each page reaches
+  the skip link.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance and a
   per-pixel color threshold of 0. The page's clock is fixed to one date rather
