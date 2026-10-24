@@ -443,15 +443,19 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names (a decorative arrow or emoji in a name fails), a Tab walk
-  (order, traps, focus on screen, uncovered, and visible), reflow at 320px,
-  and motion under reduced motion. axe's "needs review" results are printed
-  and attached to the report rather than failing the run. Since 2026-10-23
-  it also sends the contact form against a faked Netlify answer (the shared
-  `tests/support/netlify.ts`), scanning the thank-you and error notes with
-  axe and checking that each note's live region is in the page, empty, from
-  the first render, that the send button keeps focus through the send, and
-  that under reduced motion the notes play no motion and the thank-you note
-  still leaves when the visitor types again.
+  (order, traps, focus on screen, uncovered, and visible), reflow at 320px, and
+  motion under reduced motion, both what's playing and every element's and
+  layer's computed transitions and animations, so a reduced-motion variant
+  missing anywhere fails. axe's "needs review" results are printed and attached
+  to the report rather than failing the run. Since 2026-10-23 it also sends the
+  contact form against a faked Netlify answer (the shared
+  `tests/support/netlify.ts`), scanning the thank-you and error notes with axe
+  and checking that each note's live region is in the page, empty, from the
+  first render, that the send button keeps focus through the send, and that
+  under reduced motion the notes play no motion and the thank-you note still
+  leaves when the visitor types again, and with each note shown at 320px the
+  names and reflow checks run, plus a keyboard walk for the error note's phone
+  link.
 - `npm run test:interaction`: seal-and-shield's feedback check on every state
   (ported in full 2026-10-23). Each reachable link and button, form field,
   product card, and the About portrait's frame must look different in each

@@ -227,7 +227,7 @@ function scrSetFun () : Promise< void > {
 type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges each stop outside the page. How: This describes what the page reports about one stop.
 
 
-	covBoo : boolean, // What: Covered Boolean. Why: A stop hidden behind another element can't be seen while focused. How: This is true when something else sits on top of the stop's center.
+	covBoo : boolean, // What: Covered Boolean. Why: A stop hidden behind another element can't be seen while focused. How: This is true when something else sits on top of the center of the stop's first line.
 	desStr : string,  // What: Description String. Why: A problem should name the element a person would recognize. How: This joins the stop's tag and its label or text.
 	indBoo : boolean, // What: Indicator Boolean. Why: A keyboard user has to see where focus is. How: This is true when focusing the stop changes how it looks.
 	ordNum : number,  // What: Order Number. Why: Focus order is compared with document order. How: This is the stop's position among every element in the page.
@@ -309,7 +309,8 @@ function stoInfFun () : StoInfTyp | null {
 
 
 	const recCurObj = actCurEle.getBoundingClientRect();                                                                       // What: Rect Current Object. Why: A focused stop has to be on screen and uncovered. How: This measures the stop.
-	const topCurEle = document.elementFromPoint( recCurObj.left + recCurObj.width / 2, recCurObj.top + recCurObj.height / 2 ); // What: Top Current Element. Why: Whatever is drawn on top at the stop's center is what a person sees there. How: This asks the page which element sits at that point.
+	const linRecObj = actCurEle.getClientRects()[ 0 ] ?? recCurObj;                                                            // What: Line Rect Object. Why: A link wrapped onto two lines has a box whose center can fall on the text between its halves rather than on the link. How: This takes the stop's first line box, the same as its whole box for anything on one line.
+	const topCurEle = document.elementFromPoint( linRecObj.left + linRecObj.width / 2, linRecObj.top + linRecObj.height / 2 ); // What: Top Current Element. Why: Whatever is drawn on top at the stop's center is what a person sees there. How: This asks the page which element sits at that point.
 
 
 
@@ -449,6 +450,78 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 // #endregion keyProFun
 
+
+// #region motStyFun
+
+/**
+ * motStyFun = Motion Styles Function
+ *
+ * @summary
+ * Runs inside the page and returns every element, or ::before or ::after
+ * layer, whose computed styles would still move under reduced motion: a
+ * transition lasting longer than 1ms, or an animation lasting longer than
+ * 1ms that isn't turned off. Unlike getAnimations, which only lists motion
+ * already playing, this reads what each element would do on its next change,
+ * so a reduced-motion variant missing from any module, for a child, a layer,
+ * or something shown only later, is caught at rest. Each problem names the
+ * element by its tag and the readable part of its first class. Passed to
+ * Playwright's evaluate, so it can't read anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param void - This function takes no parameters.
+ *
+ * @returns Every element and layer that would still move.
+ * @see {@link proLisArr}
+ *
+ * @example
+ * ```ts
+ * page.evaluate(motStyFun) // => [ 'span.togBarSpa transitions for 0.209s' ]
+ * ```
+ *
+*/
+
+function motStyFun () : string[] {
+
+
+	const proLisArr : string[] = []; // What: Problem List Array. Why: Every element still moving should be reported, not just the first. How: This collects them.
+
+	const lonDurFun = ( durLisStr : string ) => durLisStr.split( ',' ).some( ( durCurStr ) => parseFloat( durCurStr ) > 0.001 ); // What: Long Duration Function. Why: A near-instant .01ms exit kept so an end event fires isn't motion. How: This reports whether any duration in a computed list runs past 1ms.
+
+
+	for ( const eleCurEle of document.querySelectorAll( '*' ) ) { // What: Element Loop. Why: A missing variant can sit on any element, not only a control. How: This walks every element on the page.
+
+
+		const desEleStr = `${ eleCurEle.tagName.toLowerCase() }${ eleCurEle.classList.length ? '.' + ( eleCurEle.classList[ 0 ].split( '_' ).find( ( clsPieStr ) => clsPieStr.length > 2 ) ?? eleCurEle.classList[ 0 ] ) : '' }`; // What: Element Description String. Why: A problem should name the element the way the stylesheet does. How: This joins the tag with the readable part of its first class, the module name a hashed class carries.
+
+
+		for ( const pseNamStr of [ '', '::before', '::after' ] ) { // What: Layer Loop. Why: A pseudo-element can carry motion of its own, such as the menu row's dot. How: This reads the element and each of its two layers.
+
+
+			const styCurObj = getComputedStyle( eleCurEle, pseNamStr || null ); // What: Style Current Object. Why: The layer's motion is read as the page would play it. How: This reads its computed styles.
+
+
+			if ( lonDurFun( styCurObj.transitionDuration ) ) proLisArr.push( `${ desEleStr }${ pseNamStr } transitions for ${ styCurObj.transitionDuration }` ); // What: Transition Check. Why: Reduced motion should leave no transition longer than 1ms. How: This records a layer that keeps one.
+
+
+
+			if ( styCurObj.animationName !== 'none' && lonDurFun( styCurObj.animationDuration ) ) proLisArr.push( `${ desEleStr }${ pseNamStr } animates ${ styCurObj.animationName } for ${ styCurObj.animationDuration }` ); // What: Animation Check. Why: Reduced motion should leave no animation longer than 1ms. How: This records a layer that keeps one.
+
+
+		}
+
+
+	}
+
+
+
+	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every layer still moving.
+
+
+}
+
+// #endregion motStyFun
+
 // #endregion Helpers
 
 
@@ -506,6 +579,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
 
 		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing animated as it opened. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
+		expect( await curPagObj.evaluate( motStyFun ) ).toEqual( [] ); // What: No Motion Styles Assertion. Why: A reduced-motion variant missing for a child, a layer, or something not playing at rest would otherwise pass. How: This reads every element's and layer's computed transitions and animations and compares the ones still lasting past 1ms with an empty list.
 
 
 	} );
@@ -564,6 +638,42 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 
 		await expect( curPagObj.locator( `#contact form [role="${ rolNamStr }"]` ) ).toContainText( notTexStr ); // What: Note Shown Assertion. Why: Focus is checked once the answer has played out. How: This waits for the note.
 		await expect( senButObj ).toBeFocused();                                                                 // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the send button still holds it.
+
+
+	} );
+
+
+
+	test( `with the ${ resDesStr } note shown at ${ REF_WID_NUM }px, every name, the keyboard walk, and the reflow stay clean`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Note State Test. Why: Each note is a state of the page with text and a link no other state shows, so the scripted checks have to cover it too, at the narrowest width, where long text is likeliest to overflow. How: This sends the form at the reflow width, then checks the names and the reflow with the note showing, and walks the page from the top for the error note, the only note with a link to reach.
+
+
+		test.slow(); // What: Slow Test Mark. Why: A full keyboard walk takes about 11 seconds alone and runs long while every suite shares the machine. How: This triples this test's timeout.
+
+		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: A focus transition still running would be measured halfway through the walk. How: This makes the page match prefers-reduced-motion: reduce.
+
+		await curPagObj.setViewportSize( { height : 844, width : REF_WID_NUM } ); // What: Narrow Viewport Call. Why: Reflow is judged at WCAG's narrowest width. How: This sizes the page to the reflow width before it loads.
+
+		await fakNetFun( curPagObj, staCodNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
+
+		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+		await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.
+
+		await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The note only shows after a send. How: This sends the message, which the fake answers.
+
+		await expect( curPagObj.locator( `#contact form [role="${ rolNamStr }"]` ) ).toContainText( notTexStr );                                          // What: Note Shown Assertion. Why: The checks have to see the note. How: This waits for it.
+		expect( await namProFun( curPagObj ) ).toEqual( [] );                                                                                             // What: No Name Problems Assertion. Why: The note's link, such as the error's phone link, needs a clean name too. How: This compares the problems with an empty list.
+		expect( await curPagObj.evaluate( () => document.documentElement.scrollWidth - document.documentElement.clientWidth ) ).toBeLessThanOrEqual( 0 ); // What: No Sideways Scroll Assertion. Why: The note's long text mustn't push the page sideways. How: This subtracts the visible width from the scrollable width.
+
+
+
+		if ( rolNamStr === 'status' ) return; // What: Thank-You Walk Guard. Why: The thank-you holds nothing a keyboard user can reach, so walking past it checks nothing new, and it hides itself partway through a walk. How: This ends the test for the thank-you before the walk.
+
+
+
+		await curPagObj.evaluate( () => { document.body.tabIndex = -1; document.body.focus(); document.body.removeAttribute( 'tabindex' ); } ); // What: Focus Reset Call. Why: The walk tabs from wherever focus is, and the send left it on the send button, past the note. How: This focuses the body for a moment, which moves the browser's starting point for Tab back to the top of the page, then makes the body unfocusable again.
+
+		expect( await keyProFun( curPagObj, engNamStr ) ).toEqual( [] ); // What: No Keyboard Problems Assertion. Why: The note's link has to be reachable and visibly focused like every other stop. How: This walks the page from the top and compares the problems with an empty list.
 
 
 	} );
