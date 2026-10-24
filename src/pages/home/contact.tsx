@@ -215,6 +215,7 @@ function ConSecCom () : React.JSX.Element {
 	const sucExiObj = useNotExiFun( forSenBoo ); // What: Success Exit Object. Why: The thank-you note should fade out rather than vanish. How: This keeps it mounted while it leaves.
 
 
+
 	// #region fieChaFun
 
 	/**
@@ -255,6 +256,7 @@ function ConSecCom () : React.JSX.Element {
 	};
 
 	// #endregion fieChaFun
+
 
 
 	// #region forSubFun
@@ -298,6 +300,7 @@ function ConSecCom () : React.JSX.Element {
 		const forFieObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Fields Object. Why: Netlify reads the fields as a URL-encoded body. How: This collects every named field, the hidden form-name included. // What: Type Assertion Note. Why: URLSearchParams accepts string pairs, while FormData can also hold files. How: This form has no file fields, so every value is a string.
 
 		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you note. How: This starts false and turns true only when Netlify answers OK.
+
 
 
 		setForErrBoo( false ); // What: Error Note Hide Call. Why: A new attempt shouldn't keep showing the last one's error. How: This hides the error note.
