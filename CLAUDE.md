@@ -311,9 +311,12 @@ passes on `close-out`.
      inline size went, since every row's value now shares one step and
      still fits a line at every width.
    - **Durations and easing**: the animation family runs to `p20` for the
-     portrait ring's 43.7-second turn, the 100ms entrance delay and the
-     cards' 30ms stagger stay literal, every curve folds into the standard
-     ease, and `html` turns smooth scrolling off under reduced motion.
+     portrait ring's 43.7-second turn, the 100ms entrance delay and the cards'
+     30ms stagger stay literal, every curve folds into the standard ease
+     (2026-10-23: except where the Interaction Feedback rule names a curve, so
+     every hover lift, nudge, and press now decelerates, the product card's
+     shadow leaving on accelerate), and `html` turns smooth scrolling off under
+     reduced motion.
    - **Shadows**: the hovered card reads the medium elevation, and the hard
      offset shadows rest on `m05` with each button's hover and press offset
      written as the resting offset plus or minus its lift step.
