@@ -20,11 +20,11 @@ import { useNavigate } from 'react-router';   // What: Use Navigate. Why: The ha
  * home.tsx = Home
  *
  * @summary
- * The home page: the hero, the collection, the craft fair gallery, Tony's
- * story, and the contact section, in that order. The bar and footer around it
- * come from app.tsx. A visitor arriving with a section's id as the hash, from
- * another page's section link or a shared address such as /#about, lands on
- * that section, and the hash is cleared from the address once used.
+ * The home page: its sections in reading order, from the hero down to the
+ * Contact section. The bar and footer around it come from app.tsx. A visitor
+ * arriving with a section's id as the hash, from another page's section link
+ * or a shared address such as /#about, lands on that section, and the hash is
+ * cleared from the address once used.
  *
  * Sections:
  *  - Components
@@ -44,10 +44,10 @@ import { useNavigate } from 'react-router';   // What: Use Navigate. Why: The ha
  * HomPagCom = Home Page Component
  *
  * @summary
- * Renders the five sections. When the address arrives with a hash, it jumps
- * straight to the section the hash names, without gliding down from the top
- * of a freshly loaded page, then replaces the address with the same path and
- * no hash, so the address stays as clean as it does for in-page links.
+ * Renders the sections in order. When the address arrives with a hash, it
+ * jumps straight to the section the hash names, without gliding down from the
+ * top of a freshly loaded page, then replaces the address with the same path
+ * and no hash, so the address stays as clean as it does for in-page links.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

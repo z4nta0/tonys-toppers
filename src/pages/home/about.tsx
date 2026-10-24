@@ -19,8 +19,8 @@ import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why
  *
  * @summary
  * The home page's story of Tony: his portrait with the Tony's Toppers logo
- * badge, his name, four paragraphs about who he is and how the business
- * began, and three stats beneath them. His age is worked out from his birth
+ * badge, his name, paragraphs about who he is and how the business began, and
+ * a few stats beneath them. His age is worked out from his birth
  * year each time the section renders, so it never needs updating by hand.
  *
  * Sections:

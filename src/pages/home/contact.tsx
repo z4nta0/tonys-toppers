@@ -6,7 +6,7 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { useState } from 'react'; // What: Use State. Why: The form remembers its fields, whether a send is out, and whether the last one went through or failed. How: Four state pairs hold them.
+import { useState } from 'react'; // What: Use State. Why: The section tracks the form's state, such as whether a request is out. How: This holds each piece.
 
 
 import type { AnimationEvent } from 'react'; // What: Animation Event. Why: A leaving note unmounts once its own exit animation ends. How: This types the end handler's event.
@@ -21,11 +21,10 @@ import type { FormEvent      } from 'react'; // What: Form Event. Why: Sending t
  * contact.tsx = Contact
  *
  * @summary
- * The home page's closing section: a note inviting visitors to reach Tony,
- * his phone number and Facebook page as links, his home town, and a form that
- * sends a name, email, the kind of piece they're interested in, and a message
- * through Netlify Forms. The fields' names must match the hidden copy of the
- * form in index.html, which Netlify reads at deploy time.
+ * The home page's closing section: the ways to reach Tony, such as his phone
+ * number, and a form that sends a message through Netlify Forms. The fields'
+ * names must match the hidden copy of the form in index.html, which Netlify
+ * reads at deploy time.
  *
  * Sections:
  *  - Types

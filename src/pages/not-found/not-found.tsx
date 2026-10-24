@@ -16,9 +16,8 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
  * not-found.tsx = Not Found
  *
  * @summary
- * The page every unknown address lands on: a 404 label, a heading saying the
- * page wasn't found, a short line pointing back to Tony's pieces, and two
- * ways onward, home and straight to the collection. It names itself in the
+ * The page every unknown address lands on: a short message saying the page
+ * wasn't found, and ways onward, such as back home. It names itself in the
  * tab and asks search engines not to index it, since the host answers every
  * unknown address with this page and a 200 status. The bar and footer around
  * it come from app.tsx, so every section link still works from here.

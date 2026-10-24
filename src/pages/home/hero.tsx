@@ -19,10 +19,9 @@ import { useSecLinFun } from '../../ui/section-link.ts'; // What: Use Section Li
  * hero.tsx = Hero
  *
  * @summary
- * The home page's opening section: where Tony works, the headline, a short
- * pitch, two buttons into the page (the collection and Tony's story), and
- * his cartoon portrait in a slowly turning ring beside a "Made with love"
- * sticker. Two soft blurred blobs float behind it all.
+ * The home page's opening section: Tony's headline and pitch, with buttons
+ * into the page, such as the one to the collection, beside his cartoon
+ * portrait in a slowly turning ring. Soft blurred blobs float behind it all.
  *
  * Sections:
  *  - Components
