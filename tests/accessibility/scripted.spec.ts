@@ -56,6 +56,45 @@ const TAB_MAX_NUM = 80;                                    // What: Tab Maximum 
 
 // #region Helpers
 
+// #region focTopFun
+
+/**
+ * focTopFun = Focus Top Function
+ *
+ * @summary
+ * Moves the browser's starting point for Tab back to the top of the page,
+ * so a keyboard walk meets every stop from the first. A click or a send can
+ * leave focus partway down, such as on the menu toggle or the send button,
+ * and blurring alone isn't enough, since browsers remember where focus last
+ * was. Focusing the body for a moment moves that point to the top, and the
+ * body is made unfocusable again straight after.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page whose focus to reset.
+ *
+ * @returns A promise that settles once focus is back at the top, with no
+ *          value.
+ *
+ * @example
+ * ```ts
+ * focTopFun(page) // => Promise<void>
+ * ```
+ *
+*/
+
+async function focTopFun ( curPagObj : Page ) : Promise< void > {
+
+
+	await curPagObj.evaluate( () => { document.body.tabIndex = -1; document.body.focus(); document.body.removeAttribute( 'tabindex' ); } ); // What: Focus Reset Call. Why: The walk tabs from wherever focus is. How: This focuses the body for a moment, then makes it unfocusable again.
+
+
+}
+
+// #endregion focTopFun
+
+
+
 // #region forFilFun
 
 /**
@@ -552,6 +591,8 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk should start from the state settled. How: This loads and settles it.
 
+		await focTopFun( curPagObj ); // What: Focus Top Call. Why: A state's action can leave focus partway down, such as on the menu toggle it clicked. How: This moves the starting point for Tab back to the top of the page, so every engine walks every stop.
+
 		expect( await keyProFun( curPagObj, engNamStr ) ).toEqual( [] ); // What: No Keyboard Problems Assertion. Why: The state passes only when every stop is reachable, in order, on screen, uncovered, and visibly focused. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -671,7 +712,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 
 
 
-		await curPagObj.evaluate( () => { document.body.tabIndex = -1; document.body.focus(); document.body.removeAttribute( 'tabindex' ); } ); // What: Focus Reset Call. Why: The walk tabs from wherever focus is, and the send left it on the send button, past the note. How: This focuses the body for a moment, which moves the browser's starting point for Tab back to the top of the page, then makes the body unfocusable again.
+		await focTopFun( curPagObj ); // What: Focus Top Call. Why: The send left focus on the send button, past the note. How: This moves the starting point for Tab back to the top of the page.
 
 		expect( await keyProFun( curPagObj, engNamStr ) ).toEqual( [] ); // What: No Keyboard Problems Assertion. Why: The note's link has to be reachable and visibly focused like every other stop. How: This walks the page from the top and compares the problems with an empty list.
 
