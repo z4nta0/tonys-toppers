@@ -568,7 +568,56 @@ for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'statu
 	} );
 
 
+
+	test( `the ${ resDesStr } note plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Note Motion Test. Why: Visitors who ask for less motion shouldn't see the note rise in or its check pop. How: This requests reduced motion, sends the form against the faked answer, and checks nothing longer than 1ms is animating once the note shows.
+
+
+		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+		await fakNetFun( curPagObj, codNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
+
+		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+		await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.
+
+		await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The note only shows after a send. How: This sends the message, which the fake answers.
+
+		await expect( curPagObj.locator( `#contact form [role="${ roleStr }"]` ) ).toContainText( texStr ); // What: Note Shown Assertion. Why: The motion is checked once the note has arrived. How: This waits for the note.
+
+		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The note should simply appear. How: This lists every animation or transition the page still holds that lasts longer than 1ms, by name, and compares the list with an empty one. // What: Type Assertion Note. Why: getAnimations types each entry as a plain Animation. How: A CSS animation or transition carries its name, so this reads each as one, falling back for a script's own.
+
+
+	} );
+
+
 }
+
+
+test( 'under reduced motion the thank-you note still leaves when the visitor types again', async ( { page : curPagObj } ) => { // What: Note Exit Test. Why: The note unmounts when its exit animation ends, so under reduced motion that exit has to stay long enough to fire its end event rather than be turned off. How: This sends the form under reduced motion, types into a field, and checks the status region empties.
+
+
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+	await fakNetFun( curPagObj, 200 ); // What: Netlify OK Fake Call. Why: The thank-you only shows after an accepted send. How: This fakes an OK answer.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+	await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.
+
+	await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The thank-you only shows after a send. How: This sends the message, which the fake accepts.
+
+
+	const staRegObj = curPagObj.locator( '#contact form [role="status"]' ); // What: Status Region Object. Why: The note's coming and going is read from its region. How: This finds the form's status region.
+
+
+	await expect( staRegObj ).toContainText( 'Your message was sent' ); // What: Note Shown Assertion. Why: The exit is checked once the note has arrived. How: This waits for the note.
+
+	await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Another Visitor' ); // What: Name Retype Call. Why: Typing again hides the thank-you. How: This changes the name field.
+
+	await expect( staRegObj ).toHaveText( '' ); // What: Region Emptied Assertion. Why: The note has to unmount once its near-instant exit ends. How: This waits until the region holds no text.
+
+
+} );
 
 // #endregion Module Init
 

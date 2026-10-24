@@ -437,7 +437,9 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   it also sends the contact form against a faked Netlify answer (the shared
   `tests/support/netlify.ts`), scanning the thank-you and error notes with
   axe and checking that each note's live region is in the page, empty, from
-  the first render and that the send button keeps focus through the send.
+  the first render, that the send button keeps focus through the send, and
+  that under reduced motion the notes play no motion and the thank-you note
+  still leaves when the visitor types again.
 - `npm run test:interaction`: seal-and-shield's feedback check on every state
   (ported in full 2026-10-23). Each reachable link and button, form field,
   product card, and the About portrait's frame must look different in each
