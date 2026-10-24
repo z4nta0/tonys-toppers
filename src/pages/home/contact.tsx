@@ -339,7 +339,7 @@ function ConSecCom () : React.JSX.Element {
 		if ( senOkaBoo ) { // What: Sent Check. Why: Only a confirmed submission is reported as sent. How: This shows the thank-you note, empties the fields, and schedules the note's hiding.
 
 
-			setForSenBoo( true ); // What: Thank-You Show Call. Why: The visitor should see the form went. How: This shows the note.
+			setForSenBoo( true ); // What: Thank-You Show Call. Why: The visitor should see the form went through. How: This shows the note.
 
 			setForDatObj( FOR_EMP_OBJ ); // What: Form Reset Call. Why: A sent form starts fresh. How: This empties every field.
 
@@ -490,7 +490,7 @@ function ConSecCom () : React.JSX.Element {
 								role='status'
 
 								onAnimationEnd={ sucExiObj.endFun }
-							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: It rises in with its check popping once and fades out when it goes, and its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
+							>{ /* What: Form Success Div Element. Why: The visitor should see the form went through. How: It rises in with its check popping once and fades out when it goes, and its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
 								<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
 							</div>
 
