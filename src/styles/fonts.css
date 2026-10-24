@@ -38,7 +38,7 @@
 
 }
 
-@font-face { /* What: Fraunces Italic Font Face. Why: Fraunces needs a true italic, which draws different letterforms than a slanted upright. How: This loads its latin italic file, which holds weight 600 alone, showing fallback text until it arrives. */
+@font-face { /* What: Fraunces Italic Font Face. Why: Fraunces is the display font, and this is its true italic, which draws different letterforms than a slanted upright. How: This loads its latin italic file, which holds weight 600 alone, showing fallback text until it arrives. */
 
 
 	font-display : swap;

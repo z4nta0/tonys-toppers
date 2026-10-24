@@ -137,7 +137,7 @@ function HerSecCom () : React.JSX.Element {
 
 					<span className={ cssModObj.herEyeSpa }>Handcrafted in Bolivar, Missouri</span>{ /* What: Hero Eyebrow Span Element. Why: Visitors should know where the pieces are made before anything else. How: This shows the town above the headline. */ }
 
-					<h1 className={ cssModObj.herTitHea }>Crafted by hand &amp; <span className={ cssModObj.titAccSpa }>made with love.</span></h1>{ /* What: Hero Title Heading Element. Why: The headline sums up the business in one line. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
+					<h1 className={ cssModObj.herTitHea }>Crafted by hand &amp; <span className={ cssModObj.titAccSpa }>made with love.</span></h1>{ /* What: Hero Title Heading Element. Why: The headline sums up the business in one sentence. How: The second half sits in an italic accent with a highlight bar beneath it. */ }
 
 					<p className={ cssModObj.herLedPar }>{ /* What: Hero Lede Paragraph Element. Why: A short pitch says what Tony makes and why it's special. How: This shows two sentences beneath the headline. */ }
 						Tony Mawhiney designs and beads every piece by hand: color-coordinated, carefully

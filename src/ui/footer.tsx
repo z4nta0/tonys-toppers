@@ -13,10 +13,10 @@ import cssModObj from './footer.module.css'; // What: CSS Module Object. Why: Th
  * footer.tsx = Footer
  *
  * @summary
- * The site's footer: one line about the business, ending in Tony's phone
- * number, which dials on phones. It reads the
- * current year each time it renders, so the copyright never goes stale. Every
- * page renders it below its content.
+ * The site's footer: one line about the business, wrapping at about 506px
+ * wide and below, and ending in Tony's phone number, which dials on phones. It
+ * reads the current year each time it renders, so the copyright never goes
+ * stale. Every page renders it below its content.
  *
  * Sections:
  *  - Components
