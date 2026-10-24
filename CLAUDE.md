@@ -131,12 +131,12 @@ src/
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
-  and a component only that page uses (the hero, products, fairs, about,
-  and contact sections) lives in that folder.
+  and a component only that page uses (the hero and the Products, Craft
+  Fairs, About, and Contact sections) lives in that folder.
 - **A page's main file is named after its folder, with no prefix**
   (`pages/home/home.tsx`), the same as the sibling projects.
 - **The product data is `pages/home/catalog.ts`**, not `products.ts`,
-  so it doesn't share a name with the products section beside it. It
+  so it doesn't share a name with the Products section beside it. It
   imports every photo through `import.meta.glob` and looks each card's up
   by file name.
 - **The product photos live in `src/assets/products/`** (decided 2026-10-10

@@ -204,7 +204,7 @@
 
 
 }
-@media ( max-width : 1000px ) { /* What: Narrow Filter Toggle Button. Why: Nine buttons in one wrapping row scatter on a narrower screen. How: This applies 1000px wide and below. */
+@media ( max-width : 1000px ) { /* What: Narrow Filter Toggle Button. Why: Nine buttons in one wrapping row scatter on a narrower screen. How: This applies 1,000px wide and below. */
 
 
 	.filTogBut { /* What: Gridded Filter Toggle Button. Why: The buttons line up better in even columns. How: This bases each button on a third of the strip's width. */
