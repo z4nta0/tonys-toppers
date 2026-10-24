@@ -154,7 +154,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
+.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
 
 
 	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
@@ -163,7 +163,7 @@
 
 
 }
-.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
+.butBasAnc--primary:hover { /* What: Hovered Button Base Anchor Primary. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
 
 
 	background : var( --acc-hov-col ); /* Accent Hover Color ~= #2d4c9d */
@@ -172,7 +172,7 @@
 
 
 }
-.butBasAnc--primary:active { /* What: Pressed Primary Button Base Anchor. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
+.butBasAnc--primary:active { /* What: Pressed Button Base Anchor Primary. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
 
 
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
@@ -180,7 +180,7 @@
 
 
 }
-.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: Seeing the collection is the quieter second way onward. How: This leaves it unfilled with ink text and an ink outline. */
+.butBasAnc--secondary { /* What: Button Base Anchor Secondary. Why: Seeing the collection is the quieter second way onward. How: This leaves it unfilled with ink text and an ink outline. */
 
 
 	background   : transparent;
@@ -189,7 +189,7 @@
 
 
 }
-.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink, turns its text cream, and lifts it slightly. */
+.butBasAnc--secondary:hover { /* What: Hovered Button Base Anchor Secondary. Why: The button should respond to the pointer. How: This fills it with ink, turns its text cream, and lifts it slightly. */
 
 
 	background : var( --bac-inv-col );                            /* Background Inverse Color = #1a1a2e */
@@ -198,7 +198,7 @@
 
 
 }
-.butBasAnc--secondary:active { /* What: Pressed Secondary Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, which also undoes its hover lift. */
+.butBasAnc--secondary:active { /* What: Pressed Button Base Anchor Secondary. Why: A press should register before the page responds. How: This presses the button in slightly, which also undoes its hover lift. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */

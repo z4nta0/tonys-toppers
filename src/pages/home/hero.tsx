@@ -123,9 +123,9 @@ function HerSecCom () : React.JSX.Element {
 		>{ /* What: Home Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
 
 
-			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: Hero Blob Div Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: Hero Blob Div Yellow Element. Why: A soft yellow glow warms the hero's top left corner. How: This draws a blurred circle that floats slowly. */ }
 
-			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivBlue } `} />{ /* What: Hero Blob Div Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
+			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivBlue } `} />{ /* What: Hero Blob Div Blue Element. Why: A soft blue glow balances the first in the bottom right corner. How: This draws a blurred circle that floats slowly, half a cycle behind the first. */ }
 
 
 
@@ -155,7 +155,7 @@ function HerSecCom () : React.JSX.Element {
 							aria-label='See the collection' // What: Collection Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
 
 							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'products' ) }
-						>{ /* What: Button Base Anchor Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the products section through scrSecFun. */ }
+						>{ /* What: Button Base Anchor Primary Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the products section through scrSecFun. */ }
 							See the collection →
 						</a>
 
@@ -165,7 +165,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#about'
 
 							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'about' ) }
-						>{ /* What: Button Base Anchor Element. Why: Visitors want to meet the maker. How: This scrolls to Tony's story through scrSecFun. */ }
+						>{ /* What: Button Base Anchor Secondary Element. Why: Visitors want to meet the maker. How: This scrolls to Tony's story through scrSecFun. */ }
 							Meet Tony
 						</a>
 
