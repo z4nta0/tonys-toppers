@@ -433,7 +433,11 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   button names (a decorative arrow or emoji in a name fails), a Tab walk
   (order, traps, focus on screen, uncovered, and visible), reflow at 320px,
   and motion under reduced motion. axe's "needs review" results are printed
-  and attached to the report rather than failing the run.
+  and attached to the report rather than failing the run. Since 2026-10-23
+  it also sends the contact form against a faked Netlify answer (the shared
+  `tests/support/netlify.ts`), scanning the thank-you and error notes with
+  axe and checking that each note's live region is in the page, empty, from
+  the first render and that the send button keeps focus through the send.
 - `npm run test:interaction`: seal-and-shield's feedback check on every
   state. Each reachable link and button must look different hovered than at
   rest and pressed than hovered (real clicks are blocked meanwhile), list

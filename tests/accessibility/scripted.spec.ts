@@ -3,10 +3,11 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty.
-import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them.
-import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty.
+import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form checks need Netlify's answer without sending anything. How: This answers the form's posts in the browser with a chosen status.
+import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
+import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.
+import { test        } from '@playwright/test';      // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
 import type { Page } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
@@ -22,12 +23,14 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * The accessibility checks axe-core can't make, run on every page state in
  * whichever engine the project runs. Names: every link and button in the
  * accessibility tree has a name, and no name carries a decorative glyph such
- * as an arrow. Keyboard: a Tab walk from the top of the page
- * reaches its end without getting trapped, never moves backwards through the
- * document, and lands only on stops that are on screen, not covered by
- * anything else, and visibly changed by focus. Reflow: at 320px wide, WCAG's
- * narrowest reflow width, nothing scrolls sideways. Motion: with reduced
- * motion requested, no animation or transition plays while the state opens.
+ * as an arrow. Keyboard: a Tab walk from the top of the page reaches its end
+ * without getting trapped, never moves backwards through the document, and
+ * lands only on stops that are on screen, not covered by anything else, and
+ * visibly changed by focus. Reflow: at 320px wide, WCAG's narrowest reflow
+ * width, nothing scrolls sideways. Motion: with reduced motion requested, no
+ * animation or transition plays while the state opens. Form: the thank-you and
+ * error notes each speak through a live region that's in the page, empty, from
+ * the first render, and the send button keeps focus while a message goes out.
  * Each failure lists every problem found, by element.
  *
  * Sections:
@@ -52,6 +55,45 @@ const TAB_MAX_NUM = 80;                                    // What: Tab Maximum 
 
 
 // #region Helpers
+
+// #region forFilFun
+
+/**
+ * forFilFun = Form Fill Function
+ *
+ * @summary
+ * Fills the contact form's three required fields, so a check can send it.
+ * Each field is looked up inside the Contact section's form, since
+ * index.html's hidden copy of it, which Netlify reads, labels its fields the
+ * same way, and the Message label is matched exactly, since the Send Message
+ * button's own label holds the word too.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page whose form to fill.
+ *
+ * @returns A promise that settles once every field is filled, with no value.
+ *
+ * @example
+ * ```ts
+ * forFilFun(page) // => Promise<void>
+ * ```
+ *
+*/
+
+async function forFilFun ( curPagObj : Page ) : Promise< void > {
+
+
+	await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Test Visitor' );                 // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.locator( '#contact form' ).getByLabel( 'Email' ).fill( 'visitor@test.example' );             // What: Email Fill Call. Why: The email is required. How: This types an address on the reserved .example domain.
+	await curPagObj.locator( '#contact form' ).getByLabel( 'Message', { exact : true } ).fill( 'Hello, Tony!' ); // What: Message Fill Call. Why: The message is required. How: This types a short one.
+
+
+}
+
+// #endregion forFilFun
+
+
 
 // #region namProFun
 
@@ -464,6 +506,63 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
 
 		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing animated as it opened. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
+
+
+	} );
+
+
+}
+
+
+for ( const [ codNum, roleStr, texStr, resDesStr, resVerStr ] of [ [ 200, 'status', 'Your message was sent', 'sent', 'is sent' ], [ 500, 'alert', "didn't go through", 'failed', 'fails' ] ] as const ) { // What: Form Result Loop. Why: The thank-you and the error each have their own live region. How: This declares the region and focus tests once per answer, pairing Netlify's status with the region's role, words only that note shows, and two ways of naming the result in the titles.
+
+
+	test( `a ${ resDesStr } message fills ${ roleStr === 'alert' ? 'an' : 'a' } ${ roleStr } region that was in the page, empty, from the start`, async ( { page : curPagObj } ) => { // What: Result Announcement Test. Why: A live region added at the moment it speaks is often missed, so the note's region has to wait in the page, empty, and gain the note once the answer arrives. How: This checks the form holds exactly one such region, empty on load, sends the form, and checks the region then holds the note while the other region stays empty.
+
+
+		await fakNetFun( curPagObj, codNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
+
+		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+		const othRegObj = curPagObj.locator( `#contact form [role="${ roleStr === 'status' ? 'alert' : 'status' }"]` ); // What: Other Region Object. Why: Only the matching note should speak. How: This finds the form's other live region.
+		const resRegObj = curPagObj.locator( `#contact form [role="${ roleStr }"]` );                                   // What: Result Region Object. Why: The note is announced through this region. How: This finds it inside the form.
+
+
+		await expect( resRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: The region has to be in the page before anything is sent. How: This checks there's exactly one.
+		await expect( resRegObj ).toHaveText( '' ); // What: Region Empty Assertion. Why: An empty region on load means its later note is a change a screen reader announces. How: This checks it holds no text yet.
+
+		await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.
+
+		await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: This is the action under test. How: This sends the message, which the fake answers.
+
+		await expect( resRegObj ).toContainText( texStr ); // What: Region Note Assertion. Why: The answer should reach screen readers. How: This checks the region now holds the note.
+		await expect( othRegObj ).toHaveText( '' );        // What: Other Region Empty Assertion. Why: Only one note answers each send. How: This checks the other region stayed empty.
+
+
+	} );
+
+
+
+	test( `the send button keeps focus when a message ${ resVerStr }`, async ( { page : curPagObj } ) => { // What: Send Focus Test. Why: A button disabled while it holds focus drops that focus to the page, so the send button has to keep it through the send. How: This sends from the focused button and checks it still holds focus once the answer has played out.
+
+
+		await fakNetFun( curPagObj, codNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
+
+		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+		const senButObj = curPagObj.getByRole( 'button', { name : /^Send/ } ); // What: Send Button Object. Why: Focus is checked on the send button, whose name reads Sending while a message is out. How: This finds it by the start of its name.
+
+
+		await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.
+
+		await senButObj.focus(); // What: Send Focus Call. Why: The problem only shows while the button holds focus, which a click doesn't give it in every engine. How: This focuses it directly.
+
+		await curPagObj.keyboard.press( 'Enter' ); // What: Enter Press Call. Why: This is the action under test. How: This sends the message from the focused button.
+
+		await expect( curPagObj.locator( `#contact form [role="${ roleStr }"]` ) ).toContainText( texStr ); // What: Note Shown Assertion. Why: Focus is checked once the answer has played out. How: This waits for the note.
+		await expect( senButObj ).toBeFocused();                                                         // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the send button still holds it.
 
 
 	} );

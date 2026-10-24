@@ -299,7 +299,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR, type StaRecTyp }; // What: Named Exports. Why: Every suite shares these states and their opener. How: This exports the state list, its type, and the helper that opens one.
+export { opeStaFun, STA_REC_ARR, type StaRecTyp, waiSetFun }; // What: Named Exports. Why: Every suite shares these states and their opener, and a check that changes the page waits for it to settle the same way. How: This exports the state list, its type, the helper that opens one, and the one that waits for the page to settle.
 
 // #endregion Exports
 
