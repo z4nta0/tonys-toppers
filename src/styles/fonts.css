@@ -8,7 +8,7 @@
  * The site's self-hosted fonts: Fraunces, the display serif, and Outfit, the
  * body sans serif, replacing the Google Fonts stylesheet and preconnect links
  * index.html used to load, so a visit makes no requests to a third party.
- * Each file is the same latin subset Google served, which covers every
+ * Each file is the same Latin subset Google served, which covers every
  * character the copy uses except a few symbols, such as its arrows; none of
  * Google's files for either family has those, so they keep rendering from a
  * fallback font as before. The upright Fraunces and Outfit files are variable
@@ -26,7 +26,7 @@
 
 
 
-@font-face { /* What: Fraunces Font Face. Why: Fraunces is the display font. How: This loads its latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+@font-face { /* What: Fraunces Font Face. Why: Fraunces is the display font. How: This loads its Latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
 
 
 	font-display : swap;
@@ -38,7 +38,7 @@
 
 }
 
-@font-face { /* What: Fraunces Italic Font Face. Why: Fraunces is the display font, and this is its true italic, which draws different letterforms than a slanted upright. How: This loads its latin italic file, which holds weight 600 alone, showing fallback text until it arrives. */
+@font-face { /* What: Fraunces Italic Font Face. Why: Fraunces is the display font, and this is its true italic, which draws different letterforms than a slanted upright. How: This loads its Latin italic file, which holds weight 600 alone, showing fallback text until it arrives. */
 
 
 	font-display : swap;
@@ -50,7 +50,7 @@
 
 }
 
-@font-face { /* What: Outfit Font Face. Why: Outfit is the body font. How: This loads its latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
+@font-face { /* What: Outfit Font Face. Why: Outfit is the body font. How: This loads its Latin variable file across its full 100 to 900 weight range, showing fallback text until it arrives. */
 
 
 	font-display : swap;

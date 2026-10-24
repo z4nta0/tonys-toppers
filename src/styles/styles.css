@@ -160,7 +160,7 @@
 	--err-mai-col : #b91c1c;                                                                                /* What: Error Main Color. Why: This is the red that marks an error, such as an error border. How: This is set to a fixed hex color, = #b91c1c. */
 	--err-tin-col : #fde8e8;                                                                                /* What: Error Tint Color. Why: This is a pale red behind error text. How: This is set to a fixed hex color, = #fde8e8. */
 	--foc-rin-col : var( --acc-mai-col );                                                                   /* What: Focus Ring Color. Why: Keyboard focus needs one ring color that stands out, kept apart from the accent so it can change on its own. How: This reads the main accent. */
-	--scr-mai-col : var( --tex-mai-col );                                                                   /* What: Scrim Main Color. Why: A scrim dims the page behind a layer, such as the menu. How: This reads the main text color, and a scrim reads it at its own alpha. */
+	--scr-mai-col : var( --tex-mai-col );                                                                   /* What: Scrim Main Color. Why: A scrim dims the page behind an open layer. How: This reads the main text color, and a scrim reads it at its own alpha. */
 	--sha-mai-col : var( --tex-mai-col );                                                                   /* What: Shadow Main Color. Why: Shadows cast ink rather than pure black. How: This reads the main text color, and shadows read it at their own alpha. */
 	--suc-dar-col : ;                                                                                       /* What: Success Dark Color. Why: The standard role set includes the success family. How: This site's thank-you note keeps its text in ink, so it stays empty. */
 	--suc-mai-col : #d97706;                                                                                /* What: Success Main Color. Why: This is the deeper yellow that marks success, such as a success border. How: This is set to a fixed hex color, = #d97706. */
@@ -537,7 +537,7 @@ section { /* What: Section. Why: No section should ever be wider than the screen
 
 /* #region Body State */
 
-#appMouDiv { /* What: App Mount Div. Why: index.html ships the element React renders into, outside any component, and the footer should sit at the bottom of a short page. How: This stacks the bar, main landmark, and footer in a column at least a screen tall. */
+#appMouDiv { /* What: App Mount Div. Why: index.html ships the element React renders into, outside any component, and the footer should sit at the bottom of a short page. How: This stacks the main landmark and footer in a column at least a screen tall, while the fixed bar and its scrim sit outside the flow. */
 
 
 	display        : flex;
