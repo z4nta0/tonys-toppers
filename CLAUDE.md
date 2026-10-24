@@ -137,8 +137,8 @@ Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
   (`pages/home/home.tsx`), the same as the sibling projects.
 - **The product data is `pages/home/catalog.ts`**, not `products.ts`,
   so it doesn't share a name with the Products section beside it. It
-  imports every photo through `import.meta.glob` and looks each card's up
-  by file name.
+  imports every photo through `import.meta.glob` and looks up each card's
+  photo by file name.
 - **The product photos live in `src/assets/products/`** (decided 2026-10-10
   by the user), though only the home page shows them, in one flat folder,
   since a folder per category would pass the two-level depth limit. Step

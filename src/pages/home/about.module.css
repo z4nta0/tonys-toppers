@@ -88,7 +88,7 @@
 
 /* #region porWraDiv */
 
-.porWraDiv { /* What: Portrait Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it about 104px below the top of the screen, which also places the logo badge against it. */
+.porWraDiv { /* What: Portrait Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it about 104px below the top of the screen, which also makes it the box the logo badge is placed against. */
 
 
 	position : sticky;

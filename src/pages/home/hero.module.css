@@ -402,7 +402,7 @@
 
 /* #region herVisDiv */
 
-.herVisDiv { /* What: Hero Visual Div. Why: The portrait and its sticker need a stage of their own. How: This sets a centered stage that fills its column, capped at about 426px or a horizontal step that grows past it on wide screens, as tall as the ring plus room for its drift and the sticker, sizes the portrait ring and the sticker its children read, and rises in with the words. */
+.herVisDiv { /* What: Hero Visual Div. Why: The portrait and its sticker need a stage of their own. How: This sets a centered stage that fills its column, capped at about 426px or a horizontal step that grows past it on wide screens, as tall as the ring plus room for its drift and the sticker, hands its children the portrait ring's and sticker's widths, and rises in with the words. */
 
 
 	--her-sti-wid : calc( var( --ver-rhy-p07 ) * 1rem );                              /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Hero Sticker Width. Why: The sticker's size also sets how far the ring moves over to make room for it. How: The sticker sizes itself from this, and the ring reads it to center the pair. */
@@ -451,7 +451,7 @@
 
 /* #region porRinDiv */
 
-.porRinDiv { /* What: Portrait Ring Div. Why: The portrait sits in a round frame that drifts slowly in a small circle. How: This centers a circle the ring width across in the stage, shifted right by half the sticker's overhang so the pair sits centered, and turns it about a point about 15px above its middle, so it drifts in a circle about 15px in radius rather than spinning in place. */
+.porRinDiv { /* What: Portrait Ring Div. Why: The portrait sits in a round frame that drifts slowly in a small circle. How: This centers a circle the ring width across in the stage, shifted right by half the sticker's overhang so the pair sits centered, and turns it around a point about 15px above its middle, so it drifts in a circle about 15px in radius rather than spinning in place. */
 
 
 	animation        : porRinDivLoopSpin var( --dur-ani-p20 ) linear infinite;    /* Duration Animation Base Plus 20 ~= 43,721.0ms */

@@ -1,4 +1,4 @@
-# What: All Crawlers Group. Why: Tony's Toppers is a real maker who wants to be found, so every crawler may read every page. How: This allows the whole site to any crawler; the 404 page keeps itself out of results with its own noindex tag.
+# What: All Crawlers Group. Why: Tony is a real maker who wants to be found, so every crawler may read every page. How: This allows the whole site to any crawler; the 404 page keeps itself out of results with its own noindex tag.
 User-agent: *
 Allow: /
 

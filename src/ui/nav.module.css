@@ -329,7 +329,7 @@
 		border-bottom  : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 		display        : block;
 		left           : 0;
-		max-height     : calc( 100vh - var( --spa-ver-bas ) * 2 - var( --ver-rhy-p04 ) * 1rem );                         /* Spacing Vertical Base ~= 14.572px, doubled to ~= 29.144px, Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Below The Bar Height. Why: A tall menu on a short screen would run off the bottom with no way to reach its end. How: This caps it at the screen's height less the bar's padding and logo, and the overflow below scrolls. */
+		max-height     : calc( 100vh - var( --spa-ver-bas ) * 2 - var( --ver-rhy-p04 ) * 1rem );                         /* Spacing Vertical Base ~= 14.572px, doubled to ~= 29.144px, Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Below The Bar Height. Why: A tall menu on a short screen would run off the bottom with no way to reach its end. How: This caps it at the screen's height less the bar's padding and logo, and anything taller scrolls inside it. */
 		overflow-y     : auto;
 		padding        : var( --spa-ver-bas ) var( --gut-sid-pad ) var( --spa-ver-p02 );                                 /* Spacing Vertical Base ~= 14.572px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
 		pointer-events : none;

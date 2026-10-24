@@ -9,7 +9,7 @@ import reaPluFun from '@vitejs/plugin-react'; // What: React Plugin Function. Wh
 import { defineConfig } from 'vite'; // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps VIT_CON_OBJ.
 
 
-import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a Vite plugin. How: This types minHtmFun's return, which types its hook.
+import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a Vite plugin. How: This types minHtmFun's return, which also types the arguments its hook receives.
 
 // #endregion Imports
 
