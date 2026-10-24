@@ -8,6 +8,7 @@ import lntSvgUrl from './logo-notext.svg'; // What: Logo-No-Text SVG URL. Why: T
 
 
 import { Link         } from 'react-router';      // What: Link. Why: The brand returns to the home page without a full page load. How: This renders the brand as a router link to the root.
+import { modCliFun    } from './section-link.ts'; // What: Modified Click Function. Why: A Ctrl, Cmd, Shift, or Alt click on the skip link should open it the browser's own way. How: The skip link's click handler asks it before cancelling the default.
 import { useEffect    } from 'react';             // What: Use Effect. Why: The bar reacts to the page around it, such as its scroll position. How: This sets up the bar's listeners and watchers, and undoes them again.
 import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to track and mark active. How: This reads the current path.
 import { useRef       } from 'react';             // What: Use Ref. Why: The open menu works on elements this component renders, such as the toggle. How: This creates the refs those elements attach.
@@ -23,12 +24,13 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  *
  * @summary
  * The site's fixed top bar: the brand, which returns to the home page, a link
- * to each home page section, and a toggle that, at 900px wide and below,
- * opens those links as a menu. The bar tightens and gains a bottom hairline
- * once the page scrolls, and on the home page it marks the link for the
- * section being read. The menu also offers ways to reach Tony, such as a
- * button to call or text him, over a scrim that dims the page. Every page
- * renders it above its content.
+ * to each home page section, and a toggle that, at 900px wide and below, opens
+ * those links as a menu. The bar tightens and gains a bottom hairline once the
+ * page scrolls, and on the home page it marks the link for the section being
+ * read. The menu also offers ways to reach Tony, such as a button to call or
+ * text him, over a scrim that dims the page. Every page renders it above its
+ * content, led by a skip link, the page's first stop, that jumps a keyboard
+ * user past the bar to the main content.
  *
  * Sections:
  *  - Constants
@@ -77,13 +79,15 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * screen reader users stay in the bar. Each link reaches its section through
  * section-link.ts, scrolling in place on the home page or navigating home from
  * any other page, and leaves a Ctrl, Cmd, Shift, Alt, or middle click to the
- * browser.
+ * browser. A skip link comes first, waiting above the screen until it's
+ * focused, and its plain click focuses the main element without leaving a hash
+ * in the address.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
  *
- * @returns The scrim and the bar's nav element.
+ * @returns The skip link, the scrim, and the bar's nav element.
  *
  * @example
  * ```tsx
@@ -254,8 +258,28 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Navigation Fragment. Why: The scrim and the bar render together, the scrim first. How: This groups them without adding a wrapper element. */ }
+		<>{ /* What: Navigation Fragment. Why: The skip link, the scrim, and the bar render together, the skip link first so it's the page's first stop, then the scrim. How: This groups them without adding a wrapper element. */ }
 
+
+			<a
+				className={ cssModObj.navSkiAnc }
+
+				href='#main'
+
+				onClick={ ( cliEveObj ) => { // What: Skip Click Handler. Why: The jump should land in the page's content without leaving a hash in the address. How: This leaves a modified click to the browser, and otherwise cancels the default and focuses the main element.
+
+
+					if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, or Alt click asks the browser to open the link its own way. How: This returns before the default is cancelled.
+
+
+
+					cliEveObj.preventDefault(); // What: Default Prevent Call. Why: The browser's own jump would put #main in the address. How: This cancels it.
+
+					document.getElementById( 'main' )?.focus(); // What: Main Focus Call. Why: Focus has to land past the bar, so the next Tab continues into the content. How: This focuses the page's main element, which also brings it into view.
+
+
+				} }
+			>Skip to main content</a>{ /* What: Navigation Skip Anchor Element. Why: A keyboard user shouldn't have to Tab through every link in the bar to reach the page. How: This is the page's first stop, waiting above the screen until it's focused, when it slides down over the bar's corner, and its click moves focus to the main element. */ }
 
 			<div
 				ref={ scrDivRef }

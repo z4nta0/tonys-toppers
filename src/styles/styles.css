@@ -480,6 +480,13 @@ main { /* What: Main. Why: The footer should sit at the bottom of the screen on 
 
 
 }
+main:focus { /* What: Focused Main. Why: The skip link moves focus to the main element, which is where the jump lands rather than a control, and a ring around the whole page would only confuse. How: This removes its focus outline. */
+
+
+	outline : none;
+
+
+}
 
 a { /* What: Anchor. Why: Links should take their surroundings' color until a module styles them. How: This inherits the text color. */
 

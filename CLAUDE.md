@@ -156,6 +156,14 @@ Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
   own copy with a white disc behind the TT, so the favicon holds up on a
   dark tab bar.
 
+## Main content
+Decided 2026-10-23, under the user-level "## Skip Link And Modal Layers"
+rule. The main content is each page between the bar and the footer: the
+`<main>` in `app.tsx`, which wraps whichever route matches and carries
+`id='main'` and `tabIndex={ -1 }`. The skip link is the first thing
+`NavBarCom` renders, so every page starts with it, and it waits above the
+screen until it's focused.
+
 ## Unused files
 Decided 2026-10-10. An unused image is listed for the user to confirm before
 it's removed. Any other file that nothing references is removed without

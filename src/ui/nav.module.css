@@ -5,22 +5,83 @@
  * nav.module.css = Navigation Bar Module
  *
  * @summary
- * Styles for NavBarCom: the fixed, frosted top bar, which tightens and gains
- * a hairline once the page scrolls, with the brand on the left and the
- * section links in a row on the right. On screens 900px wide or narrower the
- * links move into a menu that slides down below the bar from the toggle's
- * three bars, over a scrim that dims the page, and is hidden from the Tab
- * order and screen readers once it has slid away. The menu's rows are set in
- * the serif with hairlines between them and a yellow dot for the section
- * being read, rise in one after another, and end with the ways to reach Tony,
- * such as a call button. The bar's states are attributes rather than classes,
- * such as data-mobile-menu-open on the menu and the scrim.
+ * Styles for NavBarCom: a skip link that waits above the screen until it's
+ * focused, then the fixed, frosted top bar, which tightens and gains a
+ * hairline once the page scrolls, with the brand on the left and the section
+ * links in a row on the right. On screens 900px wide or narrower the links
+ * move into a menu that slides down below the bar from the toggle's three
+ * bars, over a scrim that dims the page, and is hidden from the Tab order and
+ * screen readers once it has slid away. The menu's rows are set in the serif
+ * with hairlines between them and a yellow dot for the section being read,
+ * rise in one after another, and end with the ways to reach Tony, such as a
+ * call button. The bar's states are attributes rather than classes, such as
+ * data-mobile-menu-open on the menu and the scrim.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
 
 
+
+.navSkiAnc { /* What: Navigation Skip Anchor. Why: A keyboard user should be able to jump past the bar, and the link shouldn't show until it's needed. How: This sets it as a navy pill with cream text and a hard ink shadow, like the menu's call button, fixed just above the screen's top edge at the page's side gutter, and eases its slide into view and back out, leaving on the accelerating curve, along with its hover fill, lift, and shadow, its press, and its focus ring. */
+
+
+	background      : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
+	border-radius   : 999px;
+	box-shadow      : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	color           : var( --tex-acc-col );                                                                           /* Text Accent Color = #fdf9ee */
+	font-size       : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight     : 600;
+	left            : var( --gut-sid-pad );                                                                           /* Gutter Side Padding, about 19.304px - 44.876px */
+	padding         : var( --spa-ver-bas ) var( --spa-hor-p02 );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	position        : fixed;
+	text-decoration : none;
+	top             : var( --spa-ver-m02 );                                                                           /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	transform       : translateY( calc( -100% - var( --spa-ver-m02 ) * 2 ) );                                         /* Spacing Vertical Base Minus 2 ~= -16.608px */ /* What: Hidden Offset. Why: The link waits just above the screen until it's focused, clear of the edge so no sliver of it or its shadow shows. How: This raises it by its own height plus twice its top offset, leaving its bottom edge a top offset above the screen, farther than its shadow reaches. */
+	transition      : background var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-acc-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	z-index         : 4;                                                                                              /* What: Skip Link Stack Level. Why: The focused link has to show above the bar, at 3, and the scrim, at 2. How: This sets it one level above the bar. */
+
+
+}
+.navSkiAnc:focus { /* What: Focused Navigation Skip Anchor. Why: The link has to come into view however focus reaches it. How: This slides it down over the bar's corner on the decelerating curve, still easing its hover fill, lift, and shadow, its press, and its focus ring, on :focus rather than :focus-visible so a script's focus shows it too. */
+
+
+	transform  : translateY( 0 );
+	transition : background var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.navSkiAnc:hover { /* What: Hovered Navigation Skip Anchor. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match, like the menu's call button. */
+
+
+	background : var( --acc-hov-col ); /* Accent Hover Color ~= #2d4c9d */
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-hor-m07 ) ) calc( var( --ver-rhy-m05 ) * 1rem + var( --spa-ver-m07 ) ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 7 ~= 2.035px, Shadow Main Color = #1a1a2e */ /* What: Anchored Lift Shadow Offset. Why: The shadow should stay where it was while the button lifts toward the pointer. How: Each offset adds the lift's own step to the resting offset, so the shadow grows by exactly as much as the button rises. */
+	transform  : translate( calc( var( --spa-hor-m07 ) * -1 ), calc( var( --spa-ver-m07 ) * -1 ) );                                                            /* Spacing Horizontal Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.navSkiAnc:active { /* What: Pressed Navigation Skip Anchor. Why: A press should register before focus moves. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
+
+
+	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
+	transform  : scale( 0.97 );                                                                                  /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes its hover lift, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Skip Anchor. Why: Someone who asked for less motion shouldn't see the link slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navSkiAnc,
+	.navSkiAnc:focus { /* What: Motionless Navigation Skip Anchor. Why: The link should simply appear, and its hover, press, and focus changes should switch on at once. How: This turns the transition off on both the hidden and the focused rule, since the focused rule outranks the base. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
 
 .navScrDiv { /* What: Navigation Scrim Div. Why: The open phone menu should stand apart from a dimmed page, and the page should only dim on screens that have the menu. How: This covers the screen in the scrim color just under the bar, hidden by default and shown 900px wide and below, fading in while the menu is open and out, accelerating, when it closes. */
 
