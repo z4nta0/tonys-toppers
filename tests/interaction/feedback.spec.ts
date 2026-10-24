@@ -60,11 +60,11 @@ type SnaRecTyp = { // What: Snapshot Record Type. Why: An element's look, and wh
 
 // #region Constants
 
-const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control or a hover-only card or frame and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
-const ERR_LIN_STR = '#contact form [role="alert"] a';                                        // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
-const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-width' ];                    // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
-const HOV_TAR_STR = '[class*="proCarArt"], [class*="porFraDiv"]';                            // What: Hover Target String. Why: The product cards and the About portrait's frame respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
-const SET_WAI_NUM = 400;                                                                     // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
+const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'box-shadow', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control or a hover-only card or frame and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
+const ERR_LIN_STR = '#contact form [role="alert"] a';                                                      // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
+const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-width' ];                                  // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
+const HOV_TAR_STR = '[class*="proCarArt"], [class*="porFraDiv"]';                                          // What: Hover Target String. Why: The product cards and the About portrait's frame respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
+const SET_WAI_NUM = 400;                                                                                   // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
 
 // #endregion Constants
 
@@ -336,7 +336,7 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], boolean ] ) : 
 
 
 
-	if ( aftIncBoo ) snaRecArr.push( snaStyFun( getComputedStyle( eleCurEle, '::after' ) ) ); // What: After Layer Snapshot. Why: A card's shadow fades in on its ::after layer. How: When asked, this records that layer last.
+	if ( aftIncBoo ) snaRecArr.push( snaStyFun( getComputedStyle( eleCurEle, '::after' ) ) ); // What: After Layer Snapshot. Why: A hover-only element can carry part of its look on its ::after layer, such as a shadow that fades in. How: When asked, this records that layer last.
 
 
 
@@ -748,7 +748,7 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 		const hovSnaArr = await snaHanFun( tarCurObj, CON_PRO_ARR, true ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest. How: This records it.
-		const traDurStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ getComputedStyle( tarCurEle ).transitionDuration }, ${ getComputedStyle( tarCurEle, '::after' ).transitionDuration }` ); // What: Transition Duration String. Why: A card's shadow fades in on its ::after layer, so both have to ease normally and stand still under reduced motion. How: This joins the element's durations with its ::after layer's.
+		const traDurStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ getComputedStyle( tarCurEle ).transitionDuration }, ${ getComputedStyle( tarCurEle, '::after' ).transitionDuration }` ); // What: Transition Duration String. Why: A hover-only element can fade part of its look in on its ::after layer, so both have to ease normally and stand still under reduced motion. How: This joins the element's durations with its ::after layer's.
 
 
 		if ( valSigFun( resSnaArr ) === valSigFun( hovSnaArr ) ) proLisArr.push( `${ tarDesStr } looks the same hovered` ); // What: Hover Check. Why: A hovered card or frame has to respond, under reduced motion too. How: This records one that doesn't change.
