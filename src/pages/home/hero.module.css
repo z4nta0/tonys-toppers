@@ -177,12 +177,12 @@
 .herEyeSpa::before { /* What: Hero Eyebrow Span Dot. Why: A small yellow dot leads the eye into the line. How: This draws a yellow circle about 8px across with a soft yellow halo. */
 
 
-	background    : var( --acc-sec-col );                                                                                          /* Accent Secondary Color = #fbbf24 */
+	background    : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
 	border-radius : 50%;
 	box-shadow    : 0 0 0 calc( var( --ver-rhy-m05 ) * 1rem ) oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-004-rec ) ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
 	content       : '';
-	height        : calc( var( --ver-rhy-m02 ) * 1rem );                                                                           /* Vertical Rhythm Base Minus 2 ~= 8.304px */
-	width         : calc( var( --ver-rhy-m02 ) * 1rem );                                                                           /* Vertical Rhythm Base Minus 2 ~= 8.304px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+	height        : calc( var( --ver-rhy-m02 ) * 1rem ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+	width         : calc( var( --ver-rhy-m02 ) * 1rem ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }

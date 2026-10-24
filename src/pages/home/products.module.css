@@ -47,7 +47,7 @@
 
 
 	background-image : radial-gradient( circle, oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) 1px, transparent 1px ); /* Text Main Color = #1a1a2e, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
-	background-size  : var( --spa-hor-p01 ) var( --spa-ver-p01 );                                                                           /* Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 1 ~= 19.304px */
+	background-size  : var( --spa-hor-p01 ) var( --spa-ver-p01 ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 1 ~= 19.304px */
 	content          : '';
 	inset            : 0;
 	pointer-events   : none;
