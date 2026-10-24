@@ -151,12 +151,38 @@
 
 /* #region faiGriDiv */
 
-.faiGriDiv { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least about 138px wide, or horizontal step 019 on wider screens, or the full width when that's narrower. */
+.faiGriDiv { /* What: Fairs Grid Div. Why: The four booth shots should fill every row, never leaving a short last one. How: This lays them out in four even columns, stepping to two at 900px wide and below and one at 360px and below. */
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );                   /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	grid-template-columns : repeat( auto-fit, minmax( min( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-019 ) ), 100% ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 19 ~= 202.448px @ 1,920px width */
+	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	grid-template-columns : repeat( 4, 1fr );
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Fairs Grid Div. Why: Four frames would be cramped on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.faiGriDiv { /* What: Halved Fairs Grid Div. Why: Two rows of two keep every row full. How: This sets two even columns. */
+
+
+		grid-template-columns : repeat( 2, 1fr );
+
+
+	}
+
+
+}
+@media ( max-width : 360px ) { /* What: Phone Fairs Grid Div. Why: Two frames would fall under the cards' 138px minimum on the narrowest phones. How: This applies 360px wide and below. */
+
+
+	.faiGriDiv { /* What: Stacked Fairs Grid Div. Why: The booth shots read best one at a time there. How: This sets a single column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
 
 
 }

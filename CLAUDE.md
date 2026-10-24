@@ -104,10 +104,13 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
   size, sending the portrait around a wide circle off the hero's edges).
   Firefox alone shows a brief cross flashing over the sticker now and
   then, which no screenshot catches; the user chose to leave it.
-- **Grid cards**: the products' and gallery's minimum card widths take
-  `max()` of about 138px and a horizontal step (020 and 019), replacing the
-  narrow-screen override. A 320px screen shows one column of each, the
-  same as before.
+- **Grid cards**: the products grid's minimum card width takes `max()` of
+  about 138px and horizontal step 020, replacing the narrow-screen override,
+  so a 320px screen shows one column. The Craft Fairs gallery's four booth
+  shots step instead, so every row is full (decided 2026-10-23, under the
+  Card Grids rule): four columns, two at 900px wide and below, and one at
+  360px and below, where two would fall under the 138px minimum. That adds
+  360px to the breakpoints, beside 900px and 1,000px.
 
 ## Directory structure
 Decided 2026-10-10, matching reese-roofing's and seal-and-shield's adaptation

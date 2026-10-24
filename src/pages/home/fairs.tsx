@@ -17,9 +17,9 @@ import { PRO_REC_ARR } from './catalog.ts'; // What: Product Record Array. Why: 
  *
  * @summary
  * The home page's craft fair gallery: a heading, a line about where Tony sets
- * up, and his booth shots in a grid with as many columns as fit. The same
- * photos also appear under the product filters for the kinds of pieces they
- * show.
+ * up, and his booth shots in a grid of four columns, stepping to two and then
+ * one on narrower screens, so every row is full. The same photos also appear
+ * under the product filters for the kinds of pieces they show.
  *
  * Sections:
  *  - Constants
