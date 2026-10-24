@@ -55,9 +55,9 @@ type CatSluTyp = 'pen-topper' | 'wine-stopper' | 'keychain' | 'dog-necklace' | '
  * CAT_LAB_OBJ = Category Label Object
  *
  * @summary
- * The singular name of each kind of piece, keyed by its category's slug, which
- * a card shows as its tag and subtitle and numbers in its title. Every row is
- * a slug and its label, so no row needs a comment of its own.
+ * The singular name of each kind of piece, keyed by its category's slug. A
+ * card shows it as its tag and subtitle and numbers it in its title. Every row
+ * is a slug and its label, so no row needs a comment of its own.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

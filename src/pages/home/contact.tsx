@@ -181,14 +181,14 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
  * ConSecCom = Contact Section Component
  *
  * @summary
- * Renders the Contact section. The form's fields are controlled, the browser
- * won't send it until the required name, email, and message are filled in and
- * the email looks like an address, and typing in any field hides the thank-you
- * note. Sending it waits for Netlify's answer before showing the thank-you
- * note or, when the message didn't go through, an error note that keeps the
- * visitor's details for a retry. The icons beside the contact links are hidden
- * from screen readers, and the send button is named by its words alone, so
- * neither reads a decorative glyph aloud.
+ * Renders the Contact section. The form's fields are controlled, typing in any
+ * field hides the thank-you note, and the browser won't send the form until
+ * the required name, email, and message are filled in and the email looks like
+ * an address. Sending it waits for Netlify's answer before showing the
+ * thank-you note or, when the message didn't go through, an error note that
+ * keeps the visitor's details for a retry. The icons beside the contact links
+ * are hidden from screen readers, and the send button is named by its words
+ * alone, so neither reads a decorative glyph aloud.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

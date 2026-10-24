@@ -5,12 +5,12 @@
  * motion.ts = Motion
  *
  * @summary
- * The reduced-motion check that motion JavaScript plays itself consults
- * before playing: whether the visitor's operating system asks for reduced
- * motion. A smooth scroll started from JavaScript never sees a stylesheet's
- * media query, so it asks here instead. It reads the live media query each
- * time, so a change to the setting takes effect without a reload. Adapted
- * from ease-my-life's own.
+ * The reduced-motion check that JavaScript consults before it plays any motion
+ * itself: whether the visitor's operating system asks for reduced motion. A
+ * smooth scroll started from JavaScript never sees a stylesheet's media query,
+ * so it asks here instead. It reads the live media query each time, so a
+ * change to the setting takes effect without a reload. Adapted from
+ * ease-my-life's own.
  *
  * Sections:
  *  - Helpers

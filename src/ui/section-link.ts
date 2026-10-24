@@ -45,7 +45,7 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * with a modifier key held (Ctrl or Cmd to open a new tab, Shift for a new
  * window, Alt to download) or with any button but the main one. A section
  * link's handler returns early when this is true, so the link's own address
- * opens the home page at the section, where the home page scrolls to it.
+ * opens the home page at the section, and the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

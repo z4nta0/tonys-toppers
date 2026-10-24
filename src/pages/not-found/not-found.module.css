@@ -45,7 +45,7 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column capped at the shared content width, about 1,449px with room above and below, and centers its text, copied from the shared container with the page's own spacing merged in. */
+.pagConDiv { /* What: Page Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column with room above and below, capped at the shared content width of about 1,449px, and centers its text, copied from the shared container with the page's own spacing merged in. */
 
 
 	margin     : 0 auto;
