@@ -22,10 +22,10 @@ import type { CatSluTyp } from './catalog.ts'; // What: Category Slug Type. Why:
  * products.tsx = Products
  *
  * @summary
- * The home page's collection: a heading and a short note about how Tony works,
- * a row of filter buttons (All and one per category), and a grid of photo
- * cards for the chosen filter. All lists every single piece and set once,
- * while a category also shows the craft fair booth shots tagged with it.
+ * The home page's collection: filter buttons, one per category plus All, and a
+ * grid of photo cards for the chosen filter, below the section's heading. All
+ * lists every single piece and set once, while a category also shows the
+ * craft fair booth shots tagged with it.
  *
  * Sections:
  *  - Components

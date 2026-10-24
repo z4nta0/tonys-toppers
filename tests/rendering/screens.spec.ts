@@ -48,8 +48,8 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
 // #region Constants
 
 const FIX_TIM_STR = '2026-10-10T12:00:00'; // What: Fixed Time String. Why: The copyright year and Tony's age are worked out from today's date, so the baselines would stop matching once the year turned over. How: This is the date and time every capture's page clock reads.
-const MAX_DIF_NUM = 0;                     // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it hid reese-roofing's nav links moving. How: This fails a comparison when even one pixel differs, with PIX_THR_NUM deciding what counts as differing.
-const PIX_THR_NUM = 0;                     // What: Pixel Threshold Number. Why: Playwright otherwise treats a pixel whose color moved by less than 0.2 of its color space as unchanged, which let a contrast fix's slightly darker text pass as identical in seal-and-shield. How: This counts any change to a pixel's color at all as a difference.
+const MAX_DIF_NUM = 0;                     // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This fails a comparison when even one pixel differs, with PIX_THR_NUM deciding what counts as differing.
+const PIX_THR_NUM = 0;                     // What: Pixel Threshold Number. Why: Playwright otherwise treats a pixel whose color moved by less than 0.2 of its color space as unchanged, which let a contrast fix's slightly darker text pass as identical. How: This counts any change to a pixel's color at all as a difference.
 
 // #endregion Constants
 

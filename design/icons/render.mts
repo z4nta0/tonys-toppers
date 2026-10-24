@@ -19,14 +19,15 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * Rebuilds the site's raster icons in public/ from favicon.svg, the Tony's
  * Toppers mark: the yellow and blue ring around the TT, on a white disc, so
  * only the corners are transparent. Browsers that read SVG favicons use
- * favicon.svg itself; this script draws the fallbacks: PNG icons at 16, 32,
- * 192, and 512px, a favicon.ico holding the 16, 32, and 48px sizes for older
- * browsers and the request browsers make for /favicon.ico on their own, and a
- * 180px apple-touch-icon.png on a solid white square, since iOS fills
- * transparency with black and rounds the corners itself. The touch icon draws
- * the mark a little smaller than the square, so the rounded corners never
- * crowd the ring. Since the mark is a vector, each size is drawn straight from
- * it. Run it with npm run icons whenever the mark changes.
+ * favicon.svg itself; this script draws the fallbacks: PNG icons at the sizes
+ * browsers and apps ask for, such as 192px, a favicon.ico packing the small
+ * sizes older browsers pick from and the request browsers make for
+ * /favicon.ico on their own, and a 180px apple-touch-icon.png on a solid
+ * white square, since iOS fills transparency with black and rounds the
+ * corners itself. The touch icon draws the mark a little smaller than the
+ * square, so the rounded corners never crowd the ring. Since the mark is a
+ * vector, each size is drawn straight from it. Run it with npm run icons
+ * whenever the mark changes.
  *
  * Sections:
  *  - Constants

@@ -27,9 +27,9 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  * to each home page section, and a toggle that, at 900px wide and below,
  * opens those links as a menu. The bar tightens and gains a bottom hairline
  * once the page scrolls, and on the home page it marks the link for the
- * section being read. The menu also offers a button to call or text Tony, his
- * Facebook page, and his home town, over a scrim that dims the page. Every
- * page renders it above its content.
+ * section being read. The menu also offers ways to reach Tony, such as a
+ * button to call or text him, over a scrim that dims the page. Every page
+ * renders it above its content.
  *
  * Sections:
  *  - Constants

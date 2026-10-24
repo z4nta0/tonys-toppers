@@ -21,7 +21,8 @@ import { useSecLinFun } from '../../ui/section-link.ts'; // What: Use Section Li
  * @summary
  * The home page's opening section: Tony's headline and pitch, with buttons
  * into the page, such as the one to the collection, beside his cartoon
- * portrait in a slowly turning ring. Soft blurred blobs float behind it all.
+ * portrait in a slowly turning ring, or below it at 900px wide and below.
+ * Soft blurred blobs float behind it all.
  *
  * Sections:
  *  - Components

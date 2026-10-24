@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * section-link.ts = Section Link
  *
  * @summary
- * The one way the bar and the hero reach a home page section, from any page.
+ * The one way a link or button reaches a home page section, from any page.
  * On the home page the section is already there, so the link scrolls to it in
  * place, smoothly unless the visitor asked for reduced motion. On any other
  * page, such as the 404 page, the section doesn't exist yet, so the link
@@ -145,7 +145,7 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
 
 // #region Exports
 
-export { modCliFun, useSecLinFun }; // What: Named Exports. Why: The bar and the hero both reach sections through these. How: This exports the modified-click check and useSecLinFun.
+export { modCliFun, useSecLinFun }; // What: Named Exports. Why: Every section link and button reaches its section through these. How: This exports the modified-click check and useSecLinFun.
 
 // #endregion Exports
 

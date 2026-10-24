@@ -306,7 +306,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		try {
+		try { // What: Netlify Post Try. Why: The post can fail outright, such as when the visitor is offline, and that failure should leave the form as it was rather than break the handler. How: This wraps the post and its answer check, so a failure falls through to the catch with senOkaBoo still false.
 
 
 			const netResObj = await fetch( '/', { // What: Netlify Response Object. Why: Netlify Forms records a post to the site's own address carrying the form's name, and its answer says whether it did. How: This posts the fields URL-encoded and waits for the answer.

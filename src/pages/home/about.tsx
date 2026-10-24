@@ -18,10 +18,10 @@ import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Size Object. Why:
  * about.tsx = About
  *
  * @summary
- * The home page's story of Tony: his portrait with the Tony's Toppers logo
- * badge, his name, paragraphs about who he is and how the business began, and
- * a few stats beneath them. His age is worked out from his birth
- * year each time the section renders, so it never needs updating by hand.
+ * The home page's story of Tony: his portrait and the story of who he is and
+ * how the business began, with details about him, such as his age. His age is
+ * worked out from his birth year each time the section renders, so it never
+ * needs updating by hand.
  *
  * Sections:
  *  - Constants
