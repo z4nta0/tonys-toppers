@@ -3,12 +3,13 @@
 
 // #region Imports
 
-import { HomPagCom } from './pages/home/home.tsx';           // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.
-import { NavBarCom } from './ui/nav.tsx';                    // What: Navigation Bar Component. Why: Every page starts with the shared bar. How: This renders above the routes.
-import { NotFouCom } from './pages/not-found/not-found.tsx'; // What: Not Found Component. Why: Unknown addresses need a page of their own. How: The catch-all route renders it.
-import { Route     } from 'react-router';                    // What: Route. Why: Each page is matched to its path. How: This declares one route per page.
-import { Routes    } from 'react-router';                    // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
-import { SitFooCom } from './ui/footer.tsx';                 // What: Site Footer Component. Why: Every page ends with the shared footer. How: This renders below the routes.
+import { HomPagCom    } from './pages/home/home.tsx';           // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.
+import { NavBarCom    } from './ui/nav.tsx';                    // What: Navigation Bar Component. Why: Every page starts with the shared bar. How: This renders above the routes.
+import { NotFouCom    } from './pages/not-found/not-found.tsx'; // What: Not Found Component. Why: Unknown addresses need a page of their own. How: The catch-all route renders it.
+import { Route        } from 'react-router';                    // What: Route. Why: Each page is matched to its path. How: This declares one route per page.
+import { Routes       } from 'react-router';                    // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
+import { SitFooCom    } from './ui/footer.tsx';                 // What: Site Footer Component. Why: Every page ends with the shared footer. How: This renders below the routes.
+import { useScrTopFun } from './ui/scroll-top.ts';              // What: Use Scroll Top Function. Why: A link from one page to another should open the new page at its top. How: The app root calls it once, inside the router.
 
 // #endregion Imports
 
@@ -22,7 +23,7 @@ import { SitFooCom } from './ui/footer.tsx';                 // What: Site Foote
  * the main landmark holding whichever page the address matches, and the
  * footer. The home page answers the root address, and the 404 page every
  * other. A new page, such as a shop later on, is added as another route here,
- * before the catch-all.
+ * before the catch-all. It also opens every page a link leads to at its top.
  *
  * Sections:
  *  - Components
@@ -42,9 +43,9 @@ import { SitFooCom } from './ui/footer.tsx';                 // What: Site Foote
  * AppRooCom = App Root Component
  *
  * @summary
- * The top of the component tree: renders the bar, the page the address
- * matches inside the main landmark, and the footer, so every page shares the
- * same frame.
+ * The top of the component tree: renders the bar, the page the address matches
+ * inside the main landmark, and the footer, so every page shares the same
+ * frame, and calls useScrTopFun so a link to another page opens it at its top.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -60,6 +61,10 @@ import { SitFooCom } from './ui/footer.tsx';                 // What: Site Foote
 */
 
 function AppRooCom () : React.JSX.Element {
+
+
+	useScrTopFun(); // What: Scroll Top Call. Why: A link from one page to another should open the new page at its top, as a real page load does. How: This runs the hook once from the root, which stays mounted across every route.
+
 
 
 	return (
