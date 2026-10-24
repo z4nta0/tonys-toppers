@@ -62,7 +62,7 @@ type SnaRecTyp = { // What: Snapshot Record Type. Why: An element's look, and wh
 
 const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'box-shadow', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control or a hover-only card or frame and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
 const ERR_LIN_STR = '#contact form [role="alert"] a';                                                      // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
-const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-width' ];                                  // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
+const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-offset', 'outline-width' ];                // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
 const HOV_TAR_STR = '[class*="proCarArt"], [class*="porFraDiv"]';                                          // What: Hover Target String. Why: The product cards and the About portrait's frame respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
 const SET_WAI_NUM = 400;                                                                                   // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
 
@@ -606,8 +606,9 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
  * at rest, one the Tab press doesn't land on, or one that looks the same
  * focused as at rest (its border color and outline), is a problem. Normally
  * every one of those that changes has to be eased by a transition ({@link
- * snaProFun}), outline-width included, so the ring eases in; under reduced
- * motion every one of its transition durations must be zero instead.
+ * snaProFun}), outline-width and outline-offset included, so the ring eases
+ * in; under reduced motion every one of its transition durations must be zero
+ * instead.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
