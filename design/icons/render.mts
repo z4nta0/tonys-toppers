@@ -21,7 +21,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * only the corners are transparent. Browsers that read SVG favicons use
  * favicon.svg itself; this script draws the fallbacks: PNG icons at the sizes
  * browsers and apps ask for, such as 192px, a favicon.ico packing the small
- * sizes older browsers pick from and the request browsers make for
+ * sizes older browsers pick from and answering the request browsers make for
  * /favicon.ico on their own, and a 180px apple-touch-icon.png on a solid
  * white square, since iOS fills transparency with black and rounds the
  * corners itself. The touch icon draws the mark a little smaller than the
