@@ -10,8 +10,8 @@
  * number, and the cream message form on the other, with its thank-you and
  * error notes, which rise in as they appear, the thank-you check popping once.
  * On screens 900px wide or narrower the two sides stack, and so do the form's
- * name and email fields. The shared section, container, and label classes the
- * section used to borrow from the global stylesheet are copied here.
+ * name and email fields. The shared styles the section used to borrow from the
+ * global stylesheet, such as the eyebrow label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -6,8 +6,9 @@
  *
  * @summary
  * Styles for SitFooCom: the dark ink band that ends every page, holding one
- * centered line of cream text, with Tony's phone number underlined in yellow
- * so it reads as a link by more than its color.
+ * centered line of cream text, which wraps at about 506px wide and below, with
+ * Tony's phone number underlined in yellow so it reads as a link by more than
+ * its color.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -17,7 +18,7 @@
 
 /* #region sitFooFoo */
 
-.sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the ink color and centers its line of cream text, never wider than the screen. */
+.sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the ink color and centers its line of cream text, never wider than the screen, wrapping it at about 506px wide and below. */
 
 
 	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Focus Ring Color For The Footer. Why: The navy ring would vanish on the ink band. How: The phone link draws its ring yellow instead. */

@@ -11,8 +11,8 @@
  * while the story scrolls past on wide screens. The story opens with a navy
  * drop cap and ends in a row of three stats. On screens 900px wide or
  * narrower the portrait moves above the story in a single column. The shared
- * section, container, and label classes the section used to borrow from the
- * global stylesheet are copied here.
+ * styles the section used to borrow from the global stylesheet, such as the
+ * eyebrow label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

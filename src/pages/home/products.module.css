@@ -9,9 +9,9 @@
  * faint grid, with the section's heading and note, the row of filter buttons,
  * and the responsive grid of product cards. Each card holds its photo in a
  * portrait frame with a tag over its corner and its name and kind beneath, and
- * rises in through the global blockEnterFadeIn keyframes. The shared section,
- * container, heading, label, and note classes the section used to borrow from
- * the global stylesheet are copied here.
+ * rises in through the global blockEnterFadeIn keyframes. The shared styles
+ * the section used to borrow from the global stylesheet, such as the eyebrow
+ * label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -183,7 +183,7 @@
 	max-width     : 100%;
 	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
 	position      : relative;
-	z-index       : 1;                                               /* What: Strip Stack Level. Why: The strip's white has to sit over the band's dot grid, which is positioned at 0. How: This lifts the strip one level above the grid, like the heading and the cards. */
+	z-index       : 1;                                               /* What: Strip Stack Level. Why: The strip's white has to sit over the band's dot grid, which is positioned at 0. How: This lifts the strip one level above the grid. */
 
 
 }
@@ -289,7 +289,7 @@
 
 /* #region proCarArt */
 
-.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global blockEnterFadeIn keyframes, and eases its hover look. */
+.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global blockEnterFadeIn keyframes, and eases its hover lift, shadow, and border color. */
 
 
 	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) backwards; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */ /* What: Backwards Fill. Why: A both fill kept the keyframes' final transform in force after the entrance, which outranked the hover lift, so the card never rose. How: A backwards fill holds the hidden first frame only through each card's stagger delay, then lets go once the card has risen. */
