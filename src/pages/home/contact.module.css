@@ -26,7 +26,7 @@
 .homConSec { /* What: Home Contact Section. Why: The page ends on a bold navy band that sets the contact details apart, with the same generous padding as every home page section. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
 
 
-	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Yellow Focus Ring. Why: The navy ring would vanish on the navy band. How: Every link inside the band draws its ring yellow instead, until the form card hands back the navy. */
+	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Focus Ring Color For The Section. Why: The navy ring would vanish on the navy band. How: Every link inside the band draws its ring yellow instead, until the form card hands back the navy. */
 
 	background : var( --acc-mai-col );                      /* Accent Main Color = #1e3a8a */
 	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
@@ -300,7 +300,7 @@
 .conForFor { /* What: Contact Form Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
 
 
-	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */ /* What: Navy Focus Ring. Why: On the cream card the band's yellow ring would be faint. How: The fields, the button, and the error note's link draw their rings navy again. */
+	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */ /* What: Focus Ring Color For The Form. Why: On the cream card the band's yellow ring would be faint. How: The fields, the button, and the error note's link draw their rings navy again. */
 
 	background    : var( --bac-pag-col );                                                                           /* Background Page Color = #fdf9ee */
 	border-radius : var( --rad-bor-xla );                                                                           /* Radius Border Extra Large ~= 19.304px */

@@ -20,7 +20,7 @@
 .sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the ink color and centers its line of cream text, never wider than the screen. */
 
 
-	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Yellow Focus Ring. Why: The navy ring would vanish on the ink band. How: The phone link draws its ring yellow instead. */
+	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Focus Ring Color For The Footer. Why: The navy ring would vanish on the ink band. How: The phone link draws its ring yellow instead. */
 
 	background : var( --bac-inv-col );                      /* Background Inverse Color = #1a1a2e */
 	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
