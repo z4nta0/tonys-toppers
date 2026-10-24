@@ -143,8 +143,8 @@ const souFilArr = [ ...proFilArr, 'tony-cartoon.jpg', 'tony-portrait.jpg' ];    
 
 const sizRowArr : [ string, number, number ][] = []; // What: Size Row Array. Why: Every photo written adds a row to the sizes file. How: This collects them.
 
-let befBytNum = 0; // What: Before Bytes Number. Why: The run reports how much smaller the photos got. How: This adds up the originals' sizes.
 let aftBytNum = 0; // What: After Bytes Number. Why: The run reports how much smaller the photos got. How: This adds up the encoded files' sizes.
+let befBytNum = 0; // What: Before Bytes Number. Why: The run reports how much smaller the photos got. How: This adds up the originals' sizes.
 
 
 for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each original is rebuilt the same way. How: This crops, scales, encodes, and writes one photo per pass.
@@ -224,8 +224,8 @@ await broInsObj.close(); // What: Browser Close Call. Why: The script should exi
 sizRowArr.sort( ( rowOneArr, rowTwoArr ) => rowOneArr[ 0 ].localeCompare( rowTwoArr[ 0 ] ) ); // What: Size Row Sort. Why: The sizes file should list its rows in a stable order. How: This sorts them by file name.
 
 
-const keyWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => sizCurArr[ 0 ].length ) ) + 2;           // What: Key Width Number. Why: Every row's colon lines up after the longest quoted name. How: This measures the longest name plus its two quotes.
 const heiWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => String( sizCurArr[ 1 ] ).length ) ) + 1; // What: Height Width Number. Why: Every row's width field starts in one column after the longest height. How: This measures the longest height plus its comma.
+const keyWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => sizCurArr[ 0 ].length ) ) + 2;           // What: Key Width Number. Why: Every row's colon lines up after the longest quoted name. How: This measures the longest name plus its two quotes.
 const widWidNum = Math.max( ...sizRowArr.map( ( sizCurArr ) => String( sizCurArr[ 2 ] ).length ) );     // What: Width Width Number. Why: Every row's closing brace lines up after the longest width. How: This measures the longest width.
 const sizLinArr = sizRowArr.map( ( [ filNamStr, heiValNum, widValNum ], rowIndNum ) => `\t${ `'${ filNamStr }'`.padEnd( keyWidNum ) } : { heiNum : ${ `${ heiValNum },`.padEnd( heiWidNum ) } widNum : ${ String( widValNum ).padEnd( widWidNum ) } }${ rowIndNum === sizRowArr.length - 1 ? '' : ',' }` ); // What: Size Line Array. Why: The rows form an aligned table, as stacked one-line rows do everywhere else. How: This pads each field to its column's width, and only the last row goes without a comma.
 
