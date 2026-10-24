@@ -371,29 +371,6 @@
 
 
 }
-@keyframes menuItemOpenFadeIn { /* What: Menu Item Open Fade In. Why: The menu's rows arrive one after another as it opens. How: This moves a row up from a small rhythm step below and from transparent to fully shown. */
-
-
-	from {
-
-
-		opacity   : 0;
-		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
-
-
-	}
-
-	to {
-
-
-		opacity   : 1;
-		transform : translateY( 0 );
-
-
-	}
-
-
-}
 
 
 /* #region navLinUno */
@@ -452,6 +429,29 @@
 
 
 		animation : none;
+
+
+	}
+
+
+}
+@keyframes menuItemOpenFadeIn { /* What: Menu Item Open Fade In. Why: The menu's rows arrive one after another as it opens. How: This moves a row up from a small rhythm step below and from transparent to fully shown. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY( 0 );
 
 
 	}
