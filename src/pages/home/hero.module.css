@@ -159,7 +159,7 @@
 
 
 	align-items    : center;
-	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) 0.1s both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) 0.1s both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	background     : oklch( from var( --bac-sur-col ) l c h / var( --cdn-pow-001-rec ) );            /* Background Surface Color = #ffffff, Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius  : 999px;
@@ -207,7 +207,7 @@
 .herTitHea { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 45px and 79px, tightly leaded, rising in second. */
 
 
-	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) var( --dur-ani-p01 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 1 ~= 209.1ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) var( --dur-ani-p01 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 1 ~= 209.1ms */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	color          : var( --tex-mai-col );                                                                           /* Text Main Color = #1a1a2e */
 	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Fraunces', Georgia, serif */
 	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) );                                       /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
@@ -265,7 +265,7 @@
 .herLedPar { /* What: Hero Lede Paragraph. Why: The pitch should read easily without competing with the headline. How: This sets it a little large in the soft ink color, capped at a comfortable line length, rising in third. */
 
 
-	animation     : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p03 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 3 ~= 366.9ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation     : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p03 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 3 ~= 366.9ms */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	color         : var( --tex-sec-col );                                                                           /* Text Secondary Color = #4a4a5e */
 	font-size     : var( --fon-siz-p02 );                                                                           /* Font Size Base Plus 2 ~= 19.304px */
 	margin-bottom : var( --spa-ver-p03 );                                                                           /* Spacing Vertical Base Plus 3 ~= 33.876px */
@@ -293,7 +293,7 @@
 .herActDiv { /* What: Hero Actions Div. Why: The two main ways into the page sit together. How: This sets the buttons in a row that wraps when it runs out of room, rising in last. */
 
 
-	animation : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 4 ~= 486.1ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p04 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 4 ~= 486.1ms */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	display   : flex;
 	flex-wrap : wrap;
 	gap       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
@@ -409,7 +409,7 @@
 	--her-sti-wid : calc( var( --ver-rhy-p07 ) * 1rem );                              /* Vertical Rhythm Base Plus 7 ~= 104.323px */ /* What: Hero Sticker Width. Why: The sticker's size also sets how far the ring moves over to make room for it. How: The sticker sizes itself from this, and the ring reads it to center the pair. */
 	--por-rin-wid : max( calc( var( --ver-rhy-p10 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */ /* What: Portrait Ring Width. Why: The ring and the sticker placed against it both need the ring's size. How: The ring sizes itself from this, and the sticker reads it to sit on the ring's edge. */
 
-	animation : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 2 ~= 277.0ms */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
+	animation : global( blockEnterFadeIn ) var( --dur-ani-p07 ) var( --mot-sta-eas ) var( --dur-ani-p02 ) both; /* Duration Animation Base Plus 7 ~= 1,130.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 2 ~= 277.0ms */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared with the product cards, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	height    : calc( var( --por-rin-wid ) + var( --ver-rhy-bas ) * 2rem + var( --spa-ver-m01 ) * 2 );          /* Portrait Ring Width, set by its own rule, Vertical Rhythm Base ~= 14.572px, doubled to ~= 29.144px, Spacing Vertical Base Minus 1 = 11px, doubled to = 22px */ /* What: Ring Room Height. Why: The stage should hold the ring, its drift, and the sticker above it without empty space below. How: This adds the drift's reach on both sides and the sticker's rise on both sides to the ring's width. */
 	margin    : 0 auto;
 	max-width : max( calc( var( --ver-rhy-p12 ) * 1rem ), var( --hor-rhy-023 ) );                               /* Vertical Rhythm Base Plus 12 ~= 425.596px, Horizontal Rhythm 23 ~= 623.458px @ 1,920px width */
