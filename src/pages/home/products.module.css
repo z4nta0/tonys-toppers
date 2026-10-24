@@ -200,7 +200,7 @@
 	font-size     : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 500;
 	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -289,7 +289,7 @@
 
 /* #region proCarArt */
 
-.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, has it rise in through the global blockEnterFadeIn keyframes, and eases its hover lift, shadow, and border color. */
+.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, has it rise in through the global blockEnterFadeIn keyframes, and eases its hover lift, shadow, and border color, its shadow fading out on the accelerating curve. */
 
 
 	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) backwards; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */ /* What: Backwards Fill. Why: A both fill kept the keyframes' final transform in force after the entrance, which outranked the hover lift, so the card never rose. How: A backwards fill holds the hidden first frame only through each card's stagger delay, then lets go once the card has risen. */
@@ -298,23 +298,25 @@
 	border-radius : var( --rad-bor-xla );                                                           /* Radius Border Extra Large ~= 19.304px */
 	overflow      : hidden;
 	position      : relative;
-	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the card clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the card itself, which only repaints the one card. */
+	transition    : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-acc-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the card clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the card itself, which only repaints the one card. */
 
 
 }
-.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft ink shadow, and turns its border navy. */
+.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft ink shadow that fades in on the decelerating curve, and turns its border navy. */
 
 
 	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
 	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
 	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition   : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Standard Easing = ease */
 
 
 }
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Product Card Article. Why: Someone who asked for less motion shouldn't see the cards rise in or ease their hover look. How: This applies only when the reduced-motion preference is set. */
 
 
-	.proCarArt { /* What: Still Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transition off. */
+	.proCarArt,
+	.proCarArt:hover { /* What: Still Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transitions off, naming the hovered rule's own selector so it wins. */
 
 
 		animation  : none;
@@ -365,7 +367,7 @@
 
 	height     : 100%;
 	object-fit : contain;
-	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width      : 100%;
 
 
