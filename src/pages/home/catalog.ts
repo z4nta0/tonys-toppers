@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why: Every card's img carries its photo's intrinsic size. How: Each record looks its photo's width and height up by file name.
+import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Size Object. Why: Every card's img carries its photo's intrinsic size. How: Each record looks its photo's width and height up by file name.
 
 // #endregion Imports
 

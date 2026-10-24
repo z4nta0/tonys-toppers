@@ -8,7 +8,7 @@ import logSvgUrl from './logo.svg';           // What: Logo SVG URL. Why: The Ab
 import porWebUrl from './tony-portrait.webp'; // What: Portrait WebP URL. Why: The About section shows Tony's portrait, and Vite fingerprints and checks an imported image. How: This imports the photo's built URL for its img.
 
 
-import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why: The portrait's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the portrait's width and height.
+import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Size Object. Why: The portrait's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the portrait's width and height.
 
 // #endregion Imports
 

@@ -28,18 +28,21 @@ type PhoSizTyp = { heiNum : number, widNum : number }; // What: Photo Size Type.
 // #region PHO_SIZ_OBJ
 
 /**
- * PHO_SIZ_OBJ = Photo Sizes Object
+ * PHO_SIZ_OBJ = Photo Size Object
  *
  * @summary
- * One row per photo: heiNum, its height in pixels, and widNum, its width in
- * pixels. Every row has the same two fields, so no row needs a comment of
- * its own.
+ * One row per photo, keyed by its file name without the extension. Every row
+ * has the same two fields, so no row needs a comment of its own:
+ *
+ * - `heiNum` (Number): Height Number, the photo's height in pixels.
+ *
+ * - `widNum` (Number): Width Number, the photo's width in pixels.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
 
-const PHO_SIZ_OBJ : Record< string, PhoSizTyp > = { // What: Photo Sizes Object. Why: Every img element needs its photo's intrinsic size. How: The page looks each photo's size up by its file name.
+const PHO_SIZ_OBJ : Record< string, PhoSizTyp > = { // What: Photo Size Object. Why: Every img element needs its photo's intrinsic size. How: The page looks each photo's size up by its file name.
 
 
 	'booth-1'           : { heiNum : 927,  widNum : 696 },

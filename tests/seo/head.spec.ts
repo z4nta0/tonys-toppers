@@ -222,7 +222,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 
-test( 'the social preview image is a 1,200x630 JPEG under 300 KB', async ( { request : reqCotObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card small enough for WhatsApp. How: This fetches the image, checks its byte count, and reads its size from the JPEG's frame header.
+test( 'the social preview image is a 1,200x630 JPEG under 300 KB', async ( { request : reqCotObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card small enough for WhatsApp. How: This fetches the image, checks its served type and byte count, and reads its size from the JPEG's frame header.
 
 
 	const imaResObj = await reqCotObj.get( '/og-image.jpg' ); // What: Image Response Object. Why: The image has to exist where the tags point. How: This fetches it from the site.

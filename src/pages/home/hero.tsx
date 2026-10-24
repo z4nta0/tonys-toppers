@@ -8,7 +8,7 @@ import cssModObj from './hero.module.css';   // What: CSS Module Object. Why: Th
 
 
 import { modCliFun    } from '../../ui/section-link.ts'; // What: Modified Click Function. Why: A button opened in a new tab should be left to the browser. How: scrSecFun steps aside when this is true.
-import { PHO_SIZ_OBJ  } from './photo-sizes.ts';         // What: Photo Sizes Object. Why: The cartoon's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the cartoon's width and height.
+import { PHO_SIZ_OBJ  } from './photo-sizes.ts';         // What: Photo Size Object. Why: The cartoon's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the cartoon's width and height.
 import { useSecLinFun } from '../../ui/section-link.ts'; // What: Use Section Link Function. Why: Both hero buttons reach a section the same way the bar does. How: This returns visSecFun, which scrolls to the section.
 
 // #endregion Imports

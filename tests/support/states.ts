@@ -13,12 +13,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * states.ts = States
  *
  * @summary
- * The page states the accessibility, interaction, and rendering suites visit,
- * and the helper that opens one; the responsive suite opens its own widths
- * through the same helper. A state is a page at a width, sometimes with
- * something opened on it, such as the mobile menu on a phone. opeStaFun sizes
- * the viewport, loads the page, waits for the fonts, scrolls through the page
- * so its lazily loaded product photos load, runs the state's own action, and
+ * The page states the suites visit, and the helper that opens one, which a
+ * suite that sizes its own pages uses too. A state is a page at a width,
+ * sometimes with something opened on it, such as the mobile menu on a phone.
+ * opeStaFun sizes the viewport, loads the page, gets its content ready to
+ * measure, such as its lazily loaded photos, runs the state's own action, and
  * then waits for the page to stay still so nothing is measured mid-fade.
  *
  * Sections:
@@ -62,8 +61,8 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  * Every state the checks visit: the home page and the 404 page each at a
  * phone width (390px) and a desktop width (1,440px), plus the mobile menu
  * open at the phone width, since the menu is only reachable there. Every row
- * shares the {@link StaRecTyp} shape, so its fields carry no comments of their
- * own:
+ * shares the {@link StaRecTyp} shape, so the shared fields carry no comments
+ * of their own:
  *
  * - `actFun` (Function): Action Function, run after the page loads to open
  *   something on it, such as the menu. Only the menu row has one.
@@ -299,7 +298,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR, type StaRecTyp }; // What: Named Exports. Why: The accessibility, interaction, rendering, and responsive specs share these states and their opener. How: This exports the state list, its type, and the helper that opens one.
+export { opeStaFun, STA_REC_ARR, type StaRecTyp }; // What: Named Exports. Why: Every suite shares these states and their opener. How: This exports the state list, its type, and the helper that opens one.
 
 // #endregion Exports
 
