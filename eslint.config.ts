@@ -4,7 +4,7 @@
 // #region Imports
 
 import reaPluObj from 'eslint-plugin-react';       // What: React Plugin Object. Why: An undefined component in a JSX tag should fail lint. How: This registers the plugin behind react/jsx-no-undef.
-import rehPluObj from 'eslint-plugin-react-hooks'; // What: React-Hooks Plugin Object. Why: Hook calls follow rules plain JS linting can't check. How: Its recommended rules are spread into the .tsx config.
+import rehPluObj from 'eslint-plugin-react-hooks'; // What: React-Hooks Plugin Object. Why: Hook calls follow rules plain JS linting can't check. How: Its recommended rules are spread into the hooks config.
 import tyeEslObj from 'typescript-eslint';         // What: TypeScript ESLint Object. Why: ESLint's default parser can't read TypeScript's type annotations. How: Its recommended rules are spread into the config, and its parser is set on both configs below.
 
 // #endregion Imports
@@ -46,7 +46,7 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 
 
 	{ ignores : [ 'dist/**', 'tests/output/**' ] }, // What: Ignores Object. Why: The build output and the test suites' reports are generated, not hand-written, so their lint results mean nothing. How: This global ignores entry skips both folders for every config below; one glob each, since braces break ESLint's matching here.
-	...tyeEslObj.configs.recommended,               // What: Recommended Configs Spread. Why: typescript-eslint's recommended rules catch TypeScript mistakes the compiler allows, such as an unused variable. How: This spreads its recommended configs in, which apply to every file ESLint lints and switch off the core rules TypeScript already covers.
+	...tyeEslObj.configs.recommended,               // What: Recommended Configs Spread. Why: typescript-eslint's recommended rules catch TypeScript mistakes the compiler allows, such as an unused variable. How: This spreads its recommended configs in, whose parser and rules apply to every file ESLint lints, while the one that switches off the core rules TypeScript already covers applies to TypeScript files only.
 
 	{ // What: Rule Overrides Object. Why: Two recommended rules flag patterns the formatting rules rely on. How: This re-sets both rules with an option that allows those patterns.
 
