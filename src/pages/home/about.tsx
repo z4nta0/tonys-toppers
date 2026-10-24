@@ -144,7 +144,7 @@ function AboSecCom () : React.JSX.Element {
 
 						<p className={ cssModObj.bioStoPar }>{ /* What: Biography Story Paragraph Element. Why: Tony's art started long before the business. How: This tells of his schooling and his painting in the State Capitol. */ }
 							After graduating high school, Tony moved to Grandview, Missouri, where he had his own
-							apartment and attended Longview Jr. College through the Ace program. He's always been
+							apartment and attended Longview Community College through the Ace program. He's always been
 							artistic and crafty. In high school, a painting of his was chosen through a contest
 							that traveled around Missouri for a year before being hung in the State Capitol.
 						</p>
