@@ -483,9 +483,9 @@ const valSigFun = ( snaRecArr : SnaRecTyp[] ) : string => JSON.stringify( snaRec
  * problem. Normally every property that changes on hover or press, on the
  * control or anything inside it, has to be eased by a transition ({@link
  * snaProFun}), and its transition list must include the focus ring's
- * outline-width, so the ring eases in; under reduced motion every one of its
- * transition durations must be zero instead. The caller blocks real clicks
- * first, so releasing the mouse does nothing.
+ * outline-width and outline-offset, so the ring eases in; under reduced motion
+ * every one of its transition durations must be zero instead. The caller
+ * blocks real clicks first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -571,7 +571,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero.
 
-		else if ( !redMotBoo && !traLisStr.includes( 'outline-width' ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out the outline.
+		else if ( !redMotBoo && !( traLisStr.includes( 'outline-width' ) && traLisStr.includes( 'outline-offset' ) ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring grows in through its width and its offset, so both have to ease rather than snap. How: This records a control whose transition list leaves out either outline property.
 
 
 
