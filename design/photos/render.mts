@@ -266,9 +266,9 @@ type PhoSizTyp = { heiNum : number, widNum : number }; // What: Photo Size Type.
  * One row per photo, keyed by its file name without the extension. Every row
  * has the same two fields, so no row needs a comment of its own:
  *
- * - `heiNum` (Number): Height Number, the photo's height in pixels.
+ * - \`heiNum\` (Number): Height Number, the photo's height in pixels.
  *
- * - `widNum` (Number): Width Number, the photo's width in pixels.
+ * - \`widNum\` (Number): Width Number, the photo's width in pixels.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
