@@ -22,9 +22,9 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * the product photos in products/, written as WebP into src/assets/products,
  * and Tony's cartoon and portrait, written into src/pages/home. Each photo is
  * cropped where CRO_BOX_OBJ says (booth-1 is a phone screenshot, cropped to
- * the photo inside it), scaled down to fit its box, which is twice the
- * largest size the site shows it at, never scaled up, and encoded at 0.85
- * quality, the lowest that shows no difference from the original at 3x
+ * the photo inside it), scaled down to fit its box, which is no more than
+ * twice the largest size the site shows it at, never scaled up, and encoded
+ * at 0.85 quality, the lowest that shows no difference from the original at 3x
  * zoom. It then writes src/pages/home/photo-sizes.ts, the width and height
  * of every photo it wrote, which the page's img elements read so nothing
  * shifts while photos load. Run it with npm run photos whenever a photo is
