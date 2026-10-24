@@ -139,7 +139,7 @@ async function secOffFun ( curPagObj : Page, secIdeStr : string ) : Promise< num
 
 
 		const padTopNum = parseFloat( getComputedStyle( document.documentElement ).scrollPaddingTop ) || 0; // What: Padding Top Number. Why: A section link lands its section below the bar, not at the very top. How: This reads the page's scroll padding, or 0 when it has none.
-		const secTopNum = document.getElementById( tarIdeStr )?.getBoundingClientRect().top;               // What: Section Top Number. Why: The section's position is what's checked. How: This reads its top edge on screen, or undefined while it isn't on the page.
+		const secTopNum = document.getElementById( tarIdeStr )?.getBoundingClientRect().top;                // What: Section Top Number. Why: The section's position is what's checked. How: This reads its top edge on screen, or undefined while it isn't on the page.
 
 
 

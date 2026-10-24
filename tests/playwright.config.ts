@@ -106,8 +106,8 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 	use : { // What: Use. Why: Every suite shares the same page setup. How: This sets the locale and failure artifacts.
 
 
-		locale     : 'en-US',           // What: Locale. Why: The site is written in US English. How: This runs every page in it.
-		screenshot : 'only-on-failure', // What: Screenshot. Why: A failing check is easier to diagnose from what was on screen. How: This saves a screenshot only when a test fails.
+		locale     : 'en-US',            // What: Locale. Why: The site is written in US English. How: This runs every page in it.
+		screenshot : 'only-on-failure',  // What: Screenshot. Why: A failing check is easier to diagnose from what was on screen. How: This saves a screenshot only when a test fails.
 		trace      : 'retain-on-failure' // What: Trace. Why: A failure can be stepped through afterwards. How: This keeps the Playwright trace only for failing tests.
 
 

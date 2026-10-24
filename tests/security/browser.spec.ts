@@ -165,7 +165,7 @@ test( 'the policy refuses an injected inline script', async ( { page : curPagObj
 
 		document.body.append( scrNewEle ); // What: Script Append Call. Why: An inline script runs as soon as it joins the page, unless the policy refuses it. How: This adds it to the body.
 
-		await new Promise( ( resFunObj ) => setTimeout( resFunObj, 100 ) ); // What: Event Wait Call. Why: The browser reports a violation as an event shortly after refusing the script. How: This waits 100ms for it.
+		await new Promise( ( resWaiFun ) => setTimeout( resWaiFun, 100 ) ); // What: Event Wait Call. Why: The browser reports a violation as an event shortly after refusing the script. How: This waits 100ms for it.
 
 
 
@@ -195,10 +195,10 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Loop. Why: Every state t
 
 
 		const opeRelArr = await curPagObj.locator( 'a[target="_blank"]' ).evaluateAll( ( ancEleArr ) => ancEleArr.map( ( ancCurEle ) => ancCurEle.getAttribute( 'rel' ) ?? '' ) ); // What: Opener Rel Array. Why: A new tab opened without noopener can reach back and change this page. How: This collects the rel of every link that opens a new tab.
-		const vioLisArr = ( await polVioFun( curPagObj ) ).filter( ( vioCurStr ) => !( broNamStr === 'webkit' && vioCurStr === 'style-src-attr blocked inline on select' ) ); // What: Violation List Array. Why: WebKit reports a style attribute violation for every select element, even one built in a blank script with no style of its own, since its own drawing of the control sets one, which no page can avoid short of allowing inline style attributes everywhere. How: This keeps every violation but that one WebKit select report.
+		const vioLisArr = ( await polVioFun( curPagObj ) ).filter( ( vioCurStr ) => !( broNamStr === 'webkit' && vioCurStr === 'style-src-attr blocked inline on select' ) );      // What: Violation List Array. Why: WebKit reports a style attribute violation for every select element, even one built in a blank script with no style of its own, since its own drawing of the control sets one, which no page can avoid short of allowing inline style attributes everywhere. How: This keeps every violation but that one WebKit select report.
 
 
-		expect( vioLisArr ).toEqual( [] );                                                                 // What: No Violation Assertion. Why: Everything the state loads should be allowed by the policy. How: This checks none was refused.
+		expect( vioLisArr ).toEqual( [] );                                                                // What: No Violation Assertion. Why: Everything the state loads should be allowed by the policy. How: This checks none was refused.
 		expect( opeRelArr.filter( ( relValStr ) => !/\bnoopener\b/.test( relValStr ) ) ).toEqual( [] );   // What: No Opener Assertion. Why: The opened page shouldn't get a handle on this one. How: This checks every new tab link carries noopener.
 		expect( opeRelArr.filter( ( relValStr ) => !/\bnoreferrer\b/.test( relValStr ) ) ).toEqual( [] ); // What: No Referrer Assertion. Why: The opened site shouldn't learn the address it came from. How: This checks every new tab link carries noreferrer.
 

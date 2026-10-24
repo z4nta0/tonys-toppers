@@ -514,6 +514,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 }
 
 
+
 for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200, 'status', 'Your message was sent', 'sent', 'is sent' ], [ 500, 'alert', "didn't go through", 'failed', 'fails' ] ] as const ) { // What: Form Result Loop. Why: The thank-you and the error each have their own live region. How: This declares the region and focus tests once per answer, pairing Netlify's status with the region's role, words only that note shows, and two ways of naming the result in the titles.
 
 
@@ -591,6 +592,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 
 
 }
+
 
 
 test( 'under reduced motion the thank-you note still leaves when the visitor types again', async ( { page : curPagObj } ) => { // What: Note Exit Test. Why: The note unmounts when its exit animation ends, so under reduced motion that exit has to stay long enough to fire its end event rather than be turned off. How: This sends the form under reduced motion, types into a field, and checks the status region empties.
