@@ -5,7 +5,7 @@
  * hero.module.css = Hero Section Module
  *
  * @summary
- * Styles for HerSecCom: the opening section, at least nearly a screen tall,
+ * Styles for HerSecCom: the opening section, nearly a screen tall or taller,
  * warmed by two soft glows that float slowly in its corners, with the
  * eyebrow, headline, pitch, and buttons beside Tony's cartoon portrait, whose
  * round frame turns slowly while the portrait inside it turns the other way
@@ -23,7 +23,7 @@
 
 /* #region homHerSec */
 
-.homHerSec { /* What: Home Hero Section. Why: The page opens on a warm welcome at least nearly a screen tall. How: This makes it at least the screen's height less about 79px tall, centers its content, clips the glows at its edges, and washes the cream background with a yellow glow at the top left and a blue one at the bottom right. */
+.homHerSec { /* What: Home Hero Section. Why: The page opens on a warm welcome nearly a screen tall or taller. How: This makes it at least as tall as the screen less about 79px, centers its content, clips the glows at its edges, and washes the cream background with a yellow glow at the top left and a blue one at the bottom right. */
 
 
 	background  : radial-gradient( ellipse at 20% 10%, oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-006-rec ) ), transparent 50% ), radial-gradient( ellipse at 85% 80%, oklch( from var( --acc-mai-col ) l c h / 0.12 ), transparent 55% ), var( --bac-pag-col ); /* Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185, Accent Main Color = #1e3a8a @ 0.12 opacity, Background Page Color = #fdf9ee */
