@@ -79,7 +79,7 @@
 
 /* #region conGriDiv */
 
-.conGriDiv { /* What: Contact Grid Div. Why: The ways to reach Tony and the form sit side by side on wide screens, above the glow. How: This lays out two even columns stretched to the same height and lifts them onto their own layer. */
+.conGriDiv { /* What: Contact Grid Div. Why: The ways to reach Tony and the form sit side by side on wide screens, above the glow. How: This lays out two even columns stretched to the same height and lifts the grid onto its own layer. */
 
 
 	align-items           : stretch;
@@ -325,7 +325,7 @@
 
 /* #region forSucDiv */
 
-.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went. How: This rises and fades in once as it appears, and sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
+.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went through. How: This rises and fades in once as it appears, and sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
 
 
 	animation     : forSucDivShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -366,7 +366,7 @@
 
 
 }
-@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you note should arrive rather than snap into place. How: This rises it a little from below and fades it in. */
+@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you note should arrive rather than snap into place. How: This moves it up a little from below and fades it in. */
 
 
 	from {
@@ -652,7 +652,7 @@
 
 
 }
-@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This rises it a little from below and fades it in. */
+@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This moves it up a little from below and fades it in. */
 
 
 	from {
