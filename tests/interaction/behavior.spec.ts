@@ -46,9 +46,8 @@ const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > =
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size most checks open at.
 const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The phone menu exists only on small screens. How: This is the phone size the menu checks use.
-const SHO_VIE_OBJ = { height : 500, width : 390  }; // What: Short Viewport Object. Why: The 404 page fits a full phone screen, so it only scrolls on a shorter one. How: This is the size the scroll position check opens it at.
-
 const SEC_LIN_ARR = [ [ 'Home', 'home' ], [ 'Products', 'products' ], [ 'Craft Fairs', 'fairs' ], [ 'About Tony', 'about' ], [ 'Contact', 'contact' ] ]; // What: Section Link Array. Why: The bar and the phone menu link to the same five sections. How: Each row pairs a link's label with its section's id.
+const SHO_VIE_OBJ = { height : 500, width : 390  }; // What: Short Viewport Object. Why: The 404 page fits a full phone screen, so it only scrolls on a shorter one. How: This is the size the scroll position check opens it at.
 
 // #endregion Constants
 

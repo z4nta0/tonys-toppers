@@ -801,7 +801,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every control, every form field, and on the home states every product card and the About portrait frame, and checks it finds no problems.
 
 
-		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past a tripled 90-second timeout while the engines shared the machine. How: This gives the test three minutes.
+		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
 
@@ -837,7 +837,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control, every form field, and on the home states every product card and the About portrait frame, with reduced motion on and checks it finds no problems.
 
 
-		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past a tripled 90-second timeout while the engines shared the machine. How: This gives the test three minutes.
+		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
