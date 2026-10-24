@@ -207,15 +207,16 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * feeProFun = Feedback Problems Function
  *
  * @summary
- * Probes every reachable control and returns a problem for each one that
- * gives no feedback. Each control is scrolled into view, read at rest with
- * the pointer away, read again while hovered, and again while the mouse
- * button is held on it, every look read once its transition has settled. A
- * control that looks the same at rest and hovered, or hovered and pressed,
- * is a problem. Normally its transition list must include the focus ring's
- * outline-width, so the ring eases in; under reduced motion every one of its
- * transition durations must be zero instead. The caller blocks real clicks
- * first, so releasing the mouse does nothing.
+ * Probes every reachable control and returns a problem for each one that gives
+ * no feedback. Each control is scrolled into view, and one that waits above
+ * the screen until it's focused, such as the skip link, is focused so it comes
+ * into view, read at rest with the pointer away, read again while hovered, and
+ * again while the mouse button is held on it, every look read once its
+ * transition has settled. A control that looks the same at rest and hovered,
+ * or hovered and pressed, is a problem. Normally its transition list must
+ * include the focus ring's outline-width, so the ring eases in; under reduced
+ * motion every one of its transition durations must be zero instead. The
+ * caller blocks real clicks first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -247,6 +248,14 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		await conCurObj.scrollIntoViewIfNeeded(); // What: Control Scroll Call. Why: A control has to be on screen to hover or press. How: This scrolls it into view.
 
+
+		const offScrBoo = await conCurObj.evaluate( ( conCurEle ) => conCurEle.getBoundingClientRect().bottom <= 0 ); // What: Off Screen Boolean. Why: A control that waits above the screen until it's focused, such as the skip link, can't be hovered where it rests. How: This is true when its box still sits above the top of the screen after the scroll.
+
+
+		if ( offScrBoo ) await conCurObj.focus(); // What: Hidden Control Focus Call. Why: Such a control only comes into view while focused, and is probed there. How: This focuses it, and the rest settle wait below lets it finish sliding in.
+
+
+
 		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer to the corner of the bar.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
@@ -274,6 +283,9 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
+
+
+		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Hidden Control Blur Call. Why: Left focused, the control would stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it slide away.
 
 
 
