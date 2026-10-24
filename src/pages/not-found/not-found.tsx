@@ -85,7 +85,7 @@ function NotFouCom () : React.JSX.Element {
 				<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The page's few lines read best centered. How: This centers them at the page's width with room above and below. */ }
 
 
-					<div className={ cssModObj.eyeLabDiv }>{ /* What: Eyebrow Label Div Element. Why: A small label says what happened. How: This shows 404, centered with its leading line. */ }
+					<div className={ cssModObj.eyeLabDiv }>{ /* What: Eyebrow Label Div Element. Why: A short label says what happened. How: This shows 404, centered with its leading line. */ }
 						404
 					</div>
 

@@ -6,11 +6,11 @@
  *
  * @summary
  * Styles for ConSecCom: the navy band that ends the home page, warmed by a
- * yellow glow, with the ways to reach Tony on one side (the heading, a note,
- * and rows for his phone, his Facebook page, and his home town) and the cream
- * message form on the other, with its thank-you and error notes, which rise in
- * as they appear, the thank-you check popping once. On screens 900px wide or
- * narrower the two sides stack, and so do the form's name and email fields.
+ * yellow glow, with the ways to reach Tony on one side, such as his phone
+ * number, and the cream message form on the other, with its thank-you and
+ * error notes, which rise in as they appear, the thank-you check popping once.
+ * On screens 900px wide or narrower the two sides stack, and so do the form's
+ * name and email fields.
  * The shared section, container, and label classes the section used to borrow
  * from the global stylesheet are copied here, and every animation and
  * transition stops for anyone who asked for less motion.
@@ -108,7 +108,7 @@
 
 }
 
-.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and yellow to stand out on the navy, led by a short yellow line, copied from the shared section label with the contact section's yellow merged in. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it widely spaced, uppercase, and yellow to stand out on the navy, led by a short yellow line, copied from the shared section label with the contact section's yellow merged in. */
 
 
 	align-items    : center;
@@ -498,7 +498,7 @@
 
 }
 
-.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it small, semibold, spaced, and uppercase in ink, on its own line above the control. */
+.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it semibold, spaced, and uppercase in ink, on its own line above the control. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */

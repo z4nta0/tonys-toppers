@@ -374,7 +374,7 @@ function ConSecCom () : React.JSX.Element {
 					<div>{ /* What: Contact Info Div Element. Why: The direct ways to reach Tony read as one column. How: This stacks the label, heading, note, and contact rows, with no styling of its own. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>Get in Touch</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>Get in Touch</div>{ /* What: Eyebrow Label Div Element. Why: A short label names the section. How: This shows it above the heading. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Want a piece, or have a <em className={ cssModObj.titAccEmp }>question?</em></h2>{ /* What: Section Title Heading Element. Why: The heading invites visitors to write. How: The question sits in an italic accent. */ }
 

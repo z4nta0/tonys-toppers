@@ -58,7 +58,7 @@
 
 }
 
-.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the error above the heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, centered, copied from the shared section label. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the error above the heading. How: This sets it widely spaced, uppercase, and navy, led by a short yellow line, centered, copied from the shared section label. */
 
 
 	align-items     : center;

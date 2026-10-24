@@ -32,7 +32,7 @@
 
 }
 
-.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number should stand out from the rest of the line as something to tap. How: This sets it in yellow with an underline held a little below the text. */
+.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number should stand out from the rest of the line as something to tap. How: This sets it in yellow with an underline held a little below the text, and eases its hover color, press dim, and focus ring. */
 
 
 	color                 : var( --acc-sec-col );                   /* Accent Secondary Color = #fbbf24 */

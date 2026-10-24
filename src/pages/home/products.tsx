@@ -102,7 +102,7 @@ function ProSecCom () : React.JSX.Element {
 					<div>{ /* What: Products Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>The Collection</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>The Collection</div>{ /* What: Eyebrow Label Div Element. Why: A short label names the section. How: This shows it above the heading. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Every piece, <em className={ cssModObj.titAccEmp }>one of a kind.</em></h2>{ /* What: Section Title Heading Element. Why: The heading sums up the collection. How: The second half sits in an italic accent. */ }
 

@@ -132,7 +132,7 @@ function AboSecCom () : React.JSX.Element {
 					<div>{ /* What: Biography Content Div Element. Why: The story reads as one column. How: This stacks the label, name, paragraphs, and stats, with no styling of its own. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>Meet the Maker</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the name. */ }
+						<div className={ cssModObj.eyeLabDiv }>Meet the Maker</div>{ /* What: Eyebrow Label Div Element. Why: A short label names the section. How: This shows it above the name. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Tony Mawhiney: <em className={ cssModObj.titAccEmp }>artist, crafter, kind soul.</em></h2>{ /* What: Section Title Heading Element. Why: The heading names Tony and sums him up. How: The description sits in an italic accent. */ }
 

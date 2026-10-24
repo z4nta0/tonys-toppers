@@ -86,7 +86,7 @@ function FaiSecCom () : React.JSX.Element {
 					<div>{ /* What: Fairs Title Div Element. Why: The label and heading read as one block. How: This stacks them. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>At the Craft Fairs</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>At the Craft Fairs</div>{ /* What: Eyebrow Label Div Element. Why: A short label names the section. How: This shows it above the heading. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Come see Tony <em className={ cssModObj.titAccEmp }>at his table.</em></h2>{ /* What: Section Title Heading Element. Why: The heading invites visitors to find Tony in person. How: The second half sits in an italic accent. */ }
 

@@ -12,11 +12,9 @@
  * three bars, over a scrim that dims the page, and is hidden from the Tab
  * order and screen readers once it has slid away. The menu's rows are set in
  * the serif with hairlines between them and a yellow dot for the section
- * being read, rise in one after another, and end with a call button, a
- * Facebook link, and Tony's home town. The bar's states are attributes
- * rather than classes: data-page-scroll-active on the bar,
- * data-section-link-active on the link for the section being read, and
- * data-mobile-menu-open on the menu and the scrim.
+ * being read, rise in one after another, and end with the ways to reach Tony,
+ * such as a call button. The bar's states are attributes rather than classes,
+ * such as data-mobile-menu-open on the menu and the scrim.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -24,7 +22,7 @@
 
 
 
-.navScrDiv { /* What: Navigation Scrim Div. Why: The open phone menu should stand apart from a dimmed page, and the page should only dim on screens that have the menu. How: This covers the screen in the scrim color just under the bar, hidden by default and shown 900px wide and below, fading in while the menu is open. */
+.navScrDiv { /* What: Navigation Scrim Div. Why: The open phone menu should stand apart from a dimmed page, and the page should only dim on screens that have the menu. How: This covers the screen in the scrim color just under the bar, hidden by default and shown 900px wide and below, fading in while the menu is open and out when it closes. */
 
 
 	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-003-rec ) );                          /* Scrim Main Color = #1a1a2e, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
@@ -79,7 +77,7 @@
 
 /* #region navBarNav */
 
-.navBarNav { /* What: Navigation Bar Nav. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it, within the page's content width. */
+.navBarNav { /* What: Navigation Bar Nav. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, frosts what slides under it, and spreads the brand, links, and toggle across it, within the page's content width, easing its hairline color and padding as the page scrolls. */
 
 
 	-webkit-backdrop-filter : blur( calc( var( --ver-rhy-m01 ) * 1rem ) );                                                   /* Vertical Rhythm Base Minus 1 = 11px */ /* What: Prefixed Backdrop Filter. Why: Safari before 18 only reads the prefixed name. How: This comes before the unprefixed declaration, since Vite's minifier keeps only the last of the pair it treats as one property. */
@@ -145,7 +143,7 @@
 
 /* #region navBraAnc */
 
-.navBraAnc { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link home. How: This sets the mark beside the name in the bold serif, with no underline, easing its hover and press. */
+.navBraAnc { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link home. How: This sets the mark beside the name in the bold serif, with no underline, easing its hover color, press, and focus ring. */
 
 
 	align-items     : center;
@@ -226,7 +224,7 @@
 
 /* #region navTogBut */
 
-.navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon in a square about 34px across with no button chrome, easing its press, hidden until the narrow layout shows it. */
+.navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon in a square about 34px across with no button chrome, easing its press and focus ring, hidden until the narrow layout shows it. */
 
 
 	background      : none;
@@ -459,7 +457,7 @@
 
 }
 
-.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section as a soft pill. How: This sets it in medium weight with pill padding and rounding, easing its colors, press, and menu nudge. */
+.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section as a soft pill. How: This sets it in medium weight with pill padding and rounding, easing its colors, press dim, menu nudge, and focus ring. */
 
 
 	border-radius   : 999px;
@@ -520,7 +518,7 @@
 
 
 	}
-	.navLinAnc::before { /* What: Menu Row Navigation Link Anchor Dot. Why: The section being read is marked with a small yellow dot rather than a filled pill. How: This holds an empty circle slot before every name, so the names line up whether or not their row is marked. */
+	.navLinAnc::before { /* What: Menu Row Navigation Link Anchor Dot. Why: The section being read is marked with a small yellow dot rather than a filled pill. How: This holds an empty circle slot before every name, so the names line up whether or not their row is marked, and eases its fill. */
 
 
 		background    : transparent;
@@ -543,7 +541,7 @@
 
 
 	}
-	.navLinAnc:hover { /* What: Hovered Menu Row Navigation Link Anchor. Why: A row under the pointer should respond even when it's the section being read. How: This nudges the row a few pixels toward its name. */
+	.navLinAnc:hover { /* What: Hovered Menu Row Navigation Link Anchor. Why: A row under the pointer should respond even when it's the section being read. How: This nudges the row about 3.6px to the right. */
 
 
 		transform : translateX( var( --spa-hor-m05 ) ); /* Spacing Horizontal Base Minus 5 ~= 3.572px */
@@ -627,7 +625,7 @@
 
 }
 
-.menCalAnc { /* What: Menu Call Anchor. Why: Calling or texting is the quickest way to reach Tony, so the menu gives it a button in the site's sticker style. How: This sets a full-width navy pill with cream text and a hard ink shadow, centering its label, and eases its lift and press. */
+.menCalAnc { /* What: Menu Call Anchor. Why: Calling or texting is the quickest way to reach Tony, so the menu gives it a button in the site's sticker style. How: This sets a full-width navy pill with cream text and a hard ink shadow, centering its label, and eases its fill, lift, shadow, press, and focus ring. */
 
 
 	align-items     : center;
@@ -677,7 +675,7 @@
 
 }
 
-.menFacAnc { /* What: Menu Facebook Anchor. Why: Tony's Facebook page is the second way to reach him, quieter than the call button. How: This sets it in semibold navy with an underline held a little below the text, easing its color and press. */
+.menFacAnc { /* What: Menu Facebook Anchor. Why: Tony's Facebook page is the second way to reach him, quieter than the call button. How: This sets it in semibold navy with an underline held a little below the text, easing its color, press dim, and focus ring. */
 
 
 	color                 : var( --acc-mai-col );                   /* Accent Main Color = #1e3a8a */
