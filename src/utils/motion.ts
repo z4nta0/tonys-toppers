@@ -27,7 +27,7 @@
 // #region redMotFun
 
 /**
- * redMotFun = Reduce Motion Function
+ * redMotFun = Reduced Motion Function
  *
  * @summary
  * Whether the visitor asked their system for reduced motion. JS-driven
@@ -48,7 +48,7 @@
  *
 */
 
-const redMotFun = () : boolean => !!( window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ); // What: Reduce Motion Function. Why: JS-driven motion such as a smooth scroll must check this, since the CSS media query alone never reaches it. How: This reports whether the system's prefers-reduced-motion media query currently matches reduce.
+const redMotFun = () : boolean => !!( window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ); // What: Reduced Motion Function. Why: JS-driven motion such as a smooth scroll must check this, since the CSS media query alone never reaches it. How: This reports whether the system's prefers-reduced-motion media query currently matches reduce.
 
 // #endregion redMotFun
 

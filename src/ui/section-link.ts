@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { redMotFun   } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: A section link's smooth scroll has to respect the reduced-motion preference. How: The returned function asks it before choosing the scroll behavior.
+import { redMotFun   } from '../utils/motion.ts'; // What: Reduced Motion Function. Why: A section link's smooth scroll has to respect the reduced-motion preference. How: The returned function asks it before choosing the scroll behavior.
 import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A section link on any page but the home page has to take the visitor home first. How: This returns the router's navigate function.
 
 // #endregion Imports
