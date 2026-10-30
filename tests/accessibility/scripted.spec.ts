@@ -3,11 +3,11 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the page shows nothing wrong. How: This asserts on what each check reads, most often that its problem list is empty.
 import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form checks need Netlify's answer without sending anything. How: This answers the form's posts in the browser with a chosen status.
-import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
+import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: The per-state checks open and settle their state first. How: This loads it and waits for it.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.
-import { test        } from '@playwright/test';      // What: Test. Why: Each check of each state is its own test. How: This declares them.
+import { test        } from '@playwright/test';      // What: Test. Why: Each check is its own test. How: This declares them.
 
 
 import type { Page } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
@@ -774,6 +774,7 @@ test( 'under reduced motion the thank-you note still leaves when the visitor typ
 
 
 } );
+
 
 
 test( 'under reduced motion the error note still leaves when the visitor sends again', async ( { page : curPagObj } ) => { // What: Error Exit Test. Why: The error note unmounts when its exit animation ends too, so under reduced motion that exit has to stay long enough to fire its end event. How: This fails a send under reduced motion, sends again against an accepted answer, and checks the alert region empties.

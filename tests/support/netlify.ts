@@ -38,7 +38,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The fake answe
  * @summary
  * Stands in for Netlify Forms during a form check: every post the page
  * makes to the site's root address is answered in the browser with the
- * given status instead of reaching the dev server, and counted, so a check
+ * given status instead of reaching the server, and counted, so a check
  * can tell whether the form sent anything at all. Every other request
  * passes through untouched.
  *

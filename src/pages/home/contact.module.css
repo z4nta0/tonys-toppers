@@ -839,7 +839,7 @@
 
 
 }
-@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that cross-fades reads as a response to the press. How: This fades the new label up from transparent. */
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that fades in reads as a response to the press. How: This fades the new label up from transparent. */
 
 
 	from {
