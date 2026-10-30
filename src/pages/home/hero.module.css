@@ -88,7 +88,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Blob Div. Why: Someone who asked for less motion shouldn't see the glows drift. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herBloDiv { /* What: Still Hero Blob Div. Why: The glows should simply sit in their corners. How: This turns the animation off. */
+	.herBloDiv { /* What: Motionless Hero Blob Div. Why: The glows should simply sit in their corners. How: This turns the animation off. */
 
 
 		animation : none;
@@ -189,7 +189,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Eyebrow Span. Why: Someone who asked for less motion shouldn't see the line rise in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herEyeSpa { /* What: Still Hero Eyebrow Span. Why: The line should simply be there. How: This turns the animation off. */
+	.herEyeSpa { /* What: Motionless Hero Eyebrow Span. Why: The line should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -220,7 +220,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Title Heading. Why: Someone who asked for less motion shouldn't see the headline rise in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herTitHea { /* What: Still Hero Title Heading. Why: The headline should simply be there. How: This turns the animation off. */
+	.herTitHea { /* What: Motionless Hero Title Heading. Why: The headline should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -275,7 +275,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Lede Paragraph. Why: Someone who asked for less motion shouldn't see the pitch rise in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herLedPar { /* What: Still Hero Lede Paragraph. Why: The pitch should simply be there. How: This turns the animation off. */
+	.herLedPar { /* What: Motionless Hero Lede Paragraph. Why: The pitch should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -302,7 +302,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Actions Div. Why: Someone who asked for less motion shouldn't see the buttons rise in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herActDiv { /* What: Still Hero Actions Div. Why: The buttons should simply be there. How: This turns the animation off. */
+	.herActDiv { /* What: Motionless Hero Actions Div. Why: The buttons should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -437,7 +437,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Visual Div. Why: Someone who asked for less motion shouldn't see the portrait rise in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herVisDiv { /* What: Still Hero Visual Div. Why: The portrait should simply be there. How: This turns the animation off. */
+	.herVisDiv { /* What: Motionless Hero Visual Div. Why: The portrait should simply be there. How: This turns the animation off. */
 
 
 		animation : none;
@@ -470,7 +470,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Portrait Ring Div. Why: Someone who asked for less motion shouldn't see the frame turn. How: This applies only when the reduced-motion preference is set. */
 
 
-	.porRinDiv { /* What: Still Portrait Ring Div. Why: The frame should simply sit still. How: This turns the animation off. */
+	.porRinDiv { /* What: Motionless Portrait Ring Div. Why: The frame should simply sit still. How: This turns the animation off. */
 
 
 		animation : none;
@@ -510,7 +510,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Portrait Cartoon Image. Why: Someone who asked for less motion shouldn't see the portrait turn. How: This applies only when the reduced-motion preference is set. */
 
 
-	.porCarIma { /* What: Still Portrait Cartoon Image. Why: The portrait should simply sit upright. How: This turns the animation off. */
+	.porCarIma { /* What: Motionless Portrait Cartoon Image. Why: The portrait should simply sit upright. How: This turns the animation off. */
 
 
 		animation : none;
@@ -567,7 +567,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Sticker Div. Why: Someone who asked for less motion shouldn't see the sticker wobble. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herStiDiv { /* What: Still Hero Sticker Div. Why: The sticker should simply sit at its tilt. How: This turns the animation off. */
+	.herStiDiv { /* What: Motionless Hero Sticker Div. Why: The sticker should simply sit at its tilt. How: This turns the animation off. */
 
 
 		animation : none;

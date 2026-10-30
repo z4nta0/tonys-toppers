@@ -226,7 +226,7 @@
 
 
 }
-.filTogBut[aria-pressed='true'] { /* What: Pressed Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text. */
+.filTogBut[aria-pressed='true'] { /* What: Chosen Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
@@ -234,7 +234,7 @@
 
 
 }
-.filTogBut:active { /* What: Held Filter Toggle Button. Why: A press should register before the grid changes. How: This presses the pill in slightly while it's held, which also undoes its hover lift. */
+.filTogBut:active { /* What: Pressed Filter Toggle Button. Why: A press should register before the grid changes. How: This presses the pill in slightly while it's held, which also undoes its hover lift. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
@@ -316,7 +316,7 @@
 
 
 	.proCarArt,
-	.proCarArt:hover { /* What: Still Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transitions off, naming the hovered rule's own selector so it wins. */
+	.proCarArt:hover { /* What: Motionless Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transitions off, naming the hovered rule's own selector so it wins. */
 
 
 		animation  : none;

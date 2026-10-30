@@ -484,7 +484,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Item. Why: Someone who asked for less motion shouldn't see the rows rise in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navMenDiv[data-mobile-menu-open] .navLinIte { /* What: Still Navigation Link Item. Why: The rows should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
+	.navMenDiv[data-mobile-menu-open] .navLinIte { /* What: Motionless Navigation Link Item. Why: The rows should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
 
 
 		animation : none;
@@ -677,7 +677,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Contact Div. Why: Someone who asked for less motion shouldn't see the block rise in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Still Menu Contact Div. Why: The block should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
+	.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Motionless Menu Contact Div. Why: The block should simply be there. How: This turns the entrance off, matching the entering rule's own selector so it wins. */
 
 
 		animation : none;
