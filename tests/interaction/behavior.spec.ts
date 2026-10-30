@@ -63,7 +63,8 @@ const SHO_VIE_OBJ = { height : 500, width : 390  }; // What: Short Viewport Obje
  * @summary
  * Opens one route at one viewport size, ready to be used: it turns on
  * reduced motion so in-page scrolling jumps rather than glides, sizes the
- * viewport, loads the path, and waits for the web fonts, so positions read
+ * viewport, has every page it loads count its hashchange events for
+ * hasNonFun, loads the path, and waits for the web fonts, so positions read
  * afterwards are final.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -89,6 +90,19 @@ async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { h
 	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Scrolling should land at once, so its target can be read right away. How: This makes the page match prefers-reduced-motion, which turns smooth scrolling off.
 
 	await curPagObj.setViewportSize( vieSizObj ); // What: Viewport Size Call. Why: The bar's links and the menu depend on the width. How: This sizes the page before it loads.
+
+	await curPagObj.addInitScript( () => { // What: Hash Change Counter Script. Why: A link that let the browser jump to its hash would fire hashchange even after the home page cleared the hash away, which the address alone can't show. How: This has each page it loads start a count at zero and add one on every hashchange.
+
+
+		const winRecObj = window as unknown as { hasChaNum : number }; // What: Window Record Object. Why: The count has to outlive this script for hasNonFun to read it. How: This views the window as holding it. // What: Type Assertion Note. Why: The window has no such field in its type. How: The script adds it here and hasNonFun reads it.
+
+
+		winRecObj.hasChaNum = 0; // What: Hash Change Count Reset. Why: Each page starts with no hash jumps. How: This sets the count to zero.
+
+		window.addEventListener( 'hashchange', () => { winRecObj.hasChaNum += 1; } ); // What: Hash Change Listener. Why: A native jump to a hash fires hashchange, while the router's own navigation doesn't. How: This adds one to the count for each.
+
+
+	} );
 
 	await curPagObj.goto( rouPatStr ); // What: Route Load Call. Why: Each check starts from a fresh load. How: This opens the path on the suite's dev server.
 
@@ -193,6 +207,43 @@ async function ariSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< voi
 
 // #endregion ariSecFun
 
+
+// #region hasNonFun
+
+/**
+ * hasNonFun = Hash None Function
+ *
+ * @summary
+ * Checks that no link click let the browser jump to a hash on the page as it
+ * stands, by reading the hashchange count opeRouFun's counter keeps. The home
+ * page clears a hash it arrives with, so the address alone can't show that a
+ * plain click never put one there, while a native jump to a hash always fires
+ * hashchange.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to check.
+ *
+ * @returns A promise that settles once the count has been checked, with no
+ *          value.
+ *
+ * @example
+ * ```ts
+ * hasNonFun(page) // => Promise<void>
+ * ```
+ *
+*/
+
+async function hasNonFun ( curPagObj : Page ) : Promise< void > {
+
+
+	expect( await curPagObj.evaluate( () => ( window as unknown as { hasChaNum : number } ).hasChaNum ) ).toBe( 0 ); // What: No Hash Change Assertion. Why: A plain click should never put a hash in the address, even for a moment. How: This checks the page counted no hashchange. // What: Type Assertion Note. Why: The window has no such field in its type. How: opeRouFun's counter script set it.
+
+
+}
+
+// #endregion hasNonFun
+
 // #endregion Helpers
 
 
@@ -214,6 +265,8 @@ for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Section Link Lo
 		await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+
+		await hasNonFun( curPagObj ); // What: No Hash Jump Check. Why: The click should reach its section without the browser ever jumping to the hash. How: This checks no hashchange fired.
 
 
 	} );
@@ -267,6 +320,8 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'See the collection', 'products' ], 
 
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
+		await hasNonFun( curPagObj ); // What: No Hash Jump Check. Why: The click should reach its section without the browser ever jumping to the hash. How: This checks no hashchange fired.
+
 
 	} );
 
@@ -303,6 +358,8 @@ test( 'the brand returns to the top', async ( { page : curPagObj } ) => { // Wha
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Arrival Assertion. Why: The visitor should be back at the top. How: This waits until the page sits at the top.
 
 	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ ); // What: Clean Address Assertion. Why: The brand leaves no hash behind. How: This checks the URL is the bare root.
+
+	await hasNonFun( curPagObj ); // What: No Hash Jump Check. Why: The brand should return to the top without the browser ever jumping to a hash. How: This checks no hashchange fired.
 
 
 } );
@@ -536,6 +593,8 @@ for ( const [ pagNamStr, rouPatStr ] of [ [ 'home page', '/' ], [ '404 page', '/
 		await expect( curPagObj.locator( 'main' ) ).toBeFocused();              // What: Main Focus Assertion. Why: The jump has to land past the bar, so the next Tab continues into the content. How: This checks the main element holds focus.
 		await expect( curPagObj ).toHaveURL( new RegExp( `${ rouPatStr }$` ) ); // What: Clean Address Assertion. Why: The jump shouldn't leave a hash in the address. How: This checks the address still ends with the page's own path.
 
+		await hasNonFun( curPagObj ); // What: No Hash Jump Check. Why: The skip link should focus the main content without the browser ever jumping to #main. How: This checks no hashchange fired.
+
 
 	} );
 
@@ -571,6 +630,8 @@ for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Menu Link Loop.
 		await expect( togButLoc ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: A handled click should close the menu. How: This waits until the button reports it collapsed.
 
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+
+		await hasNonFun( curPagObj ); // What: No Hash Jump Check. Why: The click should reach its section without the browser ever jumping to the hash. How: This checks no hashchange fired.
 
 
 	} );
@@ -635,6 +696,8 @@ for ( const [ conLabStr, secIdeStr, conDesStr ] of [ [ 'See the collection', 'pr
 		await curPagObj.getByRole( conLabStr === 'About Tony' ? 'navigation' : 'main' ).getByRole( 'link', { exact : true, name : conLabStr } ).click(); // What: Control Click Call. Why: This is the action under test. How: This clicks the control by its label, in the bar or in the page's main content.
 
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+
+		await hasNonFun( curPagObj ); // What: No Hash Jump Check. Why: The click should reach its section without the browser ever jumping to the hash. How: This checks no hashchange fired.
 
 
 	} );
