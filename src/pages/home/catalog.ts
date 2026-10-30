@@ -84,7 +84,7 @@ const CAT_LAB_OBJ : Record< CatSluTyp, string > = { // What: Category Label Obje
 
 type CatRecTyp = { labStr : string, sluStr : CatSluTyp }; // What: Category Record Type. Why: Each filter button has a slug and a label. How: This pairs them.
 
-const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The products grid offers a filter button per category, in this order, and lists single pieces in the same order. How: Each row pairs a category's slug with its plural label.
+const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The Products grid offers a filter button per category, in this order, and lists single pieces in the same order. How: Each row pairs a category's slug with its plural label.
 
 
 	{ labStr : 'Pen Toppers',      sluStr : 'pen-topper'      }, // What: Pen Toppers Row. Why: Beaded pen toppers are Tony's first and biggest line. How: This names their category.
@@ -264,7 +264,7 @@ const phoUrlFun = ( filNamStr : string ) => PRO_URL_OBJ[ `../../assets/products/
 
 
 
-type ProRecTyp = { // What: Product Record Type. Why: The products grid and the gallery read every photo the same way, through PRO_REC_ARR. How: This describes one photo's card.
+type ProRecTyp = { // What: Product Record Type. Why: The Products grid and the gallery read every photo the same way, through PRO_REC_ARR. How: This describes one photo's card.
 
 
 	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
@@ -280,7 +280,7 @@ type ProRecTyp = { // What: Product Record Type. Why: The products grid and the 
 
 };
 
-const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The products grid and the gallery read every photo from one list. How: This lists every single piece in category order, with the sets right after the wine stoppers, then the booth shots, which only the filters and the gallery show.
+const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The Products grid and the gallery read every photo from one list. How: This lists every single piece in category order, with the sets right after the wine stoppers, then the booth shots, which only the filters and the gallery show.
 
 
 	...CAT_REC_ARR.flatMap( ( catRecObj ) => [ // What: Category Pieces Spread. Why: Single pieces are listed category by category. How: This builds each category's cards, adding the sets after the wine stoppers.

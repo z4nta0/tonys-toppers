@@ -75,7 +75,7 @@ function HerSecCom () : React.JSX.Element {
 			id='home'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Home Hero Section Element. Why: The home page opens with the headline and pitch. How: Its ID stays the plain word `home`, since the bar's Home link points at it and it can appear in the page's address. */ }
+		>{ /* What: Home Hero Section Element. Why: The home page opens with the headline and pitch. How: Its ID stays the plain word `home`, since the bar's "Home" link points at it and it can appear in the page's address. */ }
 
 
 			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: Hero Blob Div Yellow Element. Why: A soft yellow glow warms the hero's top-left corner. How: This draws a blurred circle that floats slowly. */ }
