@@ -190,7 +190,7 @@
 
 /* #region faiPhoFig */
 
-.faiPhoFig { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners. */
+.faiPhoFig { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners, and eases its hover lift, shadow, and border color, its shadow fading out on the accelerating curve. */
 
 
 	aspect-ratio  : 4 / 5;
@@ -198,6 +198,31 @@
 	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
 	overflow      : hidden;
+	transition    : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-acc-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the frame clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the frame itself, which only repaints the one frame. */
+
+
+}
+.faiPhoFig:hover { /* What: Hovered Fair Photo Figure. Why: The booth shot under the pointer should come forward, the same as a product card. How: This lifts it, casts a soft ink shadow that fades in on the decelerating curve, and turns its border navy. */
+
+
+	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
+	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
+	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition   : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Standard Easing = ease */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Fair Photo Figure. Why: Someone who asked for less motion shouldn't see the frames ease their hover look. How: This applies only when the reduced-motion preference is set. */
+
+
+	.faiPhoFig,
+	.faiPhoFig:hover { /* What: Motionless Fair Photo Figure. Why: The hover look should simply switch. How: This turns the transitions off, naming the hovered rule's own selector so it wins. */
+
+
+		transition : none;
+
+
+	}
 
 
 }

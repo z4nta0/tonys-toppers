@@ -115,7 +115,7 @@ function FaiSecCom () : React.JSX.Element {
 							key={ faiRecObj.ideStr }
 
 							className={ cssModObj.faiPhoFig }
-						>{ /* What: Fair Photo Figure Element. Why: Each booth shot sits in the same rounded 4:5 frame. How: This frames the photo. */ }
+						>{ /* What: Fair Photo Figure Element. Why: Each booth shot sits in the same rounded 4:5 frame. How: This frames the photo, and lifts it forward on hover like a product card. */ }
 
 
 							<img
