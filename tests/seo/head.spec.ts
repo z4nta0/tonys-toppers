@@ -184,10 +184,11 @@ test( 'the 404 page stays out of search results', async ( { page : curPagObj } )
 
 	await curPagObj.goto( '/no-such-page' ); // What: Unknown Address Open Call. Why: Every unknown path shows the 404 page. How: This loads one.
 
-	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
-	await expect( curPagObj ).toHaveTitle( "Page Not Found | Tony's Toppers" );                         // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.
-	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                   // What: Single Description Assertion. Why: Every route should carry exactly one description, and the 404 page keeps index.html's. How: This checks there's exactly one.
-	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 );                   // What: Single Heading Assertion. Why: Every page should have exactly one h1. How: This checks the 404 page has one.
+	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' );  // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
+	await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR ); // What: Canonical Assertion. Why: The 404 page keeps the home page's canonical beside its noindex, as CLAUDE.md records. How: This checks the canonical link names the live address.
+	await expect( curPagObj ).toHaveTitle( "Page Not Found | Tony's Toppers" );                          // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                    // What: Single Description Assertion. Why: Every route should carry exactly one description, and the 404 page keeps index.html's. How: This checks there's exactly one.
+	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 );                    // What: Single Heading Assertion. Why: Every page should have exactly one h1. How: This checks the 404 page has one.
 
 
 } );
@@ -209,6 +210,8 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) ); // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
+	expect( SOC_KEY_ARR.filter( ( socKeyStr ) => !socTagObj[ socKeyStr ] ) ).toEqual( [] ); // What: Filled Tags Assertion. Why: A tag that's present but empty still leaves part of the card blank. How: This lists every required tag with no content, which should be none.
+	expect( [ socTagObj[ 'og:type' ], socTagObj[ 'og:locale' ], socTagObj[ 'twitter:card' ] ] ).toEqual( [ 'website', 'en_US', 'summary_large_image' ] );                                          // What: Fixed Values Assertion. Why: The rule names the type and card layout, and the locale says the card is in US English. How: This checks the three tags hold those values.
 	expect( [ socTagObj[ 'og:image' ], socTagObj[ 'og:url' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ `${ LIV_URL_STR }og-image.jpg`, LIV_URL_STR, `${ LIV_URL_STR }og-image.jpg` ] );         // What: Absolute URLs Assertion. Why: Scrapers can't resolve a relative address. How: This checks each URL tag names the live HTTPS address.
 	expect( [ socTagObj[ 'og:image:type' ], socTagObj[ 'og:image:width' ], socTagObj[ 'og:image:height' ] ] ).toEqual( [ 'image/jpeg', '1200', '630' ] );                                          // What: Image Facts Assertion. Why: The tags have to describe the file they point at. How: This checks the type and size they give.
 	expect( [ socTagObj[ 'og:title' ], socTagObj[ 'twitter:title' ] ] ).toEqual( [ await curPagObj.title(), await curPagObj.title() ] );                                                           // What: Title Match Assertion. Why: A card should name the page the way its tab does. How: This checks both card titles match the page title.
