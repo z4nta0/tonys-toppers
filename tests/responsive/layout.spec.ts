@@ -267,12 +267,12 @@ function layProFun () : string[] {
 
 
 		const carEleArr = [ ...griCurEle.children ].filter( ( carCurEle ) => carCurEle.getBoundingClientRect().width > 0 && !/^(absolute|fixed)$/.test( getComputedStyle( carCurEle ).position ) ); // What: Card Element Array. Why: Only children on screen and in the grid's flow make up its rows. How: This keeps the children that take up room and aren't positioned out of the flow.
-		const carCouBoo = carEleArr.length >= 2;                                               // What: Card Count Boolean. Why: A grid of one child has no rows to compare. How: This is true when at least two children show.
+		const carCouBoo = carEleArr.length >= 1;                                               // What: Card Count Boolean. Why: A grid showing no child has nothing to measure, while a filter can leave the Products grid a single card. How: This is true when at least one child shows.
 		const griDisBoo = /^(inline-)?grid$/.test( getComputedStyle( griCurEle ).display );    // What: Grid Display Boolean. Why: Only a grid lays its children out in rows of columns. How: This is true when the element displays as a grid.
 		const proGriBoo = ( griCurEle.getAttribute( 'class' ) ?? '' ).includes( 'proGriDiv' ); // What: Products Grid Boolean. Why: The Products grid's card count changes with its filter, so its last row may center several leftover cards rather than one. How: This is true for the Products grid, found by its module class attribute, which also reads safely on an SVG element, whose className isn't a string.
 
 
-		if ( !( griDisBoo && carCouBoo ) ) continue; // What: Not A Card Grid Guard. Why: Only grids of two or more children are held to even rows. How: This skips anything else.
+		if ( !( griDisBoo && carCouBoo ) ) continue; // What: Not A Card Grid Guard. Why: Only a grid with a child showing can be held to even rows. How: This skips anything else.
 
 
 
@@ -298,23 +298,27 @@ function layProFun () : string[] {
 		rowLisArr.sort( ( rowOneArr, rowTwoArr ) => rowOneArr[ 0 ].top - rowTwoArr[ 0 ].top ); // What: Row Sort Call. Why: The grid's order can differ from its markup's, since a child can move with the CSS order property. How: This sorts the rows top to bottom by their first card's top edge.
 
 
-		const firRecObj = rowLisArr[ 0 ][ 0 ];                                // What: First Rect Object. Why: Leftover cards have to keep the width the other cards share. How: This takes a card from the top row.
-		const griRecObj = griCurEle.getBoundingClientRect();                  // What: Grid Rect Object. Why: Leftover cards are judged against the grid's center. How: This measures the grid.
-		const lasRowArr = rowLisArr[ rowLisArr.length - 1 ];                  // What: Last Row Array. Why: The last row holds the cards that can be left over. How: This takes the bottom row's boxes.
-		const rowCouArr = rowLisArr.map( ( rowCurArr ) => rowCurArr.length ); // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
+		const colTraArr = getComputedStyle( griCurEle ).gridTemplateColumns.split( ' ' ); // What: Column Track Array. Why: Leftover cards in the Products grid keep its track width and sit centered even when they fill less than one row. How: This lists the column tracks the grid laid out, each as its resolved width.
+		const firRecObj = rowLisArr[ 0 ][ 0 ];                                            // What: First Rect Object. Why: Leftover cards have to keep the width the other cards share. How: This takes a card from the top row.
+		const griRecObj = griCurEle.getBoundingClientRect();                              // What: Grid Rect Object. Why: Leftover cards are judged against the grid's center. How: This measures the grid.
+		const lasRowArr = rowLisArr[ rowLisArr.length - 1 ];                              // What: Last Row Array. Why: The last row holds the cards that can be left over. How: This takes the bottom row's boxes.
+		const rowCouArr = rowLisArr.map( ( rowCurArr ) => rowCurArr.length );             // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
 
 		const lasLefNum = Math.min( ...lasRowArr.map( ( lasRecObj ) => lasRecObj.left ) );  // What: Last Left Number. Why: The leftover cards are centered as a group. How: This finds the group's left edge.
 		const lasRigNum = Math.max( ...lasRowArr.map( ( lasRecObj ) => lasRecObj.right ) ); // What: Last Right Number. Why: The leftover cards are centered as a group. How: This finds the group's right edge.
 
-		const cenLasBoo = Math.abs( ( lasLefNum + lasRigNum ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Last Boolean. Why: Leftover cards have to sit centered under the rows above them. How: This is true when the group's center is within a pixel of the grid's.
-		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                      // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
-		const lonLasBoo = rowCouArr[ rowCouArr.length - 1 ] === 1;                                                   // What: Lone Last Boolean. Why: Only a single leftover card may sit in a row of its own. How: This is true when the last row holds one card.
-		const samWidBoo = lasRowArr.every( ( lasRecObj ) => Math.abs( lasRecObj.width - firRecObj.width ) <= 1 );    // What: Same Width Boolean. Why: Leftover cards keep the others' width, never stretched across their row. How: This is true when each one's width is within a pixel of a top row card's.
-		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );            // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
+		const cenLasBoo = Math.abs( ( lasLefNum + lasRigNum ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1;           // What: Centered Last Boolean. Why: Leftover cards have to sit centered under the rows above them. How: This is true when the group's center is within a pixel of the grid's.
+		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
+		const lonLasBoo = rowCouArr[ rowCouArr.length - 1 ] === 1;                                                             // What: Lone Last Boolean. Why: Only a single leftover card may sit in a row of its own. How: This is true when the last row holds one card.
+		const proShoBoo = proGriBoo && lasRowArr.length < colTraArr.length;                                                    // What: Products Short Boolean. Why: The Products grid's last row can hold fewer cards than its columns even when it's the only row. How: This is true when the last row leaves a column empty.
+		const samWidBoo = lasRowArr.every( ( lasRecObj ) => Math.abs( lasRecObj.width - firRecObj.width ) <= 1 );              // What: Same Width Boolean. Why: Leftover cards keep the others' width, never stretched across their row. How: This is true when each one's width is within a pixel of a top row card's.
+		const traWidBoo = lasRowArr.every( ( lasRecObj ) => Math.abs( lasRecObj.width - parseFloat( colTraArr[ 0 ] ) ) <= 1 ); // What: Track Width Boolean. Why: A leftover card keeps the grid's track width rather than stretching, which a single row can't show by comparing with itself. How: This is true when each card in the last row is within 1px of the first track.
+		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                      // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
 
 		const cenOddBoo = cenLasBoo && ( lonLasBoo || proGriBoo ) && samWidBoo; // What: Centered Odd Boolean. Why: The Card Grids rule allows one leftover card, or in a filtered grid any leftover cards, sitting centered in their own row at the others' width. How: This combines the checks.
+		const proCenBoo = cenLasBoo && traWidBoo;                               // What: Products Centered Boolean. Why: The Products grid's leftover cards have to sit centered at its track width, however many rows it has. How: This combines the two checks.
 
-		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't centered at the others' width, break the Card Grids rule. How: This combines them.
+		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ) || ( proShoBoo && !proCenBoo ); // What: Short Row Boolean. Why: Uneven rows, a short last row that isn't centered at the others' width, or Products cards that leave a column empty without sitting centered at the track width, break the Card Grids rule. How: This combines them.
 
 
 		if ( shoRowBoo ) proLisArr.push( `${ desEleFun( griCurEle ) } leaves uneven rows (${ rowCouArr.join( ', ' ) })` ); // What: Card Row Check. Why: Every row of a card grid should hold the same number of cards. How: This records a grid with uneven rows, listing each row's count.
