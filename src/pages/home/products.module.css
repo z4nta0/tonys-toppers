@@ -382,7 +382,7 @@
 .proCarArt:hover .proPhoIma { /* What: Hovered Product Photo Image. Why: The photo draws the eye in when its card is hovered. How: This zooms it slightly within its frame. */
 
 
-	transform : scale( 1.06 );
+	transform : scale( 1.03 );
 
 
 }
