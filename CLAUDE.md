@@ -72,9 +72,10 @@ quality 0.85, plus `src/pages/home/photo-sizes.ts`, which gives every img its
 width and height. Each is no more than three times its largest display size
 (decided 2026-10-29, up from twice, for the densest phone screens, taking the
 photos from 2,698 KB to 4,892 KB): a product photo fits within 843 by
-1,125px, a booth shot is 1,044px wide, the cartoon 1,065px, and the portrait
-keeps its 756px. Adding or
-replacing a photo means dropping the original in and rerunning the script.
+1,125px, a booth shot within 1,044px wide, and the cartoon within 1,065px,
+never enlarged past its original, while the portrait keeps its 756px. Adding
+or replacing a photo means dropping the original in and rerunning the
+script.
 Tony's cartoon stays lossy like the photos (decided 2026-10-29): its original
 is a JPEG with halftone texture rather than flat artwork, and lossless came to
 751 KB against 69 KB with no difference visible at 3x zoom.

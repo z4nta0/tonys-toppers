@@ -62,7 +62,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The fake answe
 async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { couNum : number } > {
 
 
-	const posCouObj = { couNum : 0 }; // What: Post Count Object. Why: A check needs to know whether the form sent anything. How: This counts the posts the fake answers, read after the action.
+	const posCouObj = { couNum : 0 }; // What: Post Count Object. Why: A check can ask whether the form sent anything. How: This counts the posts the fake answers, read after the action.
 
 
 	await curPagObj.route( ( reqUrlObj ) => reqUrlObj.pathname === '/', async ( curRouObj ) => { // What: Root Route Handler. Why: Netlify Forms takes the form's post at the site's root address. How: This intercepts every request to the root and answers only the posts.
@@ -72,7 +72,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 
 
-		posCouObj.couNum += 1; // What: Post Count Increment. Why: The check reads how many posts were sent. How: This counts this one.
+		posCouObj.couNum += 1; // What: Post Count Increment. Why: The returned counter should show how many posts were sent. How: This counts this one.
 
 
 		await curRouObj.fulfill( { body : '', status : staCodNum } ); // What: Fake Answer Call. Why: The form should see Netlify's answer without anything really being sent. How: This answers the post with the given status and an empty body.
@@ -82,7 +82,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 
 
-	return posCouObj; // What: Post Count Return. Why: Some tests check how many posts went out. How: This hands back the counter the route handler updates.
+	return posCouObj; // What: Post Count Return. Why: A check can read how many posts went out. How: This hands back the counter the route handler updates.
 
 
 }

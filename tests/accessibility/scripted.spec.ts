@@ -33,7 +33,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * speak through a live region that's in the page, empty, from the first
  * render, and the send button keeps focus while a message goes out. A name,
  * keyboard, or motion style failure lists every problem it found, naming the
- * element in all but the positive tabindex count.
+ * element in each except the positive tabindex count and a keyboard trap.
  *
  * Sections:
  *  - Constants
