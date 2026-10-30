@@ -91,12 +91,9 @@ const TOG_PRO_ARR = [ ...CON_PRO_ARR, 'padding-top' ];                          
  * TOG_TAR_ARR = Toggle Target Array
  *
  * @summary
- * The kinds of element with a state that switches on and off, each flipped on
- * and off again in turn, in the order listed, so the bar and the menu are read
- * before the Products filters scroll the page. The phone menu's own open state
- * isn't listed: its rows play a staggered entrance animation rather than a
- * transition, which this probe doesn't judge. Every row holds:
- *
+ * The kinds of element with a state that switches on and off, each flipped
+ * on and off again in turn, in the order listed, so the bar and the menu are
+ * read before the Products filters scroll the page. Every row holds: *
  *  - `actStr` (String): the value that marks the state on.
  *
  *  - `attStr` (String): the attribute that marks the state.
@@ -117,6 +114,7 @@ const TOG_TAR_ARR : TogTarTyp[] = [ // What: Toggle Target Array. Why: A switche
 
 	{ actStr : 'true', attStr : 'aria-expanded',            inaStr : 'false', pseStr : '',         selStr : '[class*="navTogBut"]' }, // What: Menu Toggle Row. Why: The phone menu's toggle turns its bars into a cross while the menu is open. How: This flips its aria-expanded.
 	{ actStr : '',     attStr : 'data-page-scroll-active',  inaStr : null,    pseStr : '',         selStr : '[class*="navBarNav"]' }, // What: Scrolled Bar Row. Why: The bar draws its hairline and tightens once the page scrolls. How: This flips its data-page-scroll-active.
+	{ actStr : '',     attStr : 'data-mobile-menu-open',    inaStr : null,    pseStr : '',         selStr : '[class*="navMenDiv"]' }, // What: Open Menu Row. Why: The phone menu slides down while it's open, its rows rising in after it. How: This flips its data-mobile-menu-open, on the open menu state, where it shows.
 	{ actStr : '',     attStr : 'data-mobile-menu-open',    inaStr : null,    pseStr : '',         selStr : '[class*="navScrDiv"]' }, // What: Open Scrim Row. Why: The page dims behind the open phone menu. How: This flips the scrim's data-mobile-menu-open, on the open menu state, where it shows.
 	{ actStr : '',     attStr : 'data-section-link-active', inaStr : null,    pseStr : '::before', selStr : '[class*="navLinAnc"]' }, // What: Section Link Row. Why: The bar's link, or the menu's row and its dot, for the section being read is marked active. How: This flips its data-section-link-active, reading the row's dot on its ::before layer.
 	{ actStr : 'true', attStr : 'aria-pressed',             inaStr : 'false', pseStr : '',         selStr : '[class*="filTogBut"]' }, // What: Filter Toggle Row. Why: The chosen Products filter fills its pill. How: This flips its aria-pressed.
@@ -130,6 +128,48 @@ const TOG_TAR_ARR : TogTarTyp[] = [ // What: Toggle Target Array. Why: A switche
 
 
 // #region Helpers
+
+// #region aniFinFun
+
+/**
+ * aniFinFun = Animation Finish Function
+ *
+ * @summary
+ * Runs inside the page and waits until every animation and transition on an
+ * element and everything inside it has finished, leaving out any that repeat
+ * forever, so a look read afterwards is the settled one even when a staggered
+ * entrance, such as the phone menu's rows rising in one after another, runs
+ * past the usual settle wait. Passed to Playwright's evaluate, so it can't
+ * read anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param eleCurEle - Element Current Element: The element to wait on.
+ *
+ * @returns A promise that settles once every finite animation has finished,
+ *          with no value.
+ *
+ * @example
+ * ```ts
+ * handle.evaluate(aniFinFun) // => Promise<void>
+ * ```
+ *
+*/
+
+async function aniFinFun ( eleCurEle : Element ) : Promise< void > {
+
+
+	const finAniArr = eleCurEle.getAnimations( { subtree : true } ).filter( ( aniCurObj ) => aniCurObj.effect?.getTiming().iterations !== Infinity ); // What: Finite Animation Array. Why: A loop never finishes, so waiting on one would hang. How: This lists the element's and its descendants' animations and transitions that end.
+
+
+	await Promise.all( finAniArr.map( ( aniCurObj ) => aniCurObj.finished ) ); // What: Animation Finish Wait. Why: The look is read only once every entrance and transition has ended. How: This waits on each one's finished promise.
+
+
+}
+
+// #endregion aniFinFun
+
+
 
 // #region attSetFun
 
@@ -406,8 +446,9 @@ function movProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr
  * with the parent's transition, as does a layer whose color matches the
  * element's, and a border color matching the element's own color takes the
  * color's duration, since an unset border color is currentColor and follows
- * the color as it eases. Passed to Playwright's evaluate, so it can't read
- * anything from this file.
+ * the color as it eases. An identity matrix reads as none, since the two draw
+ * the same. Passed to Playwright's evaluate, so it can't read anything from
+ * this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -465,7 +506,7 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], string ] ) : S
 
 
 			durArr : proNamArr.map( durProFun ), // What: Duration Array. Why: A property that changes has to ease rather than snap. How: This reads the duration of the transition covering each probed property, or 0 when none does.
-			valArr : proNamArr.map( ( proNamStr ) => ( proNamStr === 'border-color' ? borValFun( styCurObj ) : styCurObj.getPropertyValue( proNamStr ) ) ) // What: Value Array. Why: Two moments are compared property by property. How: This reads each probed property's computed value, taking the border color from its drawn sides only.
+			valArr : proNamArr.map( ( proNamStr ) => ( proNamStr === 'border-color' ? borValFun( styCurObj ) : styCurObj.getPropertyValue( proNamStr ).replace( /^matrix\(1, 0, 0, 1, 0, 0\)$/, 'none' ) ) ) // What: Value Array. Why: Two moments are compared property by property. How: This reads each probed property's computed value, taking the border color from its drawn sides only and reading an identity matrix as none, since an entrance held at translateY( 0 ) draws the same as no transform.
 
 
 		};
@@ -993,15 +1034,16 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  * @summary
  * Flips every reachable element with a state that switches on and off, each
  * kind listed in {@link TOG_TAR_ARR}, and returns a problem for each one that
- * gives no feedback. The pointer is moved away, and each element is scrolled
- * into view, marked off, read, marked on, read again, marked off, and read a
- * third time, every look read once its transition has settled, then left as
- * the page had it. An element that looks the same off and on is a problem.
- * Normally every probed property that changes either way, on the element,
- * anything inside it, or the layer its row names, has to be eased by a
- * transition ({@link snaProFun}); under reduced motion none of them may ease
- * ({@link movProFun}). Finding nothing to flip is a problem too, so the check
- * can't pass without checking anything.
+ * gives no feedback, skipping one drawn as display: contents, which has no box
+ * of its own. The pointer is moved away, and each element is scrolled into
+ * view, marked off, read, marked on, read again, marked off, and read a third
+ * time, every look read once its transitions and finite animations have
+ * finished, then left as the page had it. An element that looks the same off
+ * and on is a problem. Normally every probed property that changes either way,
+ * on the element, anything inside it, or the layer its row names, has to be
+ * eased by a transition ({@link snaProFun}); under reduced motion none of them
+ * may ease ({@link movProFun}). Finding nothing to flip is a problem too, so
+ * the check can't pass without checking anything.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -1037,6 +1079,13 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 	for ( const [ togTarObj, togCurObj ] of togHanArr ) { // What: Toggle Probe Loop. Why: Every switched state has to show and ease. How: This reads each element off, on, and off again.
 
 
+		const conDisBoo = await togCurObj.evaluate( ( togCurEle ) => getComputedStyle( togCurEle ).display === 'contents' ); // What: Contents Display Boolean. Why: An element drawn as display: contents has no box of its own, such as the phone menu's wrapper on wide screens, where its state changes nothing. How: This reads its computed display.
+
+
+		if ( conDisBoo ) continue; // What: Boxless Element Guard. Why: A state on an element with no box can't change how it looks. How: This skips it.
+
+
+
 		const oriValStr = await togCurObj.getAttribute( togTarObj.attStr ); // What: Original Value String. Why: The element is left as the page had it. How: This reads the attribute's value, or null when it's absent.
 		const togDesStr = await togCurObj.evaluate( ( togCurEle ) => `${ togCurEle.tagName.toLowerCase() } "${ ( togCurEle.getAttribute( 'aria-label' ) || togCurEle.textContent || '' ).trim().slice( 0, 30 ) }"` ); // What: Toggle Description String. Why: A problem should name the element a person would recognize. How: This joins its tag with its label or text.
 
@@ -1049,6 +1098,8 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Off Settle Wait. Why: Any earlier look has to finish fading. How: This pauses for the settle time.
 
+		await togCurObj.evaluate( aniFinFun ); // What: Animation Finish Call. Why: A staggered entrance inside the element can outlast the settle wait. How: This waits for every finite animation in it to end.
+
 
 		const inaSnaArr = await snaHanFun( togCurObj, TOG_PRO_ARR, togTarObj.pseStr ); // What: Inactive Snapshot Array. Why: The off look is what the on look is compared with. How: This records the element, everything inside it, and its row's layer.
 
@@ -1057,6 +1108,8 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: On Settle Wait. Why: The on look is read once it has eased in. How: This pauses for the settle time.
 
+		await togCurObj.evaluate( aniFinFun ); // What: Animation Finish Call. Why: A staggered entrance inside the element can outlast the settle wait. How: This waits for every finite animation in it to end.
+
 
 		const actSnaArr = await snaHanFun( togCurObj, TOG_PRO_ARR, togTarObj.pseStr ); // What: Active Snapshot Array. Why: The on look is compared with off both ways. How: This records it.
 
@@ -1064,6 +1117,8 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await attSetFun( togCurObj, togTarObj.attStr, togTarObj.inaStr ); // What: Off Again Set Call. Why: Switching the state off has to ease too. How: This marks it off again.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Off Again Settle Wait. Why: The off look is read once it has eased out. How: This pauses for the settle time.
+
+		await togCurObj.evaluate( aniFinFun ); // What: Animation Finish Call. Why: A staggered entrance inside the element can outlast the settle wait. How: This waits for every finite animation in it to end.
 
 
 		const retSnaArr = await snaHanFun( togCurObj, TOG_PRO_ARR, togTarObj.pseStr ); // What: Return Snapshot Array. Why: The look switched back off is compared with on. How: This records it.
