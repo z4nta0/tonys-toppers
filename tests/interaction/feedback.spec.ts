@@ -732,17 +732,17 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  * hovProFun = Hover Problems Function
  *
  * @summary
- * Probes every visible product card and the About portrait's frame and returns
- * a problem for each one that gives no hover feedback. Neither is a control,
- * so only hover is checked: each is scrolled into view, read at rest with the
- * pointer away and again while hovered, every look read once its transition
- * has settled, and one that looks the same both ways is a problem. Its
- * transition durations are read from the element and its ::after layer, where
- * a hover shadow can fade in. Normally every property that changes, on it,
- * anything inside it, or that layer, has to be eased by a transition ({@link
- * snaProFun}); under reduced motion every duration must be zero instead, while
- * the hover look still has to change. Finding nothing to probe is a problem
- * too, so the check can't pass without checking anything.
+ * Probes every visible card and frame that responds to hover, such as a
+ * product card, and returns a problem for each one that gives no hover
+ * feedback. None is a control, so only hover is checked: each is scrolled into
+ * view, read at rest with the pointer away and again while hovered, every look
+ * read once its transition has settled, and one that looks the same both ways
+ * is a problem. Its transition durations are read from the element and its
+ * ::after layer, where a hover shadow can fade in. Normally every property
+ * that changes, on it, anything inside it, or that layer, has to be eased by a
+ * transition ({@link snaProFun}); under reduced motion every duration must be
+ * zero instead, while the hover look still has to change. Finding nothing to
+ * probe is a problem too, so the check can't pass without checking anything.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -765,14 +765,14 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
 
-	const tarHanArr = await conLisFun( curPagObj, HOV_TAR_STR ); // What: Target Handle Array. Why: Every visible card and the frame are probed. How: This collects them the way the controls are collected.
+	const tarHanArr = await conLisFun( curPagObj, HOV_TAR_STR ); // What: Target Handle Array. Why: Every visible card and frame that responds to hover is probed. How: This collects them the way the controls are collected.
 
 
-	if ( !tarHanArr.length ) proLisArr.push( 'no product card or portrait frame to probe' ); // What: Empty Probe Check. Why: A probe that finds nothing would pass without checking anything. How: This records a problem when no card or frame is found.
+	if ( !tarHanArr.length ) proLisArr.push( 'no card or frame to probe' ); // What: Empty Probe Check. Why: A probe that finds nothing would pass without checking anything. How: This records a problem when no card or frame is found.
 
 
 
-	for ( const tarCurObj of tarHanArr ) { // What: Target Probe Loop. Why: Every card and the frame has to respond to hover. How: This reads each one at rest and hovered.
+	for ( const tarCurObj of tarHanArr ) { // What: Target Probe Loop. Why: Every card and frame has to respond to hover. How: This reads each one at rest and hovered.
 
 
 		const tarDesStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ tarCurEle.tagName.toLowerCase() } "${ ( tarCurEle.textContent || '' ).trim().slice( 0, 30 ) }"` ); // What: Target Description String. Why: A problem should name the card or frame a person would recognize. How: This joins its tag with the start of its text.
@@ -826,10 +826,10 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } gives every reachable link and button hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every reachable link and button, every reachable form field, and on the home states every visible product card and the About portrait frame, and checks it finds no problems.
+	test( `${ staRecObj.ideStr } gives every reachable link and button hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every reachable link and button, every reachable form field, and on the home states every visible card and frame that responds to hover, and checks it finds no problems.
 
 
-		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
+		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and frame took about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
 
@@ -839,7 +839,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		expect( await fieProFun( curPagObj, false ) ).toEqual( [] );              // What: No Field Problems Assertion. Why: The state passes only when every form field shows focus. How: This compares the problems with an empty list, so a failure prints each one.
 
 
-		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, false ) ).toEqual( [] ); // What: No Hover Problems Assertion. Why: The product cards and the portrait frame respond to hover, and only the home states show them with nothing covering them. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
+		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, false ) ).toEqual( [] ); // What: No Hover Problems Assertion. Why: The cards and frames that respond to hover show with nothing covering them only on the home states. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
 
 
 	} );
@@ -862,10 +862,10 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every reachable link and button, every reachable form field, and on the home states every visible product card and the About portrait frame, with reduced motion on and checks it finds no problems.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every reachable link and button, every reachable form field, and on the home states every visible card and frame that responds to hover, with reduced motion on and checks it finds no problems.
 
 
-		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
+		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and frame took about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
@@ -877,7 +877,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		expect( await fieProFun( curPagObj, true ) ).toEqual( [] );              // What: No Reduced Motion Field Problems Assertion. Why: Every form field has to show focus without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 
-		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Hover Problems Assertion. Why: The product cards and the portrait frame have to keep their hover look without moving. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
+		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Hover Problems Assertion. Why: The cards and frames that respond to hover have to keep their hover look without moving. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
 
 
 	} );
