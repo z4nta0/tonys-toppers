@@ -6,7 +6,9 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { useState } from 'react'; // What: Use State. Why: The section tracks the form's state, such as whether a request is out. How: This holds each piece.
+import { useEffect } from 'react'; // What: Use Effect. Why: A pending thank-you timer shouldn't outlive the section. How: This clears it when the section unmounts.
+import { useRef    } from 'react'; // What: Use Ref. Why: The thank-you timer has to be found again to restart it. How: This holds its ID between renders.
+import { useState  } from 'react'; // What: Use State. Why: The section tracks the form's state, such as whether a request is out. How: This holds each piece.
 
 
 import type { AnimationEvent } from 'react'; // What: Animation Event. Why: A leaving note unmounts once its own exit animation ends. How: This types the end handler's event.
@@ -209,8 +211,12 @@ function ConSecCom () : React.JSX.Element {
 	const [ forSenBoo, setForSenBoo ] = useState( false );                    // What: Form Sent Boolean And Setter. Why: The thank-you note shows only right after a confirmed send. How: This holds whether it's showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );                    // What: Sending Progress Boolean And Setter. Why: The visitor should see a message is on its way, and shouldn't send it twice. How: This holds whether a request is out.
 
-	const errExiObj = useNotExiFun( forErrBoo ); // What: Error Exit Object. Why: The error note should fade out rather than vanish. How: This keeps it mounted while it leaves.
-	const sucExiObj = useNotExiFun( forSenBoo ); // What: Success Exit Object. Why: The thank-you note should fade out rather than vanish. How: This keeps it mounted while it leaves.
+	const errExiObj = useNotExiFun( forErrBoo );                 // What: Error Exit Object. Why: The error note should fade out rather than vanish. How: This keeps it mounted while it leaves.
+	const sucExiObj = useNotExiFun( forSenBoo );                 // What: Success Exit Object. Why: The thank-you note should fade out rather than vanish. How: This keeps it mounted while it leaves.
+	const thaTimRef = useRef< number | undefined >( undefined ); // What: Thank-You Timer Reference. Why: A second send should restart the note's hiding rather than inherit the first send's timer. How: This holds the pending timer's ID, or undefined when none is pending.
+
+
+	useEffect( () => () => window.clearTimeout( thaTimRef.current ), [] ); // What: Thank-You Timer Cleanup Effect. Why: The note's state shouldn't change after the section is gone. How: This cancels a pending timer when the section unmounts, the empty list running it once.
 
 
 
@@ -347,7 +353,10 @@ function ConSecCom () : React.JSX.Element {
 
 			setForDatObj( FOR_EMP_OBJ ); // What: Form Reset Call. Why: A sent form starts fresh. How: This empties every field.
 
-			window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Thank-You Timer Call. Why: The note shouldn't stay up forever. How: This hides it after 6 seconds.
+			window.clearTimeout( thaTimRef.current ); // What: Thank-You Timer Clear Call. Why: An earlier send's timer would hide this note early. How: This cancels it, doing nothing when none is pending.
+
+
+			thaTimRef.current = window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Thank-You Timer Assignment. Why: The note shouldn't stay up forever. How: This hides it after 6 seconds, keeping the timer's ID so a later send can restart it.
 
 
 		}
