@@ -314,7 +314,8 @@ test( 'a link to another page opens it at its top, and back returns to where the
 
 	await opeRouFun( curPagObj, '/missing', SHO_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page has a link home and scrolls on a short phone screen. How: This opens an unknown address at the short phone size.
 
-	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : document.documentElement.scrollHeight } ) ); // What: Scroll Bottom Call. Why: The new page should open at its top however far down the link was. How: This jumps to the bottom of the page.
+	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : document.documentElement.scrollHeight } ) );          // What: Scroll Bottom Call. Why: The new page should open at its top however far down the link was. How: This jumps to the bottom of the page.
+	await curPagObj.evaluate( () => new Promise( ( resProFun ) => requestAnimationFrame( () => requestAnimationFrame( resProFun ) ) ) ); // What: Two Frame Wait. Why: The scroll hook records a position from the scroll event, which the browser dispatches with its next frame. How: This waits two animation frames, after which that frame's scroll event has run.
 
 
 	const oldTopNum = await curPagObj.evaluate( () => window.scrollY ); // What: Old Top Number. Why: Back should return to this position. How: This reads how far down the page sits.
@@ -462,6 +463,47 @@ test( 'malformed saved scroll positions are ignored rather than breaking the pag
 
 	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBeGreaterThan( 0 ); // What: Scrolled Assertion. Why: A page that can't scroll fires no scroll event, so the recorder and its save would never run. How: This checks the page sits below its top.
 	expect( errLisArr ).toEqual( [] );                                               // What: No Error Assertion. Why: The page passes only when the hook handled the bad value. How: This compares the collected errors with an empty list, so a failure prints each one.
+
+
+} );
+
+
+
+test( 'malformed saved entries are dropped while a well-formed saved position is still restored', async ( { page : curPagObj } ) => { // What: Mixed Storage Test. Why: The scroll hook checks each saved pair on its own, so one bad entry shouldn't cost the visitor a good position. How: This saves a real position, surrounds it with malformed entries, including a bad one under the same key after it, reloads, and checks the page raised no error and returned to the saved position.
+
+
+	const errLisArr : string[] = []; // What: Error List Array. Why: An uncaught error in the page would mean the hook choked on the stored value. How: This collects every one the page raises.
+
+
+	curPagObj.on( 'pageerror', ( errCurObj ) => errLisArr.push( errCurObj.message ) ); // What: Page Error Listener. Why: Errors thrown in the page don't fail the test by themselves. How: This records each one's message.
+
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The check starts on the home page. How: This opens it at the phone size.
+
+	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', left : 0, top : 1500 } ) );                                 // What: Scroll Down Call. Why: The position to return to has to be well below the top. How: This jumps 1,500px down the home page, past any smooth scroll-behavior.
+	await curPagObj.evaluate( () => new Promise( ( resProFun ) => requestAnimationFrame( () => requestAnimationFrame( resProFun ) ) ) ); // What: Two Frame Wait. Why: The scroll hook records a position from the scroll event, which the browser dispatches with its next frame. How: This waits two animation frames, after which that frame's scroll event has run.
+
+
+	const leaTopNum = await curPagObj.evaluate( () => window.scrollY ); // What: Leaving Top Number. Why: The reload should return the page to this position. How: This reads how far down the page sits.
+
+
+	expect( leaTopNum ).toBeGreaterThan( 0 ); // What: Scrolled Assertion. Why: A page that can't scroll would let the check pass without anything restored. How: This checks the page sits below its top.
+
+	await curPagObj.evaluate( () => { // What: Malformed Entries Plant. Why: Only the hook's per-entry checks keep the good pair, since a bad entry under the same key would replace it and an entry that isn't a list would throw. How: This rewrites the saved record with malformed entries around the real ones, one of them a non-number position under each real key.
+
+
+		const savPosArr : [ string, number ][] = JSON.parse( sessionStorage.getItem( 'scroll-positions' ) || '[]' ); // What: Saved Position Array. Why: The real pairs have to stay in the record. How: This reads the pairs the hook saved.
+
+
+		sessionStorage.setItem( 'scroll-positions', JSON.stringify( [ null, [ 'bad' ], [ 1, 2 ], ...savPosArr, ...savPosArr.map( ( [ savKeyStr ] ) => [ savKeyStr, 'abc' ] ) ] ) ); // What: Mixed Record Write. Why: The reload reads this record. How: This puts a null, a one-item list, and a number key before the real pairs, and a text position under each real key after them.
+
+
+	} );
+
+	await curPagObj.reload(); // What: Page Reload Call. Why: The hook reads the planted record as the site loads. How: This reloads the home page.
+
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( leaTopNum ); // What: Reloaded Position Assertion. Why: The well-formed pair should survive the malformed entries around it. How: This polls the scroll position until it matches the leaving position.
+
+	expect( errLisArr ).toEqual( [] ); // What: No Error Assertion. Why: The page passes only when the hook handled the bad entries. How: This compares the collected errors with an empty list, so a failure prints each one.
 
 
 } );
