@@ -312,6 +312,13 @@
 
 
 }
+.proCarArt[data-row-leftover-centered] { /* What: Leftover Product Card Article. Why: Cards left over after the last full row should sit centered under the rows above, at the same width. How: This moves each one across by the offset its grid is handed, without changing the layout around it. */
+
+
+	left : var( --pro-row-off ); /* Product Row Offset, set by its parent */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Product Card Article. Why: Someone who asked for less motion shouldn't see the cards rise in or ease their hover look. How: This applies only when the reduced-motion preference is set. */
 
 

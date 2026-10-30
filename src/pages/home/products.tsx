@@ -6,10 +6,12 @@
 import cssModObj from './products.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { CAT_REC_ARR } from './catalog.ts'; // What: Category Record Array. Why: The grid offers a filter button per category. How: Each row gives a button its slug and label.
-import { PRO_REC_ARR } from './catalog.ts'; // What: Product Record Array. Why: The grid shows the catalog's photos. How: The chosen filter decides which records become cards.
-import { useMemo     } from 'react';        // What: Use Memo. Why: The visible cards only change when the filter does. How: This keeps the filtered list between renders.
-import { useState    } from 'react';        // What: Use State. Why: The grid remembers which filter is chosen. How: This holds the filter key.
+import { CAT_REC_ARR     } from './catalog.ts'; // What: Category Record Array. Why: The grid offers a filter button per category. How: Each row gives a button its slug and label.
+import { PRO_REC_ARR     } from './catalog.ts'; // What: Product Record Array. Why: The grid shows the catalog's photos. How: The chosen filter decides which records become cards.
+import { useLayoutEffect } from 'react';        // What: Use Layout Effect. Why: The leftover cards should be centered before the grid is drawn. How: This measures the grid's columns right after React commits it.
+import { useMemo         } from 'react';        // What: Use Memo. Why: The visible cards only change when the filter does. How: This keeps the filtered list between renders.
+import { useRef          } from 'react';        // What: Use Ref. Why: The grid's columns are measured on the grid element itself. How: This holds that element.
+import { useState        } from 'react';        // What: Use State. Why: The grid remembers which filter is chosen and how many columns it has. How: This holds each value.
 
 
 import type { CatSluTyp } from './catalog.ts'; // What: Category Slug Type. Why: A filter key is a category's slug or all. How: This types the filter state.
@@ -69,6 +71,8 @@ type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's fi
 function ProSecCom () : React.JSX.Element {
 
 
+	// #region Card Filtering
+
 	const [ filKeyStr, setFilKeyStr ] = useState< FilKeyTyp >( 'all' ); // What: Filter Key String And Setter. Why: The grid shows the cards for one filter at a time. How: This holds the chosen filter, starting with `all`.
 
 
@@ -81,6 +85,62 @@ function ProSecCom () : React.JSX.Element {
 
 
 	), [ filKeyStr ] ); // What: Memo Dependency Array. Why: The visible cards only change with the filter. How: filKeyStr changing reruns the filter.
+
+	// #endregion Card Filtering
+
+
+
+	// #region Last Row Centering
+
+	const griDivRef = useRef< HTMLDivElement >( null ); // What: Grid Div Reference. Why: The grid's column count is only known once the browser lays it out. How: This holds the grid element the observer measures.
+
+	const [ griColObj, setGriColObj ] = useState( { couNum : 1, steNum : 0 } ); // What: Grid Column Object And Setter. Why: Centering the leftover cards takes the grid's column count and the distance from one column to the next. How: This holds both, starting at one column until the grid is measured.
+
+
+	useLayoutEffect( () => { // What: Grid Column Effect. Why: The grid fits as many columns as its width allows, so the leftover cards' offset changes as it resizes. How: This measures the grid whenever its size changes, the first time included.
+
+
+		const griCurEle = griDivRef.current!; // What: Grid Current Element. Why: The observer watches the grid itself. How: This reads it from its reference. // What: Non-Null Note. Why: React fills the reference before a layout effect runs. How: The grid always renders, so the reference holds it here.
+
+
+
+		const meaColFun = () => { // What: Measure Columns Function. Why: The resolved tracks give the column count and width the stylesheet's auto-fill produced. How: This stores the track count and one track plus the column gap.
+
+
+			const griStyObj = getComputedStyle( griCurEle );              // What: Grid Style Object. Why: The resolved tracks and gap are only available as computed values. How: This reads the grid's computed style.
+			const trkLisArr = griStyObj.gridTemplateColumns.split( ' ' ); // What: Track List Array. Why: Each column is one resolved track. How: This splits the computed track list into its pixel widths.
+
+
+			setGriColObj({ // What: Grid Column Setter Call. Why: The leftover offset is worked out from these at render. How: This stores the count and the step.
+
+
+				couNum : trkLisArr.length,                                                // What: Count Number. Why: The leftover cards are the count left after the full rows. How: This is the number of tracks.
+				steNum : parseFloat( trkLisArr[ 0 ] ) + parseFloat( griStyObj.columnGap ) // What: Step Number. Why: Moving a card by one column covers a track and a gap. How: This adds the first track's width to the column gap.
+
+
+			});
+
+
+		};
+
+
+		const resObsObj = new ResizeObserver( meaColFun ); // What: Resize Observer Object. Why: The column count changes with the grid's width. How: This measures the grid on each resize, including once as observing starts.
+
+
+		resObsObj.observe( griCurEle ); // What: Grid Observe Call. Why: Only the grid's own size changes its columns. How: This starts watching it.
+
+
+
+		return () => resObsObj.disconnect(); // What: Observer Cleanup. Why: An unmounted grid shouldn't be measured. How: This stops the observer.
+
+
+	}, [] ); // What: Effect Dependency Array. Why: The observer only needs starting once. How: The empty list runs the effect on mount alone.
+
+
+	const lefCouNum = visRecArr.length % griColObj.couNum;                                         // What: Leftover Count Number. Why: Only the cards past the last full row need centering. How: This takes the remainder of the cards after full rows.
+	const rowOffNum = lefCouNum === 0 ? 0 : ( griColObj.couNum - lefCouNum ) * griColObj.steNum / 2; // What: Row Offset Number. Why: The leftover cards sit centered when they move across half the empty columns. How: This multiplies the empty columns by one step and halves it, or is 0 when every row is full.
+
+	// #endregion Last Row Centering
 
 
 
@@ -166,7 +226,13 @@ function ProSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.proGriDiv }>{ /* What: Products Grid Div Element. Why: The cards lay out in a responsive grid. How: This holds one card per visible record. */ }
+				<div
+					ref={ griDivRef }
+
+					className={ cssModObj.proGriDiv }
+
+					style={ { '--pro-row-off' : `${ rowOffNum }px` } as React.CSSProperties } // What: Product Row Offset Style. Why: The leftover cards in the last row should sit centered at the other cards' width. How: This hands the grid the distance its stylesheet moves them across. // What: Type Assertion Note. Why: React's style type doesn't list custom properties. How: The object holds only this one custom property, which React sets as written.
+				>{ /* What: Products Grid Div Element. Why: The cards lay out in a responsive grid. How: This holds one card per visible record, its observer reading the columns that center the last row's leftover cards. */ }
 
 
 					{ visRecArr.map( ( proRecObj, proIndNum ) => ( // What: Product Card Map. Why: Each visible record gets a card. How: This renders one article per record, in order.
@@ -178,6 +244,8 @@ function ProSecCom () : React.JSX.Element {
 							className={ cssModObj.proCarArt }
 
 							style={{ animationDelay : `${ proIndNum * 30 }ms` }} // What: Staggered Animation Delay. Why: Cards that mount together fade in one after another rather than all at once. How: Each card waits 30ms longer than the one before it.
+
+							data-row-leftover-centered={ proIndNum >= visRecArr.length - lefCouNum || undefined } // What: Leftover Card Flag. Why: Only the cards past the last full row move to the center. How: This marks the last lefCouNum cards, and is left off every other card.
 						>{ /* What: Product Card Article Element. Why: Each photo is shown as a card. How: Its place in the list sets when it fades in. */ }
 
 

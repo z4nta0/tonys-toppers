@@ -20,10 +20,13 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * where it exists, in whichever engine the project runs, and fails a width
  * whose layout breaks: the page scrolling sideways, a visible element
  * reaching past either edge of the screen (unless an ancestor clips it on
- * purpose), text spilling out of its own box, or two controls a visitor can
- * reach overlapping each other. The widths run from 320px, WCAG's narrowest
- * reflow width, to 1,920px, and include a pixel either side of each of the
- * site's breakpoints, where a layout switches and is most likely to crowd.
+ * purpose), text spilling out of its own box, two controls a visitor can
+ * reach overlapping each other, or a card grid leaving uneven rows. The
+ * widths run from 320px, WCAG's narrowest reflow width, to 1,920px, and
+ * include a pixel either side of each of the site's breakpoints, where a
+ * layout switches and is most likely to crowd. The home page is also
+ * measured with each Products filter chosen, at a few widths, since the
+ * grid's card count changes with its filter.
  * Pages open under reduced motion, which changes nothing about the layout but
  * skips the wait for entrance animations.
  *
@@ -60,6 +63,7 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page an
 
 ];
 
+const FIL_WID_ARR = [ 390, 1000, 1440 ];                                                                 // What: Filter Width Array. Why: The Products filters change the grid's card count, so each one is measured at a phone, tablet, and desktop width. How: This lists those widths.
 const MEN_MAX_NUM = 900;                                                                                 // What: Menu Maximum Number. Why: The mobile menu exists only up to the site's 900px breakpoint. How: The menu case is measured only at widths up to this.
 const WID_LIS_ARR = [ 320, 360, 361, 390, 414, 480, 768, 900, 901, 1000, 1001, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths, such as 768px for a tablet, plus each of the site's breakpoints and the pixel past it.
 
@@ -90,8 +94,9 @@ const WID_LIS_ARR = [ 320, 360, 361, 390, 414, 480, 768, 900, 901, 1000, 1001, 1
  * the other. A grid (an element displayed as a grid, with two or more visible
  * children in its flow) leaves uneven rows when its rows hold different
  * counts, unless the last row is a single child centered in the grid at the
- * others' width, as the Card Grids rule allows; the Products grid is left out
- * until its question is settled. A grid's children are grouped into rows by
+ * others' width, as the Card Grids rule allows, or, in the Products grid,
+ * whose card count changes with its filter, any leftover cards centered
+ * together at the others' width. A grid's children are grouped into rows by
  * where they overlap vertically, so cards of different heights still share a
  * row however the grid aligns them, and the rows are read top to bottom.
  * Passed to Playwright's evaluate, so it can't read anything from this file.
@@ -265,10 +270,10 @@ function layProFun () : string[] {
 		const carEleArr = [ ...griCurEle.children ].filter( ( carCurEle ) => carCurEle.getBoundingClientRect().width > 0 && !/^(absolute|fixed)$/.test( getComputedStyle( carCurEle ).position ) ); // What: Card Element Array. Why: Only children on screen and in the grid's flow make up its rows. How: This keeps the children that take up room and aren't positioned out of the flow.
 		const carCouBoo = carEleArr.length >= 2;                                               // What: Card Count Boolean. Why: A grid of one child has no rows to compare. How: This is true when at least two children show.
 		const griDisBoo = /^(inline-)?grid$/.test( getComputedStyle( griCurEle ).display );    // What: Grid Display Boolean. Why: Only a grid lays its children out in rows of columns. How: This is true when the element displays as a grid.
-		const proGriBoo = ( griCurEle.getAttribute( 'class' ) ?? '' ).includes( 'proGriDiv' ); // What: Products Grid Boolean. Why: How the Products grid should fill its rows under each filter is still undecided with the user, as CLAUDE.md records, so it's left out until that's settled. How: This is true for the Products grid, found by its module class attribute, which also reads safely on an SVG element, whose className isn't a string.
+		const proGriBoo = ( griCurEle.getAttribute( 'class' ) ?? '' ).includes( 'proGriDiv' ); // What: Products Grid Boolean. Why: The Products grid's card count changes with its filter, so its last row may center several leftover cards rather than one. How: This is true for the Products grid, found by its module class attribute, which also reads safely on an SVG element, whose className isn't a string.
 
 
-		if ( !( griDisBoo && carCouBoo ) || proGriBoo ) continue; // What: Not A Card Grid Guard. Why: Only grids of two or more children are held to even rows, the Products grid aside for now. How: This skips anything else, and the Products grid.
+		if ( !( griDisBoo && carCouBoo ) ) continue; // What: Not A Card Grid Guard. Why: Only grids of two or more children are held to even rows. How: This skips anything else.
 
 
 
@@ -294,20 +299,23 @@ function layProFun () : string[] {
 		rowLisArr.sort( ( rowOneArr, rowTwoArr ) => rowOneArr[ 0 ].top - rowTwoArr[ 0 ].top ); // What: Row Sort Call. Why: The grid's order can differ from its markup's, since a child can move with the CSS order property. How: This sorts the rows top to bottom by their first card's top edge.
 
 
-		const firRecObj = rowLisArr[ 0 ][ 0 ];                                // What: First Rect Object. Why: A lone last card has to keep the width the other cards share. How: This takes a card from the top row.
-		const griRecObj = griCurEle.getBoundingClientRect();                  // What: Grid Rect Object. Why: A lone last card is judged against the grid's center. How: This measures the grid.
-		const lasRecObj = rowLisArr[ rowLisArr.length - 1 ][ 0 ];             // What: Last Rect Object. Why: The last row's card is the one that can sit alone. How: This takes a card from the bottom row.
+		const firRecObj = rowLisArr[ 0 ][ 0 ];                                // What: First Rect Object. Why: Leftover cards have to keep the width the other cards share. How: This takes a card from the top row.
+		const griRecObj = griCurEle.getBoundingClientRect();                  // What: Grid Rect Object. Why: Leftover cards are judged against the grid's center. How: This measures the grid.
+		const lasRowArr = rowLisArr[ rowLisArr.length - 1 ];                  // What: Last Row Array. Why: The last row holds the cards that can be left over. How: This takes the bottom row's boxes.
 		const rowCouArr = rowLisArr.map( ( rowCurArr ) => rowCurArr.length ); // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
 
-		const cenLasBoo = Math.abs( ( lasRecObj.left + lasRecObj.right ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Last Boolean. Why: A lone last card has to sit centered under the rows above it. How: This is true when its center is within a pixel of the grid's.
-		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                 // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
-		const lonLasBoo = rowCouArr[ rowCouArr.length - 1 ] === 1;                                                              // What: Lone Last Boolean. Why: Only a single leftover card may sit in a row of its own. How: This is true when the last row holds one card.
-		const samWidBoo = Math.abs( lasRecObj.width - firRecObj.width ) <= 1;                                                   // What: Same Width Boolean. Why: The leftover card keeps the others' width, never stretched across its row. How: This is true when its width is within a pixel of a top row card's.
-		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                       // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
+		const lasLefNum = Math.min( ...lasRowArr.map( ( lasRecObj ) => lasRecObj.left ) );  // What: Last Left Number. Why: The leftover cards are centered as a group. How: This finds the group's left edge.
+		const lasRigNum = Math.max( ...lasRowArr.map( ( lasRecObj ) => lasRecObj.right ) ); // What: Last Right Number. Why: The leftover cards are centered as a group. How: This finds the group's right edge.
 
-		const cenOddBoo = cenLasBoo && lonLasBoo && samWidBoo; // What: Centered Odd Boolean. Why: The Card Grids rule allows one leftover card sitting centered in its own row at the others' width. How: This combines the three.
+		const cenLasBoo = Math.abs( ( lasLefNum + lasRigNum ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Last Boolean. Why: Leftover cards have to sit centered under the rows above them. How: This is true when the group's center is within a pixel of the grid's.
+		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                      // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
+		const lonLasBoo = rowCouArr[ rowCouArr.length - 1 ] === 1;                                                   // What: Lone Last Boolean. Why: Only a single leftover card may sit in a row of its own. How: This is true when the last row holds one card.
+		const samWidBoo = lasRowArr.every( ( lasRecObj ) => Math.abs( lasRecObj.width - firRecObj.width ) <= 1 );    // What: Same Width Boolean. Why: Leftover cards keep the others' width, never stretched across their row. How: This is true when each one's width is within a pixel of a top row card's.
+		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );            // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
 
-		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't one centered card at the others' width, break the Card Grids rule. How: This combines them.
+		const cenOddBoo = cenLasBoo && ( lonLasBoo || proGriBoo ) && samWidBoo; // What: Centered Odd Boolean. Why: The Card Grids rule allows one leftover card, or in a filtered grid any leftover cards, sitting centered in their own row at the others' width. How: This combines the checks.
+
+		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't centered at the others' width, break the Card Grids rule. How: This combines them.
 
 
 		if ( shoRowBoo ) proLisArr.push( `${ desEleFun( griCurEle ) } leaves uneven rows (${ rowCouArr.join( ', ' ) })` ); // What: Card Row Check. Why: Every row of a card grid should hold the same number of cards. How: This records a grid with uneven rows, listing each row's count.
@@ -361,6 +369,39 @@ for ( const layCasObj of LAY_CAS_ARR ) { // What: Case Loop. Why: The page and t
 
 
 	}
+
+
+}
+
+
+
+for ( const widCurNum of FIL_WID_ARR ) { // What: Filter Width Loop. Why: Each filter's rows are measured at a phone, tablet, and desktop width. How: This declares one test per width.
+
+
+	test( `every Products filter holds its layout at ${ widCurNum.toLocaleString( 'en-US' ) }px`, async ( { page : curPagObj } ) => { // What: Filter Layout Test. Why: The Products grid's card count changes with its filter, so each filter's rows have to hold. How: This opens the home page at the width, chooses each filter in turn, and checks the layout after each one.
+
+
+		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The cards' entrance doesn't change the layout, so waiting on it only slows the run. How: This makes the page match prefers-reduced-motion.
+
+		await opeStaFun( curPagObj, { heiNum : 900, ideStr : 'home', patStr : '/', widNum : widCurNum } ); // What: Home Open Call. Why: The filters live on the home page. How: This opens it at the width, settled.
+
+
+		for ( const filButEle of await curPagObj.locator( '[aria-pressed]' ).all() ) { // What: Filter Button Loop. Why: Every filter shows a different number of cards. How: This takes each filter toggle in turn, the only elements with a pressed state.
+
+
+			await filButEle.click(); // What: Filter Click Call. Why: The grid shows the chosen filter's cards. How: This chooses the filter.
+
+			await curPagObj.mouse.move( widCurNum - 1, 899 ); // What: Pointer Away Call. Why: The clicked filter would stay hovered, lifted into the row above, while the layout is meant to be measured at rest. How: This moves the pointer to the screen's bottom right corner.
+
+			await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', left : 0, top : 0 } ) ); // What: Top Scroll Call. Why: Clicking a filter scrolls it into view, and the fixed bar would then overlap the content it slides over. How: This jumps back to the top, where the other cases are measured.
+
+			expect( await curPagObj.evaluate( layProFun ), await filButEle.innerText() ).toEqual( [] ); // What: No Filter Layout Problems Assertion. Why: Each filter passes only with nothing spilling, overlapping, or leaving uneven rows. How: This compares the problems with an empty list, naming the filter in a failure.
+
+
+		}
+
+
+	} );
 
 
 }

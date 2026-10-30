@@ -72,6 +72,9 @@ quality 0.85, plus `src/pages/home/photo-sizes.ts`, which gives every img its
 width and height. A product photo fits within 562 by 750px, a booth shot is
 696px wide, the cartoon 710px, and the portrait keeps its 756px. Adding or
 replacing a photo means dropping the original in and rerunning the script.
+Tony's cartoon stays lossy like the photos (decided 2026-10-29): its original
+is a JPEG with halftone texture rather than flat artwork, and lossless came to
+751 KB against 69 KB with no difference visible at 3x zoom.
 The logo and favicon come from the existing SVGs (`logo.svg`,
 `logo-no-text.svg`), and `npm run icons` renders the raster icons from
 `public/favicon.svg`.
@@ -116,10 +119,11 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
   Card Grids rule): four columns, two at 900px wide and below, and one at
   360px and below, where two would fall under the 138px minimum. That adds
   360px to the breakpoints, beside 900px and 1,000px.
-  The products grid still uses `auto-fill`, so most filters leave a short
-  last row; how it should fill its rows, given filters of 7 and 5 pieces, is
-  open with the user (2026-10-23), and the responsive suite's row check
-  leaves it out until that's settled.
+  The products grid keeps `auto-fill`, and its leftover cards sit centered
+  in the last row at the others' width (decided 2026-10-29), since filters
+  of 7 and 5 pieces have no column count that fills every row: an observer
+  in `products.tsx` reads how many columns the grid laid out, and the
+  leftover cards move across by half the empty columns (`--pro-row-off`).
 
 ## Directory structure
 Decided 2026-10-10, matching reese-roofing's and seal-and-shield's adaptation
@@ -404,7 +408,9 @@ passes on `close-out`.
       Send Message, the menu's call button) lighten to `--acc-hov-col` on hover
       as they lift, and press in to 0.97 back onto their resting shadow, like
       every other button. The product cards lift about 2px, the rule's size,
-      not 6px, and show the normal cursor, since they aren't links. The footer
+      not 6px, and show the normal cursor, since they aren't links, while
+      keeping their navy hover border beside the fading shadow (confirmed
+      2026-10-29). The footer
       spells out Bolivar, Missouri, like the rest of the page; only the page
       title, the preview card, and the structured data use MO, where length or
       format needs it. The same holds for every Missouri town the page names,
@@ -414,7 +420,10 @@ passes on `close-out`.
       heading and the cards. The contact form's thank-you and error notes fade
       out as they leave, as well as rising in. The portrait's hover tilt and
       the product photos' hover zoom run about 277ms, within the rule's range,
-      and the phone menu's rows keep their sideways nudge on hover.
+      and the phone menu's rows keep their sideways nudge on hover. Cards a
+      filter drops leave the grid at once (confirmed 2026-10-29), since the
+      new cards' staggered rise already animates the change, and an exit
+      would hold every filter back a beat while the old cards played it.
 12. **Close-out**: done 2026-10-11 on `close-out`. The README was rewritten for
     the finished site, and the rule pass ran seven full audits, each fixed and
     rechecked, as the findings fell from 82 to 2 (82, 36, 20, 7, 16, 11, 2),
@@ -497,8 +506,9 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   it exists, failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, two reachable controls overlapping, or a grid
   leaving uneven rows (the Card Grids rule, added 2026-10-23 with 361px, a
-  pixel past the gallery's 360px step; the Products grid is left out until its
-  question is settled). Unlike seal-and-shield's, the spill check measures each
+  pixel past the gallery's 360px step), where the Products grid may center
+  several leftover cards. It also chooses each Products filter in turn at
+  390px, 1,000px, and 1,440px (added 2026-10-29). Unlike seal-and-shield's, the spill check measures each
   line of an element's own text rather than its scroll width, since the hero's
   highlight bar reaches 4px past its italic line on purpose and counted as a
   spill at every width.
