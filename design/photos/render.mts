@@ -305,7 +305,7 @@ export { PHO_SIZ_OBJ }; // What: Named Export. Why: The components that show pho
 
 writeFileSync( SIZ_OUT_STR, sizTexStr ); // What: Sizes Write Call. Why: The page reads the photos' sizes from this file. How: This saves it.
 
-console.log( `Wrote ${ SOU_FIL_ARR.length } photos, ${ Math.round( befBytNum / 1024 ) } KB down to ${ Math.round( aftBytNum / 1024 ) } KB, and ${ SIZ_OUT_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count, the sizes before and after, and the sizes file's path.
+console.log( `Wrote ${ SOU_FIL_ARR.length } photos, ${ Math.round( befBytNum / 1024 ).toLocaleString( 'en-US' ) } KB down to ${ Math.round( aftBytNum / 1024 ).toLocaleString( 'en-US' ) } KB, and ${ SIZ_OUT_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count, the sizes before and after, and the sizes file's path.
 
 // #endregion Module Init
 

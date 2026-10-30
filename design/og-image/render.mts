@@ -64,11 +64,11 @@ await broInsObj.close(); // What: Browser Close Call. Why: The script should exi
 const outBytNum = statSync( OUT_PAT_STR ).size; // What: Output Bytes Number. Why: The card has to stay under WhatsApp's limit. How: This reads the saved file's size.
 
 
-if ( outBytNum >= MAX_BYT_NUM ) throw new Error( `og-image.jpg is ${ outBytNum } bytes, at or over the ${ MAX_BYT_NUM } byte limit.` ); // What: Size Guard. Why: An image over the limit would quietly drop out of WhatsApp previews. How: This fails the run with the file's size.
+if ( outBytNum >= MAX_BYT_NUM ) throw new Error( `og-image.jpg is ${ outBytNum.toLocaleString( 'en-US' ) } bytes, at or over the ${ MAX_BYT_NUM.toLocaleString( 'en-US' ) } byte limit.` ); // What: Size Guard. Why: An image over the limit would quietly drop out of WhatsApp previews. How: This fails the run with the file's size.
 
 
 
-console.log( `Wrote ${ OUT_PAT_STR } (${ outBytNum } bytes).` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the path and size.
+console.log( `Wrote ${ OUT_PAT_STR } (${ outBytNum.toLocaleString( 'en-US' ) } bytes).` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the path and size.
 
 // #endregion Module Init
 
