@@ -86,7 +86,7 @@ function HerSecCom () : React.JSX.Element {
 			<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the portrait sit side by side. How: This lays out the two columns, stacking them in one column with the portrait first at 900px wide and below. */ }
 
 
-				<div>{ /* What: Hero Text Div Element. Why: The words read as one column. How: This stacks the eyebrow, headline, pitch, and buttons, with no styling of its own. */ }
+				<div className={ cssModObj.herTexDiv }>{ /* What: Hero Text Div Element. Why: The words read as one column. How: This stacks the eyebrow, headline, pitch, and buttons, and gives the headline its width to size against. */ }
 
 
 					<span className={ cssModObj.herEyeSpa }>Handcrafted in Bolivar, Missouri</span>{ /* What: Hero Eyebrow Span Element. Why: Visitors should know where the pieces are made before anything else. How: This shows the town above the headline. */ }

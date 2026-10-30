@@ -154,6 +154,17 @@
 
 }
 
+
+/* #region herTexDiv */
+
+.herTexDiv { /* What: Hero Text Div. Why: The headline sizes itself to fit this column. How: This makes the column a size container, so its children can read its width. */
+
+
+	container-type : inline-size;
+
+
+}
+
 .herEyeSpa { /* What: Hero Eyebrow Span. Why: Visitors should know where the pieces are made before anything else. How: This sets the town in spaced, uppercase navy letters on a translucent white pill with a yellow dot, rising in first. */
 
 
@@ -164,7 +175,7 @@
 	border-radius  : 999px;
 	color          : var( --acc-mai-col );                                                           /* Accent Main Color = #1e3a8a */
 	display        : inline-flex;
-	font-size      : var( --fon-siz-p01 );                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	font-size      : var( --fon-siz-bas );                                                           /* Font Size Base = 11px */
 	font-weight    : 600;
 	gap            : var( --spa-hor-m01 );                                                           /* Spacing Horizontal Base Minus 1 = 11px */
 	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em );                                         /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
@@ -203,13 +214,13 @@
 
 /* #region herTitHea */
 
-.herTitHea { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 45px and 79px, tightly leaded, rising in second. */
+.herTitHea { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 34px and 79px, and smaller where its column couldn't fit the line before its ampersand, tightly leaded, rising in second. */
 
 
 	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) var( --dur-ani-p01 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 1 ~= 209.1ms */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */
 	color          : var( --tex-mai-col );                                                                           /* Text Main Color = #1a1a2e */
 	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Fraunces', Georgia, serif */
-	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) );                                       /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
+	font-size      : min( 100cqi / 8.75, clamp( var( --fon-siz-p04 ), 7vw, var( --fon-siz-p07 ) ) );                 /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 7 ~= 78.751px */ /* What: Column Fit Cap. Why: The headline should break only after its ampersand, and in the two-column layout its column grows slower than the screen, while WebKit sets its longer line, "Crafted by hand &", about 8.6em wide. How: The size never passes the text column's width over 8.75em, which only bites in that layout and on screens under about 335px, where it drops below the floor so the line still fits. */
 	font-weight    : 800;
 	letter-spacing : calc( var( --cdn-pow-012-rec ) * -1em );                                                        /* Core-Design-Number to the Power of 12 Reciprocal ~= -0.034em */
 	line-height    : var( --ver-rhy-m01 );                                                                           /* Vertical Rhythm Base Minus 1 = 1 */
@@ -397,6 +408,8 @@
 }
 
 /* #endregion herActDiv */
+
+/* #endregion herTexDiv */
 
 
 
