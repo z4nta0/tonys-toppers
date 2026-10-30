@@ -20,10 +20,10 @@
 
 /* #region nofPagSec */
 
-.nofPagSec { /* What: Not-Found Page Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with about 138px on top and positions it, copied from the shared section with the page's own top padding merged in. */
+.nofPagSec { /* What: Not-Found Page Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round, its top the bar's height plus room, and positions it, copied from the shared section with the page's own top padding merged in. */
 
 
-	padding  : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
+	padding  : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
 	position : relative;
 
 
@@ -31,10 +31,10 @@
 @media ( max-width : 900px ) { /* What: Narrow Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.nofPagSec { /* What: Compact Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen, while the top still has to clear the bar. How: This trims the bottom padding and keeps about 138px on top. */
+	.nofPagSec { /* What: Compact Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen, while the top still has to clear the bar. How: This trims the bottom padding and keeps the bar's height plus room on top. */
 
 
-		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
+		padding : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
 
 
 	}
