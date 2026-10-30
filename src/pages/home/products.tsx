@@ -51,9 +51,9 @@ type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's fi
  * @summary
  * Renders the collection. Choosing a filter button re-renders the grid with
  * that filter's cards, and the cards that weren't already showing fade in one
- * after another, each 30ms behind the one before. The filter buttons are a
- * labelled group of toggle buttons, the chosen one pressed, so screen readers
- * announce which filter is on.
+ * after another, each waiting 30ms for every place above it in the list. The
+ * filter buttons are a labelled group of toggle buttons, the chosen one
+ * pressed, so screen readers announce which filter is on.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
