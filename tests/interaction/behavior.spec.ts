@@ -338,6 +338,7 @@ test( 'a link to another page opens it at its top, and back returns to where the
 } );
 
 
+
 test( 'back and forward return to the exact position, from a page scrolled further than the page between can scroll', async ( { page : curPagObj } ) => { // What: History Position Test. Why: The scroll hook restores positions itself, and Firefox would otherwise cut one short while a shorter page is still drawn. How: This scrolls the home page further than the 404 page can scroll, goes back to the 404 page and forward again, and checks the home page returns to the same position.
 
 
@@ -345,7 +346,7 @@ test( 'back and forward return to the exact position, from a page scrolled furth
 
 	await curPagObj.getByRole( 'main' ).getByRole( 'link', { name : 'Back home' } ).click(); // What: Back Home Click Call. Why: The home page has to be a history entry after the 404 page. How: This follows the 404 page's link home.
 
-	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ );                                                    // What: Home Address Assertion. Why: The scroll belongs to the home page's entry. How: This waits until the URL is the bare root.
+	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ );                                               // What: Home Address Assertion. Why: The scroll belongs to the home page's entry. How: This waits until the URL is the bare root.
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveText( /^Crafted by hand/ ); // What: Home Heading Assertion. Why: The address changes a moment before the home page renders, and the hook's jump to the top would undo a scroll made before it. How: This waits for the home page's own heading.
 
 	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', left : 0, top : 1500 } ) );                                 // What: Scroll Down Call. Why: The position to return to has to be well below the top. How: This jumps 1,500px down the home page, past any smooth scroll-behavior.
@@ -360,14 +361,14 @@ test( 'back and forward return to the exact position, from a page scrolled furth
 	await expect( curPagObj ).toHaveURL( /\/missing$/ ); // What: Back Address Assertion. Why: The page between has to be showing before it's measured. How: This waits until the URL is the 404 page's.
 
 
-	const notMaxNum = await curPagObj.evaluate( () => document.documentElement.scrollHeight - window.innerHeight ); // What: Not Found Maximum Number. Why: The check only means something when the home page sat further down than the 404 page can scroll. How: This reads the 404 page's furthest scroll position.
+	const nofMaxNum = await curPagObj.evaluate( () => document.documentElement.scrollHeight - window.innerHeight ); // What: Not-Found Maximum Number. Why: The check only means something when the home page sat further down than the 404 page can scroll. How: This reads the 404 page's furthest scroll position.
 
 
-	expect( homTopNum ).toBeGreaterThan( notMaxNum ); // What: Further Scroll Assertion. Why: A home position the 404 page could also reach wouldn't show a cut short restore. How: This checks the home position lies past the 404 page's reach.
+	expect( homTopNum ).toBeGreaterThan( nofMaxNum ); // What: Further Scroll Assertion. Why: A home position the 404 page could also reach wouldn't show a cut short restore. How: This checks the home position lies past the 404 page's reach.
 
 	await curPagObj.goForward(); // What: Forward Navigation Call. Why: This is the navigation under test. How: This goes forward to the home page.
 
-	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ );                                     // What: Forward Address Assertion. Why: Forward leads back to the home page. How: This waits until the URL is the bare root.
+	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ );                                      // What: Forward Address Assertion. Why: Forward leads back to the home page. How: This waits until the URL is the bare root.
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( homTopNum ); // What: Forward Position Assertion. Why: Forward should return to exactly where the visitor was. How: This waits until the home page sits at the position read before leaving.
 
 

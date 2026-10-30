@@ -110,7 +110,7 @@ function NotFouCom () : React.JSX.Element {
 
 							to='/'
 
-							aria-label='Back home' // What: Back Home Label. Why: Screen readers would otherwise read the decorative arrow aloud as "right arrow". How: This names the button by its words alone, which still match what's shown.
+							aria-label='Back home' // What: Back Home Label. Why: The decorative arrow would otherwise become part of the button's accessible name. How: This names the button by its words alone, which still match what's shown.
 						>{ /* What: Button Base Anchor Primary Link. Why: The visitor needs a clear way onward. How: This returns to the home page. */ }
 							Back home →
 						</Link>

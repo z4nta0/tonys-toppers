@@ -410,7 +410,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>☎</div>{ /* What: Info Icon Div Element. Why: A telephone marks the row at a glance. How: It's hidden from screen readers, which would read it aloud as black telephone. */ }
+							>☎</div>{ /* What: Info Icon Div Element. Why: A telephone marks the row at a glance. How: It's hidden from screen readers, so the glyph stays out of the row's accessible name. */ }
 
 							<div>{ /* What: Phone Text Div Element. Why: The row's label and number stack beside the icon. How: This holds the two lines. */ }
 
@@ -687,7 +687,7 @@ function ConSecCom () : React.JSX.Element {
 							type='submit'
 
 							aria-disabled={ senProBoo } // What: Sending Disabled Flag. Why: A disabled button drops keyboard focus to the page, so the button stays focusable while a message is on its way. How: This marks it disabled for screen readers and the module's dimmed look while sending, and forSubFun ignores a second submit meanwhile.
-							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as "right arrow". How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
+							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: The decorative arrow would otherwise become part of the button's accessible name. How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
 						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is marked disabled while a request is out, keeping its focus. */ }
 
 
@@ -696,7 +696,7 @@ function ConSecCom () : React.JSX.Element {
 
 								className={ cssModObj.subLabSpa }
 							>{ /* What: Submit Label Span Element. Why: The label fades to its new text when a message goes out. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
-								{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads "Sending..." while a request is out and "Send Message" otherwise. */ }
+								{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads "Sending..." while a request is out and "Send Message →" otherwise. */ }
 							</span>
 
 

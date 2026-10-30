@@ -264,7 +264,7 @@
 	position      : absolute;
 	right         : calc( var( --spa-hor-m05 ) * -1 );   /* Spacing Horizontal Base Minus 5 ~= -3.572px */
 	transform     : skew( -3deg );
-	z-index       : -1;                                  /* What: Highlight Stack Level. Why: The yellow bar has to sit behind the words it underlines, and the span has no layer of its own. How: This drops it one level below the span's text, within the hero inner div's layer. */
+	z-index       : -1;                                  /* What: Highlight Stack Level. Why: The yellow bar has to sit behind the words it underlines, and the span has no layer of its own. How: This drops it one level below the span's text, within the nearest layer: the headline's own while its entrance holds a transform, or the hero inner div's under reduced motion. */
 
 
 }

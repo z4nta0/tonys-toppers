@@ -37,7 +37,7 @@
 	position        : fixed;
 	text-decoration : none;
 	top             : var( --spa-ver-m02 );                                                                           /* Spacing Vertical Base Minus 2 ~= 8.304px */
-	transform       : translateY( calc( -100% - var( --spa-ver-m02 ) * 2 ) );                                         /* Spacing Vertical Base Minus 2 ~= -16.608px */ /* What: Hidden Offset. Why: The link waits just above the screen until it's focused, clear of the edge so no sliver of it or its shadow shows. How: This raises it by its own height plus twice its top offset, leaving its bottom edge a top offset above the screen, farther than its shadow reaches. */
+	transform       : translateY( calc( -100% - var( --spa-ver-m02 ) * 2 ) );                                         /* Spacing Vertical Base Minus 2 ~= 8.304px, doubled and negated to ~= -16.608px */ /* What: Hidden Offset. Why: The link waits just above the screen until it's focused, clear of the edge so no sliver of it or its shadow shows. How: This raises it by its own height plus twice its top offset, leaving its bottom edge a top offset above the screen, farther than its shadow reaches. */
 	transition      : background var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p02 ) var( --mot-acc-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
 	z-index         : 4;                                                                                              /* What: Skip Link Stack Level. Why: The focused link has to show above the bar, at 3, and the scrim, at 2. How: This sets it one level above the bar. */
 
@@ -420,7 +420,7 @@
 		position       : absolute;
 		right          : 0;
 		top            : 100%;
-		transform      : translateY( -210% );
+		transform      : translateY( -210% ); /* What: Hidden Offset. Why: The closed panel hangs from the bar's bottom edge, so moving it by its own height would leave it showing under the bar. How: This raises it by 2.1 times its own height, which clears the top of the screen whenever the panel is taller than about the bar, as it is with its five links. */
 		transition     : transform var( --dur-tra-p02 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Leaving Ease. Why: A panel leaving the screen should pick up speed as it goes. How: The slide out accelerates, and the panel hides once it has finished. */ /* What: Delayed Visibility Transition. Why: Hiding the menu at once would cut off its slide-out. How: The visibility switch waits the slide's own duration step before it takes effect. */
 		visibility     : hidden;
 

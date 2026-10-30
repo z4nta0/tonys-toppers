@@ -33,14 +33,15 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and the design
 
 ```bash
 npm test                    # every suite
-npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
-npm run test:interaction    # that every link and button gives hover, press, and focus feedback, with and without reduced motion
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks, including the contact form's notes
+npm run test:interaction    # hover, press, and focus feedback on the reachable controls, and where links, back, forward, and a reload take the visitor
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
-npm run test:responsive     # the pages from 320 to 1,920px and the phone menu up to 900px: no sideways scroll, spill, or overlap
+npm run test:responsive     # the pages from 320 to 1,920px, the phone menu up to 900px, and each Products filter: no sideways scroll, spill, overlap, or uneven card rows
+npm run test:security       # the headers policy, secrets in the build, dependency advisories, and policy violations and new tab links on every page state
 npm run test:seo            # titles, descriptions, canonical, robots, and social tags, structured data, the preview card, icons, robots.txt, and the sitemap
 ```
 
-Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5192, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5192 (the security suite uses a production preview on port 5199), so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel (WebKit's captures mask the photos, which it draws slightly differently each time), so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
