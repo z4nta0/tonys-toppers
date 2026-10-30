@@ -14,7 +14,7 @@ import { useRef          } from 'react';        // What: Use Ref. Why: The grid'
 import { useState        } from 'react';        // What: Use State. Why: The grid remembers which filter is chosen and how many columns it has. How: This holds each value.
 
 
-import type { CatSluTyp } from './catalog.ts'; // What: Category Slug Type. Why: A filter key is a category's slug or all. How: This types the filter state.
+import type { CatSluTyp } from './catalog.ts'; // What: Category Slug Type. Why: A filter key is a category's slug or `all`. How: This types the filter state.
 
 // #endregion Imports
 
@@ -24,9 +24,9 @@ import type { CatSluTyp } from './catalog.ts'; // What: Category Slug Type. Why:
  * products.tsx = Products
  *
  * @summary
- * The home page's collection: filter buttons, one per category plus All, and a
- * grid of photo cards for the chosen filter, below the section's heading. All
- * lists every single piece and set once, while a category also shows the
+ * The home page's collection: filter buttons, one per category plus "All", and
+ * a grid of photo cards for the chosen filter, below the section's heading.
+ * "All" lists every single piece and set once, while a category also shows the
  * craft fair booth shots tagged with it.
  *
  * Sections:
@@ -41,7 +41,7 @@ import type { CatSluTyp } from './catalog.ts'; // What: Category Slug Type. Why:
 
 // #region Components
 
-type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's filter is either everything or one category. How: This is all or a category's slug.
+type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's filter is either everything or one category. How: This is `all` or a category's slug.
 
 // #region ProSecCom
 
@@ -76,11 +76,11 @@ function ProSecCom () : React.JSX.Element {
 	const [ filKeyStr, setFilKeyStr ] = useState< FilKeyTyp >( 'all' ); // What: Filter Key String And Setter. Why: The grid shows the cards for one filter at a time. How: This holds the chosen filter, starting with `all`.
 
 
-	const visRecArr = useMemo( () => ( // What: Visible Record Array. Why: All lists every piece and set once, while a category also shows the booth shots tagged with it. How: This leaves the booth shots out of all, and otherwise keeps every photo tagged with the chosen category.
+	const visRecArr = useMemo( () => ( // What: Visible Record Array. Why: "All" lists every piece and set once, while a category also shows the booth shots tagged with it. How: This leaves the booth shots out of `all`, and otherwise keeps every photo tagged with the chosen category.
 
 
 		filKeyStr === 'all' // What: All Filter Check. Why: All and a category choose their cards differently. How: This picks the branch.
-			? PRO_REC_ARR.filter( ( proRecObj ) => !proRecObj.faiBoo )                      // What: All Branch. Why: The booth shots belong in the gallery, not the All list. How: This keeps every other record.
+			? PRO_REC_ARR.filter( ( proRecObj ) => !proRecObj.faiBoo )                      // What: All Branch. Why: The booth shots belong in the gallery, not the "All" list. How: This keeps every other record.
 			: PRO_REC_ARR.filter( ( proRecObj ) => proRecObj.catArr.includes( filKeyStr ) ) // What: Category Branch. Why: A category shows everything tagged with it, booth shots included. How: This keeps every record listing the category.
 
 
@@ -186,7 +186,7 @@ function ProSecCom () : React.JSX.Element {
 
 					aria-label='Filter products by category'
 					role='group'
-				>{ /* What: Filter Group Div Element. Why: Visitors can narrow the grid to one kind of piece. How: This groups the All button and one button per category under one label. */ }
+				>{ /* What: Filter Group Div Element. Why: Visitors can narrow the grid to one kind of piece. How: This groups the "All" button and one button per category under one label. */ }
 
 
 					<button
@@ -197,7 +197,7 @@ function ProSecCom () : React.JSX.Element {
 						aria-pressed={ filKeyStr === 'all' }
 
 						onClick={ () => setFilKeyStr( 'all' ) }
-					>{ /* What: Filter Toggle Button Element. Why: Visitors can go back to every piece. How: This chooses the all filter, and shows as pressed while it's chosen. */ }
+					>{ /* What: Filter Toggle Button Element. Why: Visitors can go back to every piece. How: This chooses the `all` filter, and shows as pressed while it's chosen. */ }
 						All
 					</button>
 

@@ -49,13 +49,13 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
   copies, and the user moved the copies out. The four wide booth shots
   (`booth-1` to `booth-4`) live in the "At the craft fairs" gallery between
   Products and About Tony, and each category filter also shows the booth
-  shots tagged with it, so Straw Charms isn't empty, while All lists only
+  shots tagged with it, so "Straw Charms" isn't empty, while "All" lists only
   the pieces and sets, once each. The three small mixed displays
   (`pen-wine-set-1` to `-3`) are one card each, tagged as both pen toppers
   and wine stoppers. Each catalog entry lists every category it shows
   (decided 2026-10-11: every kind its alt text names, so the booth shots
-  also appear under Keychains and Name Badge Reels). Booth-3 is the only
-  photo tagged Straw Charms, and the user confirmed it shows them, so its
+  also appear under "Keychains" and "Name Badge Reels"). Booth-3 is the only
+  photo tagged "Straw Charms", and the user confirmed it shows them, so its
   alt text names them and the contact form offers "A straw charm".
 - **`booth-1` is a phone screenshot**, sharper than the copy that was moved
   out: the image script crops off the phone's interface, keeping the

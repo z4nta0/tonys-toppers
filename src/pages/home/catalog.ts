@@ -24,7 +24,7 @@ import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Size Object. Why:
  * match its file exactly. Two kinds of photo show more than one category at
  * once, and list theirs by hand: the pen and wine stopper sets, one card each
  * under both filters, and the craft fair booth shots, which the gallery shows
- * and each tagged category's filter includes, while the All list leaves them
+ * and each tagged category's filter includes, while the "All" list leaves them
  * out.
  *
  * Sections:
@@ -103,7 +103,7 @@ const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The Pro
 
 type FaiRecTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // What: Fair Record Type. Why: A booth shot lists by hand the categories it shows and describes the table, which its card's name can't. How: This names the photo's description, its categories, and its file name without the extension.
 
-const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps Straw Charms from being empty. How: Each row names the photo, the categories it shows, and its description.
+const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps "Straw Charms" from being empty. How: Each row names the photo, the categories it shows, and its description.
 
 
 	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony',   catArr : [ 'pen-topper', 'wine-stopper', 'keychain' ],                 filStr : 'booth-1' }, // What: First Booth Row. Why: This photo shows a shop window display of pens and stoppers with keychains below. How: This tags it under pen toppers, wine stoppers, and keychains.
@@ -269,7 +269,7 @@ type ProRecTyp = { // What: Product Record Type. Why: The Products grid and the 
 
 	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
 	catArr : CatSluTyp[], // What: Category Array. Why: One photo can show more than one kind of piece. How: This lists every category the photo is tagged with.
-	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the All list. How: This is true for a booth shot and false for a piece or set.
+	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the "All" list. How: This is true for a booth shot and false for a piece or set.
 	heiNum : number,      // What: Height Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's height in pixels, from photo-sizes.ts.
 	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
 	imaStr : string,      // What: Image String. Why: The card shows its photo. How: This is the photo's built URL.
@@ -291,7 +291,7 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The Prod
 
 			altStr : PHO_ALT_OBJ[ filNamStr ],                                  // What: Alternative String. Why: A screen reader should hear what the photo shows. How: This looks up the photo's description by its file name.
 			catArr : [ catRecObj.sluStr ],                                      // What: Category Array. Why: A single piece shows one kind. How: This lists its category alone.
-			faiBoo : false,                                                     // What: Fair Boolean. Why: A single piece isn't a booth shot. How: This keeps it in the All list.
+			faiBoo : false,                                                     // What: Fair Boolean. Why: A single piece isn't a booth shot. How: This keeps it in the "All" list.
 			heiNum : PHO_SIZ_OBJ[ filNamStr ].heiNum,                           // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
 			ideStr : filNamStr,                                                 // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
 			imaStr : phoUrlFun( filNamStr ),                                    // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
@@ -302,12 +302,12 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The Prod
 
 		}) ),
 
-		...( catRecObj.sluStr === 'wine-stopper' ? SET_REC_ARR.map( ( setRecObj, setIndNum ) => ({ // What: Set Cards Spread. Why: The pen and wine stopper sets sit right after the wine stoppers in the All list. How: This builds one record per set, only after the wine stopper category.
+		...( catRecObj.sluStr === 'wine-stopper' ? SET_REC_ARR.map( ( setRecObj, setIndNum ) => ({ // What: Set Cards Spread. Why: The pen and wine stopper sets sit right after the wine stoppers in the "All" list. How: This builds one record per set, only after the wine stopper category.
 
 
 			altStr : PHO_ALT_OBJ[ setRecObj.filStr ],                    // What: Alternative String. Why: A screen reader should hear what the set shows. How: This looks up the photo's description by its file name.
 			catArr : setRecObj.catArr,                                   // What: Category Array. Why: A set shows both kinds. How: This lists both categories.
-			faiBoo : false,                                              // What: Fair Boolean. Why: A set isn't a booth shot. How: This keeps it in the All list.
+			faiBoo : false,                                              // What: Fair Boolean. Why: A set isn't a booth shot. How: This keeps it in the "All" list.
 			heiNum : PHO_SIZ_OBJ[ setRecObj.filStr ].heiNum,             // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
 			ideStr : setRecObj.filStr,                                   // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
 			imaStr : phoUrlFun( setRecObj.filStr ),                      // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
@@ -326,7 +326,7 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The Prod
 
 		altStr : faiRecObj.altStr,                       // What: Alternative String. Why: A booth shot shows a whole table, which its name can't describe. How: This takes the row's description.
 		catArr : faiRecObj.catArr,                       // What: Category Array. Why: A booth shot shows several kinds. How: This lists every category it's tagged with.
-		faiBoo : true,                                   // What: Fair Boolean. Why: A booth shot belongs in the gallery and the filters, not the All list. How: This marks it.
+		faiBoo : true,                                   // What: Fair Boolean. Why: A booth shot belongs in the gallery and the filters, not the "All" list. How: This marks it.
 		heiNum : PHO_SIZ_OBJ[ faiRecObj.filStr ].heiNum, // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
 		ideStr : faiRecObj.filStr,                       // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
 		imaStr : phoUrlFun( faiRecObj.filStr ),          // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
