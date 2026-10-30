@@ -119,7 +119,8 @@ const TOG_TAR_ARR : TogTarTyp[] = [ // What: Toggle Target Array. Why: A switche
 	{ actStr : '',     attStr : 'data-page-scroll-active',  inaStr : null,    pseStr : '',         selStr : '[class*="navBarNav"]' }, // What: Scrolled Bar Row. Why: The bar draws its hairline and tightens once the page scrolls. How: This flips its data-page-scroll-active.
 	{ actStr : '',     attStr : 'data-mobile-menu-open',    inaStr : null,    pseStr : '',         selStr : '[class*="navScrDiv"]' }, // What: Open Scrim Row. Why: The page dims behind the open phone menu. How: This flips the scrim's data-mobile-menu-open, on the open menu state, where it shows.
 	{ actStr : '',     attStr : 'data-section-link-active', inaStr : null,    pseStr : '::before', selStr : '[class*="navLinAnc"]' }, // What: Section Link Row. Why: The bar's link, or the menu's row and its dot, for the section being read is marked active. How: This flips its data-section-link-active, reading the row's dot on its ::before layer.
-	{ actStr : 'true', attStr : 'aria-pressed',             inaStr : 'false', pseStr : '',         selStr : '[class*="filTogBut"]' }  // What: Filter Toggle Row. Why: The chosen Products filter fills its pill. How: This flips its aria-pressed.
+	{ actStr : 'true', attStr : 'aria-pressed',             inaStr : 'false', pseStr : '',         selStr : '[class*="filTogBut"]' }, // What: Filter Toggle Row. Why: The chosen Products filter fills its pill. How: This flips its aria-pressed.
+	{ actStr : 'true', attStr : 'aria-disabled',            inaStr : 'false', pseStr : '',         selStr : '[class*="forSubBut"]' }  // What: Submit Sending Row. Why: The send button dims while a message is out. How: This flips its aria-disabled.
 
 
 ];
