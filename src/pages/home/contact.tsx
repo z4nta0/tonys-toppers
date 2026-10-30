@@ -43,8 +43,6 @@ import type { FormEvent      } from 'react'; // What: Form Event. Why: Sending t
 
 type IntOptTyp = 'A pen topper' | 'A wine stopper' | 'A keychain' | 'A dog necklace' | 'A car freshie' | 'A name badge reel' | 'A phone grip' | 'A straw charm' | 'A custom piece' | 'Just saying hi'; // What: Interest Option Type. Why: The interest field offers a fixed set of choices. How: This lists every choice, each one also the value sent.
 
-
-
 type ForStaTyp = { // What: Form State Type. Why: The form's fields are held together in one record. How: Each key is a field's name attribute, which Netlify records, so none of them are renamed.
 
 
