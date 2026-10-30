@@ -846,12 +846,12 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } draws its focus ring at full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop and checks its ring reaches 2px once it has eased in.
+	test( `${ staRecObj.ideStr } draws its focus ring at full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This presses Tab once from where the state leaves focus and checks the stop it lands on draws its ring at 2px once it has eased in.
 
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk starts from the state settled. How: This loads and settles it.
 
-		await curPagObj.keyboard.press( engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab' ); // What: First Tab Press Call. Why: The ring shows only for keyboard focus. How: This tabs to the first stop, holding Alt in WebKit, which otherwise skips links the way Safari does.
+		await curPagObj.keyboard.press( engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab' ); // What: Tab Press Call. Why: The ring shows only for keyboard focus. How: This presses Tab once from where the state leaves focus, holding Alt in WebKit, which otherwise skips links the way Safari does.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Ring Settle Wait. Why: The ring is read once it has grown in. How: This pauses for the settle time.
 

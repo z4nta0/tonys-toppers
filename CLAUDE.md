@@ -457,39 +457,40 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names (a decorative arrow or emoji in a name fails), a Tab walk
-  (order, traps, focus on screen, uncovered, and visible), reflow at 320px, and
-  motion under reduced motion, both what's playing and every element's and
+  (order, traps, focus on screen, uncovered, and visible), reflow at 320px,
+  and motion under reduced motion, both what's playing and every element's and
   layer's computed transitions and animations, so a reduced-motion variant
-  missing anywhere fails. axe's "needs review" results are printed and attached
-  to the report rather than failing the run. Since 2026-10-23 it also sends the
-  contact form against a faked Netlify answer (the shared
+  missing anywhere fails. axe's "needs review" results are printed and
+  attached to the report rather than failing the run. Since 2026-10-23 it also
+  sends the contact form against a faked Netlify answer (the shared
   `tests/support/netlify.ts`), scanning the thank-you and error notes with axe
   and checking that each note's live region is in the page, empty, from the
   first render, that the send button keeps focus through the send, and that
   under reduced motion the notes play no motion and the thank-you note still
-  leaves when the visitor types again, and with each note shown at 320px the
-  names and reflow checks run, plus a keyboard walk for the error note's phone
-  link.
+  leaves when the visitor types again and the error note when they send again,
+  that a second failure while the first error is leaving is announced again
+  (added 2026-10-29), and with each note shown at 320px the names and reflow
+  checks run, plus a keyboard walk for the error note's phone link.
 - `npm run test:interaction`: seal-and-shield's feedback check on every state
   (ported in full 2026-10-23). Each reachable link and button, form field,
   product card, Craft Fairs booth frame, and the About portrait's frame must
   look different in each state it responds to (hovered, pressed, or focused)
   and ease every property that change touches, on it or anything inside it,
-  while real clicks are blocked; the first Tab stop's focus ring must reach
-  its full 2px; under reduced motion the changes stay but nothing transitions;
-  and the contact form error's phone link gets the same checks once a failed
-  send is faked. Its behavior spec (added 2026-10-23) checks where links lead:
-  every bar, menu, hero, and 404 page section link lands on its section with
-  no hash left in the address, a Ctrl, Cmd, or middle click opens the section
-  in a new tab without moving the page clicked from, a Ctrl, Cmd, or middle
-  click on a menu link or the brand closes the menu (added 2026-10-30), an
-  address with a hash lands on its section, a link to another page opens it at
-  its top, back and forward (from a page scrolled further than the 404 page
-  between can scroll) and a reload return to the exact earlier position, a
-  fresh load opens at the top, a hash added to the address lands on its
-  section, malformed saved positions raise no error (added 2026-10-29, with
-  `ui/scroll-top.ts` recording and restoring positions itself), and the first
-  Tab on each page reaches the skip link.
+  while real clicks are blocked; the stop one Tab press reaches must draw its
+  focus ring at its full 2px; under reduced motion the changes stay but
+  nothing transitions; and the contact form error's phone link gets the same
+  checks once a failed send is faked. Its behavior spec (added 2026-10-23)
+  checks where links lead: every bar, menu, hero, and 404 page section link
+  lands on its section with no hash left in the address, a Ctrl, Cmd, or
+  middle click opens the section in a new tab without moving the page clicked
+  from, a Ctrl, Cmd, or middle click on a menu link or the brand closes the
+  menu (added 2026-10-30), an address with a hash lands on its section, a link
+  to another page opens it at its top, back and forward (from a page scrolled
+  further than the 404 page between can scroll) and a reload return to the
+  exact earlier position, a fresh load opens at the top, a hash added to the
+  address lands on its section, malformed saved positions raise no error
+  (added 2026-10-29, with `ui/scroll-top.ts` recording and restoring positions
+  itself), and the first Tab on each page reaches the skip link.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance and a
   per-pixel color threshold of 0. The page's clock is fixed to one date rather
@@ -527,11 +528,14 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
 - `npm run test:seo`: checks the home page's title, description, author,
   canonical, lack of a robots tag, and single description; that the raw page,
   fetched without a browser, carries the full title and one 120 to 125
-  character description; that the structured data's name, phone, town, Facebook
-  page, and node links match what the page shows, with no street address or
-  birth date; the 404 page's `noindex` and title; one h1 per page; every Open
-  Graph and Twitter tag and the theme color, with absolute addresses and copy
-  matching the page; the card's type, size, and bytes; every icon link; and
+  character description; that the built page, fetched in Chromium from the
+  production preview, carries the same title, one description, the canonical,
+  the preview image, and structured data that parses (added 2026-10-30); that
+  the structured data's name, phone, town, Facebook page, and node links match
+  what the page shows, with no street address or birth date; the 404 page's
+  `noindex`, title, and canonical; one h1 per page; every Open Graph and
+  Twitter tag and the theme color, with absolute addresses and copy matching
+  the page; the card's type, size, and bytes; every icon link; and
   `robots.txt` and the sitemap.
 - `npm run test:security`: added 2026-10-23, from seal-and-shield's. It
   checks `public/_headers` against the security baseline (a strict

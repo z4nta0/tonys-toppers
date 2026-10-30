@@ -20,12 +20,12 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * nothing about the others. Each suite lives in its own folder under tests/,
  * such as accessibility, which the pre-commit check runs. Playwright starts
  * the Vite dev server on port 5192 for the run, and a production build served
- * by vite preview on 5199 for the security suite, and stops both afterwards,
- * so a dev server already running on the usual 5173, or a sibling project's
- * suites on their own ports, are never touched. Reports and failure
- * screenshots land in tests/output, which git ignores, while the rendering
- * suite's approved screenshots live in tests/rendering/baselines and are
- * committed.
+ * by vite preview on 5199 for the security suite and the SEO suite's built
+ * page check, and stops both afterwards, so a dev server already running on
+ * the usual 5173, or a sibling project's suites on their own ports, are never
+ * touched. Reports and failure screenshots land in tests/output, which git
+ * ignores, while the rendering suite's approved screenshots live in
+ * tests/rendering/baselines and are committed.
  *
  * Sections:
  *  - Constants
