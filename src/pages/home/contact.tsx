@@ -184,11 +184,11 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
  * Renders the Contact section. The form's fields are controlled, typing in any
  * field hides the thank-you note, and the browser won't send the form until
  * the required name, email, and message are filled in and the email looks like
- * an address. Sending it waits for Netlify's answer before showing the
- * thank-you note or, when the message didn't go through, an error note that
- * keeps the visitor's details for a retry. The icons beside the contact links
- * are hidden from screen readers, and the send button is named by its words
- * alone, so neither reads a decorative glyph aloud.
+ * an address. Sending it waits for Netlify's answer before showing the thank-
+ * you note or, when the message didn't go through, an error note that keeps
+ * the visitor's details for a retry. The icons beside the contact links are
+ * hidden from screen readers, and the send button is named by its words alone,
+ * so no decorative glyph joins their accessible names.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -439,7 +439,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>📲</div>{ /* What: Info Icon Div Element. Why: A phone marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
+							>📲</div>{ /* What: Info Icon Div Element. Why: A phone marks the row at a glance. How: It's hidden from screen readers, so the emoji stays out of the row's accessible name. */ }
 
 							<div>{ /* What: Facebook Text Div Element. Why: The row's label and name stack beside the icon. How: This holds the two lines. */ }
 
@@ -462,7 +462,7 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>📍</div>{ /* What: Info Icon Div Element. Why: A pin marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
+							>📍</div>{ /* What: Info Icon Div Element. Why: A pin marks the row at a glance. How: It's hidden from screen readers, so the emoji stays out of the row's accessible name. */ }
 
 							<div>{ /* What: Location Text Div Element. Why: The row's label and town stack beside the icon. How: This holds the two lines. */ }
 
@@ -504,7 +504,7 @@ function ConSecCom () : React.JSX.Element {
 									data-note-exit-active={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
 
 									onAnimationEnd={ sucExiObj.endFun }
-								>{ /* What: Form Success Div Element. Why: The visitor should see the form went through. How: It rises in with its check popping once and fades out when it goes, and the status region around it has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
+								>{ /* What: Form Success Div Element. Why: The visitor should see the form went through. How: It rises in with its check popping once and fades out when it goes, and the status region around it has screen readers announce it, with the decorative check mark hidden so it stays out of what's announced. */ }
 									<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
 								</div>
 

@@ -213,7 +213,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Loop. Why: Every state t
 
 
 
-for ( const [ staCodNum, notTexStr, resDesStr ] of [ [ 200, 'Your message was sent', 'sent' ], [ 500, "didn't go through", 'failed' ] ] as const ) { // What: Form Result Loop. Why: The form's post and its notes are states no page load reaches, and they have to work under the policy too. How: This declares one test per answer, pairing Netlify's status with words only that note shows and a name for the title.
+for ( const [ staCodNum, notTexStr, resDesStr ] of [ [ 200, 'Your message was sent', 'sent' ], [ 500, "didn't go through", 'failed' ] ] as const ) { // What: Form Result Loop. Why: The form's post and its notes are states no page load reaches, and they have to work under the policy too. How: This declares one test per answer, pairing Netlify's status with words only that note shows and a name for the title. // What: Type Assertion Note. Why: Without it each row widens to a mixed array, so the destructured names lose their literal types. How: as const keeps each row a readonly tuple, so each name is typed by its position.
 
 
 	test( `a ${ resDesStr } message breaks no rule of the security policy`, async ( { browserName : broNamStr, page : curPagObj } ) => { // What: Form Result Policy Test. Why: Sending the form posts to the site and shows a note with motion of its own, which would break once deployed if the policy refused any of it. How: This sends the form under the policy against the faked answer and checks nothing was refused.

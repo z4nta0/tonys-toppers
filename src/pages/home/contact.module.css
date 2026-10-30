@@ -610,7 +610,7 @@
 /* What: Form Field Select Pointer. Why: The interest dropdown shares the inputs' look, hover, and focus ring. How: Its rules, shared with the inputs and the message box, sit in the forRowDiv region, where the inputs first appear. */
 
 /* What: Form Field Textarea Pointer. Why: The message box shares the inputs' look, placeholder, hover, and focus ring. How: Its shared rules sit in the forRowDiv region, where the inputs first appear, while its own room to grow follows. */
-.forFieTex { /* What: Form Field Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px that can only be dragged taller. */
+.forFieTex { /* What: Form Field Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px and lets the visitor resize it vertically. */
 
 
 	min-height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */

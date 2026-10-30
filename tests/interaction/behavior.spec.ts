@@ -22,7 +22,7 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * project runs. Section links, such as the bar's, have to land on their
  * section and leave the address free of hashes, while a new tab click opens
  * the section in the new tab and leaves the page clicked from alone. A link
- * to another page has to open it at its top, and back has to return near
+ * to another page has to open it at its top, and back has to return to
  * where the visitor was. Every page opens with a skip link that moves focus
  * to the main content. The phone menu's links close the menu only when they
  * take the visitor somewhere. Pages open under reduced motion, so scrolling
@@ -309,7 +309,7 @@ test( 'the brand returns to the top', async ( { page : curPagObj } ) => { // Wha
 
 
 
-test( 'a link to another page opens it at its top, and back returns to where the visitor was', async ( { page : curPagObj } ) => { // What: Page Top Test. Why: A client-side router never resets the scroll position, so the app root has to, while back should give the earlier position back. How: This scrolls the 404 page down on a phone, follows "Back home", checks the home page opens at its top, then goes back and checks the 404 page returns near where it was.
+test( 'a link to another page opens it at its top, and back returns to where the visitor was', async ( { page : curPagObj } ) => { // What: Page Top Test. Why: A client-side router never resets the scroll position, so the app root has to, while back should give the earlier position back. How: This scrolls the 404 page down on a phone, follows "Back home", checks the home page opens at its top, then goes back and checks the 404 page returns to where it was.
 
 
 	await opeRouFun( curPagObj, '/missing', SHO_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page has a link home and scrolls on a short phone screen. How: This opens an unknown address at the short phone size.
@@ -317,7 +317,7 @@ test( 'a link to another page opens it at its top, and back returns to where the
 	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : document.documentElement.scrollHeight } ) ); // What: Scroll Bottom Call. Why: The new page should open at its top however far down the link was. How: This jumps to the bottom of the page.
 
 
-	const oldTopNum = await curPagObj.evaluate( () => window.scrollY ); // What: Old Top Number. Why: Back should return near this position. How: This reads how far down the page sits.
+	const oldTopNum = await curPagObj.evaluate( () => window.scrollY ); // What: Old Top Number. Why: Back should return to this position. How: This reads how far down the page sits.
 
 
 	expect( oldTopNum ).toBeGreaterThan( 0 ); // What: Scrolled Assertion. Why: The check means nothing unless the page really left its top. How: This checks it's scrolled down.

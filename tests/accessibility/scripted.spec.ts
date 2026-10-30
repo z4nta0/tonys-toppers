@@ -31,9 +31,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * animation is still running once the state has settled, and no element's
  * computed styles would still move. Form: the thank-you and error notes each
  * speak through a live region that's in the page, empty, from the first
- * render, and the send button keeps focus while a message goes out. Each
- * failure lists every problem found, naming the element for all but the
- * positive tabindex count.
+ * render, and the send button keeps focus while a message goes out. A name,
+ * keyboard, or motion style failure lists every problem it found, naming the
+ * element in all but the positive tabindex count.
  *
  * Sections:
  *  - Constants
@@ -48,7 +48,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
 
 // #region Constants
 
-const GLY_DEC_REG = /[←↑→↓·•]|\p{Extended_Pictographic}/u; // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name is read aloud as noise, such as a right arrow. How: This matches the arrows and dots a decorative glyph would add to a name, plus any emoji or pictograph.
+const GLY_DEC_REG = /[←↑→↓·•]|\p{Extended_Pictographic}/u; // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name becomes part of the control's announced name, such as a right arrow. How: This matches the arrows and dots a decorative glyph would add to a name, plus any emoji or pictograph.
 const REF_WID_NUM = 320;                                   // What: Reflow Width Number. Why: WCAG's reflow criterion asks for no sideways scrolling at 320 CSS pixels, the width of 1,280px at 400% zoom. How: This is the viewport width the reflow check opens each state at.
 const TAB_MAX_NUM = 80;                                    // What: Tab Maximum Number. Why: A keyboard trap would otherwise keep the walk going forever. How: This caps the walk at far more Tab presses than the site has stops.
 
@@ -179,7 +179,7 @@ async function namProFun ( curPagObj : Page ) : Promise< string[] > {
 
 		if ( !conNamStr.trim() ) proLisArr.push( `${ conLinStr } has no name` ); // What: Missing Name Check. Why: A control with no name is announced as just its role. How: This records the line when its name is empty.
 
-		else if ( GLY_DEC_REG.test( conNamStr ) ) proLisArr.push( `${ conLinStr } has a decorative glyph in its name` ); // What: Glyph Name Check. Why: A decorative arrow in a name is read aloud. How: This records the line when its name contains one.
+		else if ( GLY_DEC_REG.test( conNamStr ) ) proLisArr.push( `${ conLinStr } has a decorative glyph in its name` ); // What: Glyph Name Check. Why: A decorative arrow in a name becomes part of the control's announced name. How: This records the line when its name contains one.
 
 
 	}
@@ -492,6 +492,7 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 // #endregion keyProFun
 
 
+
 // #region motStyFun
 
 /**
@@ -632,7 +633,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200, 'status', 'Your message was sent', 'sent', 'is sent' ], [ 500, 'alert', "didn't go through", 'failed', 'fails' ] ] as const ) { // What: Form Result Loop. Why: The thank-you and the error each have their own live region. How: This declares the region and focus tests once per answer, pairing Netlify's status with the region's role, words only that note shows, and two ways of naming the result in the titles.
+for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200, 'status', 'Your message was sent', 'sent', 'is sent' ], [ 500, 'alert', "didn't go through", 'failed', 'fails' ] ] as const ) { // What: Form Result Loop. Why: The thank-you and the error each have their own live region. How: This declares the region and focus tests once per answer, pairing Netlify's status with the region's role, words only that note shows, and two ways of naming the result in the titles. // What: Type Assertion Note. Why: Without it each row widens to a mixed array, so the destructured names lose their literal types. How: as const keeps each row a readonly tuple, so each name is typed by its position.
 
 
 	test( `a ${ resDesStr } message fills ${ rolNamStr === 'alert' ? 'an' : 'a' } ${ rolNamStr } region that was in the page, empty, from the start`, async ( { page : curPagObj } ) => { // What: Result Announcement Test. Why: A live region added at the moment it speaks is often missed, so the note's region has to wait in the page, empty, and gain the note once the answer arrives. How: This checks the form holds exactly one such region, empty on load, sends the form, and checks the region then holds the note while the other region stays empty.

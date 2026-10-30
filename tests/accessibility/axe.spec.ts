@@ -247,7 +247,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 for ( const resRecObj of FOR_RES_ARR ) { // What: Form Result Test Loop. Why: The form's results bring text and colors no page state shows, so each must pass the scan too. How: This declares one axe test per result.
 
 
-	for ( const staIdeStr of [ 'home-desktop', 'home-phone' ] ) { // What: Width Loop. Why: Each result is scanned at phone and desktop widths, as every page state is, since the notes stack and wrap differently on a phone. How: This declares the scan once per home state.
+	for ( const staIdeStr of [ 'home-desktop', 'home-phone' ] ) { // What: Width Loop. Why: Each result is scanned at phone and desktop widths, as the pages are, since the notes stack and wrap differently on a phone. How: This declares the scan once per home state.
 
 
 		test( `${ resRecObj.ideStr } at ${ staIdeStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Form Result Axe Test. Why: The thank-you message and the error must be as accessible as the page. How: This sends the form against the faked answer, waits for the result to settle, then checks a scan of it finds no violations, reporting anything needing review.

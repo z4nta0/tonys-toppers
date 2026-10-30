@@ -44,9 +44,9 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * Renders the 404 page's title, its noindex robots tag, which React moves into
  * the document head, and its content, centered below the bar and led by the
  * page's one h1. The "Back home" button is named by its words alone, so its
- * decorative arrow isn't read aloud, and "See the collection" reaches the
- * Products section through secCliFun, the click handler every section link
- * shares.
+ * decorative arrow stays out of its accessible name, and "See the collection"
+ * reaches the Products section through secCliFun, the click handler every
+ * section link shares.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

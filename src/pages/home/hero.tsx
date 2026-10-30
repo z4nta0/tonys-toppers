@@ -44,8 +44,9 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * Renders the hero. Its buttons reach their sections through secCliFun, the
  * click handler the bar's links share, scrolling in place and leaving a Ctrl,
  * Cmd, Shift, Alt, or middle click to the browser. The collection button is
- * named by its words alone, so its decorative arrow isn't read aloud, and the
- * sticker, which only repeats the headline, is hidden from screen readers.
+ * named by its words alone, so its decorative arrow stays out of its
+ * accessible name, and the sticker, which only repeats the headline, is hidden
+ * from screen readers.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -153,7 +154,7 @@ function HerSecCom () : React.JSX.Element {
 						className={ cssModObj.herStiDiv }
 
 						aria-hidden='true'
-					>{ /* What: Hero Sticker Div Element. Why: A round sticker adds a warm note on the portrait's corner. How: This shows three short lines, hidden from screen readers, since it only repeats the headline's "made with love", and its heart symbol would be read aloud. */ }
+					>{ /* What: Hero Sticker Div Element. Why: A round sticker adds a warm note on the portrait's corner. How: This shows three short lines, hidden from screen readers, since it only repeats the headline's "made with love", and its heart symbol would join what's announced. */ }
 						Made<br />with<br />love ♥
 					</div>
 

@@ -70,7 +70,7 @@ src/
 ├── pages/
 │   ├── home/          Home page and its sections (hero, products, fairs, about, contact), each with its own .module.css, plus catalog.ts (the photos and their categories), photo-sizes.ts (generated), Tony's photos, and the full logo
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
-├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), and the bar's logo mark
+├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), scroll-top.ts (the page's scroll position on each navigation), and the bar's logo mark
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, the shared focus ring, and the shared entrance keyframes)
 ├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling)
 ├── app.tsx            Root component and the route table
@@ -78,11 +78,12 @@ src/
 public/                Files served at fixed addresses: the icons, the social card, robots.txt, sitemap.xml, and Netlify's _headers and _redirects
 tests/
 ├── accessibility/     axe-core scan and scripted checks
-├── interaction/       hover, press, and focus feedback checks
+├── interaction/       hover, press, and focus feedback, and where links and history navigation lead
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
+├── security/          the headers policy, the build's secrets and dependencies, and policy violations in the browser
 ├── seo/               head tags, structured data, preview card, icon, and crawler file checks
-├── support/           the page states the suites visit
+├── support/           the page states the suites visit and the helpers they share
 └── playwright.config.ts
 
 design/                Source artwork, not served
