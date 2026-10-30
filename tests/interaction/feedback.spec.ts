@@ -63,6 +63,7 @@ type SnaRecTyp = { // What: Snapshot Record Type. Why: An element's look, and wh
 const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'box-shadow', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control or a hover-only card or frame and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
 const ERR_LIN_STR = '#contact form [role="alert"] a';                                                      // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
 const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-offset', 'outline-width' ];                // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
+const FOC_PRO_ARR = [ ...CON_PRO_ARR, 'outline-color', 'outline-offset', 'outline-width' ];                // What: Focus Property Array. Why: A control's focus can change its look as well as draw its ring. How: Each is compared between unfocused and focused, and each that changes has to be transitioned.
 const HOV_TAR_STR = '[class*="proCarArt"], [class*="porFraDiv"]';                                          // What: Hover Target String. Why: The product cards and the About portrait's frame respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
 const SET_WAI_NUM = 400;                                                                                   // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
 
@@ -474,18 +475,20 @@ const valSigFun = ( snaRecArr : SnaRecTyp[] ) : string => JSON.stringify( snaRec
  *
  * @summary
  * Probes every reachable control and returns a problem for each one that gives
- * no feedback. Each control is scrolled into view, and one that still waits
- * above the screen until it's focused, such as the skip link, is focused so it
- * slides in, then blurred again once it's probed. Each is read at rest with
- * the pointer away, read again while hovered, and again while the mouse button
- * is held on it, every look read once its transition has settled. A control
- * that looks the same at rest and hovered, or hovered and pressed, is a
- * problem. Normally every property that changes on hover or press, on the
- * control or anything inside it, has to be eased by a transition ({@link
- * snaProFun}), and its transition list must include the focus ring's
- * outline-width and outline-offset, so the ring eases in; under reduced motion
- * every one of its transition durations must be zero instead. The caller
- * blocks real clicks first, so releasing the mouse does nothing.
+ * no feedback, or a single problem when it finds no control at all. Each
+ * control is scrolled into view, and one that still waits above the screen
+ * until it's focused, such as the skip link, is focused so it slides in, then
+ * blurred again once it's probed. Each is read at rest with the pointer away,
+ * read again while hovered, and again while the mouse button is held on it,
+ * then blurred with the pointer away and read once more while focused as a
+ * keyboard focuses it, every look read once its transition has settled. A
+ * control that looks the same at rest and hovered, hovered and pressed, or
+ * blurred and focused is a problem. Normally every property that changes on
+ * hover, press, or focus, on the control or anything inside it, has to be
+ * eased by a transition ({@link snaProFun}), the focus ring's outline
+ * included, so the ring eases in; under reduced motion every one of the
+ * control's transition durations must be zero instead. The caller blocks real
+ * clicks first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -511,8 +514,14 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
 
+	const conHanArr = await conLisFun( curPagObj, conSelStr ); // What: Control Handle Array. Why: Every reachable control the selector matches is probed. How: This collects their handles.
 
-	for ( const conCurObj of await conLisFun( curPagObj, conSelStr ) ) { // What: Control Probe Loop. Why: Every reachable control has to respond. How: This reads each one the selector matches at rest, hovered, and pressed.
+
+	if ( !conHanArr.length ) proLisArr.push( 'no control to probe' ); // What: Empty Probe Check. Why: A probe that finds nothing would pass without checking anything. How: This records a problem when no control is found.
+
+
+
+	for ( const conCurObj of conHanArr ) { // What: Control Probe Loop. Why: Every reachable control has to respond. How: This reads each reachable one the selector matches at rest, hovered, pressed, blurred, and focused.
 
 
 		const conDesStr = await conCurObj.evaluate( ( conCurEle ) => `${ conCurEle.tagName.toLowerCase() } "${ ( conCurEle.getAttribute( 'aria-label' ) || conCurEle.textContent || '' ).trim().slice( 0, 30 ) }"` ); // What: Control Description String. Why: A problem should name the control a person would recognize. How: This joins its tag with its label or text.
@@ -550,14 +559,30 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 
 		const preSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, false );                                              // What: Press Snapshot Array. Why: The pressed look is compared with hovered. How: This records it.
-		const traLisStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionProperty ); // What: Transition List String. Why: The focus ring's ease depends on the control listing its outline. How: This reads the control's transitioned properties.
 		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the control's transition durations.
 
 
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
 
+		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The focus look is compared with no hover on it. How: This moves the pointer to the corner of the bar.
 
-		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Hidden Control Blur Call. Why: Left focused, the control would stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it slide back out of view.
+		await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Control Blur Call. Why: The focus look is compared with the control unfocused, and a press or the hidden control's focus may have focused it. How: This blurs it, so a control that waits above the screen slides back out.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Blur Settle Wait. Why: The unfocused look is read once the hover and focus have faded. How: This pauses for the settle time.
+
+
+		const bluSnaArr = await snaHanFun( conCurObj, FOC_PRO_ARR, false ); // What: Blur Snapshot Array. Why: The unfocused look is what focus is compared with. How: This records the control and everything inside it, outline included.
+
+
+		await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.focus( { focusVisible : true } ); } ); // What: Keyboard Focus Call. Why: The focus ring shows only for keyboard focus, and a script's focus draws it in every engine only when it asks to show the ring. How: This focuses the control with focusVisible set.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Focus Settle Wait. Why: The focused look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const focSnaArr = await snaHanFun( conCurObj, FOC_PRO_ARR, false ); // What: Focus Snapshot Array. Why: The focused look is compared with unfocused. How: This records it.
+
+
+		await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Control Blur Call. Why: Left focused, the control would keep its ring, or stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it fade.
 
 
 
@@ -569,13 +594,15 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 
 
+		if ( valSigFun( bluSnaArr ) === valSigFun( focSnaArr ) ) proLisArr.push( `${ conDesStr } looks the same focused` ); // What: Focus Check. Why: A focused control has to show where focus is. How: This records one whose look and ring don't change.
+
+
+
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero.
 
-		else if ( !redMotBoo && !( traLisStr.includes( 'outline-width' ) && traLisStr.includes( 'outline-offset' ) ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring grows in through its width and its offset, so both have to ease rather than snap. How: This records a control whose transition list leaves out either outline property.
 
 
-
-		if ( !redMotBoo ) proLisArr.push( ...snaProFun( resSnaArr, hovSnaArr, CON_PRO_ARR, conDesStr, 'when hovered' ), ...snaProFun( hovSnaArr, preSnaArr, CON_PRO_ARR, conDesStr, 'when pressed' ) ); // What: Snapped Change Check. Why: Every property a hover or press changes should ease rather than snap. How: This records each one that changes without a transition, on the control or anything inside it.
+		if ( !redMotBoo ) proLisArr.push( ...snaProFun( resSnaArr, hovSnaArr, CON_PRO_ARR, conDesStr, 'when hovered' ), ...snaProFun( hovSnaArr, preSnaArr, CON_PRO_ARR, conDesStr, 'when pressed' ), ...snaProFun( bluSnaArr, focSnaArr, FOC_PRO_ARR, conDesStr, 'when focused' ) ); // What: Snapped Change Check. Why: Every property a hover, press, or focus changes should ease rather than snap, the focus ring included. How: This records each one that changes without a transition, on the control or anything inside it.
 
 
 	}
