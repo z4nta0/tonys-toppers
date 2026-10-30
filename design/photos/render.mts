@@ -46,13 +46,13 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 
 type BoxRecTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
 
-const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than three times that, enough for the densest phone screens. How: This maps each kind to its box.
+const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different size, and its file should be about three times its size on a 1,920px screen, enough for the densest phone screens, while never more than three times the largest size it's shown at. How: This maps each kind to its box.
 
 
-	'booth'    : { heiNum : Infinity, widNum : 1044 }, // What: Booth Box. Why: The gallery crops a booth shot to fill frames up to about 348px wide. How: This caps its width at three times that.
-	'cartoon'  : { heiNum : Infinity, widNum : 1065 }, // What: Cartoon Box. Why: The hero's portrait ring grows to about 355px wide. How: This caps its width at three times that.
+	'booth'    : { heiNum : Infinity, widNum : 1044 }, // What: Booth Box. Why: The gallery crops a booth shot to fill frames about 348px wide on a 1,920px screen, and about 398px at 900px, where it drops to two columns. How: This caps its width at three times the 1,920px frame, still about 2.6 times the 900px one.
+	'cartoon'  : { heiNum : Infinity, widNum : 1065 }, // What: Cartoon Box. Why: The hero's portrait ring is about 355px wide on a 1,920px screen, and grows on wider ones. How: This caps its width at three times its 1,920px size.
 	'portrait' : { heiNum : Infinity, widNum : 756  }, // What: Portrait Box. Why: The About portrait is shown wider than a third of its original, so it keeps its own width. How: This caps it at the original's 756px, so it's never enlarged.
-	'product'  : { heiNum : 1125,     widNum : 843  }  // What: Product Box. Why: A product card's frame is at most about 281 by 375px, and the photo fits inside it. How: This caps the photo at three times the frame.
+	'product'  : { heiNum : 1125,     widNum : 843  }  // What: Product Box. Why: A product card's frame is about 281 by 375px on a 1,920px screen, and grows on wider ones, and the photo fits inside it. How: This caps the photo at three times its 1,920px frame.
 
 
 };
