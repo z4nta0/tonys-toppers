@@ -346,7 +346,7 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The prod
 
 // #region Exports
 
-export { CAT_REC_ARR, PRO_REC_ARR, type CatSluTyp }; // What: Named Exports. Why: The sections that show the collection read these. How: This exports the two lists and the category type their rows use.
+export { CAT_REC_ARR, PRO_REC_ARR, type CatSluTyp }; // What: Named Exports. Why: The catalog's records are read by the sections that show them. How: This exports the two lists and the category type their rows use.
 
 // #endregion Exports
 

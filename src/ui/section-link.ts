@@ -207,7 +207,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 // #region Exports
 
-export { modCliFun, useSecCliFun, useSecLinFun }; // What: Named Exports. Why: Every section link and button reaches its section through these. How: This exports the modified-click check, the shared click handler, and useSecLinFun.
+export { modCliFun, useSecCliFun, useSecLinFun }; // What: Named Exports. Why: Section links are rendered in several files, which share this behavior. How: This exports the modified-click check, the shared click handler, and useSecLinFun.
 
 // #endregion Exports
 

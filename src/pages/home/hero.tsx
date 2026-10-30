@@ -181,7 +181,7 @@ function HerSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HerSecCom }; // What: Named Export. Why: The home page opens with the hero. How: This exports HerSecCom.
+export { HerSecCom }; // What: Named Export. Why: The hero is rendered as part of the home page. How: This exports HerSecCom.
 
 // #endregion Exports
 

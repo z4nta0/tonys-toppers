@@ -58,7 +58,7 @@ const redMotFun = () : boolean => !!( window.matchMedia && window.matchMedia( '(
 
 // #region Exports
 
-export { redMotFun }; // What: Named Export. Why: Every smooth scroll checks the same reduced-motion preference. How: This exports redMotFun by name.
+export { redMotFun }; // What: Named Export. Why: JavaScript-driven motion shares one reduced-motion check. How: This exports redMotFun by name.
 
 // #endregion Exports
 

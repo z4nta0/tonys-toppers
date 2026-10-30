@@ -106,7 +106,7 @@ function heaAllFun () : Record< string, string > {
 
 // #region Exports
 
-export { heaAllFun }; // What: Named Export. Why: The headers checks and the page checks both read the same policy. How: This exports the function that reads it.
+export { heaAllFun }; // What: Named Export. Why: The headers file reader is shared by more than one check. How: This exports the function that reads it.
 
 // #endregion Exports
 

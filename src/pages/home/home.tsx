@@ -135,7 +135,7 @@ function HomPagCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HomPagCom }; // What: Named Export. Why: The router renders the home page at the site's root. How: This exports HomPagCom.
+export { HomPagCom }; // What: Named Export. Why: The home page is rendered by the site's router. How: This exports HomPagCom.
 
 // #endregion Exports
 

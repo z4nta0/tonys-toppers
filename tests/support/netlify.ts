@@ -95,7 +95,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 // #region Exports
 
-export { fakNetFun }; // What: Named Export. Why: Form checks in more than one suite fake Netlify's answer. How: This exports the helper that does it.
+export { fakNetFun }; // What: Named Export. Why: The Netlify fake is shared by more than one suite. How: This exports the helper that does it.
 
 // #endregion Exports
 

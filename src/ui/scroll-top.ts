@@ -303,7 +303,7 @@ window.addEventListener( 'scroll', () => { // What: Scroll Recorder Listener. Wh
 
 // #region Exports
 
-export { useScrTopFun }; // What: Named Export. Why: The app root calls the hook once. How: This exports useScrTopFun.
+export { useScrTopFun }; // What: Named Export. Why: The hook is called from outside this file. How: This exports useScrTopFun.
 
 // #endregion Exports
 

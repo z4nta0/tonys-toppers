@@ -113,7 +113,7 @@ const PHO_SIZ_OBJ : Record< string, PhoSizTyp > = { // What: Photo Size Object. 
 
 // #region Exports
 
-export { PHO_SIZ_OBJ }; // What: Named Export. Why: The components that show photos read their sizes from here. How: This exports the sizes object.
+export { PHO_SIZ_OBJ }; // What: Named Export. Why: The photo sizes are read by the components that show them. How: This exports the sizes object.
 
 // #endregion Exports
 

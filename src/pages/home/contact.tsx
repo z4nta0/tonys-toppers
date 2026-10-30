@@ -728,7 +728,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Export. Why: The home page ends with the Contact section. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The Contact section is rendered as part of the home page. How: This exports ConSecCom.
 
 // #endregion Exports
 

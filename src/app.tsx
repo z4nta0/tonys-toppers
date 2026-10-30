@@ -127,7 +127,7 @@ function AppRooCom () : React.JSX.Element {
 
 // #region Exports
 
-export { AppRooCom }; // What: Named Export. Why: main.tsx is the sole consumer, mounting this as the site's root. How: This exports AppRooCom.
+export { AppRooCom }; // What: Named Export. Why: The root component is this file's one export, mounted from outside it. How: This exports AppRooCom.
 
 // #endregion Exports
 
