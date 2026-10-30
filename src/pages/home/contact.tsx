@@ -245,7 +245,7 @@ function ConSecCom () : React.JSX.Element {
 	const fieChaFun = ( chaEveObj : ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement > ) => { // What: Field Change Function. Why: Every field updates the form the same way. How: This stores the field's new value under its name and hides the thank-you note.
 
 
-		const { name : fieNamStr, value : fieValStr } = chaEveObj.target; // What: Field Name And Value Strings. Why: The field's name says which value changed. How: This reads the target's name and value, renaming the DOM's keys.
+		const { name : fieNamStr, value : fieValStr } = chaEveObj.target; // What: Field Name String. Why: The field's name says which value changed. How: This reads the target's name, renaming the DOM's key. // What: Field Value String. Why: The field's new value is what gets stored. How: This reads the target's value, renaming the DOM's key.
 
 
 		setForDatObj( ( preForObj ) => ({ ...preForObj, [ fieNamStr ] : fieValStr }) ); // What: Form Data Update. Why: The changed field keeps its new value. How: This copies the form and replaces that one field.
