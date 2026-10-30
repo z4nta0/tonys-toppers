@@ -23,12 +23,12 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * and Tony's cartoon and portrait, written into src/pages/home. Each photo is
  * cropped where CRO_BOX_OBJ says (booth-1 is a phone screenshot, cropped to
  * the photo inside it), scaled down to fit its box, which is no more than
- * twice the largest size the site shows it at, never scaled up, and encoded
- * at 0.85 quality, the lowest that shows no difference from the original at 3x
- * zoom. It then writes src/pages/home/photo-sizes.ts, the width and height
- * of every photo it wrote, which the page's img elements read so nothing
- * shifts while photos load. Run it with npm run photos whenever a photo is
- * added or replaced, or a display size changes.
+ * three times the largest size the site shows it at, never scaled up, and
+ * encoded at 0.85 quality, the lowest that shows no difference from the
+ * original at 3x zoom. It then writes src/pages/home/photo-sizes.ts, the width
+ * and height of every photo it wrote, which the page's img elements read so
+ * nothing shifts while photos load. Run it with npm run photos whenever a
+ * photo is added or replaced, or a display size changes.
  *
  * Sections:
  *  - Constants
@@ -46,13 +46,13 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 
 type BoxRecTyp = { heiNum : number, widNum : number }; // What: Box Record Type. Why: A photo's box is the most room it may take. How: This names its height and width in pixels, Infinity for no limit.
 
-const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than twice that. How: This maps each kind to its box.
+const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. Why: Each kind of photo is shown at a different largest size, and its file should be no more than three times that, enough for the densest phone screens. How: This maps each kind to its box.
 
 
-	'booth'    : { heiNum : Infinity, widNum : 696 }, // What: Booth Box. Why: The gallery crops a booth shot to fill frames up to about 348px wide. How: This caps its width at twice that.
-	'cartoon'  : { heiNum : Infinity, widNum : 710 }, // What: Cartoon Box. Why: The hero's portrait ring grows to about 355px wide. How: This caps its width at twice that.
-	'portrait' : { heiNum : Infinity, widNum : 756 }, // What: Portrait Box. Why: The About portrait is shown wider than half its original, so it keeps its own width. How: This caps it at the original's 756px, so it's never enlarged.
-	'product'  : { heiNum : 750,      widNum : 562 }  // What: Product Box. Why: A product card's frame is at most about 281 by 375px, and the photo fits inside it. How: This caps the photo at twice the frame.
+	'booth'    : { heiNum : Infinity, widNum : 1044 }, // What: Booth Box. Why: The gallery crops a booth shot to fill frames up to about 348px wide. How: This caps its width at three times that.
+	'cartoon'  : { heiNum : Infinity, widNum : 1065 }, // What: Cartoon Box. Why: The hero's portrait ring grows to about 355px wide. How: This caps its width at three times that.
+	'portrait' : { heiNum : Infinity, widNum : 756  }, // What: Portrait Box. Why: The About portrait is shown wider than a third of its original, so it keeps its own width. How: This caps it at the original's 756px, so it's never enlarged.
+	'product'  : { heiNum : 1125,     widNum : 843  }  // What: Product Box. Why: A product card's frame is at most about 281 by 375px, and the photo fits inside it. How: This caps the photo at three times the frame.
 
 
 };

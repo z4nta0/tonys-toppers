@@ -69,8 +69,11 @@ photos are kept in `design/photos/` (the pieces and booth shots in
 `products/`), outside the served tree, and `npm run photos`
 (`design/photos/render.mts`) writes resized WebP copies into `src/`, at
 quality 0.85, plus `src/pages/home/photo-sizes.ts`, which gives every img its
-width and height. A product photo fits within 562 by 750px, a booth shot is
-696px wide, the cartoon 710px, and the portrait keeps its 756px. Adding or
+width and height. Each is no more than three times its largest display size
+(decided 2026-10-29, up from twice, for the densest phone screens, taking the
+photos from 2,698 KB to 4,892 KB): a product photo fits within 843 by
+1,125px, a booth shot is 1,044px wide, the cartoon 1,065px, and the portrait
+keeps its 756px. Adding or
 replacing a photo means dropping the original in and rerunning the script.
 Tony's cartoon stays lossy like the photos (decided 2026-10-29): its original
 is a JPEG with halftone texture rather than flat artwork, and lossless came to
