@@ -72,7 +72,7 @@ src/
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
 ├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), scroll-top.ts (the page's scroll position on each navigation), and the bar's logo mark
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, the shared focus ring, and the shared entrance keyframes)
-├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling)
+├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling) and rhythm.ts (a token's size in pixels)
 ├── app.tsx            Root component and the route table
 └── main.tsx           Entry point
 public/                Files served at fixed addresses: the icons, the social card, robots.txt, sitemap.xml, and Netlify's _headers and _redirects

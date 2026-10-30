@@ -7,13 +7,14 @@ import cssModObj from './nav.module.css';   // What: CSS Module Object. Why: The
 import lntSvgUrl from './logo-no-text.svg'; // What: Logo-No-Text SVG URL. Why: The bar shows the logo's mark without its wordmark, and Vite fingerprints and checks an imported image. How: This imports the mark's built URL for the brand's img.
 
 
-import { Link         } from 'react-router';      // What: Link. Why: The brand returns to the home page without a full page load. How: This renders the brand as a router link to the root.
-import { modCliFun    } from './section-link.ts'; // What: Modified Click Function. Why: A Ctrl, Cmd, Shift, or Alt click on the skip link should open it the browser's own way. How: The skip link's click handler asks it before cancelling the default.
-import { useEffect    } from 'react';             // What: Use Effect. Why: The bar reacts to the page around it, such as its scroll position. How: This sets up the bar's listeners and watchers, and undoes them again.
-import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to track and mark active. How: This reads the current path.
-import { useRef       } from 'react';             // What: Use Ref. Why: The open menu works on elements this component renders, such as the toggle. How: This creates the refs those elements attach.
-import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns secCliFun, the shared section link click handler.
-import { useState     } from 'react';             // What: Use State. Why: The bar keeps state of its own, such as whether the menu is open. How: This holds each piece.
+import { Link         } from 'react-router';       // What: Link. Why: The brand returns to the home page without a full page load. How: This renders the brand as a router link to the root.
+import { modCliFun    } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, Shift, or Alt click on the skip link should open it the browser's own way. How: The skip link's click handler asks it before cancelling the default.
+import { tokPxlFun    } from '../utils/rhythm.ts'; // What: Token Pixel Function. Why: The active section's band has to start below the bar, which the stylesheet sizes. How: This reads the bar's height and a spacing step from their tokens in pixels.
+import { useEffect    } from 'react';              // What: Use Effect. Why: The bar reacts to the page around it, such as its scroll position. How: This sets up the bar's listeners and watchers, and undoes them again.
+import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to track and mark active. How: This reads the current path.
+import { useRef       } from 'react';              // What: Use Ref. Why: The open menu works on elements this component renders, such as the toggle. How: This creates the refs those elements attach.
+import { useSecCliFun } from './section-link.ts';  // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns secCliFun, the shared section link click handler.
+import { useState     } from 'react';              // What: Use State. Why: The bar keeps state of its own, such as whether the menu is open. How: This holds each piece.
 
 // #endregion Imports
 
@@ -71,14 +72,14 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * @summary
  * Renders the bar. Scrolling more than 20px gives it its scrolled look. On the
  * home page an IntersectionObserver marks the link for the section whose top
- * has crossed a band about a quarter of the way down the screen, while every
- * other page marks none. At 900px wide and below the links sit in a menu the
- * toggle opens, over a scrim that dims the page behind it, and choosing a
- * link, tapping the scrim, pressing Escape, or widening the screen past 900px
- * closes it. While it's open the page behind it is inert, so keyboard and
- * screen reader users stay in the bar. Each link reaches its section through
- * section-link.ts, scrolling in place on the home page or navigating home from
- * any other page, and leaves a Ctrl, Cmd, Shift, Alt, or middle click to the
+ * has crossed a band that starts just below the bar, while every other page
+ * marks none. At 900px wide and below the links sit in a menu the toggle
+ * opens, over a scrim that dims the page behind it, and choosing a link,
+ * tapping the scrim, pressing Escape, or widening the screen past 900px closes
+ * it. While it's open the page behind it is inert, so keyboard and screen
+ * reader users stay in the bar. Each link reaches its section through section-
+ * link.ts, scrolling in place on the home page or navigating home from any
+ * other page, and leaves a Ctrl, Cmd, Shift, Alt, or middle click to the
  * browser. A skip link comes first, waiting above the screen until it's
  * focused, and its plain click focuses the main element without leaving a hash
  * in the address.
@@ -150,6 +151,9 @@ function NavBarCom () : React.JSX.Element {
 
 
 
+		const actOffNum = tokPxlFun( '--nav-bar-hei' ) + tokPxlFun( '--spa-ver-p03' ); // What: Active Offset Number. Why: A section counts as being read once its top has passed a line just below the bar. How: This adds a spacing step to the bar's height at its tallest, both read from their tokens, so the line follows the layout. // Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 3 ~= 33.876px
+
+
 		const intObsObj = new IntersectionObserver( ( entObjArr ) => { // What: Intersection Observer Object. Why: A section's top crossing the band below the bar marks it as the one being read. How: This reports sections entering or leaving the band and marks the highest one inside it.
 
 
@@ -159,7 +163,7 @@ function NavBarCom () : React.JSX.Element {
 			if ( visEntArr[ 0 ] ) setActSecStr( visEntArr[ 0 ].target.id ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the highest visible section's ID, and leaves the active link alone when none is in the band.
 
 
-		}, { rootMargin : '-25% 0px -65% 0px', threshold : 0 } ); // What: Observer Options. Why: A section counts as being read once its top is a quarter of the way down the screen. How: This shrinks the watched band to the strip from 25% to 35% of the screen's height, reporting any overlap at all.
+		}, { rootMargin : `-${ actOffNum }px 0px -65% 0px`, threshold : 0 } ); // What: Observer Options. Why: A section counts as being read once its top has passed the line just below the bar. How: This shrinks the watched band to the strip from that line down to 35% of the way down the screen, and fires as soon as any part of a section enters or leaves it.
 
 
 		secEleArr.forEach( ( secCurEle ) => intObsObj.observe( secCurEle ) ); // What: Section Observe Loop. Why: Every section has to be watched. How: This hands each one to the observer.

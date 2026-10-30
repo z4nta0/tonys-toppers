@@ -149,7 +149,7 @@ src/
                          section-link.ts, scroll-top.ts, and the bar's logo
                          mark
   styles/                global CSS only (fonts.css, styles.css)
-  utils/                 app-agnostic helpers (motion.ts)
+  utils/                 app-agnostic helpers (motion.ts, rhythm.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
