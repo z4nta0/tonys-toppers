@@ -46,7 +46,7 @@ import { useNavigationType } from 'react-router'; // What: Use Navigation Type. 
 
 // #region Constants
 
-const POS_MAX_NUM = 100;                // What: Position Maximum Number. Why: Every navigation adds a history entry, and the whole record is saved on each scroll, so it mustn't grow for as long as a tab stays open. How: This is how many of the most recent entries' positions are kept.
+const POS_MAX_NUM = 100;                // What: Position Maximum Number. Why: A forward navigation adds a history entry, and the whole record is saved on each scroll, so it mustn't grow for as long as a tab stays open. How: This is how many of the most recent entries' positions are kept.
 const POS_STO_STR = 'scroll-positions'; // What: Position Storage String. Why: The recorded positions have to survive a reload. How: This is the session storage key they're saved under.
 
 // #endregion Constants

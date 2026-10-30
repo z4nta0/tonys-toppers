@@ -21,7 +21,7 @@
 
 /* #region homConSec */
 
-.homConSec { /* What: Home Contact Section. Why: The page ends on a bold navy band that sets the contact details apart, with the same generous padding as every home page section. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
+.homConSec { /* What: Home Contact Section. Why: The page ends on a bold navy band that sets the contact details apart, with the same generous padding as the other content sections. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
 
 
 	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Focus Ring Color For The Section. Why: The navy ring would vanish on the navy band. How: Every link inside the band draws its ring yellow instead, until the form card hands back the navy. */
@@ -544,7 +544,7 @@
 
 }
 .forFieInp::placeholder,
-.forFieTex::placeholder { /* What: Form Field Input And Textarea Placeholder. Why: A placeholder should read as a sample, quieter than typed text, yet every engine draws its own default gray, and WebKit's falls well under 4.5:1 on white. How: This sets the secondary text color in every engine, lighter than the ink typed text uses and about 9:1 on the white field. */
+.forFieTex::placeholder { /* What: Form Field Input And Textarea Placeholder. Why: A placeholder should read as a sample, quieter than typed text, while still meeting 4.5:1 contrast on white. How: This sets the secondary text color, lighter than the ink typed text uses and about 9:1 on the white field. */
 
 
 	color : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */

@@ -56,7 +56,7 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
 const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page and the open menu are measured the same way. How: Each row names a case, its path, and whether it opens the menu.
 
 
-	{ ideStr : 'home',      menBoo : false, patStr : '/'        }, // What: Home Case. Why: The home page holds all of the site's layout. How: This measures it as loaded.
+	{ ideStr : 'home',      menBoo : false, patStr : '/'        }, // What: Home Case. Why: The home page holds the site's main layout. How: This measures it as loaded.
 	{ ideStr : 'not-found', menBoo : false, patStr : '/missing' }, // What: Not Found Case. Why: The 404 page has its own centered layout. How: This measures an address the site doesn't have, closed.
 	{ ideStr : 'menu',      menBoo : true,  patStr : '/'        }  // What: Menu Case. Why: The open menu stacks the section links its own way. How: This measures the home page with the menu open.
 
@@ -386,7 +386,7 @@ for ( const widCurNum of FIL_WID_ARR ) { // What: Filter Width Loop. Why: Each f
 		await opeStaFun( curPagObj, { heiNum : 900, ideStr : 'home', patStr : '/', widNum : widCurNum } ); // What: Home Open Call. Why: The filters live on the home page. How: This opens it at the width, settled.
 
 
-		for ( const filButEle of await curPagObj.locator( '[aria-pressed]' ).all() ) { // What: Filter Button Loop. Why: Every filter shows a different number of cards. How: This takes each filter toggle in turn, the only elements with a pressed state.
+		for ( const filButEle of await curPagObj.locator( '[aria-pressed]' ).all() ) { // What: Filter Button Loop. Why: Each filter shows its own set of cards. How: This takes each filter toggle in turn, the only elements with a pressed state.
 
 
 			await filButEle.click(); // What: Filter Click Call. Why: The grid shows the chosen filter's cards. How: This chooses the filter.

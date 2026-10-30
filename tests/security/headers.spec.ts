@@ -76,9 +76,9 @@ test( 'the content security policy allows only the site itself', () => { // What
 	const cspValStr = heaAllFun()[ 'content-security-policy' ] ?? ''; // What: Content-Security-Policy Value String. Why: Each directive is checked in the policy's own text. How: This reads the header, or an empty string if it's missing.
 
 
-	expect( cspValStr ).toContain( "default-src 'self'" );     // What: Default Source Assertion. Why: Every resource type the policy doesn't name falls back to this. How: This checks it allows the site's own origin only.
-	expect( cspValStr ).toContain( "base-uri 'self'" );        // What: Base URI Assertion. Why: An injected base tag could point every relative address at another site. How: This checks the base address stays on the site.
-	expect( cspValStr ).toContain( "form-action 'self'" );     // What: Form Action Assertion. Why: An injected form could post a visitor's details elsewhere. How: This checks forms post to the site only.
+	expect( cspValStr ).toContain( "default-src 'self'" );     // What: Default Source Assertion. Why: Every resource type the policy doesn't name falls back to this. How: This checks the policy names default-src 'self'.
+	expect( cspValStr ).toContain( "base-uri 'self'" );        // What: Base URI Assertion. Why: An injected base tag could point every relative address at another site. How: This checks the policy names base-uri 'self'.
+	expect( cspValStr ).toContain( "form-action 'self'" );     // What: Form Action Assertion. Why: An injected form could post a visitor's details elsewhere. How: This checks the policy names form-action 'self'.
 	expect( cspValStr ).toContain( "frame-ancestors 'none'" ); // What: Frame Ancestors Assertion. Why: A site framing this one could trick visitors into clicks. How: This checks no page may frame it.
 	expect( cspValStr ).toContain( "object-src 'none'" );      // What: Object Source Assertion. Why: Plugins can run code outside the policy. How: This checks none can load.
 	expect( cspValStr ).not.toContain( 'unsafe-inline' );      // What: No Unsafe Inline Assertion. Why: Allowing inline script or style lets injected markup run. How: This checks the policy never allows it.

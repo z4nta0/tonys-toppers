@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';      // What: Expect. Why: Each state passes only when every control responds. How: This asserts on what each check reads, most often that its problem list is empty, and waits for content a check needs.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each state passes only when every reachable link and button responds. How: This asserts on what each check reads, most often that its problem list is empty, and waits for content a check needs.
 import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The contact form's error, and the phone link inside it, only show once a request fails. How: This answers the form's posts in the browser with a server error.
 import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.
@@ -24,12 +24,12 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * Checks the interaction feedback rule on every page state, in whichever
  * engine the project runs. Each kind of element a visitor interacts with, such
  * as a form field, has to look different in each state it responds to and ease
- * every property that change touches, on it or anything inside it. A control's
- * focus ring has to ease in to full width. Under reduced motion the changes
- * stay but nothing transitions. A control that only appears after an action,
- * such as the phone link in the contact form's error, gets checks of its own
- * once that action is faked. Real clicks are blocked during the checks, so
- * pressing a control never navigates or closes anything mid-check.
+ * every probed property that change touches, on it or anything inside it. A
+ * control's focus ring has to ease in to full width. Under reduced motion the
+ * changes stay but nothing transitions. A control that only appears after an
+ * action, such as the phone link in the contact form's error, gets checks of
+ * its own once that action is faked. Real clicks are blocked during the
+ * checks, so pressing a control never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Types
@@ -438,7 +438,7 @@ function snaProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr
 	const snaNamSet = new Set< string >(); // What: Snapped Name Set. Why: A property that snaps on several inner elements is one problem. How: This collects each snapped property's name once.
 
 
-	for ( const [ recIndNum, tarCurObj ] of tarRecArr.entries() ) { // What: Record Compare Loop. Why: Every element of the snapshot has to ease its own changes. How: This compares each later record with the earlier one in its place.
+	for ( const [ recIndNum, tarCurObj ] of tarRecArr.entries() ) { // What: Record Compare Loop. Why: Every element of the snapshot has to ease its own probed changes. How: This compares each later record with the earlier one in its place.
 
 
 		const froCurObj = froRecArr[ recIndNum ]; // What: From Current Object. Why: The change is read against the same element's earlier record. How: This finds it by place.
@@ -483,9 +483,9 @@ const valSigFun = ( snaRecArr : SnaRecTyp[] ) : string => JSON.stringify( snaRec
  * then blurred with the pointer away and read once more while focused as a
  * keyboard focuses it, every look read once its transition has settled. A
  * control that looks the same at rest and hovered, hovered and pressed, or
- * blurred and focused is a problem. Normally every property that changes on
- * hover, press, or focus, on the control or anything inside it, has to be
- * eased by a transition ({@link snaProFun}), the focus ring's outline
+ * blurred and focused is a problem. Normally every probed property that
+ * changes on hover, press, or focus, on the control or anything inside it, has
+ * to be eased by a transition ({@link snaProFun}), the focus ring's outline
  * included, so the ring eases in; under reduced motion every one of the
  * control's transition durations must be zero instead. The caller blocks real
  * clicks first, so releasing the mouse does nothing.
@@ -602,7 +602,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 
 
-		if ( !redMotBoo ) proLisArr.push( ...snaProFun( resSnaArr, hovSnaArr, CON_PRO_ARR, conDesStr, 'when hovered' ), ...snaProFun( hovSnaArr, preSnaArr, CON_PRO_ARR, conDesStr, 'when pressed' ), ...snaProFun( bluSnaArr, focSnaArr, FOC_PRO_ARR, conDesStr, 'when focused' ) ); // What: Snapped Change Check. Why: Every property a hover, press, or focus changes should ease rather than snap, the focus ring included. How: This records each one that changes without a transition, on the control or anything inside it.
+		if ( !redMotBoo ) proLisArr.push( ...snaProFun( resSnaArr, hovSnaArr, CON_PRO_ARR, conDesStr, 'when hovered' ), ...snaProFun( hovSnaArr, preSnaArr, CON_PRO_ARR, conDesStr, 'when pressed' ), ...snaProFun( bluSnaArr, focSnaArr, FOC_PRO_ARR, conDesStr, 'when focused' ) ); // What: Snapped Change Check. Why: Every probed property a hover, press, or focus changes should ease rather than snap, the focus ring included. How: This records each one that changes without a transition, on the control or anything inside it.
 
 
 	}
@@ -826,7 +826,7 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every control, every form field, and on the home states every product card and the About portrait frame, and checks it finds no problems.
+	test( `${ staRecObj.ideStr } gives every reachable link and button hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every reachable link and button, every reachable form field, and on the home states every visible product card and the About portrait frame, and checks it finds no problems.
 
 
 		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
@@ -835,7 +835,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
-		expect( await feeProFun( curPagObj, 'a, button', false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await feeProFun( curPagObj, 'a, button', false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every reachable link and button responds. How: This compares the problems with an empty list, so a failure prints each one.
 		expect( await fieProFun( curPagObj, false ) ).toEqual( [] );              // What: No Field Problems Assertion. Why: The state passes only when every form field shows focus. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -862,7 +862,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control, every form field, and on the home states every product card and the About portrait frame, with reduced motion on and checks it finds no problems.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every reachable link and button, every reachable form field, and on the home states every visible product card and the About portrait frame, with reduced motion on and checks it finds no problems.
 
 
 		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and the portrait frame takes about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
@@ -873,7 +873,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
-		expect( await feeProFun( curPagObj, 'a, button', true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await feeProFun( curPagObj, 'a, button', true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every reachable link and button has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
 		expect( await fieProFun( curPagObj, true ) ).toEqual( [] );              // What: No Reduced Motion Field Problems Assertion. Why: Every form field has to show focus without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 

@@ -206,7 +206,7 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
 function ConSecCom () : React.JSX.Element {
 
 
-	const [ forDatObj, setForDatObj ] = useState< ForStaTyp >( FOR_EMP_OBJ ); // What: Form Data Object And Setter. Why: The form's fields are controlled. How: This holds every field's value, starting empty.
+	const [ forDatObj, setForDatObj ] = useState< ForStaTyp >( FOR_EMP_OBJ ); // What: Form Data Object And Setter. Why: The form's fields are controlled. How: This holds every field's value, starting blank with the first interest chosen.
 	const [ forErrBoo, setForErrBoo ] = useState( false );                    // What: Form Error Boolean And Setter. Why: A visitor whose message didn't go through has to be told, with their details kept for a retry. How: This holds whether the error note is showing.
 	const [ forSenBoo, setForSenBoo ] = useState( false );                    // What: Form Sent Boolean And Setter. Why: The thank-you note shows only right after a confirmed send. How: This holds whether it's showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );                    // What: Sending Progress Boolean And Setter. Why: The visitor should see a message is on its way, and shouldn't send it twice. How: This holds whether a request is out.
@@ -351,7 +351,7 @@ function ConSecCom () : React.JSX.Element {
 
 			setForSenBoo( true ); // What: Thank-You Show Call. Why: The visitor should see the form went through. How: This shows the note.
 
-			setForDatObj( FOR_EMP_OBJ ); // What: Form Reset Call. Why: A sent form starts fresh. How: This empties every field.
+			setForDatObj( FOR_EMP_OBJ ); // What: Form Reset Call. Why: A sent form starts fresh. How: This returns every field to its starting value.
 
 			window.clearTimeout( thaTimRef.current ); // What: Thank-You Timer Clear Call. Why: An earlier send's timer would hide this note early. How: This cancels it, doing nothing when none is pending.
 

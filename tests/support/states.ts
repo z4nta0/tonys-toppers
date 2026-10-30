@@ -81,7 +81,7 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  *
 */
 
-const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every check walks the same list of states, so a new state is added in one place. How: Each row names a state, its path, and its viewport, and the menu row adds the action that opens it.
+const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: The suites that visit page states walk the same list, so a new state is added in one place. How: Each row names a state, its path, and its viewport, and the menu row adds the action that opens it.
 
 
 	{ heiNum : 900, ideStr : 'home-desktop',      patStr : '/',        widNum : 1440 }, // What: Home Desktop State. Why: Most visitors on a computer land here. How: This loads the home page at 1,440px.
@@ -301,7 +301,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR, type StaRecTyp, waiSetFun }; // What: Named Exports. Why: Every suite shares these states and their opener, and a check that changes the page waits for it to settle the same way. How: This exports the state list, its type, the helper that opens one, and the one that waits for the page to settle.
+export { opeStaFun, STA_REC_ARR, type StaRecTyp, waiSetFun }; // What: Named Exports. Why: The page suites share these states and their opener, and a check that changes the page waits for it to settle the same way. How: This exports the state list, its type, the helper that opens one, and the one that waits for the page to settle.
 
 // #endregion Exports
 

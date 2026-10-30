@@ -104,10 +104,10 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 
 			...rehPluObj.configs.recommended.rules, // What: Recommended Rules Spread. Why: These are the standard hooks checks, such as rules-of-hooks. How: This spreads the plugin's recommended set in first, so the overrides below win.
 
-			'react-hooks/preserve-manual-memoization' : 'off', // What: Preserve Manual Memoization Rule. Why: It only reports where the compiler would skip a component. How: This turns it off.
-			'react-hooks/purity'                      : 'off', // What: Purity Rule. Why: It flags impure calls the compiler can't place, including ones that only run in event handlers. How: This turns it off.
-			'react-hooks/refs'                        : 'off', // What: Refs Rule. Why: Reading a ref during render only conflicts with the compiler, not with React itself. How: This turns it off.
-			'react-hooks/set-state-in-effect'         : 'off'  // What: Set State In Effect Rule. Why: Syncing or measuring into state inside an effect is a working React pattern that only costs an extra render outside the compiler. How: This turns it off.
+			'react-hooks/preserve-manual-memoization' : 'off', // What: Preserve Manual Memoization Rule. Why: It is one of the four React Compiler readiness rules this site doesn't use. How: This turns it off.
+			'react-hooks/purity'                      : 'off', // What: Purity Rule. Why: It is one of the four React Compiler readiness rules this site doesn't use. How: This turns it off.
+			'react-hooks/refs'                        : 'off', // What: Refs Rule. Why: It is one of the four React Compiler readiness rules this site doesn't use. How: This turns it off.
+			'react-hooks/set-state-in-effect'         : 'off'  // What: Set State In Effect Rule. Why: It is one of the four React Compiler readiness rules this site doesn't use. How: This turns it off.
 
 
 		}

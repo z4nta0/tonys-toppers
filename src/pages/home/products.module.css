@@ -21,7 +21,7 @@
 
 /* #region homProSec */
 
-.homProSec { /* What: Home Products Section. Why: The collection sits on its own band apart from the hero, with the same generous padding as every home page section. How: This pads it all round, fills it with the deeper cream, and positions it so its dot grid can be placed against it, with the padding copied from the shared section. */
+.homProSec { /* What: Home Products Section. Why: The collection sits on its own band apart from the hero, with the same generous padding as the other content sections. How: This pads it all round, fills it with the deeper cream, and positions it so its dot grid can be placed against it, with the padding copied from the shared section. */
 
 
 	background : var( --bac-sun-col );                      /* Background Sunken Color ~= #f5edd6 */

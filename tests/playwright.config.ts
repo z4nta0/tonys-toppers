@@ -44,7 +44,7 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 	'chromium', // What: Chromium Engine. Why: Chrome and Edge render with it. How: This is Playwright's Chromium build.
 	'firefox',  // What: Firefox Engine. Why: Firefox renders with its own engine, Gecko. How: This is Playwright's Firefox build.
-	'webkit'    // What: WebKit Engine. Why: Safari, and every browser on iOS, renders with it. How: This is Playwright's WebKit build.
+	'webkit'    // What: WebKit Engine. Why: Safari renders with it. How: This is Playwright's WebKit build.
 
 
 ] as const;
@@ -57,7 +57,7 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 
 	'accessibility', // What: Accessibility Suite. Why: The pre-commit accessibility scan runs from here. How: This names tests/accessibility.
-	'interaction',   // What: Interaction Suite. Why: Every control's hover, press, and focus feedback is checked from here. How: This names tests/interaction.
+	'interaction',   // What: Interaction Suite. Why: The reachable controls' hover, press, and focus feedback is checked from here. How: This names tests/interaction.
 	'rendering',     // What: Rendering Suite. Why: Each page state is compared with its approved screenshot from here. How: This names tests/rendering.
 	'responsive',    // What: Responsive Suite. Why: Each page is measured across screen widths from here. How: This names tests/responsive.
 	'security',      // What: Security Suite. Why: The site's security policy, its build, and its dependencies are checked from here. How: This names tests/security.

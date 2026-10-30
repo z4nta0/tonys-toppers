@@ -23,7 +23,8 @@ import { useScrTopFun } from './ui/scroll-top.ts';              // What: Use Scr
  * the main landmark holding whichever page the address matches, and the
  * footer. The home page answers the root address, and the 404 page every
  * other. A new page, such as a shop later on, is added as another route here,
- * before the catch-all. It also opens every page a link leads to at its top.
+ * before the catch-all. It also opens a page a link leads to at its top,
+ * unless the link names a section.
  *
  * Sections:
  *  - Components

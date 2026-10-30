@@ -79,7 +79,7 @@ const TON_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/', import.meta
 
 // #region Module State
 
-const PRO_FIL_ARR = readdirSync( `${ PHO_DIR_STR }products` ).filter( ( filCurStr ) => filCurStr.endsWith( '.jpg' ) ).map( ( filCurStr ) => `products/${ filCurStr }` ); // What: Product File Array. Why: Every product photo in the folder is rebuilt. How: This lists the JPEGs in products/ with their folder.
+const PRO_FIL_ARR = readdirSync( `${ PHO_DIR_STR }products` ).filter( ( filCurStr ) => filCurStr.endsWith( '.jpg' ) ).map( ( filCurStr ) => `products/${ filCurStr }` ); // What: Product File Array. Why: Every JPEG product photo in the folder is rebuilt. How: This lists the JPEGs in products/ with their folder.
 const SOU_FIL_ARR = [ ...PRO_FIL_ARR, 'tony-cartoon.jpg', 'tony-portrait.jpg' ];                                                                                         // What: Source File Array. Why: Tony's two photos are rebuilt with the products. How: This adds them after the product photos.
 
 // #endregion Module State

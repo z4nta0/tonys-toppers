@@ -115,11 +115,11 @@ test( 'the raw page carries the home title and description for script-free reade
 
 
 	const rawHtmStr = await ( await reqCotObj.get( '/' ) ).text();                                                                       // What: Raw HTML String. Why: The page is read the way a script-free reader reads it. How: This fetches the root's HTML without a browser.
-	const desMatArr = [ ...rawHtmStr.matchAll( /<meta name='description' content='([^']*)'/g ) ].map( ( desMatObj ) => desMatObj[ 1 ] ); // What: Description Match Array. Why: The raw page should carry exactly one description. How: This collects the content of every description tag in it.
+	const desMatArr = [ ...rawHtmStr.matchAll( /<meta name='description' content='([^']*)'/g ) ].map( ( desMatObj ) => desMatObj[ 1 ] ); // What: Description Match Array. Why: The raw page should carry exactly one description. How: This collects the content of each single-quoted, name-then-content description tag in it.
 
 
 	expect( rawHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ] ).toBe( "Tony's Toppers | Handmade Beaded Crafts in Bolivar, MO" ); // What: Raw Title Assertion. Why: The raw page should name the home page in full, not the bare site name. How: This checks the title element's text.
-	expect( desMatArr ).toHaveLength( 1 );                                                                                          // What: Raw Single Description Assertion. Why: Readers without the script see only what index.html carries. How: This checks there's exactly one description tag.
+	expect( desMatArr ).toHaveLength( 1 );                                                                                          // What: Raw Single Description Assertion. Why: Readers without the script see only what index.html carries. How: This checks there's exactly one such tag.
 	expect( desMatArr[ 0 ].length ).toBeGreaterThanOrEqual( 120 );                                                                  // What: Raw Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters. How: This checks the raw description's length.
 	expect( desMatArr[ 0 ].length ).toBeLessThanOrEqual( 125 );                                                                     // What: Raw Description Maximum Assertion. Why: Phones cut a summary off around 125 characters. How: This checks the raw description's length.
 
@@ -151,7 +151,7 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	expect( [ orgNodObj.founder?.[ '@id' ], perNodObj.worksFor?.[ '@id' ], webNodObj.publisher?.[ '@id' ] ] ).toEqual( [ perNodObj[ '@id' ], orgNodObj[ '@id' ], orgNodObj[ '@id' ] ] ); // What: Node Links Assertion. Why: Search engines join the nodes by their ids, so Tony has to be the business's founder and the business the site's publisher. How: This checks each link points at the right node.
 	expect( perNodObj.name ).toBe( 'Tony Mawhiney' );                                        // What: Maker Name Assertion. Why: The person has to be Tony. How: This checks his name.
 	expect( pagTexStr ).toContain( 'Tony Mawhiney' );                                        // What: Maker Shown Assertion. Why: The name in the data has to be visible on the page. How: This checks the page shows it.
-	expect( [ perNodObj.birthDate, perNodObj.gender ] ).toEqual( [ undefined, undefined ] ); // What: Private Details Assertion. Why: The site never publishes Tony's birth date or other personal details. How: This checks the person node leaves them out.
+	expect( [ perNodObj.birthDate, perNodObj.gender ] ).toEqual( [ undefined, undefined ] ); // What: Private Details Assertion. Why: The site never publishes Tony's birth date or gender in its data. How: This checks the person node leaves those two out.
 	expect( telHreArr.length ).toBeGreaterThan( 0 );                                         // What: Call Link Presence Assertion. Why: A phone in the data is only honest if the page offers it. How: This checks the page has call links.
 
 
@@ -267,7 +267,7 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 		if ( icoHreStr.endsWith( '.svg' ) ) { // What: SVG Icon Guard. Why: The SVG mark has no fixed size to check. How: This checks it's served as an SVG and moves on.
 
 
-			expect( icoResObj.headers()[ 'content-type' ] ).toContain( 'image/svg+xml' ); // What: SVG Type Assertion. Why: Browsers only draw an SVG favicon served as one. How: This checks the served type.
+			expect( icoResObj.headers()[ 'content-type' ] ).toContain( 'image/svg+xml' ); // What: SVG Type Assertion. Why: The SVG favicon should be served as an SVG. How: This checks the served type.
 
 
 

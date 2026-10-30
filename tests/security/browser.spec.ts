@@ -6,7 +6,7 @@
 import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy is enforced and the page breaks none of its rules. How: This asserts on what each check collects from the page.
 import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form's notes only show once Netlify answers a send, and nothing real should be sent. How: This answers the form's posts in the browser with a chosen status.
 import { heaAllFun   } from '../support/headers.ts'; // What: Headers All Function. Why: The pages are loaded under the policy Netlify really sends. How: This reads the /* block of public/_headers.
-import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state is opened the way every suite opens it. How: This loads the state and waits until it's settled.
+import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state is opened the way the other page suites open it. How: This loads the state and waits until it's settled.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: The policy has to hold in every state the suites visit. How: This is the list of states to load.
 import { test        } from '@playwright/test';      // What: Test. Why: Each state is its own test. How: This declares them.
 
@@ -194,7 +194,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Loop. Why: Every state t
 
 		await polSetFun( curPagObj ); // What: Policy Setup Call. Why: The page has to load under the policy. How: This adds the headers and the violation listener.
 
-		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Scrolling through the page and opening the menu load everything the state uses. How: This opens the state the way every suite does.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Scrolling through the page and opening the menu load everything the state uses. How: This opens the state the way the other page suites do.
 
 
 		const opeRelArr = await curPagObj.locator( 'a[target="_blank"]' ).evaluateAll( ( ancEleArr ) => ancEleArr.map( ( ancCurEle ) => ancCurEle.getAttribute( 'rel' ) ?? '' ) ); // What: Opener Rel Array. Why: A new tab opened without noopener can reach back and change this page. How: This collects the rel of every link that opens a new tab.

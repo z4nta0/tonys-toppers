@@ -28,10 +28,12 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * lands only on stops that are on screen, not covered by anything else, and
  * visibly changed by focus. Reflow: at 320px wide, WCAG's narrowest reflow
  * width, nothing scrolls sideways. Motion: with reduced motion requested, no
- * animation or transition plays while the state opens. Form: the thank-you and
- * error notes each speak through a live region that's in the page, empty, from
- * the first render, and the send button keeps focus while a message goes out.
- * Each failure lists every problem found, by element.
+ * animation is still running once the state has settled, and no element's
+ * computed styles would still move. Form: the thank-you and error notes each
+ * speak through a live region that's in the page, empty, from the first
+ * render, and the send button keeps focus while a message goes out. Each
+ * failure lists every problem found, naming the element for all but the
+ * positive tabindex count.
  *
  * Sections:
  *  - Constants
@@ -449,7 +451,7 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 		const walEndBoo = !stoInfObj || stoInfObj.desStr === firStoStr || stoInfObj.ordNum === preOrdNum; // What: Walk Ended Boolean. Why: Focus leaving the page, coming back around, or staying put means every stop was visited. How: This checks each in turn, the later two only once a stop exists, so the chain stays inline. // What: Firefox Walk End Note. Why: Firefox moves focus out to its own interface after the last stop but still reports that stop as focused. How: Focus staying on the same stop after a press is read as the walk leaving the page.
 
 
-		if ( walEndBoo ) return proLisArr; // What: Walk End Guard. Why: A walk that reaches its end has found every problem there is. How: This returns them, ending the walk.
+		if ( walEndBoo ) return proLisArr; // What: Walk End Guard. Why: A walk that reaches its end has visited every stop it can. How: This returns them, ending the walk.
 
 
 
@@ -570,7 +572,7 @@ function motStyFun () : string[] {
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every check runs on every page state. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } names every link and button cleanly`, async ( { page : curPagObj } ) => { // What: Names Test. Why: Every control must be announced by a clean name. How: This opens the state and checks its accessibility tree.
+	test( `${ staRecObj.ideStr } names every link and button cleanly`, async ( { page : curPagObj } ) => { // What: Names Test. Why: Every link and button must be announced by a clean name. How: This opens the state and checks its accessibility tree.
 
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The tree should be read with the state settled. How: This loads and settles it.
@@ -593,7 +595,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 		await focTopFun( curPagObj ); // What: Focus Top Call. Why: A state's action can leave focus partway down, such as on the menu toggle it clicked. How: This moves the starting point for Tab back to the top of the page, so every engine walks every stop.
 
-		expect( await keyProFun( curPagObj, engNamStr ) ).toEqual( [] ); // What: No Keyboard Problems Assertion. Why: The state passes only when every stop is reachable, in order, on screen, uncovered, and visibly focused. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await keyProFun( curPagObj, engNamStr ) ).toEqual( [] ); // What: No Keyboard Problems Assertion. Why: The state passes only when every stop the walk reaches is in order, on screen, uncovered, and visibly focused. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
@@ -612,14 +614,14 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and checks that nothing played.
+	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and checks that no animation is still running once it has settled.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
 
-		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing animated as it opened. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
+		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing is still animating once it has opened. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
 		expect( await curPagObj.evaluate( motStyFun ) ).toEqual( [] ); // What: No Motion Styles Assertion. Why: A reduced-motion variant missing for a child, a layer, or something not playing at rest would otherwise pass. How: This reads every element's and layer's computed transitions and animations and compares the ones still lasting past 1ms with an empty list.
 
 
@@ -685,7 +687,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 
 
 
-	test( `with the ${ resDesStr } note shown at ${ REF_WID_NUM }px, every name, the keyboard walk, and the reflow stay clean`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Note State Test. Why: Each note is a state of the page with text and a link no other state shows, so the scripted checks have to cover it too, at the narrowest width, where long text is likeliest to overflow. How: This sends the form at the reflow width, then checks the names and the reflow with the note showing, and walks the page from the top for the error note, the only note with a link to reach.
+	test( `with the ${ resDesStr } note shown at ${ REF_WID_NUM }px, every name and the reflow stay clean, with a keyboard walk past the error note`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Note State Test. Why: Each note is a state of the page with text and a link no other state shows, so the scripted checks have to cover it too, at the narrowest width, where long text is likeliest to overflow. How: This sends the form at the reflow width, then checks the names and the reflow with the note showing, and walks the page from the top for the error note, the only note with a link to reach.
 
 
 		test.slow(); // What: Slow Test Mark. Why: A full keyboard walk takes about 11 seconds alone and runs long while every suite shares the machine. How: This triples this test's timeout.

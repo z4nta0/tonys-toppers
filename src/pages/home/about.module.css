@@ -22,7 +22,7 @@
 
 /* #region homAboSec */
 
-.homAboSec { /* What: Home About Section. Why: Tony's story sits on its own band, set apart from the Craft Fairs section above it, with the same generous padding as every home page section. How: This fills it with the deeper cream the Products band uses, pads it all round, and positions it, with the padding copied from the shared section. */
+.homAboSec { /* What: Home About Section. Why: Tony's story sits on its own band, set apart from the Craft Fairs section above it, with the same generous padding as the other content sections. How: This fills it with the deeper cream the Products band uses, pads it all round, and positions it, with the padding copied from the shared section. */
 
 
 	background : var( --bac-sun-col );                      /* Background Sunken Color ~= #f5edd6 */
