@@ -74,7 +74,7 @@ function HerSecCom () : React.JSX.Element {
 			id='home'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Home Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word home, since the bar's Home link points at it and it can appear in the page's address. */ }
+		>{ /* What: Home Hero Section Element. Why: The home page opens with the headline and pitch. How: Its id stays the plain word `home`, since the bar's Home link points at it and it can appear in the page's address. */ }
 
 
 			<div className={` ${ cssModObj.herBloDiv }   ${ cssModObj.herBloDivYellow } `} />{ /* What: Hero Blob Div Yellow Element. Why: A soft yellow glow warms the hero's top-left corner. How: This draws a blurred circle that floats slowly. */ }
@@ -106,7 +106,7 @@ function HerSecCom () : React.JSX.Element {
 
 							href='/#products'
 
-							aria-label='See the collection' // What: Collection Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
+							aria-label='See the collection' // What: Collection Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as "right arrow". How: This names the button by its words alone, which still match what's shown.
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'products' ) }
 						>{ /* What: Button Base Anchor Primary Element. Why: The collection is the main thing a visitor came to see. How: This scrolls to the Products section through secCliFun. */ }

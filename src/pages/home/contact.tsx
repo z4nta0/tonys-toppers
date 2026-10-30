@@ -368,7 +368,7 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach Tony. How: Its id stays the plain word contact, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach Tony. How: Its id stays the plain word `contact`, since the bar links to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
@@ -406,7 +406,7 @@ function ConSecCom () : React.JSX.Element {
 							<div>{ /* What: Phone Text Div Element. Why: The row's label and number stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Call or text</div>{ /* What: Info Label Div Element. Why: The row says what to do. How: This shows call or text. */ }
+								<div className={ cssModObj.infLabDiv }>Call or text</div>{ /* What: Info Label Div Element. Why: The row says what to do. How: This shows "Call or text". */ }
 
 								<div className={ cssModObj.infValDiv }>(417) 733-0681</div>{ /* What: Info Value Div Element. Why: The number itself is the row's main line. How: This shows it. */ }
 
@@ -435,7 +435,7 @@ function ConSecCom () : React.JSX.Element {
 							<div>{ /* What: Facebook Text Div Element. Why: The row's label and name stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Facebook Page</div>{ /* What: Info Label Div Element. Why: The row says where it goes. How: This shows Facebook page. */ }
+								<div className={ cssModObj.infLabDiv }>Facebook Page</div>{ /* What: Info Label Div Element. Why: The row says where it goes. How: This shows "Facebook Page". */ }
 
 								<div className={ cssModObj.infValDiv }>Tony's Toppers</div>{ /* What: Info Value Div Element. Why: The page's name is the row's main line. How: This shows it. */ }
 
@@ -458,7 +458,7 @@ function ConSecCom () : React.JSX.Element {
 							<div>{ /* What: Location Text Div Element. Why: The row's label and town stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Based in</div>{ /* What: Info Label Div Element. Why: The row says what it shows. How: This shows based in. */ }
+								<div className={ cssModObj.infLabDiv }>Based in</div>{ /* What: Info Label Div Element. Why: The row says what it shows. How: This shows "Based in". */ }
 
 								<div className={ cssModObj.infValDiv }>Bolivar, Missouri</div>{ /* What: Info Value Div Element. Why: The town is the row's main line. How: This shows it at the same size as the other rows' values. */ }
 
@@ -678,7 +678,7 @@ function ConSecCom () : React.JSX.Element {
 							type='submit'
 
 							aria-disabled={ senProBoo } // What: Sending Disabled Flag. Why: A disabled button drops keyboard focus to the page, so the button stays focusable while a message is on its way. How: This marks it disabled for screen readers and the module's dimmed look while sending, and forSubFun ignores a second submit meanwhile.
-							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
+							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as "right arrow". How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
 						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is marked disabled while a request is out, keeping its focus. */ }
 
 
@@ -687,7 +687,7 @@ function ConSecCom () : React.JSX.Element {
 
 								className={ cssModObj.subLabSpa }
 							>{ /* What: Submit Label Span Element. Why: The label fades to its new text when a message goes out. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
-								{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads Sending... while a request is out and Send Message otherwise. */ }
+								{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads "Sending..." while a request is out and "Send Message" otherwise. */ }
 							</span>
 
 

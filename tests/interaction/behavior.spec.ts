@@ -309,7 +309,7 @@ test( 'the brand returns to the top', async ( { page : curPagObj } ) => { // Wha
 
 
 
-test( 'a link to another page opens it at its top, and back returns near where the visitor was', async ( { page : curPagObj } ) => { // What: Page Top Test. Why: A client-side router never resets the scroll position, so the app root has to, while back should give the earlier position back. How: This scrolls the 404 page down on a phone, follows Back home, checks the home page opens at its top, then goes back and checks the 404 page returns near where it was.
+test( 'a link to another page opens it at its top, and back returns near where the visitor was', async ( { page : curPagObj } ) => { // What: Page Top Test. Why: A client-side router never resets the scroll position, so the app root has to, while back should give the earlier position back. How: This scrolls the 404 page down on a phone, follows "Back home", checks the home page opens at its top, then goes back and checks the 404 page returns near where it was.
 
 
 	await opeRouFun( curPagObj, '/missing', SHO_VIE_OBJ ); // What: Not Found Open Call. Why: The 404 page has a link home and scrolls on a short phone screen. How: This opens an unknown address at the short phone size.

@@ -6,7 +6,7 @@
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { Link         } from 'react-router';             // What: Link. Why: The page's Back home button returns home without a full page load. How: This renders it as a router link to the root.
+import { Link         } from 'react-router';             // What: Link. Why: The page's "Back home" button returns home without a full page load. How: This renders it as a router link to the root.
 import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: See the collection reaches the Products section the same way the bar's links do. How: This returns secCliFun, the shared section link click handler.
 
 // #endregion Imports
@@ -43,8 +43,8 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * @summary
  * Renders the 404 page's title, its noindex robots tag, which React moves into
  * the document head, and its content, centered below the bar and led by the
- * page's one h1. The Back home button is named by its words alone, so its
- * decorative arrow isn't read aloud, and See the collection reaches the
+ * page's one h1. The "Back home" button is named by its words alone, so its
+ * decorative arrow isn't read aloud, and "See the collection" reaches the
  * Products section through secCliFun, the click handler every section link
  * shares.
  *
@@ -64,7 +64,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
 function NotFouCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: See the collection should reach its section the way every section link does. How: This is the shared click handler, which leaves a modified click to the browser and otherwise navigates home to the section.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: "See the collection" should reach its section the way every section link does. How: This is the shared click handler, which leaves a modified click to the browser and otherwise navigates home to the section.
 
 
 
@@ -110,7 +110,7 @@ function NotFouCom () : React.JSX.Element {
 
 							to='/'
 
-							aria-label='Back home' // What: Back Home Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
+							aria-label='Back home' // What: Back Home Label. Why: Screen readers would otherwise read the decorative arrow aloud as "right arrow". How: This names the button by its words alone, which still match what's shown.
 						>{ /* What: Button Base Anchor Primary Link. Why: The visitor needs a clear way onward. How: This returns to the home page. */ }
 							Back home →
 						</Link>

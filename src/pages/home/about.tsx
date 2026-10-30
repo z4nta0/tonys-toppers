@@ -81,7 +81,7 @@ function AboSecCom () : React.JSX.Element {
 			id='about'
 
 			className={ cssModObj.homAboSec }
-		>{ /* What: Home About Section Element. Why: Visitors want to meet the maker. How: Its id stays the plain word about, since the bar and the hero link to it and it can appear in the page's address. */ }
+		>{ /* What: Home About Section Element. Why: Visitors want to meet the maker. How: Its id stays the plain word `about`, since the bar and the hero link to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
@@ -173,7 +173,7 @@ function AboSecCom () : React.JSX.Element {
 
 								<span className={ cssModObj.staValSpa }>{ tonAgeNum }</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows Tony's age, read on each render. */ }
 
-								<div className={ cssModObj.staLabDiv }>Years young</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it years young. */ }
+								<div className={ cssModObj.staLabDiv }>Years young</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it "Years young". */ }
 
 
 							</div>
@@ -181,9 +181,9 @@ function AboSecCom () : React.JSX.Element {
 							<div>{ /* What: Handmade Stat Div Element. Why: Every piece is made by hand. How: This shows the figure above its caption. */ }
 
 
-								<span className={ cssModObj.staValSpa }>100%</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows 100%. */ }
+								<span className={ cssModObj.staValSpa }>100%</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows "100%". */ }
 
-								<div className={ cssModObj.staLabDiv }>Handmade</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it handmade. */ }
+								<div className={ cssModObj.staLabDiv }>Handmade</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it "Handmade". */ }
 
 
 							</div>
@@ -191,9 +191,9 @@ function AboSecCom () : React.JSX.Element {
 							<div>{ /* What: One Of One Stat Div Element. Why: No two pieces are the same. How: This shows the figure above its caption. */ }
 
 
-								<span className={ cssModObj.staValSpa }>1of1</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows 1of1. */ }
+								<span className={ cssModObj.staValSpa }>1of1</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows "1of1". */ }
 
-								<div className={ cssModObj.staLabDiv }>Every piece</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it every piece. */ }
+								<div className={ cssModObj.staLabDiv }>Every piece</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it "Every piece". */ }
 
 
 							</div>

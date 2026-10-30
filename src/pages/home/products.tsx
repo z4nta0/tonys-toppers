@@ -69,7 +69,7 @@ type FilKeyTyp = 'all' | CatSluTyp; // What: Filter Key Type. Why: The grid's fi
 function ProSecCom () : React.JSX.Element {
 
 
-	const [ filKeyStr, setFilKeyStr ] = useState< FilKeyTyp >( 'all' ); // What: Filter Key String And Setter. Why: The grid shows the cards for one filter at a time. How: This holds the chosen filter, starting with all.
+	const [ filKeyStr, setFilKeyStr ] = useState< FilKeyTyp >( 'all' ); // What: Filter Key String And Setter. Why: The grid shows the cards for one filter at a time. How: This holds the chosen filter, starting with `all`.
 
 
 	const visRecArr = useMemo( () => ( // What: Visible Record Array. Why: All lists every piece and set once, while a category also shows the booth shots tagged with it. How: This leaves the booth shots out of all, and otherwise keeps every photo tagged with the chosen category.
@@ -91,7 +91,7 @@ function ProSecCom () : React.JSX.Element {
 			id='products'
 
 			className={ cssModObj.homProSec }
-		>{ /* What: Home Products Section Element. Why: The collection is the site's main content. How: Its id stays the plain word products, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Products Section Element. Why: The collection is the site's main content. How: Its id stays the plain word `products`, since the bar links to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
