@@ -106,7 +106,7 @@ async function focTopFun ( curPagObj : Page ) : Promise< void > {
  * Fills the contact form's three required fields, so a check can send it.
  * Each field is looked up inside the Contact section's form, since
  * index.html's hidden copy of it, which Netlify reads, labels its fields the
- * same way, and the Message label is matched exactly, since the "Send Message"
+ * same way, and the "Message" label is matched exactly, since the "Send Message"
  * button's own label holds the word too.
  *
  * @author z4nta0 <https://github.com/z4nta0>
