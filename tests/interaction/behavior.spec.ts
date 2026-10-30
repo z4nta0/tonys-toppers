@@ -487,16 +487,37 @@ test( 'a fresh load of an address opens at its top, not where an earlier visit l
 test( 'a hash added to the address lands on its section, not a saved position', async ( { page : curPagObj } ) => { // What: Hash Entry Test. Why: A hash typed into the address adds an entry that shares the first entry's default key, whose saved position mustn't override the section. How: This scrolls the home page down, adds the About section's hash to the address, and checks the page lands on the section with the hash cleared.
 
 
+	await curPagObj.addInitScript( () => { // What: Scroll Call Log Script. Why: The page already sits at the saved position when the hash is added, so a wrong restore there would leave no trace in the position. How: This has each page record the top of every window.scrollTo call it makes.
+
+
+		const winRecObj = window as unknown as { scrTopArr : unknown[] }; // What: Window Record Object. Why: The log has to outlive this script for the test to read it. How: This views the window as holding it. // What: Type Assertion Note. Why: The window has no such field in its type. How: The script adds it here and the test reads it below.
+
+
+		winRecObj.scrTopArr = []; // What: Scroll Top Log Reset. Why: Each page starts with nothing logged. How: This sets the log to an empty list.
+
+		window.scrollTo = new Proxy( window.scrollTo, { apply : ( tarFun, thiObj, argLisArr ) => { winRecObj.scrTopArr.push( argLisArr[ 0 ]?.top ); return Reflect.apply( tarFun, thiObj, argLisArr ); } } ); // What: Scroll Call Wrapper. Why: The scroll hook restores a saved position through window.scrollTo, while the home page's hash jump scrolls the section into view instead. How: This logs each call's top before passing the call on unchanged.
+
+
+	} );
+
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The check starts on the home page, the visit's first entry. How: This opens it at the phone size.
 
 	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', left : 0, top : 1500 } ) );                                 // What: Scroll Down Call. Why: The position to return to has to be well below the top. How: This jumps 1,500px down the home page, past any smooth scroll-behavior.
 	await curPagObj.evaluate( () => new Promise( ( resProFun ) => requestAnimationFrame( () => requestAnimationFrame( resProFun ) ) ) ); // What: Two Frame Wait. Why: The scroll hook records a position from the scroll event, which the browser dispatches with its next frame. How: This waits two animation frames, after which that frame's scroll event has run.
 
-	expect( await curPagObj.evaluate( () => window.scrollY ) ).toBeGreaterThan( 0 ); // What: Scrolled Assertion. Why: A page that can't scroll would leave nothing saved to wrongly restore. How: This checks the page sits below its top.
 
-	await curPagObj.evaluate( () => { location.hash = 'about'; } ); // What: Hash Change Call. Why: This is the navigation under test, the same as typing the hash into the address. How: This adds #about to the address, which the router reports as a POP under the default key.
+	const savTopNum = await curPagObj.evaluate( () => window.scrollY ); // What: Saved Top Number. Why: A wrong restore would scroll back to the position the hook just saved. How: This reads how far down the page sits.
 
-	await ariSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The page should land on the section the hash names, not return to the saved position. How: This waits for the About section's position and a cleared address.
+
+	expect( savTopNum ).toBeGreaterThan( 0 ); // What: Scrolled Assertion. Why: A page that can't scroll would leave nothing saved to wrongly restore. How: This checks the page sits below its top.
+
+	await curPagObj.evaluate( () => { ( window as unknown as { scrTopArr : unknown[] } ).scrTopArr = []; } ); // What: Scroll Log Clear Call. Why: Only the calls the hash change causes matter. How: This empties the log just before it. // What: Type Assertion Note. Why: The window has no such field in its type. How: The init script set it.
+
+	await curPagObj.evaluate( () => { location.hash = 'about'; } ); // What: Hash Change Call. Why: This is the navigation under test, the same as typing the hash into the address. How: This adds #about to the address, which the router reports as a POP sharing the first entry's key.
+
+	await ariSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The page should land on the section the hash names. How: This waits for the About section's position and a cleared address.
+
+	expect( await curPagObj.evaluate( () => ( window as unknown as { scrTopArr : unknown[] } ).scrTopArr ) ).not.toContain( savTopNum ); // What: No Restore Assertion. Why: The hash should win over the saved position, not merely land last. How: This checks no scroll call after the hash change aimed at the saved position. // What: Type Assertion Note. Why: The window has no such field in its type. How: The init script set it.
 
 
 } );
