@@ -490,7 +490,9 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   section both come from it. WebKit drew the page differently from one
   full-page capture to the next in two places, so the page never held still
   long enough to compare: the full-size product photos, which were masked
-  until step 11's resized photos held still in every engine, and the hero's
+  until step 11's resized photos held still in every engine (and are masked
+  in WebKit alone again since 2026-10-29, when the photos grew to 3x and
+  WebKit's captures of them stopped matching), and the hero's
   blurred blobs, which stay still because every capture runs under reduced
   motion, where the hero's module switches their floating off. Since
   the captures run under reduced motion, a change to a reduced-motion
@@ -511,8 +513,8 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   leaving uneven rows (the Card Grids rule, added 2026-10-23 with 361px, a
   pixel past the gallery's 360px step), where the Products grid may center
   several leftover cards. It also chooses each Products filter in turn at
-  390px, 1,000px, and 1,440px (added 2026-10-29). Unlike seal-and-shield's, the spill check measures each
-  line of an element's own text rather than its scroll width, since the hero's
+  390px, 1,000px, and 1,440px (added 2026-10-29). Unlike seal-and-shield's,
+  the spill check measures each line of an element's own text rather than its scroll width, since the hero's
   highlight bar reaches 4px past its italic line on purpose and counted as a
   spill at every width.
 - `npm run test:seo`: checks the home page's title, description, author,
