@@ -118,15 +118,17 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
 - **Grid cards**: the Products grid's minimum card width takes `max()` of
   about 138px and horizontal step 020, replacing the narrow-screen override,
   so a 320px screen shows one column. The Craft Fairs gallery's four booth
-  shots step instead, so every row is full (decided 2026-10-23, under the
-  Card Grids rule): four columns, two at 900px wide and below, and one at
-  360px and below, where two would fall under the 138px minimum. That adds
-  360px to the breakpoints, beside 900px and 1,000px.
-  The Products grid keeps `auto-fill`, and its leftover cards sit centered
-  in the last row at the others' width (decided 2026-10-29), since filters
-  of 7 and 5 pieces have no column count that fills every row: an observer
-  in `products.tsx` reads how many columns the grid laid out, and the
-  leftover cards move across by half the empty columns (`--pro-row-off`).
+  shots step instead, so every row is full (decided 2026-10-23, under the Card
+  Grids rule): four columns, two at 900px wide and below, and one at 360px and
+  below, since two would fall under the 138px minimum below about 330px (about
+  154px each at 361px, measured in all three engines), and a breakpoint rounds
+  up to the next one in the set. That adds 360px to the breakpoints, beside
+  900px and 1,000px. The Products grid keeps `auto-fill`, and its leftover
+  cards sit centered in the last row at the others' width (decided
+  2026-10-29), since filters of 7 and 5 pieces have no column count that fills
+  every row: an observer in `products.tsx` reads how many columns the grid
+  laid out, and the leftover cards move across by half the empty columns
+  (`--pro-row-off`).
 
 ## Directory structure
 Decided 2026-10-10, matching reese-roofing's and seal-and-shield's adaptation
