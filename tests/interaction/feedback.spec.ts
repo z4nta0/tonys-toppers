@@ -82,6 +82,7 @@ const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-offset', 'outlin
 const FOC_PRO_ARR = [ ...CON_PRO_ARR, 'outline-color', 'outline-offset', 'outline-width' ];                // What: Focus Property Array. Why: A control's focus can change its look as well as draw its ring. How: Each is compared between unfocused and focused, and each that changes has to be transitioned.
 const HOV_TAR_STR = '[class*="proCarArt"], [class*="faiPhoFig"], [class*="porFraDiv"]';                    // What: Hover Target String. Why: The product cards, the gallery's booth frames, and the About portrait's frame respond to hover without being controls, so the control probes never reach them. How: This matches each by its CSS module classes, whose names Vite keeps inside each hashed class.
 const SET_WAI_NUM = 400;                                                                                   // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
+const TOG_PRO_ARR = [ ...CON_PRO_ARR, 'padding-top' ];                                                     // What: Toggle Property Array. Why: A switched state can change more than a hover does, such as the scrolled bar trimming its padding. How: Each is compared between off and on, and each that changes has to be transitioned.
 
 
 
@@ -90,9 +91,11 @@ const SET_WAI_NUM = 400;                                                        
  * TOG_TAR_ARR = Toggle Target Array
  *
  * @summary
- * The kinds of element with a state that switches on and off, each flipped
- * on and off again in turn, in the order listed, so the bar's controls are
- * read before the Products filters scroll the page. Every row holds:
+ * The kinds of element with a state that switches on and off, each flipped on
+ * and off again in turn, in the order listed, so the bar and the menu are read
+ * before the Products filters scroll the page. The phone menu's own open state
+ * isn't listed: its rows play a staggered entrance animation rather than a
+ * transition, which this probe doesn't judge. Every row holds:
  *
  *  - `actStr` (String): the value that marks the state on.
  *
@@ -113,6 +116,8 @@ const TOG_TAR_ARR : TogTarTyp[] = [ // What: Toggle Target Array. Why: A switche
 
 
 	{ actStr : 'true', attStr : 'aria-expanded',            inaStr : 'false', pseStr : '',         selStr : '[class*="navTogBut"]' }, // What: Menu Toggle Row. Why: The phone menu's toggle turns its bars into a cross while the menu is open. How: This flips its aria-expanded.
+	{ actStr : '',     attStr : 'data-page-scroll-active',  inaStr : null,    pseStr : '',         selStr : '[class*="navBarNav"]' }, // What: Scrolled Bar Row. Why: The bar draws its hairline and tightens once the page scrolls. How: This flips its data-page-scroll-active.
+	{ actStr : '',     attStr : 'data-mobile-menu-open',    inaStr : null,    pseStr : '',         selStr : '[class*="navScrDiv"]' }, // What: Open Scrim Row. Why: The page dims behind the open phone menu. How: This flips the scrim's data-mobile-menu-open, on the open menu state, where it shows.
 	{ actStr : '',     attStr : 'data-section-link-active', inaStr : null,    pseStr : '::before', selStr : '[class*="navLinAnc"]' }, // What: Section Link Row. Why: The bar's link, or the menu's row and its dot, for the section being read is marked active. How: This flips its data-section-link-active, reading the row's dot on its ::before layer.
 	{ actStr : 'true', attStr : 'aria-pressed',             inaStr : 'false', pseStr : '',         selStr : '[class*="filTogBut"]' }  // What: Filter Toggle Row. Why: The chosen Products filter fills its pill. How: This flips its aria-pressed.
 
@@ -426,7 +431,7 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], string ] ) : S
 
 	const [ proNamArr, pseNamStr ] = snaArgArr; // What: Property Name Array And Pseudo Name String. Why: The page function takes one argument. How: This unpacks the names to probe and the layer to add.
 
-	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand to its shorthand.
+	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline', 'padding-top' : 'padding' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand to its shorthand.
 
 
 
@@ -1044,7 +1049,7 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Off Settle Wait. Why: Any earlier look has to finish fading. How: This pauses for the settle time.
 
 
-		const inaSnaArr = await snaHanFun( togCurObj, CON_PRO_ARR, togTarObj.pseStr ); // What: Inactive Snapshot Array. Why: The off look is what the on look is compared with. How: This records the element, everything inside it, and its row's layer.
+		const inaSnaArr = await snaHanFun( togCurObj, TOG_PRO_ARR, togTarObj.pseStr ); // What: Inactive Snapshot Array. Why: The off look is what the on look is compared with. How: This records the element, everything inside it, and its row's layer.
 
 
 		await attSetFun( togCurObj, togTarObj.attStr, togTarObj.actStr ); // What: On Set Call. Why: Switching the state on is the change checked first. How: This marks it on.
@@ -1052,7 +1057,7 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: On Settle Wait. Why: The on look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const actSnaArr = await snaHanFun( togCurObj, CON_PRO_ARR, togTarObj.pseStr ); // What: Active Snapshot Array. Why: The on look is compared with off both ways. How: This records it.
+		const actSnaArr = await snaHanFun( togCurObj, TOG_PRO_ARR, togTarObj.pseStr ); // What: Active Snapshot Array. Why: The on look is compared with off both ways. How: This records it.
 
 
 		await attSetFun( togCurObj, togTarObj.attStr, togTarObj.inaStr ); // What: Off Again Set Call. Why: Switching the state off has to ease too. How: This marks it off again.
@@ -1060,7 +1065,7 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Off Again Settle Wait. Why: The off look is read once it has eased out. How: This pauses for the settle time.
 
 
-		const retSnaArr = await snaHanFun( togCurObj, CON_PRO_ARR, togTarObj.pseStr ); // What: Return Snapshot Array. Why: The look switched back off is compared with on. How: This records it.
+		const retSnaArr = await snaHanFun( togCurObj, TOG_PRO_ARR, togTarObj.pseStr ); // What: Return Snapshot Array. Why: The look switched back off is compared with on. How: This records it.
 
 
 		await attSetFun( togCurObj, togTarObj.attStr, oriValStr ); // What: Original Set Call. Why: The next element is read on the page as it was. How: This puts the attribute back as the page had it.
@@ -1071,9 +1076,9 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 
-		if ( redMotBoo ) proLisArr.push( ...movProFun( inaSnaArr, actSnaArr, CON_PRO_ARR, togDesStr, 'when toggled on' ), ...movProFun( actSnaArr, retSnaArr, CON_PRO_ARR, togDesStr, 'when toggled off' ) ); // What: Reduced Motion Check. Why: Asking for less motion should switch a state at once. How: This records each property that changes while a transition still eases it, both ways.
+		if ( redMotBoo ) proLisArr.push( ...movProFun( inaSnaArr, actSnaArr, TOG_PRO_ARR, togDesStr, 'when toggled on' ), ...movProFun( actSnaArr, retSnaArr, TOG_PRO_ARR, togDesStr, 'when toggled off' ) ); // What: Reduced Motion Check. Why: Asking for less motion should switch a state at once. How: This records each property that changes while a transition still eases it, both ways.
 
-		else proLisArr.push( ...snaProFun( inaSnaArr, actSnaArr, CON_PRO_ARR, togDesStr, 'when toggled on' ), ...snaProFun( actSnaArr, retSnaArr, CON_PRO_ARR, togDesStr, 'when toggled off' ) ); // What: Snapped Change Check. Why: A state switching on or off should ease rather than snap. How: This records each property that changes without a transition, both ways.
+		else proLisArr.push( ...snaProFun( inaSnaArr, actSnaArr, TOG_PRO_ARR, togDesStr, 'when toggled on' ), ...snaProFun( actSnaArr, retSnaArr, TOG_PRO_ARR, togDesStr, 'when toggled off' ) ); // What: Snapped Change Check. Why: A state switching on or off should ease rather than snap. How: This records each property that changes without a transition, both ways.
 
 
 	}
