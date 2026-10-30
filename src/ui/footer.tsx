@@ -16,7 +16,7 @@ import cssModObj from './footer.module.css'; // What: CSS Module Object. Why: Th
  * The site's footer: one line about the business, wrapping at about 506px
  * wide and below, and ending in Tony's phone number, which dials on phones. It
  * reads the current year each time it renders, so the copyright never goes
- * stale. Every page renders it below its content.
+ * stale.
  *
  * Sections:
  *  - Components
@@ -65,7 +65,7 @@ function SitFooCom () : React.JSX.Element {
 	return (
 
 
-		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: Every page ends with the business's name, hometown, and phone number. How: This holds the footer's line, which wraps at about 506px wide and below. */ }
+		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: The footer closes the page with the business's name, hometown, and phone number. How: This holds the footer's line, which wraps at about 506px wide and below. */ }
 
 
 			<p>© { curYeaNum } Tony's Toppers · Handcrafted in Bolivar, Missouri · <a className={ cssModObj.fooPhoAnc } href='tel:4177330681'>(417) 733-0681</a></p>{ /* What: Footer Copyright Paragraph Element. Why: The footer names the year, the business, and where Tony works, and ends in a way to reach him. How: This prints the current year read on each render, with the phone number as a link that dials it on phones. */ }

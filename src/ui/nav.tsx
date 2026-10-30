@@ -28,9 +28,9 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  * those links as a menu. The bar tightens and gains a bottom hairline once the
  * page scrolls, and on the home page it marks the link for the section being
  * read. The menu also offers ways to reach Tony, such as a button to call or
- * text him, over a scrim that dims the page. Every page renders it above its
- * content, led by a skip link, the page's first stop, that jumps a keyboard
- * user past the bar to the main content.
+ * text him, over a scrim that dims the page. It's led by a skip link, the
+ * page's first stop, that jumps a keyboard user past the bar to the main
+ * content.
  *
  * Sections:
  *  - Constants
@@ -301,7 +301,7 @@ function NavBarCom () : React.JSX.Element {
 				className={ cssModObj.navBarNav }
 
 				data-page-scroll-active={ isaScrBoo || undefined } // What: Page Scroll Active Flag. Why: The bar tightens and gains a hairline once the page scrolls. How: This marks the bar while isaScrBoo is true, and drops the attribute otherwise.
-			>{ /* What: Navigation Bar Nav Element. Why: Every page starts with the shared bar. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, and the bar itself carries data-page-scroll-active once the page scrolls. */ }
+			>{ /* What: Navigation Bar Nav Element. Why: The site opens with a shared bar for moving between sections. How: This holds the brand, the phone menu toggle, and the menu, with the toggle ahead of the menu so a keyboard user's next Tab after opening it lands on the first link, and the bar itself carries data-page-scroll-active once the page scrolls. */ }
 
 
 				<Link
