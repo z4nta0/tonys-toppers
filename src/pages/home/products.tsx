@@ -8,7 +8,7 @@ import cssModObj from './products.module.css'; // What: CSS Module Object. Why: 
 
 import { CAT_REC_ARR     } from './catalog.ts'; // What: Category Record Array. Why: The grid offers a filter button per category. How: Each row gives a button its slug and label.
 import { PRO_REC_ARR     } from './catalog.ts'; // What: Product Record Array. Why: The grid shows the catalog's photos. How: The chosen filter decides which records become cards.
-import { useLayoutEffect } from 'react';        // What: Use Layout Effect. Why: The leftover cards should be centered before the grid is drawn. How: This measures the grid's columns right after React commits it.
+import { useLayoutEffect } from 'react';        // What: Use Layout Effect. Why: The leftover cards should be centered before the grid is drawn. How: This measures the grid's columns right after React commits it, before the browser paints.
 import { useMemo         } from 'react';        // What: Use Memo. Why: The visible cards only change when the filter does. How: This keeps the filtered list between renders.
 import { useRef          } from 'react';        // What: Use Ref. Why: The grid's columns are measured on the grid element itself. How: This holds that element.
 import { useState        } from 'react';        // What: Use State. Why: The grid remembers which filter is chosen and how many columns it has. How: This holds each value.
@@ -97,7 +97,7 @@ function ProSecCom () : React.JSX.Element {
 	const [ griColObj, setGriColObj ] = useState( { couNum : 1, steNum : 0 } ); // What: Grid Column Object And Setter. Why: Centering the leftover cards takes the grid's column count and the distance from one column to the next. How: This holds both, starting at one column until the grid is measured.
 
 
-	useLayoutEffect( () => { // What: Grid Column Effect. Why: The grid fits as many columns as its width allows, so the leftover cards' offset changes as it resizes. How: This measures the grid whenever its size changes, the first time included.
+	useLayoutEffect( () => { // What: Grid Column Effect. Why: The grid fits as many columns as its width allows, so the leftover cards' offset changes as it resizes. How: This measures the grid once before its first paint, then again whenever its size changes.
 
 
 		const griCurEle = griDivRef.current!; // What: Grid Current Element. Why: The observer watches the grid itself. How: This reads it from its reference. // What: Non-Null Note. Why: React fills the reference before a layout effect runs. How: The grid always renders, so the reference holds it here.
@@ -122,6 +122,9 @@ function ProSecCom () : React.JSX.Element {
 
 
 		};
+
+
+		meaColFun(); // What: First Measure Call. Why: The leftover cards should be centered in the grid's first frame, and a state update made in a layout effect is applied before the browser paints. How: This measures the grid once right away, before the observer's own first report.
 
 
 		const resObsObj = new ResizeObserver( meaColFun ); // What: Resize Observer Object. Why: The column count changes with the grid's width. How: This measures the grid on each resize, including once as observing starts.
