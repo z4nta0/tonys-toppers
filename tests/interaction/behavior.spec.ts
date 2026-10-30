@@ -204,12 +204,12 @@ async function ariSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< voi
 for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's ID.
 
 
-	test( `the bar's ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link from partway down the page and checks the address and the section's position.
+	test( `the bar's "${ linLabStr }" link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link from partway down the page and checks the address and the section's position.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
 
-		await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : 1200 } ) ); // What: Scroll Down Call. Why: The Home link has to be seen bringing a scrolled visitor back, and every other link reaching its section from mid-page. How: This jumps a way down the page first.
+		await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : 1200 } ) ); // What: Scroll Down Call. Why: The "Home" link has to be seen bringing a scrolled visitor back, and every other link reaching its section from mid-page. How: This jumps a way down the page first.
 
 		await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
@@ -258,7 +258,7 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 for ( const [ butLabStr, secIdeStr ] of [ [ 'See the collection', 'products' ], [ 'Meet Tony', 'about' ] ] ) { // What: Hero Button Loop. Why: Each of the hero's buttons is a section link of its own. How: This declares one test per button, pairing its label with its section's ID.
 
 
-	test( `the hero's ${ butLabStr } button scrolls to its section`, async ( { page : curPagObj } ) => { // What: Hero Button Test. Why: The hero's buttons are the page's first way onward. How: This clicks the button and checks where the visitor lands.
+	test( `the hero's "${ butLabStr }" button scrolls to its section`, async ( { page : curPagObj } ) => { // What: Hero Button Test. Why: The hero's buttons are the page's first way onward. How: This clicks the button and checks where the visitor lands.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The hero opens the home page. How: This opens it at desktop size.
@@ -509,7 +509,7 @@ for ( const [ pagNamStr, rouPatStr ] of [ [ 'home page', '/' ], [ '404 page', '/
 for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Menu Link Loop. Why: Each of the menu's links has its own target. How: This declares one test per link, pairing its label with its section's ID.
 
 
-	test( `the menu's ${ linLabStr } link closes the menu and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Menu Link Test. Why: Choosing a section should both take the visitor there and get the menu out of the way. How: This opens the menu, clicks the link, and checks the menu closed and the visitor landed on the section.
+	test( `the menu's "${ linLabStr }" link closes the menu and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Menu Link Test. Why: Choosing a section should both take the visitor there and get the menu out of the way. How: This opens the menu, clicks the link, and checks the menu closed and the visitor landed on the section.
 
 
 		const togButLoc = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Locator. Why: The menu opens from its button, which reports whether it's open. How: This finds the button by its name.
@@ -553,7 +553,7 @@ test( 'a new tab click on a menu link leaves the menu open', async ( { page : cu
 	const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
 
 
-	await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : 'Products' } ).click( { modifiers : [ 'ControlOrMeta' ] } ); // What: Modified Click Call. Why: This is the action under test. How: This Ctrl or Cmd clicks the menu's Products link.
+	await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : 'Products' } ).click( { modifiers : [ 'ControlOrMeta' ] } ); // What: Modified Click Call. Why: This is the action under test. How: This Ctrl or Cmd clicks the menu's "Products" link.
 
 	await newTabPro; // What: New Tab Wait. Why: The click should open a new tab. How: This waits for the browser to report it.
 
@@ -568,7 +568,7 @@ test( 'a new tab click on a menu link leaves the menu open', async ( { page : cu
 
 // #region Not Found Checks
 
-for ( const [ conLabStr, secIdeStr, conDesStr ] of [ [ 'See the collection', 'products', 'See the collection button' ], [ 'About Tony', 'about', 'About Tony link in the bar' ] ] ) { // What: Not Found Section Loop. Why: The 404 page reaches the home page's sections through its own button and the bar. How: This declares one test per control, pairing its label with its section's ID and a description for the title.
+for ( const [ conLabStr, secIdeStr, conDesStr ] of [ [ 'See the collection', 'products', '"See the collection" button' ], [ 'About Tony', 'about', '"About Tony" link in the bar' ] ] ) { // What: Not Found Section Loop. Why: The 404 page reaches the home page's sections through its own button and the bar. How: This declares one test per control, pairing its label with its section's ID and a description for the title.
 
 
 	test( `the 404 page's ${ conDesStr } leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Test. Why: A section control on the 404 page has no section to scroll to, so it has to take the visitor home to it. How: This clicks the control and checks the visitor lands on the section with a clean address.

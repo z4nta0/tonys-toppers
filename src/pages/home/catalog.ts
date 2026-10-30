@@ -273,8 +273,8 @@ type ProRecTyp = { // What: Product Record Type. Why: The products grid and the 
 	heiNum : number,      // What: Height Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's height in pixels, from photo-sizes.ts.
 	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
 	imaStr : string,      // What: Image String. Why: The card shows its photo. How: This is the photo's built URL.
-	labStr : string,      // What: Label String. Why: The card's tag and subtitle name what kind of piece it shows. How: This is the category's singular label, both labels for a set, or Craft Fair Table for a booth shot.
-	namStr : string,      // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind, with Set before the number for a set.
+	labStr : string,      // What: Label String. Why: The card's tag and subtitle name what kind of piece it shows. How: This is the category's singular label, both labels for a set, or "Craft Fair Table" for a booth shot.
+	namStr : string,      // What: Name String. Why: The card has a title. How: This is the label and the photo's number within its kind, with "Set" before the number for a set.
 	widNum : number       // What: Width Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's width in pixels, from photo-sizes.ts.
 
 

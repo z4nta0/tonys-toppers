@@ -82,7 +82,7 @@ function AppRooCom () : React.JSX.Element {
 				id='main'
 
 				tabIndex={ -1 } // What: Main Focus Target. Why: The skip link moves focus here, and a main element can't take focus on its own. How: This makes it focusable without adding it to the Tab order.
-			>{ /* What: App Main Element. Why: Each page's content is the main landmark, and the skip link jumps here. How: This holds whichever page the address matches; its ID stays the plain main, since the skip link's #main address names it as a navigation target. */ }
+			>{ /* What: App Main Element. Why: Each page's content is the main landmark, and the skip link jumps here. How: This holds whichever page the address matches; its ID stays the plain word `main`, since the skip link's #main address names it as a navigation target. */ }
 
 
 				<Routes>{ /* What: Page Routes. Why: Only one page should render for any path. How: This renders the best-matching route below for the current path. */ }
