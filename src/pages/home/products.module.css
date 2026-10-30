@@ -188,7 +188,7 @@
 
 }
 
-.filTogBut { /* What: Filter Toggle Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing its colors, lift, press, and focus ring. */
+.filTogBut { /* What: Filter Toggle Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing its colors, lift, press, and focus ring, its colors leaving on the accelerating curve. */
 
 
 	background    : transparent;
@@ -200,7 +200,7 @@
 	font-size     : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 500;
 	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition    : background var( --dur-tra-p01 ) var( --mot-acc-eas ), color var( --dur-tra-p01 ) var( --mot-acc-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -217,20 +217,22 @@
 
 
 }
-.filTogBut:hover { /* What: Hovered Filter Toggle Button. Why: The filter under the pointer should respond, chosen or not. How: This shades its pill a deeper cream, turns its label navy, and lifts it slightly; the chosen filter keeps its navy fill and only lifts. */
+.filTogBut:hover { /* What: Hovered Filter Toggle Button. Why: The filter under the pointer should respond, chosen or not. How: This shades its pill a deeper cream, turns its label navy, and lifts it slightly, its colors arriving on the decelerating curve; the chosen filter keeps its navy fill and only lifts. */
 
 
 	background : var( --bac-sun-col );                            /* Background Sunken Color ~= #f5edd6 */
 	color      : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
 	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition : background var( --dur-tra-p01 ) var( --mot-dec-eas ), color var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.filTogBut[aria-pressed='true'] { /* What: Chosen Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text. */
+.filTogBut[aria-pressed='true'] { /* What: Chosen Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text, its colors arriving on the decelerating curve. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	color      : var( --tex-acc-col ); /* Text Accent Color = #fdf9ee */
+	transition : background var( --dur-tra-p01 ) var( --mot-dec-eas ), color var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -244,7 +246,9 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Filter Toggle Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.filTogBut { /* What: Motionless Filter Toggle Button. Why: The hover, chosen, and press looks should simply switch. How: This turns the transition off. */
+	.filTogBut,
+	.filTogBut:hover,
+	.filTogBut[aria-pressed='true'] { /* What: Motionless Filter Toggle Button. Why: The hover, chosen, and press looks should simply switch. How: This turns the transitions off, naming the hovered and chosen rules' own selectors so it wins. */
 
 
 		transition : none;
