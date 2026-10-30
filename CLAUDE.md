@@ -383,19 +383,21 @@ passes on `close-out`.
       publishes. `public/` gains `robots.txt` (every crawler allowed) and a
       sitemap listing the home page. The hero's h1 stays as written; the
       eyebrow above it names Bolivar.
-    - **Social previews and favicon set**: done 2026-10-10. `npm run
-      og-image` captures `design/og-image/card.html` (Tony's cartoon, the
-      name in the heavy serif, and "Handmade in Bolivar, MO" on the hero's
-      highlight bar, over the hero's cream wash and glows) as
-      `public/og-image.jpg`. It's a JPEG at quality 90 (about 63 KB), since
-      as a PNG the washes and portrait came to 441 KB, over WhatsApp's
-      limit, and quality 85 showed faint blocking at 3x zoom. `npm run icons`
-      renders the ICO, the 16 to 512px PNGs, and an inset apple touch icon
-      on white from `public/favicon.svg`, which the head lists first. The
-      head gains `theme-color` (the cream), the full Open Graph and Twitter
-      tags, and the structured data's logo and image. After the 1.7.0
-      deploy the user confirmed the favicon and the preview card, and
-      submitted the sitemap to Google Search Console and Bing.
+    - **Social previews and favicon set**: done 2026-10-10. `npm run og-image`
+      captures `design/og-image/card.html` (Tony's cartoon, the name in the
+      heavy serif, and "Handmade in Bolivar, MO" on the hero's highlight bar,
+      over the hero's cream wash and glows) as `public/og-image.jpg`. Tony's
+      cartoon stands in for the logo the Social Previews rule asks the card to
+      be built from (decided 2026-10-30 by the user), since he is the brand.
+      It's a JPEG at quality 90 (about 63 KB), since as a PNG the washes and
+      portrait came to 441 KB, over WhatsApp's limit, and quality 85 showed
+      faint blocking at 3x zoom. `npm run icons` renders the ICO, the 16 to
+      512px PNGs, and an inset apple touch icon on white from
+      `public/favicon.svg`, which the head lists first. The head gains `theme-
+      color` (the cream), the full Open Graph and Twitter tags, and the
+      structured data's logo and image. After the 1.7.0 deploy the user
+      confirmed the favicon and the preview card, and submitted the sitemap to
+      Google Search Console and Bing.
     - **Interaction feedback**: done 2026-10-10. Every link and button
       grows seal-and-shield's focus ring in from a zero-width outline (the
       global rule in `styles.css`), and every control with its own
