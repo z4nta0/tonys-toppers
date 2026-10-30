@@ -144,7 +144,8 @@ src/
                          (Tony's photos, the logo)
     not-found/           the 404 page
   ui/                    components used by 2 or more pages (nav, footer),
-                         section-link.ts, and the bar's logo mark
+                         section-link.ts, scroll-top.ts, and the bar's logo
+                         mark
   styles/                global CSS only (fonts.css, styles.css)
   utils/                 app-agnostic helpers (motion.ts)
 ```
