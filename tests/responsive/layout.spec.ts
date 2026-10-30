@@ -90,15 +90,16 @@ const WID_LIS_ARR = [ 320, 360, 361, 390, 414, 480, 768, 900, 901, 1000, 1001, 1
  * they have no box width of their own. Two reachable controls (links and
  * buttons that are visible, in the tab order, and not inside inert content)
  * overlap when their boxes share more than a pixel of area and neither holds
- * the other. A grid (an element displayed as a grid, with two or more visible
+ * the other. A grid (an element displayed as a grid, with one or more visible
  * children in its flow) leaves uneven rows when its rows hold different
  * counts, unless the last row is a single child centered in the grid at the
  * others' width, as the Card Grids rule allows, or, in the Products grid,
  * whose card count changes with its filter, any leftover cards centered
- * together at the others' width. A grid's children are grouped into rows by
- * where they overlap vertically, so cards of different heights still share a
- * row however the grid aligns them, and the rows are read top to bottom.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
+ * together at the grid's track width, even when they fill less than one row. A
+ * grid's children are grouped into rows by where they overlap vertically, so
+ * cards of different heights still share a row however the grid aligns them,
+ * and the rows are read top to bottom. Passed to Playwright's evaluate, so it
+ * can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -263,7 +264,7 @@ function layProFun () : string[] {
 
 
 
-	for ( const griCurEle of document.body.querySelectorAll( '*' ) ) { // What: Card Grid Loop. Why: A grid of cards should hold the same number of cards in every row at every width. How: This checks each grid with two or more visible children in its flow.
+	for ( const griCurEle of document.body.querySelectorAll( '*' ) ) { // What: Card Grid Loop. Why: A grid of cards should hold the same number of cards in every row at every width. How: This checks each grid with one or more visible children in its flow.
 
 
 		const carEleArr = [ ...griCurEle.children ].filter( ( carCurEle ) => carCurEle.getBoundingClientRect().width > 0 && !/^(absolute|fixed)$/.test( getComputedStyle( carCurEle ).position ) ); // What: Card Element Array. Why: Only children on screen and in the grid's flow make up its rows. How: This keeps the children that take up room and aren't positioned out of the flow.
