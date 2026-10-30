@@ -79,7 +79,7 @@ function ProSecCom () : React.JSX.Element {
 	const visRecArr = useMemo( () => ( // What: Visible Record Array. Why: "All" lists every piece and set once, while a category also shows the booth shots tagged with it. How: This leaves the booth shots out of `all`, and otherwise keeps every photo tagged with the chosen category.
 
 
-		filKeyStr === 'all' // What: All Filter Check. Why: All and a category choose their cards differently. How: This picks the branch.
+		filKeyStr === 'all' // What: All Filter Check. Why: "All" and a category choose their cards differently. How: This picks the branch.
 			? PRO_REC_ARR.filter( ( proRecObj ) => !proRecObj.faiBoo )                      // What: All Branch. Why: The booth shots belong in the gallery, not the "All" list. How: This keeps every other record.
 			: PRO_REC_ARR.filter( ( proRecObj ) => proRecObj.catArr.includes( filKeyStr ) ) // What: Category Branch. Why: A category shows everything tagged with it, booth shots included. How: This keeps every record listing the category.
 

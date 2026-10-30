@@ -106,10 +106,10 @@ type FaiRecTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // 
 const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps "Straw Charms" from being empty. How: Each row names the photo, the categories it shows, and its description.
 
 
-	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony',   catArr : [ 'pen-topper', 'wine-stopper', 'keychain' ],                 filStr : 'booth-1' }, // What: First Booth Row. Why: This photo shows a shop window display of pens and stoppers with keychains below. How: This tags it under pen toppers, wine stoppers, and keychains.
-	{ altStr : "A craft fair table of pen toppers, wine stoppers, dog necklaces, keychains, and Tony's cartoon", catArr : [ 'pen-topper', 'wine-stopper', 'keychain', 'dog-necklace' ], filStr : 'booth-2' }, // What: Second Booth Row. Why: This photo shows a full craft fair table. How: This tags it under pen toppers, wine stoppers, keychains, and dog necklaces.
-	{ altStr : 'Beaded keychains and straw charms beside bagged pens and a framed cartoon of Tony',              catArr : [ 'pen-topper', 'keychain', 'straw-charm' ],                  filStr : 'booth-3' }, // What: Third Booth Row. Why: This photo is a close view of keychains, charms, and pens beside his cartoon. How: This tags it under pen toppers, keychains, and straw charms.
-	{ altStr : 'Tony behind his outdoor craft fair table of pen toppers, wine stoppers, and badge reels',        catArr : [ 'pen-topper', 'wine-stopper', 'name-badge-reel' ],          filStr : 'booth-4' }  // What: Fourth Booth Row. Why: This photo shows Tony at his own table outdoors. How: This tags it under pen toppers, wine stoppers, and name badge reels.
+	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony',   catArr : [ 'pen-topper', 'wine-stopper', 'keychain' ],                 filStr : 'booth-1' }, // What: First Booth Row. Why: This photo shows a shop window display of pens and stoppers with keychains below. How: This tags it under "Pen Toppers", "Wine Stoppers", and "Keychains".
+	{ altStr : "A craft fair table of pen toppers, wine stoppers, dog necklaces, keychains, and Tony's cartoon", catArr : [ 'pen-topper', 'wine-stopper', 'keychain', 'dog-necklace' ], filStr : 'booth-2' }, // What: Second Booth Row. Why: This photo shows a full craft fair table. How: This tags it under "Pen Toppers", "Wine Stoppers", "Keychains", and "Dog Necklaces".
+	{ altStr : 'Beaded keychains and straw charms beside bagged pens and a framed cartoon of Tony',              catArr : [ 'pen-topper', 'keychain', 'straw-charm' ],                  filStr : 'booth-3' }, // What: Third Booth Row. Why: This photo is a close view of keychains, charms, and pens beside his cartoon. How: This tags it under "Pen Toppers", "Keychains", and "Straw Charms".
+	{ altStr : 'Tony behind his outdoor craft fair table of pen toppers, wine stoppers, and badge reels',        catArr : [ 'pen-topper', 'wine-stopper', 'name-badge-reel' ],          filStr : 'booth-4' }  // What: Fourth Booth Row. Why: This photo shows Tony at his own table outdoors. How: This tags it under "Pen Toppers", "Wine Stoppers", and "Name Badge Reels".
 
 
 ];
@@ -330,7 +330,7 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The Prod
 		heiNum : PHO_SIZ_OBJ[ faiRecObj.filStr ].heiNum, // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
 		ideStr : faiRecObj.filStr,                       // What: Identifier String. Why: React needs a unique key. How: This reuses the file name.
 		imaStr : phoUrlFun( faiRecObj.filStr ),          // What: Image String. Why: The card shows its photo. How: This looks up the built URL.
-		labStr : 'Craft Fair Table',                     // What: Label String. Why: The card names what it shows. How: This calls it a craft fair table.
+		labStr : 'Craft Fair Table',                     // What: Label String. Why: The card names what it shows. How: This calls it "Craft Fair Table".
 		namStr : `Craft Fair Table ${ faiIndNum + 1 }`,  // What: Name String. Why: The card has a title. How: This names the table and its number.
 		widNum : PHO_SIZ_OBJ[ faiRecObj.filStr ].widNum  // What: Width Number. Why: The img carries its photo's size. How: This looks up the photo's width by its file name.
 
