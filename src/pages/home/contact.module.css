@@ -293,6 +293,20 @@
 
 
 
+/* #region infRowDiv */
+
+/* What: Info Row Div Pointer. Why: The hometown row reads as a row like the call and Facebook rows, but it isn't a link, so it stays still. How: Its rule, shared with the link rows, sits in the infRowAnc region, where the rows first appear. */
+
+/* What: Info Icon Div Pointer. Why: The hometown row's symbol matches the link rows'. How: Its rule sits in the infRowAnc region, where the class first appears. */
+
+/* What: Info Label Div Pointer. Why: The hometown row's label matches the link rows'. How: Its rule sits in the infRowAnc region, where the class first appears. */
+
+/* What: Info Value Div Pointer. Why: The town matches the link rows' values, without their hover color. How: Its rules sit in the infRowAnc region, where the class first appears. */
+
+/* #endregion infRowDiv */
+
+
+
 /* #region conForFor */
 
 .conForFor { /* What: Contact Form Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
