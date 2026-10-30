@@ -368,21 +368,23 @@
 
 
 }
-.butBasAnc--secondary { /* What: Button Base Anchor Secondary. Why: Meeting Tony is the quieter second option. How: This leaves it unfilled with ink text and an ink outline. */
+.butBasAnc--secondary { /* What: Button Base Anchor Secondary. Why: Meeting Tony is the quieter second option. How: This leaves it unfilled with ink text and an ink outline, easing its fill and text color out on the accelerating curve. */
 
 
 	background   : transparent;
 	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
 	color        : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+	transition   : transform var( --dur-tra-p01 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-dec-eas ), background var( --dur-tra-p01 ) var( --mot-acc-eas ), color var( --dur-tra-p01 ) var( --mot-acc-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
 
 
 }
-.butBasAnc--secondary:hover { /* What: Hovered Button Base Anchor Secondary. Why: The button should respond to the pointer. How: This fills it with ink, turns its text cream, and lifts it slightly. */
+.butBasAnc--secondary:hover { /* What: Hovered Button Base Anchor Secondary. Why: The button should respond to the pointer. How: This fills it with ink, turns its text cream, and lifts it slightly, its fill and text color arriving on the decelerating curve. */
 
 
 	background : var( --bac-inv-col );                            /* Background Inverse Color = #1a1a2e */
 	color      : var( --bac-pag-col );                            /* Background Page Color = #fdf9ee */
 	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition : transform var( --dur-tra-p01 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-dec-eas ), background var( --dur-tra-p01 ) var( --mot-dec-eas ), color var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -396,7 +398,9 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
+	.butBasAnc,
+	.butBasAnc--secondary,
+	.butBasAnc--secondary:hover { /* What: Motionless Button Base Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transitions off, naming the secondary rules' own selectors so it wins. */
 
 
 		transition : none;
