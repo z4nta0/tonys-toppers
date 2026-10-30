@@ -580,31 +580,43 @@ for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Menu Link Loop.
 
 
 
-test( 'a new tab click on a menu link leaves the menu open', async ( { page : curPagObj } ) => { // What: Menu New Tab Test. Why: A link opened in a new tab hasn't taken the visitor anywhere, so the menu should stay as it was. How: This opens the menu, Ctrl or Cmd clicks a link, and checks a new tab opened while the menu stayed open.
+for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Menu New Tab Loop. Why: Each way of asking for a new tab gets its own check. How: This declares one test per row of CLI_KIN_ARR.
 
 
-	const togButLoc = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Locator. Why: The button reports whether the menu is open. How: This finds it by its name.
+	for ( const linLabStr of [ 'Products', "Tony's Toppers" ] ) { // What: Menu Link Loop. Why: The menu should close for a section link and for the brand alike. How: This declares one test per link, named by its label.
+
+
+		test( `a ${ cliKinStr } click on the "${ linLabStr }" link opens a new tab and closes the menu`, async ( { page : curPagObj } ) => { // What: Menu New Tab Test. Why: The menu should close once any link is chosen, even one opening in a new tab. How: This opens the menu, clicks the link the loop's way, and checks a new tab opened and the menu closed.
+
+
+			const togButLoc = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Locator. Why: The button reports whether the menu is open. How: This finds it by its name.
 
 
 
-	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The menu exists on phone screens. How: This opens the home page at phone size.
+			await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The menu exists on phone screens. How: This opens the home page at phone size.
 
-	await togButLoc.click(); // What: Toggle Click Call. Why: The links sit in the menu on a phone. How: This opens it.
+			await togButLoc.click(); // What: Toggle Click Call. Why: The links sit in the menu on a phone. How: This opens it.
 
-	await expect( togButLoc ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Wait. Why: The link is clicked from the open menu. How: This waits until the button reports it expanded.
-
-
-	const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
+			await expect( togButLoc ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Wait. Why: The link is clicked from the open menu. How: This waits until the button reports it expanded.
 
 
-	await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : 'Products' } ).click( { modifiers : [ 'ControlOrMeta' ] } ); // What: Modified Click Call. Why: This is the action under test. How: This Ctrl or Cmd clicks the menu's "Products" link.
-
-	await newTabPro; // What: New Tab Wait. Why: The click should open a new tab. How: This waits for the browser to report it.
-
-	await expect( togButLoc ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Still Open Assertion. Why: The menu should stay open when the click was left to the browser. How: This checks the button still reports it expanded.
+			const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
 
 
-} );
+			await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : linLabStr } ).click( cliOptObj ); // What: Modified Click Call. Why: This is the action under test. How: This clicks the link the way the loop's row says.
+
+			await newTabPro; // What: New Tab Wait. Why: The click should open a new tab. How: This waits for the browser to report it.
+
+			await expect( togButLoc ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The menu should close whichever way the link opens. How: This waits until the button reports it collapsed.
+
+
+		} );
+
+
+	}
+
+
+}
 
 // #endregion Phone Menu Checks
 

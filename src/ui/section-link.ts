@@ -153,16 +153,14 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * Cmd, Shift, Alt, or middle click is left to the browser, which opens the
  * link's own address. Any other click stops the browser's jump to the hash
  * and hands the section's ID to visSecFun, which scrolls to it on the home
- * page or navigates home to it from any other page. It reports whether it
- * handled the click, so a caller such as the phone menu can close itself
- * only then.
+ * page or navigates home to it from any other page.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param void - This function takes no parameters.
  *
  * @returns The click handler, which takes the click event and the section's
- *          ID and returns whether it handled the click.
+ *          ID.
  *
  * @example
  * ```ts
@@ -171,7 +169,7 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  *
 */
 
-function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => boolean {
+function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => void {
 
 
 	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: A plain click reaches its section through the shared path. How: This scrolls to the section on the home page, or navigates home to it.
@@ -181,17 +179,13 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 	return ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Section Click Function. Why: Every section link handles a click the same way. How: This leaves a modified click to the browser and otherwise cancels the jump and visits the section.
 
 
-		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone and reports it unhandled.
+		if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone.
 
 
 
 		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise jump and leave the hash in the address. How: This stops the link's own navigation.
 
 		visSecFun( secIdeStr ); // What: Section Visit Call. Why: The visitor should land on the section they chose. How: This scrolls to it, or navigates home to it from another page.
-
-
-
-		return true; // What: Handled Click Return. Why: The caller may want to react, such as by closing the menu. How: This reports the click handled.
 
 
 	};

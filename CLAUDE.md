@@ -476,19 +476,20 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   state it responds to (hovered, pressed, or focused) and ease every property
   that change touches, on it or anything inside it, while real clicks are
   blocked; each control's focus ring must reach full width; under reduced
-  motion the changes stay but nothing transitions; and the contact form error's
-  phone link gets the same checks once a failed send is faked. Its behavior
-  spec (added 2026-10-23) checks where links lead: every bar, menu, hero, and
-  404 page section link lands on its section with no hash left in the address,
-  a Ctrl, Cmd, or middle click opens the section in a new tab without moving
-  the page clicked from or closing the menu, an address with a hash lands on
-  its section, a link to another page opens it at its top, back and forward
-  (from a page scrolled further than the 404 page between can scroll) and a
-  reload return to the exact earlier position, a fresh load opens at the top,
-  a hash added to the address lands on its section, malformed saved positions
-  raise no error (added 2026-10-29, with `ui/scroll-top.ts` recording and
-  restoring positions itself), and the first Tab on each page reaches the
-  skip link.
+  motion the changes stay but nothing transitions; and the contact form
+  error's phone link gets the same checks once a failed send is faked. Its
+  behavior spec (added 2026-10-23) checks where links lead: every bar, menu,
+  hero, and 404 page section link lands on its section with no hash left in
+  the address, a Ctrl, Cmd, or middle click opens the section in a new tab
+  without moving the page clicked from, a Ctrl, Cmd, or middle click on a menu
+  link or the brand closes the menu (added 2026-10-30), an address with a hash
+  lands on its section, a link to another page opens it at its top, back and
+  forward (from a page scrolled further than the 404 page between can scroll)
+  and a reload return to the exact earlier position, a fresh load opens at the
+  top, a hash added to the address lands on its section, malformed saved
+  positions raise no error (added 2026-10-29, with `ui/scroll-top.ts`
+  recording and restoring positions itself), and the first Tab on each page
+  reaches the skip link.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance and a
   per-pixel color threshold of 0. The page's clock is fixed to one date rather

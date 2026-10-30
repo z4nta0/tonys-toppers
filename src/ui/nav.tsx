@@ -180,7 +180,8 @@ function NavBarCom () : React.JSX.Element {
 	const [ menOpeBoo, setMenOpeBoo ] = useState( false ); // What: Menu Open Boolean And Setter. Why: The phone menu opens and closes from its toggle. How: This holds whether it's open, starting closed.
 
 
-	const cloMenFun = () => setMenOpeBoo( false ); // What: Close Menu Function. Why: The menu should get out of the way once a link is chosen. How: This closes it.
+	const cloMenFun = () => setMenOpeBoo( false );                                                        // What: Close Menu Function. Why: The menu should get out of the way once a link is chosen, however the link opens. How: This closes it.
+	const auxCloFun = ( auxEveObj : React.MouseEvent ) => { if ( auxEveObj.button === 1 ) cloMenFun(); }; // What: Auxiliary Close Function. Why: A middle click opens a link in a new tab through the auxclick event, which no click handler sees. How: This closes the menu when the middle button sent it.
 
 
 
@@ -309,8 +310,9 @@ function NavBarCom () : React.JSX.Element {
 
 					to='/'
 
+					onAuxClick={ auxCloFun }
 					onClick={ cloMenFun }
-				>{ /* What: Navigation Brand Anchor Link. Why: The brand is the way back to the home page. How: This links to the root and closes the phone menu. */ }
+				>{ /* What: Navigation Brand Anchor Link. Why: The brand is the way back to the home page. How: This links to the root and closes the phone menu on any click, a new tab's included. */ }
 
 
 					<img
@@ -382,8 +384,17 @@ function NavBarCom () : React.JSX.Element {
 
 									href={ `/#${ secRecObj.ideStr }` }
 
-									onClick={ ( cliEveObj ) => { if ( secCliFun( cliEveObj, secRecObj.ideStr ) ) cloMenFun(); } } // What: Section Link Click Handler. Why: The menu should close only when the click took the visitor to a section, not when the browser opens it in a new tab. How: This hands the click to secCliFun and closes the menu when it reports the click handled.
-								>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through secCliFun and closes the menu. */ }
+									onAuxClick={ auxCloFun }
+									onClick={ ( cliEveObj ) => { // What: Section Link Click Handler. Why: The link should reach its section, and the menu should close once any link is chosen, even one opening in a new tab. How: This hands the click to secCliFun, then closes the menu.
+
+
+										secCliFun( cliEveObj, secRecObj.ideStr ); // What: Section Click Call. Why: A plain click should reach the section, while a modified one is left to the browser. How: This hands the click and the section's ID to the shared handler.
+
+										cloMenFun(); // What: Menu Close Call. Why: The menu should close whichever way the link opens. How: This closes it.
+
+
+									} }
+								>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: Its address points at the home page's section, which a modified click opens, while a plain click goes through secCliFun, and any click closes the menu. */ }
 									{ secRecObj.labStr }
 								</a>
 
@@ -408,7 +419,10 @@ function NavBarCom () : React.JSX.Element {
 							className={ cssModObj.menCalAnc }
 
 							href='tel:4177330681'
-						>{ /* What: Menu Call Anchor Element. Why: Calling or texting is the quickest way to reach Tony. How: This dials his number on phones. */ }
+
+							onAuxClick={ auxCloFun }
+							onClick={ cloMenFun }
+						>{ /* What: Menu Call Anchor Element. Why: Calling or texting is the quickest way to reach Tony. How: This dials his number on phones and closes the menu. */ }
 							Call or text (417) 733-0681
 						</a>
 
@@ -418,7 +432,10 @@ function NavBarCom () : React.JSX.Element {
 							href='https://www.facebook.com/profile.php?id=61560009400871'
 							rel='noopener noreferrer'
 							target='_blank'
-						>{ /* What: Menu Facebook Anchor Element. Why: Tony shares new pieces and where he'll be on his Facebook page. How: This opens the page in a new tab, without giving it access to this one. */ }
+
+							onAuxClick={ auxCloFun }
+							onClick={ cloMenFun }
+						>{ /* What: Menu Facebook Anchor Element. Why: Tony shares new pieces and where he'll be on his Facebook page. How: This opens the page in a new tab, without giving it access to this one, and closes the menu. */ }
 							Find Tony on Facebook
 						</a>
 
