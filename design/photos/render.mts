@@ -32,6 +32,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  *
  * Sections:
  *  - Constants
+ *  - Module State
  *  - Helpers
  *  - Module Init
  *
@@ -73,6 +74,15 @@ const SIZ_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/photo-sizes.ts
 const TON_OUT_STR = fileURLToPath( new URL( '../../src/pages/home/', import.meta.url ) );               // What: Tony Output String. Why: Tony's cartoon and portrait are imported from the home page's folder. How: This resolves that folder.
 
 // #endregion Constants
+
+
+
+// #region Module State
+
+const PRO_FIL_ARR = readdirSync( `${ PHO_DIR_STR }products` ).filter( ( filCurStr ) => filCurStr.endsWith( '.jpg' ) ).map( ( filCurStr ) => `products/${ filCurStr }` ); // What: Product File Array. Why: Every product photo in the folder is rebuilt. How: This lists the JPEGs in products/ with their folder.
+const SOU_FIL_ARR = [ ...PRO_FIL_ARR, 'tony-cartoon.jpg', 'tony-portrait.jpg' ];                                                                                         // What: Source File Array. Why: Tony's two photos are rebuilt with the products. How: This adds them after the product photos.
+
+// #endregion Module State
 
 
 
@@ -134,16 +144,13 @@ const encPagObj = await broInsObj.newPage(); // What: Encode Page Object. Why: T
 
 
 
-const proFilArr = readdirSync( `${ PHO_DIR_STR }products` ).filter( ( filCurStr ) => filCurStr.endsWith( '.jpg' ) ).map( ( filCurStr ) => `products/${ filCurStr }` ); // What: Product File Array. Why: Every product photo in the folder is rebuilt. How: This lists the JPEGs in products/ with their folder.
-const souFilArr = [ ...proFilArr, 'tony-cartoon.jpg', 'tony-portrait.jpg' ];                                                                                           // What: Source File Array. Why: Tony's two photos are rebuilt with the products. How: This adds them after the product photos.
-
 const sizRowArr : [ string, number, number ][] = []; // What: Size Row Array. Why: Every photo written adds a row to the sizes file. How: This collects them.
 
 let aftBytNum = 0; // What: After Bytes Number. Why: The run reports how much smaller the photos got. How: This adds up the encoded files' sizes.
 let befBytNum = 0; // What: Before Bytes Number. Why: The run reports how much smaller the photos got. How: This adds up the originals' sizes.
 
 
-for ( const souFilStr of souFilArr ) { // What: Source File Loop. Why: Each original is rebuilt the same way. How: This crops, scales, encodes, and writes one photo per pass.
+for ( const souFilStr of SOU_FIL_ARR ) { // What: Source File Loop. Why: Each original is rebuilt the same way. How: This crops, scales, encodes, and writes one photo per pass.
 
 
 	const filNamStr = souFilStr.slice( souFilStr.lastIndexOf( '/' ) + 1, -4 );                                             // What: File Name String. Why: The photo is keyed by its name without folder or extension. How: This cuts both off.
@@ -298,7 +305,7 @@ export { PHO_SIZ_OBJ }; // What: Named Export. Why: The components that show pho
 
 writeFileSync( SIZ_OUT_STR, sizTexStr ); // What: Sizes Write Call. Why: The page reads the photos' sizes from this file. How: This saves it.
 
-console.log( `Wrote ${ souFilArr.length } photos, ${ Math.round( befBytNum / 1024 ) } KB down to ${ Math.round( aftBytNum / 1024 ) } KB, and ${ SIZ_OUT_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count, the sizes before and after, and the sizes file's path.
+console.log( `Wrote ${ SOU_FIL_ARR.length } photos, ${ Math.round( befBytNum / 1024 ) } KB down to ${ Math.round( aftBytNum / 1024 ) } KB, and ${ SIZ_OUT_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count, the sizes before and after, and the sizes file's path.
 
 // #endregion Module Init
 
