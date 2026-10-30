@@ -224,18 +224,18 @@ test( 'the social preview image is a 1,200x630 JPEG under 300 KB', async ( { req
 
 
 	const imaResObj = await reqCotObj.get( '/og-image.jpg' ); // What: Image Response Object. Why: The image has to exist where the tags point. How: This fetches it from the site.
-	const jpgBufObj = await imaResObj.body();                 // What: JPEG Buffer Object. Why: The image's size is written in its frame header. How: This reads the response bytes.
+	const jpeBufObj = await imaResObj.body();                 // What: JPEG Buffer Object. Why: The image's size is written in its frame header. How: This reads the response bytes.
 
 	let segOffNum = 2; // What: Segment Offset Number. Why: A JPEG's size sits in its frame segment, after a varying run of other segments. How: This starts just past the file's opening marker.
 
 
-	while ( segOffNum < jpgBufObj.length && ( jpgBufObj[ segOffNum + 1 ] < 0xC0 || jpgBufObj[ segOffNum + 1 ] > 0xC2 ) ) segOffNum += 2 + jpgBufObj.readUInt16BE( segOffNum + 2 ); // What: Frame Segment Search. Why: The frame segment's marker is 0xC0, 0xC1, or 0xC2, and every segment before it gives its own length. How: This hops from segment to segment until it lands on the frame.
+	while ( segOffNum < jpeBufObj.length && ( jpeBufObj[ segOffNum + 1 ] < 0xC0 || jpeBufObj[ segOffNum + 1 ] > 0xC2 ) ) segOffNum += 2 + jpeBufObj.readUInt16BE( segOffNum + 2 ); // What: Frame Segment Search. Why: The frame segment's marker is 0xC0, 0xC1, or 0xC2, and every segment before it gives its own length. How: This hops from segment to segment until it lands on the frame.
 
 
 
 	expect( imaResObj.headers()[ 'content-type' ] ).toBe( 'image/jpeg' );                                                    // What: JPEG Type Assertion. Why: The tags promise a JPEG. How: This checks the served type.
-	expect( jpgBufObj.length ).toBeLessThan( 300 * 1024 );                                                                   // What: JPEG Bytes Assertion. Why: WhatsApp drops a preview image of 300 KB or more. How: This checks the file's byte count.
-	expect( [ jpgBufObj.readUInt16BE( segOffNum + 7 ), jpgBufObj.readUInt16BE( segOffNum + 5 ) ] ).toEqual( [ 1200, 630 ] ); // What: JPEG Size Assertion. Why: The tags promise 1,200 by 630 pixels. How: This reads the width and height the frame segment stores after its marker, length, and precision.
+	expect( jpeBufObj.length ).toBeLessThan( 300 * 1024 );                                                                   // What: JPEG Bytes Assertion. Why: WhatsApp drops a preview image of 300 KB or more. How: This checks the file's byte count.
+	expect( [ jpeBufObj.readUInt16BE( segOffNum + 7 ), jpeBufObj.readUInt16BE( segOffNum + 5 ) ] ).toEqual( [ 1200, 630 ] ); // What: JPEG Size Assertion. Why: The tags promise 1,200 by 630 pixels. How: This reads the width and height the frame segment stores after its marker, length, and precision.
 
 
 } );
