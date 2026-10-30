@@ -805,6 +805,47 @@ test( 'under reduced motion the error note still leaves when the visitor sends a
 
 } );
 
+
+
+test( 'a second failed send is announced again, even while the first error is leaving', async ( { page : curPagObj } ) => { // What: Repeat Error Test. Why: A screen reader only speaks when the alert region gains something, and a retry that fails again before the old note has left would otherwise keep the same note in place. How: This fails a send, fails it again at once, and checks the region gained a fresh note.
+
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: Both sends have to fail. How: This fakes a server error for every post.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+	await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.
+
+	await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: First Send Click Call. Why: The first error has to show before the retry. How: This sends the message, which the fake fails.
+
+
+	const aleRegObj = curPagObj.locator( '#contact form [role="alert"]' ); // What: Alert Region Object. Why: The announcement is read from the region. How: This finds the form's alert region.
+
+
+	await expect( aleRegObj ).toContainText( "didn't go through" ); // What: First Error Assertion. Why: The retry starts once the first error is up. How: This waits for the note.
+
+	await aleRegObj.evaluate( ( aleRegEle ) => { // What: Region Observer Setup. Why: The check has to see whether the retry adds a note, not just whether one is showing. How: This counts every element added to the region from here on, on the window.
+
+
+		const winRecObj = window as unknown as { aleAddNum : number }; // What: Window Record Object. Why: The count has to outlive this callback for the test to read it. How: This views the window as holding it. // What: Type Assertion Note. Why: The window has no such field in its type. How: The test adds it here and reads it back below.
+
+
+		winRecObj.aleAddNum = 0; // What: Added Count Reset. Why: Only elements added by the retry count. How: This starts the count at zero.
+
+		new MutationObserver( ( mutRecArr ) => { winRecObj.aleAddNum += mutRecArr.reduce( ( addSumNum, mutCurObj ) => addSumNum + [ ...mutCurObj.addedNodes ].filter( ( addCurObj ) => addCurObj.nodeType === Node.ELEMENT_NODE ).length, 0 ); } ).observe( aleRegEle, { childList : true } ); // What: Added Element Observer. Why: A fresh note is what a screen reader announces. How: This adds the elements each change puts in the region to the count.
+
+
+	} );
+
+	await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Retry Send Click Call. Why: The retry fails at once, while the first note is still leaving. How: This sends the message again, which the fake fails.
+
+	await expect.poll( () => curPagObj.evaluate( () => ( window as unknown as { aleAddNum : number } ).aleAddNum ) ).toBeGreaterThan( 0 ); // What: Fresh Note Assertion. Why: The second failure has to reach screen readers too. How: This waits until the region has gained an element. // What: Type Assertion Note. Why: The window has no such field in its type. How: The observer set it above.
+
+	await expect( aleRegObj ).toContainText( "didn't go through" ); // What: Second Error Assertion. Why: The fresh note should be the error. How: This checks the region holds it.
+
+
+} );
+
 // #endregion Module Init
 
 

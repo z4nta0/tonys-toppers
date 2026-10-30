@@ -206,6 +206,7 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
 function ConSecCom () : React.JSX.Element {
 
 
+	const [ errAttNum, setErrAttNum ] = useState( 0 );                        // What: Error Attempt Number And Setter. Why: A retry that fails while the last error is still leaving would keep the same note in the alert region, which a screen reader doesn't announce again. How: This counts failed attempts, and the note takes the count as its key, so each failure mounts a fresh note.
 	const [ forDatObj, setForDatObj ] = useState< ForStaTyp >( FOR_EMP_OBJ ); // What: Form Data Object And Setter. Why: The form's fields are controlled. How: This holds every field's value, starting blank with the first interest chosen.
 	const [ forErrBoo, setForErrBoo ] = useState( false );                    // What: Form Error Boolean And Setter. Why: A visitor whose message didn't go through has to be told, with their details kept for a retry. How: This holds whether the error note is showing.
 	const [ forSenBoo, setForSenBoo ] = useState( false );                    // What: Form Sent Boolean And Setter. Why: The thank-you note shows only right after a confirmed send. How: This holds whether it's showing.
@@ -361,7 +362,15 @@ function ConSecCom () : React.JSX.Element {
 
 		}
 
-		else setForErrBoo( true ); // What: Error Note Show Call. Why: A failed submission must not look sent. How: This shows the error note and keeps every field as the visitor filled it in.
+		else { // What: Failed Branch. Why: A failed submission must not look sent, and has to be announced even when the last error is still leaving. How: This counts the attempt and shows the error note.
+
+
+			setErrAttNum( ( preAttNum ) => preAttNum + 1 ); // What: Error Attempt Increment Call. Why: Each failure should mount a fresh note. How: This raises the count the note is keyed by.
+
+			setForErrBoo( true ); // What: Error Note Show Call. Why: The visitor has to know the message didn't go through. How: This shows the error note and keeps every field as the visitor filled it in.
+
+
+		}
 
 
 	};
@@ -665,6 +674,8 @@ function ConSecCom () : React.JSX.Element {
 
 
 								<p
+									key={ errAttNum } // What: Error Note Key. Why: The alert region only speaks when it gains something, so a repeat failure needs a new note. How: This changes with every failed attempt, which remounts the note.
+
 									className={ cssModObj.forErrPar }
 
 									data-note-exit-active={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
