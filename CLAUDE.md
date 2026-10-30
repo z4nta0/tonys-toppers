@@ -73,7 +73,7 @@ width and height. A product photo fits within 562 by 750px, a booth shot is
 696px wide, the cartoon 710px, and the portrait keeps its 756px. Adding or
 replacing a photo means dropping the original in and rerunning the script.
 The logo and favicon come from the existing SVGs (`logo.svg`,
-`logo-notext.svg`), and `npm run icons` renders the raster icons from
+`logo-no-text.svg`), and `npm run icons` renders the raster icons from
 `public/favicon.svg`.
 
 ## Horizontal layout
