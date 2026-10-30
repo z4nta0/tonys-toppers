@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import AxeBuilder from '@axe-core/playwright'; // What: Axe Builder. Why: axe-core finds the mechanical accessibility failures, such as low contrast. How: This runs its scan against a Playwright page.
+import AxeBuiCla from '@axe-core/playwright'; // What: Axe Builder Class. Why: axe-core finds the mechanical accessibility failures, such as low contrast. How: This runs its scan against a Playwright page.
 
 
 import { expect      } from '@playwright/test';      // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty, and waits for content a scan needs.
@@ -46,7 +46,7 @@ import type { TestInfo } from '@playwright/test'; // What: Test Info. Why: The r
 
 // #region Types
 
-type AxeResTyp = Awaited< ReturnType< AxeBuilder[ 'analyze' ] > >; // What: Axe Results Type. Why: The scan's findings are summarized for the report, and axe-core itself is only a dependency of the Playwright integration. How: This reads the type from what AxeBuilder's analyze resolves to.
+type AxeResTyp = Awaited< ReturnType< AxeBuiCla[ 'analyze' ] > >; // What: Axe Results Type. Why: The scan's findings are summarized for the report, and axe-core itself is only a dependency of the Playwright integration. How: This reads the type from what AxeBuiCla's analyze resolves to.
 
 // #endregion Types
 
@@ -124,7 +124,7 @@ const FOR_RES_ARR = [ // What: Form Result Array. Why: The form's thank-you mess
 async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
 
 
-	return new AxeBuilder( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
+	return new AxeBuiCla( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
 
 
 }
