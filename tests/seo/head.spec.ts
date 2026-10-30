@@ -36,6 +36,7 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 
 const FAC_URL_STR = 'https://www.facebook.com/profile.php?id=61560009400871'; // What: Facebook URL String. Why: The structured data's sameAs has to be the Facebook page the site links to. How: This is the address both are compared with.
 const LIV_URL_STR = 'https://tonystoppers.com/';                              // What: Live URL String. Why: The canonical link, structured data, sitemap, and social tags must all name the live address. How: This is the address they're compared with.
+const PRE_URL_STR = 'http://localhost:5199/';                                 // What: Preview URL String. Why: The built page is what ships, after the build strips the source's comments and blank lines. How: This is the address the test config's preview server serves the build at.
 
 
 
@@ -122,6 +123,29 @@ test( 'the raw page carries the home title and description for script-free reade
 	expect( desMatArr ).toHaveLength( 1 );                                                                                          // What: Raw Single Description Assertion. Why: Readers without the script see only what index.html carries. How: This checks there's exactly one such tag.
 	expect( desMatArr[ 0 ].length ).toBeGreaterThanOrEqual( 120 );                                                                  // What: Raw Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters. How: This checks the raw description's length.
 	expect( desMatArr[ 0 ].length ).toBeLessThanOrEqual( 125 );                                                                     // What: Raw Description Maximum Assertion. Why: Phones cut a summary off around 125 characters. How: This checks the raw description's length.
+
+
+} );
+
+
+
+test( 'the built page carries the same head, with valid structured data', async ( { browserName : broNamStr, request : reqCotObj } ) => { // What: Built Head Test. Why: The build rewrites index.html, stripping its comments and blank lines, and that page is the one crawlers read. How: This fetches the preview server's root as raw HTML and checks its title, one description, canonical, preview image, and parsed structured data.
+
+
+	test.skip( broNamStr !== 'chromium', 'The built page reads the same in every engine, so this runs in Chromium only.' ); // What: Chromium Only Skip. Why: A fetched file doesn't change with the engine. How: This skips the check outside Chromium, saying why.
+
+
+
+	const bltHtmStr = await ( await reqCotObj.get( PRE_URL_STR ) ).text();                                                               // What: Built HTML String. Why: The page is read the way a script-free reader reads what ships. How: This fetches the preview server's root without running anything.
+	const desMatArr = [ ...bltHtmStr.matchAll( /<meta name='description' content='([^']*)'/g ) ].map( ( desMatObj ) => desMatObj[ 1 ] ); // What: Description Match Array. Why: The built page should carry exactly one description. How: This collects the content of each description tag.
+	const ldjTexStr = bltHtmStr.match( /<script type='application\/ld\+json'>([\s\S]*?)<\/script>/ )?.[ 1 ] ?? '';                       // What: Linked-Data-JSON Text String. Why: The structured data has to survive the build as valid JSON. How: This takes the script's contents, or an empty string when it's missing.
+
+
+	expect( bltHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ] ).toBe( "Tony's Toppers | Handmade Beaded Crafts in Bolivar, MO" ); // What: Built Title Assertion. Why: The shipped page should name the home page in full. How: This checks the title tag's text.
+	expect( desMatArr ).toHaveLength( 1 );                                                                                          // What: Built Single Description Assertion. Why: Crawlers read only what the shipped page carries. How: This checks there's exactly one description.
+	expect( bltHtmStr ).toContain( `<link href='${ LIV_URL_STR }' rel='canonical' />` );                                            // What: Built Canonical Assertion. Why: The canonical has to reach crawlers that never run the script. How: This checks the built page links the live address as canonical.
+	expect( bltHtmStr ).toMatch( new RegExp( `<meta property='og:image' +content='${ LIV_URL_STR }og-image\\.jpg' />` ) );          // What: Built Preview Image Assertion. Why: Link previews read the image from the shipped page. How: This checks the og:image tag names the live card.
+	expect( JSON.parse( ldjTexStr )[ '@graph' ] ).toHaveLength( 3 );                                                                // What: Built Structured Data Assertion. Why: Invalid JSON would hide the business, Tony, and the site from search engines. How: This parses the script and checks its graph holds the three nodes.
 
 
 } );
