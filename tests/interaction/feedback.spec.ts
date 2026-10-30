@@ -232,21 +232,20 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
  * snaEleFun = Snapshot Element Function
  *
  * @summary
- * Runs inside the page and records how an element looks right now, and
- * whether each part of that look would ease if it changed: for the element,
- * every element inside it, and its ::after layer when asked, each probed
- * property's computed value and the duration of the transition covering it,
- * listed by its own name, by a shorthand holding it (background for
- * background-color, border for border-color), or by all, or 0 when none is.
- * The border color reads only the sides actually drawn, those with a width
- * above zero, as one color when they all share it, since an undrawn side's
- * color can change without anything showing.
- * An inner element whose color matches its parent's takes the parent's
- * duration for it, since an inherited color eases with the parent's
- * transition, and a border color matching the element's own color takes the
- * color's duration, since an unset border color is currentColor and follows
- * the color as it eases. Passed to Playwright's evaluate, so it can't read
- * anything from this file.
+ * Runs inside the page and records how an element looks right now, and whether
+ * each part of that look would ease if it changed: for the element, every
+ * element inside it, and its ::after layer when asked, each probed property's
+ * computed value and the duration of the transition covering it, listed by its
+ * own name, by a shorthand holding it (such as background for background-
+ * color, or outline for outline-width), or by all, or 0 when none is. The
+ * border color reads only the sides actually drawn, those with a width above
+ * zero, as one color when they all share it, since an undrawn side's color can
+ * change without anything showing. An inner element whose color matches its
+ * parent's takes the parent's duration for it, since an inherited color eases
+ * with the parent's transition, and a border color matching the element's own
+ * color takes the color's duration, since an unset border color is
+ * currentColor and follows the color as it eases. Passed to Playwright's
+ * evaluate, so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -270,7 +269,7 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], boolean ] ) : 
 
 	const [ proNamArr, aftIncBoo ] = snaArgArr; // What: Property Name Array And After Include Boolean. Why: The page function takes one argument. How: This unpacks the names to probe and whether to add the ::after layer.
 
-	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand to its shorthand.
+	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand to its shorthand.
 
 
 
