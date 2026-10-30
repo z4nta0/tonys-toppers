@@ -127,10 +127,10 @@ function cliBloFun () : void {
  * @summary
  * Collects every element a visitor can reach on the page as it stands: each
  * element the selector matches that's visible, not taken out of the tab order
- * with tabindex -1, and not inside inert content, such as the closed mobile
- * menu, so the same list serves every kind of element the checks probe, such
- * as form fields. Handles are taken once, so restyling while the checks scroll
- * (the nav bar's scrolled look) can't shift the list.
+ * with tabindex -1, and not inside inert content, such as the page behind the
+ * open mobile menu, so the same list serves every kind of element the checks
+ * probe, such as form fields. Handles are taken once, so restyling while the
+ * checks scroll (the nav bar's scrolled look) can't shift the list.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

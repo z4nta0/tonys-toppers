@@ -84,7 +84,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 		use : { // What: Use. Why: The project has to launch its own engine, and the security suite its own server. How: This sets the browser it runs in, which build of it, and the server its pages open from, the preview for the security suite and the dev server for every other.
 
 
-			baseURL     : suiNamStr === 'security' ? PRE_URL_STR : SER_URL_STR, // What: Base URL. Why: The security suite checks the production build, while every other suite checks the dev server. How: This points each project's page.goto at its server.
+			baseURL     : suiNamStr === 'security' ? PRE_URL_STR : SER_URL_STR, // What: Base URL. Why: The security suite loads its pages from the production build, while every other suite's pages open from the dev server. How: This points each project's page.goto at its server.
 			browserName : engNamStr,                                            // What: Browser Name. Why: Each project runs in one engine. How: This names that engine's Playwright browser.
 			channel     : engNamStr === 'chromium' ? 'chromium' : undefined     // What: Channel. Why: Chromium's default headless shell sometimes opens a modified click's new tab without Playwright ever reporting it, failing about 1 run in 10 in a sibling project. How: This runs Chromium as Chrome's full headless mode instead, and leaves Firefox and WebKit on their only builds.
 
@@ -116,7 +116,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 	webServer : [ // What: Web Server. Why: The suites need the site running, without touching any dev server already open. How: This starts the dev server and the production preview, each on its own strict port from the repo root, and stops both when the run ends.
 
 
-		{ // What: Dev Server. Why: Every suite but the security suite checks the site as it's developed. How: This starts the Vite dev server on 5192.
+		{ // What: Dev Server. Why: Every suite but the security suite opens its pages from the site as it's developed. How: This starts the Vite dev server on 5192.
 
 
 			command             : 'npx vite --port 5192 --strictPort', // What: Command. Why: A strict port fails loudly instead of drifting onto another server's port. How: This starts the Vite dev server on 5192.
