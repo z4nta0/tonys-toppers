@@ -668,7 +668,7 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Menu New Tab Lo
 	for ( const linLabStr of [ 'Products', "Tony's Toppers" ] ) { // What: Menu Link Loop. Why: The menu should close for a section link and for the brand alike. How: This declares one test per link, named by its label.
 
 
-		test( `a ${ cliKinStr } click on the "${ linLabStr }" link opens a new tab and closes the menu`, async ( { page : curPagObj } ) => { // What: Menu New Tab Test. Why: The menu should close once any link is chosen, even one opening in a new tab. How: This opens the menu, clicks the link the loop's way, and checks a new tab opened and the menu closed.
+		test( `a ${ cliKinStr } click on the "${ linLabStr }" link opens a new tab and closes the menu`, async ( { page : curPagObj } ) => { // What: Menu New Tab Test. Why: The menu should close once any link is chosen, even one opening in a new tab. How: This opens the menu, clicks the link the loop's way, and checks a new tab opened, the menu closed, and the page clicked from stayed put.
 
 
 			const togButLoc = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Locator. Why: The button reports whether the menu is open. How: This finds it by its name.
@@ -690,6 +690,9 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Menu New Tab Lo
 			await newTabPro; // What: New Tab Wait. Why: The click should open a new tab. How: This waits for the browser to report it.
 
 			await expect( togButLoc ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The menu should close whichever way the link opens. How: This waits until the button reports it collapsed.
+			await expect( curPagObj ).toHaveURL( /\/$/ );                          // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
+
+			expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
 
 
 		} );
