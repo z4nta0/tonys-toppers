@@ -88,11 +88,11 @@
 
 /* #region porWraDiv */
 
-.porWraDiv { /* What: Portrait Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it about 104px below the top of the screen, which also makes it the box the logo badge is placed against. */
+.porWraDiv { /* What: Portrait Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it a step below the fixed bar, which also makes it the box the logo badge is placed against. */
 
 
 	position : sticky;
-	top      : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	top      : calc( var( --nav-bar-hei ) + var( --spa-ver-p01 ) ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }

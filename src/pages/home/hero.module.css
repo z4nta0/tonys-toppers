@@ -23,14 +23,14 @@
 
 /* #region homHerSec */
 
-.homHerSec { /* What: Home Hero Section. Why: The page opens on a warm welcome nearly a screen tall or taller. How: This makes it at least as tall as the screen less about 79px, centers its content, clips the glows at its edges, and washes the cream background with a yellow glow at the top left and a blue one at the bottom right. */
+.homHerSec { /* What: Home Hero Section. Why: The page opens on a warm welcome nearly a screen tall or taller. How: This makes it at least as tall as the screen less the bar's height, clears the bar at its top, centers its content, clips the glows at its edges, and washes the cream background with a yellow glow at the top left and a blue one at the bottom right. */
 
 
 	background  : radial-gradient( ellipse at 20% 10%, oklch( from var( --acc-sec-col ) l c h / var( --cdn-pow-006-rec ) ), transparent 50% ), radial-gradient( ellipse at 85% 80%, oklch( from var( --acc-mai-col ) l c h / 0.12 ), transparent 55% ), var( --bac-pag-col ); /* Accent Secondary Color = #fbbf24, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185, Accent Main Color = #1e3a8a @ 0.12 opacity, Background Page Color = #fdf9ee */
 	display     : grid;
-	min-height  : calc( 100vh - var( --spa-ver-p06 ) );                           /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	min-height  : calc( 100vh - var( --nav-bar-hei ) );                                                          /* Navigation Bar Height ~= 83.483px */
 	overflow    : hidden;
-	padding     : var( --spa-ver-p07 ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
+	padding     : calc( var( --nav-bar-hei ) + var( --spa-ver-p01 ) ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 1 ~= 19.304px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
 	place-items : center;
 	position    : relative;
 
@@ -42,7 +42,7 @@
 	.homHerSec { /* What: Compact Home Hero Section. Why: The portrait at the top needs room below the bar, and the bottom needs less. How: This trims the bottom padding and adds a step of room on top. */
 
 
-		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 5 ~= 59.447px */
+		padding : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p05 ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 5 ~= 59.447px */
 
 
 	}
