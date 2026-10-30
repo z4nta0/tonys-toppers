@@ -26,10 +26,12 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * as a form field, has to look different in each state it responds to and ease
  * every probed property that change touches, on it or anything inside it. A
  * control's focus ring has to ease in to full width. Under reduced motion the
- * changes stay but nothing transitions. A control that only appears after an
- * action, such as the phone link in the contact form's error, gets checks of
- * its own once that action is faked. Real clicks are blocked during the
- * checks, so pressing a control never navigates or closes anything mid-check.
+ * changes stay but nothing transitions. A state that switches on and off, such
+ * as the chosen filter, is flipped both ways and checked the same way. A
+ * control that only appears after an action, such as the phone link in the
+ * contact form's error, gets checks of its own once that action is faked. Real
+ * clicks are blocked during the checks, so pressing a control never navigates
+ * or closes anything mid-check.
  *
  * Sections:
  *  - Types
@@ -54,6 +56,20 @@ type SnaRecTyp = { // What: Snapshot Record Type. Why: An element's look, and wh
 
 };
 
+
+
+type TogTarTyp = { // What: Toggle Target Type. Why: Each kind of element with a state that switches on and off is flipped the same way. How: This holds what to find, which attribute marks the state, its two values, and the layer to read.
+
+
+	actStr : string,        // What: Active String. Why: The state is switched on by setting its attribute. How: This holds the value that marks it on, '' for an attribute that only has to be present.
+	attStr : string,        // What: Attribute String. Why: The state lives in one attribute the stylesheet reacts to. How: This holds its name.
+	inaStr : string | null, // What: Inactive String. Why: The state is switched off by its attribute too. How: This holds the value that marks it off, or null for an attribute that's removed.
+	pseStr : string,        // What: Pseudo String. Why: Part of a state's look can sit on a layer of the element, such as a dot drawn before it. How: This holds '::before' or '::after', or '' for none.
+	selStr : string         // What: Selector String. Why: Each kind is found by its own class. How: This holds the selector that matches it.
+
+
+};
+
 // #endregion Types
 
 
@@ -67,11 +83,84 @@ const FOC_PRO_ARR = [ ...CON_PRO_ARR, 'outline-color', 'outline-offset', 'outlin
 const HOV_TAR_STR = '[class*="proCarArt"], [class*="faiPhoFig"], [class*="porFraDiv"]';                    // What: Hover Target String. Why: The product cards, the gallery's booth frames, and the About portrait's frame respond to hover without being controls, so the control probes never reach them. How: This matches each by its CSS module classes, whose names Vite keeps inside each hashed class.
 const SET_WAI_NUM = 400;                                                                                   // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
 
+
+
+
+/**
+ * TOG_TAR_ARR = Toggle Target Array
+ *
+ * @summary
+ * The kinds of element with a state that switches on and off, each flipped
+ * on and off again in turn, in the order listed, so the bar's controls are
+ * read before the Products filters scroll the page. Every row holds:
+ *
+ *  - `actStr` (String): the value that marks the state on.
+ *
+ *  - `attStr` (String): the attribute that marks the state.
+ *
+ *  - `inaStr` (String or null): the value that marks it off, or null to
+ *    remove the attribute.
+ *
+ *  - `pseStr` (String): the layer to read with the element, or ''.
+ *
+ *  - `selStr` (String): the selector that finds the element.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const TOG_TAR_ARR : TogTarTyp[] = [ // What: Toggle Target Array. Why: A switched state is feedback as much as a hover, and has to ease in and out. How: This lists each kind of element to flip.
+
+
+	{ actStr : 'true', attStr : 'aria-expanded',            inaStr : 'false', pseStr : '',         selStr : '[class*="navTogBut"]' }, // What: Menu Toggle Row. Why: The phone menu's toggle turns its bars into a cross while the menu is open. How: This flips its aria-expanded.
+	{ actStr : '',     attStr : 'data-section-link-active', inaStr : null,    pseStr : '::before', selStr : '[class*="navLinAnc"]' }, // What: Section Link Row. Why: The bar's link, or the menu's row and its dot, for the section being read is marked active. How: This flips its data-section-link-active, reading the row's dot on its ::before layer.
+	{ actStr : 'true', attStr : 'aria-pressed',             inaStr : 'false', pseStr : '',         selStr : '[class*="filTogBut"]' }  // What: Filter Toggle Row. Why: The chosen Products filter fills its pill. How: This flips its aria-pressed.
+
+
+];
+
 // #endregion Constants
 
 
 
 // #region Helpers
+
+// #region attSetFun
+
+/**
+ * attSetFun = Attribute Set Function
+ *
+ * @summary
+ * Sets an attribute on an element the test holds a handle to, or removes it
+ * when given null, the way the page itself marks a state on or off, so the
+ * stylesheet's look for that state applies without a click.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param hanCurObj - Handle Current Object: The element to mark.
+ * @param attNamStr - Attribute Name String: The attribute to set.
+ * @param attValStr - Attribute Value String: Its value, or null to remove it.
+ *
+ * @returns A promise that settles once the attribute is set, with no value.
+ *
+ * @example
+ * ```ts
+ * attSetFun(togCurObj, 'aria-pressed', 'true') // => Promise<void>
+ * ```
+ *
+*/
+
+async function attSetFun ( hanCurObj : ElementHandle< Element >, attNamStr : string, attValStr : string | null ) : Promise< void > {
+
+
+	await hanCurObj.evaluate( ( hanCurEle, attArgArr ) => { if ( attArgArr[ 1 ] === null ) hanCurEle.removeAttribute( attArgArr[ 0 ] ); else hanCurEle.setAttribute( attArgArr[ 0 ], attArgArr[ 1 ] ); }, [ attNamStr, attValStr ] as const ); // What: Attribute Set Call. Why: The page function takes one argument. How: This passes the name and value as a pair, removing the attribute for null and setting it otherwise.
+
+
+}
+
+// #endregion attSetFun
+
+
 
 // #region cliBloFun
 
@@ -226,6 +315,72 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
 
 
 
+// #region movProFun
+
+/**
+ * movProFun = Motion Problems Function
+ *
+ * @summary
+ * The reduced-motion counterpart of {@link snaProFun}: compares two snapshots
+ * of the same element, taken before and after a change, and returns one
+ * problem for each probed property that changed on the element or anything
+ * inside it while a transition still eases it, read from the later snapshot.
+ * A property that eases on several inner elements is one problem.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param froRecArr - From Record Array: The snapshot before the change.
+ * @param tarRecArr - Target Record Array: The snapshot after the change.
+ * @param proNamArr - Property Name Array: The probed property names, in the
+ *                    snapshots' order.
+ * @param desLabStr - Description Label String: The element's name in each
+ *                    problem.
+ * @param staNamStr - State Name String: The change in each problem, such as
+ *                    'when toggled on'.
+ *
+ * @returns One problem per eased property.
+ *
+ * @example
+ * ```ts
+ * movProFun(inaSnaArr, actSnaArr, CON_PRO_ARR, 'button "All"',
+ *   'when toggled on')
+ * // => []
+ * ```
+ *
+*/
+
+function movProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr : string[], desLabStr : string, staNamStr : string ) : string[] {
+
+
+	const movNamSet = new Set< string >(); // What: Moving Name Set. Why: A property that eases on several inner elements is one problem. How: This collects each eased property's name once.
+
+
+	for ( const [ recIndNum, tarCurObj ] of tarRecArr.entries() ) { // What: Record Compare Loop. Why: Every element of the snapshot has to switch its changes at once. How: This compares each later record with the earlier one in its place.
+
+
+		const froCurObj = froRecArr[ recIndNum ]; // What: From Current Object. Why: The change is read against the same element's earlier record. How: This finds it by place.
+
+
+		if ( !froCurObj ) continue; // What: Missing Record Guard. Why: An element that appeared with the change has nothing to compare with. How: This skips it.
+
+
+
+		for ( const [ proIndNum, proNamStr ] of proNamArr.entries() ) if ( froCurObj.valArr[ proIndNum ] !== tarCurObj.valArr[ proIndNum ] && tarCurObj.durArr[ proIndNum ] > 0 ) movNamSet.add( proNamStr ); // What: Property Compare Loop. Why: Under reduced motion a change should switch rather than ease. How: This records each one whose value changed while its later duration is above 0.
+
+
+	}
+
+
+
+	return [ ...movNamSet ].map( ( proNamStr ) => `${ desLabStr } eases its ${ proNamStr } ${ staNamStr } under reduced motion` ); // What: Motion Problems Return. Why: Each eased property should be reported plainly. How: This turns each name into a problem line.
+
+
+}
+
+// #endregion movProFun
+
+
+
 // #region snaEleFun
 
 /**
@@ -234,7 +389,7 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
  * @summary
  * Runs inside the page and records how an element looks right now, and whether
  * each part of that look would ease if it changed: for the element, every
- * element inside it, and its ::after layer when asked, each probed property's
+ * element inside it, and one of its layers when asked, each probed property's
  * computed value and the duration of the transition covering it, listed by its
  * own name, by a shorthand holding it (such as background for background-
  * color, or outline for outline-width), or by all, or 0 when none is. The
@@ -242,32 +397,34 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
  * zero, as one color when they all share it, since an undrawn side's color can
  * change without anything showing. An inner element whose color matches its
  * parent's takes the parent's duration for it, since an inherited color eases
- * with the parent's transition, and a border color matching the element's own
- * color takes the color's duration, since an unset border color is
- * currentColor and follows the color as it eases. Passed to Playwright's
- * evaluate, so it can't read anything from this file.
+ * with the parent's transition, as does a layer whose color matches the
+ * element's, and a border color matching the element's own color takes the
+ * color's duration, since an unset border color is currentColor and follows
+ * the color as it eases. Passed to Playwright's evaluate, so it can't read
+ * anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param eleCurEle - Element Current Element: The element to record.
  * @param snaArgArr - Snapshot Argument Array: The property names to probe,
- *                    then whether to add the element's ::after layer.
+ *                    then the layer to add, '::before' or '::after', or ''
+ *                    for none.
  *
- * @returns One record per element, the element itself first, then its ::after
- *          layer when asked.
+ * @returns One record per element, the element itself first, then the asked
+ *          layer.
  * @see {@link snaRecArr}
  *
  * @example
  * ```ts
- * handle.evaluate(snaEleFun, [CON_PRO_ARR, false]) // => [ { ... } ]
+ * handle.evaluate(snaEleFun, [CON_PRO_ARR, '']) // => [ { ... } ]
  * ```
  *
 */
 
-function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], boolean ] ) : SnaRecTyp[] {
+function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], string ] ) : SnaRecTyp[] {
 
 
-	const [ proNamArr, aftIncBoo ] = snaArgArr; // What: Property Name Array And After Include Boolean. Why: The page function takes one argument. How: This unpacks the names to probe and whether to add the ::after layer.
+	const [ proNamArr, pseNamStr ] = snaArgArr; // What: Property Name Array And Pseudo Name String. Why: The page function takes one argument. How: This unpacks the names to probe and the layer to add.
 
 	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand to its shorthand.
 
@@ -336,7 +493,11 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], boolean ] ) : 
 
 
 
-	if ( aftIncBoo ) snaRecArr.push( snaStyFun( getComputedStyle( eleCurEle, '::after' ) ) ); // What: After Layer Snapshot. Why: A hover-only element can carry part of its look on its ::after layer, such as a shadow that fades in. How: When asked, this records that layer last.
+	if ( pseNamStr ) snaRecArr.push( snaStyFun( getComputedStyle( eleCurEle, pseNamStr ) ) ); // What: Pseudo Layer Snapshot. Why: An element can carry part of its look on a layer of its own, such as a shadow that fades in. How: When asked, this records that layer last.
+
+
+
+	if ( pseNamStr && colIndNum >= 0 && snaRecArr[ snaRecArr.length - 1 ].valArr[ colIndNum ] === snaRecArr[ 0 ].valArr[ colIndNum ] ) snaRecArr[ snaRecArr.length - 1 ].durArr[ colIndNum ] = snaRecArr[ 0 ].durArr[ colIndNum ]; // What: Inherited Layer Duration Assignment. Why: A layer whose color matches its element's inherits it, and eases with the element's transition. How: This copies the element's color duration onto the layer.
 
 
 
@@ -360,31 +521,31 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], boolean ] ) : 
  *
  * @summary
  * Records an element the test holds a handle to, by running {@link snaEleFun}
- * on it in the page with the properties to probe and whether to add its
- * ::after layer, handed over as one two-item argument, since the page
- * function takes only one.
+ * on it in the page with the properties to probe and the layer to add,
+ * handed over as one two-item argument, since the page function takes only
+ * one.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param hanCurObj - Handle Current Object: The element to record.
  * @param proNamArr - Property Name Array: The properties to probe.
- * @param aftIncBoo - After Include Boolean: Whether to add the element's
- *                    ::after layer.
+ * @param pseNamStr - Pseudo Name String: The layer to add, '::before' or
+ *                    '::after', or '' for none.
  *
  * @returns A promise that resolves with one record per element, the element
- *          itself first, then its ::after layer when asked.
+ *          itself first, then the asked layer.
  *
  * @example
  * ```ts
- * snaHanFun(conCurObj, CON_PRO_ARR, false) // => [ { durArr, valArr } ]
+ * snaHanFun(conCurObj, CON_PRO_ARR, '') // => [ { durArr, valArr } ]
  * ```
  *
 */
 
-async function snaHanFun ( hanCurObj : ElementHandle, proNamArr : string[], aftIncBoo : boolean ) : Promise< SnaRecTyp[] > {
+async function snaHanFun ( hanCurObj : ElementHandle, proNamArr : string[], pseNamStr : string ) : Promise< SnaRecTyp[] > {
 
 
-	const snaArgArr : [ string[], boolean ] = [ proNamArr, aftIncBoo ]; // What: Snapshot Argument Array. Why: The page function takes one argument, typed as a two-item tuple. How: This packs the property names and the ::after choice.
+	const snaArgArr : [ string[], string ] = [ proNamArr, pseNamStr ]; // What: Snapshot Argument Array. Why: The page function takes one argument, typed as a two-item tuple. How: This packs the property names and the layer to add.
 
 
 
@@ -541,7 +702,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
 
 
-		const resSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, false ); // What: Rest Snapshot Array. Why: The resting look is what hover is compared with. How: This records the control and everything inside it.
+		const resSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, '' ); // What: Rest Snapshot Array. Why: The resting look is what hover is compared with. How: This records the control and everything inside it.
 
 
 		await conCurObj.hover(); // What: Control Hover Call. Why: Hover feedback is the first thing checked. How: This moves the pointer onto the control.
@@ -549,7 +710,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const hovSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, false ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest and with pressed. How: This records it.
+		const hovSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, '' ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest and with pressed. How: This records it.
 
 
 		await curPagObj.mouse.down(); // What: Mouse Down Call. Why: A press shows while the button is held. How: This holds the mouse button down on the control.
@@ -557,7 +718,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Press Settle Wait. Why: The pressed look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const preSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, false );                                              // What: Press Snapshot Array. Why: The pressed look is compared with hovered. How: This records it.
+		const preSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, '' );                                              // What: Press Snapshot Array. Why: The pressed look is compared with hovered. How: This records it.
 		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the control's transition durations.
 
 
@@ -570,7 +731,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Blur Settle Wait. Why: The unfocused look is read once the hover and focus have faded. How: This pauses for the settle time.
 
 
-		const bluSnaArr = await snaHanFun( conCurObj, FOC_PRO_ARR, false ); // What: Blur Snapshot Array. Why: The unfocused look is what focus is compared with. How: This records the control and everything inside it, outline included.
+		const bluSnaArr = await snaHanFun( conCurObj, FOC_PRO_ARR, '' ); // What: Blur Snapshot Array. Why: The unfocused look is what focus is compared with. How: This records the control and everything inside it, outline included.
 
 
 		await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.focus( { focusVisible : true } ); } ); // What: Keyboard Focus Call. Why: The focus ring shows only for keyboard focus, and a script's focus draws it in every engine only when it asks to show the ring. How: This focuses the control with focusVisible set.
@@ -578,7 +739,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Focus Settle Wait. Why: The focused look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const focSnaArr = await snaHanFun( conCurObj, FOC_PRO_ARR, false ); // What: Focus Snapshot Array. Why: The focused look is compared with unfocused. How: This records it.
+		const focSnaArr = await snaHanFun( conCurObj, FOC_PRO_ARR, '' ); // What: Focus Snapshot Array. Why: The focused look is compared with unfocused. How: This records it.
 
 
 		await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Control Blur Call. Why: Left focused, the control would keep its ring, or stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it fade.
@@ -668,7 +829,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await fieCurObj.scrollIntoViewIfNeeded(); // What: Field Scroll Call. Why: A field has to be on screen for its look to be read. How: This scrolls it into view.
 
 
-		const resSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false ); // What: Rest Snapshot Array. Why: The resting look is what hover and focus are compared with. How: This records the field's border color and outline.
+		const resSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, '' ); // What: Rest Snapshot Array. Why: The resting look is what hover and focus are compared with. How: This records the field's border color and outline.
 
 
 		await fieCurObj.hover(); // What: Field Hover Call. Why: A field answers the pointer as well as the keyboard. How: This moves the pointer onto it.
@@ -676,7 +837,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const hovSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest. How: This records the field's border color and outline.
+		const hovSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, '' ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest. How: This records the field's border color and outline.
 
 
 		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The focused look should be read without the hover on top of it. How: This moves the pointer to the corner of the bar.
@@ -692,7 +853,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 		const focFieBoo = await fieCurObj.evaluate( ( fieCurEle ) => fieCurEle === document.activeElement );             // What: Focused Field Boolean. Why: The focused look only counts when the Tab press landed on the field. How: This checks the field holds focus.
-		const focSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false );                                              // What: Focus Snapshot Array. Why: The focused look is compared with rest. How: This records the field's border color and outline.
+		const focSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, '' );                                              // What: Focus Snapshot Array. Why: The focused look is compared with rest. How: This records the field's border color and outline.
 		const traDurStr = await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the field's transition durations.
 
 
@@ -784,7 +945,7 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
 
 
-		const resSnaArr = await snaHanFun( tarCurObj, CON_PRO_ARR, true ); // What: Rest Snapshot Array. Why: The resting look is what hover is compared with. How: This records the card or frame, everything inside it, and its ::after layer.
+		const resSnaArr = await snaHanFun( tarCurObj, CON_PRO_ARR, '::after' ); // What: Rest Snapshot Array. Why: The resting look is what hover is compared with. How: This records the card or frame, everything inside it, and its ::after layer.
 
 
 		await tarCurObj.hover(); // What: Target Hover Call. Why: Hover is the one interaction a card or frame has. How: This moves the pointer onto it.
@@ -792,7 +953,7 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const hovSnaArr = await snaHanFun( tarCurObj, CON_PRO_ARR, true ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest. How: This records it.
+		const hovSnaArr = await snaHanFun( tarCurObj, CON_PRO_ARR, '::after' ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest. How: This records it.
 		const traDurStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ getComputedStyle( tarCurEle ).transitionDuration }, ${ getComputedStyle( tarCurEle, '::after' ).transitionDuration }` ); // What: Transition Duration String. Why: A hover-only element can fade part of its look in on its ::after layer, so both have to ease normally and stand still under reduced motion. How: This joins the element's durations with its ::after layer's.
 
 
@@ -816,6 +977,116 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 // #endregion hovProFun
 
+
+
+// #region togProFun
+
+/**
+ * togProFun = Toggle Problems Function
+ *
+ * @summary
+ * Flips every reachable element with a state that switches on and off, each
+ * kind listed in {@link TOG_TAR_ARR}, and returns a problem for each one that
+ * gives no feedback. The pointer is moved away, and each element is scrolled
+ * into view, marked off, read, marked on, read again, marked off, and read a
+ * third time, every look read once its transition has settled, then left as
+ * the page had it. An element that looks the same off and on is a problem.
+ * Normally every probed property that changes either way, on the element,
+ * anything inside it, or the layer its row names, has to be eased by a
+ * transition ({@link snaProFun}); under reduced motion none of them may ease
+ * ({@link movProFun}). Finding nothing to flip is a problem too, so the check
+ * can't pass without checking anything.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to probe.
+ * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
+ *                    reduced motion.
+ *
+ * @returns A promise that resolves with every toggle feedback problem found.
+ * @see {@link proLisArr}
+ *
+ * @example
+ * ```ts
+ * togProFun(page, false) // => [] when every toggle eases
+ * ```
+ *
+*/
+
+async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< string[] > {
+
+
+	const proLisArr : string[]                                  = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
+	const togHanArr : [ TogTarTyp, ElementHandle< Element > ][] = []; // What: Toggle Handle Array. Why: Every reachable element of every kind is flipped. How: This pairs each element's handle with its kind's row.
+
+
+	for ( const togTarObj of TOG_TAR_ARR ) for ( const togCurObj of await conLisFun( curPagObj, togTarObj.selStr ) ) togHanArr.push( [ togTarObj, togCurObj ] ); // What: Toggle Collect Loop. Why: Only elements a visitor can see and reach are flipped. How: This collects each kind's reachable elements in the table's order.
+
+
+
+	if ( !togHanArr.length ) proLisArr.push( 'no toggle to probe' ); // What: Empty Probe Check. Why: A probe that finds nothing would pass without checking anything. How: This records a problem when no element is found.
+
+
+
+	for ( const [ togTarObj, togCurObj ] of togHanArr ) { // What: Toggle Probe Loop. Why: Every switched state has to show and ease. How: This reads each element off, on, and off again.
+
+
+		const oriValStr = await togCurObj.getAttribute( togTarObj.attStr ); // What: Original Value String. Why: The element is left as the page had it. How: This reads the attribute's value, or null when it's absent.
+		const togDesStr = await togCurObj.evaluate( ( togCurEle ) => `${ togCurEle.tagName.toLowerCase() } "${ ( togCurEle.getAttribute( 'aria-label' ) || togCurEle.textContent || '' ).trim().slice( 0, 30 ) }"` ); // What: Toggle Description String. Why: A problem should name the element a person would recognize. How: This joins its tag with its label or text.
+
+
+		await togCurObj.scrollIntoViewIfNeeded(); // What: Toggle Scroll Call. Why: An element's look is read on screen. How: This scrolls it into view.
+
+		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The state's look is read with nothing hovered. How: This moves the pointer to the corner of the bar.
+
+		await attSetFun( togCurObj, togTarObj.attStr, togTarObj.inaStr ); // What: Off Set Call. Why: The state is read switching on from off. How: This marks it off.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Off Settle Wait. Why: Any earlier look has to finish fading. How: This pauses for the settle time.
+
+
+		const inaSnaArr = await snaHanFun( togCurObj, CON_PRO_ARR, togTarObj.pseStr ); // What: Inactive Snapshot Array. Why: The off look is what the on look is compared with. How: This records the element, everything inside it, and its row's layer.
+
+
+		await attSetFun( togCurObj, togTarObj.attStr, togTarObj.actStr ); // What: On Set Call. Why: Switching the state on is the change checked first. How: This marks it on.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: On Settle Wait. Why: The on look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const actSnaArr = await snaHanFun( togCurObj, CON_PRO_ARR, togTarObj.pseStr ); // What: Active Snapshot Array. Why: The on look is compared with off both ways. How: This records it.
+
+
+		await attSetFun( togCurObj, togTarObj.attStr, togTarObj.inaStr ); // What: Off Again Set Call. Why: Switching the state off has to ease too. How: This marks it off again.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Off Again Settle Wait. Why: The off look is read once it has eased out. How: This pauses for the settle time.
+
+
+		const retSnaArr = await snaHanFun( togCurObj, CON_PRO_ARR, togTarObj.pseStr ); // What: Return Snapshot Array. Why: The look switched back off is compared with on. How: This records it.
+
+
+		await attSetFun( togCurObj, togTarObj.attStr, oriValStr ); // What: Original Set Call. Why: The next element is read on the page as it was. How: This puts the attribute back as the page had it.
+
+
+
+		if ( valSigFun( inaSnaArr ) === valSigFun( actSnaArr ) ) proLisArr.push( `${ togDesStr } looks the same toggled on` ); // What: Toggle Check. Why: A switched state has to show. How: This records an element that doesn't change.
+
+
+
+		if ( redMotBoo ) proLisArr.push( ...movProFun( inaSnaArr, actSnaArr, CON_PRO_ARR, togDesStr, 'when toggled on' ), ...movProFun( actSnaArr, retSnaArr, CON_PRO_ARR, togDesStr, 'when toggled off' ) ); // What: Reduced Motion Check. Why: Asking for less motion should switch a state at once. How: This records each property that changes while a transition still eases it, both ways.
+
+		else proLisArr.push( ...snaProFun( inaSnaArr, actSnaArr, CON_PRO_ARR, togDesStr, 'when toggled on' ), ...snaProFun( actSnaArr, retSnaArr, CON_PRO_ARR, togDesStr, 'when toggled off' ) ); // What: Snapped Change Check. Why: A state switching on or off should ease rather than snap. How: This records each property that changes without a transition, both ways.
+
+
+	}
+
+
+
+	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every problem collected.
+
+
+}
+
+// #endregion togProFun
+
 // #endregion Helpers
 
 
@@ -825,7 +1096,7 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } gives every reachable link and button hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every reachable link and button, every reachable form field, and on the home states every visible card and frame that responds to hover, and checks it finds no problems.
+	test( `${ staRecObj.ideStr } gives every reachable link and button hover, press, and focus feedback, and every toggle its switch`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every reachable link and button, every reachable form field, on the home states every visible card and frame that responds to hover, and every reachable toggle, and checks it finds no problems.
 
 
 		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and frame took about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
@@ -839,6 +1110,10 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, false ) ).toEqual( [] ); // What: No Hover Problems Assertion. Why: The cards and frames that respond to hover show with nothing covering them only on the home states. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
+
+
+
+		expect( await togProFun( curPagObj, false ) ).toEqual( [] ); // What: No Toggle Problems Assertion. Why: The state passes only when every switched state shows and eases. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
@@ -861,7 +1136,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every reachable link and button, every reachable form field, and on the home states every visible card and frame that responds to hover, with reduced motion on and checks it finds no problems.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every reachable link and button, every reachable form field, on the home states every visible card and frame that responds to hover, and every reachable toggle, with reduced motion on and checks it finds no problems.
 
 
 		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and frame took about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
@@ -877,6 +1152,10 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Hover Problems Assertion. Why: The cards and frames that respond to hover have to keep their hover look without moving. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
+
+
+
+		expect( await togProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Toggle Problems Assertion. Why: Every switched state has to show without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
