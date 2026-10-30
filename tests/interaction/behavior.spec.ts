@@ -560,6 +560,8 @@ for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Menu Link Loop.
 
 		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Home Open Call. Why: The menu exists on phone screens. How: This opens the home page at phone size.
 
+		await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : 1200 } ) ); // What: Scroll Down Call. Why: The "Home" link has to be seen bringing a scrolled visitor back, and every other link reaching its section from mid-page. How: This jumps a way down the page first.
+
 		await togButLoc.click(); // What: Toggle Click Call. Why: The links sit in the menu on a phone. How: This opens it.
 
 		await expect( togButLoc ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Wait. Why: The link is clicked from the open menu. How: This waits until the button reports it expanded.
