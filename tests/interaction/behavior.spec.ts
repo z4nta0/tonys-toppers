@@ -46,7 +46,7 @@ const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > =
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size most checks open at.
 const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The phone menu exists only on small screens. How: This is the phone size the menu checks use.
-const SEC_LIN_ARR = [ [ 'Home', 'home' ], [ 'Products', 'products' ], [ 'Craft Fairs', 'fairs' ], [ 'About Tony', 'about' ], [ 'Contact', 'contact' ] ]; // What: Section Link Array. Why: The bar and the phone menu link to the same five sections. How: Each row pairs a link's label with its section's id.
+const SEC_LIN_ARR = [ [ 'Home', 'home' ], [ 'Products', 'products' ], [ 'Craft Fairs', 'fairs' ], [ 'About Tony', 'about' ], [ 'Contact', 'contact' ] ]; // What: Section Link Array. Why: The bar and the phone menu link to the same five sections. How: Each row pairs a link's label with its section's ID.
 const SHO_VIE_OBJ = { height : 500, width : 390  }; // What: Short Viewport Object. Why: The 404 page fits a full phone screen, so it only scrolls on a shorter one. How: This is the size the scroll position check opens it at.
 
 // #endregion Constants
@@ -118,7 +118,7 @@ async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { h
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to measure.
- * @param secIdeStr - Section Identifier String: The id of the element to
+ * @param secIdeStr - Section Identifier String: The ID of the element to
  *                    measure.
  *
  * @returns A promise that resolves with the distance, in pixels, between the
@@ -169,7 +169,7 @@ async function secOffFun ( curPagObj : Page, secIdeStr : string ) : Promise< num
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to check.
- * @param secIdeStr - Section Identifier String: The id of the section the
+ * @param secIdeStr - Section Identifier String: The ID of the section the
  *                    visitor should land on.
  *
  * @returns A promise that settles once the visitor has landed on the section
@@ -201,7 +201,7 @@ async function ariSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< voi
 
 // #region Home Page Navigation Checks
 
-for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
+for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's ID.
 
 
 	test( `the bar's ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link from partway down the page and checks the address and the section's position.
@@ -235,7 +235,7 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 		const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
 
 
-		await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : 'About Tony' } ).click( cliOptObj ); // What: Modified Click Call. Why: This is the action under test. How: This clicks the bar's About Tony link the way the loop's row says.
+		await curPagObj.getByRole( 'navigation' ).getByRole( 'link', { exact : true, name : 'About Tony' } ).click( cliOptObj ); // What: Modified Click Call. Why: This is the action under test. How: This clicks the bar's "About Tony" link the way the loop's row says.
 
 
 		const newTabObj = await newTabPro; // What: New Tab Object. Why: The section should open in the new tab. How: This is the page the click opened.
@@ -255,7 +255,7 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 
 
 
-for ( const [ butLabStr, secIdeStr ] of [ [ 'See the collection', 'products' ], [ 'Meet Tony', 'about' ] ] ) { // What: Hero Button Loop. Why: Each of the hero's buttons is a section link of its own. How: This declares one test per button, pairing its label with its section's id.
+for ( const [ butLabStr, secIdeStr ] of [ [ 'See the collection', 'products' ], [ 'Meet Tony', 'about' ] ] ) { // What: Hero Button Loop. Why: Each of the hero's buttons is a section link of its own. How: This declares one test per button, pairing its label with its section's ID.
 
 
 	test( `the hero's ${ butLabStr } button scrolls to its section`, async ( { page : curPagObj } ) => { // What: Hero Button Test. Why: The hero's buttons are the page's first way onward. How: This clicks the button and checks where the visitor lands.
@@ -278,7 +278,7 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'See the collection', 'products' ], 
 test( 'an address naming a section opens there', async ( { page : curPagObj } ) => { // What: Section Address Test. Why: A shared or bookmarked address with a hash should land on its section, then drop the hash. How: This opens /#about and checks where the visitor lands and the address.
 
 
-	await opeRouFun( curPagObj, '/#about', DES_VIE_OBJ ); // What: Section Address Open Call. Why: This is the arrival under test. How: This opens the home page with the About section's id as the hash.
+	await opeRouFun( curPagObj, '/#about', DES_VIE_OBJ ); // What: Section Address Open Call. Why: This is the arrival under test. How: This opens the home page with the About section's ID as the hash.
 
 	await ariSecFun( curPagObj, 'about' ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
@@ -506,7 +506,7 @@ for ( const [ pagNamStr, rouPatStr ] of [ [ 'home page', '/' ], [ '404 page', '/
 
 // #region Phone Menu Checks
 
-for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Menu Link Loop. Why: Each of the menu's links has its own target. How: This declares one test per link, pairing its label with its section's id.
+for ( const [ linLabStr, secIdeStr ] of SEC_LIN_ARR ) { // What: Menu Link Loop. Why: Each of the menu's links has its own target. How: This declares one test per link, pairing its label with its section's ID.
 
 
 	test( `the menu's ${ linLabStr } link closes the menu and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Menu Link Test. Why: Choosing a section should both take the visitor there and get the menu out of the way. How: This opens the menu, clicks the link, and checks the menu closed and the visitor landed on the section.
@@ -568,7 +568,7 @@ test( 'a new tab click on a menu link leaves the menu open', async ( { page : cu
 
 // #region Not Found Checks
 
-for ( const [ conLabStr, secIdeStr, conDesStr ] of [ [ 'See the collection', 'products', 'See the collection button' ], [ 'About Tony', 'about', 'About Tony link in the bar' ] ] ) { // What: Not Found Section Loop. Why: The 404 page reaches the home page's sections through its own button and the bar. How: This declares one test per control, pairing its label with its section's id and a description for the title.
+for ( const [ conLabStr, secIdeStr, conDesStr ] of [ [ 'See the collection', 'products', 'See the collection button' ], [ 'About Tony', 'about', 'About Tony link in the bar' ] ] ) { // What: Not Found Section Loop. Why: The 404 page reaches the home page's sections through its own button and the bar. How: This declares one test per control, pairing its label with its section's ID and a description for the title.
 
 
 	test( `the 404 page's ${ conDesStr } leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Test. Why: A section control on the 404 page has no section to scroll to, so it has to take the visitor home to it. How: This clicks the control and checks the visitor lands on the section with a clean address.

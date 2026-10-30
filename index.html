@@ -167,14 +167,14 @@
 	<body><!-- What: Document Body Element. Why: This holds the site's mount point, the form copy Netlify reads, and the entry script. How: The mount point stays empty until React renders the site into it. -->
 
 
-		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this id. -->
+		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this ID. -->
 
 		<form
 			data-netlify='true'
 			name='contactForm'
 
 			hidden
-		><!-- What: Netlify Detection Form Element. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no ids, so it never duplicates the real form's, and an aria-label on each field so accessibility checkers find every control named. -->
+		><!-- What: Netlify Detection Form Element. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no IDs, so it never duplicates the real form's, and an aria-label on each field so accessibility checkers find every control named. -->
 
 
 			<input

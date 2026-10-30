@@ -75,7 +75,7 @@ function FaiSecCom () : React.JSX.Element {
 			id='fairs'
 
 			className={ cssModObj.homFaiSec }
-		>{ /* What: Home Fairs Section Element. Why: Visitors meet Tony at craft fairs, and the gallery shows what his table looks like. How: Its id stays the plain word `fairs`, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Fairs Section Element. Why: Visitors meet Tony at craft fairs, and the gallery shows what his table looks like. How: Its ID stays the plain word `fairs`, since the bar links to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }

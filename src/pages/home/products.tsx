@@ -151,7 +151,7 @@ function ProSecCom () : React.JSX.Element {
 			id='products'
 
 			className={ cssModObj.homProSec }
-		>{ /* What: Home Products Section Element. Why: The collection is the site's main content. How: Its id stays the plain word `products`, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Products Section Element. Why: The collection is the site's main content. How: Its ID stays the plain word `products`, since the bar links to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }

@@ -273,13 +273,13 @@ function ConSecCom () : React.JSX.Element {
 	 * stops the page-reloading submit, hides any earlier error, and posts the
 	 * form's fields to Netlify Forms as URL-encoded data, whose form-name
 	 * field tells Netlify which form they belong to. While the request is out,
-	 * the send button is marked disabled, keeping its focus, reads Sending...
-	 * instead, and a second submit is ignored. Only an OK answer from Netlify
-	 * counts as sent: then the thank-you note shows, the fields empty, and the
-	 * note hides again six seconds later. A request that fails outright, or
-	 * one Netlify rejects, keeps the visitor's details in place and shows the
-	 * error note instead, so they can try again or call; one that fails
-	 * outright is also logged to the console.
+	 * the send button is marked disabled, keeping its focus, reads
+	 * "Sending..." instead, and a second submit is ignored. Only an OK answer
+	 * from Netlify counts as sent: then the thank-you note shows, the fields
+	 * empty, and the note hides again six seconds later. A request that fails
+	 * outright, or one Netlify rejects, keeps the visitor's details in place
+	 * and shows the error note instead, so they can try again or call; one
+	 * that fails outright is also logged to the console.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -315,7 +315,7 @@ function ConSecCom () : React.JSX.Element {
 
 		setForErrBoo( false ); // What: Error Note Hide Call. Why: A new attempt shouldn't keep showing the last one's error. How: This hides the error note.
 
-		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the message is on its way, and shouldn't send it twice. How: This marks the button disabled, which keeps its focus, and switches its label to Sending...
+		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the message is on its way, and shouldn't send it twice. How: This marks the button disabled, which keeps its focus, and switches its label to "Sending..."
 
 
 
@@ -377,7 +377,7 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach Tony. How: Its id stays the plain word `contact`, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach Tony. How: Its ID stays the plain word `contact`, since the bar links to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
@@ -687,7 +687,7 @@ function ConSecCom () : React.JSX.Element {
 							type='submit'
 
 							aria-disabled={ senProBoo } // What: Sending Disabled Flag. Why: A disabled button drops keyboard focus to the page, so the button stays focusable while a message is on its way. How: This marks it disabled for screen readers and the module's dimmed look while sending, and forSubFun ignores a second submit meanwhile.
-							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: The decorative arrow would otherwise become part of the button's accessible name. How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
+							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: The decorative arrow would otherwise become part of the button's accessible name. How: This names the button by its words alone, which still match what's shown, "Sending" while a request is out.
 						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is marked disabled while a request is out, keeping its focus. */ }
 
 

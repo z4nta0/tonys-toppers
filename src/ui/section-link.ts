@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * On the home page the section is already there, so the link scrolls to it in
  * place, smoothly unless the visitor asked for reduced motion. On any other
  * page, such as the 404 page, the section doesn't exist yet, so the link
- * navigates to the home page with the section's id as the hash, and the home
+ * navigates to the home page with the section's ID as the hash, and the home
  * page scrolls to it on arrival and then clears the hash, so the address bar
  * stays free of hashes either way. Every section link shares one click
  * handler, which leaves a Ctrl, Cmd, Shift, Alt, or middle click to the
@@ -95,21 +95,21 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
  * useSecLinFun = Use Section Link Function
  *
  * @summary
- * Returns the function a section link calls with its section's id. When an
- * element with that id is on the page, it scrolls it into view, jumping
+ * Returns the function a section link calls with its section's ID. When an
+ * element with that ID is on the page, it scrolls it into view, jumping
  * instead of gliding under reduced motion. When there isn't one, it navigates
- * to the home page with the id as the hash, inside the site without a full
+ * to the home page with the ID as the hash, inside the site without a full
  * page load, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param void - This function takes no parameters.
  *
- * @returns The function a section link calls with its section's id.
+ * @returns The function a section link calls with its section's ID.
  *
  * @example
  * ```ts
- * useSecLinFun() // => the function a section link calls with an id
+ * useSecLinFun() // => the function a section link calls with an ID
  * ```
  *
 */
@@ -121,17 +121,17 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
 
 
 
-	return ( secIdeStr : string ) => { // What: Visit Section Function. Why: Every section link shares one way to reach its section. How: This scrolls to the section if it's on the page, or navigates home with its id as the hash.
+	return ( secIdeStr : string ) => { // What: Visit Section Function. Why: Every section link shares one way to reach its section. How: This scrolls to the section if it's on the page, or navigates home with its ID as the hash.
 
 
-		const secCurEle = document.getElementById( secIdeStr ); // What: Section Current Element. Why: The section only exists on the home page. How: This looks it up by its id.
+		const secCurEle = document.getElementById( secIdeStr ); // What: Section Current Element. Why: The section only exists on the home page. How: This looks it up by its ID.
 
 
 		if ( secCurEle ) { secCurEle.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); return; } // What: In-Page Scroll Guard. Why: On the home page the section is already there. How: This scrolls it into view, jumping instead of gliding under reduced motion, and stops.
 
 
 
-		void navRouFun( { hash : secIdeStr, pathname : '/' } ); // What: Home Navigation Call. Why: On any other page the section has to be loaded first. How: This navigates to the home page with the section's id as the hash, and the home page scrolls to it on arrival; void marks the returned promise as deliberately unawaited.
+		void navRouFun( { hash : secIdeStr, pathname : '/' } ); // What: Home Navigation Call. Why: On any other page the section has to be loaded first. How: This navigates to the home page with the section's ID as the hash, and the home page scrolls to it on arrival; void marks the returned promise as deliberately unawaited.
 
 
 	};
@@ -152,7 +152,7 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * Returns secCliFun, the click handler every section link shares. A Ctrl,
  * Cmd, Shift, Alt, or middle click is left to the browser, which opens the
  * link's own address. Any other click stops the browser's jump to the hash
- * and hands the section's id to visSecFun, which scrolls to it on the home
+ * and hands the section's ID to visSecFun, which scrolls to it on the home
  * page or navigates home to it from any other page. It reports whether it
  * handled the click, so a caller such as the phone menu can close itself
  * only then.
@@ -162,7 +162,7 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * @param void - This function takes no parameters.
  *
  * @returns The click handler, which takes the click event and the section's
- *          id and returns whether it handled the click.
+ *          ID and returns whether it handled the click.
  *
  * @example
  * ```ts

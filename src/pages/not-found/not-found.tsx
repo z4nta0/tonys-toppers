@@ -7,7 +7,7 @@ import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why:
 
 
 import { Link         } from 'react-router';             // What: Link. Why: The page's "Back home" button returns home without a full page load. How: This renders it as a router link to the root.
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: See the collection reaches the Products section the same way the bar's links do. How: This returns secCliFun, the shared section link click handler.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: "See the collection" reaches the Products section the same way the bar's links do. How: This returns secCliFun, the shared section link click handler.
 
 // #endregion Imports
 
@@ -90,7 +90,7 @@ function NotFouCom () : React.JSX.Element {
 				<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The page's few lines read best centered. How: This centers them at the page's width with room above and below. */ }
 
 
-					<div className={ cssModObj.eyeLabDiv }>{ /* What: Eyebrow Label Div Element. Why: A short label says what happened. How: This shows 404, centered with its leading line. */ }
+					<div className={ cssModObj.eyeLabDiv }>{ /* What: Eyebrow Label Div Element. Why: A short label says what happened. How: This shows "404", centered with its leading line. */ }
 						404
 					</div>
 

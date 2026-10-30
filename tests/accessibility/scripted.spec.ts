@@ -106,7 +106,7 @@ async function focTopFun ( curPagObj : Page ) : Promise< void > {
  * Fills the contact form's three required fields, so a check can send it.
  * Each field is looked up inside the Contact section's form, since
  * index.html's hidden copy of it, which Netlify reads, labels its fields the
- * same way, and the Message label is matched exactly, since the Send Message
+ * same way, and the Message label is matched exactly, since the "Send Message"
  * button's own label holds the word too.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -356,10 +356,10 @@ function stoInfFun () : StoInfTyp | null {
 
 
 	const ariLabStr = actCurEle.getAttribute( 'aria-label' ); // What: ARIA Label String. Why: A stop's own label names it best. How: This reads its aria-label, or null.
-	const eleIdeStr = actCurEle.id;                           // What: Element Identifier String. Why: A form field without a label is still recognizable by its id. How: This reads the stop's id, empty when it has none.
+	const eleIdeStr = actCurEle.id;                           // What: Element Identifier String. Why: A form field without a label is still recognizable by its ID. How: This reads the stop's ID, empty when it has none.
 	const eleTexStr = actCurEle.textContent;                  // What: Element Text String. Why: A link or button is usually named by its text. How: This reads the stop's text.
 
-	const stoLabStr = ariLabStr || eleIdeStr || eleTexStr || ''; // What: Stop Label String. Why: A problem should name the stop the way a person would recognize it. How: This takes the label, then the id, then the text, then nothing.
+	const stoLabStr = ariLabStr || eleIdeStr || eleTexStr || ''; // What: Stop Label String. Why: A problem should name the stop the way a person would recognize it. How: This takes the label, then the ID, then the text, then nothing.
 
 
 	const botBelBoo = recCurObj.bottom > 0;        // What: Bottom Below Boolean. Why: A stop entirely above the viewport is off screen. How: This is true when its bottom edge sits below the viewport's top.
@@ -377,7 +377,7 @@ function stoInfFun () : StoInfTyp | null {
 
 
 		covBoo : !!topCurEle && !actCurEle.contains( topCurEle ),                               // What: Covered Boolean. Why: The stop is hidden when something else is on top of it. How: This is true when the top element at its center is neither the stop nor inside it.
-		desStr : `${ actCurEle.tagName.toLowerCase() } "${ stoLabStr.trim().slice( 0, 40 ) }"`, // What: Description String. Why: A problem should name the element a person would recognize. How: This joins the tag with the first 40 characters of its label, id, or text.
+		desStr : `${ actCurEle.tagName.toLowerCase() } "${ stoLabStr.trim().slice( 0, 40 ) }"`, // What: Description String. Why: A problem should name the element a person would recognize. How: This joins the tag with the first 40 characters of its label, ID, or text.
 		indBoo : focSigStr !== bluSigStr,                                                       // What: Indicator Boolean. Why: A keyboard user has to see where focus is. How: This is true when focusing the stop changes how it looks.
 		ordNum : Array.prototype.indexOf.call( document.querySelectorAll( '*' ), actCurEle ),   // What: Order Number. Why: Focus order is compared with document order. How: This is the stop's position among every element in the page.
 		visBoo : visStoBoo                                                                      // What: Visible Boolean. Why: A stop off screen leaves a keyboard user lost. How: This reads whether the stop has a size and overlaps the viewport.
@@ -671,7 +671,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 		await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
 
 
-		const senButObj = curPagObj.getByRole( 'button', { name : /^Send/ } ); // What: Send Button Object. Why: Focus is checked on the send button, whose name reads Sending while a message is out. How: This finds it by the start of its name.
+		const senButObj = curPagObj.getByRole( 'button', { name : /^Send/ } ); // What: Send Button Object. Why: Focus is checked on the send button, whose name reads "Sending" while a message is out. How: This finds it by the start of its name.
 
 
 		await forFilFun( curPagObj ); // What: Form Fill Call. Why: The form only sends once its required fields are filled. How: This fills them.

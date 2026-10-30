@@ -81,7 +81,7 @@ function AboSecCom () : React.JSX.Element {
 			id='about'
 
 			className={ cssModObj.homAboSec }
-		>{ /* What: Home About Section Element. Why: Visitors want to meet the maker. How: Its id stays the plain word `about`, since the bar and the hero link to it and it can appear in the page's address. */ }
+		>{ /* What: Home About Section Element. Why: Visitors want to meet the maker. How: Its ID stays the plain word `about`, since the bar and the hero link to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }

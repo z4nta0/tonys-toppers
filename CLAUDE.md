@@ -116,14 +116,14 @@ content cap), `4c0eafb` (hero picture), and `f615155` (grid card widths).
   size, sending the portrait around a wide circle off the hero's edges).
   Firefox alone shows a brief cross flashing over the sticker now and
   then, which no screenshot catches; the user chose to leave it.
-- **Grid cards**: the products grid's minimum card width takes `max()` of
+- **Grid cards**: the Products grid's minimum card width takes `max()` of
   about 138px and horizontal step 020, replacing the narrow-screen override,
   so a 320px screen shows one column. The Craft Fairs gallery's four booth
   shots step instead, so every row is full (decided 2026-10-23, under the
   Card Grids rule): four columns, two at 900px wide and below, and one at
   360px and below, where two would fall under the 138px minimum. That adds
   360px to the breakpoints, beside 900px and 1,000px.
-  The products grid keeps `auto-fill`, and its leftover cards sit centered
+  The Products grid keeps `auto-fill`, and its leftover cards sit centered
   in the last row at the others' width (decided 2026-10-29), since filters
   of 7 and 5 pieces have no column count that fills every row: an observer
   in `products.tsx` reads how many columns the grid laid out, and the
@@ -168,7 +168,7 @@ Outside `src/`: `tests/` holds the Playwright suites (see "## Test suites").
 - **The bar, footer, and section links live in `ui/`**, since the 404 page
   uses the bar and footer too. Section links go through
   `ui/section-link.ts`, as in seal-and-shield, which scrolls in place on the
-  home page and navigates home with the section's id as the hash from any
+  home page and navigates home with the section's ID as the hash from any
   other page; the home page jumps to that section on arrival and clears the
   hash. Unlike seal-and-shield's, its `modCliFun` leaves a Ctrl, Cmd,
   Shift, Alt, or middle click to the browser, so a section can still open in
@@ -222,7 +222,7 @@ passes on `close-out`.
    - **Known axe violations**, already on the live site and fixed in their own
      steps: the 404 page with no `h1` (step 11). The footer's phone link, told
      apart by color alone, gained an underline in step 6, and the hidden
-     Netlify form repeating the contact form's ids was rebuilt in step 6,
+     Netlify form repeating the contact form's IDs was rebuilt in step 6,
      before `index.html`'s formatting.
 3. **ESLint**, set up from ease-my-life's `eslint.config.ts`. Done
    2026-10-10 with seal-and-shield's copy unchanged and the sibling
@@ -269,7 +269,7 @@ passes on `close-out`.
    now waits for Netlify's answer: only an OK shows the thank-you note,
    while a rejection or a network failure keeps the visitor's details and
    shows an announced error note offering a retry or Tony's number, and the
-   button is disabled and reads Sending... while a request is out. The
+   button is disabled and reads "Sending..." while a request is out. The
    error note's reds are literal until step 9 gives them their status
    roles. The hidden form in `index.html` became a bare, valid copy of the
    real form's four fields in step 6, as in seal-and-shield. The user sent
@@ -360,7 +360,7 @@ passes on `close-out`.
     plus a recheck of WebKit's phone menu links once the photos had their
     sizes. Done 2026-10-10 and released as 1.7.0.
     - **404 page**: done 2026-10-10, with an `h1`, its own title, `noindex`,
-      and a See the collection button beside Back home.
+      and a "See the collection" button beside "Back home".
     - **Security headers**: done 2026-10-10, seal-and-shield's `_headers`,
       with Vite emitting every asset as a file (`assetsInlineLimit: 0`) so
       the policy needn't allow data URLs.
@@ -410,25 +410,25 @@ passes on `close-out`.
       now fills `backwards`, so their hover lift finally shows.
     - **Close-out rulings** (decided 2026-10-11 by the user): the navy buttons
       with hard shadows (the hero's and 404 page's primary buttons, the form's
-      Send Message, the menu's call button) lighten to `--acc-hov-col` on hover
-      as they lift, and press in to 0.97 back onto their resting shadow, like
-      every other button. The product cards lift about 2px, the rule's size,
-      not 6px, and show the normal cursor, since they aren't links, while
-      keeping their navy hover border beside the fading shadow (confirmed
-      2026-10-29). The footer
-      spells out Bolivar, Missouri, like the rest of the page; only the page
-      title, the preview card, and the structured data use MO, where length or
-      format needs it. The same holds for every Missouri town the page names,
-      so Tony's story spells out Grandview, Missouri. The phone menu's panel
-      decelerates as it slides in and accelerates as it slides out, and the
-      Products band's filter strip sits above the band's dot grid like the
-      heading and the cards. The contact form's thank-you and error notes fade
-      out as they leave, as well as rising in. The portrait's hover tilt and
-      the product photos' hover zoom run about 277ms, within the rule's range,
-      and the phone menu's rows keep their sideways nudge on hover. Cards a
-      filter drops leave the grid at once (confirmed 2026-10-29), since the
-      new cards' staggered rise already animates the change, and an exit
-      would hold every filter back a beat while the old cards played it.
+      "Send Message", the menu's call button) lighten to `--acc-hov-col` on
+      hover as they lift, and press in to 0.97 back onto their resting shadow,
+      like every other button. The product cards lift about 2px, the rule's
+      size, not 6px, and show the normal cursor, since they aren't links,
+      while keeping their navy hover border beside the fading shadow
+      (confirmed 2026-10-29). The footer spells out Bolivar, Missouri, like
+      the rest of the page; only the page title, the preview card, and the
+      structured data use MO, where length or format needs it. The same holds
+      for every Missouri town the page names, so Tony's story spells out
+      Grandview, Missouri. The phone menu's panel decelerates as it slides in
+      and accelerates as it slides out, and the Products band's filter strip
+      sits above the band's dot grid like the heading and the cards. The
+      contact form's thank-you and error notes fade out as they leave, as well
+      as rising in. The portrait's hover tilt and the product photos' hover
+      zoom run about 277ms, within the rule's range, and the phone menu's rows
+      keep their sideways nudge on hover. Cards a filter drops leave the grid
+      at once (confirmed 2026-10-29), since the new cards' staggered rise
+      already animates the change, and an exit would hold every filter back a
+      beat while the old cards played it.
 12. **Close-out**: done 2026-10-11 on `close-out`. The README was rewritten for
     the finished site, and the rule pass ran seven full audits, each fixed and
     rechecked, as the findings fell from 82 to 2 (82, 36, 20, 7, 16, 11, 2),

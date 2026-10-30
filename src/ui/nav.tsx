@@ -45,10 +45,10 @@ import { useState     } from 'react';             // What: Use State. Why: The b
 
 // #region Constants
 
-const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to every home page section, in page order. How: Each row names a section's id, which its link goes to, and the link's label.
+const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to every home page section, in page order. How: Each row names a section's ID, which its link goes to, and the link's label.
 
 
-	{ ideStr : 'home',     labStr : 'Home'        }, // What: Home Section Row. Why: The hero is where a visitor starts. How: This links to the hero's home id.
+	{ ideStr : 'home',     labStr : 'Home'        }, // What: Home Section Row. Why: The hero is where a visitor starts. How: This links to the hero's home ID.
 	{ ideStr : 'products', labStr : 'Products'    }, // What: Products Section Row. Why: The collection is the site's main content. How: This links to the Products section.
 	{ ideStr : 'fairs',    labStr : 'Craft Fairs' }, // What: Fairs Section Row. Why: The craft fair gallery shows where to find Tony. How: This links to the gallery.
 	{ ideStr : 'about',    labStr : 'About Tony'  }, // What: About Section Row. Why: Visitors want to meet the maker. How: This links to Tony's story.
@@ -133,7 +133,7 @@ function NavBarCom () : React.JSX.Element {
 
 	// #region Active Section Tracking
 
-	const [ actSecStr, setActSecStr ] = useState( 'home' ); // What: Active Section String And Setter. Why: The link for the section being read is marked active. How: This holds that section's id, starting at the top of the page.
+	const [ actSecStr, setActSecStr ] = useState( 'home' ); // What: Active Section String And Setter. Why: The link for the section being read is marked active. How: This holds that section's ID, starting at the top of the page.
 
 
 	useEffect( () => { // What: Section Observer Effect. Why: The active link follows the section being read, but only the home page has sections. How: This watches every section the bar links to while on the home page, and stops watching when the path changes.
@@ -143,7 +143,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-		const secEleArr = NAV_SEC_ARR.map( ( secRecObj ) => document.getElementById( secRecObj.ideStr ) ).filter( ( secCurEle ) : secCurEle is HTMLElement => secCurEle !== null ); // What: Section Element Array. Why: Only sections on the page can be watched. How: This looks up each linked section by its id and keeps the ones found.
+		const secEleArr = NAV_SEC_ARR.map( ( secRecObj ) => document.getElementById( secRecObj.ideStr ) ).filter( ( secCurEle ) : secCurEle is HTMLElement => secCurEle !== null ); // What: Section Element Array. Why: Only sections on the page can be watched. How: This looks up each linked section by its ID and keeps the ones found.
 
 
 		if ( secEleArr.length === 0 ) return; // What: No Sections Guard. Why: There's nothing to watch if no section rendered. How: This skips the observer.
@@ -156,7 +156,7 @@ function NavBarCom () : React.JSX.Element {
 			const visEntArr = entObjArr.filter( ( entCurObj ) => entCurObj.isIntersecting ).sort( ( entOneObj, entTwoObj ) => entOneObj.boundingClientRect.top - entTwoObj.boundingClientRect.top ); // What: Visible Entry Array. Why: Several sections can sit in the band at once, and the highest is the one being read. How: This keeps the sections inside the band, sorted from the top of the screen down.
 
 
-			if ( visEntArr[ 0 ] ) setActSecStr( visEntArr[ 0 ].target.id ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the highest visible section's id, and leaves the active link alone when none is in the band.
+			if ( visEntArr[ 0 ] ) setActSecStr( visEntArr[ 0 ].target.id ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the highest visible section's ID, and leaves the active link alone when none is in the band.
 
 
 		}, { rootMargin : '-25% 0px -65% 0px', threshold : 0 } ); // What: Observer Options. Why: A section counts as being read once its top is a quarter of the way down the screen. How: This shrinks the watched band to the strip from 25% to 35% of the screen's height, reporting any overlap at all.
