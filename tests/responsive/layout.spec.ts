@@ -15,20 +15,19 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * layout.spec.ts = Layout Spec
  *
  * @summary
- * Measures the home page and the 404 page across a range of screen widths,
- * and the open mobile menu at the widths up to the site's 900px breakpoint,
- * where it exists, in whichever engine the project runs, and fails a width
- * whose layout breaks: the page scrolling sideways, a visible element
- * reaching past either edge of the screen (unless an ancestor clips it on
- * purpose), text spilling out of its own box, two controls a visitor can
- * reach overlapping each other, or a card grid leaving uneven rows. The
- * widths run from 320px, WCAG's narrowest reflow width, to 1,920px, and
- * include a pixel either side of each of the site's breakpoints, where a
- * layout switches and is most likely to crowd. The home page is also
- * measured with each Products filter chosen, at a few widths, since the
- * grid's card count changes with its filter.
- * Pages open under reduced motion, which changes nothing about the layout but
- * skips the wait for entrance animations.
+ * Measures the home page and the 404 page across a range of screen widths, and
+ * the open mobile menu at the widths up to the site's 900px breakpoint, where
+ * it exists, in whichever engine the project runs, and fails a width whose
+ * layout breaks: the page scrolling sideways, a visible element reaching past
+ * either edge of the screen (unless an ancestor clips it on purpose), text
+ * spilling out of its own box, two controls a visitor can reach overlapping
+ * each other, or a card grid leaving uneven rows. The widths run from 320px,
+ * WCAG's narrowest reflow width, to 1,920px, and include each of the site's
+ * breakpoints and the pixel past it, where a layout switches and is most
+ * likely to crowd. The home page is also measured with each Products filter
+ * chosen, at a few widths, since the grid's card count changes with its
+ * filter. Pages open under reduced motion, which changes nothing about the
+ * layout but skips the wait for entrance animations.
  *
  * Sections:
  *  - Constants
