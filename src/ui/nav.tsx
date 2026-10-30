@@ -318,8 +318,8 @@ function NavBarCom () : React.JSX.Element {
 
 						src={ lntSvgUrl }
 
-						alt="Tony's Toppers logo"
-					/>{ /* What: Navigation Logo Image Element. Why: The bar opens with the Tony's Toppers mark. How: This shows the mark without its wordmark, since the name sits right beside it. */ }
+						alt=''
+					/>{ /* What: Navigation Logo Image Element. Why: The bar opens with the Tony's Toppers mark. How: This shows the mark without its wordmark, since the name sits right beside it, and its empty alt leaves the link announced by that name alone. */ }
 
 					<span>Tony's Toppers</span>{ /* What: Brand Name Span Element. Why: The bar names the business. How: This shows the name beside the mark. */ }
 
@@ -342,11 +342,11 @@ function NavBarCom () : React.JSX.Element {
 				>{ /* What: Navigation Toggle Button Element. Why: At 900px wide and below the section links sit in a menu. How: This opens or closes it, tells screen readers whether it's open, and shows only at 900px wide and below. */ }
 
 
-					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is the top one, which turns into one stroke of the cross while the menu is open. */ }
 
-					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is the middle one, which fades out while the menu is open. */ }
 
-					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is one of them. */ }
+					<span className={ cssModObj.togBarSpa } />{ /* What: Toggle Bar Span Element. Why: The toggle draws as three bars. How: This is the bottom one, which turns into the cross's other stroke while the menu is open. */ }
 
 
 				</button>
