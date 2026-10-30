@@ -437,12 +437,12 @@
 
 }
 
-html { /* What: HTML. Why: One rem should equal the 11px base font size, and in-page links should glide to their sections and land clear of the fixed bar. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px and still follows a size the visitor sets, turns on smooth scrolling, and stops each section about 79px below the top. */
+html { /* What: HTML. Why: One rem should equal the 11px base font size, and in-page links should glide to their sections and land clear of the fixed bar. How: This sets the root to 68.75% (11/16) of the browser's own default, so 1rem is 11px at the usual 16px and still follows a size the visitor sets, turns on smooth scrolling, and stops each section the bar's height plus room below the top, about 103px. */
 
 
 	font-size          : 68.75%;
 	scroll-behavior    : smooth;
-	scroll-padding-top : calc( var( --ver-rhy-p06 ) * 1em ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */ /* What: Root Em Padding. Why: WebKit resolves a rem on the root element against the browser's 16px default rather than this rule's 11px, which landed every section link about 36px short, so neither the spacing token nor the bar's height token can be read here. How: This multiplies the same rhythm step by 1em, which on the root is its own 11px in every engine. */
+	scroll-padding-top : calc( ( var( --ver-rhy-p01 ) * 3 + var( --ver-rhy-p04 ) ) * 1em ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 4 ~= 44.876px, ~= 102.787px in all */ /* What: Root Em Bar Padding. Why: A section should land clear of the fixed bar with room to spare, and WebKit resolves a rem on the root element against the browser's 16px default rather than this rule's 11px, which landed every section link about 36px short, so neither the bar's height token nor a spacing token can be read here. How: This rebuilds the bar's height, twice step p01 plus step p04, adds step p01 of room, and multiplies the sum by 1em, which on the root is its own 11px in every engine. */
 
 
 }
