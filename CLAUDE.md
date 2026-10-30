@@ -367,7 +367,7 @@ passes on `close-out`.
       engines.
     - **SEO**: done 2026-10-10. `index.html` carries the home page's title
       ("Tony's Toppers | Handmade Beaded Crafts in Bolivar, MO"), a
-      120-character description naming Tony, Bolivar, and his pieces, the
+      122-character description naming Tony, Bolivar, and his pieces, the
       author and canonical tags, and one JSON-LD graph: an `Organization`
       (phone, Bolivar, MO with no street, the Facebook page in `sameAs`)
       founded by a `Person` for Tony (no birth date), and a `WebSite` it
