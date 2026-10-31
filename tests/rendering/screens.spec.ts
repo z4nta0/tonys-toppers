@@ -60,7 +60,7 @@ const PIX_THR_NUM = 0;                     // What: Pixel Threshold Number. Why:
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state has a baseline. How: This declares one comparison per state.
 
 
-	test( `${ staRecObj.ideStr } matches its approved screenshot`, async ( { browserName, page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
+	test( `${ staRecObj.ideStr } matches its approved screenshot`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
 
 
 		await curPagObj.clock.setFixedTime( new Date( FIX_TIM_STR ) ); // What: Fixed Clock Call. Why: The page's year-based text has to read the same in every run. How: This makes the page's Date always return the fixed time, while its timers keep running normally.
@@ -77,7 +77,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 			maxDiffPixelRatio : MAX_DIF_NUM, // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.
 			threshold         : PIX_THR_NUM, // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.
 
-			mask : browserName === 'webkit' ? [ curPagObj.locator( '[class*="proPhoIma"], [class*="faiPhoIma"]' ) ] : [], // What: Mask. Why: WebKit draws the 3x product and gallery photos slightly differently on every capture, which no baseline can match. How: This covers those photos in WebKit's captures, found by their module classes, and masks nothing in the other engines.
+			mask : engNamStr === 'webkit' ? [ curPagObj.locator( '[class*="proPhoIma"], [class*="faiPhoIma"]' ) ] : [], // What: Mask. Why: WebKit draws the 3x product and gallery photos slightly differently on every capture, which no baseline can match. How: This covers those photos in WebKit's captures, found by their module classes, and masks nothing in the other engines.
 
 
 		} );
