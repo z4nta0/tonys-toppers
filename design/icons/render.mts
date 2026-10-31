@@ -22,9 +22,9 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * favicon.svg itself; this script draws the fallbacks: PNG icons at the sizes
  * browsers and apps ask for, such as 192px, a favicon.ico packing the small
  * sizes older browsers pick from and answering the request browsers make for
- * /favicon.ico on their own, and a 180px apple-touch-icon.png on a solid
- * white square, since iOS fills transparency with black and rounds the
- * corners itself. The touch icon draws the mark a little smaller than the
+ * /favicon.ico on their own, and a 180px apple-touch-icon.png on a solid white
+ * square, so the icon has no transparent area for iOS to fill, and iOS rounds
+ * the corners itself. The touch icon draws the mark a little smaller than the
  * square, so the rounded corners never crowd the ring. Since the mark is a
  * vector, each size is drawn straight from it. Run it with npm run icons
  * whenever the mark changes.
@@ -59,7 +59,7 @@ const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG ico
 	{ filStr : 'favicon-32x32.png',    opaBoo : false, sizNum : 32  }, // What: Medium Icon Row. Why: A 32px icon is a common tab size. How: This renders the 32px icon.
 	{ filStr : 'favicon-192x192.png',  opaBoo : false, sizNum : 192 }, // What: Large Icon Row. Why: A large icon serves shortcuts. How: This renders the 192px icon.
 	{ filStr : 'favicon-512x512.png',  opaBoo : false, sizNum : 512 }, // What: Extra Large Icon Row. Why: High-density screens and launchers can ask for a bigger icon still. How: This renders the 512px icon.
-	{ filStr : 'apple-touch-icon.png', opaBoo : true,  sizNum : 180 }  // What: Apple Touch Icon Row. Why: iOS draws the home screen icon at 180px and fills transparency with black. How: This renders it on solid white.
+	{ filStr : 'apple-touch-icon.png', opaBoo : true,  sizNum : 180 }  // What: Apple Touch Icon Row. Why: iOS draws the home screen icon at 180px. How: This renders it on solid white.
 
 
 ];
@@ -138,7 +138,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 		const marOffNum = ( tarSizNum - marSizNum ) / 2;                 // What: Mark Offset Number. Why: The shrunk mark sits in the middle of its square. How: This splits the spare room evenly on each side.
 
 
-		if ( solBacBoo ) { // What: Solid Background Fill. Why: iOS fills transparency with black. How: For the opaque icon, this paints the square white before the mark goes on.
+		if ( solBacBoo ) { // What: Solid Background Fill. Why: The touch icon should leave iOS no transparent area to fill. How: For the opaque icon, this paints the square white before the mark goes on.
 
 
 			finCotObj.fillStyle = '#ffffff'; // What: White Fill Assignment. Why: The background has to be solid white. How: This sets the fill color.

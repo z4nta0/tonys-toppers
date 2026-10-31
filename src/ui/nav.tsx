@@ -74,15 +74,14 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * home page an IntersectionObserver marks the link for the section whose top
  * has crossed a band that starts just below the bar, while every other page
  * marks none. At 900px wide and below the links sit in a menu the toggle
- * opens, over a scrim that dims the page behind it, and choosing a link,
- * tapping the scrim, pressing Escape, or widening the screen past 900px closes
- * it. While it's open the page behind it is inert, so keyboard and screen
- * reader users stay in the bar. Each link reaches its section through section-
- * link.ts, scrolling in place on the home page or navigating home from any
- * other page, and leaves a Ctrl, Cmd, Shift, Alt, or middle click to the
- * browser. A skip link comes first, waiting above the screen until it's
- * focused, and its plain click focuses the main element without leaving a hash
- * in the address.
+ * opens, over a scrim that dims the page behind it, and the menu closes in a
+ * few ways, such as choosing a link. While it's open the page behind it is
+ * inert, so keyboard and screen reader users stay in the bar. Each link
+ * reaches its section through section- link.ts, scrolling in place on the home
+ * page or navigating home from any other page, and leaves a Ctrl, Cmd, Shift,
+ * Alt, or middle click to the browser. A skip link comes first, waiting above
+ * the screen until it's focused, and its plain click focuses the main element
+ * without leaving a hash in the address.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

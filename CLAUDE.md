@@ -450,8 +450,8 @@ Added 2026-10-10, adapted from seal-and-shield's. Playwright suites live in
 `tests/`, one project per suite and engine in `tests/playwright.config.ts`,
 which starts its own dev server on port 5192 (never the usual 5173, nor a
 sibling project's port), plus a production preview on 5199 for the security
-suite, and stops both afterwards. Every suite runs in
-Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
+suite and the SEO suite's built page check, and stops both afterwards. Every
+suite runs in Chromium, Firefox, and WebKit. Results, screenshots, and traces go to
 `tests/output/` (git-ignored); `npx playwright show-report
 tests/output/report` opens the HTML report. The states the suites visit (the
 home page and the 404 page at 390px and 1,440px, plus the phone menu open at
