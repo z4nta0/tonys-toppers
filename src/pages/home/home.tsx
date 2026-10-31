@@ -90,7 +90,7 @@ function HomPagCom () : React.JSX.Element {
 		} );
 
 
-	}, [ hasValStr, navRouFun ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a section link arrives, and navRouFun is listed because the effect calls it, though it stays the same while the visitor stays on this page.
+	}, [ hasValStr, navRouFun ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a section link arrives, and navRouFun is listed because the effect calls it.
 
 
 
