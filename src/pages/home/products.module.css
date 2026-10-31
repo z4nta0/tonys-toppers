@@ -265,7 +265,7 @@
 
 /* #region proGriDiv */
 
-.proGriDiv { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This fills each row with cards at least about 138px wide, or horizontal step 020 on wider screens, and lifts the grid onto its own layer. */
+.proGriDiv { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This lays out as many columns as fit, each at least about 138px wide, or horizontal step 020 on wider screens, and lifts the grid onto its own layer. */
 
 
 	display               : grid;
