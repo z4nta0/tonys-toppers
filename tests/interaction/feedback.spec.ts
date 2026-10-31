@@ -566,7 +566,7 @@ function movProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr
 function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], string ] ) : SnaRecTyp[] {
 
 
-	const [ proNamArr, pseNamStr ] = snaArgArr; // What: Property Name Array And Pseudo Name String. Why: The page function takes one argument. How: This unpacks the names to probe and the layer to add.
+	const [ proNamArr, pseNamStr ] = snaArgArr; // What: Property Name Array. Why: The page function takes one argument, which holds the names to probe. How: This unpacks them from its first slot. // What: Pseudo Name String. Why: The same argument holds the layer to read with the element. How: This unpacks it from the second slot, '' for none.
 
 	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline', 'padding-top' : 'padding' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand that has a shorthand to it.
 
