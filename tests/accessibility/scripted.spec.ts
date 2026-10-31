@@ -64,12 +64,12 @@ const TAB_MAX_NUM = 80;                                    // What: Tab Maximum 
  * focTopFun = Focus Top Function
  *
  * @summary
- * Moves the browser's starting point for Tab back to the top of the page,
- * so a keyboard walk meets every stop from the first. A click or a send can
- * leave focus partway down, such as on the menu toggle or the send button,
- * and blurring alone isn't enough, since browsers remember where focus last
- * was. Focusing the body for a moment moves that point to the top, and the
- * body is made unfocusable again straight after.
+ * Moves the browser's starting point for Tab back to the top of the page, so a
+ * keyboard walk meets every stop from the first. A click or a send can leave
+ * focus partway down, such as on the menu toggle, and blurring alone isn't
+ * enough, since browsers remember where focus last was. Focusing the body for
+ * a moment moves that point to the top, and the body is made unfocusable again
+ * straight after.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

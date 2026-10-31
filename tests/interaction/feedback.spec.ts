@@ -459,7 +459,7 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
 // #region movProFun
 
 /**
- * movProFun = Motion Problems Function
+ * movProFun = Moving Problems Function
  *
  * @summary
  * The reduced-motion counterpart of {@link snaProFun}: compares two snapshots
@@ -532,8 +532,8 @@ function movProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr
  * each part of that look would ease if it changed: for the element, every
  * element inside it, and one of its layers when asked, each probed property's
  * computed value and the duration of the transition covering it, listed by its
- * own name, by a shorthand holding it (such as background for background-
- * color, or outline for outline-width), or by all, or 0 when none is. The
+ * own name, by a shorthand holding it (such as background for
+ * background-color), or by all, or 0 when none is. The
  * border color reads only the sides actually drawn, those with a width above
  * zero, as one color when they all share it, since an undrawn side's color can
  * change without anything showing. An inner element whose color matches its

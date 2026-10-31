@@ -54,7 +54,7 @@ const carPagObj = await broInsObj.newPage( { viewport : { height : 630, width : 
 
 await carPagObj.goto( CAR_URL_STR ); // What: Card Load Call. Why: The card has to be on screen before it's captured. How: This opens card.html.
 
-await carPagObj.evaluate( () => Promise.all( [ document.fonts.ready, ...[ ...document.images ].map( ( imaCurEle ) => imaCurEle.decode() ) ] ) ); // What: Fonts And Portrait Ready Wait. Why: Text captured before its web font loads would be set in a fallback, and an undecoded portrait would be missing. How: This waits for every font face and image.
+await carPagObj.evaluate( () => Promise.all( [ document.fonts.ready, ...[ ...document.images ].map( ( imaCurEle ) => imaCurEle.decode() ) ] ) ); // What: Fonts And Portrait Ready Wait. Why: Text captured before its web font loads would be set in a fallback, and an undecoded portrait would be missing. How: This waits for the fonts the page uses and every image.
 
 await carPagObj.screenshot( { path : OUT_PAT_STR, quality : 90, type : 'jpeg' } ); // What: Card Capture Call. Why: This writes the finished image. How: This saves the page as a JPEG at quality 90 in public/, the lowest that showed no difference from the original at 3x zoom.
 

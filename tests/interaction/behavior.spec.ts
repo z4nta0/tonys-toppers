@@ -107,7 +107,7 @@ async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { h
 
 	await curPagObj.goto( rouPatStr ); // What: Route Load Call. Why: Each check starts from a fresh load. How: This opens the path on the suite's dev server.
 
-	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Positions measured before the fonts load would shift. How: This waits until every font face has loaded.
+	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Positions measured before the fonts load would shift. How: This waits until the fonts the page uses have loaded.
 
 
 }
