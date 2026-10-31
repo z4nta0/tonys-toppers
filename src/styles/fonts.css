@@ -7,16 +7,15 @@
  * @summary
  * The site's self-hosted fonts: Fraunces, the display serif, and Outfit, the
  * body sans serif, replacing the Google Fonts stylesheet and preconnect links
- * index.html used to load, so a visit makes no requests to a third party.
- * Each file is the same Latin subset Google served, which covers every
- * character the copy uses except a few symbols, such as its arrows; none of
- * Google's files for either family has those, so they keep rendering from a
- * fallback font as before. The upright Fraunces and Outfit files are variable
- * across weights 100 to 900, read from each font's fvar table, so each face
- * declares that range. The italic Fraunces file holds weight 600 alone,
- * varying only its optical size, so its face declares 600, and the browser
- * thickens it for a heavier italic. Fraunces's optical size axis (9 to 144)
- * follows each element's font size on its own. The files live in
+ * index.html used to load, so a visit makes no requests to a third party. Each
+ * file is the same Latin subset Google served, which covers every character
+ * the copy uses except a few symbols, such as its arrows; none of Google's
+ * files for either family has those, so they keep rendering from a fallback
+ * font as before. The upright Fraunces and Outfit files are variable across
+ * weights 100 to 900, read from each font's fvar table, so each face declares
+ * that range. The italic Fraunces file holds weight 600 alone, varying only
+ * its optical size, so its face declares 600. Fraunces's optical size axis (9
+ * to 144) follows each element's font size on its own. The files live in
  * src/assets/fonts/ and are pulled in through url(), so Vite fingerprints
  * them.
  *

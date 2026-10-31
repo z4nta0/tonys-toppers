@@ -103,11 +103,11 @@ async function focTopFun ( curPagObj : Page ) : Promise< void > {
  * forFilFun = Form Fill Function
  *
  * @summary
- * Fills the contact form's three required fields, so a check can send it.
- * Each field is looked up inside the Contact section's form, since
- * index.html's hidden copy of it, which Netlify reads, labels its fields the
- * same way, and the "Message" label is matched exactly, since the
- * "Send Message" button's own label holds the word too.
+ * Fills the contact form's three required fields, so a check can send it. Each
+ * field is looked up inside the Contact section's form, since index.html's
+ * hidden copy of it, which Netlify reads, labels its email and message fields
+ * the same way, and the "Message" label is matched exactly, since the "Send
+ * Message" button's own label holds the word too.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -768,7 +768,7 @@ test( 'under reduced motion the thank-you note still leaves when the visitor typ
 
 	await expect( staRegObj ).toContainText( 'Your message was sent' ); // What: Note Shown Assertion. Why: The exit is checked once the note has arrived. How: This waits for the note.
 
-	await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Another Visitor' ); // What: Name Retype Call. Why: Typing again hides the thank-you. How: This changes the name field. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+	await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Another Visitor' ); // What: Name Retype Call. Why: Typing again hides the thank-you. How: This changes the name field.
 
 	await expect( staRegObj ).toHaveText( '' ); // What: Region Emptied Assertion. Why: The note has to unmount once its near-instant exit ends. How: This waits until the region holds no text.
 

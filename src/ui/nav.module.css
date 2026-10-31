@@ -9,13 +9,13 @@
  * focused, then the fixed, frosted top bar, which tightens and gains a
  * hairline once the page scrolls, with the brand on the left and the section
  * links in a row on the right. On screens 900px wide or narrower the links
- * move into a menu that slides down below the bar from the toggle's three
- * bars, over a scrim that dims the page, and is hidden from the Tab order and
- * screen readers once it has slid away. The menu's rows are set in the serif
- * with hairlines between them and a yellow dot for the section being read,
- * rise in one after another, and end with the ways to reach Tony, such as a
- * call button. The bar's states are attributes rather than classes, such as
- * data-mobile-menu-open on the menu and the scrim.
+ * move into a menu, opened from the toggle's three bars, that slides down
+ * below the bar, over a scrim that dims the page, and is hidden from the Tab
+ * order and screen readers once it has slid away. The menu's rows are set in
+ * the serif with hairlines between them and a yellow dot for the section being
+ * read, rise in one after another, and end with the ways to reach Tony, such
+ * as a call button. The bar's states are attributes rather than classes, such
+ * as data-mobile-menu-open on the menu and the scrim.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

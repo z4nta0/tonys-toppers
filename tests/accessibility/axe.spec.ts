@@ -103,10 +103,10 @@ const FOR_RES_ARR = [ // What: Form Result Array. Why: The form's thank-you mess
  * scaStaFun = Scan State Function
  *
  * @summary
- * Runs axe-core on the page as it stands, limited to the WCAG and
- * best-practice rule sets, and returns its full results. The caller opens
- * and settles the state first, so the scan never sees a page mid-load or
- * mid-animation.
+ * Runs axe-core on the page as it stands, limited to the WCAG and best-
+ * practice rule sets, and returns its full results. The caller opens and
+ * settles the state first, so the scan runs on a page that has finished
+ * loading and animating.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -257,9 +257,9 @@ for ( const resRecObj of FOR_RES_ARR ) { // What: Form Result Test Loop. Why: Th
 
 			await opeStaFun( curPagObj, STA_REC_ARR.find( ( staRecObj ) => staRecObj.ideStr === staIdeStr )! ); // What: Home Open Call. Why: The form lives in the Contact section, scanned at the loop's width. How: This loads and settles the loop's home state. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always holds both home states.
 
-			await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Test Visitor' );                 // What: Name Fill Call. Why: The name is required. How: This types a name. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
-			await curPagObj.locator( '#contact form' ).getByLabel( 'Email' ).fill( 'visitor@test.example' );             // What: Email Fill Call. Why: The email is required. How: This types an address on the reserved .example domain. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
-			await curPagObj.locator( '#contact form' ).getByLabel( 'Message', { exact : true } ).fill( 'Hello, Tony!' ); // What: Message Fill Call. Why: The message is required. How: This types a short one, matching the label exactly, since the "Send Message" button's own label holds the word too. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its fields the same way. How: Each field is looked up inside the Contact section's form.
+			await curPagObj.locator( '#contact form' ).getByLabel( 'Your Name' ).fill( 'Test Visitor' );                 // What: Name Fill Call. Why: The name is required. How: This types a name.
+			await curPagObj.locator( '#contact form' ).getByLabel( 'Email' ).fill( 'visitor@test.example' );             // What: Email Fill Call. Why: The email is required. How: This types an address on the reserved .example domain. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its email and message fields the same way. How: Each field is looked up inside the Contact section's form.
+			await curPagObj.locator( '#contact form' ).getByLabel( 'Message', { exact : true } ).fill( 'Hello, Tony!' ); // What: Message Fill Call. Why: The message is required. How: This types a short one, matching the label exactly, since the "Send Message" button's own label holds the word too. // What: Contact Form Scope. Why: index.html's hidden copy of the form, which Netlify reads, labels its email and message fields the same way. How: Each field is looked up inside the Contact section's form.
 
 			await curPagObj.getByRole( 'button', { name : 'Send Message' } ).click(); // What: Send Click Call. Why: The result only shows after a send. How: This sends the message, which the fake answers.
 
