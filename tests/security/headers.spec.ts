@@ -102,7 +102,7 @@ test( 'the other hardening headers are set', () => { // What: Hardening Headers 
 	expect( hstValStr ).toContain( 'includeSubDomains' );                                                  // What: HSTS Subdomains Assertion. Why: A plain HTTP subdomain could still be used against the site. How: This checks HSTS covers every subdomain.
 	expect( heaAllObj[ 'x-content-type-options' ] ).toBe( 'nosniff' );                                     // What: No Sniff Assertion. Why: A browser guessing a file's type could run a text file as script. How: This checks it's told not to guess.
 	expect( heaAllObj[ 'x-frame-options' ] ).toBe( 'DENY' );                                               // What: Frame Options Assertion. Why: Older browsers ignore frame-ancestors. How: This checks framing is refused the older way too.
-	expect( heaAllObj[ 'referrer-policy' ] ).toBeTruthy();                                                 // What: Referrer Policy Assertion. Why: Without one, the full address can leak to other sites. How: This checks a policy is set.
+	expect( heaAllObj[ 'referrer-policy' ] ).toBeTruthy();                                                 // What: Referrer Policy Assertion. Why: A referrer policy states how much of the address other sites receive. How: This checks a policy is set.
 	expect( heaAllObj[ 'permissions-policy' ] ).toBeTruthy();                                              // What: Permissions Policy Assertion. Why: Browser features the site never uses shouldn't be available to injected code. How: This checks a policy is set.
 
 

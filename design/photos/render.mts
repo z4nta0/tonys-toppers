@@ -59,7 +59,7 @@ const BOX_REC_OBJ : Record< string, BoxRecTyp > = { // What: Box Record Object. 
 
 type CroBoxTyp = { heiNum : number, lefNum : number, topNum : number, widNum : number }; // What: Crop Box Type. Why: A crop keeps one rectangle of the original. How: This names its height, left edge, top edge, and width in the original's pixels.
 
-const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Why: A few originals carry more than the photo itself. How: This maps a file name to the rectangle to keep.
+const CRO_BOX_OBJ : Record< string, CroBoxTyp > = { // What: Crop Box Object. Why: An original can carry more than the photo itself, such as booth-1's phone screenshot. How: This maps a file name to the rectangle to keep.
 
 
 	'booth-1' : { heiNum : 1260, lefNum : 0, topNum : 394, widNum : 946 } // What: Booth 1 Crop. Why: booth-1 is a phone screenshot, with the status bar and share buttons above the photo and the phone's controls below it. How: This keeps the photo, measured where the black frame around it ends.

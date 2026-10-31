@@ -501,13 +501,13 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
  * @summary
  * Runs inside the page and returns every element, or ::before or ::after
  * layer, whose computed styles would still move under reduced motion: a
- * transition lasting longer than 1ms, or an animation lasting longer than
- * 1ms that isn't turned off. Unlike getAnimations, which only lists motion
- * already playing, this reads what each element would do on its next change,
- * so a reduced-motion variant missing from any module, for a child, a layer,
- * or something shown only later, is caught at rest. Each problem names the
- * element by its tag and the readable part of its first class. Passed to
- * Playwright's evaluate, so it can't read anything from this file.
+ * transition lasting longer than 1ms, or an animation lasting longer than 1ms
+ * that isn't turned off. Unlike getAnimations, which only lists motion already
+ * playing, this reads what each element would do on its next change, so a
+ * reduced-motion variant missing for an element in the page, a child, or a
+ * layer, even one that only changes later, is caught at rest. Each problem
+ * names the element by its tag and the readable part of its first class.
+ * Passed to Playwright's evaluate, so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -568,7 +568,7 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], string ] ) : S
 
 	const [ proNamArr, pseNamStr ] = snaArgArr; // What: Property Name Array And Pseudo Name String. Why: The page function takes one argument. How: This unpacks the names to probe and the layer to add.
 
-	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline', 'padding-top' : 'padding' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand to its shorthand.
+	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline', 'padding-top' : 'padding' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand that has a shorthand to it.
 
 
 
