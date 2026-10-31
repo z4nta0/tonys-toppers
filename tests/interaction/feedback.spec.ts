@@ -88,26 +88,32 @@ const TOG_PRO_ARR = [ ...CON_PRO_ARR, 'padding-top' ];                          
 
 
 
+// #region TOG_TAR_ARR
+
 /**
  * TOG_TAR_ARR = Toggle Target Array
  *
  * @summary
  * The kinds of element with a state that switches on and off, each flipped
  * on and off again in turn, in the order listed, so the bar and the menu are
- * read before the Products filters scroll the page. Every row holds: *
- *  - `actStr` (String): the value that marks the state on.
+ * read before the Products filters scroll the page. Every row shares one
+ * shape, so its fields carry no comments of their own:
  *
- *  - `attStr` (String): the attribute that marks the state.
+ * - `actStr` (String): Active String, the value that marks the state on.
  *
- *  - `inaStr` (String or null): the value that marks it off, or null to
- *    remove the attribute.
+ * - `attStr` (String): Attribute String, the attribute that marks the state.
  *
- *  - `pseStr` (String): the layer to read with the element, or ''.
+ * - `inaStr` (String or null): Inactive String, the value that marks it off,
+ *   or null to remove the attribute.
  *
- *  - `selStr` (String): the selector that finds the element.
+ * - `pseStr` (String): Pseudo String, the layer to read with the element, or
+ *   ''.
  *
- *  - `staArr` (Array): the page states, by their names in `STA_REC_ARR`,
- *    where at least one element of the kind has to be found and flipped.
+ * - `selStr` (String): Selector String, the selector that finds the element.
+ *
+ * - `staArr` (Array): State Array, the page states, by their names in
+ *   `STA_REC_ARR`, where at least one element of the kind has to be found and
+ *   flipped.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -209,6 +215,8 @@ const TOG_TAR_ARR : TogTarTyp[] = [ // What: Toggle Target Array. Why: A switche
 
 
 ];
+
+// #endregion TOG_TAR_ARR
 
 // #endregion Constants
 
@@ -532,10 +540,10 @@ function movProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr
  * parent's takes the parent's duration for it, since an inherited color eases
  * with the parent's transition, as does a layer whose color matches the
  * element's, and a border color matching the element's own color takes the
- * color's duration, since an unset border color is currentColor and follows
- * the color as it eases. An identity matrix reads as none, since the two draw
- * the same. Passed to Playwright's evaluate, so it can't read anything from
- * this file.
+ * color's duration when that's longer than its own, since an unset border
+ * color is currentColor and follows the color as it eases. An identity matrix
+ * reads as none, since the two draw the same. Passed to Playwright's evaluate,
+ * so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

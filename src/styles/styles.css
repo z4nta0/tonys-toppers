@@ -509,7 +509,7 @@ button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather
 
 }
 a:focus-visible,
-button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard user has to see where focus is. How: This grows the ring to its full width and draws it in close, so it eases in; every element with its own transition lists the two outline properties so the ease survives. */
+button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard user has to see where focus is. How: This grows the ring to its full width and draws it in close, so it eases in; every link or button with its own transition lists the two outline properties so the ease survives. */
 
 
 	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */

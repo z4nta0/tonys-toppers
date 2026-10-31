@@ -24,10 +24,11 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * the section in the new tab and leaves the page clicked from alone. A link to
  * another page has to open it at its top, and back has to return to where the
  * visitor was. Every page opens with a skip link that moves focus to the main
- * content. Every link in the phone menu, and the brand, closes the menu on any
- * click, one opening in a new tab included. Pages open under reduced motion,
- * so scrolling jumps straight to its target and each position can be read at
- * once; how things move is checked by the feedback spec.
+ * content. The phone menu closes on a plain click of each section link, and
+ * on a Ctrl, Cmd, or middle click of a section link or the brand. Pages open
+ * under reduced motion, so scrolling jumps straight to its target and each
+ * position can be read at once; how things move is checked by the feedback
+ * spec.
  *
  * Sections:
  *  - Constants
