@@ -8,7 +8,7 @@ import { expect        } from '@playwright/test';      // What: Expect. Why: Eac
 import { fileURLToPath } from 'node:url';              // What: File URL To Path. Why: The repo root npm works from sits two folders above this file, with the build folder, dist/, inside it. How: This turns each one's URL into a path.
 import { heaAllFun     } from '../support/headers.ts'; // What: Headers All Function. Why: The checks test the policy Netlify really sends. How: This reads the /* block of public/_headers.
 import { join          } from 'node:path';             // What: Join. Why: A built file's path is its folder plus its name. How: This joins them with the right separator.
-import { readdirSync   } from 'node:fs';               // What: Read Directory Sync. Why: Every built file is searched for secrets. How: This lists the build folder's entries, recursively.
+import { readdirSync   } from 'node:fs';               // What: Read Directory Sync. Why: Every built text file is searched for secrets. How: This lists the build folder's entries, recursively.
 import { readFileSync  } from 'node:fs';               // What: Read File Sync. Why: Each built file's text is searched. How: This reads a built file.
 import { relative      } from 'node:path';             // What: Relative. Why: A match is reported by its path inside the build. How: This trims the build folder off a file's path.
 import { test          } from '@playwright/test';      // What: Test. Why: Each part of the policy is its own test. How: This declares them.

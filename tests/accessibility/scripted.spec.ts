@@ -20,11 +20,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers th
  * scripted.spec.ts = Scripted Spec
  *
  * @summary
- * The accessibility checks axe-core can't make, run on every page state in
- * whichever engine the project runs. Names: every link and button in the
- * accessibility tree has a name, and no name carries a decorative glyph such
- * as an arrow. Keyboard: a Tab walk from the top of the page reaches its end
- * without getting trapped, never moves backwards through the document, and
+ * The accessibility checks axe-core can't make, run in whichever engine the
+ * project runs, most of them on every page state. Names: every link and button
+ * in the accessibility tree has a name, and no name carries a decorative glyph
+ * such as an arrow. Keyboard: a Tab walk from the top of the page reaches its
+ * end without getting trapped, never moves backwards through the document, and
  * lands only on stops that are on screen, not covered by anything else, and
  * visibly changed by focus. Reflow: at 320px wide, WCAG's narrowest reflow
  * width, nothing scrolls sideways. Motion: with reduced motion requested, no
@@ -570,7 +570,7 @@ function motStyFun () : string[] {
 
 // #region Module Init
 
-for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every check runs on every page state. How: This declares each check once per state.
+for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: The names, keyboard, reflow, and motion checks run on every page state. How: This declares each check once per state.
 
 
 	test( `${ staRecObj.ideStr } names every link and button cleanly`, async ( { page : curPagObj } ) => { // What: Names Test. Why: Every link and button must be announced by a clean name. How: This opens the state and checks its accessibility tree.

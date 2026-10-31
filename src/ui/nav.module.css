@@ -573,7 +573,7 @@
 
 
 }
-.navLinAnc[data-section-link-active]:hover { /* What: Hovered Active Navigation Link Anchor. Why: The link for the section being read should still respond to the pointer. How: This turns its ink pill navy, like every other hovered link. */
+.navLinAnc[data-section-link-active]:hover { /* What: Hovered Active Navigation Link Anchor. Why: The link for the section being read should still respond to the pointer. How: This turns its ink pill navy. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */

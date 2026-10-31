@@ -15,8 +15,8 @@ import cssModObj from './footer.module.css'; // What: CSS Module Object. Why: Th
  * @summary
  * The site's footer: one line about the business, wrapping at about 506px
  * wide and below, and ending in Tony's phone number, which dials on phones. It
- * reads the current year each time it renders, so the copyright never goes
- * stale.
+ * reads the current year each time it renders, so the copyright needs no
+ * yearly edit.
  *
  * Sections:
  *  - Components

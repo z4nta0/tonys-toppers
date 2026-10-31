@@ -447,7 +447,7 @@ html { /* What: HTML. Why: One rem should equal the 11px base font size, and in-
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion HTML. Why: Someone who asked for less motion shouldn't see the page glide, and a section link's own scroll asks for the instant jump the html element's smooth scrolling would otherwise override. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion HTML. Why: Someone who asked for less motion shouldn't see the page glide, and a section link's scroll then follows the html element's scroll behavior, which would otherwise glide. How: This applies only when the reduced-motion preference is set. */
 
 
 	html { /* What: Instant Scrolling HTML. Why: In-page links and section links should jump straight to their sections. How: This turns smooth scrolling off. */
