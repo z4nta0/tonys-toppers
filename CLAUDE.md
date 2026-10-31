@@ -50,7 +50,7 @@ paragraph covering all 8 categories, and the user confirms them for accuracy.
 - **Photos showing more than one kind of piece** (decided 2026-10-10): ten
   photos had been listed under every category they show, as byte-for-byte
   copies, and the user moved the copies out. The four wide booth shots
-  (`booth-1` to `booth-4`) live in the "At the craft fairs" gallery between
+  (`booth-1` to `booth-4`) live in the "At the Craft Fairs" gallery between
   Products and About Tony, and each category filter also shows the booth
   shots tagged with it, so "Straw Charms" isn't empty, while "All" lists only
   the pieces and sets, once each. The three small mixed displays
