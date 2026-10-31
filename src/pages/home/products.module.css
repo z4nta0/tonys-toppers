@@ -43,7 +43,7 @@
 
 
 }
-.homProSec::before { /* What: Home Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 1px ink dots about every 19px, out of the way of the pointer. */
+.homProSec::before { /* What: Home Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 2px ink dots, each a 1px radius, about every 19px, out of the way of the pointer. */
 
 
 	background-image : radial-gradient( circle, oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) 1px, transparent 1px ); /* Text Main Color = #1a1a2e, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */

@@ -187,10 +187,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Logo Badge Div. Why: The badge shrinks with the narrower portrait. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Logo Badge Div. Why: A phone-sized badge suits the stacked portrait's corner. How: This applies 900px wide and below. */
 
 
-	.logBadDiv { /* What: Small Logo Badge Div. Why: A smaller badge keeps its place on the smaller portrait. How: This sizes it at about 104px and tucks it closer to the corner. */
+	.logBadDiv { /* What: Small Logo Badge Div. Why: A smaller badge sits on the corner without covering much of the portrait. How: This sizes it at about 104px and tucks it closer to the corner. */
 
 
 		bottom : calc( var( --spa-ver-p04 ) * -1 );   /* Spacing Vertical Base Plus 4 ~= -44.876px */

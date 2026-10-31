@@ -11,7 +11,7 @@ Live at [tonystoppers.com](https://tonystoppers.com/).
 - **React 19** + **TypeScript 6**
 - **React Router 8** (the home page at the root path and a 404 page for every other path)
 - **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
-- Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`), sends the security headers in `public/_headers`, and receives the contact form through Netlify Forms
+- Deployed on **Netlify**, which serves `index.html` for every path that has no file of its own (`public/_redirects`), sends the security headers in `public/_headers`, and receives the contact form through Netlify Forms
 
 ## Getting started
 
