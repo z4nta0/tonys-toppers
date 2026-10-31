@@ -60,9 +60,9 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  * STA_REC_ARR = State Record Array
  *
  * @summary
- * Every state the checks visit: the home page and the 404 page each at a
- * phone width (390px) and a desktop width (1,440px), plus the mobile menu
- * open at the phone width, since the menu is only reachable there. Every row
+ * The page states the state-walking checks visit: the home page and the 404
+ * page each at a phone width (390px) and a desktop width (1,440px), plus the
+ * mobile menu open at the phone width, since the menu is only reachable there. Every row
  * shares the {@link StaRecTyp} shape, so the shared fields carry no comments
  * of their own:
  *
