@@ -77,7 +77,7 @@ const NAV_SEC_ARR = [ // What: Navigation Section Array. Why: The bar links to e
  * opens, over a scrim that dims the page behind it, and the menu closes in a
  * few ways, such as choosing a link. While it's open the page behind it is
  * inert, so keyboard and screen reader users stay in the bar. Each link
- * reaches its section through section- link.ts, scrolling in place on the home
+ * reaches its section through section-link.ts, scrolling in place on the home
  * page or navigating home from any other page, and leaves a Ctrl, Cmd, Shift,
  * Alt, or middle click to the browser. A skip link comes first, waiting above
  * the screen until it's focused, and its plain click focuses the main element

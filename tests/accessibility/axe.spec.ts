@@ -103,8 +103,8 @@ const FOR_RES_ARR = [ // What: Form Result Array. Why: The form's thank-you mess
  * scaStaFun = Scan State Function
  *
  * @summary
- * Runs axe-core on the page as it stands, limited to the WCAG and best-
- * practice rule sets, and returns its full results. The caller opens and
+ * Runs axe-core on the page as it stands, limited to the WCAG and
+ * best-practice rule sets, and returns its full results. The caller opens and
  * settles the state first, so the scan runs on a page that has finished
  * loading and animating.
  *

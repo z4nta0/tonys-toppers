@@ -587,7 +587,7 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Navigation Link Anchor. Why: The menu's links are tapped rather than clicked, and should look like Tony's site rather than a plain list. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Navigation Link Anchor. Why: The menu's links need room for a finger to tap them, and should look like Tony's site rather than a plain list. How: This applies 900px wide and below. */
 
 
 	.navLinAnc { /* What: Menu Row Navigation Link Anchor. Why: A bigger target is easier to tap, and the serif matches the site's headings. How: This fills the row in the semibold serif a step larger, with room above and below, a dot slot before the name, and no pill. */

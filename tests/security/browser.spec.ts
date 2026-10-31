@@ -23,14 +23,13 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The policy set
  * @summary
  * Checks that the site works under its own security policy, in whichever
  * engine the project runs. Each page loads from the production build, which
- * the security suite's preview server serves, since the dev server injects
- * inline scripts the policy would block. Neither server reads public/_headers,
- * so every response is given its headers here. First a check proves the policy
- * is live, by injecting an inline script and seeing it refused and reported.
- * Then every state the suites visit is checked for policy violations and
- * checked to close off every new tab link, and the contact form is sent
- * against each faked answer, so its post and its notes are checked under the
- * policy too.
+ * the preview server serves, since the dev server injects inline scripts the
+ * policy would block. Neither server reads public/_headers, so every response
+ * is given its headers here. First a check proves the policy is live, by
+ * injecting an inline script and seeing it refused and reported. Then every
+ * state the suites visit is checked for policy violations and checked to close
+ * off every new tab link, and the contact form is sent against each faked
+ * answer, so its post and its notes are checked under the policy too.
  *
  * Sections:
  *  - Helpers

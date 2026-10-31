@@ -23,11 +23,11 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * browsers and apps ask for, such as 192px, a favicon.ico packing the small
  * sizes older browsers pick from and answering the request browsers make for
  * /favicon.ico on their own, and a 180px apple-touch-icon.png on a solid white
- * square, so the icon has no transparent area for iOS to fill, and iOS rounds
- * the corners itself. The touch icon draws the mark a little smaller than the
- * square, so the rounded corners never crowd the ring. Since the mark is a
- * vector, each size is drawn straight from it. Run it with npm run icons
- * whenever the mark changes.
+ * square, so the icon has no transparent area, and iOS rounds the corners
+ * itself. The touch icon draws the mark a little smaller than the square, so
+ * the rounded corners never crowd the ring. Since the mark is a vector, each
+ * size is drawn straight from it. Run it with npm run icons whenever the mark
+ * changes.
  *
  * Sections:
  *  - Constants
@@ -46,7 +46,7 @@ type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
 
 
 	filStr : string,  // What: File String. Why: Each icon is saved under its own name in public/. How: This is the file name.
-	opaBoo : boolean, // What: Opaque Boolean. Why: iOS turns transparent pixels black and rounds the icon's corners. How: This is true for the icon drawn smaller on solid white.
+	opaBoo : boolean, // What: Opaque Boolean. Why: iOS rounds the icon's corners, so the touch icon is drawn smaller on solid white. How: This is true for the icon drawn smaller on solid white.
 	sizNum : number   // What: Size Number. Why: Each icon is square at its own size. How: This is its width and height in pixels.
 
 
@@ -138,7 +138,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 		const marOffNum = ( tarSizNum - marSizNum ) / 2;                 // What: Mark Offset Number. Why: The shrunk mark sits in the middle of its square. How: This splits the spare room evenly on each side.
 
 
-		if ( solBacBoo ) { // What: Solid Background Fill. Why: The touch icon should leave iOS no transparent area to fill. How: For the opaque icon, this paints the square white before the mark goes on.
+		if ( solBacBoo ) { // What: Solid Background Fill. Why: The touch icon should have no transparent area. How: For the opaque icon, this paints the square white before the mark goes on.
 
 
 			finCotObj.fillStyle = '#ffffff'; // What: White Fill Assignment. Why: The background has to be solid white. How: This sets the fill color.

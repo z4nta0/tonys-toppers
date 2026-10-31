@@ -24,10 +24,10 @@ import { test          } from '@playwright/test';      // What: Test. Why: Each 
  * Checks the security policy and what ships rather than a page, so it runs in
  * the Chromium project only, since a file reads the same in every engine. The
  * headers public/_headers sends have to hold the site to its own strict
- * policy, such as refusing framing. The production build, which the security
- * suite's preview server builds before the run, has to hold no private key or
- * provider token. npm audit has to find no high or critical advisory in the
- * shipped dependencies, and skips with a message when npm can't be reached.
+ * policy, such as refusing framing. The production build, which the preview
+ * server builds before the run, has to hold no private key or provider token.
+ * npm audit has to find no high or critical advisory in the shipped
+ * dependencies, and skips with a message when npm can't be reached.
  *
  * Sections:
  *  - Constants

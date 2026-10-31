@@ -97,7 +97,7 @@ function AppRooCom () : React.JSX.Element {
 
 					<Route
 						element={ <NotFouCom /> }
-						path='*' // What: Catch-All Path. Why: Any address the site doesn't have should land on the 404 page. How: The asterisk matches every path no earlier route claimed.
+						path='*' // What: Catch-All Path. Why: Any address the site doesn't have should land on the 404 page. How: The asterisk matches any path and ranks below every more specific route, so it only renders when no other route matches.
 					/>{ /* What: Not Found Route. Why: Unknown paths need a page of their own. How: This renders NotFouCom for every other path. */ }
 
 
