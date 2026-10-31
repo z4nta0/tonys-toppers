@@ -99,7 +99,7 @@ function HerSecCom () : React.JSX.Element {
 						chosen, and one of a kind. Small art for everyday moments.
 					</p>
 
-					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The two main ways into the page sit together. How: This sets the buttons in a row, wrapping onto two lines at about 337px wide and below. */ }
+					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The hero's two ways into the page sit together. How: This sets the buttons in a row, wrapping onto two lines at about 337px wide and below. */ }
 
 
 						<a

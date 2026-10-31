@@ -441,7 +441,7 @@ function ConSecCom () : React.JSX.Element {
 							href='https://www.facebook.com/profile.php?id=61560009400871'
 							rel='noopener noreferrer'
 							target='_blank'
-						>{ /* What: Info Row Anchor Element. Why: Tony shares new pieces and where he'll be on his Facebook page. How: This opens the page in a new tab, without giving it access to this one. */ }
+						>{ /* What: Info Row Anchor Element. Why: Tony's Facebook page is another way to follow his work. How: This opens the page in a new tab, without giving it access to this one. */ }
 
 
 							<div

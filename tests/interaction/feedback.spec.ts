@@ -77,7 +77,7 @@ type TogTarTyp = { // What: Toggle Target Type. Why: Each kind of element with a
 
 // #region Constants
 
-const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'box-shadow', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control or a hover-only card or frame and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
+const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'box-shadow', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control or a hover-only card or frame and on what's inside it, such as the menu toggle's bars. How: Each is compared between moments, and each that changes has to be transitioned.
 const ERR_LIN_STR = '#contact form [role="alert"] a';                                                      // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
 const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-offset', 'outline-width' ];                // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
 const FOC_PRO_ARR = [ ...CON_PRO_ARR, 'outline-color', 'outline-offset', 'outline-width' ];                // What: Focus Property Array. Why: A control's focus can change its look as well as draw its ring. How: Each is compared between unfocused and focused, and each that changes has to be transitioned.

@@ -51,7 +51,7 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 const PRE_URL_STR = 'http://localhost:5199';                           // What: Preview URL String. Why: The security suite loads the production build, since the dev server injects inline scripts the security policy would block. How: This is the address the preview server answers on.
 const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: Both servers must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
-const SER_URL_STR = 'http://localhost:5192';                           // What: Server URL String. Why: Every suite but the security suite opens the site from the dev server. How: This is the address Playwright waits on and the baseURL of every project but the security ones.
+const SER_URL_STR = 'http://localhost:5192';                           // What: Server URL String. Why: Every project but the security ones opens its pages from the dev server through its baseURL. How: This is the address Playwright waits on and the baseURL of every project but the security ones.
 
 const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its own folder and runs as its own projects. How: Each entry names a folder under tests/, crossed with each engine into one project apiece.
 
@@ -81,12 +81,12 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 		name      : `${ suiNamStr }-${ engNamStr }`, // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
 		testMatch : `${ suiNamStr }/**/*.spec.ts`,   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
 
-		use : { // What: Use. Why: The project has to launch its own engine, and the security suite its own server. How: This sets the browser it runs in, which build of it, and the server its pages open from, the preview for the security suite and the dev server for every other.
+		use : { // What: Use. Why: The project has to launch its own engine, and the security suite its own server. How: This sets the browser it runs in, which build of it, and the server its pages open from, the preview for the security suite and the dev server for every other project.
 
 
-			baseURL     : suiNamStr === 'security' ? PRE_URL_STR : SER_URL_STR, // What: Base URL. Why: The security suite loads its pages from the production build, while every other suite's pages open from the dev server. How: This points each project's page.goto at its server.
+			baseURL     : suiNamStr === 'security' ? PRE_URL_STR : SER_URL_STR, // What: Base URL. Why: The security suite loads its pages from the production build, while every other project's baseURL is the dev server. How: This points each project's page.goto at its server.
 			browserName : engNamStr,                                            // What: Browser Name. Why: Each project runs in one engine. How: This names that engine's Playwright browser.
-			channel     : engNamStr === 'chromium' ? 'chromium' : undefined     // What: Channel. Why: Chromium's default headless shell sometimes opens a modified click's new tab without Playwright ever reporting it, failing about 1 run in 10 in a sibling project. How: This runs Chromium as Chrome's full headless mode instead, and leaves Firefox and WebKit on their only builds.
+			channel     : engNamStr === 'chromium' ? 'chromium' : undefined     // What: Channel. Why: Chromium's default headless shell sometimes opens a modified click's new tab without Playwright ever reporting it, failing about 1 run in 10 in a sibling project. How: This runs Chromium as Chrome's full headless mode instead, and leaves Firefox and WebKit on their default builds.
 
 
 		}
@@ -116,7 +116,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 	webServer : [ // What: Web Server. Why: The suites need the site running, without touching any dev server already open. How: This starts the dev server and the production preview, each on its own strict port from the repo root, and stops both when the run ends.
 
 
-		{ // What: Dev Server. Why: Every suite but the security suite opens its pages from the site as it's developed. How: This starts the Vite dev server on 5192.
+		{ // What: Dev Server. Why: Every project but the security ones points its baseURL at the site as it's developed. How: This starts the Vite dev server on 5192.
 
 
 			command             : 'npx vite --port 5192 --strictPort', // What: Command. Why: A strict port fails loudly instead of drifting onto another server's port. How: This starts the Vite dev server on 5192.
@@ -128,7 +128,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 
 		},
 
-		{ // What: Preview Server. Why: The security suite checks what ships, and the dev server's inline scripts would break a strict policy. How: This builds the site and serves the build on 5199.
+		{ // What: Preview Server. Why: The security suite and the SEO suite's built page check read what ships, and the dev server's inline scripts would break a strict policy. How: This builds the site and serves the build on 5199.
 
 
 			command             : 'npm run build && npx vite preview --port 5199 --strictPort', // What: Command. Why: The preview serves only a fresh build, and a strict port fails loudly. How: This type checks and builds the site, then serves dist/ on 5199.

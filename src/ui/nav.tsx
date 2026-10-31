@@ -438,7 +438,7 @@ function NavBarCom () : React.JSX.Element {
 
 							onAuxClick={ auxCloFun }
 							onClick={ cloMenFun }
-						>{ /* What: Menu Facebook Anchor Element. Why: Tony shares new pieces and where he'll be on his Facebook page. How: This opens the page in a new tab, without giving it access to this one, and closes the menu. */ }
+						>{ /* What: Menu Facebook Anchor Element. Why: Tony's Facebook page is another way to follow his work. How: This opens the page in a new tab, without giving it access to this one, and closes the menu. */ }
 							Find Tony on Facebook
 						</a>
 
