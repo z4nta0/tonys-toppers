@@ -37,6 +37,9 @@ form a shop could build on.
 ## Content
 Decided 2026-10-10. Claude drafts the product photos' alt text and an About
 paragraph covering all 8 categories, and the user confirms them for accuracy.
+- **Bolivar is Tony's hometown** (confirmed by the user 2026-10-30), so
+  comments may call it that, though the About story only says he lives there
+  and moved to Grandview after high school.
 - **Alt text**: done 2026-10-10 and confirmed by the user. Each photo's
   description lives in `catalog.ts`'s `PHO_ALT_OBJ`, keyed by file name, or
   in its booth row, under 100 characters and never repeating the card's
