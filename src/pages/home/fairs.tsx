@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './fairs.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './fairs.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 
 import { PRO_REC_ARR } from './catalog.ts'; // What: Product Record Array. Why: The booth shots live in the catalog beside the pieces they show. How: The gallery keeps only the records marked as booth shots.
@@ -16,11 +16,11 @@ import { PRO_REC_ARR } from './catalog.ts'; // What: Product Record Array. Why: 
  * fairs.tsx = Fairs
  *
  * @summary
- * The home page's craft fair gallery: a heading, a line about where Tony sets
- * up, and his booth shots in a grid of four columns, stepping to two at 900px
- * wide and below and to one at 360px and below, so every row is full. The same
- * photos also appear under the product filters for the kinds of pieces they
- * show.
+ * The home page's craft fair gallery: the section's words, such as its
+ * heading, above his booth shots in a grid of four columns, stepping to two at
+ * 900px wide and below and to one at 360px and below, so every row is full.
+ * The same photos also appear under the product filters for the kinds of
+ * pieces they show.
  *
  * Sections:
  *  - Constants

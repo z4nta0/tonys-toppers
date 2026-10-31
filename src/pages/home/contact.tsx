@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 
 import { useEffect } from 'react'; // What: Use Effect. Why: A pending thank-you timer shouldn't outlive the section. How: This clears it when the section unmounts.

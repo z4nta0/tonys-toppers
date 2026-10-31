@@ -483,10 +483,9 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
   look different in each state it responds to (hovered, pressed, or focused)
   and ease every property that change touches, on it or anything inside it,
   while real clicks are blocked; the stop one Tab press reaches must draw its
-  focus ring at its full 2px; each toggled state (the chosen filter, the menu
-  toggle's cross, and the bar's active link and the menu row's dot) is flipped
-  off, on, and off again and must ease each change (added 2026-10-30); under
-  reduced motion the changes stay but nothing transitions; and the contact
+  focus ring at its full 2px; each toggled state (such as the chosen filter) is
+  flipped off, on, and off again, must turn up in each page state its row
+  names, and must ease each change (added 2026-10-30); under reduced motion the changes stay but nothing transitions; and the contact
   form error's phone link gets the same checks once a failed send is faked.
   Its behavior spec (added 2026-10-23)
   checks where links lead: every bar, menu, hero, and 404 page section link

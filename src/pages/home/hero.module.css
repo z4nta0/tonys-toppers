@@ -6,10 +6,10 @@
  *
  * @summary
  * Styles for HerSecCom: the opening section, nearly a screen tall or taller,
- * warmed by two soft glows that float slowly in its corners, with the
- * eyebrow, headline, pitch, and buttons beside Tony's cartoon portrait, whose
- * round frame turns slowly while the portrait inside it turns the other way
- * to stay upright, and a wobbling sticker on its corner. On screens 900px
+ * warmed by two soft glows that float slowly in its corners, with the words
+ * that introduce Tony, such as the headline, beside his cartoon portrait,
+ * whose round frame turns slowly while the portrait inside it turns the other
+ * way to stay upright, and a wobbling sticker on its corner. On screens 900px
  * wide or narrower the portrait moves above the words in a single column.
  * The words rise into place one block after another through the global
  * blockEnterFadeIn keyframes. The shared button styles the hero's two

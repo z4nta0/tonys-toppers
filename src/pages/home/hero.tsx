@@ -4,7 +4,7 @@
 // #region Imports
 
 import carWebUrl from './tony-cartoon.webp'; // What: Cartoon WebP URL. Why: The hero shows Tony's cartoon portrait, and Vite fingerprints and checks an imported image. How: This imports the image's built URL for the hero's img.
-import cssModObj from './hero.module.css';   // What: CSS Module Object. Why: The hero is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './hero.module.css';   // What: CSS Module Object. Why: The hero is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 
 import { PHO_SIZ_OBJ  } from './photo-sizes.ts';         // What: Photo Size Object. Why: The cartoon's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the cartoon's width and height.

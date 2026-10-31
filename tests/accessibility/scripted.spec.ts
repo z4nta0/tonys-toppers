@@ -10,7 +10,7 @@ import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array
 import { test        } from '@playwright/test';      // What: Test. Why: Each check is its own test. How: This declares them.
 
 
-import type { Page } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
+import type { Page } from '@playwright/test'; // What: Page. Why: The helpers that drive the page from the test take a Playwright page, while those that run inside it take none. How: This types the driving helpers' page parameters.
 
 // #endregion Imports
 
@@ -534,7 +534,7 @@ function motStyFun () : string[] {
 	for ( const eleCurEle of document.querySelectorAll( '*' ) ) { // What: Element Loop. Why: A missing variant can sit on any element, not only a control. How: This walks every element on the page.
 
 
-		const desEleStr = `${ eleCurEle.tagName.toLowerCase() }${ eleCurEle.classList.length ? '.' + ( eleCurEle.classList[ 0 ].split( '_' ).find( ( clsPieStr ) => clsPieStr.length > 2 ) ?? eleCurEle.classList[ 0 ] ) : '' }`; // What: Element Description String. Why: A problem should name the element the way the stylesheet does. How: This joins the tag with the readable part of its first class, the module name a hashed class carries.
+		const desEleStr = `${ eleCurEle.tagName.toLowerCase() }${ eleCurEle.classList.length ? '.' + ( eleCurEle.classList[ 0 ].split( '_' ).find( ( clsPieStr ) => clsPieStr.length > 2 ) ?? eleCurEle.classList[ 0 ] ) : '' }`; // What: Description Element String. Why: A problem should name the element the way the stylesheet does. How: This joins the tag with the readable part of its first class, the module name a hashed class carries.
 
 
 		for ( const pseNamStr of [ '', '::before', '::after' ] ) { // What: Layer Loop. Why: A pseudo-element can carry motion of its own, such as the menu row's dot. How: This reads the element and each of its two layers.

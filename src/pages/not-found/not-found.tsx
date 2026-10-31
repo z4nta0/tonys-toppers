@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 
 import { Link         } from 'react-router';             // What: Link. Why: The page's "Back home" button returns home without a full page load. How: This renders it as a router link to the root.

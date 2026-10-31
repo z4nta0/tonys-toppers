@@ -35,7 +35,7 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 // #region Constants
 
 const FAC_URL_STR = 'https://www.facebook.com/profile.php?id=61560009400871'; // What: Facebook URL String. Why: The structured data's sameAs has to be the Facebook page the site links to. How: This is the address both are compared with.
-const LIV_URL_STR = 'https://tonystoppers.com/';                              // What: Live URL String. Why: The canonical link, structured data, sitemap, and social tags must all name the live address. How: This is the address they're compared with.
+const LIV_URL_STR = 'https://tonystoppers.com/';                              // What: Live URL String. Why: Every page-level address the checks compare, such as the canonical link, has to be the live one. How: This is the address they're compared with.
 const PRE_URL_STR = 'http://localhost:5199/';                                 // What: Preview URL String. Why: The built page is what ships, after the build strips the source's comments and blank lines. How: This is the address the test config's preview server serves the build at.
 
 

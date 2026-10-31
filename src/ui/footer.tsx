@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './footer.module.css'; // What: CSS Module Object. Why: The footer is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './footer.module.css'; // What: CSS Module Object. Why: The footer is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 // #endregion Imports
 

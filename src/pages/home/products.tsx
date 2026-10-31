@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './products.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './products.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 
 import { CAT_REC_ARR     } from './catalog.ts'; // What: Category Record Array. Why: The grid offers a filter button per category. How: Each row gives a button its slug and label.
