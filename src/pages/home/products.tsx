@@ -130,7 +130,7 @@ function ProSecCom () : React.JSX.Element {
 		const resObsObj = new ResizeObserver( meaColFun ); // What: Resize Observer Object. Why: The column count changes with the grid's width. How: This measures the grid on each resize, including once as observing starts.
 
 
-		resObsObj.observe( griCurEle ); // What: Grid Observe Call. Why: Only the grid's own size changes its columns. How: This starts watching it.
+		resObsObj.observe( griCurEle ); // What: Grid Observe Call. Why: A change in the column count resizes the grid too, even above the content cap where its width holds, since each card's height follows its column's width. How: This starts watching it.
 
 
 

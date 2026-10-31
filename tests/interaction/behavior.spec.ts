@@ -160,7 +160,7 @@ async function secOffFun ( curPagObj : Page, secIdeStr : string ) : Promise< num
 		return secTopNum === undefined ? Infinity : window.scrollY - Math.max( 0, window.scrollY + secTopNum - padTopNum ); // What: Offset Return. Why: A missing section should keep a polling check waiting, and a section too near the top can only bring the page to its top. How: This gives Infinity for a missing section, and otherwise the page's scroll position less the one the section asks for, limited at the top of the page.
 
 
-	}, secIdeStr );
+	}, secIdeStr ); // What: Section Identifier Argument. Why: The page function can't read this script's variables. How: This hands the section's ID in as tarIdeStr.
 
 
 }

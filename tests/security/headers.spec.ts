@@ -48,7 +48,7 @@ const ROO_DIR_STR = fileURLToPath( new URL( '../..', import.meta.url ) );       
 const SEC_PAT_ARR = [ // What: Secret Pattern Array. Why: A key pasted into the source would ship to every visitor. How: Each entry matches one well-known kind of private key or provider token.
 
 
-	/-----BEGIN [A-Z ]*PRIVATE KEY-----/, // What: Private Key Pattern. Why: A private key's file always opens with this line. How: This matches it.
+	/-----BEGIN [A-Z ]*PRIVATE KEY-----/, // What: Private Key Pattern. Why: A private key's file opens with this line. How: This matches it.
 	/AIza[0-9A-Za-z_-]{35}/,              // What: Google Key Pattern. Why: The site uses no Google service, so any Google key here is a mistake. How: This matches a Google API key.
 	/AKIA[0-9A-Z]{16}/,                   // What: AWS Key Pattern. Why: An AWS access key opens with AKIA. How: This matches one.
 	/gh[opsu]_[0-9A-Za-z]{36}/,           // What: GitHub Token Pattern. Why: A GitHub token opens with a short type prefix. How: This matches a personal, OAuth, app, or user token.

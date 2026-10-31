@@ -324,7 +324,7 @@ function stoInfFun () : StoInfTyp | null {
 
 
 
-	const sigStyFun = () => { // What: Signature Style Function. Why: A focus indicator is any visible change between focused and unfocused. How: This reads the stop's styles as one string to compare.
+	const sigStyFun = () => { // What: Signature Style Function. Why: A focus indicator usually shows as a change in one of the styles read here. How: This reads the stop's styles as one string to compare.
 
 
 		const styCurObj = getComputedStyle( actCurEle ); // What: Style Current Object. Why: The stop's styles are compared as they're drawn now. How: This reads its computed styles.

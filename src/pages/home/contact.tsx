@@ -214,7 +214,7 @@ function ConSecCom () : React.JSX.Element {
 
 	const errExiObj = useNotExiFun( forErrBoo );                 // What: Error Exit Object. Why: The error note should fade out rather than vanish. How: This keeps it mounted while it leaves.
 	const sucExiObj = useNotExiFun( forSenBoo );                 // What: Success Exit Object. Why: The thank-you note should fade out rather than vanish. How: This keeps it mounted while it leaves.
-	const thaTimRef = useRef< number | undefined >( undefined ); // What: Thank-You Timer Reference. Why: A second send should restart the note's hiding rather than inherit the first send's timer. How: This holds the pending timer's ID, or undefined when none is pending.
+	const thaTimRef = useRef< number | undefined >( undefined ); // What: Thank-You Timer Reference. Why: A second send should restart the note's hiding rather than inherit the first send's timer. How: This holds the latest timer's ID, or undefined before any send.
 
 
 	useEffect( () => () => window.clearTimeout( thaTimRef.current ), [] ); // What: Thank-You Timer Cleanup Effect. Why: The note's state shouldn't change after the section is gone. How: This cancels a pending timer when the section unmounts, the empty list running it once.
