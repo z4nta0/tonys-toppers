@@ -3,12 +3,12 @@
 
 // #region Imports
 
-import cssModObj from './about.module.css';   // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './about.module.css';   // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 import logSvgUrl from './logo.svg';           // What: Logo SVG URL. Why: The About section shows the Tony's Toppers logo over his portrait's corner, and Vite fingerprints and checks an imported image. How: This imports the logo's built URL for its img.
 import porWebUrl from './tony-portrait.webp'; // What: Portrait WebP URL. Why: The About section shows Tony's portrait, and Vite fingerprints and checks an imported image. How: This imports the photo's built URL for its img.
 
 
-import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why: The portrait's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the portrait's width and height.
+import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Size Object. Why: The portrait's img carries its intrinsic size, so the page doesn't shift while it loads. How: This looks up the portrait's width and height.
 
 // #endregion Imports
 
@@ -18,10 +18,10 @@ import { PHO_SIZ_OBJ } from './photo-sizes.ts'; // What: Photo Sizes Object. Why
  * about.tsx = About
  *
  * @summary
- * The home page's story of Tony: his portrait with the Tony's Toppers logo
- * badge, his name, four paragraphs about who he is and how the business
- * began, and three stats beneath them. His age is worked out from his birth
- * year each time the section renders, so it never needs updating by hand.
+ * The home page's story of Tony: his portrait and the story of who he is and
+ * how the business began, with details about him, such as his age. His age is
+ * worked out from his birth year each time the section renders, so it never
+ * needs updating by hand.
  *
  * Sections:
  *  - Constants
@@ -58,7 +58,7 @@ const TON_BIR_NUM = 1982; // What: Tony Birth Number. Why: The story and the fir
  *
  * @param props - This component does not use any props.
  *
- * @returns The about section element.
+ * @returns The About section element.
  *
  * @example
  * ```tsx
@@ -81,13 +81,13 @@ function AboSecCom () : React.JSX.Element {
 			id='about'
 
 			className={ cssModObj.homAboSec }
-		>{ /* What: Home About Section Element. Why: Visitors want to meet the maker. How: Its id stays the plain word about, since the bar and the hero link to it and it can appear in the page's address. */ }
+		>{ /* What: Home About Section Element. Why: Visitors want to meet the maker. How: Its ID stays the plain word `about`, since the bar and the hero link to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.bioGriDiv }>{ /* What: Biography Grid Div Element. Why: The portrait and the story sit side by side on wide screens. How: This lays out the two columns. */ }
+				<div className={ cssModObj.bioGriDiv }>{ /* What: Biography Grid Div Element. Why: The portrait and the story sit side by side. How: This lays out the two columns, stacking them with the portrait on top at 900px wide and below. */ }
 
 
 					<div className={ cssModObj.porWraDiv }>{ /* What: Portrait Wrap Div Element. Why: The portrait and its logo badge read as one picture. How: This holds both, the badge overlapping the portrait's corner. */ }
@@ -99,10 +99,10 @@ function AboSecCom () : React.JSX.Element {
 							<img
 								className={ cssModObj.porPhoIma }
 
-								height={ PHO_SIZ_OBJ[ 'tony-portrait' ].heiNum }
+								height={ PHO_SIZ_OBJ[ 'tony-portrait' ].heiNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 								loading='lazy'
 								src={ porWebUrl }
-								width={ PHO_SIZ_OBJ[ 'tony-portrait' ].widNum }
+								width={ PHO_SIZ_OBJ[ 'tony-portrait' ].widNum } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 								alt='Portrait of Tony Mawhiney'
 							/>{ /* What: Portrait Photo Image Element. Why: Visitors see who Tony is. How: This loads his portrait only as it nears the screen, at its own width and height so the frame doesn't shift when it arrives. */ }
@@ -132,11 +132,11 @@ function AboSecCom () : React.JSX.Element {
 					<div>{ /* What: Biography Content Div Element. Why: The story reads as one column. How: This stacks the label, name, paragraphs, and stats, with no styling of its own. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>Meet the Maker</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the name. */ }
+						<div className={ cssModObj.eyeLabDiv }>Meet the Maker</div>{ /* What: Eyebrow Label Div Element. Why: A short label names the section. How: This shows it above the name. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Tony Mawhiney: <em className={ cssModObj.titAccEmp }>artist, crafter, kind soul.</em></h2>{ /* What: Section Title Heading Element. Why: The heading names Tony and sums him up. How: The description sits in an italic accent. */ }
 
-						<p className={ cssModObj.bioStoPar }>{ /* What: Biography Story Paragraph Element. Why: The story opens with who Tony is. How: This gives his age, read on each render, his home town, and his character, with a drop cap on its first letter. */ }
+						<p className={ cssModObj.bioStoPar }>{ /* What: Biography Story Paragraph Element. Why: The story opens with who Tony is. How: This gives his age, read on each render, his hometown, and his character, with a drop cap on its first letter. */ }
 							Tony is a { tonAgeNum }-year-old young man with Down syndrome living in Bolivar, Missouri. He's quiet at first, but
 							once you know him you won't find a kinder, more polite person, and you wouldn't have
 							to look hard to know it.
@@ -144,7 +144,7 @@ function AboSecCom () : React.JSX.Element {
 
 						<p className={ cssModObj.bioStoPar }>{ /* What: Biography Story Paragraph Element. Why: Tony's art started long before the business. How: This tells of his schooling and his painting in the State Capitol. */ }
 							After graduating high school, Tony moved to Grandview, Missouri, where he had his own
-							apartment and attended Longview Jr. College through the Ace program. He's always been
+							apartment and attended Longview Community College through the ACE program. He's always been
 							artistic and crafty. In high school, a painting of his was chosen through a contest
 							that traveled around Missouri for a year before being hung in the State Capitol.
 						</p>
@@ -173,7 +173,7 @@ function AboSecCom () : React.JSX.Element {
 
 								<span className={ cssModObj.staValSpa }>{ tonAgeNum }</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows Tony's age, read on each render. */ }
 
-								<div className={ cssModObj.staLabDiv }>Years young</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it years young. */ }
+								<div className={ cssModObj.staLabDiv }>Years young</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it "Years young". */ }
 
 
 							</div>
@@ -181,9 +181,9 @@ function AboSecCom () : React.JSX.Element {
 							<div>{ /* What: Handmade Stat Div Element. Why: Every piece is made by hand. How: This shows the figure above its caption. */ }
 
 
-								<span className={ cssModObj.staValSpa }>100%</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows 100%. */ }
+								<span className={ cssModObj.staValSpa }>100%</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows "100%". */ }
 
-								<div className={ cssModObj.staLabDiv }>Handmade</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it handmade. */ }
+								<div className={ cssModObj.staLabDiv }>Handmade</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it "Handmade". */ }
 
 
 							</div>
@@ -191,9 +191,9 @@ function AboSecCom () : React.JSX.Element {
 							<div>{ /* What: One Of One Stat Div Element. Why: No two pieces are the same. How: This shows the figure above its caption. */ }
 
 
-								<span className={ cssModObj.staValSpa }>1of1</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows 1of1. */ }
+								<span className={ cssModObj.staValSpa }>1of1</span>{ /* What: Stat Value Span Element. Why: The stat's figure leads. How: This shows "1of1". */ }
 
-								<div className={ cssModObj.staLabDiv }>Every piece</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it every piece. */ }
+								<div className={ cssModObj.staLabDiv }>Every piece</div>{ /* What: Stat Label Div Element. Why: The figure needs a caption. How: This names it "Every piece". */ }
 
 
 							</div>
@@ -227,7 +227,7 @@ function AboSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { AboSecCom }; // What: Named Exports. Why: The home page tells Tony's story after the gallery. How: This exports AboSecCom.
+export { AboSecCom }; // What: Named Export. Why: The About section is rendered as part of the home page. How: This exports AboSecCom.
 
 // #endregion Exports
 

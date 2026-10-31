@@ -20,11 +20,11 @@ import { useNavigate } from 'react-router';   // What: Use Navigate. Why: The ha
  * home.tsx = Home
  *
  * @summary
- * The home page: the hero, the collection, the craft fair gallery, Tony's
- * story, and the contact section, in that order. The bar and footer around it
- * come from app.tsx. A visitor arriving with a section's id as the hash, from
- * another page's section link or a shared address such as /#about, lands on
- * that section, and the hash is cleared from the address once used.
+ * The home page: its sections in reading order, from the hero down to the
+ * Contact section. The bar and footer around it come from app.tsx. A visitor
+ * arriving with a section's ID as the hash, from another page's section link
+ * or a shared address such as /#about, lands on that section, and the hash is
+ * cleared from the address once used.
  *
  * Sections:
  *  - Components
@@ -44,10 +44,12 @@ import { useNavigate } from 'react-router';   // What: Use Navigate. Why: The ha
  * HomPagCom = Home Page Component
  *
  * @summary
- * Renders the five sections. When the address arrives with a hash, it jumps
- * straight to the section the hash names, without gliding down from the top
- * of a freshly loaded page, then replaces the address with the same path and
- * no hash, so the address stays as clean as it does for in-page links.
+ * Renders the sections in order. When the address arrives with a hash, it
+ * waits for the fonts to load and jumps straight to the section the hash
+ * names, without gliding down from the top of a freshly loaded page, then
+ * replaces the address with the same path and no hash, so the address stays
+ * as clean as it does for in-page links. That replace is flagged in its
+ * router state, so the app root's scroll to the top leaves it alone.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -65,38 +67,44 @@ import { useNavigate } from 'react-router';   // What: Use Navigate. Why: The ha
 function HomPagCom () : React.JSX.Element {
 
 
-	const { hash : hasValStr } = useLocation(); // What: Hash Value String. Why: A section link from another page arrives with its section's id as the hash. How: This reads the hash, e.g. #contact, or an empty string, renaming the router's hash key.
+	const { hash : hasValStr } = useLocation(); // What: Hash Value String. Why: A section link from another page arrives with its section's ID as the hash. How: This reads the hash, e.g. #contact, or an empty string, renaming the router's hash key.
 
 	const navRouFun = useNavigate(); // What: Navigate Router Function. Why: The hash should be cleared once the page has used it. How: This is the router's navigate function.
 
 
-	useEffect( () => { // What: Hash Arrival Effect. Why: A visitor arriving from a section link or a shared address should land on that section, with no hash left in the address. How: This jumps to the section the hash names, then replaces the address with one without it.
+	useEffect( () => { // What: Hash Arrival Effect. Why: A visitor arriving from a section link or a shared address should land on that section, with no hash left in the address. How: Once the fonts have loaded, this jumps to the section the hash names, then replaces the address with one without it.
 
 
 		if ( !hasValStr ) return; // What: No Hash Guard. Why: Most visits arrive without a hash. How: This does nothing when the hash is empty, including right after it's been cleared.
 
 
 
-		document.getElementById( hasValStr.slice( 1 ) )?.scrollIntoView( { behavior : 'instant' } ); // What: Arrival Scroll Call. Why: The visitor should land on the section, as a normal link arrival would. How: This jumps to the element the hash names, without the html element's smooth scrolling, since gliding down from the top of a freshly loaded page would be slow.
-
-		void navRouFun( { hash : '' }, { replace : true } ); // What: Hash Clear Call. Why: The address should stay as clean as it does for in-page links. How: This replaces the current history entry with the same path and no hash; void marks the returned promise as deliberately unawaited.
+		void document.fonts.ready.then( () => { // What: Fonts Ready Callback. Why: The jump should land where the section sits once the fonts have reflowed the page above it. How: This waits for the fonts, then scrolls and clears the hash; void marks the returned promise as deliberately unawaited.
 
 
-	}, [ hasValStr, navRouFun ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a section link arrives, and navRouFun is listed because the effect calls it, though it stays the same between renders.
+			document.getElementById( hasValStr.slice( 1 ) )?.scrollIntoView( { behavior : 'instant' } ); // What: Arrival Scroll Call. Why: The visitor should land on the section, as a normal link arrival would. How: This jumps to the element the hash names, without the html element's smooth scrolling, since an arrival isn't a movement.
+
+			void navRouFun( { hash : '' }, { replace : true, state : { cleBoo : true } } ); // What: Hash Clear Call. Why: The address should stay as clean as it does for in-page links. How: This replaces the current history entry with the same path and no hash, flagging it with cleBoo so the app root's scroll to the top leaves the visitor on the section; void marks the returned promise as deliberately unawaited.
+
+
+		} );
+
+
+	}, [ hasValStr, navRouFun ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a section link arrives, and navRouFun is listed because the effect calls it.
 
 
 
 	return (
 
 
-		<>{ /* What: Home Page Fragment. Why: The sections sit side by side in the main landmark app.tsx provides. How: This groups them without adding an element. */ }
+		<>{ /* What: Home Page Fragment. Why: The sections sit one above another in the main landmark app.tsx provides. How: This groups them without adding an element. */ }
 
 
 			<HerSecCom />{ /* What: Hero Section Component. Why: The page opens with the headline and pitch. How: This renders the hero first. */ }
 
 
 
-			<ProSecCom />{ /* What: Products Section Component. Why: The collection is the site's main content. How: This renders it second. */ }
+			<ProSecCom />{ /* What: Products Section Component. Why: The collection is the work the site exists to show. How: This renders it second. */ }
 
 
 
@@ -108,7 +116,7 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-			<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach Tony. How: This renders the contact section last. */ }
+			<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach Tony. How: This renders the Contact section last. */ }
 
 
 		</>
@@ -127,7 +135,7 @@ function HomPagCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HomPagCom }; // What: Named Exports. Why: The router renders the home page at the site's root. How: This exports HomPagCom.
+export { HomPagCom }; // What: Named Export. Why: The home page is rendered by the site's router. How: This exports HomPagCom.
 
 // #endregion Exports
 

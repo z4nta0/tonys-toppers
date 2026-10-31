@@ -5,14 +5,12 @@
  * not-found.module.css = Not Found Page Module
  *
  * @summary
- * Styles for NotFouCom: the 404 page's centered message below the bar, with
- * its 404 label, heading, short note, and its two buttons, home and to the
- * collection, side by side in a row that wraps. The shared section,
- * container, label, heading, and button classes the page used to borrow from
- * the global stylesheet are copied here, with the page's own inline
- * adjustments (the extra room below the bar, the centering, and the
- * heading's and note's spacing) merged into them, and the buttons'
- * transition stops for anyone who asked for less motion.
+ * Styles for NotFouCom: the 404 page's centered message below the bar, its
+ * words, such as the heading, ending in two buttons, one home and one to the
+ * collection, side by side in a row that wraps at about 342px wide and below.
+ * The shared styles the page used to borrow from the global stylesheet, such
+ * as the buttons, are copied here, with the page's own inline adjustments
+ * merged into them.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -22,10 +20,10 @@
 
 /* #region nofPagSec */
 
-.nofPagSec { /* What: Not-Found Page Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round with about 138px on top and positions it, copied from the shared section with the page's own top padding merged in. */
+.nofPagSec { /* What: Not-Found Page Section. Why: The page's message needs generous room, and extra room above to clear the fixed bar. How: This pads it all round, its top the bar's height plus room, and positions it, copied from the shared section with the page's own top padding merged in. */
 
 
-	padding  : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
+	padding  : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
 	position : relative;
 
 
@@ -33,10 +31,10 @@
 @media ( max-width : 900px ) { /* What: Narrow Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen. How: This applies 900px wide and below. */
 
 
-	.nofPagSec { /* What: Compact Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen, while the top still has to clear the bar. How: This trims the bottom padding and keeps about 138px on top. */
+	.nofPagSec { /* What: Compact Not-Found Page Section. Why: The tall bottom padding wastes a phone's short screen, while the top still has to clear the bar. How: This trims the bottom padding and keeps the bar's height plus room on top. */
 
 
-		padding : var( --spa-ver-p08 ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 8 ~= 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
+		padding : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
 
 
 	}
@@ -47,7 +45,7 @@
 
 /* #region pagConDiv */
 
-.pagConDiv { /* What: Page Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column capped at the shared content width, about 1,449px with room above and below, and centers its text, copied from the shared container with the page's own spacing merged in. */
+.pagConDiv { /* What: Page Container Div. Why: The page's few lines read best centered at the page's content width. How: This centers a column with room above and below, capped at the shared content width of about 1,449px, and centers its text, copied from the shared container with the page's own spacing merged in. */
 
 
 	margin     : 0 auto;
@@ -58,7 +56,7 @@
 
 }
 
-.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the error above the heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, centered, copied from the shared section label. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the error above the heading. How: This sets it widely spaced, uppercase, and navy, led by a short yellow line, centered, copied from the shared section label. */
 
 
 	align-items     : center;
@@ -74,7 +72,7 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Div Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -125,7 +123,7 @@
 
 /* #region nofActDiv */
 
-.nofActDiv { /* What: Not-Found Actions Div. Why: The two ways onward sit side by side under the note. How: This centers them in a row that wraps when it runs out of room. */
+.nofActDiv { /* What: Not-Found Actions Div. Why: The two ways onward sit side by side under the note. How: This centers them in a row that wraps onto two lines at about 342px wide and below. */
 
 
 	display         : flex;
@@ -150,11 +148,11 @@
 	gap             : var( --spa-hor-m01 );                                                                           /* Spacing Horizontal Base Minus 1 = 11px */
 	padding         : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-decoration : none;
-	transition      : transform var( --dur-tra-p01 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-sta-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
+	transition      : transform var( --dur-tra-p01 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-dec-eas ), background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Standard Easing = ease */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button. */
 
 
 }
-.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
+.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: Going home is the page's main action. How: This fills it navy with cream text and a hard ink shadow. */
 
 
 	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
@@ -163,7 +161,7 @@
 
 
 }
-.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
+.butBasAnc--primary:hover { /* What: Hovered Button Base Anchor Primary. Why: The button should respond to the pointer. How: This lightens its navy and lifts it up and to the left while its shadow grows to match. */
 
 
 	background : var( --acc-hov-col ); /* Accent Hover Color ~= #2d4c9d */
@@ -172,7 +170,7 @@
 
 
 }
-.butBasAnc--primary:active { /* What: Pressed Primary Button Base Anchor. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
+.butBasAnc--primary:active { /* What: Pressed Button Base Anchor Primary. Why: A press should register before anything else happens. How: This presses the button in slightly, back onto its resting shadow, which also undoes its hover lift. */
 
 
 	box-shadow : calc( var( --ver-rhy-m05 ) * 1rem ) calc( var( --ver-rhy-m05 ) * 1rem ) 0 var( --sha-mai-col ); /* Vertical Rhythm Base Minus 5 ~= 3.572px, Shadow Main Color = #1a1a2e */
@@ -180,25 +178,27 @@
 
 
 }
-.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: Seeing the collection is the quieter second way onward. How: This leaves it unfilled with ink text and an ink outline. */
+.butBasAnc--secondary { /* What: Button Base Anchor Secondary. Why: Seeing the collection is the quieter second way onward. How: This leaves it unfilled with ink text and an ink outline, easing its fill and text color out on the accelerating curve. */
 
 
 	background   : transparent;
 	border-color : var( --bor-str-col ); /* Border Strong Color = #1a1a2e */
 	color        : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
+	transition   : transform var( --dur-tra-p01 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-dec-eas ), background var( --dur-tra-p01 ) var( --mot-acc-eas ), color var( --dur-tra-p01 ) var( --mot-acc-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
 
 
 }
-.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This fills it with ink, turns its text cream, and lifts it slightly. */
+.butBasAnc--secondary:hover { /* What: Hovered Button Base Anchor Secondary. Why: The button should respond to the pointer. How: This fills it with ink, turns its text cream, and lifts it slightly, its fill and text color arriving on the decelerating curve. */
 
 
 	background : var( --bac-inv-col );                            /* Background Inverse Color = #1a1a2e */
 	color      : var( --bac-pag-col );                            /* Background Page Color = #fdf9ee */
 	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition : transform var( --dur-tra-p01 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p01 ) var( --mot-dec-eas ), background var( --dur-tra-p01 ) var( --mot-dec-eas ), color var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.butBasAnc--secondary:active { /* What: Pressed Secondary Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, which also undoes its hover lift. */
+.butBasAnc--secondary:active { /* What: Pressed Button Base Anchor Secondary. Why: A press should register before the page responds. How: This presses the button in slightly, which also undoes its hover lift. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
@@ -208,7 +208,9 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
+	.butBasAnc,
+	.butBasAnc--secondary,
+	.butBasAnc--secondary:hover { /* What: Motionless Button Base Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transitions off, naming the secondary rules' own selectors so it wins. */
 
 
 		transition : none;

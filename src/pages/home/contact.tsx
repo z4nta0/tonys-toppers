@@ -3,10 +3,12 @@
 
 // #region Imports
 
-import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 
-import { useState } from 'react'; // What: Use State. Why: The form remembers its fields, whether a send is out, and whether the last one went through or failed. How: Four state pairs hold them.
+import { useEffect } from 'react'; // What: Use Effect. Why: A pending thank-you timer shouldn't outlive the section. How: This clears it when the section unmounts.
+import { useRef    } from 'react'; // What: Use Ref. Why: The thank-you timer has to be found again to restart it. How: This holds its ID between renders.
+import { useState  } from 'react'; // What: Use State. Why: The section tracks the form's state, such as whether a request is out. How: This holds each piece.
 
 
 import type { AnimationEvent } from 'react'; // What: Animation Event. Why: A leaving note unmounts once its own exit animation ends. How: This types the end handler's event.
@@ -21,11 +23,10 @@ import type { FormEvent      } from 'react'; // What: Form Event. Why: Sending t
  * contact.tsx = Contact
  *
  * @summary
- * The home page's closing section: a note inviting visitors to reach Tony,
- * his phone number and Facebook page as links, his home town, and a form that
- * sends a name, email, the kind of piece they're interested in, and a message
- * through Netlify Forms. The fields' names must match the hidden copy of the
- * form in index.html, which Netlify reads at deploy time.
+ * The home page's closing section: the ways to reach Tony, such as his phone
+ * number, and a form that sends a message through Netlify Forms. The fields'
+ * names must match the hidden copy of the form in index.html, which Netlify
+ * reads at deploy time.
  *
  * Sections:
  *  - Types
@@ -44,8 +45,6 @@ import type { FormEvent      } from 'react'; // What: Form Event. Why: Sending t
 
 type IntOptTyp = 'A pen topper' | 'A wine stopper' | 'A keychain' | 'A dog necklace' | 'A car freshie' | 'A name badge reel' | 'A phone grip' | 'A straw charm' | 'A custom piece' | 'Just saying hi'; // What: Interest Option Type. Why: The interest field offers a fixed set of choices. How: This lists every choice, each one also the value sent.
 
-
-
 type ForStaTyp = { // What: Form State Type. Why: The form's fields are held together in one record. How: Each key is a field's name attribute, which Netlify records, so none of them are renamed.
 
 
@@ -63,7 +62,7 @@ type ForStaTyp = { // What: Form State Type. Why: The form's fields are held tog
 
 // #region Constants
 
-const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message : '', name : '' }; // What: Form Empty Object. Why: The form starts empty and empties again once sent. How: This holds blank fields with the first interest chosen.
+const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message : '', name : '' }; // What: Form Empty Object. Why: The form starts empty and empties again once sent. How: This holds blank fields with the first interest chosen. // What: Email. Why: The email field starts blank. How: This is an empty string. // What: Interest. Why: The interest field always holds a choice. How: This is the first option. // What: Message. Why: The message field starts blank. How: This is an empty string. // What: Name. Why: The name field starts blank. How: This is an empty string.
 
 
 
@@ -86,7 +85,7 @@ const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message
 const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The interest field lists every choice in this order. How: Each entry is one option's text and value.
 
 
-	'A pen topper', // What: Pen Topper Option. Why: Pen toppers are Tony's first and biggest line. How: This is the default choice.
+	'A pen topper',      // What: Pen Topper Option. Why: Pen toppers are Tony's first line. How: This is the default choice.
 	'A wine stopper',
 	'A keychain',
 	'A dog necklace',
@@ -94,8 +93,8 @@ const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The int
 	'A name badge reel',
 	'A phone grip',
 	'A straw charm',
-	'A custom piece', // What: Custom Piece Option. Why: Tony makes pieces to order. How: This offers a custom request.
-	'Just saying hi'  // What: Saying Hi Option. Why: Not every message is an order. How: This offers a friendly note.
+	'A custom piece',    // What: Custom Piece Option. Why: Tony makes pieces to order. How: This offers a custom request.
+	'Just saying hi'     // What: Saying Hi Option. Why: Not every message is an order. How: This offers a friendly note.
 
 
 ];
@@ -182,20 +181,20 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
  * ConSecCom = Contact Section Component
  *
  * @summary
- * Renders the contact section. The form's fields are controlled, the browser
- * won't send it until the required name, email, and message are filled in and
- * the email looks like an address, and typing in any field hides the thank-you
- * note. Sending it waits for Netlify's answer before showing the thank-you
- * note or, when the message didn't go through, an error note that keeps the
- * visitor's details for a retry. The icons beside the contact links are hidden
- * from screen readers, and the send button is named by its words alone, so
- * neither reads a decorative glyph aloud.
+ * Renders the Contact section. The form's fields are controlled, typing in any
+ * field hides the thank-you note, and the browser won't send the form until
+ * the required name, email, and message are filled in and the email looks like
+ * an address. Sending it waits for Netlify's answer before showing the
+ * thank-you note or, when the message didn't go through, an error note that
+ * keeps the visitor's details for a retry. The icons beside the contact links
+ * are hidden from screen readers, and the send button is named by its words
+ * alone, so no decorative glyph joins their accessible names.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
  *
- * @returns The contact section element.
+ * @returns The Contact section element.
  *
  * @example
  * ```tsx
@@ -207,13 +206,19 @@ function useNotExiFun ( notShoBoo : boolean ) : NotExiTyp {
 function ConSecCom () : React.JSX.Element {
 
 
-	const [ forDatObj, setForDatObj ] = useState< ForStaTyp >( FOR_EMP_OBJ ); // What: Form Data Object And Setter. Why: The form's fields are controlled. How: This holds every field's value, starting empty.
+	const [ errAttNum, setErrAttNum ] = useState( 0 );                        // What: Error Attempt Number And Setter. Why: A retry that fails while the last error is still leaving would keep the same note in the alert region, which a screen reader doesn't announce again. How: This counts failed attempts, and the note takes the count as its key, so each failure mounts a fresh note.
+	const [ forDatObj, setForDatObj ] = useState< ForStaTyp >( FOR_EMP_OBJ ); // What: Form Data Object And Setter. Why: The form's fields are controlled. How: This holds every field's value, starting blank with the first interest chosen.
 	const [ forErrBoo, setForErrBoo ] = useState( false );                    // What: Form Error Boolean And Setter. Why: A visitor whose message didn't go through has to be told, with their details kept for a retry. How: This holds whether the error note is showing.
 	const [ forSenBoo, setForSenBoo ] = useState( false );                    // What: Form Sent Boolean And Setter. Why: The thank-you note shows only right after a confirmed send. How: This holds whether it's showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );                    // What: Sending Progress Boolean And Setter. Why: The visitor should see a message is on its way, and shouldn't send it twice. How: This holds whether a request is out.
 
-	const errExiObj = useNotExiFun( forErrBoo ); // What: Error Exit Object. Why: The error note should fade out rather than vanish. How: This keeps it mounted while it leaves.
-	const sucExiObj = useNotExiFun( forSenBoo ); // What: Success Exit Object. Why: The thank-you note should fade out rather than vanish. How: This keeps it mounted while it leaves.
+	const errExiObj = useNotExiFun( forErrBoo );                 // What: Error Exit Object. Why: The error note should fade out rather than vanish. How: This keeps it mounted while it leaves.
+	const sucExiObj = useNotExiFun( forSenBoo );                 // What: Success Exit Object. Why: The thank-you note should fade out rather than vanish. How: This keeps it mounted while it leaves.
+	const thaTimRef = useRef< number | undefined >( undefined ); // What: Thank-You Timer Reference. Why: A second send should restart the note's hiding rather than inherit the first send's timer. How: This holds the latest timer's ID, or undefined before any send.
+
+
+	useEffect( () => () => window.clearTimeout( thaTimRef.current ), [] ); // What: Thank-You Timer Cleanup Effect. Why: The note's state shouldn't change after the section is gone. How: This cancels a pending timer when the section unmounts, the empty list running it once.
+
 
 
 	// #region fieChaFun
@@ -245,7 +250,7 @@ function ConSecCom () : React.JSX.Element {
 	const fieChaFun = ( chaEveObj : ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement > ) => { // What: Field Change Function. Why: Every field updates the form the same way. How: This stores the field's new value under its name and hides the thank-you note.
 
 
-		const { name : fieNamStr, value : fieValStr } = chaEveObj.target; // What: Field Name And Value Strings. Why: The field's name says which value changed. How: This reads the target's name and value, renaming the DOM's keys.
+		const { name : fieNamStr, value : fieValStr } = chaEveObj.target; // What: Field Name String. Why: The field's name says which value changed. How: This reads the target's name, renaming the DOM's key. // What: Field Value String. Why: The field's new value is what gets stored. How: This reads the target's value, renaming the DOM's key.
 
 
 		setForDatObj( ( preForObj ) => ({ ...preForObj, [ fieNamStr ] : fieValStr }) ); // What: Form Data Update. Why: The changed field keeps its new value. How: This copies the form and replaces that one field.
@@ -258,6 +263,7 @@ function ConSecCom () : React.JSX.Element {
 	// #endregion fieChaFun
 
 
+
 	// #region forSubFun
 
 	/**
@@ -268,12 +274,13 @@ function ConSecCom () : React.JSX.Element {
 	 * stops the page-reloading submit, hides any earlier error, and posts the
 	 * form's fields to Netlify Forms as URL-encoded data, whose form-name
 	 * field tells Netlify which form they belong to. While the request is out,
-	 * the send button is disabled and reads Sending... instead. Only an OK
-	 * answer from Netlify counts as sent: then the thank-you note shows, the
-	 * fields empty, and the note hides again six seconds later. A request that
-	 * fails outright, or one Netlify rejects, keeps the visitor's details in
-	 * place and shows the error note instead, so they can try again or call;
-	 * one that fails outright is also logged to the console.
+	 * the send button is marked disabled, keeping its focus, reads
+	 * "Sending..." instead, and a second submit is ignored. Only an OK answer
+	 * from Netlify counts as sent: then the thank-you note shows, the fields
+	 * empty, and the note hides again six seconds later. A request that fails
+	 * outright, or one Netlify rejects, keeps the visitor's details in place
+	 * and shows the error note instead, so they can try again or call; one
+	 * that fails outright is also logged to the console.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -295,19 +302,25 @@ function ConSecCom () : React.JSX.Element {
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: The browser would otherwise leave the page for Netlify's own thank-you page. How: This stops the form's own submission.
 
 
+
+		if ( senProBoo ) return; // What: Sending Guard. Why: The button stays focusable while a message is on its way, so a second press could send it twice. How: This ignores a submit while one is out.
+
+
+
 		const forCurEle = subEveObj.target as HTMLFormElement;                              // What: Form Current Element. Why: The fields are read from the form itself. How: This is the submitted form. // What: Type Assertion Note. Why: A submit event's target types as a plain event target. How: Only this form's submit event reaches forSubFun.
-		const forFieObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Fields Object. Why: Netlify reads the fields as a URL-encoded body. How: This collects every named field, the hidden form-name included. // What: Type Assertion Note. Why: URLSearchParams accepts string pairs, while FormData can also hold files. How: This form has no file fields, so every value is a string.
+		const forFieObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Field Object. Why: Netlify reads the fields as a URL-encoded body. How: This collects every named field, the hidden form-name included. // What: Type Assertion Note. Why: URLSearchParams accepts string pairs, while FormData can also hold files. How: This form has no file fields, so every value is a string.
 
 		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you note. How: This starts false and turns true only when Netlify answers OK.
 
 
+
 		setForErrBoo( false ); // What: Error Note Hide Call. Why: A new attempt shouldn't keep showing the last one's error. How: This hides the error note.
 
-		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the message is on its way, and shouldn't send it twice. How: This disables the button and switches its label to Sending...
+		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the message is on its way, and shouldn't send it twice. How: This marks the button disabled, which keeps its focus, and switches its label to "Sending..."
 
 
 
-		try {
+		try { // What: Netlify Post Try. Why: The post can fail outright, such as when the visitor is offline, and that failure should leave the form as it was rather than break the handler. How: This wraps the post and its answer check, so a failure falls through to the catch with senOkaBoo still false.
 
 
 			const netResObj = await fetch( '/', { // What: Netlify Response Object. Why: Netlify Forms records a post to the site's own address carrying the form's name, and its answer says whether it did. How: This posts the fields URL-encoded and waits for the answer.
@@ -330,23 +343,34 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This re-enables the button and restores its label.
+		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This clears the button's disabled mark and restores its label.
 
 
 
 		if ( senOkaBoo ) { // What: Sent Check. Why: Only a confirmed submission is reported as sent. How: This shows the thank-you note, empties the fields, and schedules the note's hiding.
 
 
-			setForSenBoo( true ); // What: Thank-You Show Call. Why: The visitor should see the form went. How: This shows the note.
+			setForSenBoo( true ); // What: Thank-You Show Call. Why: The visitor should see the form went through. How: This shows the note.
 
-			setForDatObj( FOR_EMP_OBJ ); // What: Form Reset Call. Why: A sent form starts fresh. How: This empties every field.
+			setForDatObj( FOR_EMP_OBJ ); // What: Form Reset Call. Why: A sent form starts fresh. How: This returns every field to its starting value.
 
-			window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Thank-You Timer Call. Why: The note shouldn't stay up forever. How: This hides it after 6 seconds.
+			window.clearTimeout( thaTimRef.current ); // What: Thank-You Timer Clear Call. Why: An earlier send's timer would hide this note early. How: This cancels it, doing nothing when none is pending.
+
+
+			thaTimRef.current = window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Thank-You Timer Assignment. Why: The note shouldn't stay up forever. How: This hides it after 6 seconds, keeping the timer's ID so a later send can restart it.
 
 
 		}
 
-		else setForErrBoo( true ); // What: Error Note Show Call. Why: A failed submission must not look sent. How: This shows the error note and keeps every field as the visitor filled it in.
+		else { // What: Failed Branch. Why: A failed submission must not look sent, and has to be announced even when the last error is still leaving. How: This counts the attempt and shows the error note.
+
+
+			setErrAttNum( ( preAttNum ) => preAttNum + 1 ); // What: Error Attempt Increment Call. Why: Each failure should mount a fresh note. How: This raises the count the note is keyed by.
+
+			setForErrBoo( true ); // What: Error Note Show Call. Why: The visitor has to know the message didn't go through. How: This shows the error note and keeps every field as the visitor filled it in.
+
+
+		}
 
 
 	};
@@ -362,19 +386,19 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach Tony. How: Its id stays the plain word contact, since the bar links to it and it can appear in the page's address. */ }
+		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach Tony. How: Its ID stays the plain word `contact`, since the bar links to it and it can appear in the page's address. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's width. How: This centers it at a capped width. */ }
 
 
-				<div className={ cssModObj.conGriDiv }>{ /* What: Contact Grid Div Element. Why: The ways to reach Tony and the form sit side by side on wide screens. How: This lays out the two columns. */ }
+				<div className={ cssModObj.conGriDiv }>{ /* What: Contact Grid Div Element. Why: The ways to reach Tony and the form sit side by side. How: This lays out the two columns, stacking the form below the details at 900px wide and below. */ }
 
 
 					<div>{ /* What: Contact Info Div Element. Why: The direct ways to reach Tony read as one column. How: This stacks the label, heading, note, and contact rows, with no styling of its own. */ }
 
 
-						<div className={ cssModObj.eyeLabDiv }>Get in Touch</div>{ /* What: Eyebrow Label Div Element. Why: A small label names the section. How: This shows it above the heading. */ }
+						<div className={ cssModObj.eyeLabDiv }>Get in Touch</div>{ /* What: Eyebrow Label Div Element. Why: A short label names the section. How: This shows it above the heading. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Want a piece, or have a <em className={ cssModObj.titAccEmp }>question?</em></h2>{ /* What: Section Title Heading Element. Why: The heading invites visitors to write. How: The question sits in an italic accent. */ }
 
@@ -395,12 +419,12 @@ function ConSecCom () : React.JSX.Element {
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>☎</div>{ /* What: Info Icon Div Element. Why: A telephone marks the row at a glance. How: It's hidden from screen readers, which would read it aloud as black telephone. */ }
+							>☎</div>{ /* What: Info Icon Div Element. Why: A telephone marks the row at a glance. How: It's hidden from screen readers, so the glyph stays out of the row's accessible name. */ }
 
 							<div>{ /* What: Phone Text Div Element. Why: The row's label and number stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Call or text</div>{ /* What: Info Label Div Element. Why: The row says what to do. How: This shows call or text. */ }
+								<div className={ cssModObj.infLabDiv }>Call or text</div>{ /* What: Info Label Div Element. Why: The row says what to do. How: This shows "Call or text". */ }
 
 								<div className={ cssModObj.infValDiv }>(417) 733-0681</div>{ /* What: Info Value Div Element. Why: The number itself is the row's main line. How: This shows it. */ }
 
@@ -417,19 +441,19 @@ function ConSecCom () : React.JSX.Element {
 							href='https://www.facebook.com/profile.php?id=61560009400871'
 							rel='noopener noreferrer'
 							target='_blank'
-						>{ /* What: Info Row Anchor Element. Why: Tony shares new pieces and where he'll be on his Facebook page. How: This opens the page in a new tab, without giving it access to this one. */ }
+						>{ /* What: Info Row Anchor Element. Why: Tony's Facebook page is another way to follow his work. How: This opens the page in a new tab, without giving it access to this one. */ }
 
 
 							<div
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>📲</div>{ /* What: Info Icon Div Element. Why: A phone marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
+							>📲</div>{ /* What: Info Icon Div Element. Why: A phone marks the row at a glance. How: It's hidden from screen readers, so the emoji stays out of the row's accessible name. */ }
 
 							<div>{ /* What: Facebook Text Div Element. Why: The row's label and name stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Facebook Page</div>{ /* What: Info Label Div Element. Why: The row says where it goes. How: This shows Facebook page. */ }
+								<div className={ cssModObj.infLabDiv }>Facebook Page</div>{ /* What: Info Label Div Element. Why: The row says where it goes. How: This shows "Facebook Page". */ }
 
 								<div className={ cssModObj.infValDiv }>Tony's Toppers</div>{ /* What: Info Value Div Element. Why: The page's name is the row's main line. How: This shows it. */ }
 
@@ -440,19 +464,19 @@ function ConSecCom () : React.JSX.Element {
 						</a>
 
 
-						<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: Visitors should know where Tony is based. How: This shows his home town in the same style as the links, without being one. */ }
+						<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: Visitors should know where Tony is based. How: This shows his hometown in the same style as the links, without being one. */ }
 
 
 							<div
 								className={ cssModObj.infIcoDiv }
 
 								aria-hidden='true'
-							>📍</div>{ /* What: Info Icon Div Element. Why: A pin marks the row at a glance. How: It's hidden from screen readers, which would read the emoji aloud. */ }
+							>📍</div>{ /* What: Info Icon Div Element. Why: A pin marks the row at a glance. How: It's hidden from screen readers, so the emoji stays out of the row's accessible name. */ }
 
 							<div>{ /* What: Location Text Div Element. Why: The row's label and town stack beside the icon. How: This holds the two lines. */ }
 
 
-								<div className={ cssModObj.infLabDiv }>Based in</div>{ /* What: Info Label Div Element. Why: The row says what it shows. How: This shows based in. */ }
+								<div className={ cssModObj.infLabDiv }>Based in</div>{ /* What: Info Label Div Element. Why: The row says what it shows. How: This shows "Based in". */ }
 
 								<div className={ cssModObj.infValDiv }>Bolivar, Missouri</div>{ /* What: Info Value Div Element. Why: The town is the row's main line. How: This shows it at the same size as the other rows' values. */ }
 
@@ -477,26 +501,30 @@ function ConSecCom () : React.JSX.Element {
 					>{ /* What: Contact Form Form Element. Why: Visitors can send Tony a message without leaving the site. How: Netlify Forms records it under the contactForm name, matching the hidden copy in index.html, while forSubFun sends it in the background once the browser's own checks pass: the name, email, and message are required, and the email has to look like an address. */ }
 
 
-						{ sucExiObj.mouBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending, and stays while it fades out. How: This renders it while it's mounted.
+						<div role='status'>{ /* What: Form Status Div Element. Why: A live region added at the moment it speaks is often missed, so screen readers should find this one empty from the first render. How: This status region stays in the page and only gains the thank-you note once a message is sent. */ }
 
 
-							<div
-								className={ cssModObj.forSucDiv }
-
-								data-note-exit-active={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
-
-								role='status'
-
-								onAnimationEnd={ sucExiObj.endFun }
-							>{ /* What: Form Success Div Element. Why: The visitor should see the form went. How: It rises in with its check popping once and fades out when it goes, and its status role has screen readers announce it, with the decorative check mark hidden so it isn't read aloud. */ }
-								<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
-							</div>
+							{ sucExiObj.mouBoo && ( // What: Thank-You Visibility Check. Why: The note shows only right after sending, and stays while it fades out. How: This renders it while it's mounted.
 
 
-						) }
+								<div
+									className={ cssModObj.forSucDiv }
+
+									data-note-exit-active={ sucExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+
+									onAnimationEnd={ sucExiObj.endFun }
+								>{ /* What: Form Success Div Element. Why: The visitor should see the form went through. How: It rises in with its check popping once and fades out when it goes, and the status region around it has screen readers announce it, with the decorative check mark hidden so it stays out of what's announced. */ }
+									<span className={ cssModObj.sucIcoSpa } aria-hidden='true'>✓</span> Thanks! Your message was sent, and Tony will be in touch soon.
+								</div>
 
 
-						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields sit side by side. How: This lays out the two fields in a row. */ }
+							) }
+
+
+						</div>
+
+
+						<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields sit side by side. How: This lays out the two fields in a row, stacking them at 900px wide and below. */ }
 
 
 							<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The label and input read as one field. How: This stacks them. */ }
@@ -638,32 +666,40 @@ function ConSecCom () : React.JSX.Element {
 							value='contactForm'
 						/>{ /* What: Form Name Input Element. Why: Netlify needs to know which form a background post belongs to. How: This sends the form's name with the other fields. */ }
 
-						{ errExiObj.mouBoo && ( // What: Error Note Check. Why: A failed submission has to be explained, and the note stays while it fades out. How: This renders it while it's mounted.
+
+						<div role='alert'>{ /* What: Form Alert Div Element. Why: A live region added at the moment it speaks is often missed, so screen readers should find this one empty from the first render. How: This alert region stays in the page and only gains the error note when a message doesn't go through. */ }
 
 
-							<p
-								className={ cssModObj.forErrPar }
-
-								data-note-exit-active={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
-
-								role='alert'
-
-								onAnimationEnd={ errExiObj.endFun }
-							>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the message didn't go through and what to do next. How: It rises in and fades out when it goes, and its alert role has screen readers announce it the moment it appears. */ }
-								Sorry, your message didn't go through. Please try again, or call or text Tony at <a className={ cssModObj.errLinAnc } href='tel:4177330681'>(417) 733-0681</a>.
-							</p>
+							{ errExiObj.mouBoo && ( // What: Error Note Check. Why: A failed submission has to be explained, and the note stays while it fades out. How: This renders it while it's mounted.
 
 
-						) }
+								<p
+									key={ errAttNum } // What: Error Note Key. Why: The alert region only speaks when it gains something, so a repeat failure needs a new note. How: This changes with every failed attempt, which remounts the note.
+
+									className={ cssModObj.forErrPar }
+
+									data-note-exit-active={ errExiObj.leaBoo || undefined } // What: Note Leaving Flag. Why: The module plays the exit only while the note leaves. How: This is set while it's leaving and absent otherwise.
+
+									onAnimationEnd={ errExiObj.endFun }
+								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the message didn't go through and what to do next. How: It rises in and fades out when it goes, and the alert region around it has screen readers announce it the moment it appears. */ }
+									Sorry, your message didn't go through. Please try again, or call or text Tony at <a className={ cssModObj.errLinAnc } href='tel:4177330681'>(417) 733-0681</a>.
+								</p>
+
+
+							) }
+
+
+						</div>
+
 
 						<button
 							className={ cssModObj.forSubBut }
 
-							disabled={ senProBoo }
 							type='submit'
 
-							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown, Sending while a request is out.
-						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is disabled while a request is out. */ }
+							aria-disabled={ senProBoo } // What: Sending Disabled Flag. Why: A disabled button drops keyboard focus to the page, so the button stays focusable while a message is on its way. How: This marks it disabled for screen readers and the module's dimmed look while sending, and forSubFun ignores a second submit meanwhile.
+							aria-label={ senProBoo ? 'Sending' : 'Send Message' } // What: Send Button Label. Why: The decorative arrow would otherwise become part of the button's accessible name. How: This names the button by its words alone, which still match what's shown, "Sending" while a request is out.
+						>{ /* What: Form Submit Button Element. Why: The visitor sends the form. How: This submits it through forSubFun, and is marked disabled while a request is out, keeping its focus. */ }
 
 
 							<span
@@ -671,7 +707,7 @@ function ConSecCom () : React.JSX.Element {
 
 								className={ cssModObj.subLabSpa }
 							>{ /* What: Submit Label Span Element. Why: The label fades to its new text when a message goes out. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
-								{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads Sending... while a request is out and Send Message otherwise. */ }
+								{ senProBoo ? 'Sending...' : 'Send Message →' }{ /* What: Send Button Label Expression. Why: The button should show when a message is on its way. How: This reads "Sending..." while a request is out and "Send Message →" otherwise. */ }
 							</span>
 
 
@@ -703,7 +739,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Exports. Why: The home page ends with the contact section. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The Contact section is rendered as part of the home page. How: This exports ConSecCom.
 
 // #endregion Exports
 

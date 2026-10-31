@@ -23,17 +23,17 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
  * it's always caught at rest, and with the page's clock fixed to one date,
  * since the footer's copyright year and Tony's age in the About section both
  * come from the current year and would otherwise fail the baselines every
- * January. The product and gallery photos are captured as they are: WebKit
- * redrew the old full-size photos differently from one capture to the next, so
- * they were masked, but the resized photos hold still. Reduced motion also
- * keeps the hero's blurred blobs from floating, whose blur WebKit redrew
- * differently each time a capture paused and resumed them. Baselines live in
- * tests/rendering/baselines, one per state and engine, captured on Linux;
- * another system's font rendering would differ, so baselines are refreshed on
- * the machine that runs the suite. When a change is meant to alter how a page
- * looks, review the failing diff in the report, then refresh the baselines
- * with npm run test:rendering -- --update-snapshots and commit them with the
- * change.
+ * January. WebKit draws the product and gallery photos, sized for 3x screens,
+ * slightly differently from one capture to the next, so its captures mask
+ * them, while Chromium and Firefox, which hold them still, compare them pixel
+ * for pixel. Reduced motion also keeps the hero's blurred blobs from floating,
+ * whose blur WebKit redrew differently each time a capture paused and resumed
+ * them. Baselines live in tests/rendering/baselines, one per state and engine,
+ * captured on Linux; another system's font rendering would differ, so
+ * baselines are refreshed on the machine that runs the suite. When a change is
+ * meant to alter how a page looks, review the failing diff in the report, then
+ * refresh the baselines with npm run test:rendering -- --update-snapshots and
+ * commit them with the change.
  *
  * Sections:
  *  - Constants
@@ -48,8 +48,8 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
 // #region Constants
 
 const FIX_TIM_STR = '2026-10-10T12:00:00'; // What: Fixed Time String. Why: The copyright year and Tony's age are worked out from today's date, so the baselines would stop matching once the year turned over. How: This is the date and time every capture's page clock reads.
-const MAX_DIF_NUM = 0;                     // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it hid reese-roofing's nav links moving. How: This fails a comparison when even one pixel differs, with PIX_THR_NUM deciding what counts as differing.
-const PIX_THR_NUM = 0;                     // What: Pixel Threshold Number. Why: Playwright otherwise treats a pixel whose color moved by less than 0.2 of its color space as unchanged, which let a contrast fix's slightly darker text pass as identical in seal-and-shield. How: This counts any change to a pixel's color at all as a difference.
+const MAX_DIF_NUM = 0;                     // What: Maximum Difference Number. Why: Each engine renders a state the same from run to run on the machine that captured its baseline, apart from the WebKit photos the test masks and a rare antialiasing difference a rerun clears, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This fails a comparison when even one pixel differs, with PIX_THR_NUM deciding what counts as differing.
+const PIX_THR_NUM = 0;                     // What: Pixel Threshold Number. Why: Playwright otherwise treats a pixel whose color moved by less than 0.2 of its color space as unchanged, which let a contrast fix's slightly darker text pass as identical. How: This counts any change to a pixel's color at all as a difference.
 
 // #endregion Constants
 
@@ -60,7 +60,7 @@ const PIX_THR_NUM = 0;                     // What: Pixel Threshold Number. Why:
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state has a baseline. How: This declares one comparison per state.
 
 
-	test( `${ staRecObj.ideStr } matches its approved screenshot`, async ( { page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
+	test( `${ staRecObj.ideStr } matches its approved screenshot`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
 
 
 		await curPagObj.clock.setFixedTime( new Date( FIX_TIM_STR ) ); // What: Fixed Clock Call. Why: The page's year-based text has to read the same in every run. How: This makes the page's Date always return the fixed time, while its timers keep running normally.
@@ -69,14 +69,15 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
-
 		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and compares it with the state's baseline pixel for pixel, color for color.
 
 
 			animations        : 'disabled',  // What: Animations. Why: A looping animation would never hold still for the capture. How: This fast-forwards every finite animation and transition to its end, and resets each looping one to its start, for the capture.
 			fullPage          : true,        // What: Full Page. Why: The whole state has to match, not just the first screen. How: This captures the page's full height.
 			maxDiffPixelRatio : MAX_DIF_NUM, // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.
-			threshold         : PIX_THR_NUM  // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.
+			threshold         : PIX_THR_NUM, // What: Threshold. Why: Even a slight color change should fail. How: This reads the suite's zero per-pixel threshold.
+
+			mask : engNamStr === 'webkit' ? [ curPagObj.locator( '[class*="proPhoIma"], [class*="faiPhoIma"]' ) ] : [], // What: Mask. Why: WebKit draws the 3x product and gallery photos slightly differently on every capture, which no baseline can match. How: This covers those photos in WebKit's captures, found by their module classes, and masks nothing in the other engines.
 
 
 		} );

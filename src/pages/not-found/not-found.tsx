@@ -3,10 +3,11 @@
 
 // #region Imports
 
-import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Each element with a class reads it from this object.
 
 
-import { Link } from 'react-router'; // What: Link. Why: The page's button returns home without a full page load. How: This renders it as a router link to the root.
+import { Link         } from 'react-router';             // What: Link. Why: The page's "Back home" button returns home without a full page load. How: This renders it as a router link to the root.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: "See the collection" reaches the Products section the same way the bar's links do. How: This returns secCliFun, the shared section link click handler.
 
 // #endregion Imports
 
@@ -16,9 +17,8 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
  * not-found.tsx = Not Found
  *
  * @summary
- * The page every unknown address lands on: a 404 label, a heading saying the
- * page wasn't found, a short line pointing back to Tony's pieces, and two
- * ways onward, home and straight to the collection. It names itself in the
+ * The page every unknown address lands on: a short message saying the page
+ * wasn't found, and ways onward, such as back home. It names itself in the
  * tab and asks search engines not to index it, since the host answers every
  * unknown address with this page and a 200 status. The bar and footer around
  * it come from app.tsx, so every section link still works from here.
@@ -41,11 +41,12 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
  * NotFouCom = Not Found Component
  *
  * @summary
- * Renders the 404 page's title, its noindex robots tag, which React moves
- * into the document head, and its content, centered below the bar, under the
- * page's one h1. The Back home button is named by its words alone, so its
- * decorative arrow isn't read aloud, and See the collection opens the home
- * page at the products section through the home page's hash arrival.
+ * Renders the 404 page's title, its noindex robots tag, which React moves into
+ * the document head, and its content, centered below the bar and led by the
+ * page's one h1. The "Back home" button is named by its words alone, so its
+ * decorative arrow stays out of its accessible name, and "See the collection"
+ * reaches the Products section through secCliFun, the click handler every
+ * section link shares.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -63,10 +64,14 @@ import { Link } from 'react-router'; // What: Link. Why: The page's button retur
 function NotFouCom () : React.JSX.Element {
 
 
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: "See the collection" should reach its section the way every section link does. How: This is the shared click handler, which leaves a modified click to the browser and otherwise navigates home to the section.
+
+
+
 	return (
 
 
-		<>{ /* What: Not Found Fragment. Why: The page's head tags and its section render side by side. How: This groups them without adding an element. */ }
+		<>{ /* What: Not Found Fragment. Why: The page's head tags and its section render together. How: This groups them without adding an element. */ }
 
 
 			<title>Page Not Found | Tony's Toppers</title>{ /* What: Page Title Element. Why: A visitor's tab and history should say the address they tried doesn't exist. How: React 19 moves this title into the document head while the page is shown. */ }
@@ -85,7 +90,7 @@ function NotFouCom () : React.JSX.Element {
 				<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The page's few lines read best centered. How: This centers them at the page's width with room above and below. */ }
 
 
-					<div className={ cssModObj.eyeLabDiv }>{ /* What: Eyebrow Label Div Element. Why: A small label says what happened. How: This shows 404, centered with its leading line. */ }
+					<div className={ cssModObj.eyeLabDiv }>{ /* What: Eyebrow Label Div Element. Why: A short label says what happened. How: This shows "404", centered with its leading line. */ }
 						404
 					</div>
 
@@ -93,11 +98,11 @@ function NotFouCom () : React.JSX.Element {
 						Page not <em className={ cssModObj.titAccEmp }>found.</em>
 					</h1>
 
-					<p className={ cssModObj.nofLedPar }>{ /* What: Not-Found Lede Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one line in the soft ink color. */ }
+					<p className={ cssModObj.nofLedPar }>{ /* What: Not-Found Lede Paragraph Element. Why: The page points the visitor back to what the site is about. How: This shows one sentence in the soft ink color. */ }
 						That page doesn't exist, but Tony's pens and stoppers do.
 					</p>
 
-					<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the home and collection buttons side by side, wrapping when they run out of room. */ }
+					<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the home and collection buttons side by side, wrapping onto two lines at about 342px wide and below. */ }
 
 
 						<Link
@@ -105,20 +110,22 @@ function NotFouCom () : React.JSX.Element {
 
 							to='/'
 
-							aria-label='Back home' // What: Back Home Label. Why: Screen readers would otherwise read the decorative arrow aloud as right arrow. How: This names the button by its words alone, which still match what's shown.
-						>{ /* What: Back Home Link. Why: The visitor needs a clear way onward. How: This returns to the home page. */ }
+							aria-label='Back home' // What: Back Home Label. Why: The decorative arrow would otherwise become part of the button's accessible name. How: This names the button by its words alone, which still match what's shown.
+						>{ /* What: Button Base Anchor Primary Link. Why: The visitor needs a clear way onward. How: This returns to the home page. */ }
 							Back home →
 						</Link>
 
 
 
-						<Link
+						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
-							to={{ hash : 'products', pathname : '/' }} // What: Products Section Address. Why: A visitor who came looking for Tony's pieces can go straight to them. How: This opens the home page with the products section's id as the hash, which the home page scrolls to and then clears.
-						>{ /* What: See Collection Link. Why: The site's main content stays one step away. How: This opens the home page at the products section. */ }
+							href='/#products'
+
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'products' ) }
+						>{ /* What: Button Base Anchor Secondary Element. Why: The work the site exists to show stays one step away. How: Its address opens the home page at the Products section, which a modified click opens its own way, while a plain click goes through secCliFun, which navigates home to the section inside the site. */ }
 							See the collection
-						</Link>
+						</a>
 
 
 					</div>
@@ -146,7 +153,7 @@ function NotFouCom () : React.JSX.Element {
 
 // #region Exports
 
-export { NotFouCom }; // What: Named Exports. Why: The router renders the 404 page for every unknown address. How: This exports NotFouCom.
+export { NotFouCom }; // What: Named Export. Why: The 404 page is rendered by the site's router. How: This exports NotFouCom.
 
 // #endregion Exports
 

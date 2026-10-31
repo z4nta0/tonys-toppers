@@ -5,15 +5,14 @@
  * contact.module.css = Contact Section Module
  *
  * @summary
- * Styles for ConSecCom: the navy band that ends the home page, warmed by a
- * yellow glow, with the ways to reach Tony on one side (the heading, a note,
- * and rows for his phone, his Facebook page, and his home town) and the cream
- * message form on the other, with its thank-you and error notes, which rise in
- * as they appear, the thank-you check popping once. On screens 900px wide or
- * narrower the two sides stack, and so do the form's name and email fields.
- * The shared section, container, and label classes the section used to borrow
- * from the global stylesheet are copied here, and every animation and
- * transition stops for anyone who asked for less motion.
+ * Styles for ConSecCom: the navy band that is the home page's last section,
+ * above the footer, warmed by a yellow glow, with the ways to reach Tony on
+ * one side, such as his phone number, and the cream message form on the other,
+ * with its thank-you and error notes, which rise in as they appear, the
+ * thank-you check popping once. On screens 900px wide or narrower the two
+ * sides stack, and so do the form's name and email fields. The shared styles
+ * the section used to borrow from the global stylesheet, such as the eyebrow
+ * label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -23,10 +22,10 @@
 
 /* #region homConSec */
 
-.homConSec { /* What: Home Contact Section. Why: The page ends on a bold navy band that sets the contact details apart, with the same generous padding as every home page section. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
+.homConSec { /* What: Home Contact Section. Why: The page's last section is a bold navy band that sets the contact details apart, with the same generous padding as the other content sections. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
 
 
-	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Yellow Focus Ring. Why: The navy ring would vanish on the navy band. How: Every link inside the band draws its ring yellow instead, until the form card hands back the navy. */
+	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Focus Ring Color For The Section. Why: The navy ring would vanish on the navy band. How: Every link inside the band draws its ring yellow instead, until the form card hands back the navy. */
 
 	background : var( --acc-mai-col );                      /* Accent Main Color = #1e3a8a */
 	color      : var( --bac-pag-col );                      /* Background Page Color = #fdf9ee */
@@ -81,7 +80,7 @@
 
 /* #region conGriDiv */
 
-.conGriDiv { /* What: Contact Grid Div. Why: The ways to reach Tony and the form sit side by side on wide screens, above the glow. How: This lays out two even columns stretched to the same height and lifts them onto their own layer. */
+.conGriDiv { /* What: Contact Grid Div. Why: The ways to reach Tony and the form sit side by side on wide screens, above the glow. How: This lays out two even columns stretched to the same height and lifts the grid onto its own layer. */
 
 
 	align-items           : stretch;
@@ -108,7 +107,7 @@
 
 }
 
-.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and yellow to stand out on the navy, led by a short yellow line, copied from the shared section label with the contact section's yellow merged in. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it widely spaced, uppercase, and yellow to stand out on the navy, led by a short yellow line, copied from the shared section label with the Contact section's yellow merged in. */
 
 
 	align-items    : center;
@@ -123,7 +122,7 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Div Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -179,7 +178,7 @@
 /* #region infRowAnc */
 
 .infRowAnc,
-.infRowDiv { /* What: Info Row Anchor And Div. Why: Each way to reach Tony reads as a row of its own, whether it's a link or the home town row. How: This sets the icon beside its two lines on a faintly lighter, rounded panel with a soft cream border, with no link underline or color. */
+.infRowDiv { /* What: Info Row Anchor And Div. Why: Each way to reach Tony reads as a row of its own, whether it's a link or the hometown row. How: This sets the icon beside its two lines on a faintly lighter, rounded panel with a soft cream border, with no link underline or color. */
 
 
 	align-items     : center;
@@ -195,10 +194,10 @@
 
 
 }
-.infRowAnc { /* What: Info Row Anchor. Why: A row that's a link should ease its hover and press, while the home town row stays still. How: This eases its background, its lift and press, and its focus ring. */
+.infRowAnc { /* What: Info Row Anchor. Why: A row that's a link should ease its hover and press, while the hometown row stays still. How: This eases its background, its lift and press, and its focus ring. */
 
 
-	transition : background var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition : background var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -270,7 +269,7 @@
 
 
 }
-.infRowAnc:hover .infValDiv { /* What: Hovered Info Value Div. Why: A row that's a link should respond to the pointer, and the home town row isn't one. How: This turns the value yellow while its link row is hovered. */
+.infRowAnc:hover .infValDiv { /* What: Hovered Info Value Div. Why: A row that's a link should respond to the pointer, and the hometown row isn't one. How: This turns the value yellow while its link row is hovered. */
 
 
 	color : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */
@@ -295,12 +294,26 @@
 
 
 
+/* #region infRowDiv */
+
+/* What: Info Row Div Pointer. Why: The hometown row reads as a row like the call and Facebook rows, but it isn't a link, so it stays still. How: Its rule, shared with the link rows, sits in the infRowAnc region, where the rows first appear. */
+
+/* What: Info Icon Div Pointer. Why: The hometown row's symbol matches the link rows'. How: Its rule sits in the infRowAnc region, where the class first appears. */
+
+/* What: Info Label Div Pointer. Why: The hometown row's label matches the link rows'. How: Its rule sits in the infRowAnc region, where the class first appears. */
+
+/* What: Info Value Div Pointer. Why: The town matches the link rows' values, without their hover color. How: Its rules sit in the infRowAnc region, where the class first appears. */
+
+/* #endregion infRowDiv */
+
+
+
 /* #region conForFor */
 
 .conForFor { /* What: Contact Form Form. Why: The form stands out as a card on the navy. How: This sets a padded, rounded cream card with ink text and a hard yellow shadow. */
 
 
-	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */ /* What: Navy Focus Ring. Why: On the cream card the band's yellow ring would be faint. How: The fields, the button, and the error note's link draw their rings navy again. */
+	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */ /* What: Focus Ring Color For The Form. Why: On the cream card the band's yellow ring would be faint. How: The fields, the button, and the error note's link draw their rings navy again. */
 
 	background    : var( --bac-pag-col );                                                                           /* Background Page Color = #fdf9ee */
 	border-radius : var( --rad-bor-xla );                                                                           /* Radius Border Extra Large ~= 19.304px */
@@ -327,7 +340,7 @@
 
 /* #region forSucDiv */
 
-.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went. How: This rises and fades in once as it appears, and sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
+.forSucDiv { /* What: Form Success Div. Why: The visitor should see the message went through. How: This rises and fades in once as it appears, and sets the note on a pale yellow panel with a deep yellow border, in medium-weight ink, above the fields. */
 
 
 	animation     : forSucDivShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -368,7 +381,7 @@
 
 
 }
-@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you note should arrive rather than snap into place. How: This rises it a little from below and fades it in. */
+@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you note should arrive rather than snap into place. How: This moves it up a little from below and fades it in. */
 
 
 	from {
@@ -498,7 +511,7 @@
 
 }
 
-.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it small, semibold, spaced, and uppercase in ink, on its own line above the control. */
+.forFieLab { /* What: Form Field Label. Why: Each field needs a clear, visible name. How: This sets it semibold, spaced, and uppercase in ink, on its own line above the control. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1a1a2e */
@@ -532,7 +545,7 @@
 
 }
 .forFieInp::placeholder,
-.forFieTex::placeholder { /* What: Form Field Input And Textarea Placeholder. Why: A placeholder should read as a sample, quieter than typed text, yet every engine draws its own default gray, and WebKit's falls well under 4.5:1 on white. How: This sets the secondary text color in every engine, lighter than the ink typed text uses and about 9:1 on the white field. */
+.forFieTex::placeholder { /* What: Form Field Input And Textarea Placeholder. Why: A placeholder should read as a sample, quieter than typed text, while still meeting 4.5:1 contrast on white. How: This sets the secondary text color, lighter than the ink typed text uses and about 9:1 on the white field. */
 
 
 	color : var( --tex-sec-col ); /* Text Secondary Color = #4a4a5e */
@@ -582,7 +595,23 @@
 
 
 }
-.forFieTex { /* What: Form Field Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px that can only be dragged taller. */
+
+/* #endregion forFieDiv */
+
+/* #endregion forRowDiv */
+
+
+
+/* #region forFieDiv */
+
+/* What: Form Field Div Pointer. Why: The interest and message fields stack their labels over their controls like the name and email fields, but sit directly in the form rather than in the row. How: Its rule sits in the forRowDiv region, where the class first appears. */
+
+/* What: Form Field Label Pointer. Why: The interest and message labels match the others. How: Its rule sits in the forRowDiv region, where the class first appears. */
+
+/* What: Form Field Select Pointer. Why: The interest dropdown shares the inputs' look, hover, and focus ring. How: Its rules, shared with the inputs and the message box, sit in the forRowDiv region, where the inputs first appear. */
+
+/* What: Form Field Textarea Pointer. Why: The message box shares the inputs' look, placeholder, hover, and focus ring. How: Its shared rules sit in the forRowDiv region, where the inputs first appear, while its own room to grow follows. */
+.forFieTex { /* What: Form Field Textarea. Why: A message needs more room than one line, and the visitor may want more still. How: This sets a minimum height of about 104px and lets the visitor resize it vertically. */
 
 
 	min-height : calc( var( --ver-rhy-p07 ) * 1rem ); /* Vertical Rhythm Base Plus 7 ~= 104.323px */
@@ -592,8 +621,6 @@
 }
 
 /* #endregion forFieDiv */
-
-/* #endregion forRowDiv */
 
 
 
@@ -640,7 +667,7 @@
 
 
 }
-@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This rises it a little from below and fades it in. */
+@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This moves it up a little from below and fades it in. */
 
 
 	from {
@@ -687,7 +714,7 @@
 
 }
 
-.errLinAnc { /* What: Error Link Anchor. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color, easing its hover and press. */
+.errLinAnc { /* What: Error Link Anchor. Why: Tony's number is the visitor's way forward, so it should stand out from the note. How: This sets it bold and underlined in the note's own color, easing its hover color, press dim, and focus ring. */
 
 
 	color           : inherit;
@@ -728,6 +755,7 @@
 /* #endregion forErrPar */
 
 
+
 /* #region forSubBut */
 
 .forSubBut { /* What: Form Submit Button. Why: Sending is the form's one action, so its button stands out. How: This sets a full-width navy button with cream text, an ink border, and a hard ink shadow, easing its color, lift, press, dim, and focus ring. */
@@ -743,7 +771,7 @@
 	font-size     : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 600;
 	padding       : var( --spa-ver-bas ) var( --spa-hor-bas );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button, as cheap as a color change. */
+	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), opacity var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), box-shadow var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Animated Shadow Offset. Why: The hard offset shadow grows as the button lifts and settles back as it presses in, and moving the shadow itself can't be done with a transform without a second layer behind every button. How: It has no blur, so easing its offsets only repaints the button. */
 	width         : 100%;
 
 
@@ -765,8 +793,9 @@
 
 
 }
-.forSubBut:disabled,
-.forSubBut:disabled:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting navy and place even under the pointer. */
+.forSubBut[aria-disabled='true'],
+.forSubBut[aria-disabled='true']:active,
+.forSubBut[aria-disabled='true']:hover { /* What: Disabled Form Submit Button. Why: While a message is on its way, the button shouldn't look pressable. How: This dims it, shows the progress cursor, and holds it in its resting navy and place even under the pointer or a press; it reads aria-disabled rather than :disabled, since the button stays focusable while sending. */
 
 
 	background : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e3a8a */
@@ -811,7 +840,7 @@
 
 
 }
-@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that cross-fades reads as a response to the press. How: This fades the new label up from transparent. */
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that fades in reads as a response to the press. How: This fades the new label up from transparent. */
 
 
 	from {

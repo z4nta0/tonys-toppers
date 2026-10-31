@@ -11,7 +11,7 @@ Live at [tonystoppers.com](https://tonystoppers.com/).
 - **React 19** + **TypeScript 6**
 - **React Router 8** (the home page at the root path and a 404 page for every other path)
 - **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
-- Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`), sends the security headers in `public/_headers`, and receives the contact form through Netlify Forms
+- Deployed on **Netlify**, which serves `index.html` for every path that has no file of its own (`public/_redirects`), sends the security headers in `public/_headers`, and receives the contact form through Netlify Forms
 
 ## Getting started
 
@@ -33,14 +33,15 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and the design
 
 ```bash
 npm test                    # every suite
-npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
-npm run test:interaction    # that every link and button gives hover, press, and focus feedback, with and without reduced motion
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks, including the contact form's notes
+npm run test:interaction    # hover, press, and focus feedback on the reachable controls, and where links, back, forward, and a reload take the visitor
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
-npm run test:responsive     # the pages and the phone menu from 320 to 1,920px: no sideways scroll, spill, or overlap
+npm run test:responsive     # the pages from 320 to 1,920px, the phone menu up to 900px, and each Products filter: no sideways scroll, spill, overlap, or uneven card rows
+npm run test:security       # the headers policy, secrets in the build, dependency advisories, and policy violations and new tab links on every page state
 npm run test:seo            # titles, descriptions, canonical, robots, and social tags, structured data, the preview card, icons, robots.txt, and the sitemap
 ```
 
-Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5192, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5192 (the security suite, and the SEO suite's check of the built page, use a production preview on port 5199), so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel (WebKit's captures mask the photos, which it draws slightly differently each time), so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
@@ -69,19 +70,20 @@ src/
 ├── pages/
 │   ├── home/          Home page and its sections (hero, products, fairs, about, contact), each with its own .module.css, plus catalog.ts (the photos and their categories), photo-sizes.ts (generated), Tony's photos, and the full logo
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
-├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), and the bar's logo mark
-├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, the shared focus ring, and the shared entrance keyframes)
-├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling)
+├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), scroll-top.ts (the page's scroll position on each navigation), and the bar's logo mark
+├── styles/            fonts.css (@font-face) + styles.css (global CSS, such as the design tokens)
+├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling) and rhythm.ts (a token's size in pixels)
 ├── app.tsx            Root component and the route table
 └── main.tsx           Entry point
 public/                Files served at fixed addresses: the icons, the social card, robots.txt, sitemap.xml, and Netlify's _headers and _redirects
 tests/
 ├── accessibility/     axe-core scan and scripted checks
-├── interaction/       hover, press, and focus feedback checks
+├── interaction/       hover, press, and focus feedback, and where links and history navigation lead
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
+├── security/          the headers policy, the build's secrets and dependencies, and policy violations in the browser
 ├── seo/               head tags, structured data, preview card, icon, and crawler file checks
-├── support/           the page states the suites visit
+├── support/           the page states the suites visit and the helpers they share
 └── playwright.config.ts
 
 design/                Source artwork, not served
@@ -93,13 +95,20 @@ design/                Source artwork, not served
 ## Design notes
 
 - **Type pairing:** Fraunces, a soft serif, for headings, names, and the logo text, with Outfit for body text and buttons, both self-hosted (`src/assets/fonts/`, declared in `src/styles/fonts.css`), so a visit makes no third-party requests.
-- **Palette:** A warm cream page (`#fdf9ee`) with a deeper cream band behind the Products and About sections, ink (`#1a1a2e`) for text, outlines, and the buttons' hard offset shadows, navy (`#1e3a8a`) for buttons, links, and the contact band, and a sunny yellow (`#fbbf24`) for highlights, stickers, and the hard shadows behind the portrait and the contact form.
-- **Logo usage:** The **full logo** (`src/pages/home/logo.svg`) sits in the badge on Tony's About portrait. The **mark** (`src/ui/logo-notext.svg`) leads the nav bar, and `public/favicon.svg` is its copy on a white disc for browser tabs.
-- **Motion:** The hero's glows float, Tony's cartoon drifts in its turning ring, the hero rises in on load, the product cards rise in one after another, and the contact form's notes rise in when a message is sent. Links, buttons, and rows respond to hover, press, and keyboard focus with a color shift, a small lift or press-in, and a focus ring that eases in. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion, leaving only the instant color and position changes.
+- **Palette:** A warm cream page (`#fdf9ee`) with a deeper cream band behind the Products and About sections, ink (`#1a1a2e`) for text, outlines, and the buttons' hard offset shadows, navy (`#1e3a8a`) for buttons, links, and the Contact band, and a sunny yellow (`#fbbf24`) for highlights, stickers, and the hard shadows behind the portrait and the contact form.
+- **Logo usage:** The **full logo** (`src/pages/home/logo.svg`) sits in the badge on Tony's About portrait. The **mark** (`src/ui/logo-no-text.svg`) leads the nav bar, and `public/favicon.svg` is its copy on a white disc for browser tabs.
+- **Motion:** The page moves in a few calm ways, such as the hero's glows floating and the product cards rising in one after another. Links, buttons, and rows respond to hover, press, and keyboard focus with a color shift, a small lift or press-in, and a focus ring that eases in. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion, leaving only the instant color and position changes.
 
 ## Contact form
 
 The form posts to Netlify Forms as `contactForm`. Netlify finds the form by reading the deployed HTML, before React has rendered anything, so `index.html` carries a hidden, bare copy of it with the same name and field names. A field added to or renamed in `src/pages/home/contact.tsx` has to be changed in that copy too, or Netlify won't record it.
+
+## Support
+
+If this project is useful to you, you can support its development with a tip
+on Ko-fi. It's never required, and always appreciated.
+
+[![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/techgeekdev)
 
 ## License
 

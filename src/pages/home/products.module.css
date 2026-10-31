@@ -6,13 +6,12 @@
  *
  * @summary
  * Styles for ProSecCom: the collection's deeper cream band, dotted with a
- * faint grid, with the section's heading and note, the row of filter buttons,
- * and the responsive grid of product cards. Each card holds its photo in a
- * portrait frame with a tag over its corner and its name and kind beneath, and
- * rises in through the global blockEnterFadeIn keyframes, which the hero
- * shares. The shared section, container, heading, label, and note classes the
- * section used to borrow from the global stylesheet are copied here, and every
- * animation and transition stops for anyone who asked for less motion.
+ * faint grid, with the section's words, such as its heading, above its filter
+ * buttons and the responsive grid of product cards. Each card holds its photo
+ * in a portrait frame with a tag over its corner and its name and kind
+ * beneath, and rises in through the global blockEnterFadeIn keyframes. The
+ * shared styles the section used to borrow from the global stylesheet, such as
+ * the eyebrow label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -22,7 +21,7 @@
 
 /* #region homProSec */
 
-.homProSec { /* What: Home Products Section. Why: The collection sits on its own band apart from the hero, with the same generous padding as every home page section. How: This pads it all round, fills it with the deeper cream, and positions it so its dot grid can be placed against it, with the padding copied from the shared section. */
+.homProSec { /* What: Home Products Section. Why: The collection sits on its own band apart from the hero, with the same generous padding as the other content sections. How: This pads it all round, fills it with the deeper cream, and positions it so its dot grid can be placed against it, with the padding copied from the shared section. */
 
 
 	background : var( --bac-sun-col );                      /* Background Sunken Color ~= #f5edd6 */
@@ -44,11 +43,11 @@
 
 
 }
-.homProSec::before { /* What: Home Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 1px ink dots about every 19px, out of the way of the pointer. */
+.homProSec::before { /* What: Home Products Section Dot Grid. Why: A faint dot grid gives the band texture. How: This covers the section with 2px ink dots, each a 1px radius, about every 19px, out of the way of the pointer. */
 
 
 	background-image : radial-gradient( circle, oklch( from var( --tex-mai-col ) l c h / var( --cdn-pow-010-rec ) ) 1px, transparent 1px ); /* Text Main Color = #1a1a2e, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
-	background-size  : var( --spa-hor-p01 ) var( --spa-ver-p01 );                                                                           /* Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 1 ~= 19.304px */
+	background-size  : var( --spa-hor-p01 ) var( --spa-ver-p01 ); /* Spacing Horizontal Base Plus 1 ~= 19.304px, Spacing Vertical Base Plus 1 ~= 19.304px */
 	content          : '';
 	inset            : 0;
 	pointer-events   : none;
@@ -72,7 +71,7 @@
 
 /* #region secHeaDiv */
 
-.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about Tony's work sit side by side, above the band's dot grid. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, and lifts it onto its own layer above the grid, copied from the shared section head. */
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about Tony's work sit side by side, above the band's dot grid. How: This spreads them across a row that wraps the note below the heading at about 951px wide and below, aligned along their bottoms, with room below, and lifts the row onto its own layer above the grid, copied from the shared section head. */
 
 
 	align-items     : end;
@@ -102,7 +101,7 @@
 
 }
 
-.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
 
 
 	align-items    : center;
@@ -117,7 +116,7 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Div Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -171,7 +170,7 @@
 
 /* #region filGroDiv */
 
-.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps on a narrow screen, above the band's dot grid. */
+.filGroDiv { /* What: Filter Group Div. Why: The filter buttons read as one control. How: This sets them in a white rounded strip with a hairline border that wraps onto more lines at about 1,172px wide and below, above the band's dot grid. */
 
 
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #ffffff */
@@ -184,12 +183,12 @@
 	max-width     : 100%;
 	padding       : var( --spa-ver-m05 ) var( --spa-hor-m05 );       /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
 	position      : relative;
-	z-index       : 1;                                               /* What: Strip Stack Level. Why: The strip's white has to sit over the band's dot grid, which is positioned at 0. How: This lifts the strip one level above the grid, like the heading and the cards. */
+	z-index       : 1;                                               /* What: Strip Stack Level. Why: The strip's white has to sit over the band's dot grid, which is positioned at 0. How: This lifts the strip one level above the grid. */
 
 
 }
 
-.filTogBut { /* What: Filter Toggle Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing its colors, lift, press, and focus ring. */
+.filTogBut { /* What: Filter Toggle Button. Why: Each filter is a soft pill inside the strip. How: This drops the button's chrome and sets its label in the sans font in soft ink, easing its colors, lift, press, and focus ring, its colors leaving on the accelerating curve. */
 
 
 	background    : transparent;
@@ -201,11 +200,11 @@
 	font-size     : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight   : 500;
 	padding       : var( --spa-ver-m02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	transition    : background var( --dur-tra-p01 ) var( --mot-sta-eas ), color var( --dur-tra-p01 ) var( --mot-sta-eas ), transform var( --dur-tra-p01 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition    : background var( --dur-tra-p01 ) var( --mot-acc-eas ), color var( --dur-tra-p01 ) var( --mot-acc-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-@media ( max-width : 1000px ) { /* What: Narrow Filter Toggle Button. Why: Nine buttons in one wrapping row scatter on a narrower screen. How: This applies 1000px wide and below. */
+@media ( max-width : 1000px ) { /* What: Narrow Filter Toggle Button. Why: Nine buttons in one wrapping row scatter on a narrower screen. How: This applies 1,000px wide and below. */
 
 
 	.filTogBut { /* What: Gridded Filter Toggle Button. Why: The buttons line up better in even columns. How: This bases each button on a third of the strip's width. */
@@ -218,24 +217,26 @@
 
 
 }
-.filTogBut:hover { /* What: Hovered Filter Toggle Button. Why: The filter under the pointer should respond, chosen or not. How: This shades its pill a deeper cream, turns its label navy, and lifts it slightly; the chosen filter keeps its navy fill and only lifts. */
+.filTogBut:hover { /* What: Hovered Filter Toggle Button. Why: The filter under the pointer should respond, chosen or not. How: This shades its pill a deeper cream, turns its label navy, and lifts it slightly, its colors arriving on the decelerating curve; the chosen filter keeps its navy fill and only lifts. */
 
 
 	background : var( --bac-sun-col );                            /* Background Sunken Color ~= #f5edd6 */
 	color      : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
 	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition : background var( --dur-tra-p01 ) var( --mot-dec-eas ), color var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.filTogBut[aria-pressed='true'] { /* What: Pressed Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text. */
+.filTogBut[aria-pressed='true'] { /* What: Chosen Filter Toggle Button. Why: The chosen filter should stand out. How: This fills its pill navy with cream text, its colors arriving on the decelerating curve. */
 
 
 	background : var( --acc-mai-col ); /* Accent Main Color = #1e3a8a */
 	color      : var( --tex-acc-col ); /* Text Accent Color = #fdf9ee */
+	transition : background var( --dur-tra-p01 ) var( --mot-dec-eas ), color var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.filTogBut:active { /* What: Held Filter Toggle Button. Why: A press should register before the grid changes. How: This presses the pill in slightly while it's held, which also undoes its hover lift. */
+.filTogBut:active { /* What: Pressed Filter Toggle Button. Why: A press should register before the grid changes. How: This presses the pill in slightly while it's held, which also undoes its hover lift. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
@@ -245,7 +246,9 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Filter Toggle Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.filTogBut { /* What: Motionless Filter Toggle Button. Why: The hover, chosen, and press looks should simply switch. How: This turns the transition off. */
+	.filTogBut,
+	.filTogBut:hover,
+	.filTogBut[aria-pressed='true'] { /* What: Motionless Filter Toggle Button. Why: The hover, chosen, and press looks should simply switch. How: This turns the transitions off, naming the hovered and chosen rules' own selectors so it wins. */
 
 
 		transition : none;
@@ -262,7 +265,7 @@
 
 /* #region proGriDiv */
 
-.proGriDiv { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This fills each row with cards at least about 138px wide, or horizontal step 020 on wider screens, and lifts the grid onto its own layer. */
+.proGriDiv { /* What: Products Grid Div. Why: The cards lay out in as many columns as fit, above the band's dot grid. How: This lays out as many columns as fit, each at least about 138px wide, or horizontal step 020 on wider screens, and lifts the grid onto its own layer. */
 
 
 	display               : grid;
@@ -290,32 +293,41 @@
 
 /* #region proCarArt */
 
-.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, rises it in through the global blockEnterFadeIn keyframes, and eases its hover look. */
+.proCarArt { /* What: Product Card Article. Why: Each photo is shown as a white card. How: This draws a rounded white card with a hairline border, positions it for its tag, has it rise in through the global blockEnterFadeIn keyframes, and eases its hover lift, shadow, and border color, its shadow fading out on the accelerating curve. */
 
 
-	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) backwards; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Fade Up Keyframes. Why: The blockEnterFadeIn keyframes are shared with the hero, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */ /* What: Backwards Fill. Why: A both fill kept the keyframes' final transform in force after the entrance, which outranked the hover lift, so the card never rose. How: A backwards fill holds the hidden first frame only through each card's stagger delay, then lets go once the card has risen. */
+	animation     : global( blockEnterFadeIn ) var( --dur-ani-p03 ) var( --mot-sta-eas ) backwards; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */ /* What: Backwards Fill. Why: A both fill kept the keyframes' final transform in force after the entrance, which outranked the hover lift, so the card never rose. How: A backwards fill holds the hidden first frame only through each card's stagger delay, then lets go once the card has risen. */
 	background    : var( --bac-sur-col );                                                           /* Background Surface Color = #ffffff */
 	border        : var( --bor-wid-bas ) solid var( --bor-mai-col );                                /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius : var( --rad-bor-xla );                                                           /* Radius Border Extra Large ~= 19.304px */
 	overflow      : hidden;
 	position      : relative;
-	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the card clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the card itself, which only repaints the one card. */
+	transition    : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-acc-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the card clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the card itself, which only repaints the one card. */
 
 
 }
-.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft ink shadow, and turns its border navy. */
+.proCarArt:hover { /* What: Hovered Product Card Article. Why: The card under the pointer should come forward. How: This lifts it, casts a soft ink shadow that fades in on the decelerating curve, and turns its border navy. */
 
 
 	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
-	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
 	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition   : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Standard Easing = ease */
+
+
+}
+.proCarArt[data-row-leftover-centered] { /* What: Leftover Product Card Article. Why: Cards left over after the last full row should sit centered under the rows above, at the same width. How: This moves each one across by the offset its grid is handed, without changing the layout around it. */
+
+
+	left : var( --pro-row-off ); /* Product Row Offset, set by its parent */
 
 
 }
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Product Card Article. Why: Someone who asked for less motion shouldn't see the cards rise in or ease their hover look. How: This applies only when the reduced-motion preference is set. */
 
 
-	.proCarArt { /* What: Still Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transition off. */
+	.proCarArt,
+	.proCarArt:hover { /* What: Motionless Product Card Article. Why: The cards should simply be there, and their hover look simply switch. How: This turns the animation and the transitions off, naming the hovered rule's own selector so it wins. */
 
 
 		animation  : none;
@@ -327,7 +339,7 @@
 
 }
 
-.proTagDiv { /* What: Product Tag Div. Why: A tag over the photo names what kind of piece it shows. How: This sets the label in small, bold, spaced capitals on a yellow pill with an ink outline in the card's top left corner. */
+.proTagDiv { /* What: Product Tag Div. Why: A tag over the photo names what kind of piece it shows. How: This sets the label in small, bold, spaced, uppercase letters on a yellow pill with an ink outline in the card's top left corner. */
 
 
 	background     : var( --acc-sec-col );                            /* Accent Secondary Color = #fbbf24 */
@@ -366,7 +378,7 @@
 
 	height     : 100%;
 	object-fit : contain;
-	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width      : 100%;
 
 
@@ -374,7 +386,7 @@
 .proCarArt:hover .proPhoIma { /* What: Hovered Product Photo Image. Why: The photo draws the eye in when its card is hovered. How: This zooms it slightly within its frame. */
 
 
-	transform : scale( 1.06 );
+	transform : scale( 1.03 );
 
 
 }
@@ -393,6 +405,7 @@
 }
 
 /* #endregion proFraDiv */
+
 
 
 /* #region proInfDiv */

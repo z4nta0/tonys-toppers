@@ -5,15 +5,14 @@
  * about.module.css = About Section Module
  *
  * @summary
- * Styles for AboSecCom: Tony's story beside his portrait. The portrait sits
- * in a tilted, ink-framed photo with a yellow shadow that straightens on
- * hover, with the round logo badge overlapping its corner, and stays in view
- * while the story scrolls past on wide screens. The story opens with a navy
- * drop cap and ends in a row of three stats. On screens 900px wide or
- * narrower the portrait moves above the story in a single column. The shared
- * section, container, and label classes the section used to borrow from the
- * global stylesheet are copied here, and the portrait's transition stops for
- * anyone who asked for less motion.
+ * Styles for AboSecCom: Tony's story beside his portrait. The portrait sits in
+ * an ink-framed photo with a yellow shadow, tilted until hover straightens it,
+ * with the round logo badge overlapping its corner, and stays in view while
+ * the story scrolls past on wide screens. The story opens with a navy drop cap
+ * and ends in a row of three stats. On screens 900px wide or narrower the
+ * portrait moves above the story in a single column. The shared styles the
+ * section used to borrow from the global stylesheet, such as the eyebrow
+ * label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -23,7 +22,7 @@
 
 /* #region homAboSec */
 
-.homAboSec { /* What: Home About Section. Why: Tony's story sits on its own band, set apart from the craft fair gallery above it, with the same generous padding as every home page section. How: This fills it with the deeper cream the products band uses, pads it all round, and positions it, with the padding copied from the shared section. */
+.homAboSec { /* What: Home About Section. Why: Tony's story sits on its own band, set apart from the Craft Fairs section above it, with the same generous padding as the other content sections. How: This fills it with the deeper cream the Products band uses, pads it all round, and positions it, with the padding copied from the shared section. */
 
 
 	background : var( --bac-sun-col );                      /* Background Sunken Color ~= #f5edd6 */
@@ -89,11 +88,11 @@
 
 /* #region porWraDiv */
 
-.porWraDiv { /* What: Portrait Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it about 104px below the top of the screen, which also places the logo badge against it. */
+.porWraDiv { /* What: Portrait Wrap Div. Why: The portrait should stay in view while the story scrolls past on a wide screen. How: This sticks it a step below the fixed bar, which also makes it the box the logo badge is placed against. */
 
 
 	position : sticky;
-	top      : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	top      : calc( var( --nav-bar-hei ) + var( --spa-ver-p01 ) ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 1 ~= 19.304px */
 
 
 }
@@ -107,7 +106,7 @@
 		max-width : 90%;
 		position  : relative;
 		top       : 0;
-		width     : 100%; /* What: Definite Width. Why: Left to shrink around the photo, WebKit kept remeasuring it and grew the portrait a step at a time after the page loaded, moving everything below it. How: This fills the column, which the 90% cap then narrows, the same width the other engines already gave it. */
+		width     : 100%;     /* What: Definite Width. Why: Left to shrink around the photo, WebKit kept remeasuring it and grew the portrait a step at a time after the page loaded, moving everything below it. How: This fills the column, which the 90% cap then narrows, the same width the other engines already gave it. */
 
 
 	}
@@ -127,7 +126,7 @@
 	box-shadow    : calc( var( --ver-rhy-bas ) * 1rem ) calc( var( --ver-rhy-bas ) * 1rem ) 0 var( --acc-sec-col ); /* Vertical Rhythm Base ~= 14.572px, Accent Secondary Color = #fbbf24 */
 	overflow      : hidden;
 	transform     : rotate( -2deg );
-	transition    : transform var( --dur-tra-p02 ) var( --mot-sta-eas );                                            /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition    : transform var( --dur-tra-p02 ) var( --mot-dec-eas );                                            /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	width         : 100%;
 
 
@@ -167,6 +166,7 @@
 /* #endregion porFraDiv */
 
 
+
 /* #region logBadDiv */
 
 .logBadDiv { /* What: Logo Badge Div. Why: A round logo badge marks the portrait as Tony's Toppers. How: This draws a white circle about 138px across with a thick ink border and a hard ink shadow, tilted the other way, overlapping the portrait's bottom right corner. */
@@ -187,10 +187,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Logo Badge Div. Why: The badge shrinks with the narrower portrait. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Logo Badge Div. Why: A phone-sized badge suits the stacked portrait's corner. How: This applies 900px wide and below. */
 
 
-	.logBadDiv { /* What: Small Logo Badge Div. Why: A smaller badge keeps its place on the smaller portrait. How: This sizes it at about 104px and tucks it closer to the corner. */
+	.logBadDiv { /* What: Small Logo Badge Div. Why: A smaller badge sits on the corner without covering much of the portrait. How: This sizes it at about 104px and tucks it closer to the corner. */
 
 
 		bottom : calc( var( --spa-ver-p04 ) * -1 );   /* Spacing Vertical Base Plus 4 ~= -44.876px */
@@ -220,7 +220,7 @@
 
 
 
-.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above Tony's name. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above Tony's name. How: This sets it widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
 
 
 	align-items    : center;
@@ -235,7 +235,7 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Div Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -284,7 +284,7 @@
 
 
 }
-.bioStoPar:first-of-type::first-letter { /* What: Biography Story Paragraph Drop Cap. Why: A drop cap opens the story like a book. How: This floats the first paragraph's first letter large in the heavy navy serif, spanning about two lines. */
+.bioStoPar:first-of-type::first-letter { /* What: Biography Story Paragraph Drop Cap. Why: A drop cap opens the story like a book. How: This floats the first paragraph's first letter large in the heavy navy serif, with the first three lines of the story wrapping beside it. */
 
 
 	color       : var( --acc-mai-col );                          /* Accent Main Color = #1e3a8a */

@@ -5,10 +5,10 @@
  * fairs.module.css = Fairs Section Module
  *
  * @summary
- * Styles for FaiSecCom: the craft fair gallery's section, with its heading and
- * note above a responsive grid of booth shots, each in a rounded 4:5 frame.
- * The shared section, container, heading, label, and note classes the section
- * used to borrow from the global stylesheet are copied here.
+ * Styles for FaiSecCom: the Craft Fairs section, with its words, such as its
+ * heading, above a responsive grid of booth shots, each in a rounded 4:5
+ * frame. The shared styles the section used to borrow from the global
+ * stylesheet, such as the eyebrow label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -18,7 +18,7 @@
 
 /* #region homFaiSec */
 
-.homFaiSec { /* What: Home Fairs Section. Why: Every home page section shares the same generous padding. How: This pads it all round, copied from the shared section. */
+.homFaiSec { /* What: Home Fairs Section. Why: The content sections below the hero share the same generous padding. How: This pads it all round, copied from the shared section. */
 
 
 	padding : var( --spa-ver-p07 ) var( --gut-sid-pad ); /* Spacing Vertical Base Plus 7 ~= 104.323px, Gutter Side Padding, about 19.304px - 44.876px */
@@ -54,7 +54,7 @@
 
 /* #region secHeaDiv */
 
-.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps, aligned along their bottoms, with room below, copied from the shared section head. */
+.secHeaDiv { /* What: Section Heading Div. Why: The heading and the note about the fairs sit side by side. How: This spreads them across a row that wraps the note below the heading at about 1,027px wide and below, aligned along their bottoms, with room below, copied from the shared section head. */
 
 
 	align-items     : end;
@@ -82,7 +82,7 @@
 
 }
 
-.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it small, widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
+.eyeLabDiv { /* What: Eyebrow Label Div. Why: A short label names the section above its heading. How: This sets it widely spaced, uppercase, and navy, led by a short yellow line, copied from the shared section label. */
 
 
 	align-items    : center;
@@ -97,7 +97,7 @@
 
 
 }
-.eyeLabDiv::before { /* What: Eyebrow Label Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
+.eyeLabDiv::before { /* What: Eyebrow Label Div Line. Why: A short yellow line leads into the label. How: This draws an about 34px by 2px yellow bar before the text. */
 
 
 	background : var( --acc-sec-col );                /* Accent Secondary Color = #fbbf24 */
@@ -151,12 +151,38 @@
 
 /* #region faiGriDiv */
 
-.faiGriDiv { /* What: Fairs Grid Div. Why: The booth shots lay out in as many columns as fit. How: This fills each row with frames at least about 138px wide, or horizontal step 019 on wider screens, or the full width when that's narrower. */
+.faiGriDiv { /* What: Fairs Grid Div. Why: The four booth shots should fill every row, never leaving a short last one. How: This lays them out in four even columns, stepping to two at 900px wide and below and one at 360px and below. */
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) );                   /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
-	grid-template-columns : repeat( auto-fit, minmax( min( max( calc( var( --ver-rhy-p08 ) * 1rem ), var( --hor-rhy-019 ) ), 100% ), 1fr ) ); /* Vertical Rhythm Base Plus 8 ~= 138.199px, Horizontal Rhythm 19 ~= 202.448px @ 1,920px width */
+	gap                   : var( --spa-ver-p01 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-013 ), var( --spa-hor-p01 ) ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	grid-template-columns : repeat( 4, 1fr );
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Fairs Grid Div. Why: Four frames would be cramped on a narrow screen. How: This applies 900px wide and below. */
+
+
+	.faiGriDiv { /* What: Halved Fairs Grid Div. Why: Two rows of two keep every row full. How: This sets two even columns. */
+
+
+		grid-template-columns : repeat( 2, 1fr );
+
+
+	}
+
+
+}
+@media ( max-width : 360px ) { /* What: Phone Fairs Grid Div. Why: Two frames would fall under the cards' 138px minimum below about 330px wide, about 154px each at 361px, so the step rounds up to the 360px breakpoint. How: This applies 360px wide and below. */
+
+
+	.faiGriDiv { /* What: Stacked Fairs Grid Div. Why: The booth shots read best one at a time there. How: This sets a single column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
 
 
 }
@@ -164,7 +190,7 @@
 
 /* #region faiPhoFig */
 
-.faiPhoFig { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners. */
+.faiPhoFig { /* What: Fair Photo Figure. Why: Each booth shot sits in the same rounded frame. How: This frames it at a 4:5 shape on white with a hairline border, clipping the photo to its corners, and eases its hover lift, shadow, and border color, its shadow fading out on the accelerating curve. */
 
 
 	aspect-ratio  : 4 / 5;
@@ -172,6 +198,31 @@
 	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #1a1a2e @ 0.12 opacity */
 	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
 	overflow      : hidden;
+	transition    : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-acc-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Motion Standard Easing = ease */ /* What: Animated Elevation Shadow. Why: A compositor version would fade in a shadow held by a pseudo-element, but the frame clips its contents to its rounded corners, so that shadow would be clipped away. How: The shadow eases on the frame itself, which only repaints the one frame. */
+
+
+}
+.faiPhoFig:hover { /* What: Hovered Fair Photo Figure. Why: The booth shot under the pointer should come forward, the same as a product card. How: This lifts it, casts a soft ink shadow that fades in on the decelerating curve, and turns its border navy. */
+
+
+	border-color : var( --acc-mai-col );                            /* Accent Main Color = #1e3a8a */
+	box-shadow   : var( --ele-med-sha );                            /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
+	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+	transition   : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-dec-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Standard Easing = ease */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Fair Photo Figure. Why: Someone who asked for less motion shouldn't see the frames ease their hover look. How: This applies only when the reduced-motion preference is set. */
+
+
+	.faiPhoFig,
+	.faiPhoFig:hover { /* What: Motionless Fair Photo Figure. Why: The hover look should simply switch. How: This turns the transitions off, naming the hovered rule's own selector so it wins. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
