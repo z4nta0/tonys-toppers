@@ -17,7 +17,7 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * @summary
  * Measures the home page and the 404 page across a range of screen widths, and
  * the open mobile menu at the widths up to the site's 900px breakpoint, where
- * it exists, in whichever engine the project runs, and fails a width whose
+ * it shows, in whichever engine the project runs, and fails a width whose
  * layout breaks: the page scrolling sideways, a visible element reaching past
  * either edge of the screen (unless an ancestor clips it on purpose), text
  * spilling out of its own box, two controls a visitor can reach overlapping
@@ -63,7 +63,7 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page an
 ];
 
 const FIL_WID_ARR = [ 390, 1000, 1440 ];                                                                 // What: Filter Width Array. Why: The Products filters change the grid's card count, so each one is measured at a phone, tablet, and desktop width. How: This lists those widths.
-const MEN_MAX_NUM = 900;                                                                                 // What: Menu Maximum Number. Why: The mobile menu exists only up to the site's 900px breakpoint. How: The menu case is measured only at widths up to this.
+const MEN_MAX_NUM = 900;                                                                                 // What: Menu Maximum Number. Why: The mobile menu shows only up to the site's 900px breakpoint. How: The menu case is measured only at widths up to this.
 const WID_LIS_ARR = [ 320, 360, 361, 390, 414, 480, 768, 900, 901, 1000, 1001, 1024, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths, such as 768px for a tablet, plus each of the site's breakpoints and the pixel past it.
 
 // #endregion Constants
@@ -345,7 +345,7 @@ function layProFun () : string[] {
 for ( const layCasObj of LAY_CAS_ARR ) { // What: Case Loop. Why: The page and the open menu are measured. How: This declares each case's tests.
 
 
-	for ( const widCurNum of WID_LIS_ARR.filter( ( widFilNum ) => !layCasObj.menBoo || widFilNum <= MEN_MAX_NUM ) ) { // What: Width Loop. Why: Each case is measured at every width it exists at. How: This declares one test per width, skipping menu widths past the breakpoint.
+	for ( const widCurNum of WID_LIS_ARR.filter( ( widFilNum ) => !layCasObj.menBoo || widFilNum <= MEN_MAX_NUM ) ) { // What: Width Loop. Why: Each case is measured at every width it shows at. How: This declares one test per width, skipping menu widths past the breakpoint.
 
 
 		test( `${ layCasObj.ideStr } holds its layout at ${ widCurNum.toLocaleString( 'en-US' ) }px`, async ( { page : curPagObj } ) => { // What: Layout Test. Why: The layout should hold together at every width. How: This opens the case at the width and checks it finds no layout problems.

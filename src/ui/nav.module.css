@@ -109,7 +109,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Navigation Scrim Div. Why: Only screens with the phone menu need the scrim. How: This applies 900px wide and below. */
 
 
-	.navScrDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to exist where the menu can open. How: This turns its display on, leaving it hidden until the menu opens. */
+	.navScrDiv { /* What: Shown Navigation Scrim Div. Why: The scrim has to show where the menu can open. How: This turns its display on, leaving it hidden until the menu opens. */
 
 
 		display : block;

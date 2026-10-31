@@ -527,7 +527,7 @@ portrait ring, and wobbling sticker) when waiting for the page to settle.
 - `npm run test:responsive`: measures the home page and the 404 page at 15
   widths from 320 to 1,920px (the 900px and 1,000px breakpoints and the pixel
   past each included), and the open menu at the 8 of those up to 900px, where
-  it exists, failing on sideways scrolling, an unclipped element past either
+  it shows, failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, two reachable controls overlapping, or a grid
   leaving uneven rows (the Card Grids rule, added 2026-10-23 with 361px, a
   pixel past the gallery's 360px step), where the Products grid may center

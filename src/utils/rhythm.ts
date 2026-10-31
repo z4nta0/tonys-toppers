@@ -52,7 +52,7 @@
 const tokPxlFun = ( tokNamStr : string ) : number => { // What: Token Pixel Function. Why: A distance in JavaScript should read the same token the stylesheet sizes the thing it clears with. How: This resolves the token through a hidden probe's height.
 
 
-	const proCurEle = document.createElement( 'div' ); // What: Probe Current Element. Why: Only a laid-out element resolves a token to pixels. How: This creates an empty div to size by the token.
+	const proCurEle = document.createElement( 'div' ); // What: Probe Current Element. Why: The probe's height is read from its laid-out box, so it has to be in the page. How: This creates an empty div to size by the token.
 
 
 	proCurEle.style.cssText = `height : var( ${ tokNamStr } ); position : absolute; visibility : hidden;`; // What: Probe Style Text. Why: The probe takes the token as its height without showing or moving anything. How: This sets the height from the token, takes the probe out of the flow, and hides it.
