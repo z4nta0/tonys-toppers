@@ -534,7 +534,7 @@ function motStyFun () : string[] {
 	for ( const eleCurEle of document.querySelectorAll( '*' ) ) { // What: Element Loop. Why: A missing variant can sit on any element, not only a control. How: This walks every element on the page.
 
 
-		const desEleStr = `${ eleCurEle.tagName.toLowerCase() }${ eleCurEle.classList.length ? '.' + ( eleCurEle.classList[ 0 ].split( '_' ).find( ( clsPieStr ) => clsPieStr.length > 2 ) ?? eleCurEle.classList[ 0 ] ) : '' }`; // What: Description Element String. Why: A problem should name the element the way the stylesheet does. How: This joins the tag with the readable part of its first class, the module name a hashed class carries.
+		const desEleStr = `${ eleCurEle.tagName.toLowerCase() }${ eleCurEle.classList.length ? '.' + ( eleCurEle.classList[ 0 ].split( '_' ).find( ( clsPieStr ) => clsPieStr.length > 2 ) ?? eleCurEle.classList[ 0 ] ) : '' }`; // What: Description Element String. Why: A problem should name the element the way the stylesheet does. How: This joins the tag with the readable part of its first class, the local name inside a hashed module class.
 
 
 		for ( const pseNamStr of [ '', '::before', '::after' ] ) { // What: Layer Loop. Why: A pseudo-element can carry motion of its own, such as the menu row's dot. How: This reads the element and each of its two layers.
