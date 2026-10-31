@@ -78,11 +78,11 @@ const WID_LIS_ARR = [ 320, 360, 361, 390, 414, 480, 768, 900, 901, 1000, 1001, 1
  * layProFun = Layout Problems Function
  *
  * @summary
- * Runs inside the page and returns every layout problem it finds, each naming
- * the element by its tag and its first class (just the readable part, once
- * that class comes from a hashed CSS module). The page scrolling sideways is
- * one problem. A visible element counts as spilling past an edge when it
- * reaches more than a pixel beyond the viewport and no ancestor clips its
+ * Runs inside the page and returns every layout problem it finds. The page
+ * scrolling sideways is one problem, and every other names the element by its
+ * tag and its first class (just the readable part, once that class comes from
+ * a hashed CSS module). A visible element counts as spilling past an edge when
+ * it reaches more than a pixel beyond the viewport and no ancestor clips its
  * overflow. An element with text of its own spills its box when a line of that
  * text runs more than a pixel past either inner edge and it doesn't clip or
  * scroll its content; a decoration drawn past the text on purpose, such as the

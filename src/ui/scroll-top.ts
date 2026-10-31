@@ -236,7 +236,7 @@ function useScrTopFun () : void {
 
 
 
-		const cleHasBoo = ( locCurObj.state as { cleBoo? : boolean } | null )?.cleBoo === true; // What: Clear Hash Boolean. Why: The home page clears a section's hash with a replace of its own, which must keep the visitor on the section it just jumped to. How: This reads the flag the home page puts in that navigation's state. // What: Type Assertion Note. Why: The router types a location's state as unknown. How: The only state this site ever sets is the home page's cleBoo flag, so this reads it as that object or null.
+		const cleHasBoo = ( locCurObj.state as { cleBoo? : boolean } | null )?.cleBoo === true; // What: Clear Hash Boolean. Why: The home page clears a section's hash with a replace of its own, which must keep the visitor on the section it just jumped to. How: This reads the flag the home page puts in that navigation's state. // What: Type Assertion Note. Why: The router types a location's state as unknown. How: This effect reads only the cleBoo flag the home page puts in its hash-clearing navigation's state, so it reads the state as that object or null.
 
 		const kepPosBoo = cleHasBoo || !hasNonBoo; // What: Kept Position Boolean. Why: A hash names a section the home page jumps to itself, once its fonts have loaded, and the replace that clears the hash already lands where it should. How: This is true for either.
 

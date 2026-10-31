@@ -104,7 +104,7 @@ function ProSecCom () : React.JSX.Element {
 
 
 
-		const meaColFun = () => { // What: Measure Columns Function. Why: The resolved tracks give the column count and width the stylesheet's auto-fill produced. How: This stores the track count and one track plus the column gap.
+		const meaColFun = () => { // What: Measure Column Function. Why: The resolved tracks give the column count and width the stylesheet's auto-fill produced. How: This stores the track count and one track plus the column gap.
 
 
 			const griStyObj = getComputedStyle( griCurEle );              // What: Grid Style Object. Why: The resolved tracks and gap are only available as computed values. How: This reads the grid's computed style.

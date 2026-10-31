@@ -308,7 +308,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 		const forCurEle = subEveObj.target as HTMLFormElement;                              // What: Form Current Element. Why: The fields are read from the form itself. How: This is the submitted form. // What: Type Assertion Note. Why: A submit event's target types as a plain event target. How: Only this form's submit event reaches forSubFun.
-		const forFieObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Fields Object. Why: Netlify reads the fields as a URL-encoded body. How: This collects every named field, the hidden form-name included. // What: Type Assertion Note. Why: URLSearchParams accepts string pairs, while FormData can also hold files. How: This form has no file fields, so every value is a string.
+		const forFieObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Field Object. Why: Netlify reads the fields as a URL-encoded body. How: This collects every named field, the hidden form-name included. // What: Type Assertion Note. Why: URLSearchParams accepts string pairs, while FormData can also hold files. How: This form has no file fields, so every value is a string.
 
 		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you note. How: This starts false and turns true only when Netlify answers OK.
 

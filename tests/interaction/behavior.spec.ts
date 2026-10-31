@@ -219,8 +219,8 @@ async function ariSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< voi
  * Checks that no link click let the browser jump to a hash on the page as it
  * stands, by reading the hashchange count opeRouFun's counter keeps. The home
  * page clears a hash it arrives with, so the address alone can't show that a
- * plain click never put one there, while a native jump to a hash always fires
- * hashchange.
+ * plain click never put one there, while a native jump that changes the hash
+ * fires hashchange.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

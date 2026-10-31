@@ -103,7 +103,7 @@ const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The Pro
 
 type FaiRecTyp = { altStr : string, catArr : CatSluTyp[], filStr : string }; // What: Fair Record Type. Why: A booth shot lists by hand the categories it shows and describes the table, which its card's name can't. How: This names the photo's description, its categories, and its file name without the extension.
 
-const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's whole table, so they live in the gallery and under the filters of the pieces they show, which keeps "Straw Charms" from being empty. How: Each row names the photo, the categories it shows, and its description.
+const FAI_REC_ARR : FaiRecTyp[] = [ // What: Fair Record Array. Why: The craft fair booth shots show Tony's table, so they live in the gallery and under the filters of the pieces they show, which keeps "Straw Charms" from being empty. How: Each row names the photo, the categories it shows, and its description.
 
 
 	{ altStr : 'Pen toppers in clear stands on a shelf, with wine stoppers, keychains, and a card about Tony',   catArr : [ 'pen-topper', 'wine-stopper', 'keychain' ],                 filStr : 'booth-1' }, // What: First Booth Row. Why: This photo shows a shop window display of pens and stoppers with keychains below. How: This tags it under "Pen Toppers", "Wine Stoppers", and "Keychains".
@@ -269,7 +269,7 @@ type ProRecTyp = { // What: Product Record Type. Why: The Products grid and the 
 
 	altStr : string,      // What: Alternative String. Why: A screen reader announces each photo by its text alternative. How: Every photo carries a short description of what it shows, from PHO_ALT_OBJ or its booth row, kept under 100 characters.
 	catArr : CatSluTyp[], // What: Category Array. Why: One photo can show more than one kind of piece. How: This lists every category the photo is tagged with.
-	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows a whole table, so it belongs in the gallery and under the filters it's tagged with, not in the "All" list. How: This is true for a booth shot and false for a piece or set.
+	faiBoo : boolean,     // What: Fair Boolean. Why: A craft fair booth shot shows Tony's table, so it belongs in the gallery and under the filters it's tagged with, not in the "All" list. How: This is true for a booth shot and false for a piece or set.
 	heiNum : number,      // What: Height Number. Why: The photo's img carries its intrinsic size, so the page doesn't shift while it loads. How: This is the photo's height in pixels, from photo-sizes.ts.
 	ideStr : string,      // What: Identifier String. Why: React tells the cards apart by a key. How: This is the photo's file name, unique in the folder.
 	imaStr : string,      // What: Image String. Why: The card shows its photo. How: This is the photo's built URL.
@@ -324,7 +324,7 @@ const PRO_REC_ARR : ProRecTyp[] = [ // What: Product Record Array. Why: The Prod
 	...FAI_REC_ARR.map( ( faiRecObj, faiIndNum ) => ({ // What: Booth Cards Spread. Why: The booth shots come last, for the filters and the gallery. How: This builds one record per booth shot.
 
 
-		altStr : faiRecObj.altStr,                       // What: Alternative String. Why: A booth shot shows a whole table, which its name can't describe. How: This takes the row's description.
+		altStr : faiRecObj.altStr,                       // What: Alternative String. Why: A booth shot shows Tony's table, which its name can't describe. How: This takes the row's description.
 		catArr : faiRecObj.catArr,                       // What: Category Array. Why: A booth shot shows several kinds. How: This lists every category it's tagged with.
 		faiBoo : true,                                   // What: Fair Boolean. Why: A booth shot belongs in the gallery and the filters, not the "All" list. How: This marks it.
 		heiNum : PHO_SIZ_OBJ[ faiRecObj.filStr ].heiNum, // What: Height Number. Why: The img carries its photo's size. How: This looks up the photo's height by its file name.
