@@ -309,7 +309,7 @@ async function attSetFun ( hanCurObj : ElementHandle< Element >, attNamStr : str
  * cliBloFun = Click Block Function
  *
  * @summary
- * Runs inside the page and cancels every click before anything handles it,
+ * Runs inside the page and cancels every click before the app handles it,
  * so pressing a control during a check never follows a link, starts a phone
  * call, or closes the menu. It listens on the document in the capture
  * phase, ahead of React's own listener on the app's root, and both prevents
@@ -340,7 +340,7 @@ function cliBloFun () : void {
 		cliEveObj.stopPropagation(); // What: Propagation Stop Call. Why: React's handlers, such as a menu link closing the menu, shouldn't run either. How: This keeps the click from reaching the app's root.
 
 
-	}, true ); // What: Capture Phase Flag. Why: The block has to run before anything else sees the click. How: This registers the listener for the capture phase.
+	}, true ); // What: Capture Phase Flag. Why: The block has to run ahead of the app's own handlers. How: This registers the listener for the capture phase.
 
 
 }

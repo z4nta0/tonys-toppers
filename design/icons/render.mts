@@ -57,14 +57,14 @@ const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG ico
 
 	{ filStr : 'favicon-16x16.png',    opaBoo : false, sizNum : 16  }, // What: Small Icon Row. Why: Tabs draw small icons crisper at their own size. How: This renders the 16px icon.
 	{ filStr : 'favicon-32x32.png',    opaBoo : false, sizNum : 32  }, // What: Medium Icon Row. Why: A 32px icon is a common tab size. How: This renders the 32px icon.
-	{ filStr : 'favicon-192x192.png',  opaBoo : false, sizNum : 192 }, // What: Large Icon Row. Why: A large icon serves shortcuts. How: This renders the 192px icon.
-	{ filStr : 'favicon-512x512.png',  opaBoo : false, sizNum : 512 }, // What: Extra Large Icon Row. Why: High-density screens and launchers can ask for a bigger icon still. How: This renders the 512px icon.
+	{ filStr : 'favicon-192x192.png',  opaBoo : false, sizNum : 192 }, // What: Large Icon Row. Why: The set offers a larger size for any place that draws the icon bigger than a tab. How: This renders the 192px icon.
+	{ filStr : 'favicon-512x512.png',  opaBoo : false, sizNum : 512 }, // What: Extra Large Icon Row. Why: The set tops out at a still larger size. How: This renders the 512px icon.
 	{ filStr : 'apple-touch-icon.png', opaBoo : true,  sizNum : 180 }  // What: Apple Touch Icon Row. Why: iOS draws the home screen icon at 180px. How: This renders it on solid white.
 
 
 ];
 
-const ICO_SIZ_ARR = [ 16, 32, 48 ];                                               // What: ICO Size Array. Why: favicon.ico should hold the sizes older browsers and Windows pick from. How: Each entry is one square size packed into the file.
+const ICO_SIZ_ARR = [ 16, 32, 48 ];                                               // What: ICO Size Array. Why: favicon.ico should hold the sizes older browsers pick from. How: Each entry is one square size packed into the file.
 const OUT_DIR_STR = fileURLToPath( new URL( '../../public/', import.meta.url ) ); // What: Output Directory String. Why: Browsers request icons from the site's root. How: This resolves public/ from this script's folder.
 const TOU_SCA_NUM = 0.8;                                                          // What: Touch Scale Number. Why: iOS rounds the touch icon's corners, which would crowd a ring drawn edge to edge. How: The touch icon draws the mark at this share of its square, centered.
 

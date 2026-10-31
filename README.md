@@ -71,7 +71,7 @@ src/
 │   ├── home/          Home page and its sections (hero, products, fairs, about, contact), each with its own .module.css, plus catalog.ts (the photos and their categories), photo-sizes.ts (generated), Tony's photos, and the full logo
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
 ├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), scroll-top.ts (the page's scroll position on each navigation), and the bar's logo mark
-├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, the shared focus ring, and the shared entrance keyframes)
+├── styles/            fonts.css (@font-face) + styles.css (global CSS, such as the design tokens)
 ├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling) and rhythm.ts (a token's size in pixels)
 ├── app.tsx            Root component and the route table
 └── main.tsx           Entry point
