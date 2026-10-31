@@ -1304,7 +1304,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		test.setTimeout( 180000 ); // What: Test Timeout Call. Why: Probing every control, field, card, and frame took about 90 seconds in WebKit alone, which ran past the 90-second limit (the default 30 seconds tripled) while the engines shared the machine. How: This gives the test three minutes.
 
-		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The page plays its entrance animations as it loads, so the preference has to be set first. How: This makes the page match prefers-reduced-motion: reduce.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
 
@@ -1343,7 +1343,7 @@ test( "the contact form error's phone link gives hover, press, and focus feedbac
 test( "the contact form error's phone link keeps feedback without motion under reduced motion", async ( { page : curPagObj } ) => { // What: Reduced Motion Error Link Test. Why: Visitors who ask for less motion still need to see the link respond. How: This fails a send with reduced motion on, probes the link, and checks it finds no problems.
 
 
-	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The page plays its entrance animations as it loads, so the preference has to be set first. How: This makes the page match prefers-reduced-motion: reduce.
 
 	await errOpeFun( curPagObj ); // What: Error Open Call. Why: The link only exists once a send has failed. How: This fails a send and waits for the error.
 

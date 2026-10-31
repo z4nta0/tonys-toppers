@@ -5,13 +5,14 @@
  * contact.module.css = Contact Section Module
  *
  * @summary
- * Styles for ConSecCom: the navy band that ends the home page, warmed by a
- * yellow glow, with the ways to reach Tony on one side, such as his phone
- * number, and the cream message form on the other, with its thank-you and
- * error notes, which rise in as they appear, the thank-you check popping once.
- * On screens 900px wide or narrower the two sides stack, and so do the form's
- * name and email fields. The shared styles the section used to borrow from the
- * global stylesheet, such as the eyebrow label, are copied here.
+ * Styles for ConSecCom: the navy band that is the home page's last section,
+ * above the footer, warmed by a yellow glow, with the ways to reach Tony on
+ * one side, such as his phone number, and the cream message form on the other,
+ * with its thank-you and error notes, which rise in as they appear, the
+ * thank-you check popping once. On screens 900px wide or narrower the two
+ * sides stack, and so do the form's name and email fields. The shared styles
+ * the section used to borrow from the global stylesheet, such as the eyebrow
+ * label, are copied here.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -21,7 +22,7 @@
 
 /* #region homConSec */
 
-.homConSec { /* What: Home Contact Section. Why: The page ends on a bold navy band that sets the contact details apart, with the same generous padding as the other content sections. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
+.homConSec { /* What: Home Contact Section. Why: The page's last section is a bold navy band that sets the contact details apart, with the same generous padding as the other content sections. How: This pads it all round, fills it navy with cream text, clips its glow at the edges, and positions it so the glow can be placed against it, with the padding copied from the shared section. */
 
 
 	--foc-rin-col : var( --acc-sec-col ); /* Accent Secondary Color = #fbbf24 */ /* What: Focus Ring Color For The Section. Why: The navy ring would vanish on the navy band. How: Every link inside the band draws its ring yellow instead, until the form card hands back the navy. */

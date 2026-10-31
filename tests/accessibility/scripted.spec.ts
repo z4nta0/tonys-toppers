@@ -618,7 +618,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: The name
 	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and checks that no animation is still running once it has settled.
 
 
-		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The page plays its entrance animations as it loads, so the preference has to be set first. How: This makes the page match prefers-reduced-motion: reduce.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
 
@@ -727,7 +727,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 	test( `the ${ resDesStr } note plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Note Motion Test. Why: Visitors who ask for less motion shouldn't see the note rise in or its check pop. How: This requests reduced motion, sends the form against the faked answer, and checks nothing longer than 1ms is animating once the note shows.
 
 
-		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The page plays its entrance animations as it loads, so the preference has to be set first. How: This makes the page match prefers-reduced-motion: reduce.
 
 		await fakNetFun( curPagObj, staCodNum ); // What: Netlify Fake Call. Why: The note depends on Netlify's answer, and no real message should go out. How: This answers every post to the site's root with the loop's status.
 
@@ -752,7 +752,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 test( 'under reduced motion the thank-you note still leaves when the visitor types again', async ( { page : curPagObj } ) => { // What: Note Exit Test. Why: The note unmounts when its exit animation ends, so under reduced motion that exit has to stay long enough to fire its end event rather than be turned off. How: This sends the form under reduced motion, types into a field, and checks the status region empties.
 
 
-	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The page plays its entrance animations as it loads, so the preference has to be set first. How: This makes the page match prefers-reduced-motion: reduce.
 
 	await fakNetFun( curPagObj, 200 ); // What: Netlify OK Fake Call. Why: The thank-you only shows after an accepted send. How: This fakes an OK answer.
 
@@ -780,7 +780,7 @@ test( 'under reduced motion the thank-you note still leaves when the visitor typ
 test( 'under reduced motion the error note still leaves when the visitor sends again', async ( { page : curPagObj } ) => { // What: Error Exit Test. Why: The error note unmounts when its exit animation ends too, so under reduced motion that exit has to stay long enough to fire its end event. How: This fails a send under reduced motion, sends again against an accepted answer, and checks the alert region empties.
 
 
-	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The page plays its entrance animations as it loads, so the preference has to be set first. How: This makes the page match prefers-reduced-motion: reduce.
 
 	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The error only shows after a failed send. How: This fakes a server error.
 

@@ -41,7 +41,7 @@ import { test          } from '@playwright/test';      // What: Test. Why: Each 
 
 // #region Constants
 
-const BIN_EXT_REG = /\.(ico|jpg|png|webp|woff2)$/;                              // What: Binary Extension Regular Expression. Why: Images and fonts hold no text to search, and their bytes could match a pattern by chance. How: This matches the built file types the secret search skips.
+const BIN_EXT_REG = /\.(ico|jpg|png|webp|woff2)$/;                              // What: Binary Extension Regular Expression. Why: Raster images and fonts hold no text to search, and their bytes could match a pattern by chance. How: This matches the built file types the secret search skips.
 const DIS_DIR_STR = fileURLToPath( new URL( '../../dist/', import.meta.url ) ); // What: Distribution Directory String. Why: The secret search reads what visitors download. How: This resolves the build folder, dist/.
 const ROO_DIR_STR = fileURLToPath( new URL( '../..', import.meta.url ) );       // What: Root Directory String. Why: npm audit reads the repo's lockfile. How: This resolves the repo root.
 
@@ -123,7 +123,7 @@ test( 'the built site holds no secrets', () => { // What: Secret Search Test. Wh
 	for ( const filEntObj of readdirSync( DIS_DIR_STR, { recursive : true, withFileTypes : true } ) ) { // What: Built Entry Loop. Why: Every built file could hold a secret. How: This walks every file and folder in the build.
 
 
-		if ( !filEntObj.isFile() || BIN_EXT_REG.test( filEntObj.name ) ) continue; // What: Text File Guard. Why: Folders, images, and fonts hold no text to search. How: This skips everything but text files.
+		if ( !filEntObj.isFile() || BIN_EXT_REG.test( filEntObj.name ) ) continue; // What: Text File Guard. Why: Folders, raster images, and fonts hold no text to search. How: This skips everything but text files.
 
 
 

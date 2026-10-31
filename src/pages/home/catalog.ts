@@ -203,8 +203,8 @@ type SetRecTyp = { catArr : CatSluTyp[], filStr : string }; // What: Set Record 
 const SET_REC_ARR : SetRecTyp[] = [ // What: Set Record Array. Why: A few photos show pen toppers and wine stoppers displayed together, so each is one card under both filters rather than a copy under each. How: Each row names the photo and the categories it shows.
 
 
-	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-1' }, // What: First Set Row. Why: This photo shows pens and stoppers in a shop display. How: This tags it under both.
-	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-2' }, // What: Second Set Row. Why: This photo shows pens and stoppers on acrylic stands. How: This tags it under both.
+	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-1' }, // What: First Set Row. Why: This photo shows pens and stoppers on clear stands, with bagged pens behind them. How: This tags it under both.
+	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-2' }, // What: Second Set Row. Why: This photo shows stoppers and pens on clear stands. How: This tags it under both.
 	{ catArr : [ 'pen-topper', 'wine-stopper' ], filStr : 'pen-wine-set-3' }  // What: Third Set Row. Why: This photo shows a few pens and stoppers laid out together. How: This tags it under both.
 
 
