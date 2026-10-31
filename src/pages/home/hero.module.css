@@ -214,7 +214,7 @@
 
 /* #region herTitHea */
 
-.herTitHea { /* What: Hero Title Heading. Why: The headline is the biggest thing on the page. How: This sets it in the heavy serif, growing with the screen between about 34px and 79px, and smaller where its column couldn't fit the line before its ampersand, tightly leaded, rising in second. */
+.herTitHea { /* What: Hero Title Heading. Why: The headline leads the page, so it's set large, up to the size its column allows. How: This sets it in the heavy serif, growing with the screen between about 34px and 79px, and smaller where its column couldn't fit the line before its ampersand, tightly leaded, rising in second. */
 
 
 	animation      : global( blockEnterFadeIn ) var( --dur-ani-p06 ) var( --mot-sta-eas ) var( --dur-ani-p01 ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease, Duration Animation Base Plus 1 ~= 209.1ms */ /* What: Global Block Enter Fade In Keyframes. Why: The blockEnterFadeIn keyframes are shared by several modules, so they stay in the global sheet. How: global() keeps CSS modules from renaming the keyframe reference to a scoped name that doesn't exist. */

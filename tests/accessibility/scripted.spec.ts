@@ -688,7 +688,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 
 
 
-	test( `with the ${ resDesStr } note shown at ${ REF_WID_NUM }px, every name and the reflow stay clean, with a keyboard walk past the error note`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Note State Test. Why: Each note is a state of the page with text and a link no other state shows, so the scripted checks have to cover it too, at the narrowest width, where long text is likeliest to overflow. How: This sends the form at the reflow width, then checks the names and the reflow with the note showing, and walks the page from the top for the error note, the only note with a link to reach.
+	test( `with the ${ resDesStr } note shown at ${ REF_WID_NUM }px, every name and the reflow stay clean, with a keyboard walk past the error note`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Note State Test. Why: Each note is a state of the page with text no other state shows, and the error note adds a link no other state has, so the scripted checks have to cover it too, at the narrowest width, where long text is likeliest to overflow. How: This sends the form at the reflow width, then checks the names and the reflow with the note showing, and walks the page from the top for the error note, the only note with a link to reach.
 
 
 		test.slow(); // What: Slow Test Mark. Why: A full keyboard walk takes about 11 seconds alone and runs long while every suite shares the machine. How: This triples this test's timeout.
