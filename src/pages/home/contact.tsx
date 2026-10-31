@@ -85,7 +85,7 @@ const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message
 const INT_OPT_ARR : IntOptTyp[] = [ // What: Interest Option Array. Why: The interest field lists every choice in this order. How: Each entry is one option's text and value.
 
 
-	'A pen topper',      // What: Pen Topper Option. Why: Pen toppers are Tony's first and biggest line. How: This is the default choice.
+	'A pen topper',      // What: Pen Topper Option. Why: Pen toppers are Tony's first line. How: This is the default choice.
 	'A wine stopper',
 	'A keychain',
 	'A dog necklace',

@@ -87,7 +87,7 @@ type CatRecTyp = { labStr : string, sluStr : CatSluTyp }; // What: Category Reco
 const CAT_REC_ARR : CatRecTyp[] = [ // What: Category Record Array. Why: The Products grid offers a filter button per category, in this order, and lists single pieces in the same order. How: Each row pairs a category's slug with its plural label.
 
 
-	{ labStr : 'Pen Toppers',      sluStr : 'pen-topper'      }, // What: Pen Toppers Row. Why: Beaded pen toppers are Tony's first and biggest line. How: This names their category.
+	{ labStr : 'Pen Toppers',      sluStr : 'pen-topper'      }, // What: Pen Toppers Row. Why: Beaded pen toppers are Tony's first line. How: This names their category.
 	{ labStr : 'Wine Stoppers',    sluStr : 'wine-stopper'    }, // What: Wine Stoppers Row. Why: Wine stoppers came next, beside the pens. How: This names their category.
 	{ labStr : 'Keychains',        sluStr : 'keychain'        }, // What: Keychains Row. Why: Tony beads keychains too. How: This names their category.
 	{ labStr : 'Dog Necklaces',    sluStr : 'dog-necklace'    }, // What: Dog Necklaces Row. Why: Tony beads necklaces for dogs. How: This names their category.
