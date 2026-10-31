@@ -58,14 +58,15 @@ type SnaRecTyp = { // What: Snapshot Record Type. Why: An element's look, and wh
 
 
 
-type TogTarTyp = { // What: Toggle Target Type. Why: Each kind of element with a state that switches on and off is flipped the same way. How: This holds what to find, which attribute marks the state, its two values, and the layer to read.
+type TogTarTyp = { // What: Toggle Target Type. Why: Each kind of element with a state that switches on and off is flipped the same way. How: This holds what to find, which attribute marks the state, its two values, the layer to read, and the states it has to be found in.
 
 
 	actStr : string,        // What: Active String. Why: The state is switched on by setting its attribute. How: This holds the value that marks it on, '' for an attribute that only has to be present.
 	attStr : string,        // What: Attribute String. Why: The state lives in one attribute the stylesheet reacts to. How: This holds its name.
 	inaStr : string | null, // What: Inactive String. Why: The state is switched off by its attribute too. How: This holds the value that marks it off, or null for an attribute that's removed.
 	pseStr : string,        // What: Pseudo String. Why: Part of a state's look can sit on a layer of the element, such as a dot drawn before it. How: This holds '::before' or '::after', or '' for none.
-	selStr : string         // What: Selector String. Why: Each kind is found by its own class. How: This holds the selector that matches it.
+	selStr : string,        // What: Selector String. Why: Each kind is found by its own class. How: This holds the selector that matches it.
+	staArr : string[]       // What: State Array. Why: A kind the probe silently stopped finding would pass without checking anything. How: This names each page state the kind has to be found in.
 
 
 };
@@ -105,6 +106,9 @@ const TOG_PRO_ARR = [ ...CON_PRO_ARR, 'padding-top' ];                          
  *
  *  - `selStr` (String): the selector that finds the element.
  *
+ *  - `staArr` (Array): the page states, by their names in `STA_REC_ARR`,
+ *    where at least one element of the kind has to be found and flipped.
+ *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
@@ -112,13 +116,96 @@ const TOG_PRO_ARR = [ ...CON_PRO_ARR, 'padding-top' ];                          
 const TOG_TAR_ARR : TogTarTyp[] = [ // What: Toggle Target Array. Why: A switched state is feedback as much as a hover, and has to ease in and out. How: This lists each kind of element to flip.
 
 
-	{ actStr : 'true', attStr : 'aria-expanded',            inaStr : 'false', pseStr : '',         selStr : '[class*="navTogBut"]' }, // What: Menu Toggle Row. Why: The phone menu's toggle turns its bars into a cross while the menu is open. How: This flips its aria-expanded.
-	{ actStr : '',     attStr : 'data-page-scroll-active',  inaStr : null,    pseStr : '',         selStr : '[class*="navBarNav"]' }, // What: Scrolled Bar Row. Why: The bar draws its hairline and tightens once the page scrolls. How: This flips its data-page-scroll-active.
-	{ actStr : '',     attStr : 'data-mobile-menu-open',    inaStr : null,    pseStr : '',         selStr : '[class*="navMenDiv"]' }, // What: Open Menu Row. Why: The phone menu slides down while it's open, its rows rising in after it. How: This flips its data-mobile-menu-open, on the open menu state, where it shows.
-	{ actStr : '',     attStr : 'data-mobile-menu-open',    inaStr : null,    pseStr : '',         selStr : '[class*="navScrDiv"]' }, // What: Open Scrim Row. Why: The page dims behind the open phone menu. How: This flips the scrim's data-mobile-menu-open, on the open menu state, where it shows.
-	{ actStr : '',     attStr : 'data-section-link-active', inaStr : null,    pseStr : '::before', selStr : '[class*="navLinAnc"]' }, // What: Section Link Row. Why: The bar's link, or the menu's row and its dot, for the section being read is marked active. How: This flips its data-section-link-active, reading the row's dot on its ::before layer.
-	{ actStr : 'true', attStr : 'aria-pressed',             inaStr : 'false', pseStr : '',         selStr : '[class*="filTogBut"]' }, // What: Filter Toggle Row. Why: The chosen Products filter fills its pill. How: This flips its aria-pressed.
-	{ actStr : 'true', attStr : 'aria-disabled',            inaStr : 'false', pseStr : '',         selStr : '[class*="forSubBut"]' }  // What: Submit Sending Row. Why: The send button dims while a message is out. How: This flips its aria-disabled.
+	{ // What: Menu Toggle Row. Why: The phone menu's toggle turns its bars into a cross while the menu is open. How: This flips its aria-expanded, on the phone states, where it shows.
+
+
+		actStr : 'true',
+		attStr : 'aria-expanded',
+		inaStr : 'false',
+		pseStr : '',
+		selStr : '[class*="navTogBut"]',
+		staArr : [ 'home-phone', 'menu-phone', 'not-found-phone' ]
+
+
+	},
+
+	{ // What: Scrolled Bar Row. Why: The bar draws its hairline and tightens once the page scrolls. How: This flips its data-page-scroll-active, on every state.
+
+
+		actStr : '',
+		attStr : 'data-page-scroll-active',
+		inaStr : null,
+		pseStr : '',
+		selStr : '[class*="navBarNav"]',
+		staArr : [ 'home-desktop', 'home-phone', 'menu-phone', 'not-found-desktop', 'not-found-phone' ]
+
+
+	},
+
+	{ // What: Open Menu Row. Why: The phone menu slides down while it's open, its rows rising in after it. How: This flips its data-mobile-menu-open, on the open menu state, where it shows.
+
+
+		actStr : '',
+		attStr : 'data-mobile-menu-open',
+		inaStr : null,
+		pseStr : '',
+		selStr : '[class*="navMenDiv"]',
+		staArr : [ 'menu-phone' ]
+
+
+	},
+
+	{ // What: Open Scrim Row. Why: The page dims behind the open phone menu. How: This flips the scrim's data-mobile-menu-open, on the open menu state, where it shows.
+
+
+		actStr : '',
+		attStr : 'data-mobile-menu-open',
+		inaStr : null,
+		pseStr : '',
+		selStr : '[class*="navScrDiv"]',
+		staArr : [ 'menu-phone' ]
+
+
+	},
+
+	{ // What: Section Link Row. Why: The bar's link, or the menu's row and its dot, for the section being read is marked active. How: This flips its data-section-link-active, reading the row's dot on its ::before layer, on the desktop states and the open menu state, where the links show.
+
+
+		actStr : '',
+		attStr : 'data-section-link-active',
+		inaStr : null,
+		pseStr : '::before',
+		selStr : '[class*="navLinAnc"]',
+		staArr : [ 'home-desktop', 'menu-phone', 'not-found-desktop' ]
+
+
+	},
+
+	{ // What: Filter Toggle Row. Why: The chosen Products filter fills its pill. How: This flips its aria-pressed, on the home states, where the Products section can be reached.
+
+
+		actStr : 'true',
+		attStr : 'aria-pressed',
+		inaStr : 'false',
+		pseStr : '',
+		selStr : '[class*="filTogBut"]',
+		staArr : [ 'home-desktop', 'home-phone' ]
+
+
+	},
+
+	{ // What: Submit Sending Row. Why: The send button dims while a message is out. How: This flips its aria-disabled, on the home states, where the contact form can be reached.
+
+
+		actStr : 'true',
+		attStr : 'aria-disabled',
+		inaStr : 'false',
+		pseStr : '',
+		selStr : '[class*="forSubBut"]',
+		staArr : [ 'home-desktop', 'home-phone' ]
+
+
+	}
 
 
 ];
@@ -1042,12 +1129,14 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  * and on is a problem. Normally every probed property that changes either way,
  * on the element, anything inside it, or the layer its row names, has to be
  * eased by a transition ({@link snaProFun}); under reduced motion none of them
- * may ease ({@link movProFun}). Finding nothing to flip is a problem too, so
- * the check can't pass without checking anything.
+ * may ease ({@link movProFun}). A kind that flips nothing in a state its row
+ * names is a problem too, so the check can't pass by quietly losing one.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to probe.
+ * @param staIdeStr - State Identifier String: The page state's name, which
+ *                    each row's states are checked against.
  * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
  *                    reduced motion.
  *
@@ -1056,23 +1145,20 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  *
  * @example
  * ```ts
- * togProFun(page, false) // => [] when every toggle eases
+ * togProFun(page, 'home-phone', false) // => [] when every toggle eases
  * ```
  *
 */
 
-async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< string[] > {
+async function togProFun ( curPagObj : Page, staIdeStr : string, redMotBoo : boolean ) : Promise< string[] > {
 
 
-	const proLisArr : string[]                                  = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
-	const togHanArr : [ TogTarTyp, ElementHandle< Element > ][] = []; // What: Toggle Handle Array. Why: Every reachable element of every kind is flipped. How: This pairs each element's handle with its kind's row.
+	const fliTarSet : Set< TogTarTyp >                          = new Set(); // What: Flipped Target Set. Why: Each kind has to be flipped in the states its row names. How: This records every kind at least one element was flipped for.
+	const proLisArr : string[]                                  = [];        // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
+	const togHanArr : [ TogTarTyp, ElementHandle< Element > ][] = [];        // What: Toggle Handle Array. Why: Every reachable element of every kind is flipped. How: This pairs each element's handle with its kind's row.
 
 
 	for ( const togTarObj of TOG_TAR_ARR ) for ( const togCurObj of await conLisFun( curPagObj, togTarObj.selStr ) ) togHanArr.push( [ togTarObj, togCurObj ] ); // What: Toggle Collect Loop. Why: Only elements a visitor can see and reach are flipped. How: This collects each kind's reachable elements in the table's order.
-
-
-
-	if ( !togHanArr.length ) proLisArr.push( 'no toggle to probe' ); // What: Empty Probe Check. Why: A probe that finds nothing would pass without checking anything. How: This records a problem when no element is found.
 
 
 
@@ -1083,6 +1169,10 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 		if ( conDisBoo ) continue; // What: Boxless Element Guard. Why: A state on an element with no box can't change how it looks. How: This skips it.
+
+
+
+		fliTarSet.add( togTarObj ); // What: Flipped Kind Call. Why: Each kind is checked for in the states its row names once the loop ends. How: This records the element's row.
 
 
 
@@ -1141,6 +1231,10 @@ async function togProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 
+	for ( const togTarObj of TOG_TAR_ARR ) if ( togTarObj.staArr.includes( staIdeStr ) && !fliTarSet.has( togTarObj ) ) proLisArr.push( `${ togTarObj.selStr } flips nothing` ); // What: Missing Kind Loop. Why: A kind that stopped matching, such as after a class rename, would otherwise drop out without failing. How: This records each kind whose row names this state but which flipped no element.
+
+
+
 	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every problem collected.
 
 
@@ -1174,7 +1268,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-		expect( await togProFun( curPagObj, false ) ).toEqual( [] ); // What: No Toggle Problems Assertion. Why: The state passes only when every switched state shows and eases. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await togProFun( curPagObj, staRecObj.ideStr, false ) ).toEqual( [] ); // What: No Toggle Problems Assertion. Why: The state passes only when every switched state shows and eases. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
@@ -1216,7 +1310,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-		expect( await togProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Toggle Problems Assertion. Why: Every switched state has to show without moving. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await togProFun( curPagObj, staRecObj.ideStr, true ) ).toEqual( [] ); // What: No Reduced Motion Toggle Problems Assertion. Why: Every switched state has to show without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
