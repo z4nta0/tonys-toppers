@@ -153,13 +153,13 @@ function NavBarCom () : React.JSX.Element {
 		const actOffNum = tokPxlFun( '--nav-bar-hei' ) + tokPxlFun( '--spa-ver-p03' ); // What: Active Offset Number. Why: A section counts as being read once its top has passed a line just below the bar. How: This adds a spacing step to the bar's height at its tallest, both read from their tokens, so the line follows the layout. // Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 3 ~= 33.876px
 
 
-		const intObsObj = new IntersectionObserver( ( entObjArr ) => { // What: Intersection Observer Object. Why: A section's top crossing the band below the bar marks it as the one being read. How: This reports sections entering or leaving the band and marks the highest one inside it.
+		const intObsObj = new IntersectionObserver( ( entObjArr ) => { // What: Intersection Observer Object. Why: A section's top crossing the band below the bar marks it as the one being read. How: This reports sections entering or leaving the band and marks the highest of the reported sections inside it.
 
 
-			const visEntArr = entObjArr.filter( ( entCurObj ) => entCurObj.isIntersecting ).sort( ( entOneObj, entTwoObj ) => entOneObj.boundingClientRect.top - entTwoObj.boundingClientRect.top ); // What: Visible Entry Array. Why: Several sections can sit in the band at once, and the highest is the one being read. How: This keeps the sections inside the band, sorted from the top of the screen down.
+			const visEntArr = entObjArr.filter( ( entCurObj ) => entCurObj.isIntersecting ).sort( ( entOneObj, entTwoObj ) => entOneObj.boundingClientRect.top - entTwoObj.boundingClientRect.top ); // What: Visible Entry Array. Why: Several reported sections can be inside the band at once, and the highest of them is marked. How: This keeps the reported sections that are inside the band, sorted from the top of the screen down.
 
 
-			if ( visEntArr[ 0 ] ) setActSecStr( visEntArr[ 0 ].target.id ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the highest visible section's ID, and leaves the active link alone when none is in the band.
+			if ( visEntArr[ 0 ] ) setActSecStr( visEntArr[ 0 ].target.id ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the ID of the highest reported section inside the band, and leaves the active link alone when none is.
 
 
 		}, { rootMargin : `-${ actOffNum }px 0px -65% 0px`, threshold : 0 } ); // What: Observer Options. Why: A section counts as being read once its top has passed the line just below the bar. How: This shrinks the watched band to the strip from that line down to 35% of the way down the screen, and fires as soon as any part of a section enters or leaves it.

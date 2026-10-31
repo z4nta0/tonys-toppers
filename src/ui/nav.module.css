@@ -168,10 +168,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Navigation Bar Nav. Why: The bar's wide padding crowds a narrow screen. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Navigation Bar Nav. Why: The bar's tall padding takes too much of a narrow screen's height. How: This applies 900px wide and below. */
 
 
-	.navBarNav { /* What: Compact Navigation Bar Nav. Why: A narrow screen needs its room for the brand and toggle. How: This trims the bar's padding. */
+	.navBarNav { /* What: Compact Navigation Bar Nav. Why: A narrow screen has little height to spare. How: This trims the bar's padding. */
 
 
 		padding : var( --spa-ver-bas ) var( --gut-sid-pad ); /* Spacing Vertical Base ~= 14.572px, Gutter Side Padding, about 19.304px - 44.876px */
@@ -406,7 +406,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Navigation Menu Div. Why: The links and the ways to reach Tony don't fit the bar on a narrow screen. How: This applies 900px wide and below. */
 
 
-	.navMenDiv { /* What: Closed Navigation Menu Div. Why: On a narrow screen the links and the contact block become a menu below the bar, out of the way until the toggle opens it. How: This sets the cream panel under the bar, scrolling if it's taller than the screen, slides it up out of view, easing that slide on the accelerating curve as it leaves, then hides it once the slide ends, so its links leave the Tab order and screen readers. */
+	.navMenDiv { /* What: Closed Navigation Menu Div. Why: On a narrow screen the links and the contact block become a menu below the bar, out of the way until the toggle opens it. How: This sets the cream panel under the bar, scrolling if it's taller than the screen less the bar, slides it up out of view, easing that slide on the accelerating curve as it leaves, then hides it once the slide ends, so its links leave the Tab order and screen readers. */
 
 
 		background     : var( --bac-pag-col );                                                                           /* Background Page Color = #fdf9ee */
