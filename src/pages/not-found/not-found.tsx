@@ -123,7 +123,7 @@ function NotFouCom () : React.JSX.Element {
 							href='/#products'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'products' ) }
-						>{ /* What: Button Base Anchor Secondary Element. Why: The site's main content stays one step away. How: Its address opens the home page at the Products section, which a modified click opens in a new tab, while a plain click goes through secCliFun, which navigates home to the section inside the site. */ }
+						>{ /* What: Button Base Anchor Secondary Element. Why: The work the site exists to show stays one step away. How: Its address opens the home page at the Products section, which a modified click opens its own way, while a plain click goes through secCliFun, which navigates home to the section inside the site. */ }
 							See the collection
 						</a>
 

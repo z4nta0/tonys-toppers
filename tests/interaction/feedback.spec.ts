@@ -1163,7 +1163,7 @@ async function togProFun ( curPagObj : Page, staIdeStr : string, redMotBoo : boo
 
 	const fliTarSet : Set< TogTarTyp >                          = new Set(); // What: Flipped Target Set. Why: Each kind has to be flipped in the states its row names. How: This records every kind at least one element was flipped for.
 	const proLisArr : string[]                                  = [];        // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
-	const togHanArr : [ TogTarTyp, ElementHandle< Element > ][] = [];        // What: Toggle Handle Array. Why: Every reachable element of every kind is flipped. How: This pairs each element's handle with its kind's row.
+	const togHanArr : [ TogTarTyp, ElementHandle< Element > ][] = [];        // What: Toggle Handle Array. Why: Each reachable element of each kind is flipped, unless it's drawn without a box. How: This pairs each element's handle with its kind's row.
 
 
 	for ( const togTarObj of TOG_TAR_ARR ) for ( const togCurObj of await conLisFun( curPagObj, togTarObj.selStr ) ) togHanArr.push( [ togTarObj, togCurObj ] ); // What: Toggle Collect Loop. Why: Only elements a visitor can see and reach are flipped. How: This collects each kind's reachable elements in the table's order.

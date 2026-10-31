@@ -7,7 +7,7 @@ import { chromium      } from '@playwright/test'; // What: Chromium. Why: The ph
 import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why: Every path is resolved from this script's own location. How: This turns a file URL into a path.
 import { readdirSync   } from 'node:fs';          // What: Read Directory Sync. Why: The product photos are found by listing their folder. How: This lists the originals in design/photos/products.
 import { readFileSync  } from 'node:fs';          // What: Read File Sync. Why: Each original is handed to the browser as data. How: This reads its bytes.
-import { statSync      } from 'node:fs';          // What: Stat Sync. Why: The run reports how much each batch shrank. How: This reads each original's size in bytes.
+import { statSync      } from 'node:fs';          // What: Stat Sync. Why: The run reports how much smaller the photos got. How: This reads each original's size in bytes.
 import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why: The encoded photos and their sizes file are saved. How: This writes each one.
 
 // #endregion Imports

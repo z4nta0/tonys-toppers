@@ -104,7 +104,7 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-			<ProSecCom />{ /* What: Products Section Component. Why: The collection is the site's main content. How: This renders it second. */ }
+			<ProSecCom />{ /* What: Products Section Component. Why: The collection is the work the site exists to show. How: This renders it second. */ }
 
 
 
