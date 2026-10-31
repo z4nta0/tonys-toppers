@@ -289,7 +289,7 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 		const icoBufObj = await icoResObj.body();           // What: Icon Buffer Object. Why: A PNG's size is written in its header. How: This reads the bytes.
 
 
-		expect( icoResObj.ok() ).toBe( true ); // What: Icon Served Assertion. Why: A missing icon falls through to the app's HTML. How: This checks the file is served.
+		expect( icoResObj.ok() ).toBe( true ); // What: Icon Served Assertion. Why: The icon has to answer before its type and size are read. How: This checks the request succeeds, while the checks below catch the app's HTML standing in for a missing file.
 
 
 		if ( icoHreStr.endsWith( '.svg' ) ) { // What: SVG Icon Guard. Why: The SVG mark has no fixed size to check. How: This checks it's served as an SVG and moves on.
@@ -341,7 +341,7 @@ test( 'robots.txt lets crawlers in and names the sitemap', async ( { request : r
 	const robTexStr = await robResObj.text();               // What: Robots Text String. Why: The rules are checked as written. How: This reads the response body.
 
 
-	expect( robResObj.ok() ).toBe( true );                                   // What: Robots Served Assertion. Why: A missing robots.txt would fall through to the app. How: This checks the file is served.
+	expect( robResObj.ok() ).toBe( true );                                   // What: Robots Served Assertion. Why: The file has to answer before its rules are read. How: This checks the request succeeds, while the checks below catch the app standing in for a missing file.
 	expect( robTexStr ).toMatch( /User-agent: \*\nAllow: \// );              // What: Allow All Assertion. Why: Every crawler should be let in. How: This checks the wildcard group allows the whole site.
 	expect( robTexStr ).not.toMatch( /Disallow: \// );                       // What: No Block Assertion. Why: Nothing should be blocked from crawling. How: This checks no group disallows the site.
 	expect( robTexStr ).toContain( `Sitemap: ${ LIV_URL_STR }sitemap.xml` ); // What: Sitemap Line Assertion. Why: Crawlers find the sitemap from here. How: This checks it names the sitemap's absolute address.
@@ -358,7 +358,7 @@ test( 'the sitemap lists the home page alone', async ( { request : reqCotObj } )
 	const sitTexStr = await sitResObj.text();                // What: Sitemap Text String. Why: Its entries are checked as written. How: This reads the response body.
 
 
-	expect( sitResObj.ok() ).toBe( true );                                                            // What: Sitemap Served Assertion. Why: A missing sitemap would fall through to the app. How: This checks the file is served.
+	expect( sitResObj.ok() ).toBe( true );                                                            // What: Sitemap Served Assertion. Why: The file has to answer before its addresses are read. How: This checks the request succeeds, while the checks below catch the app standing in for a missing file.
 	expect( sitTexStr.match( /<loc>([^<]*)<\/loc>/g ) ).toEqual( [ `<loc>${ LIV_URL_STR }</loc>` ] ); // What: Home Entry Assertion. Why: The home page is the only indexable page. How: This checks the sitemap's entries are exactly its canonical address.
 
 

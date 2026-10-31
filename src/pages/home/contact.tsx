@@ -62,7 +62,7 @@ type ForStaTyp = { // What: Form State Type. Why: The form's fields are held tog
 
 // #region Constants
 
-const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message : '', name : '' }; // What: Form Empty Object. Why: The form starts empty and empties again once sent. How: This holds blank fields with the first interest chosen.
+const FOR_EMP_OBJ : ForStaTyp = { email : '', interest : 'A pen topper', message : '', name : '' }; // What: Form Empty Object. Why: The form starts empty and empties again once sent. How: This holds blank fields with the first interest chosen. // What: Email. Why: The email field starts blank. How: This is an empty string. // What: Interest. Why: The interest field always holds a choice. How: This is the first option. // What: Message. Why: The message field starts blank. How: This is an empty string. // What: Name. Why: The name field starts blank. How: This is an empty string.
 
 
 

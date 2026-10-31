@@ -45,10 +45,10 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
 
 const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: A new tab can be asked for with a modified click or a middle click. How: Each row pairs a name for the test title with the click options that make it.
 
-const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the checks that use the bar's links open at.
-const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The phone menu exists only on small screens. How: This is the phone size the menu checks use.
+const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the checks that use the bar's links open at. // What: Height. Why: The page needs a screen's height. How: This is 900px. // What: Width. Why: The bar's links show above 900px. How: This is 1,440px.
+const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The phone menu shows only on small screens. How: This is the phone size the menu checks use. // What: Height. Why: The page needs a phone screen's height. How: This is 844px. // What: Width. Why: The menu shows at 900px and below. How: This is 390px.
 const SEC_LIN_ARR = [ [ 'Home', 'home' ], [ 'Products', 'products' ], [ 'Craft Fairs', 'fairs' ], [ 'About Tony', 'about' ], [ 'Contact', 'contact' ] ]; // What: Section Link Array. Why: The bar and the phone menu link to the same five sections. How: Each row pairs a link's label with its section's ID.
-const SHO_VIE_OBJ = { height : 500, width : 390  }; // What: Short Viewport Object. Why: The 404 page fits a full phone screen, so it only scrolls on a shorter one. How: This is the size the scroll position check opens it at.
+const SHO_VIE_OBJ = { height : 500, width : 390  }; // What: Short Viewport Object. Why: The 404 page fits a full phone screen, so it only scrolls on a shorter one. How: This is the size the scroll position check opens it at. // What: Height. Why: The 404 page has to be taller than the screen to scroll. How: This is 500px. // What: Width. Why: The check opens the phone layout. How: This is 390px.
 
 // #endregion Constants
 
