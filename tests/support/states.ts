@@ -36,7 +36,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
 
 // #region Types
 
-type StaRecTyp = { // What: State Record Type. Why: Every check reads the same description of a state. How: This names a state, its path, its viewport, and an optional action that opens something on it.
+type StaRecTyp = { // What: State Record Type. Why: The state-walking checks read the same description of a state. How: This names a state, its path, its viewport, and an optional action that opens something on it.
 
 
 	actFun? : ( curPagObj : Page ) => Promise< void >, // What: Action Function. Why: Some states need something opened after the page loads. How: This runs against the loaded page, e.g. clicking the menu toggle.

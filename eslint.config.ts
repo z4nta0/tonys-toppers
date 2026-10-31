@@ -68,7 +68,7 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 
 		files   : [ 'src/**/*.ts', 'src/**/*.tsx' ],  // What: Files. Why: Only the site's own source is linted by these rules. How: This lists one glob per extension.
 		plugins : { react : reaPluObj },              // What: Plugins. Why: react/jsx-no-undef comes from the React plugin. How: This registers it.
-		rules   : { 'react/jsx-no-undef' : 'error' }, // What: Rules. Why: An undefined component in a JSX tag is always a bug, and TypeScript reports every other undefined name. How: This makes the JSX rule an error.
+		rules   : { 'react/jsx-no-undef' : 'error' }, // What: Rules. Why: An undefined component in a JSX tag is always a bug, and lint should catch it too. How: This makes the JSX rule an error.
 
 		languageOptions : { // What: Language Options. Why: The parser has to know the syntax the source uses. How: This sets the TypeScript parser and modern module syntax with JSX.
 
