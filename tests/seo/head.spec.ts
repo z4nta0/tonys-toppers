@@ -153,7 +153,7 @@ test( 'the built page carries the same head, with valid structured data', async 
 
 
 
-test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's and Tony's details from the JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD and checks each detail against the page's own text and links.
+test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's and Tony's details from the JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD and checks the details the page also shows, such as the phone, against the page's own text and links.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The structured data lives on the home page. How: This loads the root path.

@@ -724,7 +724,7 @@ for ( const [ staCodNum, rolNamStr, notTexStr, resDesStr, resVerStr ] of [ [ 200
 
 
 
-	test( `the ${ resDesStr } note plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Note Motion Test. Why: Visitors who ask for less motion shouldn't see the note rise in or its check pop. How: This requests reduced motion, sends the form against the faked answer, and checks nothing longer than 1ms is animating once the note shows.
+	test( `the ${ resDesStr } note plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Note Motion Test. Why: Visitors who ask for less motion shouldn't see a note rise in, or the thank-you's check pop. How: This requests reduced motion, sends the form against the faked answer, and checks nothing longer than 1ms is animating once the note shows.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The page plays its entrance animations as it loads, so the preference has to be set first. How: This makes the page match prefers-reduced-motion: reduce.
